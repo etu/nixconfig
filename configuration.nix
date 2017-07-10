@@ -15,6 +15,9 @@
   boot.loader.grub.version = 2;
   boot.loader.grub.device = "/dev/sda";
 
+  # Use local nixpkgs checkout
+  nix.nixPath = [ "/etc/nixos" "nixos-config=/etc/nixos/configuration.nix" ];
+
   # Hardware settings
   hardware = {
     cpu.intel.updateMicrocode = true;
