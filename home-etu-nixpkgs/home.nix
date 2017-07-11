@@ -6,11 +6,10 @@
   home.file.".config/emacs/config.org".source = ./dotfiles/emacs/config.org;
 
   home.packages = [
+    pkgs.tmux
     pkgs.pass
     pkgs.stow
     pkgs.kdeconnect
-    pkgs.gnome3.gnome-tweak-tool
-    pkgs.gnome3.gnome-shell-extensions
   ];
 
   programs.firefox = {
