@@ -21,6 +21,7 @@
     pkgs.ncdu
     pkgs.pass
     pkgs.stow
+    pkgs.ripgrep
     pkgs.sshfs-fuse
     pkgs.youtube-dl
     pkgs.kdeconnect
