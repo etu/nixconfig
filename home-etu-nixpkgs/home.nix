@@ -24,6 +24,19 @@
     enable = true;
     userName = "Elis Axelsson";
     userEmail = "elis.axelsson@gmail.com";
+    signing.key = "67FE98F28C44CF221828E12FD57EFA625C9A925F";
+    extraConfig = ''
+    [push]
+    default = simple
+
+    [color]
+    diff = auto
+    status = auto
+    branch = auto
+
+    [core]
+    excludesfile = ~/.gitignore_global
+    '';
   };
 
   programs.emacs = {
