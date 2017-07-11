@@ -43,6 +43,8 @@
     emacs
     htop
     git
+    gnupg
+    ccid
   ];
 
   networking = {
@@ -69,6 +71,9 @@
 
     # Enable CUPS to print documents.
     printing.enable = true;
+
+    # Enable the smartcard deamon.
+    pcscd.enable = true;
 
     xserver = {
       # Enable the X11 windowing system.

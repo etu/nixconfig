@@ -18,6 +18,8 @@
     enableAdobeFlash = false;
   };
 
+  programs.browserpass.enable = true;
+
   programs.git = {
     enable = true;
     userName = "Elis Axelsson";
