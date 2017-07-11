@@ -5,7 +5,17 @@
   home.file.".emacs".source = ./dotfiles/emacs/emacs.el;
   home.file.".config/emacs/config.org".source = ./dotfiles/emacs/config.org;
 
+  # Fish config
+  home.file.".config/fish/config.fish".source = ./dotfiles/fish/config.fish;
+  home.file.".config/fish/functions/ltime.fish".source = ./dotfiles/fish/functions/ltime.fish;
+  home.file.".config/fish/functions/isfind.fish".source = ./dotfiles/fish/functions/isfind.fish;
+  home.file.".config/fish/functions/weather.fish".source = ./dotfiles/fish/functions/weather.fish;
+  home.file.".config/fish/functions/256colors.fish".source = ./dotfiles/fish/functions/256colors.fish;
+  home.file.".config/fish/functions/fish_prompt.fish".source = ./dotfiles/fish/functions/fish_prompt.fish;
+  home.file.".config/fish/functions/fish_right_prompt.fish".source = ./dotfiles/fish/functions/fish_right_prompt.fish;
+
   home.packages = [
+    pkgs.bc          # Dependency for some fish functions
     pkgs.mpv
     pkgs.tmux
     pkgs.ncdu
