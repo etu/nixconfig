@@ -57,7 +57,7 @@
       # 1714-1764 is KDE Connect
       allowedTCPPortRanges = [ { from = 1714; to = 1764; } ];
       allowedUDPPortRanges = [ { from = 1714; to = 1764; } ];
-      # allowedTCPPorts = [ ... ];
+      allowedTCPPorts = [ 22 ];
       # allowedUDPPorts = [ ... ];
     };
   };
@@ -67,7 +67,9 @@
   # List services that you want to enable:
   services = {
     # Enable the OpenSSH daemon.
-    openssh.enable = false;
+    openssh.enable = true;
+    openssh.permitRootLogin = "no";
+    openssh.passwordAuthentication = false;
 
     # Enable CUPS to print documents.
     printing.enable = true;
