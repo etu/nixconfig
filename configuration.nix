@@ -79,13 +79,13 @@
       xkbOptions = "eurosign:e,ctrl:nocaps,numpad:mac,kpdl:dot";
       xkbVariant = "dvorak";
 
-      # Enable the Gnome Desktop Environment.
-      desktopManager.gnome3.enable = true;
+      # Enable the Plasma Desktop Environment.
+      desktopManager.plasma5.enable = true;
 
       # Enable autologin
-      displayManager.slim.enable = true;
-      displayManager.slim.autoLogin = true;
-      displayManager.slim.defaultUser = "etu";
+      displayManager.sddm.enable = true;
+      displayManager.sddm.autoLogin.enable = false;
+      displayManager.sddm.autoLogin.user = "etu";
     };
   };
 
