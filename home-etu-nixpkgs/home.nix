@@ -42,39 +42,40 @@
   programs.emacs = {
     enable = true;
     extraPackages = epkgs: [
-      epkgs.nix-mode
-      epkgs.magit
-      epkgs.zerodark-theme
-      epkgs.webpaste
-      epkgs.helm
-      epkgs.helm-projectile
-      epkgs.helm-fuzzier
+      epkgs._0blayout
+      epkgs.anzu
+      epkgs.column-enforce-mode
       epkgs.company
       epkgs.company-flx
-      epkgs.company-statistics
-      epkgs.company-restclient
-      epkgs.company-php
       epkgs.company-go
-      epkgs.fish-mode
-      epkgs.go-mode
-      epkgs.php-mode
-      epkgs.scss-mode
-      epkgs.web-mode
-      epkgs.markdown-mode
-      epkgs.yaml-mode
-      epkgs.restclient
-      epkgs.anzu
-      epkgs.flycheck
-      epkgs.eyebrowse
-      epkgs.yasnippet
-      epkgs.guide-key
-      epkgs.smooth-scrolling
+      epkgs.company-php
+      epkgs.company-restclient
+      epkgs.company-statistics
       epkgs.diff-hl
-      epkgs.column-enforce-mode
+      epkgs.eyebrowse
+      epkgs.fish-mode
+      epkgs.flycheck
       epkgs.geben
-      epkgs.nyan-mode
-      epkgs.htmlize
       epkgs.gnuplot
+      epkgs.go-mode
+      epkgs.guide-key
+      epkgs.helm
+      epkgs.helm-fuzzier
+      epkgs.helm-projectile
+      epkgs.htmlize
+      epkgs.magit
+      epkgs.markdown-mode
+      epkgs.nix-mode
+      epkgs.nyan-mode
+      epkgs.php-mode
+      epkgs.restclient
+      epkgs.scss-mode
+      epkgs.smooth-scrolling
+      epkgs.web-mode
+      epkgs.webpaste
+      epkgs.yaml-mode
+      epkgs.yasnippet
+      epkgs.zerodark-theme
       pkgs.emacs-all-the-icons-fonts
     ];
   };
