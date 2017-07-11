@@ -89,7 +89,7 @@
 
       # Enable autologin
       displayManager.sddm.enable = true;
-      displayManager.sddm.autoLogin.enable = false;
+      displayManager.sddm.autoLogin.enable = true;
       displayManager.sddm.autoLogin.user = "etu";
     };
   };
