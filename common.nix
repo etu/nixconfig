@@ -18,4 +18,9 @@ with lib;
     consoleKeyMap = "dvorak-sv-a1";
     defaultLocale = "en_US.UTF-8";
   };
+
+  # Enable the OpenSSH daemon.
+  services.openssh.enable = true;
+  services.openssh.permitRootLogin = "no";
+  services.openssh.passwordAuthentication = false;
 }

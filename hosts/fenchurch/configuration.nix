@@ -11,14 +11,15 @@
     ../../services/xserver.nix
   ];
 
-  # Use the GRUB 2 boot loader.
-  boot.loader.grub.enable = true;
-  boot.loader.grub.version = 2;
-  boot.loader.grub.device = "/dev/sda";
+  # Use the systemd-boot EFI boot loader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  # Used for nvidia drivers
+  nixpkgs.config.allowUnfree = true;
 
   # Hardware settings
   hardware.cpu.intel.updateMicrocode = true;
-  hardware.trackpoint.enable = true;
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
@@ -30,12 +31,16 @@
     git
     gnupg
     ccid
+    nfs-utils
   ];
 
-  networking.hostName = "prosser";
+  networking.hostName = "fenchurch";
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
+  # Enable nvidia xserver driver
+  services.xserver.videoDrivers = [ "nvidia" ];
+
+  # Disable CUPS to print documents.
+  services.printing.enable = false;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.extraUsers.etu = {

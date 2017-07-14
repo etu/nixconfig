@@ -25,6 +25,8 @@
     pkgs.sshfs-fuse
     pkgs.youtube-dl
     pkgs.kdeconnect
+    pkgs.python3
+    pkgs.python36Packages.ipython
   ];
 
   programs.firefox = {
