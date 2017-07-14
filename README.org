@@ -1,0 +1,4 @@
+Symlink configuration.nix to this directory to use on that system you're on:
+#+BEGIN_SRC
+ln -s hosts/<hostname>/configuration.nix .
+#+END_SRC
