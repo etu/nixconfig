@@ -5,19 +5,16 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ../../services/xserver.nix
-    ];
+  imports = [
+    ./hardware-configuration.nix
+    ../../common.nix
+    ../../services/xserver.nix
+  ];
 
   # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;
   boot.loader.grub.device = "/dev/sda";
-
-  # Use local nixpkgs checkout
-  nix.nixPath = [ "/etc/nixos" "nixos-config=/etc/nixos/configuration.nix" ];
 
   # Hardware settings
   hardware = {
@@ -25,16 +22,6 @@
     trackpoint.enable = true;
     pulseaudio.enable = true;
   };
-
-  # Select internationalisation properties.
-  i18n = {
-    consoleFont = "Lat2-Terminus16";
-    consoleKeyMap = "dvorak-sv-a1";
-    defaultLocale = "en_US.UTF-8";
-  };
-
-  # Set your time zone.
-  time.timeZone = "Europe/Stockholm";
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
@@ -87,7 +74,4 @@
 
   # Root shell
   users.extraUsers.root.shell = pkgs.fish;
-
-  # The NixOS release to be compatible with for stateful data such as databases.
-  system.stateVersion = "17.03";
 }
