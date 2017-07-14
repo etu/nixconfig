@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ../../services/xserver.nix
     ];
 
   # Use the GRUB 2 boot loader.
@@ -62,8 +63,6 @@
     };
   };
 
-  fonts.fontconfig.ultimate.enable = true;
-
   # List services that you want to enable:
   services = {
     # Enable the OpenSSH daemon.
@@ -76,24 +75,6 @@
 
     # Enable the smartcard deamon.
     pcscd.enable = true;
-
-    xserver = {
-      # Enable the X11 windowing system.
-      enable = true;
-
-      # Keyboard layout
-      layout = "se";
-      xkbOptions = "eurosign:e,ctrl:nocaps,numpad:mac,kpdl:dot";
-      xkbVariant = "dvorak";
-
-      # Enable the Plasma Desktop Environment.
-      desktopManager.plasma5.enable = true;
-
-      # Enable autologin
-      displayManager.sddm.enable = true;
-      displayManager.sddm.autoLogin.enable = true;
-      displayManager.sddm.autoLogin.user = "etu";
-    };
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
