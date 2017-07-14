@@ -35,19 +35,17 @@
     ccid
   ];
 
-  networking = {
-    hostName = "prosser";
-    networkmanager.enable = true;
+  networking.hostName = "prosser";
+  networking.networkmanager.enable = true;
 
-    firewall = {
-      enable = true;
+  networking.firewall = {
+    enable = true;
 
-      # 1714-1764 is KDE Connect
-      allowedTCPPortRanges = [ { from = 1714; to = 1764; } ];
-      allowedUDPPortRanges = [ { from = 1714; to = 1764; } ];
-      allowedTCPPorts = [ 22 ];
-      # allowedUDPPorts = [ ... ];
-    };
+    # 1714-1764 is KDE Connect
+    allowedTCPPortRanges = [ { from = 1714; to = 1764; } ];
+    allowedUDPPortRanges = [ { from = 1714; to = 1764; } ];
+    allowedTCPPorts = [ 22 ];
+    # allowedUDPPorts = [ ... ];
   };
 
   # List services that you want to enable:
