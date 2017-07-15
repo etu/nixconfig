@@ -4,8 +4,17 @@
   # Enable the smartcard deamon.
   services.pcscd.enable = true;
 
-  # Enable some font thingy.
+  # Sane font defaults
+  fonts.enableFontDir = true;
+  fonts.enableGhostscriptFonts = true;
+  fonts.fontconfig.cache32Bit = true;
+
   fonts.fontconfig.ultimate.enable = true;
+  fonts.fontconfig.ultimate.preset = "osx";
+
+  fonts.fonts = with pkgs; [
+    liberation_ttf
+  ];
 
   # Enable pulseaudio.
   hardware.pulseaudio.enable = true;
