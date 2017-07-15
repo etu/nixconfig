@@ -5,6 +5,9 @@
   home.file.".emacs".source = ./dotfiles/emacs/emacs.el;
   home.file.".config/emacs/config.org".source = ./dotfiles/emacs/config.org;
 
+  # Htop
+  home.file.".config/htop/htoprc".source = ./dotfiles/htop/htoprc;
+
   # Fish config
   home.file.".config/fish/config.fish".source = ./dotfiles/fish/config.fish;
   home.file.".config/fish/functions/ltime.fish".source = ./dotfiles/fish/functions/ltime.fish;
