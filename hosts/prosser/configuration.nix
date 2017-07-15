@@ -11,6 +11,8 @@
     ../../services/xserver.nix
   ];
 
+  networking.hostName = "prosser";
+
   # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;
@@ -20,31 +22,6 @@
   hardware.cpu.intel.updateMicrocode = true;
   hardware.trackpoint.enable = true;
 
-  # List packages installed in system profile. To search by name, run:
-  # $ nix-env -qaP | grep wget
-  environment.systemPackages = with pkgs; [
-    fish
-    curl
-    emacs
-    htop
-    git
-    gnupg
-    ccid
-  ];
-
-  networking.hostName = "prosser";
-
   # Enable CUPS to print documents.
   services.printing.enable = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.extraUsers.etu = {
-    isNormalUser = true;
-    uid = 1000;
-    extraGroups = [ "wheel" "networkmanager" ];
-    shell = pkgs.fish;
-  };
-
-  # Root shell
-  users.extraUsers.root.shell = pkgs.fish;
 }

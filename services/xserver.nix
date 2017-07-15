@@ -37,4 +37,7 @@
   networking.firewall.allowedUDPPortRanges = [ { from = 1714; to = 1764; } ];
   networking.firewall.allowedTCPPorts = [ 22 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
+
+  # Define extra groups for user.
+  users.extraUsers.etu.extraGroups = [ "wheel" "networkmanager" ];
 }

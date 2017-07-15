@@ -23,4 +23,26 @@ with lib;
   services.openssh.enable = true;
   services.openssh.permitRootLogin = "no";
   services.openssh.passwordAuthentication = false;
+
+  # List packages installed in system profile. To search by name, run:
+  # $ nix-env -qaP | grep wget
+  environment.systemPackages = with pkgs; [
+    fish
+    curl
+    emacs
+    htop
+    git
+    gnupg
+    ccid
+    nfs-utils
+  ];
+
+  # Define a user account.
+  users.extraUsers.etu.isNormalUser = true;
+  users.extraUsers.etu.uid = 1000;
+  users.extraUsers.etu.extraGroups = [ "wheel" ];
+  users.extraUsers.etu.shell = pkgs.fish;
+
+  # Root shell
+  users.extraUsers.root.shell = pkgs.fish;
 }
