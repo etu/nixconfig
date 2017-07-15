@@ -26,6 +26,9 @@
   services.xserver.displayManager.sddm.autoLogin.enable = true;
   services.xserver.displayManager.sddm.autoLogin.user = "etu";
 
+  # Don't install xterm.
+  services.xserver.desktopManager.xterm.enable = false;
+
   # Enable networkmanager.
   networking.networkmanager.enable = true;
 
