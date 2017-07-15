@@ -79,17 +79,18 @@
       epkgs.go-mode
       epkgs.guide-key
       epkgs.helm
+      epkgs.helm-ag
       epkgs.helm-fuzzier
       epkgs.helm-projectile
       epkgs.htmlize
       epkgs.magit
       epkgs.markdown-mode
       epkgs.nix-mode
-      epkgs.nyan-mode
       epkgs.php-mode
       epkgs.restclient
       epkgs.scss-mode
       epkgs.smooth-scrolling
+      epkgs.use-package
       epkgs.web-mode
       epkgs.webpaste
       epkgs.yaml-mode

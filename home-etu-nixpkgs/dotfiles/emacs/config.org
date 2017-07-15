@@ -665,12 +665,6 @@ fit better.
   (use-package htmlize :ensure t)
 #+end_src
 
-* Useless utilities
-** Nyan-mode
-#+begin_src emacs-lisp :tangle yes
-  (use-package nyan-mode :ensure t)
-#+end_src
-
 * Functions
 ** Three-column-layout
 #+begin_src emacs-lisp :tangle yes
