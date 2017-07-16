@@ -30,6 +30,9 @@
     pkgs.kdeconnect
     pkgs.python3
     pkgs.python36Packages.ipython
+
+    # Font packages
+    pkgs.emacs-all-the-icons-fonts
   ];
 
   programs.firefox = {
@@ -96,7 +99,6 @@
       epkgs.yaml-mode
       epkgs.yasnippet
       epkgs.zerodark-theme
-      pkgs.emacs-all-the-icons-fonts
     ];
   };
 
