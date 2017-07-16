@@ -363,6 +363,17 @@ Utilizes the program =gocode= as backend. Available in AUR as =gocode-git=.
                   (company-mode t)))))
 #+end_src
 
+** Jedi                                                              :python:
+
+#+begin_src emacs-lisp :tangle yes
+  (add-hook 'python-mode-hook
+            '(lambda ()
+               (add-to-list 'company-backends 'company-jedi)
+               (company-mode t)))
+  (setq-default jedi:setup-keys t)
+  (setq-default jedi:complete-on-dot t)
+#+end_src
+
 * Utilities                                                           :utils:
 ** Anzu                                                        :anzu:replace:
 Enables interactive replacing in emacs.

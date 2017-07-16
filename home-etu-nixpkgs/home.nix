@@ -28,8 +28,13 @@
     pkgs.sshfs-fuse
     pkgs.youtube-dl
     pkgs.kdeconnect
-    pkgs.python3
+    pkgs.python36
     pkgs.python36Packages.ipython
+
+    # Jedi dependendencies
+    pkgs.python36Packages.epc
+    pkgs.python36Packages.jedi
+    pkgs.python36Packages.virtualenv
 
     # Font packages
     pkgs.emacs-all-the-icons-fonts
@@ -70,6 +75,7 @@
       epkgs.company
       epkgs.company-flx
       epkgs.company-go
+      epkgs.company-jedi
       epkgs.company-php
       epkgs.company-restclient
       epkgs.company-statistics
