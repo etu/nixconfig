@@ -35,6 +35,7 @@ with lib;
     gnupg
     ccid
     nfs-utils
+    file
   ];
 
   # Define a user account.

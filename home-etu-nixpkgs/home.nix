@@ -19,7 +19,9 @@
 
   home.packages = [
     pkgs.bc          # Dependency for some fish functions
+    pkgs.fzf
     pkgs.mpv
+    pkgs.mosh
     pkgs.tmux
     pkgs.ncdu
     pkgs.pass
