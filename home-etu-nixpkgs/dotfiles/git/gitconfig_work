@@ -1,0 +1,6 @@
+[commit]
+gpgSign=false
+
+[user]
+email=elis.axelsson@schibsted.se
+signingKey=

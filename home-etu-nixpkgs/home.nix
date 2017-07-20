@@ -8,8 +8,9 @@
   # Htop
   home.file.".config/htop/htoprc".source = ./dotfiles/htop/htoprc;
 
-  # Global gitignore
-  home.file.".gitignore_global".source = ./dotfiles/gitignore_global;
+  # Git config files
+  home.file.".gitconfig_work".source = ./dotfiles/git/gitconfig_work;
+  home.file.".gitignore_global".source = ./dotfiles/git/gitignore_global;
 
   # Fish config
   home.file.".config/fish/config.fish".source = ./dotfiles/fish/config.fish;
@@ -70,6 +71,9 @@
 
     [core]
     excludesfile = ~/.gitignore_global
+
+    [includeIf "gitdir:~/tvnu/"]
+    path = ~/.gitconfig_work
     '';
   };
 
