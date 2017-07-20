@@ -22,6 +22,9 @@
   hardware.cpu.intel.updateMicrocode = true;
   hardware.trackpoint.enable = true;
 
+  # Enable firewall.
+  networking.firewall.enable = true;
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 }

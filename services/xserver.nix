@@ -41,9 +41,6 @@
   # Enable networkmanager.
   networking.networkmanager.enable = true;
 
-  # Enable firewall.
-  networking.firewall.enable = true;
-
   # 1714-1764 is KDE Connect.
   networking.firewall.allowedTCPPortRanges = [ { from = 1714; to = 1764; } ];
   networking.firewall.allowedUDPPortRanges = [ { from = 1714; to = 1764; } ];

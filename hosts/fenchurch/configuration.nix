@@ -28,4 +28,7 @@
 
   # Disable CUPS to print documents.
   services.printing.enable = false;
+
+  # Enable firewall.
+  networking.firewall.enable = true;
 }
