@@ -19,6 +19,7 @@
 
   home.packages = [
     pkgs.bc          # Dependency for some fish functions
+    pkgs.ag
     pkgs.pv
     pkgs.fzf
     pkgs.mpv
