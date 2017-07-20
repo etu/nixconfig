@@ -8,6 +8,9 @@
   # Htop
   home.file.".config/htop/htoprc".source = ./dotfiles/htop/htoprc;
 
+  # Global gitignore
+  home.file.".gitignore_global".source = ./dotfiles/gitignore_global;
+
   # Fish config
   home.file.".config/fish/config.fish".source = ./dotfiles/fish/config.fish;
   home.file.".config/fish/functions/ltime.fish".source = ./dotfiles/fish/functions/ltime.fish;
