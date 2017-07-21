@@ -36,6 +36,9 @@ with lib;
     ccid
     nfs-utils
     file
+    dnsutils
+    host
+    whois
   ];
 
   # Define a user account.
