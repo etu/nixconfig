@@ -9,6 +9,7 @@
     ./hardware-configuration.nix
     ../../common.nix
     ../../services/xserver.nix
+    ../../services/vbox.nix
   ];
 
   networking.hostName = "pouchg";
@@ -31,15 +32,9 @@
   iptables -A INPUT -d 192.168.5.1 -s 192.168.5.102 -j ACCEPT
   '';
 
-  # Enable virtualbox.
-  virtualisation.virtualbox.host.enable = true;
-
   # Enable nfs server.
   services.nfs.server.enable = true;
   services.nfs.server.exports = ''
     /home/etu/tvnu/projects 192.168.5.102(rw,no_subtree_check,all_squash,anonuid=1000,anongid=100)
   '';
-
-  # Add user to group
-  users.extraUsers.etu.extraGroups = [ "wheel" "networkmanager" "vboxusers" ];
 }

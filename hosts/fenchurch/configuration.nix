@@ -9,6 +9,7 @@
     ./hardware-configuration.nix
     ../../common.nix
     ../../services/xserver.nix
+    ../../services/vbox.nix
   ];
 
   networking.hostName = "fenchurch";
