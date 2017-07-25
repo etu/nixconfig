@@ -45,7 +45,8 @@
   networking.firewall.allowPing = true;
   networking.firewall.allowedTCPPortRanges = [ { from = 1714; to = 1764; } ];
   networking.firewall.allowedUDPPortRanges = [ { from = 1714; to = 1764; } ];
-  networking.firewall.allowedTCPPorts = [ 22 ];
+  # Port 22 is SSH and 8000 is for random web sharing things.
+  networking.firewall.allowedTCPPorts = [ 22 8000 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
 
   # Define extra groups for user.
