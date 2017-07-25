@@ -17,6 +17,9 @@ with lib;
     consoleFont = "Lat2-Terminus16";
     consoleKeyMap = "dvorak-sv-a1";
     defaultLocale = "en_US.UTF-8";
+    supportedLocales = [
+      "all"
+    ];
   };
 
   # Enable the OpenSSH daemon.
