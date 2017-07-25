@@ -365,7 +365,7 @@ Utilizes the program =gocode= as backend. Available in AUR as =gocode-git=.
 
 ** Jedi                                                              :python:
 
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle no
   (add-hook 'python-mode-hook
             '(lambda ()
                (add-to-list 'company-backends 'company-jedi)
