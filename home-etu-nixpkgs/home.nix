@@ -37,6 +37,7 @@
     pkgs.youtube-dl
     pkgs.kdeconnect
     pkgs.python36
+    pkgs.python36Packages.flake8
     pkgs.python36Packages.ipython
 
     # Jedi dependendencies
