@@ -7,7 +7,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../common.nix
+    ../../services/common.nix
     ../../services/xserver.nix
   ];
 
