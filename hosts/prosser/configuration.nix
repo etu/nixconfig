@@ -27,4 +27,7 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
+
+  # Add dialout group for serial ports.
+  users.extraUsers.etu.extraGroups = [ "dialout" ];
 }
