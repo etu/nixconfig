@@ -98,8 +98,6 @@ Move =auto-save-list= files to =$XDG_CACHE_DIR=.
 
   ;; Browser
   (setq-default browse-url-browser-function 'browse-url-generic)
-  (setq-default browse-url-generic-program
-                (concat (getenv "HOME") "/bin/browser"))
 #+end_src
 
 ** Miscellaneous stuff
