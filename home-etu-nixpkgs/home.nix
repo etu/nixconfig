@@ -12,6 +12,9 @@
   home.file.".gitconfig_work".source = ./dotfiles/git/gitconfig_work;
   home.file.".gitignore_global".source = ./dotfiles/git/gitignore_global;
 
+  # Mpv config file
+  home.file.".config/mpv/mpv.conf".source = ./dotfiles/mpv/mpv.conf;
+
   # Fish config
   home.file.".config/fish/config.fish".source = ./dotfiles/fish/config.fish;
   home.file.".config/fish/functions/ltime.fish".source = ./dotfiles/fish/functions/ltime.fish;
