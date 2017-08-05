@@ -4,6 +4,9 @@
   # Nano config
   home.file.".nanorc".source = ./dotfiles/nanorc;
 
+  # Tmux config
+  home.file.".tmux.conf".source = ./dotfiles/tmux.conf;
+
   # Emacs config
   home.file.".emacs".source = ./dotfiles/emacs/emacs.el;
   home.file.".config/emacs/config.org".source = ./dotfiles/emacs/config.org;
