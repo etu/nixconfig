@@ -1,65 +1,5 @@
 #+TITLE: Elis Emacs configuration
 
-* Bootstrap this configuration
-This configuration is designed to follow the [[https://ploum.net/207-modify-your-application-to-use-xdg-folders/][XDG]] guidelines. This means that
-I configure locations for files of quite a lot of things.
-
-To use this configuration of Emacs, save this file in
-=~/.config/emacs/config.org=. You can download the file [[https://home.elis.nu/.emacs.d/config.org][here]].
-
-This is a minimal bootstrap which should live in =~/.emacs=:
-#+begin_src emacs-lisp :tangle no
-  ;; Define XDG directories
-  (defvar user-emacs-config-directory
-    (concat (getenv "HOME") "/.config/emacs"))
-
-  (defvar user-emacs-data-directory
-    (concat (getenv "HOME") "/.local/share/emacs"))
-
-  (defvar user-emacs-cache-directory
-    (concat (getenv "HOME") "/.cache/emacs"))
-
-  ;; Load config
-  (org-babel-load-file (concat user-emacs-config-directory "/config.org"))
-#+end_src
-
-* Emacs initialization
-** Add package sources and initialize the package manager
-Set up package sources with HTTPS, specify where to store packages and
-initialize the package management.
-
-#+begin_src emacs-lisp :tangle yes
-  (setq-default package-archives
-                '(("gnu" . "https://elpa.gnu.org/packages/")
-                  ("melpa" . "https://melpa.org/packages/")))
-
-  (setq-default package-user-dir (concat user-emacs-cache-directory "/elpa"))
-
-  (package-initialize)
-#+end_src
-
-** Install use-package if missing
-#+begin_src emacs-lisp :tangle yes
-  (unless (package-installed-p 'use-package)
-    (progn
-      (package-refresh-contents)
-      (package-install 'use-package)))
-
-  (require 'use-package)
-#+end_src
-
-* TODO Modes to try out
- - [[https://github.com/keelerm84/php-refactor-mode.el][PHP Refactor Mode]].
- - [[https://github.com/nishimaki10/emacs-phpcbf][PHP Code Formatting]].
- - [[http://melpa.org/#/company-ycm][Company YCM]] / [[http://melpa.org/#/company-ycmd][Company YCMD]].
- - [[https://github.com/myrjola/diminish.el][Diminish]].
- - [[https://github.com/purcell/paredit-everywhere][Paredit-everywhere]].
- - [[https://github.com/syohex/emacs-anzu][Anzu replace]].
- - [[https://github.com/DamienCassou/beginend][Beginend]].
- - [[https://github.com/NicolasPetton/pass][Pass]] / [[https://github.com/DamienCassou/auth-password-store][Pass Auth Source]].
- - [[https://melpa.org/#/jabber][Jabber]].
- - [[https://melpa.org/#/notmuch][notmuch]].
-
 * General configuration
 ** Backup Files
 Unless the =$XGD_DATA_DIR/emacs/backup= directory exists, create it. Then set
@@ -122,7 +62,6 @@ Move =auto-save-list= files to =$XDG_CACHE_DIR=.
 ** Theme
 #+begin_src emacs-lisp :tangle yes
   (use-package zerodark-theme
-    :ensure t
     :config
     (progn
       (load-theme 'zerodark t)
@@ -131,7 +70,7 @@ Move =auto-save-list= files to =$XDG_CACHE_DIR=.
 
 ** [[https://stackoverflow.com/questions/3984730/emacs-gui-with-emacs-daemon-not-loading-fonts-correctly][Set font]]
 #+begin_src emacs-lisp :tangle yes
-  (if (string= system-name "phouchg")
+  (if (string= (system-name) "phouchg")
       (add-to-list 'default-frame-alist '(font . "Liberation Mono 6"))
     (add-to-list 'default-frame-alist '(font . "Liberation Mono 10")))
 #+end_src
@@ -182,15 +121,9 @@ graphical emacs.
 #+end_src
 
 * Major modes
-** Fish shell mode                                                     :fish:
-#+begin_src emacs-lisp :tangle yes
-  (use-package fish-mode :ensure t)
-#+end_src
-
 ** Go mode                                                               :go:
 #+begin_src emacs-lisp :tangle yes
   (use-package go-mode
-    :ensure t
     :config
     (progn
       (add-hook 'before-save-hook 'gofmt-before-save)))
@@ -201,7 +134,6 @@ Install PHP-mode, set coding style and add a hook to load flymake.
 
 #+begin_src emacs-lisp :tangle yes
   (use-package php-mode
-    :ensure t
     :config
     (progn
       (setq-default php-mode-coding-style 'psr2)))
@@ -212,7 +144,6 @@ Disable compile at save since I rarely have ruby installed.
 
 #+begin_src emacs-lisp :tangle yes
   (use-package scss-mode
-    :ensure t
     :config
     (progn
       (setq-default scss-compile-at-save nil)))
@@ -223,7 +154,6 @@ Install web-mode, set rules for filetypes and indent.
 
 #+begin_src emacs-lisp :tangle yes
   (use-package web-mode
-    :ensure t
     :mode "\\.twig$"
     :mode "\\.html$"
     :config
@@ -233,24 +163,9 @@ Install web-mode, set rules for filetypes and indent.
       (setq-default web-mode-code-indent-offset 4))) ; JS/PHP/etc
 #+end_src
 
-** Markdown
-Handy when editing markdown.
-
-#+begin_src emacs-lisp :tangle yes
-  (use-package markdown-mode :ensure t)
-#+end_src
-
-** YAML
-Handy when editing YAML/YML.
-
-#+begin_src emacs-lisp :tangle yes
-  (use-package yaml-mode :ensure t)
-#+end_src
-
 ** Rest Client                                                   :restclient:
 #+begin_src emacs-lisp :tangle yes
   (use-package restclient
-    :ensure t
     :mode "\\.rest$"
     :config
     (progn
@@ -265,7 +180,6 @@ Handy when editing YAML/YML.
 * Company mode and backends                                         :company:
 #+begin_src emacs-lisp :tangle yes
   (use-package company
-    :ensure t
     :diminish company-mode
     :bind ("<backtab>" . company-complete)
     :config
@@ -281,7 +195,6 @@ Handy when editing YAML/YML.
 ** Fuzzy Matching                                                       :flx:
 #+begin_src emacs-lisp :tangle yes
   (use-package company-flx
-    :ensure t
     :config
     (progn
       (with-eval-after-load 'company
@@ -291,7 +204,6 @@ Handy when editing YAML/YML.
 ** Statistics for completions                                    :statistics:
 #+begin_src emacs-lisp :tangle yes
   (use-package company-statistics
-    :ensure t
     :config
     (progn
       (setq-default company-statistics-file
@@ -303,7 +215,6 @@ Handy when editing YAML/YML.
 ** Restclient Mode                                               :restclient:
 #+begin_src emacs-lisp :tangle yes
   (use-package company-restclient
-    :ensure t
     :config
     (progn
       (add-hook 'restclient-mode-hook
@@ -319,7 +230,6 @@ Utilizes the program =ctags= in the background. Available in pacman.
 
 #+begin_src emacs-lisp :tangle yes
   (use-package company-php
-    :ensure t
     :config
     (progn
       (setq-default ac-php-tags-path
@@ -349,7 +259,6 @@ Utilizes the program =gocode= as backend. Available in AUR as =gocode-git=.
 
 #+begin_src emacs-lisp :tangle yes
   (use-package company-go
-    :ensure t
     :config
     (progn
       (add-hook 'go-mode-hook
@@ -377,7 +286,6 @@ Utilizes the program =gocode= as backend. Available in AUR as =gocode-git=.
 Enables interactive replacing in emacs.
 #+begin_src emacs-lisp :tangle yes
   (use-package anzu
-    :ensure t
     :bind (("M-%" . anzu-query-replace)
            ("C-M-%" . anzu-query-replace-regexp)))
 #+end_src
@@ -388,7 +296,6 @@ Install magit, bind =C-x g= to display the main magit popup and bind
 
 #+begin_src emacs-lisp :tangle yes
   (use-package magit
-    :ensure t
     :bind (("C-x g" . magit-status)     ; Display the main magit popup
            ("C-x M-g" . magit-dispatch-popup))) ; Display keybinds for magit
 #+end_src
@@ -396,7 +303,6 @@ Install magit, bind =C-x g= to display the main magit popup and bind
 ** Flycheck                                                        :flycheck:
 #+begin_src emacs-lisp :tangle yes
   (use-package flycheck
-    :ensure t
     :diminish flycheck-mode
     :config
     (progn
@@ -410,7 +316,6 @@ Install magit, bind =C-x g= to display the main magit popup and bind
 ** Simple layouts                                                  :0blayout:
 #+begin_src emacs-lisp :tangle yes
   (use-package 0blayout
-    :ensure t
     :config
     (progn
       (0blayout-mode t)
@@ -420,7 +325,6 @@ Install magit, bind =C-x g= to display the main magit popup and bind
 ** Eyebrowse
 #+begin_src emacs-lisp :tangle yes
   (use-package eyebrowse
-    :ensure t
     :config
     (progn
       (setq eyebrowse-new-workspace t)
@@ -432,7 +336,6 @@ Paste whole buffers or parts of buffers to the internet.
 
 #+begin_src emacs-lisp :tangle yes
   (use-package webpaste
-    :ensure t
     :bind (("C-c C-p C-b" . webpaste-paste-buffer)
            ("C-c C-p C-r" . webpaste-paste-region))
 
@@ -446,7 +349,6 @@ Using Yasnippet (Yet Another Snippet Extension) for snippets/templates.
 
 #+begin_src emacs-lisp :tangle yes
   (use-package yasnippet
-    :ensure t
     :diminish yas-minor-mode
     :config
     (progn
@@ -466,7 +368,6 @@ state of pressed keybinds.
 
 #+begin_src emacs-lisp :tangle yes
   (use-package guide-key
-    :ensure t
     :diminish guide-key-mode
     :config
     (progn
@@ -480,7 +381,6 @@ scrolling smoother.
 
 #+begin_src emacs-lisp :tangle yes
   (use-package smooth-scrolling
-    :ensure t
     :config
     (progn
       (setq-default smooth-scroll-margin 2)
@@ -490,7 +390,6 @@ scrolling smoother.
 ** Show diff inline                                                 :diff:hl:
 #+begin_src emacs-lisp :tangle yes
   (use-package diff-hl
-    :ensure t
     :config
     (progn
       (global-diff-hl-mode)))
@@ -506,7 +405,6 @@ is the limit for php-files.
 
 #+begin_src emacs-lisp :tangle yes
   (use-package column-enforce-mode
-    :ensure t
     :config
     (progn
       (face-spec-set column-enforce-face '((t (:background "dark red"))))
@@ -536,7 +434,6 @@ This will replace =lambda= with =λ= and some other chars in elisp-mode.
 Enables interactive remote debugging of PHP in Emacs.
 #+begin_src emacs-lisp :tangle yes
   (use-package geben
-    :ensure t
     :config
     (progn
       (setq-default geben-temporary-file-directory
@@ -547,7 +444,6 @@ Enables interactive remote debugging of PHP in Emacs.
 #+begin_src emacs-lisp :tangle yes
   (use-package helm
     :diminish helm-mode
-    :ensure t
     :bind (("C-x C-f" . helm-find-files)
            ("M-x" . helm-M-x)
            ("C-x b" . helm-mini)
@@ -566,7 +462,6 @@ Enables interactive remote debugging of PHP in Emacs.
 ** Helm Projectile                                            :projectile:ag:
 #+begin_src emacs-lisp :tangle yes
   (use-package helm-projectile
-    :ensure t
     :bind (("C-x , p" . helm-projectile-switch-project)
            ("C-x , f" . helm-projectile-find-file)
            ("C-x , b" . projectile-ibuffer)
@@ -574,8 +469,6 @@ Enables interactive remote debugging of PHP in Emacs.
            ("C-x , a" . helm-projectile-ag))
     :config
     (progn
-      (use-package helm-ag :ensure t)
-
       (projectile-mode)
       (setq-default projectile-enable-caching t)))
 #+end_src
@@ -583,7 +476,6 @@ Enables interactive remote debugging of PHP in Emacs.
 ** Helm fuzzier                                                       :fuzzy:
 #+begin_src emacs-lisp :tangle yes
   (use-package helm-fuzzier
-    :ensure t
     :config
     (progn
       (setq-default helm-mode-fuzzy-match t)
@@ -635,26 +527,24 @@ Define =org-files/directories=, templates for org-capturing of notes.
       (setq-default org-time-clocksum-use-fractional t)
 
 
+      ;; Add advice to override indention
       ;; Define function to re-do indent of items in clocktable
       ;; http://emacs.stackexchange.com/a/9544
-      (defun my/org-clocktable-indent-string (level)
-        (if (= level 1)
-            ""
-          (let ((str " "))
-            (while (> level 2)
-              (setq level (1- level)
-                    str (concat str "-")))
-            (concat str "- "))))
-
-      ;; Add advice to override indention
-      (advice-add 'org-clocktable-indent-string
-                  :override #'my/org-clocktable-indent-string)))
+      (advice-add
+       'org-clocktable-indent-string
+       :override (lambda (level)
+                   (if (= level 1)
+                       ""
+                     (let ((str " "))
+                       (while (> level 2)
+                         (setq level (1- level)
+                               str (concat str "-")))
+                       (concat str "- ")))))))
 #+end_src
 
 ** Graphs                                                           :gnuplot:
 #+begin_src emacs-lisp :tangle yes
   (use-package gnuplot
-    :ensure t
     :bind (("M-C-g" . org-plot/gnuplot)))
 #+end_src
 
@@ -667,11 +557,6 @@ fit better.
                                ;max-width:920px; line-height:1.6;
                                font-size:18px; color:#444; padding:0 10px}
                                h1,h2,h3{line-height:1.2}</style>")
-#+end_src
-
-** Code highlight                                           :publish:htmlize:
-#+begin_src emacs-lisp :tangle yes
-  (use-package htmlize :ensure t)
 #+end_src
 
 * Functions

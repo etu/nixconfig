@@ -17,12 +17,16 @@
   (concat (getenv "HOME") "/.cache/emacs"))
 
 
+;; Init package manager
+(package-initialize)
+
+
 ;; Avoid creation of ~/.emacs.d/
 (setq-default user-emacs-directory user-emacs-data-directory)
 
 
 ;; Load config
-(org-babel-load-file (concat user-emacs-config-directory "/config.org"))
+(org-babel-load-file (concat user-emacs-config-directory "/config.org") t)
 
 
 ;;; emacs.el ends here
