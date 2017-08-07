@@ -7,8 +7,8 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../services/common.nix
-    ../../services/xserver.nix
+    ../../profiles/common.nix
+    ../../profiles/xserver.nix
   ];
 
   networking.hostName = "prosser";

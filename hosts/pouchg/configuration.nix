@@ -7,9 +7,9 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../services/common.nix
-    ../../services/xserver.nix
-    ../../services/vbox.nix
+    ../../profiles/common.nix
+    ../../profiles/xserver.nix
+    ../../profiles/vbox.nix
   ];
 
   networking.hostName = "pouchg";

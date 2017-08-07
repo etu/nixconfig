@@ -7,10 +7,10 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../services/common.nix
-    ../../services/xserver.nix
-    ../../services/vbox.nix
-    ../../services/steam.nix
+    ../../profiles/common.nix
+    ../../profiles/xserver.nix
+    ../../profiles/vbox.nix
+    ../../profiles/steam.nix
   ];
 
   networking.hostName = "fenchurch";
