@@ -29,6 +29,7 @@ with lib;
 
   # Enable fish
   programs.fish.enable = true;
+  programs.mosh.enable = true;
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
@@ -46,7 +47,6 @@ with lib;
     gnupg
     htop
     host
-    mosh
     ncdu
     nfs-utils
     oathToolkit       # Used by the pass otp etxension
