@@ -27,10 +27,12 @@ with lib;
   services.openssh.permitRootLogin = "no";
   services.openssh.passwordAuthentication = false;
 
+  # Enable fish
+  programs.fish.enable = true;
+
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
-    fish
     curl
     emacs
     htop
