@@ -49,6 +49,9 @@
     pkgs.python36Packages.flake8
     pkgs.python36Packages.ipython
 
+    # Used by the pass otp etxension
+    pkgs.oathToolkit
+
     # Jedi dependendencies
     pkgs.python36Packages.epc
     pkgs.python36Packages.jedi
