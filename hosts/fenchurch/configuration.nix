@@ -20,9 +20,6 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  # Used for nvidia drivers
-  nixpkgs.config.allowUnfree = true;
-
   # Hardware settings
   hardware.cpu.intel.updateMicrocode = true;
 
