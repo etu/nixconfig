@@ -30,66 +30,6 @@
   home.file.".config/fish/functions/fish_prompt.fish".source = ./dotfiles/fish/functions/fish_prompt.fish;
   home.file.".config/fish/functions/fish_right_prompt.fish".source = ./dotfiles/fish/functions/fish_right_prompt.fish;
 
-  home.packages = [
-    pkgs.bc          # Dependency for some fish functions
-    pkgs.ag
-    pkgs.pv
-    pkgs.fzf
-    pkgs.mpv
-    pkgs.mosh
-    pkgs.tmux
-    pkgs.ncdu
-    pkgs.pass
-    pkgs.stow
-    pkgs.ripgrep
-    pkgs.sshfs-fuse
-    pkgs.youtube-dl
-    pkgs.kdeconnect
-    pkgs.python36
-    pkgs.python36Packages.flake8
-    pkgs.python36Packages.ipython
-
-    # Used by the pass otp etxension
-    pkgs.oathToolkit
-
-    # Jedi dependendencies
-    pkgs.python36Packages.epc
-    pkgs.python36Packages.jedi
-    pkgs.python36Packages.virtualenv
-
-    # Font packages
-    pkgs.emacs-all-the-icons-fonts
-  ];
-
-  programs.firefox = {
-    enable = true;
-    enableAdobeFlash = false;
-  };
-
-  programs.browserpass.enable = true;
-
-  programs.git = {
-    enable = true;
-    userName = "Elis Axelsson";
-    userEmail = "elis.axelsson@gmail.com";
-    signing.key = "67FE98F28C44CF221828E12FD57EFA625C9A925F";
-    extraConfig = ''
-    [push]
-    default = simple
-
-    [color]
-    diff = auto
-    status = auto
-    branch = auto
-
-    [core]
-    excludesfile = ~/.gitignore_global
-
-    [includeIf "gitdir:~/tvnu/"]
-    path = ~/.gitconfig_work
-    '';
-  };
-
   programs.emacs = {
     enable = true;
     extraPackages = epkgs: [
@@ -131,6 +71,30 @@
       epkgs.zerodark-theme
     ];
   };
+
+  programs.git = {
+    enable = true;
+    userName = "Elis Axelsson";
+    userEmail = "elis.axelsson@gmail.com";
+    signing.key = "67FE98F28C44CF221828E12FD57EFA625C9A925F";
+    extraConfig = ''
+    [push]
+    default = simple
+
+    [color]
+    diff = auto
+    status = auto
+    branch = auto
+
+    [core]
+    excludesfile = ~/.gitignore_global
+
+    [includeIf "gitdir:~/tvnu/"]
+    path = ~/.gitconfig_work
+    '';
+  };
+
+  programs.browserpass.enable = true;
 
   manual.manpages.enable = false;
 }

@@ -33,16 +33,30 @@ with lib;
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
+    ag
+    bc                # Dependency for some fish functions
+    ccid              # Used for smartcards
     curl
+    dnsutils
     emacs
-    htop
+    emacs-all-the-icons-fonts
+    file
+    fzf
     git
     gnupg
-    ccid
-    nfs-utils
-    file
-    dnsutils
+    htop
     host
+    mosh
+    ncdu
+    nfs-utils
+    oathToolkit       # Used by the pass otp etxension
+    pass
+    pv
+    ripgrep
+    stow
+    sshfs-fuse
+    tmux
+    youtube-dl
     whois
   ];
 

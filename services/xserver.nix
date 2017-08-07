@@ -16,6 +16,16 @@
     liberation_ttf
   ];
 
+  # List packages installed in system profile. To search by name, run:
+  # $ nix-env -qaP | grep wget
+  environment.systemPackages = with pkgs; [
+    mpv
+    kdeconnect
+    firefox
+    # Require unfree
+    spotify
+  ];
+
   # Enable pulseaudio.
   hardware.pulseaudio.enable = true;
 

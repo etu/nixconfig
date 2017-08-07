@@ -10,6 +10,7 @@
     ../../services/common.nix
     ../../services/xserver.nix
     ../../services/vbox.nix
+    ../../services/steam.nix
   ];
 
   networking.hostName = "fenchurch";
@@ -24,12 +25,6 @@
 
   # Hardware settings
   hardware.cpu.intel.updateMicrocode = true;
-
-  # Enable 32bit libs for steam and such.
-  hardware.opengl = {
-    driSupport = true;
-    driSupport32Bit = true;
-  };
 
   # Enable nvidia xserver driver
   services.xserver.videoDrivers = [ "nvidia" ];
