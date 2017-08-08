@@ -8,7 +8,7 @@
   imports = [
     ./hardware-configuration.nix
     ../../profiles/common.nix
-    ../../profiles/xserver.nix
+    ../../profiles/graphical-desktop.nix
     ../../profiles/vbox.nix
     ../../profiles/steam.nix
   ];
