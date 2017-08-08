@@ -19,17 +19,17 @@
 
   boot.initrd.luks.devices."root".device = "/dev/disk/by-uuid/5f162a92-7527-470f-b0f4-01a4048751ba";
 
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/C3A4-AC64";
+      fsType = "vfat";
+    };
+
   fileSystems."/home" =
     { device = "/dev/disk/by-uuid/582c8881-98bf-4d13-a760-fb1ebf5b2ddd";
       fsType = "ext4";
     };
 
   boot.initrd.luks.devices."home".device = "/dev/disk/by-uuid/9184c868-e125-4d91-8eff-4a245c270750";
-
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/C3A4-AC64";
-      fsType = "vfat";
-    };
 
   swapDevices = [ ];
 
