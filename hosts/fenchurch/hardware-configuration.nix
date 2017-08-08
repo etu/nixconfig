@@ -31,6 +31,12 @@
 
   boot.initrd.luks.devices."home".device = "/dev/disk/by-uuid/9184c868-e125-4d91-8eff-4a245c270750";
 
+  fileSystems."/mnt/hactar" =
+    { device = "10.3.0.2:/media/files";
+      fsType = "nfs4";
+      options = [ "ro" "noauto" "x-systemd.automount" ];
+    };
+
   swapDevices = [ ];
 
   nix.maxJobs = lib.mkDefault 8;
