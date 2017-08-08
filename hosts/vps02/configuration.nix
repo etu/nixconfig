@@ -12,6 +12,4 @@
   # Set up bootloader
   boot.loader.grub.device = "/dev/vda";
   boot.cleanTmpDir = true;
-
-  networking.firewall.allowPing = true;
 }
