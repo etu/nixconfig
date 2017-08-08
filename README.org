@@ -1,4 +1,26 @@
+* My NixOS configs
+** Set up system configs
+Clone into =/etc/nixos/=.
+
+#+BEGIN_SRC sh
+# Set up submodules
+git submodule init
+git submodule update
+#+END_SRC
+
 Symlink configuration.nix to this directory to use on that system you're on:
-#+BEGIN_SRC
+#+BEGIN_SRC sh
 ln -s hosts/<hostname>/configuration.nix .
+#+END_SRC
+
+** Set up home-manager
+#+BEGIN_SRC sh
+# Symlink home configs
+ln -s /etc/nixos/home-etu-nixpkgs/ /home/etu/.config/nixpkgs
+
+# Install home-manager
+nix-env -f '<nixpkgs>' -iA home-manager
+
+# Build home config
+home-manager switch
 #+END_SRC
