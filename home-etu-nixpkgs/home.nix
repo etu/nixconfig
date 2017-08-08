@@ -1,34 +1,44 @@
 { pkgs, ... }:
 
 {
-  # Nano config
-  home.file.".nanorc".source = ./dotfiles/nanorc;
+  home.file = [
+    # Nano config
+    {
+      target = ".nanorc";
+      text = ''
+      set const	    # Show linenumbers -c as default
+      '';
+    }
 
-  # Tmux config
-  home.file.".tmux.conf".source = ./dotfiles/tmux.conf;
+    # Mpv config file
+    {
+      target = ".config/mpv/mpv.conf";
+      text = ''
+      # Don't show images embedded in music files
+      no-audio-display
+      '';
+    }
 
-  # Emacs config
-  home.file.".emacs".source = ./dotfiles/emacs/emacs.el;
-  home.file.".config/emacs/config.org".source = ./dotfiles/emacs/config.org;
+    # Tmux config
+    { target = ".tmux.conf"; source = ./dotfiles/tmux.conf; }
 
-  # Htop
-  home.file.".config/htop/htoprc".source = ./dotfiles/htop/htoprc;
+    # Fish config
+    { target = ".config/fish/config.fish"; source = ./dotfiles/fish/config.fish; }
 
-  # Git config files
-  home.file.".gitconfig_work".source = ./dotfiles/git/gitconfig_work;
-  home.file.".gitignore_global".source = ./dotfiles/git/gitignore_global;
+    # Fish functions
+    { target = ".config/fish/functions"; source = ./dotfiles/fish/functions; }
 
-  # Mpv config file
-  home.file.".config/mpv/mpv.conf".source = ./dotfiles/mpv/mpv.conf;
+    # Git config files
+    { target = ".gitconfig_work"; source = ./dotfiles/git/gitconfig_work; }
+    { target = ".gitignore_global"; source = ./dotfiles/git/gitignore_global; }
 
-  # Fish config
-  home.file.".config/fish/config.fish".source = ./dotfiles/fish/config.fish;
-  home.file.".config/fish/functions/ltime.fish".source = ./dotfiles/fish/functions/ltime.fish;
-  home.file.".config/fish/functions/isfind.fish".source = ./dotfiles/fish/functions/isfind.fish;
-  home.file.".config/fish/functions/weather.fish".source = ./dotfiles/fish/functions/weather.fish;
-  home.file.".config/fish/functions/256colors.fish".source = ./dotfiles/fish/functions/256colors.fish;
-  home.file.".config/fish/functions/fish_prompt.fish".source = ./dotfiles/fish/functions/fish_prompt.fish;
-  home.file.".config/fish/functions/fish_right_prompt.fish".source = ./dotfiles/fish/functions/fish_right_prompt.fish;
+    # Emacs config
+    { target = ".emacs"; source = ./dotfiles/emacs/emacs.el; }
+    { target = ".config/emacs/config.org"; source = ./dotfiles/emacs/config.org; }
+
+    # Htop
+    { target = ".config/htop/htoprc"; source = ./dotfiles/htop/htoprc; }
+  ];
 
   programs.emacs = {
     enable = true;
