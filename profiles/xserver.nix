@@ -62,5 +62,5 @@
   networking.firewall.allowedTCPPorts = [ 8000 ];
 
   # Define extra groups for user.
-  users.extraUsers.etu.extraGroups = [ "wheel" "networkmanager" ];
+  users.extraUsers.etu.extraGroups = [ "networkmanager" "dialout" ];
 }
