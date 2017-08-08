@@ -55,12 +55,11 @@
   networking.networkmanager.enable = true;
 
   # 1714-1764 is KDE Connect.
-  networking.firewall.allowPing = true;
   networking.firewall.allowedTCPPortRanges = [ { from = 1714; to = 1764; } ];
   networking.firewall.allowedUDPPortRanges = [ { from = 1714; to = 1764; } ];
-  # Port 22 is SSH and 8000 is for random web sharing things.
-  networking.firewall.allowedTCPPorts = [ 22 8000 ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
+
+  # 8000 is for random web sharing things.
+  networking.firewall.allowedTCPPorts = [ 8000 ];
 
   # Define extra groups for user.
   users.extraUsers.etu.extraGroups = [ "wheel" "networkmanager" ];

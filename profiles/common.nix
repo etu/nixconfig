@@ -60,6 +60,10 @@ with lib;
     whois
   ];
 
+  # Enable firewall.
+  networking.firewall.enable = true;
+  networking.firewall.allowPing = true;
+
   # Define a user account.
   users.extraUsers.etu.isNormalUser = true;
   users.extraUsers.etu.uid = 1000;

@@ -24,9 +24,7 @@
   # Disable CUPS to print documents.
   services.printing.enable = true;
 
-  # Enable firewall.
-  networking.firewall.enable = true;
-
+  # Open all ports from 192.168.5.102.
   networking.firewall.extraCommands = ''
   # Allow any traffic from virtual machine to host (mostly NFS).
   iptables -A INPUT -d 192.168.5.1 -s 192.168.5.102 -j ACCEPT
