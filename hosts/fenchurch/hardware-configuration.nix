@@ -12,24 +12,22 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
+  boot.initrd.luks.devices."root".device = "/dev/disk/by-uuid/61ea4dca-c490-4f56-85e4-54873669c7f7";
+
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/f1b09fa8-7fdc-4382-b47c-0e02c440de65";
+    { device = "/dev/disk/by-uuid/cc869eb3-1e03-4952-b53c-9edda00ee243";
       fsType = "ext4";
-    };
-
-  boot.initrd.luks.devices."root".device = "/dev/disk/by-uuid/5f162a92-7527-470f-b0f4-01a4048751ba";
-
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/C3A4-AC64";
-      fsType = "vfat";
     };
 
   fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/582c8881-98bf-4d13-a760-fb1ebf5b2ddd";
+    { device = "/dev/disk/by-uuid/fdde2451-dfb9-4494-8a73-402cdf83c63b";
       fsType = "ext4";
     };
 
-  boot.initrd.luks.devices."home".device = "/dev/disk/by-uuid/9184c868-e125-4d91-8eff-4a245c270750";
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/AFD2-F740";
+      fsType = "vfat";
+    };
 
   fileSystems."/mnt/hactar" =
     { device = "10.3.0.2:/media/files";
