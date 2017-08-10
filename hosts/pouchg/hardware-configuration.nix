@@ -12,22 +12,17 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
+  boot.initrd.luks.devices."disk".device = "/dev/disk/by-uuid/7e568ea3-137d-406a-a5bf-22d13e30ce53";
+
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/019967e2-54c9-4011-b5bf-913bd72d3f23";
       fsType = "ext4";
     };
 
-  boot.initrd.luks.devices = [
-    {
-      name = "root";
-      device = "/dev/disk/by-uuid/7e568ea3-137d-406a-a5bf-22d13e30ce53";
-      preLVM = true;
-    }
-  ];
-
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/D11C-2DEF";
       fsType = "vfat";
+      options = [ "noauto" "x-systemd.automount" ];
     };
 
   swapDevices =
