@@ -54,6 +54,7 @@
       epkgs.company-restclient
       epkgs.company-statistics
       epkgs.diff-hl
+      epkgs.es-mode
       epkgs.eyebrowse
       epkgs.fish-mode
       epkgs.flycheck
@@ -70,10 +71,12 @@
       epkgs.markdown-mode
       epkgs.nix-mode
       epkgs.php-mode
+      epkgs.phpcbf
       epkgs.restclient
       epkgs.scss-mode
       epkgs.smooth-scrolling
       epkgs.use-package
+      epkgs.vcl-mode
       epkgs.web-mode
       epkgs.webpaste
       epkgs.yaml-mode

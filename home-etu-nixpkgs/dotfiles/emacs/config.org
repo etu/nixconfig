@@ -70,9 +70,7 @@ Move =auto-save-list= files to =$XDG_CACHE_DIR=.
 
 ** [[https://stackoverflow.com/questions/3984730/emacs-gui-with-emacs-daemon-not-loading-fonts-correctly][Set font]]
 #+begin_src emacs-lisp :tangle yes
-  (if (string= (system-name) "phouchg")
-      (add-to-list 'default-frame-alist '(font . "Liberation Mono 6"))
-    (add-to-list 'default-frame-alist '(font . "Liberation Mono 10")))
+  (add-to-list 'default-frame-alist '(font . "Liberation Mono 10"))
 #+end_src
 
 ** [[https://emacs.stackexchange.com/questions/13291/emacs-cursor-color-is-different-in-daemon-and-non-daemon-modes][Cursor color]]
