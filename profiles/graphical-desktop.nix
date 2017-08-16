@@ -25,6 +25,8 @@
     mpv
     kdeconnect
     firefox
+    okular
+
     # Require unfree
     spotify
   ];
