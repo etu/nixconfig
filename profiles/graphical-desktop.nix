@@ -27,6 +27,10 @@
     firefox
     okular
 
+    # Fonts
+    powerline-fonts
+    emacs-all-the-icons-fonts
+
     # Require unfree
     spotify
   ];

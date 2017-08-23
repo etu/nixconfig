@@ -40,7 +40,6 @@ with lib;
     curl
     dnsutils
     emacs
-    emacs-all-the-icons-fonts
     file
     fzf
     git
