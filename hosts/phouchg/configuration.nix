@@ -22,7 +22,10 @@
   # Hardware settings
   hardware.cpu.intel.updateMicrocode = true;
 
-  # Disable CUPS to print documents.
+  # Enable bluetooth
+  hardware.bluetooth.enable = true;
+
+  # Enable CUPS to print documents.
   services.printing.enable = true;
 
   # Open all ports from 192.168.5.102.
