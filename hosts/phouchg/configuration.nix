@@ -20,10 +20,15 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Hardware settings
+  services.xserver.videoDrivers = ["intel" "modesetting"];
   hardware.cpu.intel.updateMicrocode = true;
 
   # Enable bluetooth
   hardware.bluetooth.enable = true;
+
+  # Enable pulse with all the modules
+  hardware.pulseaudio.enable = true;
+  hardware.pulseaudio.package = pkgs.pulseaudioFull;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
