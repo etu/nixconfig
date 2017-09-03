@@ -10,7 +10,7 @@
     ../../profiles/common.nix
     ../../profiles/graphical-desktop.nix
     ../../profiles/vbox.nix
-    ../../profiles/steam.nix
+    ../../profiles/gaming.nix
   ];
 
   networking.hostName = "fenchurch";
