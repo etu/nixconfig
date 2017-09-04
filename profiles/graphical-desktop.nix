@@ -24,6 +24,7 @@
   environment.systemPackages = with pkgs; [
     mpv
     kdeconnect
+    kdeApplications.spectacle
     firefox
     okular
 
