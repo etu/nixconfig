@@ -26,6 +26,7 @@
     kdeconnect
     kdeApplications.spectacle
     firefox
+    firejail
     okular
 
     # Fonts
@@ -35,6 +36,10 @@
     # Require unfree
     spotify
   ];
+
+  security.wrappers = {
+    firejail.source = "${pkgs.firejail.out}/bin/firejail";
+  };
 
   # Enable pulseaudio.
   hardware.pulseaudio.enable = true;
