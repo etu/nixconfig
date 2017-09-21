@@ -57,6 +57,11 @@ with lib;
     tmux
     youtube-dl
     whois
+
+    # Golang tools
+    go
+    go-dependency-manager
+    gocode
   ];
 
   # Enable firewall.
