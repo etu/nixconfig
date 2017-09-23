@@ -91,6 +91,7 @@
     userEmail = "elis@hirwing.se";
     signing.key = "67FE98F28C44CF221828E12FD57EFA625C9A925F";
     signing.gpgPath = "${pkgs.gnupg}/bin/gpg";
+    signing.signByDefault = true;
     extraConfig = ''
     [push]
     default = simple
