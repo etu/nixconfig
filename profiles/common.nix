@@ -54,6 +54,7 @@ with lib;
     ripgrep
     stow
     sshfs-fuse
+    testssl
     tmux
     youtube-dl
     whois
