@@ -28,6 +28,7 @@
     firefox
     firejail
     okular
+    stupidterm
 
     # Fonts
     powerline-fonts

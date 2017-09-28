@@ -38,6 +38,9 @@
 
     # Htop
     { target = ".config/htop/htoprc"; source = ./dotfiles/htop/htoprc; }
+
+    # Stupidterm
+    { target = ".config/stupidterm.ini"; source = ./dotfiles/stupidterm.ini; }
   ];
 
   programs.emacs = {
