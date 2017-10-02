@@ -8,7 +8,8 @@
   imports = [
     ./hardware-configuration.nix
     ../../profiles/common.nix
-    ../../profiles/graphical-desktop.nix
+    ../../profiles/common-graphical.nix
+    ../../profiles/desktop-plasma.nix
   ];
 
   networking.hostName = "prosser";

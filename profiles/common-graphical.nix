@@ -24,10 +24,8 @@
   environment.systemPackages = with pkgs; [
     mpv
     kdeconnect
-    kdeApplications.spectacle
     firefox
     firejail
-    okular
     stupidterm
 
     # Fonts
@@ -48,25 +46,13 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
+  # Don't have xterm as a session manager.
+  services.xserver.desktopManager.xterm.enable = false;
+
   # Keyboard layout.
   services.xserver.layout = "se";
   services.xserver.xkbOptions = "eurosign:e,ctrl:nocaps,numpad:mac,kpdl:dot";
   services.xserver.xkbVariant = "dvorak";
-
-  # Enable the Plasma Desktop Environment.
-  services.xserver.desktopManager.plasma5.enable = true;
-
-  # Workaround for missing settings in kde settings panel:
-  # https://github.com/NixOS/nixpkgs/issues/27050#issuecomment-315324541
-  environment.variables.QT_PLUGIN_PATH = [ "${pkgs.plasma-desktop}/lib/qt-5.9/plugins/kcms" ];
-
-  # Enable autologin.
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.displayManager.sddm.autoLogin.enable = true;
-  services.xserver.displayManager.sddm.autoLogin.user = "etu";
-
-  # Don't install xterm.
-  services.xserver.desktopManager.xterm.enable = false;
 
   # Enable networkmanager.
   networking.networkmanager.enable = true;
