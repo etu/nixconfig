@@ -1,5 +1,5 @@
 [commit]
-gpgSign=false
+gpgSign=0
 
 [user]
 email=elis.hirwing@schibsted.se

@@ -1,0 +1,21 @@
+[push]
+default = simple
+
+[color]
+diff = auto
+status = auto
+branch = auto
+
+[core]
+excludesfile = ~/.gitignore_global
+
+[commit]
+gpgSign=1
+
+[user]
+email=elis@hirwing.se
+name=Elis Hirwing
+signingKey=67FE98F28C44CF221828E12FD57EFA625C9A925F
+
+[includeIf "gitdir:~/tvnu/"]
+path = ~/.gitconfig_work

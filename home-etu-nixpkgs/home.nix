@@ -29,6 +29,7 @@
     { target = ".config/fish/functions"; source = ./dotfiles/fish/functions; }
 
     # Git config files
+    { target = ".gitconfig"; source = ./dotfiles/git/gitconfig; }
     { target = ".gitconfig_work"; source = ./dotfiles/git/gitconfig_work; }
     { target = ".gitignore_global"; source = ./dotfiles/git/gitignore_global; }
 
@@ -90,26 +91,8 @@
 
   programs.git = {
     enable = true;
-    userName = "Elis Hirwing";
-    userEmail = "elis@hirwing.se";
-    signing.key = "67FE98F28C44CF221828E12FD57EFA625C9A925F";
-    signing.gpgPath = "${pkgs.gnupg}/bin/gpg";
-    signing.signByDefault = true;
-    extraConfig = ''
-    [push]
-    default = simple
-
-    [color]
-    diff = auto
-    status = auto
-    branch = auto
-
-    [core]
-    excludesfile = ~/.gitignore_global
-
-    [includeIf "gitdir:~/tvnu/"]
-    path = ~/.gitconfig_work
-    '';
+    userName = "";
+    userEmail = "";
   };
 
   programs.browserpass.enable = true;
