@@ -28,6 +28,11 @@
     firejail
     stupidterm
 
+    # Mail
+    offlineimap
+    notmuch
+    msmtp
+
     # Fonts
     powerline-fonts
     emacs-all-the-icons-fonts

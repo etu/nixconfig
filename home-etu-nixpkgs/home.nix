@@ -74,6 +74,7 @@
       epkgs.magit
       epkgs.markdown-mode
       epkgs.nix-mode
+      epkgs.notmuch
       epkgs.php-mode
       epkgs.phpcbf
       epkgs.restclient
