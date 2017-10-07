@@ -9,7 +9,7 @@
     ./hardware-configuration.nix
     ../../profiles/common.nix
     ../../profiles/common-graphical.nix
-    ../../profiles/desktop-plasma.nix
+    ../../profiles/desktop-gnome.nix
   ];
 
   networking.hostName = "prosser";
