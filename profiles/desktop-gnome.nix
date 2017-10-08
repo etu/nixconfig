@@ -5,6 +5,7 @@
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
     evince
+    pavucontrol
     gnome3.gnome-tweak-tool
     gnomeExtensions.dash-to-dock
     gnomeExtensions.topicons-plus
