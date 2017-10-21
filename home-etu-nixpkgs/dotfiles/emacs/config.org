@@ -335,11 +335,7 @@ Paste whole buffers or parts of buffers to the internet.
 #+begin_src emacs-lisp :tangle yes
   (use-package webpaste
     :bind (("C-c C-p C-b" . webpaste-paste-buffer)
-           ("C-c C-p C-r" . webpaste-paste-region))
-
-    :config
-    (progn
-      (setq webpaste-open-in-browser t)))
+           ("C-c C-p C-r" . webpaste-paste-region)))
 #+end_src
 
 ** Snippets / Templates                                           :yasnippet:
