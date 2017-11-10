@@ -25,7 +25,7 @@
     mpv
     keybase
     kdeconnect
-    firefox
+    firefox-bin
     firejail
     stupidterm
 
