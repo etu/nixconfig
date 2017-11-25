@@ -16,6 +16,10 @@
     KERNEL=="uinput", MODE="0660", GROUP="users", OPTIONS+="static_node=uinput"
   '';
 
+  # Steam link ports
+  networking.firewall.allowedTCPPorts = [ 27036 27037 ];
+  networking.firewall.allowedUDPPorts = [ 27031 27036 ];
+
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
