@@ -72,6 +72,7 @@ with lib;
   # Define a user account.
   users.extraUsers.etu.isNormalUser = true;
   users.extraUsers.etu.uid = 1000;
+  users.extraUsers.etu.description = "Elis Hirwing,,,,";
   users.extraUsers.etu.extraGroups = [ "wheel" ];
   users.extraUsers.etu.shell = pkgs.fish;
 
