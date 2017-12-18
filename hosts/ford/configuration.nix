@@ -35,4 +35,10 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
+
+  # List packages installed in system profile. To search by name, run:
+  # $ nix-env -qaP | grep wget
+  environment.systemPackages = with pkgs; [
+    postscript-lexmark
+  ];
 }
