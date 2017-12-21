@@ -10,8 +10,6 @@
     ../../profiles/common.nix
     ../../profiles/common-graphical.nix
     ../../profiles/desktop-gnome.nix
-    ../../profiles/vbox.nix
-    ../../profiles/nfsd.nix
   ];
 
   networking.hostName = "ford";
