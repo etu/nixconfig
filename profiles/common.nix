@@ -7,7 +7,10 @@ with lib;
   system.stateVersion = "17.09";
 
   # Use local nixpkgs checkout
-  nix.nixPath = [ "/etc/nixos" "nixos-config=/etc/nixos/configuration.nix" ];
+  nix.nixPath = [
+    "nixpkgs=/etc/nixos/nixpkgs"
+    "nixos-config=/etc/nixos/configuration.nix"
+  ];
 
   # Set your time zone.
   time.timeZone = "Europe/Stockholm";
