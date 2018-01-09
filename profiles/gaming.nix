@@ -25,5 +25,7 @@
   environment.systemPackages = with pkgs; [
     discord
     steam
+    sc-controller
+    linux-steam-integration
   ];
 }
