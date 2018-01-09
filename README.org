@@ -24,3 +24,19 @@ $ nix-shell https://github.com/rycee/home-manager/archive/master.tar.gz -A insta
 # Build home config
 $ home-manager switch
 #+END_SRC
+
+** Using other channels when defining my own nix.nixPath
+#+BEGIN_SRC nix
+# Define variable that imports and configures the channel
+nixos-small = (import /nix/var/nix/profiles/per-user/root/channels/nixos-small/nixpkgs {
+  config.allowUnfree = true;
+});
+
+# Installing packages
+environment.systemPackages = with pkgs; [
+  firefox
+
+  # Example usage of packages from other channel
+  nixos-small.emacs
+];
+#+END_SRC
