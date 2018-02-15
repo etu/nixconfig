@@ -49,6 +49,7 @@ with lib;
     gnupg
     host
     htop
+    jq
     ncdu
     nfs-utils
     oathToolkit       # Used by the pass otp etxension
