@@ -47,20 +47,20 @@ with lib;
     fzf
     git
     gnupg
-    htop
     host
+    htop
     ncdu
     nfs-utils
     oathToolkit       # Used by the pass otp etxension
     pass
     pv
     ripgrep
-    stow
     sshfs-fuse
+    stow
     testssl
     tmux
-    youtube-dl
     whois
+    youtube-dl
 
     # Golang tools
     go
