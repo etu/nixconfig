@@ -1,6 +1,10 @@
 { pkgs, ... }:
 
 {
+  environment.systemPackages = with pkgs; [
+    vagrant
+  ];
+
   # Enable virtualbox.
   virtualisation.virtualbox.host.enable = true;
 
