@@ -63,6 +63,11 @@ with lib;
     whois
     youtube-dl
 
+    # PHP utils
+    php
+    phpPackages.composer
+    phpPackages.xdebug
+
     # Golang tools
     go
     go-dependency-manager
