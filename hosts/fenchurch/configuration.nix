@@ -32,4 +32,7 @@
 
   # Disable CUPS to print documents.
   services.printing.enable = false;
+
+  # Build nix stuff with all the power
+  nix.buildCores = 9;
 }
