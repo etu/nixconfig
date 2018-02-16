@@ -42,7 +42,7 @@ with lib;
     ccid              # Used for smartcards
     curl
     dnsutils
-    emacs
+    emacs25-nox
     file
     fzf
     git
