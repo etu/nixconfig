@@ -553,24 +553,6 @@ fit better.
                                h1,h2,h3{line-height:1.2}</style>")
 #+end_src
 
-* Email
-
-#+begin_src emacs-lisp :tangle yes
-  (use-package sendmail
-    :config
-    (setq send-mail-function 'sendmail-send-it
-          sendmail-program "/run/current-system/sw/bin/msmtp"))
-
-  (use-package notmuch
-    :config
-    (setq notmuch-archive-tags '("-inbox" "-unread" "+archive")))
-
-  (setq message-kill-buffer-on-exit t)
-
-  (setq user-mail-address "elis@hirwing.se"
-        user-full-name "Elis Hirwing")
-#+end_src
-
 * Functions
 ** Three-column-layout
 #+begin_src emacs-lisp :tangle yes
