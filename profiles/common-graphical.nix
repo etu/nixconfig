@@ -23,6 +23,7 @@
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
     emacs
+    feh
     firefox-bin
     firejail
     kdeconnect
