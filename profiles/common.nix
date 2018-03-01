@@ -69,6 +69,8 @@ with lib;
     php
     phpPackages.composer
     phpPackages.xdebug
+    phpPackages.phpcbf
+    phpPackages.phpcs
 
     # Golang tools
     go
