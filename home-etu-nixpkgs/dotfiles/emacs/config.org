@@ -305,8 +305,7 @@ Install magit, bind =C-x g= to display the main magit popup and bind
     :config
     (progn
       (setq-default flycheck-phpcs-standard "PSR2")
-      (setq-default flycheck-php-phpcs-executable
-                    (concat (getenv "HOME") "/bin/phpcs"))
+      (setq-default flycheck-php-phpcs-executable "phpcs")
 
       (global-flycheck-mode)))
 #+end_src
