@@ -5,6 +5,7 @@
     ./hardware-configuration.nix
     ./networking.nix
     ../../profiles/common.nix
+    ../../profiles/matrix.nix
   ];
 
   networking.hostName = "vps02";
