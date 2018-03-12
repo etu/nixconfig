@@ -1,18 +1,26 @@
 { pkgs, ... }:
 
 {
-  # Caddy
-  services.caddy.enable = true;
-  services.caddy.agree = true;
-  services.caddy.email = "elis@hirwing.se";
-  services.caddy.config = ''
-    matrix.failar.nu {
-      gzip
-      log syslog
+  # Cert renewal
+  security.acme.certs = {
+    "matrix.failar.nu" = {
+      group = "matrix-synapse";
+      allowKeysForGroup = true;
+      postRun = "systemctl reload nginx.service; systemctl restart matrix-synapse.service";
+    };
+  };
 
-      proxy / http://127.0.0.1:8008
-    }
-  '';
+  # Nginx
+  services.nginx.enable = true;
+  services.nginx.virtualHosts = {
+    "matrix.failar.nu" = {
+      forceSSL = true;
+      enableACME = true;
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:8008";
+      };
+    };
+  };
 
   networking.firewall.allowedTCPPorts = [ 80 443 ];
 
@@ -24,20 +32,23 @@
   services.matrix-synapse.public_baseurl = "https://matrix.failar.nu/";
   # services.matrix-synapse.registration_shared_secret = "shared-secret-used-for-commandline-creation-of-users";
 
+  services.matrix-synapse.tls_certificate_path = "/var/lib/acme/matrix.failar.nu/fullchain.pem";
+  services.matrix-synapse.tls_private_key_path = "/var/lib/acme/matrix.failar.nu/key.pem";
+
   services.matrix-synapse.extraConfig = ''
     max_upload_size: "50M"
   '';
 
   services.matrix-synapse.listeners = [
-    { port = 8008;
-      bind_address = "";
-      type = "http";
-      tls = false;
-      x_forwarded = true;
+    { bind_address = "127.0.0.1";
+      port = 8008;
       resources = [
-          { names = [ "client" "webclient" ]; compress = true; }
-          { names = [ "federation" ];         compress = false; }
+        { compress = true;  names = [ "client" "webclient" ]; }
+        { compress = false; names = [ "federation" ]; }
       ];
+      tls = false;
+      type = "http";
+      x_forwarded = true;
     }
   ];
 
