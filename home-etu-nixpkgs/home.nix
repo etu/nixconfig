@@ -9,7 +9,7 @@
     {
       target = ".nanorc";
       text = ''
-      set const	    # Show linenumbers -c as default
+      set constantshow	    # Show linenumbers -c as default
       '';
     }
 
