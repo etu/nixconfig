@@ -1,4 +1,4 @@
-{ ... }: {
+{ pkgs, ... }: {
   imports = [
     ./hardware-configuration.nix
     ./networking.nix
@@ -60,8 +60,36 @@
         header_upstream Host ix.ufs.se
       }
     }
+
+    git.elis.nu {
+      tls {
+        protocols tls1.2
+        key_type p384
+      }
+
+      proxy / http://127.0.0.1:3000
+    }
   '';
 
   # Firewall
   networking.firewall.allowedTCPPorts = [ 80 443 ];
+
+  # Gitea
+  services.gitea.enable = true;
+  services.gitea.appName = "Elis Git Service";
+  services.gitea.cookieSecure = true;
+  services.gitea.rootUrl = "https://git.elis.nu/";
+  services.gitea.database.type = "postgres";
+  services.gitea.database.passwordFile = "/var/lib/gitea-db-pass";
+  services.gitea.extraConfig = ''
+    [log]
+    ROOT_PATH = /var/lib/gitea
+  '';
+
+  # Enable default shell so we can use git over ssh
+  users.extraUsers.gitea.useDefaultShell = true;
+
+  # Postgres
+  services.postgresql.package = pkgs.postgresql100;
+  services.postgresql.dataDir = "/var/lib/postgresql/10.0";
 }
