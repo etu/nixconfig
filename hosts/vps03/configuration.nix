@@ -30,6 +30,21 @@
         header_upstream Host {host}
       }
     }
+
+    sa.0b.se {
+      tls {
+        protocols tls1.2
+        key_type p384
+      }
+
+      header / {
+        Strict-Transport-Security max-age=31536000
+      }
+
+      proxy / https://etu.github.io/ {
+        header_upstream Host elis.nu
+      }
+    }
   '';
 
   # Firewall
