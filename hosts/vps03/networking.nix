@@ -9,7 +9,7 @@
       "8.8.4.4"
     ];
     defaultGateway = "146.185.156.1";
-    defaultGateway6 = "";
+    defaultGateway6 = "2a03:b0c0:0:1010::1";
     interfaces = {
       eth0 = {
         ipv4.addresses = [
