@@ -45,6 +45,21 @@
         header_upstream Host elis.nu
       }
     }
+
+    ix.ufs.se {
+      tls {
+        protocols tls1.2
+        key_type p384
+      }
+
+      header / {
+        Strict-Transport-Security max-age=31536000
+      }
+
+      proxy / https://ix-sthlm.github.io/ {
+        header_upstream Host ix.ufs.se
+      }
+    }
   '';
 
   # Firewall
