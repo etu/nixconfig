@@ -92,4 +92,9 @@
   # Postgres
   services.postgresql.package = pkgs.postgresql100;
   services.postgresql.dataDir = "/var/lib/postgresql/10.0";
+
+  # Install the ip.failar.nu program
+  environment.systemPackages = with pkgs; [
+    (callPackage ../../packages/ip-failar-nu.nix {})
+  ];
 }
