@@ -6,6 +6,16 @@
 
 let
   ip-failar-nu = (pkgs.callPackage ../../packages/ip-failar-nu.nix {});
+  caddyTlsHsts = ''
+      tls {
+        protocols tls1.2
+        key_type p384
+      }
+
+      header / {
+        Strict-Transport-Security max-age=31536000
+      }
+  '';
 in {
   imports = [
     ./hardware-configuration.nix
@@ -25,14 +35,7 @@ in {
   services.caddy.email = "elis@hirwing.se";
   services.caddy.config = ''
     elis.nu, www.elis.nu {
-      tls {
-        protocols tls1.2
-        key_type p384
-      }
-
-      header / {
-        Strict-Transport-Security max-age=31536000
-      }
+      ${caddyTlsHsts}
 
       proxy / https://etu.github.io/ {
         header_upstream Host {host}
@@ -40,14 +43,7 @@ in {
     }
 
     sa.0b.se {
-      tls {
-        protocols tls1.2
-        key_type p384
-      }
-
-      header / {
-        Strict-Transport-Security max-age=31536000
-      }
+      ${caddyTlsHsts}
 
       proxy / https://etu.github.io/ {
         header_upstream Host elis.nu
@@ -55,14 +51,7 @@ in {
     }
 
     ix.ufs.se {
-      tls {
-        protocols tls1.2
-        key_type p384
-      }
-
-      header / {
-        Strict-Transport-Security max-age=31536000
-      }
+      ${caddyTlsHsts}
 
       proxy / https://ix-sthlm.github.io/ {
         header_upstream Host ix.ufs.se
@@ -70,23 +59,13 @@ in {
     }
 
     git.elis.nu {
-      tls {
-        protocols tls1.2
-        key_type p384
-      }
+      ${caddyTlsHsts}
 
       proxy / http://127.0.0.1:3000
     }
 
     https://ip.failar.nu {
-      tls {
-        protocols tls1.2
-        key_type p384
-      }
-
-      header / {
-        Strict-Transport-Security max-age=31536000
-      }
+      ${caddyTlsHsts}
 
       proxy / localhost:8123
     }
