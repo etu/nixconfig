@@ -81,13 +81,6 @@
   services.gitea.rootUrl = "https://git.elis.nu/";
   services.gitea.database.type = "postgres";
   services.gitea.database.passwordFile = "/var/lib/gitea-db-pass";
-  services.gitea.extraConfig = ''
-    [log]
-    ROOT_PATH = /var/lib/gitea
-  '';
-
-  # Enable default shell so we can use git over ssh
-  users.extraUsers.gitea.useDefaultShell = true;
 
   # Postgres
   services.postgresql.package = pkgs.postgresql100;
