@@ -85,6 +85,10 @@ in {
   services.gitea.rootUrl = "https://git.elis.nu/";
   services.gitea.database.type = "postgres";
   services.gitea.database.passwordFile = "/var/lib/gitea-db-pass";
+  services.gitea.extraConfig = ''
+    [service]
+    DISABLE_REGISTRATION = true
+  '';
 
   # Postgres
   services.postgresql.package = pkgs.postgresql100;
