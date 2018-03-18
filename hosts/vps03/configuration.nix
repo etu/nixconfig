@@ -1,4 +1,12 @@
-{ pkgs, ... }: {
+# Edit this configuration file to define what should be installed on
+# your system.  Help is available in the configuration.nix(5) man page
+# and in the NixOS manual (accessible by running ‘nixos-help’).
+
+{ config, pkgs, ... }:
+
+let
+  ip-failar-nu = (pkgs.callPackage ../../packages/ip-failar-nu.nix {});
+in {
   imports = [
     ./hardware-configuration.nix
     ./networking.nix
@@ -69,6 +77,23 @@
 
       proxy / http://127.0.0.1:3000
     }
+
+    https://ip.failar.nu {
+      tls {
+        protocols tls1.2
+        key_type p384
+      }
+
+      header / {
+        Strict-Transport-Security max-age=31536000
+      }
+
+      proxy / localhost:8123
+    }
+
+    http://ip.failar.nu {
+      proxy / localhost:8123
+    }
   '';
 
   # Firewall
@@ -86,8 +111,17 @@
   services.postgresql.package = pkgs.postgresql100;
   services.postgresql.dataDir = "/var/lib/postgresql/10.0";
 
-  # Install the ip.failar.nu program
-  environment.systemPackages = with pkgs; [
-    (callPackage ../../packages/ip-failar-nu.nix {})
-  ];
+  # Enable the ip-failar-nu service
+  systemd.services.ip-failar-nu = {
+    description = "ip-failar-nu";
+    after = [ "network.target" ];
+    wantedBy = [ "multi-user.target" ];
+    path = [ ip-failar-nu ];
+    serviceConfig = {
+      Type = "simple";
+      User = "nobody";
+      ExecStart = "${ip-failar-nu}/bin/ip-failar-nu";
+      Restart = "always";
+    };
+  };
 }
