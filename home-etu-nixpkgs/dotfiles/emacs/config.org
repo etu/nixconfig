@@ -462,7 +462,7 @@ Enables interactive remote debugging of PHP in Emacs.
            ("C-x , a" . helm-projectile-ag))
     :config
     (progn
-      (projectile-global-mode)
+      (projectile-mode)
       (setq-default projectile-enable-caching t)))
 #+end_src
 
