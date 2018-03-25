@@ -408,21 +408,6 @@ is the limit for php-files.
       (add-hook 'org-mode-hook (make-column-rule 77))))
 #+end_src
 
-** Prettify Symbols                                          :pretty:symbols:
-This will replace =lambda= with =λ= and some other chars in elisp-mode.
-
-#+begin_src emacs-lisp :tangle yes
-  (use-package prog-mode
-    :config
-    (progn
-      (add-hook 'emacs-lisp-mode-hook
-                (lambda ()
-                  (push '(">=" . ?≥) prettify-symbols-alist)
-                  (push '("<=" . ?≤) prettify-symbols-alist)))
-
-      (global-prettify-symbols-mode t)))
-#+end_src
-
 ** Geben                                                    :DBGp:xdebug:php:
 Enables interactive remote debugging of PHP in Emacs.
 #+begin_src emacs-lisp :tangle yes
