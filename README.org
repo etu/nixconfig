@@ -40,3 +40,19 @@ environment.systemPackages = with pkgs; [
   nixos-small.emacs
 ];
 #+END_SRC
+
+** Sample overlay to overwrite package
+Sample overlay to downgrade PHP to a specific version:
+
+#+BEGIN_SRC nix
+{ pkgs, ... }:
+
+{
+  nixpkgs.overlays = [
+    (self: super: {
+      php = self.php70;
+      phpPackages = self.php70Packages;
+    })
+  ];
+}
+#+END_SRC
