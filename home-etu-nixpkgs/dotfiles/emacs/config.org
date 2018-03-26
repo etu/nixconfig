@@ -295,7 +295,11 @@ Install magit, bind =C-x g= to display the main magit popup and bind
 #+begin_src emacs-lisp :tangle yes
   (use-package magit
     :bind (("C-x g" . magit-status)     ; Display the main magit popup
-           ("C-x M-g" . magit-dispatch-popup))) ; Display keybinds for magit
+           ("C-x M-g" . magit-dispatch-popup)) ; Display keybinds for magit
+    :config
+    (progn
+      (setq-default magit-log-arguments
+                    '("--graph" "--color" "--decorate" "--show-signature" "-n256"))))
 #+end_src
 
 ** Flycheck                                                        :flycheck:
