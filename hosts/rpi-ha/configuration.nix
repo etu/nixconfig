@@ -58,6 +58,21 @@
     tmux
   ];
 
+  # Enable Home Assistant, open port and add the hass user to the dialout group
+  services.home-assistant.enable = true;
+  services.home-assistant.package = pkgs.home-assistant.override {
+    extraPackages = ps: with ps; [
+      # Zwave
+      python_openzwave pydispatcher
+
+      # Requirements of default modules
+      netdisco distro xmltodict
+    ];
+  };
+
+  networking.firewall.allowedTCPPorts = [ 8123 ];
+  users.extraUsers.hass.extraGroups = [ "dialout" ];
+
   users.extraUsers.root.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILPvVYtcFHwuW/QW5Sqyuno7KrsVq9q9HUOBoaoIlIwu etu@hactar-2016-09-24"
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPXaF1OwJAyGuPr3Rb0E+ut1gxVenll82/fLSc7p8UeA etu@fenchurch-2017-07-14"
