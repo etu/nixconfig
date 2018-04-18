@@ -46,9 +46,6 @@
   # Enable pulseaudio.
   hardware.pulseaudio.enable = true;
 
-  # Install keybase
-  services.keybase.enable = true;
-
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
