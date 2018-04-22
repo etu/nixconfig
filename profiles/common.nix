@@ -63,8 +63,6 @@ with lib;
     whois
     youtube-dl
 
-    nixUnstable
-
     # PHP utils
     php
     phpPackages.composer
