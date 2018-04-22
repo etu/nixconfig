@@ -20,7 +20,7 @@ in {
   imports = [
     ./hardware-configuration.nix
     ./networking.nix
-    ../../profiles/common.nix
+    ../../profiles/common-server.nix
   ];
 
   networking.hostName = "vps03";
