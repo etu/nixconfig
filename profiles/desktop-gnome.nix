@@ -11,15 +11,28 @@
     gnomeExtensions.topicons-plus
   ];
 
-  # Ugly hack to get gdm and gnome to understand keyboard settings
-  # https://github.com/NixOS/nixpkgs/issues/14318#issuecomment-330193990
+  # Without this the gsettings overrides won't work.
+  services.xserver.desktopManager.gnome3.extraGSettingsOverridePackages = with pkgs; [
+    gnome3.gnome_shell
+  ];
+
+  # Extra gsettings overrides.
   services.xserver.desktopManager.gnome3.extraGSettingsOverrides = ''
     [org.gnome.desktop.input-sources]
     sources=[('xkb', 'se+dvorak')]
     xkb-options=['eurosign:e', 'ctrl:nocaps', 'numpad:mac', 'kpdl:dot']
+
+    [org.gnome.shell]
+    always-show-log-out=true
+
+    [org.gnome.desktop.wm.preferences]
+    resize-with-right-button=true
+
+    [org.gnome.shell]
+    enabled-extensions=['dash-to-dock@micxgx.gmail.com', 'TopIcons@phocean.net', 'alternate-tab@gnome-shell-extensions.gcampax.github.com']
   '';
 
-  # Enable the Plasma Desktop Environment.
+  # Enable the Gnome Desktop Environment.
   services.xserver.desktopManager.gnome3.enable = true;
 
   # Enable autologin.
