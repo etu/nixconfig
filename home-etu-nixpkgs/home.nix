@@ -31,10 +31,8 @@
     # Fish functions
     { target = ".config/fish/functions"; source = ./dotfiles/fish/functions; }
 
-    # Git config files
-    { target = ".gitconfig"; source = ./dotfiles/git/gitconfig; }
-    { target = ".gitconfig_work"; source = ./dotfiles/git/gitconfig_work; }
-    { target = ".gitignore_global"; source = ./dotfiles/git/gitignore_global; }
+    # Git config file for work
+    { target = ".config/git/work_config"; source = ./dotfiles/git/gitconfig_work; }
 
     # Emacs config
     { target = ".emacs"; source = ./dotfiles/emacs/emacs.el; }
@@ -95,8 +93,19 @@
 
   programs.git = {
     enable = true;
-    userName = "";
-    userEmail = "";
+    userName = "Elis Hirwing";
+    userEmail = "elis@hirwing.se";
+
+    signing = {
+      key = "67FE98F28C44CF221828E12FD57EFA625C9A925F";
+      signByDefault = true;
+    };
+
+    ignores = [ ".ac-php-conf.json" ];
+
+    includes = [
+      { condition = "gitdir:~/tvnu/"; path = "~/.config/git/work_config"; }
+    ];
   };
 
   programs.browserpass.enable = true;
