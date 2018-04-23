@@ -4,16 +4,21 @@
   # Enable the smartcard deamon.
   services.pcscd.enable = true;
 
-  # Sane font defaults
+  # Sane font defaults.
   fonts.enableFontDir = true;
   fonts.enableGhostscriptFonts = true;
   fonts.fontconfig.cache32Bit = true;
 
   fonts.fontconfig.ultimate.enable = true;
-  fonts.fontconfig.ultimate.preset = "osx";
 
+  # Install some extra fonts.
   fonts.fonts = with pkgs; [
+    dejavu_fonts
+    emacs-all-the-icons-fonts
+    inconsolata
     liberation_ttf
+    powerline-fonts
+    source-code-pro
   ];
 
   # Used for nvidia drivers, spotify and steam and such
@@ -33,10 +38,6 @@
     # Keysigning party
     signing-party
     msmtp
-
-    # Fonts
-    emacs-all-the-icons-fonts
-    powerline-fonts
   ];
 
   security.wrappers = {
