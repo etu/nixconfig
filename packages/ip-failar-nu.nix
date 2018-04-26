@@ -15,8 +15,7 @@ stdenv.mkDerivation rec {
     owner = "etu";
     repo = "ip.failar.nu";
     rev = "925218c6615659e56faabbab64146dff8c38b55c";
-    githubBase = "git.elis.nu";
-    fetchSubmodules = true;
     sha256 = "0qmvya8ilgj3y38dxy7qk64cxpfjrbp78iihj8nl97iqq29s5lf0";
+    fetchSubmodules = true;
   };
 }
