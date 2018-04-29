@@ -28,4 +28,8 @@
     sc-controller
     linux-steam-integration
   ];
+
+  nixpkgs.config.permittedInsecurePackages = [
+    "mono-4.0.4.1"
+  ];
 }
