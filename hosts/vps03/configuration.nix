@@ -5,7 +5,6 @@
 { config, pkgs, ... }:
 
 let
-  ip-failar-nu = (pkgs.callPackage ../../packages/ip-failar-nu.nix {});
   caddyTlsHsts = ''
       tls {
         protocols tls1.2
@@ -95,16 +94,5 @@ in {
   services.postgresql.dataDir = "/var/lib/postgresql/10.0";
 
   # Enable the ip-failar-nu service
-  systemd.services.ip-failar-nu = {
-    description = "ip-failar-nu";
-    after = [ "network.target" ];
-    wantedBy = [ "multi-user.target" ];
-    path = [ ip-failar-nu ];
-    serviceConfig = {
-      Type = "simple";
-      User = "nobody";
-      ExecStart = "${ip-failar-nu}/bin/ip-failar-nu";
-      Restart = "always";
-    };
-  };
+  programs.ip-failar-nu.enable = true;
 }
