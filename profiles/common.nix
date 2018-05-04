@@ -12,6 +12,15 @@ with lib;
     "nixos-config=/etc/nixos/configuration.nix"
   ];
 
+  # Local overlays
+  nixpkgs.overlays = [
+    (import ../overlays/local/pkgs/default.nix)
+  ];
+
+  imports = [
+    ../overlays/local/modules/default.nix
+  ];
+
   # Set your time zone.
   time.timeZone = "Europe/Stockholm";
 
