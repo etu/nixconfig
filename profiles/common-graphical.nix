@@ -35,6 +35,10 @@
     mpv
     stupidterm
 
+    # Pass related
+    ccid              # Used for smartcards
+    (pass.withExtensions (ext: with ext; [ pass-otp pass-update ]))
+
     # Keysigning party
     signing-party
     msmtp

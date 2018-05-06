@@ -48,7 +48,6 @@ with lib;
   environment.systemPackages = with pkgs; [
     ag
     bc                # Dependency for some fish functions
-    ccid              # Used for smartcards
     curl
     dnsutils
     emacs25-nox
@@ -61,8 +60,6 @@ with lib;
     jq
     ncdu
     nfs-utils
-    oathToolkit       # Used by the pass otp etxension
-    pass
     pv
     ripgrep
     sshfs-fuse
