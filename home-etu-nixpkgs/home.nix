@@ -59,6 +59,7 @@
       epkgs.company-restclient
       epkgs.company-statistics
       epkgs.diff-hl
+      epkgs.direnv
       epkgs.es-mode
       epkgs.eyebrowse
       epkgs.fish-mode

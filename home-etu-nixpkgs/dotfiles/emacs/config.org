@@ -456,6 +456,14 @@ Enables interactive remote debugging of PHP in Emacs.
                     (concat user-emacs-cache-directory "/geben"))))
 #+end_src
 
+** Direnv
+Enables support for direnv environment variables.
+#+begin_src emacs-lisp :tangle yes
+  (use-package direnv
+    :config
+    (direnv-mode))
+#+end_src
+
 * Helm                                                                 :helm:
 #+begin_src emacs-lisp :tangle yes
   (use-package helm

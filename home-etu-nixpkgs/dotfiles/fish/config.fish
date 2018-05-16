@@ -9,10 +9,10 @@ set --global --export EDITOR emacs
 set --global --export LESS_TERMCAP_se (echo -e '\e[0m')
 set --global --export LESS_TERMCAP_so (echo -e '\e[38;5;16m\e[48;5;15m')
 
-
-# Enable pass extensions in home directory
-set --global --export PASSWORD_STORE_ENABLE_EXTENSIONS true
-
+###
+# Enable the direnv hook
+##
+eval (direnv hook fish)
 
 ###
 # Put an ascii-fish as greeter if it's an interactive shell, otherwise erase the greeter message

@@ -49,6 +49,7 @@ with lib;
     ag
     bc                # Dependency for some fish functions
     curl
+    direnv
     dnsutils
     emacs25-nox
     file
