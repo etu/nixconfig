@@ -4,7 +4,7 @@ with lib;
 
 {
   # The NixOS release to be compatible with for stateful data such as databases.
-  system.stateVersion = "17.09";
+  system.nixos.stateVersion = "17.09";
 
   # Use local nixpkgs checkout
   nix.nixPath = [
