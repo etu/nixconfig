@@ -77,6 +77,9 @@ in {
   # Firewall
   networking.firewall.allowedTCPPorts = [ 80 443 ];
 
+  # Gitea dump
+  services.gitea.dump.enable = true;
+
   # Gitea
   services.gitea.enable = true;
   services.gitea.appName = "Elis Git Service";
