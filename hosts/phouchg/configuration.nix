@@ -33,9 +33,6 @@
   hardware.pulseaudio.enable = true;
   hardware.pulseaudio.package = pkgs.pulseaudioFull;
 
-  # Enable the fw update manager
-  services.fwupd.enable = true;
-
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
