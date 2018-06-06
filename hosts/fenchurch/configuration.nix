@@ -24,9 +24,6 @@
   # Hardware settings
   hardware.cpu.intel.updateMicrocode = true;
 
-  # Firmware update deamon
-  services.fwupd.enable = true;
-
   # Enable nvidia xserver driver
   services.xserver.videoDrivers = [ "nvidia" ];
 
