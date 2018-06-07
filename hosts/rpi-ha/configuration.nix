@@ -31,6 +31,9 @@
 
       # Requirements of default modules
       netdisco distro xmltodict
+
+      # Hue
+      aiohue voluptuous-serialize
     ];
   };
 

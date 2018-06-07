@@ -25,7 +25,7 @@
     };
 
   # Adding a swap file is optional, but strongly recommended!
-  # swapDevices = [ { device = "/swapfile"; size = 1024; } ];
+  swapDevices = [ { device = "/swapfile"; size = 3072; } ];
 
   nix.maxJobs = lib.mkDefault 4;
 }
