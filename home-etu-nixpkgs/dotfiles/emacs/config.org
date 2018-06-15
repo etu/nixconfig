@@ -57,6 +57,9 @@ Move =auto-save-list= files to =$XDG_CACHE_DIR=.
 
   ;; Change all yes-or-no-p to y-or-n-p
   (defalias 'yes-or-no-p 'y-or-n-p)
+
+  ;; Disable line wrapping where the window ends
+  (toggle-truncate-lines t)
 #+end_src
 
 ** Theme
@@ -117,7 +120,6 @@ graphical emacs.
   (global-unset-key (kbd "C-z"))
   (global-unset-key (kbd "C-x C-z"))
 #+end_src
-
 
 ** Beginning of line
 C-a is revised to go to first char of the line, ignoring initial whitespace
