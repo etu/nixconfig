@@ -43,6 +43,9 @@
 
     # Stupidterm
     { target = ".config/stupidterm.ini"; source = ./dotfiles/stupidterm.ini; }
+
+    # Direnvrc
+    { target = ".direnvrc"; source = ./dotfiles/direnvrc.sh; }
   ];
 
   programs.emacs = {
