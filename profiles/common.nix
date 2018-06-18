@@ -76,11 +76,6 @@ with lib;
     phpPackages.xdebug
     phpPackages.phpcbf
     phpPackages.phpcs
-
-    # Golang tools
-    go
-    go-dependency-manager
-    gocode
   ];
 
   # Enable firewall.
