@@ -72,10 +72,22 @@ in {
     http://ip.failar.nu {
       proxy / localhost:8123
     }
+
+    # Set up webserver for pgpkeyserver-lite and routes for sks
+    keys.ix.ufs.se {
+      ${caddyTlsHsts}
+
+      root ${pkgs.pgpkeyserver-lite}
+    }
+    keys.ix.ufs.se/pks {
+      ${caddyTlsHsts}
+
+      proxy / http://127.0.0.1:11371/pks
+    }
   '';
 
-  # Firewall
-  networking.firewall.allowedTCPPorts = [ 80 443 ];
+  # Open Firewall for HTTP, HTTPS and hkp (keyserver)
+  networking.firewall.allowedTCPPorts = [ 80 443 11371 ];
 
   # Gitea dump
   services.gitea.dump.enable = true;
@@ -98,4 +110,9 @@ in {
 
   # Enable the ip-failar-nu service
   programs.ip-failar-nu.enable = true;
+
+  # Enable sks keyserver
+  services.sks.enable = true;
+  services.sks.hkpAddress = [ "0.0.0.0" "::0" ];
+  environment.systemPackages = with pkgs; [ pgpkeyserver-lite ];
 }
