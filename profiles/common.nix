@@ -55,7 +55,6 @@ with lib;
     file
     fzf
     git
-    gnupg
     host
     htop
     jq
