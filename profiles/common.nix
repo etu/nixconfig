@@ -21,52 +21,24 @@ with lib;
     ../overlays/local/modules/default.nix
   ];
 
-  # Set your time zone.
-  time.timeZone = "Europe/Stockholm";
+  # Enable common cli settings for my systems
+  my.common-cli.enable = true;
 
-  # Select internationalisation properties.
-  i18n = {
-    consoleFont = "Lat2-Terminus16";
-    consoleKeyMap = "dvorak-sv-a1";
-    defaultLocale = "en_US.UTF-8";
-    supportedLocales = [
-      "all"
-    ];
-  };
-
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
+  # Disable root login for ssh
   services.openssh.permitRootLogin = "no";
-  services.openssh.passwordAuthentication = false;
-
-  # Enable fish
-  programs.fish.enable = true;
-  programs.mosh.enable = true;
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
     ag
-    bc                # Dependency for some fish functions
-    curl
     direnv
     dnsutils
     emacs25-nox
-    file
-    fzf
-    git
-    host
-    htop
     jq
-    ncdu
     nfs-utils
-    pv
-    ripgrep
     sshfs-fuse
     stow
     testssl
-    tmux
-    whois
     youtube-dl
 
     # PHP utils
@@ -76,10 +48,6 @@ with lib;
     phpPackages.phpcbf
     phpPackages.phpcs
   ];
-
-  # Enable firewall.
-  networking.firewall.enable = true;
-  networking.firewall.allowPing = true;
 
   # Define a user account.
   users.extraUsers.etu.isNormalUser = true;
@@ -97,7 +65,4 @@ with lib;
     "no-agent-forwarding,no-X11-forwarding,permitopen=\"localhost:8001\",command=\"echo 'This account can only be used for weechat relays'\" ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDELIFRmA2C93sjHebScoj8QPynqdYyl6fgYLOrBMsBKQAKrzsfF4wmA/LYo9Z89l3TmpMqzd4C/315HFO6sO7iHVrUfsC0lToA+FOcN7D40pr8m+AaQtVSI14Mlz4GY3fyeyYyssz7XXMn9LEzgZ8SxZh06YLJM9yL1kprBoRXe3Bxbja38JBSl+8xBWRyNrQBPySrTeuoxRYbJ8DUwtOeSElSP6YDjtMut4PbjLXJ2GNHavXhoQaLiZsW4c4YzcMzjiKEmAZWNg2cNuljXMf3KoKCbxqiD9zWidWhKdMuT+XhuDzTt89JAdWWStkj2N++eeESRozHmDBp9PROJx7Z etu@android-2017-04-24"
     "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDjJcOzWajRgpgZ/uHRNUSpm6giWoXAQL995e5mE0J3aZc/aF68svXjhvpjkRJRFMWJUkwngtQiP+qdFAFDdKI2t9sMeMRuI54HRIQUoeDou8dNPcTlXQjV2DcdOt7GedjlAexdzV/WitNlZC255a8200iQ7e5D9WjSibHpeBrMLhxYGGd/Lzvs5pn6jTJaTFVlCiosh/vnP/rP+W1ruWymVdMxe/6s3ExeIxPeWmpR8zuk30izJ+Gb2jCAzH5lWjpL8BYinVkhbxIyqouaa0Ycgs1/ohcKvRC5Sg/2Or2pJ8rol1aTq1Zb7Z0j+DaXtF3smnpm/gWnuFwin6xiuMjyR20ItI/VOBjZZcLxtDvleXCpBTcZHBaCoGl2YvuZ2GpDSTtF8TPCb3LDQry9LXFUULH650u8bCQvktKGUnuVnwte7wVQGLgTUR+0PsyE+yK34BPWAGxKtowxfMQ59szKo4bY/+WZyll3fySsBeAsGvNPHH9D+Uu3B28Aufyn/1nVQLJKH3UjcVhOeJpnVGw8VBEh8l6gt9wa2VQFP9Wpnlxpbpfr9Q5p6Ssmj4l+fal+PwElN36ltmDs9tfAvoNgxBiG9f0zwYq/pO5PEvmZCTrDqk/mPqEnZrhSp47Qx65ikwwD88ySs5HNtOgZ3NhrYRk4IacWRMt5ESWvJgDMXQ== openpgp:0x14E6F255"
   ];
-
-  # Root shell
-  users.extraUsers.root.shell = pkgs.fish;
 }
