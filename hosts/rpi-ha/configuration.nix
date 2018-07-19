@@ -24,19 +24,18 @@
 
   # Enable Home Assistant, open port and add the hass user to the dialout group
   services.home-assistant.enable = true;
+  services.home-assistant.openFirewall = true;
+  services.home-assistant.autoExtraComponents = false;
   services.home-assistant.package = pkgs.home-assistant.override {
-    extraPackages = ps: with ps; [
-      # Zwave
-      python_openzwave pydispatcher
-
-      # Requirements of default modules
-      netdisco distro xmltodict
-
-      # Hue
-      aiohue voluptuous-serialize
+    extraComponents = [
+      "discovery"
+      "hue"
+      "media_player.cast"
+      "sensor.yr"
+      "updater"
+      "zwave"
     ];
   };
 
-  networking.firewall.allowedTCPPorts = [ 8123 ];
   users.extraUsers.hass.extraGroups = [ "dialout" ];
 }
