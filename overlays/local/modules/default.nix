@@ -8,5 +8,6 @@
     ./my-desktop-gnome.nix
     ./my-gpg-utils.nix
     ./my-user.nix
+    ./my-vbox.nix
   ];
 }
