@@ -8,6 +8,7 @@
     ./my-desktop-gnome.nix
     ./my-gaming.nix
     ./my-gpg-utils.nix
+    ./my-nfsd.nix
     ./my-user.nix
     ./my-vbox.nix
   ];
