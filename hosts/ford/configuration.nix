@@ -7,9 +7,23 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../profiles/common.nix
-    ../../profiles/common-graphical.nix
-    ../../profiles/desktop-gnome.nix
+
+    # Import local modules
+    ../../overlays/local/modules/default.nix
+  ];
+
+  # The NixOS release to be compatible with for stateful data such as databases.
+  system.nixos.stateVersion = "18.09";
+
+  # Use local nixpkgs checkout
+  nix.nixPath = [
+    "nixpkgs=/etc/nixos/nixpkgs"
+    "nixos-config=/etc/nixos/configuration.nix"
+  ];
+
+  # Local overlays
+  nixpkgs.overlays = [
+    (import ../../overlays/local/pkgs/default.nix)
   ];
 
   networking.hostName = "ford";
@@ -36,6 +50,24 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
+
+  # Disable root login for ssh
+  services.openssh.permitRootLogin = "no";
+
+  # Enable common cli settings for my systems
+  my.common-cli.enable = true;
+
+  # Enable gpg related stuff
+  my.gpg-utils.enable = true;
+
+  # Enable common graphical stuff
+  my.common-graphical.enable = true;
+
+  # Enable my gnome desktop settings
+  my.desktop-gnome.enable = true;
+
+  # Define a user account.
+  my.user.enable = true;
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
