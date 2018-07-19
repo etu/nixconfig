@@ -7,11 +7,17 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../profiles/common.nix
-    ../../profiles/common-graphical.nix
-    ../../profiles/desktop-gnome.nix
-    ../../profiles/vbox.nix
-    ../../profiles/nfsd.nix
+
+    # Import local modules
+    ../../overlays/local/modules/default.nix
+  ];
+
+  # The NixOS release to be compatible with for stateful data such as databases.
+  system.nixos.stateVersion = "18.09";
+
+  # Local overlays
+  nixpkgs.overlays = [
+    (import ../../overlays/local/pkgs/default.nix)
   ];
 
   networking.hostName = "phouchg";
@@ -36,8 +42,32 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  # Enable nfs server.
+  # Enable nfs server exports.
   services.nfs.server.exports = ''
     /home/etu/tvnu/projects 192.168.5.102(rw,no_subtree_check,all_squash,anonuid=1000,anongid=100)
   '';
+
+  # Disable root login for ssh
+  services.openssh.permitRootLogin = "no";
+
+  # Enable common cli settings for my systems
+  my.common-cli.enable = true;
+
+  # Enable gpg related stuff
+  my.gpg-utils.enable = true;
+
+  # Enable common graphical stuff
+  my.common-graphical.enable = true;
+
+  # Enable my gnome desktop settings
+  my.desktop-gnome.enable = true;
+
+  # Define a user account.
+  my.user.enable = true;
+
+  # Enable nfsd with firewall rules.
+  my.nfsd.enable = true;
+
+  # Enable vbox and friends.
+  my.vbox.enable = true;
 }
