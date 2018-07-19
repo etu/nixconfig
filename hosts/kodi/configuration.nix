@@ -5,18 +5,33 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ../../profiles/common-server.nix
-    ];
+  imports = [
+    ./hardware-configuration.nix
+
+    # Import local modules
+    ../../overlays/local/modules/default.nix
+  ];
+
+  # The NixOS release to be compatible with for stateful data such as databases.
+  system.nixos.stateVersion = "18.09";
+
+  # Use local nixpkgs checkout
+  nix.nixPath = [
+    "nixpkgs=/etc/nixos/nixpkgs"
+    "nixos-config=/etc/nixos/configuration.nix"
+  ];
+
+  # Local overlays
+  nixpkgs.overlays = [
+    (import ../../overlays/local/pkgs/default.nix)
+  ];
+
+  networking.hostName = "kodi";
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
-
-  networking.hostName = "kodi";
 
   # Enable some firmwares.
   hardware.enableRedistributableFirmware = true;
@@ -28,13 +43,6 @@
   # OpenGL stuff
   hardware.opengl.enable = true;
   hardware.opengl.driSupport = true;
-
-  # Select internationalisation properties.
-  i18n = {
-    consoleFont = "Lat2-Terminus16";
-    consoleKeyMap = "us";
-    defaultLocale = "en_US.UTF-8";
-  };
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
@@ -61,4 +69,14 @@
 
   # Need access to use HDMI CEC Dongle
   users.extraUsers.kodi.extraGroups = [ "dialout" ];
+
+  # Enable common cli settings for my systems
+  my.common-cli.enable = true;
+
+  # SSH Keys for remote logins
+  users.extraUsers.root.openssh.authorizedKeys.keys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILPvVYtcFHwuW/QW5Sqyuno7KrsVq9q9HUOBoaoIlIwu etu@hactar-2016-09-24"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPXaF1OwJAyGuPr3Rb0E+ut1gxVenll82/fLSc7p8UeA etu@fenchurch-2017-07-14"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINvIdD5t0Tjn+e41dIMt9VM5B0gs9yCuTY4p7Hpklrhr etu@ford-2018-03-05"
+  ];
 }
