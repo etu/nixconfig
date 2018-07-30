@@ -8,17 +8,12 @@
   imports = [
     ./hardware-configuration.nix
 
-    # Import local modules
-    ../../overlays/local/modules/default.nix
+    # Import local modules & overlays
+    ../../overlays/local/default.nix
   ];
 
   # The NixOS release to be compatible with for stateful data such as databases.
   system.nixos.stateVersion = "17.09";
-
-  # Local overlays
-  nixpkgs.overlays = [
-    (import ../../overlays/local/pkgs/default.nix)
-  ];
 
   networking.hostName = "rpi-ha";
 
