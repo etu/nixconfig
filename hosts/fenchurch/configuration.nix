@@ -13,7 +13,7 @@
   ];
 
   # The NixOS release to be compatible with for stateful data such as databases.
-  system.nixos.stateVersion = "18.09";
+  system.stateVersion = "18.09";
 
   # Use local nixpkgs checkout
   nix.nixPath = [
