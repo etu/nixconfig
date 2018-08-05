@@ -41,6 +41,13 @@ in {
     # List packages installed in system profile. To search by name, run:
     # $ nix-env -qaP | grep wget
     environment.systemPackages = with pkgs; [
+      # Add spelling dictionaries
+      aspell
+      aspellDicts.en
+      aspellDicts.en-computers
+      aspellDicts.en-science
+      aspellDicts.sv
+
       emacs
       feh
       firefox-bin
