@@ -49,6 +49,9 @@
     pkgs.postscript-lexmark
   ];
 
+  # Enable SANE to handle scanners
+  hardware.sane.enable = true;
+
   # Disable root login for ssh
   services.openssh.permitRootLogin = "no";
 
@@ -66,4 +69,7 @@
 
   # Define a user account.
   my.user.enable = true;
+  my.user.extraGroups = [
+    "scanner"
+  ];
 }
