@@ -45,6 +45,9 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
+  services.printing.drivers = [
+    pkgs.postscript-lexmark
+  ];
 
   # Disable root login for ssh
   services.openssh.permitRootLogin = "no";
@@ -63,10 +66,4 @@
 
   # Define a user account.
   my.user.enable = true;
-
-  # List packages installed in system profile. To search by name, run:
-  # $ nix-env -qaP | grep wget
-  environment.systemPackages = with pkgs; [
-    postscript-lexmark
-  ];
 }
