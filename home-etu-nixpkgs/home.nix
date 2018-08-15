@@ -84,7 +84,6 @@
       epkgs.restclient
       epkgs.scss-mode
       epkgs.smooth-scrolling
-      epkgs.toml-mode
       epkgs.use-package
       epkgs.vcl-mode
       epkgs.web-mode
