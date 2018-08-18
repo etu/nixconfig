@@ -15,13 +15,7 @@
   # The NixOS release to be compatible with for stateful data such as databases.
   system.stateVersion = "18.09";
 
-  # Use local nixpkgs checkout
-  nix.nixPath = [
-    "nixpkgs=/etc/nixos/nixpkgs"
-    "nixos-config=/etc/nixos/configuration.nix"
-  ];
-
-  networking.hostName = "kodi";
+  networking.hostName = "next-kodi";
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -29,6 +23,7 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Enable some firmwares.
+  hardware.cpu.amd.updateMicrocode = true;
   hardware.enableRedistributableFirmware = true;
 
   # Enable amdgpu driver.
@@ -43,6 +38,11 @@
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
     lm_sensors
+    hddtemp
+    pciutils
+    lshw
+    nvme-cli
+    xorg.xinit
   ];
 
   # List services that you want to enable:
