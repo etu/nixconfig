@@ -42,12 +42,6 @@ Move =auto-save-list= files to =$XDG_CACHE_DIR=.
   ;; Automagic indent on newline
   (global-set-key "\C-m" 'newline-and-indent)
 
-  ;; Auto reread from disk when file changes
-  (global-auto-revert-mode t)
-
-  ;; Enable line highlight mode everywhere
-  (global-hl-line-mode 1)
-
   ;; Make sure that there is one newline at the end of the file while saving,
   ;; also removes all spaces at the end of lines.
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
@@ -55,8 +49,16 @@ Move =auto-save-list= files to =$XDG_CACHE_DIR=.
   ;; Change all yes-or-no-p to y-or-n-p
   (defalias 'yes-or-no-p 'y-or-n-p)
 
-  ;; Disable line wrapping where the window ends
-  (toggle-truncate-lines t)
+  (add-hook 'emacs-startup-hook
+            (lambda ()
+              ;; Auto reread from disk when file changes
+              (global-auto-revert-mode t)
+
+              ;; Enable line highlight mode everywhere
+              (global-hl-line-mode 1)
+
+              ;; Disable line wrapping where the window ends
+              (toggle-truncate-lines t)))
 #+end_src
 
 ** Theme
