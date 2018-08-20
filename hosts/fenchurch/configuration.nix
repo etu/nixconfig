@@ -52,6 +52,9 @@
   # Enable common graphical stuff
   my.common-graphical.enable = true;
 
+  # Enable emacs deamon stuff
+  my.emacs.enable = true;
+
   # Enable my gnome desktop settings
   my.desktop-gnome.enable = true;
 

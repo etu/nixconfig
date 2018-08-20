@@ -48,52 +48,6 @@
     { target = ".direnvrc"; source = ./dotfiles/direnvrc.sh; }
   ];
 
-  programs.emacs = {
-    enable = true;
-    extraPackages = epkgs: [
-      epkgs._0blayout
-      epkgs.anzu
-      epkgs.column-enforce-mode
-      epkgs.company
-      epkgs.company-flx
-      epkgs.company-go
-      epkgs.company-jedi
-      epkgs.company-php
-      epkgs.company-restclient
-      epkgs.company-statistics
-      epkgs.diff-hl
-      epkgs.direnv
-      epkgs.es-mode
-      epkgs.eyebrowse
-      epkgs.fish-mode
-      epkgs.flycheck
-      epkgs.geben
-      epkgs.gnuplot
-      epkgs.go-mode
-      epkgs.guide-key
-      epkgs.helm
-      epkgs.helm-ag
-      epkgs.helm-fuzzier
-      epkgs.helm-projectile
-      epkgs.htmlize
-      epkgs.magit
-      epkgs.markdown-mode
-      epkgs.nix-mode
-      epkgs.php-mode
-      epkgs.phpcbf
-      epkgs.restclient
-      epkgs.scss-mode
-      epkgs.smooth-scrolling
-      epkgs.use-package
-      epkgs.vcl-mode
-      epkgs.web-mode
-      epkgs.webpaste
-      epkgs.yaml-mode
-      epkgs.yasnippet
-      epkgs.zerodark-theme
-    ];
-  };
-
   programs.git = {
     enable = true;
     userName = "Elis Hirwing";

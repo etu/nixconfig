@@ -48,7 +48,6 @@ in {
       aspellDicts.en-science
       aspellDicts.sv
 
-      emacs
       feh
       firefox-bin
       kdeconnect
