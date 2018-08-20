@@ -86,20 +86,18 @@ Move =auto-save-list= files to =$XDG_CACHE_DIR=.
 
 ** UI Elements
 #+begin_src emacs-lisp :tangle yes
-  (menu-bar-mode -1)                      ; Hide menubar
-  (tool-bar-mode -1)                      ; Hide toolbar
+  (add-hook 'emacs-startup-hook
+            (lambda ()
+              (menu-bar-mode -1)         ; Hide menubar
+              (tool-bar-mode -1)         ; Hide toolbar
 
-  (if (boundp 'scroll-bar-mode)
-      (scroll-bar-mode -1))               ; Hide scrollbar
+              (if (boundp 'scroll-bar-mode)
+                  (scroll-bar-mode -1))   ; Hide scrollbar
 
-  ;; Hide startup screen
-  (setq inhibit-startup-screen t)
+              (show-paren-mode t)      ; Highlight parenthesises
+              (column-number-mode t))) ; Enable column number in newline
 
-  ;; Highlight parenthesises
-  (show-paren-mode 1)
-
-  ;; Enable column number in modeline
-  (column-number-mode 1)
+  (setq inhibit-startup-screen t) ; Hide startup screen
 #+end_src
 
 ** Linum mode
