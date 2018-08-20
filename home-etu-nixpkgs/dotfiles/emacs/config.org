@@ -482,7 +482,7 @@ Enables interactive remote debugging of PHP in Emacs.
 Enables support for direnv environment variables.
 #+begin_src emacs-lisp :tangle yes
   (use-package direnv
-    :defer 2
+    :defer 1
     :config
     (direnv-mode))
 #+end_src
