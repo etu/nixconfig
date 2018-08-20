@@ -76,6 +76,7 @@ Move =auto-save-list= files to =$XDG_CACHE_DIR=.
 ** [[https://emacs.stackexchange.com/questions/13291/emacs-cursor-color-is-different-in-daemon-and-non-daemon-modes][Cursor color]]
 #+begin_src emacs-lisp :tangle yes
   (use-package frame
+    :defer 2
     :config
     (progn
       (add-hook 'after-make-frame-functions
@@ -153,6 +154,7 @@ and on second run go to the real begining of the line.
 ** Go mode                                                               :go:
 #+begin_src emacs-lisp :tangle yes
   (use-package go-mode
+    :defer 2
     :config
     (progn
       (add-hook 'before-save-hook 'gofmt-before-save)))
@@ -163,6 +165,7 @@ Install PHP-mode, set coding style and add a hook to load flymake.
 
 #+begin_src emacs-lisp :tangle yes
   (use-package php-mode
+    :defer 2
     :config
     (setq php-mode-coding-style 'psr2))
 #+end_src
@@ -172,6 +175,7 @@ Disable compile at save since I rarely have ruby installed.
 
 #+begin_src emacs-lisp :tangle yes
   (use-package scss-mode
+    :defer 2
     :config
     (setq scss-compile-at-save nil))
 #+end_src
@@ -181,6 +185,7 @@ Install web-mode, set rules for filetypes and indent.
 
 #+begin_src emacs-lisp :tangle yes
   (use-package web-mode
+    :defer 2
     :mode "\\.twig$"
     :mode "\\.html$"
     :config
@@ -193,6 +198,7 @@ Install web-mode, set rules for filetypes and indent.
 ** Rest Client                                                   :restclient:
 #+begin_src emacs-lisp :tangle yes
   (use-package restclient
+    :defer 2
     :mode "\\.rest$"
     :config
     (progn
@@ -207,6 +213,7 @@ Install web-mode, set rules for filetypes and indent.
 * Company mode and backends                                         :company:
 #+begin_src emacs-lisp :tangle yes
   (use-package company
+    :defer 2
     :diminish company-mode
     :bind ("<backtab>" . company-complete)
     :config
@@ -223,6 +230,7 @@ Install web-mode, set rules for filetypes and indent.
 ** Fuzzy Matching                                                       :flx:
 #+begin_src emacs-lisp :tangle yes
   (use-package company-flx
+    :defer 2
     :config
     (progn
       (with-eval-after-load 'company
@@ -232,6 +240,7 @@ Install web-mode, set rules for filetypes and indent.
 ** Statistics for completions                                    :statistics:
 #+begin_src emacs-lisp :tangle yes
   (use-package company-statistics
+    :defer 2
     :config
     (progn
       (setq company-statistics-file
@@ -242,6 +251,7 @@ Install web-mode, set rules for filetypes and indent.
 ** Restclient Mode                                               :restclient:
 #+begin_src emacs-lisp :tangle yes
   (use-package company-restclient
+    :defer 2
     :config
     (progn
       (add-hook 'restclient-mode-hook
@@ -257,8 +267,11 @@ Utilizes the program =ctags= in the background. Available in pacman.
 
 #+begin_src emacs-lisp :tangle yes
   (use-package company-php
+    :defer 2
     :config
     (progn
+      (require 'php-mode)
+
       (setq ac-php-tags-path (concat user-emacs-cache-directory "/ac-php"))
 
       (add-hook 'php-mode-hook
@@ -285,6 +298,7 @@ Utilizes the program =gocode= as backend. Available in AUR as =gocode-git=.
 
 #+begin_src emacs-lisp :tangle yes
   (use-package company-go
+    :defer 2
     :config
     (progn
       (add-hook 'go-mode-hook
@@ -312,6 +326,7 @@ Utilizes the program =gocode= as backend. Available in AUR as =gocode-git=.
 Enables interactive replacing in emacs.
 #+begin_src emacs-lisp :tangle yes
   (use-package anzu
+    :defer 2
     :bind (("M-%" . anzu-query-replace)
            ("C-M-%" . anzu-query-replace-regexp)))
 #+end_src
@@ -322,6 +337,7 @@ Install magit, bind =C-x g= to display the main magit popup and bind
 
 #+begin_src emacs-lisp :tangle yes
   (use-package magit
+    :defer 2
     :bind (("C-x g" . magit-status)     ; Display the main magit popup
            ("C-x M-g" . magit-dispatch-popup)) ; Display keybinds for magit
     :config
@@ -333,6 +349,7 @@ Install magit, bind =C-x g= to display the main magit popup and bind
 ** Flycheck                                                        :flycheck:
 #+begin_src emacs-lisp :tangle yes
   (use-package flycheck
+    :defer 2
     :diminish flycheck-mode
     :config
     (progn
@@ -345,6 +362,7 @@ Install magit, bind =C-x g= to display the main magit popup and bind
 ** Simple layouts                                                  :0blayout:
 #+begin_src emacs-lisp :tangle yes
   (use-package 0blayout
+    :defer 2
     :config
     (progn
       (0blayout-mode t)
@@ -354,6 +372,7 @@ Install magit, bind =C-x g= to display the main magit popup and bind
 ** Eyebrowse
 #+begin_src emacs-lisp :tangle yes
   (use-package eyebrowse
+    :defer 2
     :config
     (progn
       (setq eyebrowse-new-workspace t)
@@ -365,6 +384,7 @@ Paste whole buffers or parts of buffers to the internet.
 
 #+begin_src emacs-lisp :tangle yes
   (use-package webpaste
+    :defer 2
     :bind (("C-c C-p C-b" . webpaste-paste-buffer)
            ("C-c C-p C-r" . webpaste-paste-region)))
 #+end_src
@@ -374,6 +394,7 @@ Using Yasnippet (Yet Another Snippet Extension) for snippets/templates.
 
 #+begin_src emacs-lisp :tangle yes
   (use-package yasnippet
+    :defer 2
     :diminish yas-minor-mode
     :config
     (progn
@@ -393,6 +414,7 @@ state of pressed keybinds.
 
 #+begin_src emacs-lisp :tangle yes
   (use-package guide-key
+    :defer 2
     :diminish guide-key-mode
     :config
     (progn
@@ -406,6 +428,7 @@ scrolling smoother.
 
 #+begin_src emacs-lisp :tangle yes
   (use-package smooth-scrolling
+    :defer 2
     :config
     (progn
       (setq smooth-scroll-margin 2)
@@ -415,6 +438,7 @@ scrolling smoother.
 ** Show diff inline                                                 :diff:hl:
 #+begin_src emacs-lisp :tangle yes
   (use-package diff-hl
+    :defer 2
     :config
     (progn
       (global-diff-hl-mode)))
@@ -430,6 +454,7 @@ is the limit for php-files.
 
 #+begin_src emacs-lisp :tangle yes
   (use-package column-enforce-mode
+    :defer 2
     :config
     (progn
       (face-spec-set column-enforce-face '((t (:background "dark red"))))
@@ -444,6 +469,7 @@ is the limit for php-files.
 Enables interactive remote debugging of PHP in Emacs.
 #+begin_src emacs-lisp :tangle yes
   (use-package geben
+    :defer 2
     :config
     (progn
       (setq geben-temporary-file-directory
@@ -454,6 +480,7 @@ Enables interactive remote debugging of PHP in Emacs.
 Enables support for direnv environment variables.
 #+begin_src emacs-lisp :tangle yes
   (use-package direnv
+    :defer 2
     :config
     (direnv-mode))
 #+end_src
@@ -461,6 +488,7 @@ Enables support for direnv environment variables.
 * Helm                                                                 :helm:
 #+begin_src emacs-lisp :tangle yes
   (use-package helm
+    :defer 2
     :diminish helm-mode
     :bind (("C-x C-f" . helm-find-files)
            ("M-x" . helm-M-x)
@@ -480,6 +508,7 @@ Enables support for direnv environment variables.
 ** Helm Projectile                                            :projectile:ag:
 #+begin_src emacs-lisp :tangle yes
   (use-package helm-projectile
+    :defer 2
     :bind (("C-x , p" . helm-projectile-switch-project)
            ("C-x , f" . helm-projectile-find-file)
            ("C-x , b" . projectile-ibuffer)
@@ -494,6 +523,7 @@ Enables support for direnv environment variables.
 ** Helm fuzzier                                                       :fuzzy:
 #+begin_src emacs-lisp :tangle yes
   (use-package helm-fuzzier
+    :defer 2
     :config
     (progn
       (setq helm-mode-fuzzy-match t
@@ -517,6 +547,7 @@ Define =org-files/directories=, templates for org-capturing of notes.
 
 #+begin_src emacs-lisp :tangle yes
   (use-package org
+    :defer 2
     :bind ("M-n" . org-capture)
     :config
     (progn
@@ -535,6 +566,7 @@ Define =org-files/directories=, templates for org-capturing of notes.
 ** Workhour Clocking                                             :clocktable:
 #+begin_src emacs-lisp :tangle yes
   (use-package org
+    :defer 2
     :config
     (progn
       ;; This changes formating of time in clocktables
@@ -560,6 +592,7 @@ Define =org-files/directories=, templates for org-capturing of notes.
 ** Graphs                                                           :gnuplot:
 #+begin_src emacs-lisp :tangle yes
   (use-package gnuplot
+    :defer 2
     :bind (("M-C-g" . org-plot/gnuplot)))
 #+end_src
 
