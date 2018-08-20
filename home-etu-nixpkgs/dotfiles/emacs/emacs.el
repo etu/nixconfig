@@ -19,7 +19,8 @@
 ;; Increase the threshold to reduce the amount of garbage collections made
 ;; during startups.
 (let ((gc-cons-threshold (* 50 1000 1000))
-      (gc-cons-percentage 0.6))
+      (gc-cons-percentage 0.6)
+      (file-name-handler-alist nil))
 
   ;; Init package manager
   (package-initialize)
