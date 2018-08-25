@@ -53,6 +53,7 @@ in {
       kdeconnect
       mpv
       stupidterm
+      tdesktop
     ];
 
     # Enable pulseaudio.
