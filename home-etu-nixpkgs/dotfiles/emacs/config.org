@@ -33,8 +33,8 @@ Move =auto-save-list= files to =$XDG_CACHE_DIR=.
   (setq indent-tabs-mode nil              ; Always indent with spaces
         mouse-yank-at-point t             ; Paste at cursor, not at mouse
         show-trailing-whitespace t        ; Highlight trailing whitespaces
-        calendar-week-start-day 1         ; Weeks starts on Mondays
-        tab-width 4)                      ; Set tab-size to 4 spaces
+        calendar-week-start-day 1 )       ; Weeks starts on Mondays
+  (setq-default tab-width 4)              ; Set tab-size to 4 spaces
 #+end_src
 
 ** Miscellaneous stuff
