@@ -66,6 +66,4 @@
   };
 
   programs.browserpass.enable = true;
-
-  manual.manpages.enable = false;
 }
