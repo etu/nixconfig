@@ -66,4 +66,10 @@
   };
 
   programs.browserpass.enable = true;
+
+  # GTK theme configs
+  gtk.enable = true;
+  gtk.gtk3.extraConfig = {
+    gtk-application-prefer-dark-theme = 1;
+  };
 }
