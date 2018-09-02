@@ -26,6 +26,11 @@ in {
     # TODO: read my.user.username in some way
     services.xserver.displayManager.gdm.autoLogin.user = "etu";
 
+    # Temporary fix so gnome doesn't crash on nixos-rebuild switches. This can
+    # be removed whenever it's fixed upstream:
+    # https://github.com/NixOS/nixpkgs/pull/45936
+    systemd.services.accounts-daemon.restartIfChanged = false;
+
     # Enable the Gnome Desktop Environment.
     services.xserver.desktopManager.gnome3.enable = true;
 
