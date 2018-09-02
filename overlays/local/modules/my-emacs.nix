@@ -7,6 +7,21 @@ let
 
  myEmacs = pkgs.emacs.override {};
  myEmacsWithPackages = (pkgs.emacsPackagesNgGen myEmacs).emacsWithPackages;
+ myEmacsConfig = pkgs.writeText "default.el" ''
+;;; default.el -- Global config starts here
+
+;; Use a hook so the message doesn't get clobbered by other messages.
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (message "Emacs ready in %s with %d garbage collections."
+                     (format "%.2f seconds"
+                             (float-time
+                              (time-subtract after-init-time before-init-time)))
+                     gcs-done)))
+
+;;; default.el ends here
+ '';
+
 in {
   options = {
     my.emacs = {
@@ -23,6 +38,10 @@ in {
   config = mkIf cfg.enable {
     services.emacs.enable = true;
     services.emacs.package = (myEmacsWithPackages (epkgs: with epkgs; [
+      (pkgs.runCommand "default.el" {} ''
+        mkdir -p $out/share/emacs/site-lisp
+        cp ${myEmacsConfig} $out/share/emacs/site-lisp/default.el
+      '')
       _0blayout
       anzu
       column-enforce-mode
