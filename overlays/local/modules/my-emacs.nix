@@ -5,6 +5,8 @@ with lib;
 let
  cfg = config.my.emacs;
 
+ myEmacs = pkgs.emacs.override {};
+ myEmacsWithPackages = (pkgs.emacsPackagesNgGen myEmacs).emacsWithPackages;
 in {
   options = {
     my.emacs = {
@@ -20,7 +22,7 @@ in {
 
   config = mkIf cfg.enable {
     services.emacs.enable = true;
-    services.emacs.package = (pkgs.emacsWithPackages (epkgs: with epkgs; [
+    services.emacs.package = (myEmacsWithPackages (epkgs: with epkgs; [
       _0blayout
       anzu
       column-enforce-mode
