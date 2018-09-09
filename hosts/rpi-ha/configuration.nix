@@ -27,6 +27,14 @@
   # Needed for the virtual console to work on the RPi 3, as the default of 16M doesn't seem to be enough.
   boot.kernelParams = [ "cma=32M" ];
 
+  # Auto upgrade system
+  system.autoUpgrade.enable = true;
+  system.autoUpgrade.channel = "https://nixos.org/channels/nixos-18.09-small";
+
+  # Auto garbage collect
+  nix.gc.automatic = true;
+  nix.gc.options = "--delete-older-than 14d";
+
   # Enable Home Assistant, open port and add the hass user to the dialout group
   services.home-assistant.enable = true;
   services.home-assistant.openFirewall = true;
