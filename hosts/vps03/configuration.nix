@@ -33,6 +33,14 @@ in {
   boot.loader.grub.device = "/dev/vda";
   boot.cleanTmpDir = true;
 
+  # Auto upgrade system
+  system.autoUpgrade.enable = true;
+  system.autoUpgrade.channel = "https://nixos.org/channels/nixos-18.09-small";
+
+  # Auto garbage collect
+  nix.gc.automatic = true;
+  nix.gc.options = "--delete-older-than 14d";
+
   # Caddy
   services.caddy.enable = true;
   services.caddy.agree = true;
