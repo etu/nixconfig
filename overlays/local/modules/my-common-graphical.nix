@@ -48,6 +48,7 @@ in {
       aspellDicts.en-science
       aspellDicts.sv
 
+      dino
       feh
       firefox-bin
       kdeconnect
