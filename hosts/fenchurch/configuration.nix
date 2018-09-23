@@ -34,6 +34,10 @@
   # Enable nvidia xserver driver
   services.xserver.videoDrivers = [ "nvidia" ];
 
+  # Disable nvidia compositing in webkitgtk due to this bug
+  # https://github.com/NixOS/nixpkgs/issues/32580
+  environment.variables.WEBKIT_DISABLE_COMPOSITING_MODE = "1";
+
   # Disable CUPS to print documents.
   services.printing.enable = false;
 
