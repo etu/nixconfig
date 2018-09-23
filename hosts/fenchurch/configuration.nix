@@ -31,6 +31,9 @@
   # Hardware settings
   hardware.cpu.intel.updateMicrocode = true;
 
+  # Needed for nvidia drivers
+  nixpkgs.config.allowUnfree = true;
+
   # Enable nvidia xserver driver
   services.xserver.videoDrivers = [ "nvidia" ];
 
