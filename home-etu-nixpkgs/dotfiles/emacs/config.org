@@ -511,7 +511,8 @@ Enables support for direnv environment variables.
            ("C-x , f" . helm-projectile-find-file)
            ("C-x , b" . projectile-ibuffer)
            ("C-x , i" . projectile-invalidate-cache)
-           ("C-x , a" . helm-projectile-ag))
+           ("C-x , a" . helm-projectile-ag)
+           ("C-x , k" . projectile-kill-buffers))
     :config
     (progn
       (projectile-mode)
