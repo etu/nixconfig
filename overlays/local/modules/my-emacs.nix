@@ -54,6 +54,7 @@ in {
       company-statistics
       diff-hl
       direnv
+      dracula-theme
       es-mode
       eyebrowse
       fish-mode
@@ -74,6 +75,7 @@ in {
       restclient
       scss-mode
       smooth-scrolling
+      telephone-line
       use-package
       vcl-mode
       web-mode
@@ -81,7 +83,6 @@ in {
       which-key
       yaml-mode
       yasnippet
-      zerodark-theme
     ]));
     services.emacs.defaultEditor = true;
 
