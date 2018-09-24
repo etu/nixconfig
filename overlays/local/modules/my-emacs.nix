@@ -61,7 +61,6 @@ in {
       geben
       gnuplot
       go-mode
-      guide-key
       helm
       helm-ag
       helm-fuzzier
@@ -79,6 +78,7 @@ in {
       vcl-mode
       web-mode
       webpaste
+      which-key
       yaml-mode
       yasnippet
       zerodark-theme

@@ -410,18 +410,14 @@ Using Yasnippet (Yet Another Snippet Extension) for snippets/templates.
       (yas-global-mode 1)))
 #+end_src
 
-** Help guide for keybinds                                        :guide:key:
-Enable guide-key, a mode that displays available keybinds from current
-state of pressed keybinds.
-
+** Guide for keybinds                                             :which:key:
 #+begin_src emacs-lisp :tangle yes
-  (use-package guide-key
+  (use-package which-key
     :defer 2
-    :diminish guide-key-mode
+    :diminish which-key-mode ;; Seems to be broken at the moment though
     :config
     (progn
-      (setq guide-key/guide-key-sequence t)
-      (guide-key-mode 1)))
+      (which-key-mode 1)))
 #+end_src
 
 ** Smooth scrolling                                        :smooth:scrolling:
