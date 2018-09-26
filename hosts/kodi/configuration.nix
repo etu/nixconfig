@@ -35,10 +35,6 @@
   hardware.cpu.amd.updateMicrocode = true;
   hardware.enableRedistributableFirmware = true;
 
-  # Enable amdgpu driver.
-  boot.kernelParams = [ "amdgpu.dc=1" ]; # Shouldn't be needed but added it anyways.
-  services.xserver.videoDrivers = [ "amdgpu" ];
-
   # OpenGL stuff
   hardware.opengl.enable = true;
   hardware.opengl.driSupport = true;
