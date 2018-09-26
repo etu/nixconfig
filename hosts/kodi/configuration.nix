@@ -22,6 +22,15 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  boot.kernelPatches = [
+    { name = "amdgpu-config";
+      patch = null;
+      extraConfig = ''
+        DRM_AMD_DC_DCN1_0 y
+      '';
+    }
+  ];
+
   # Enable some firmwares.
   hardware.cpu.amd.updateMicrocode = true;
   hardware.enableRedistributableFirmware = true;
