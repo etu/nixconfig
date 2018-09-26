@@ -59,6 +59,12 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
+  # Set display resolution
+  services.xserver.extraDisplaySettings = ''
+      Depth        24
+      Modes        "1920x1080"
+  '';
+
   # Enable Kodi.
   services.xserver.desktopManager.kodi.enable = true;
 
