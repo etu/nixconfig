@@ -77,6 +77,9 @@
   # Enable common cli settings for my systems
   my.common-cli.enable = true;
 
+  # Open port to remote control Kodi
+  networking.firewall.allowedTCPPorts = [ 8080 ];
+
   # SSH Keys for remote logins
   users.extraUsers.root.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILPvVYtcFHwuW/QW5Sqyuno7KrsVq9q9HUOBoaoIlIwu etu@hactar-2016-09-24"
