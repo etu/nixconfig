@@ -47,6 +47,9 @@
   hardware.opengl.enable = true;
   hardware.opengl.driSupport = true;
 
+  # Build nix stuff with all the power
+  nix.buildCores = 4;
+
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
