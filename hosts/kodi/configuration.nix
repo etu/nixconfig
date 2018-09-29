@@ -15,7 +15,7 @@
   # The NixOS release to be compatible with for stateful data such as databases.
   system.stateVersion = "18.09";
 
-  networking.hostName = "next-kodi";
+  networking.hostName = "kodi";
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -43,11 +43,7 @@
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
     lm_sensors
-    hddtemp
-    pciutils
-    lshw
     nvme-cli
-    xorg.xinit
   ];
 
   # List services that you want to enable:
