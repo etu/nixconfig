@@ -31,6 +31,14 @@
     }
   ];
 
+  # Auto upgrade system
+  system.autoUpgrade.enable = true;
+  system.autoUpgrade.channel = "https://nixos.org/channels/nixos-18.09";
+
+  # Auto garbage collect
+  nix.gc.automatic = true;
+  nix.gc.options = "--delete-older-than 30d";
+
   # Enable some firmwares.
   hardware.cpu.amd.updateMicrocode = true;
   hardware.enableRedistributableFirmware = true;
