@@ -223,6 +223,13 @@ Install web-mode, set rules for filetypes and indent.
                     'restclient-http-send-current-stay-in-window)))))
 #+end_src
 
+** Nix mode                                                             :nix:
+#+begin_src emacs-lisp :tangle yes
+  (use-package nix-mode
+    :defer 2
+    :mode "\\.nix$")
+#+end_src
+
 * Company mode and backends                                         :company:
 #+begin_src emacs-lisp :tangle yes
   (use-package company
