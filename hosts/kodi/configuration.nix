@@ -71,6 +71,9 @@
   # Enable Kodi.
   services.xserver.desktopManager.kodi.enable = true;
 
+  # Enable Kodi plugins.
+  nixpkgs.config.kodi.enableSVTPlay = true;
+
   # Enable slim autologin.
   services.xserver.displayManager.slim.enable = true;
   services.xserver.displayManager.slim.autoLogin = true;
