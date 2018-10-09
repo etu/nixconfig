@@ -31,7 +31,7 @@
 
 
   ;; Load config
-  (org-babel-load-file (concat user-emacs-config-directory "/config.org")))
+  (load-file (concat user-emacs-config-directory "/config.el")))
 
 
 ;;; emacs.el ends here

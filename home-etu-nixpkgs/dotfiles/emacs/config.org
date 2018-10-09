@@ -68,6 +68,9 @@ Move =auto-save-list= files to =$XDG_CACHE_DIR=.
 	(progn
 	  (load-theme 'dracula t)
 
+      ;; Required to be able to override org-level-faces
+      (require 'org)
+
 	  (mapc (lambda (args)
 			  (face-spec-reset-face (car args))
 			  (apply 'set-face-attribute args))
