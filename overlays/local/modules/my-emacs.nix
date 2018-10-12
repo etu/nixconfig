@@ -44,6 +44,7 @@ in {
       '')
       _0blayout
       anzu
+      centimacro
       column-enforce-mode
       company
       company-flx
