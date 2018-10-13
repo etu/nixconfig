@@ -22,6 +22,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  # AMD GPU drivers
   boot.kernelPatches = [
     { name = "amdgpu-config";
       patch = null;
@@ -30,6 +31,8 @@
       '';
     }
   ];
+
+  services.xserver.videoDrivers = [ "amdgpu" ];
 
   # Auto upgrade system
   system.autoUpgrade.enable = true;
