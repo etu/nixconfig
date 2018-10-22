@@ -48,7 +48,7 @@ in {
       aspellDicts.en-science
       aspellDicts.sv
 
-      dino
+      gajim
       feh
       firefox-bin
       kdeconnect
