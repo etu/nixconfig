@@ -10,6 +10,7 @@
     ./modules/my-gaming.nix
     ./modules/my-gpg-utils.nix
     ./modules/my-nfsd.nix
+    ./modules/my-update-config.nix
     ./modules/my-user.nix
     ./modules/my-vbox.nix
   ];
