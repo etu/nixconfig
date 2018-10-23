@@ -30,10 +30,11 @@
   # Auto upgrade system
   system.autoUpgrade.enable = true;
   system.autoUpgrade.channel = "https://nixos.org/channels/nixos-18.09-small";
+  system.autoUpgrade.dates = "weekly";
 
   # Auto garbage collect
   nix.gc.automatic = true;
-  nix.gc.options = "--delete-older-than 14d";
+  nix.gc.options = "--delete-older-than 30d";
 
   # Auto update the config before it upgrades the system
   my.update-config.enable = true;
