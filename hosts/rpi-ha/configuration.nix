@@ -35,6 +35,9 @@
   nix.gc.automatic = true;
   nix.gc.options = "--delete-older-than 14d";
 
+  # Auto update the config before it upgrades the system
+  my.update-config.enable = true;
+
   # Enable Home Assistant, open port and add the hass user to the dialout group
   services.home-assistant.enable = true;
   services.home-assistant.openFirewall = true;

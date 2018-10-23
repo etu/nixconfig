@@ -42,6 +42,9 @@
   nix.gc.automatic = true;
   nix.gc.options = "--delete-older-than 30d";
 
+  # Auto update the config before it upgrades the system
+  my.update-config.enable = true;
+
   # Enable some firmwares.
   hardware.cpu.amd.updateMicrocode = true;
   hardware.enableRedistributableFirmware = true;
