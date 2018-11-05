@@ -74,6 +74,13 @@ in {
   # Enable vbox and friends.
   my.vbox.enable = true;
 
+  # List packages installed in system profile. To search by name, run:
+  # $ nix-env -qaP | grep wget
+  environment.systemPackages = with pkgs; [
+    sequeler
+    androidenv.platformTools
+  ];
+
   # Overlay to use PHP from stable to get PHP 7.0 which is gone in unstable
   nixpkgs.overlays = [
     (self: super: {
