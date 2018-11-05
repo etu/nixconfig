@@ -70,6 +70,9 @@
   # Enable my gnome desktop settings
   my.desktop-gnome.enable = true;
 
+  # Enable DMR stuff.
+  my.dmrconfig.enable = true;
+
   # Define a user account.
   my.user.enable = true;
   my.user.extraGroups = [
