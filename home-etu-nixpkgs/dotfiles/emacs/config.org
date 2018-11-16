@@ -230,7 +230,8 @@ Install web-mode, set rules for filetypes and indent.
 #+begin_src emacs-lisp :tangle yes
   (use-package nix-mode
     :defer 2
-    :mode "\\.nix$")
+    :mode "\\.nix$"
+    :config (setq nix-indent-function 'nix-indent-line))
 #+end_src
 
 * Company mode and backends                                         :company:
