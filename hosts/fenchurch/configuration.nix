@@ -71,6 +71,9 @@
   # Enable virtualbox and friends.
   my.vbox.enable = true;
 
+  # Enable dmrconfig to configure my hamradio.
+  programs.dmrconfig.enable = true;
+
   # Enable gaming related thingys.
   my.gaming.enable = true;
 }

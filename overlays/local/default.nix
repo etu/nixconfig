@@ -6,7 +6,6 @@
     ./modules/my-common-cli.nix
     ./modules/my-common-graphical.nix
     ./modules/my-desktop-gnome.nix
-    ./modules/my-dmrconfig.nix
     ./modules/my-emacs.nix
     ./modules/my-gaming.nix
     ./modules/my-gpg-utils.nix

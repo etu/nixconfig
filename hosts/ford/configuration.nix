@@ -70,8 +70,8 @@
   # Enable my gnome desktop settings
   my.desktop-gnome.enable = true;
 
-  # Enable DMR stuff.
-  my.dmrconfig.enable = true;
+  # Enable dmrconfig to configure my hamradio.
+  programs.dmrconfig.enable = true;
 
   # Define a user account.
   my.user.enable = true;
