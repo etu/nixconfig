@@ -9,6 +9,7 @@
     ./modules/my-emacs.nix
     ./modules/my-gaming.nix
     ./modules/my-gpg-utils.nix
+    ./modules/my-i3.nix
     ./modules/my-nfsd.nix
     ./modules/my-update-config.nix
     ./modules/my-user.nix
