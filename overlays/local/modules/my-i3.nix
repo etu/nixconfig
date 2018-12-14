@@ -4,6 +4,7 @@ with lib;
 
 let
   cfg = config.my.i3;
+  myUser = "etu";
 
 in {
   options = {
@@ -25,7 +26,7 @@ in {
     # Loginmanager
     services.xserver.displayManager.lightdm.enable = true;
     services.xserver.displayManager.lightdm.autoLogin.enable = true;
-    services.xserver.displayManager.lightdm.autoLogin.user = "etu";
+    services.xserver.displayManager.lightdm.autoLogin.user = myUser;
 
     # Needed for autologin
     services.xserver.desktopManager.default = "none";
@@ -52,5 +53,20 @@ in {
 
     # Configure TERMINAL for i3-sensible-terminal
     environment.variables.TERMINAL = "stupidterm";
+
+    # Enable i3lock on suspend
+    systemd.services.i3lock = {
+      description = "Lock screen before suspend";
+      before = [ "sleep.target" ];
+      wantedBy = [ "suspend.target" ];
+
+      serviceConfig = {
+        User = myUser;
+        Type = "simple";
+        Environment = "DISPLAY=:0";
+        ExecStart = "${pkgs.i3lock}/bin/i3lock -n -c 000000";
+        ExecStartPost = "${pkgs.coreutils}/bin/sleep 1";
+      };
+    };
   };
 }
