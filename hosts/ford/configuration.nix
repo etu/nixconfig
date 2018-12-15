@@ -77,5 +77,9 @@
   my.user.enable = true;
   my.user.extraGroups = [
     "scanner"
+    "docker"
   ];
+
+  # Enable docker
+  virtualisation.docker.enable = true;
 }
