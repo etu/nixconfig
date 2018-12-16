@@ -30,7 +30,7 @@
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelPackages = pkgs.linuxPackages_4_18;
+  boot.kernelPackages = pkgs.linuxPackages_4_19;
 
   # Hardware settings
   hardware.cpu.intel.updateMicrocode = true;
@@ -66,8 +66,8 @@
   # Enable emacs deamon stuff
   my.emacs.enable = true;
 
-  # Enable my gnome desktop settings
-  my.desktop-gnome.enable = true;
+  # Enable my i3 desktop settings
+  my.i3.enable = true;
 
   # Define a user account.
   my.user.enable = true;
