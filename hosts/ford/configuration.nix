@@ -10,6 +10,9 @@
 
     # Import local modules & overlays
     ../../overlays/local/default.nix
+
+    # Import the home-manager module
+    <home-manager/nixos>
   ];
 
   # The NixOS release to be compatible with for stateful data such as databases.
@@ -18,6 +21,7 @@
   # Use local nixpkgs checkout
   nix.nixPath = [
     "nixpkgs=/etc/nixos/nixpkgs"
+    "home-manager=/nix/var/nix/profiles/per-user/root/channels/home-manager/"
     "nixos-config=/etc/nixos/configuration.nix"
   ];
 
@@ -79,6 +83,9 @@
     "scanner"
     "docker"
   ];
+
+  # Home-manager as nix module
+  home-manager.users.etu = import ../../home-etu-nixpkgs/home.nix;
 
   # Enable docker
   virtualisation.docker.enable = true;
