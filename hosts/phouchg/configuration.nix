@@ -65,8 +65,8 @@ in {
   # Enable emacs deamon stuff
   my.emacs.enable = true;
 
-  # Enable my gnome desktop settings
-  my.desktop-gnome.enable = true;
+  # Enable my i3 desktop settings
+  my.i3.enable = true;
 
   # Define a user account.
   my.user.enable = true;
