@@ -15,6 +15,9 @@ in {
 
     # Import local modules & overlays
     ../../overlays/local/default.nix
+
+    # Import the home-manager module
+    <home-manager/nixos>
   ];
 
   # The NixOS release to be compatible with for stateful data such as databases.
@@ -73,6 +76,9 @@ in {
 
   # Enable vbox and friends.
   my.vbox.enable = true;
+
+  # Home-manager as nix module
+  home-manager.users.etu = import ../../home-etu-nixpkgs/home.nix;
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
