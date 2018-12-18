@@ -80,10 +80,10 @@
   # Enable Kodi plugins.
   nixpkgs.config.kodi.enableSVTPlay = true;
 
-  # Enable slim autologin.
-  services.xserver.displayManager.slim.enable = true;
-  services.xserver.displayManager.slim.autoLogin = true;
-  services.xserver.displayManager.slim.defaultUser = "kodi";
+  # Enable lightdm autologin.
+  services.xserver.displayManager.lightdm.enable = true;
+  services.xserver.displayManager.lightdm.autoLogin.enable = true;
+  services.xserver.displayManager.lightdm.autoLogin.user = "kodi";
 
   # Define a user account.
   users.extraUsers.kodi.isNormalUser = true;
