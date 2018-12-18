@@ -31,8 +31,13 @@ in {
       emacs-all-the-icons-fonts
       inconsolata
       liberation_ttf
+      noto-fonts
+      noto-fonts-cjk
+      noto-fonts-emoji
+      noto-fonts-extra
       powerline-fonts
       source-code-pro
+      symbola
     ];
 
     # Used for firefox-bin because of mozillas branding and pre-compiled bins
