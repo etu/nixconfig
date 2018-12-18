@@ -208,7 +208,9 @@ in {
 
     # Install aditional packages
     environment.systemPackages = with pkgs; [
+      arandr
       gnome3.evolution
+      scrot
     ];
 
     # Configure TERMINAL for i3-sensible-terminal
