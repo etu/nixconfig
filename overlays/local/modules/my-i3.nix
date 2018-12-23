@@ -209,6 +209,7 @@ in {
     # Install aditional packages
     environment.systemPackages = with pkgs; [
       arandr
+      evince
       gnome3.evolution
       scrot
     ];
