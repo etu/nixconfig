@@ -230,5 +230,13 @@ in {
         ExecStartPost = "${pkgs.coreutils}/bin/sleep 1";
       };
     };
+
+    # Enable auto locking of the screen
+    services.xserver.xautolock.enable = true;
+    services.xserver.xautolock.locker = "${pkgs.i3lock}/bin/i3lock -n -c 000000";
+    services.xserver.xautolock.enableNotifier = true;
+    services.xserver.xautolock.notify = 10;
+    services.xserver.xautolock.notifier = "${pkgs.libnotify}/bin/notify-send \"Locking in 10 seconds\"";
+    services.xserver.xautolock.time = 3;
   };
 }
