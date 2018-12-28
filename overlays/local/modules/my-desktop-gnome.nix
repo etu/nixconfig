@@ -24,7 +24,7 @@ in {
     services.xserver.displayManager.gdm.enable = true;
     services.xserver.displayManager.gdm.autoLogin.enable = true;
     # TODO: read my.user.username in some way
-    services.xserver.displayManager.gdm.autoLogin.user = "etu";
+    services.xserver.displayManager.gdm.autoLogin.user = config.my.user.username;
 
     # Temporary fix so gnome doesn't crash on nixos-rebuild switches. This can
     # be removed whenever it's fixed upstream:

@@ -4,7 +4,6 @@ with lib;
 
 let
   cfg = config.my.i3;
-  myUser = "etu";
   myI3wmPkg = pkgs.i3;
   myI3Config = pkgs.writeText "i3wm.config" ''
     # i3 config file (v4)
@@ -184,7 +183,7 @@ in {
     # Loginmanager
     services.xserver.displayManager.lightdm.enable = true;
     services.xserver.displayManager.lightdm.autoLogin.enable = true;
-    services.xserver.displayManager.lightdm.autoLogin.user = myUser;
+    services.xserver.displayManager.lightdm.autoLogin.user = config.my.user.username;
 
     # Needed for autologin
     services.xserver.desktopManager.default = "none";
@@ -224,7 +223,7 @@ in {
       wantedBy = [ "suspend.target" ];
 
       serviceConfig = {
-        User = myUser;
+        User = config.my.user.username;
         Type = "simple";
         Environment = "DISPLAY=:0";
         ExecStart = "${pkgs.i3lock}/bin/i3lock -n -c 000000";
