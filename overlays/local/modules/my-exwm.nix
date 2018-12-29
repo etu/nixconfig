@@ -47,6 +47,21 @@ in {
     services.xserver.desktopManager.default = "none";
     services.xserver.windowManager.default = "exwm";
 
+    # Enable i3lock on suspend
+    systemd.services.i3lock = {
+      description = "Lock screen before suspend";
+      before = [ "sleep.target" ];
+      wantedBy = [ "suspend.target" ];
+
+      serviceConfig = {
+        User = config.my.user.username;
+        Type = "simple";
+        Environment = "DISPLAY=:0";
+        ExecStart = "${pkgs.i3lock}/bin/i3lock -n -c 000000";
+        ExecStartPost = "${pkgs.coreutils}/bin/sleep 1";
+      };
+    };
+
     # Set up services needed for gnome stuff for evolution
     services.gnome3.evolution-data-server.enable = true;
     services.gnome3.gnome-keyring.enable = true;
