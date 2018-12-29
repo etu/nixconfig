@@ -4,7 +4,6 @@ with lib;
 
 let
   cfg = config.my.exwm;
-  exwmEmacs = config.services.emacs.package;
   loadScript = pkgs.writeText "emacs-exwm-load" ''
     (require 'exwm)
     (require 'exwm-config)
@@ -61,10 +60,13 @@ in {
       gnome3.networkmanagerapplet
     ];
 
+    # Enable exwm with my emacs modules
+    my.emacs.enableExwm = true;
+
     services.xserver.windowManager.session = singleton {
       name = "exwm";
       start = ''
-        ${exwmEmacs}/bin/emacs -l ${loadScript}
+        ${config.services.emacs.package}/bin/emacs -l ${loadScript}
       '';
     };
   };

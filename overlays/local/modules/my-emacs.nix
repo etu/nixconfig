@@ -32,12 +32,16 @@ in {
           Enables emacs with the modules I want.
         '';
       };
+      enableExwm = mkOption {
+        type = types.bool;
+        default = false;
+      };
     };
   };
 
   config = mkIf cfg.enable {
     services.emacs.enable = true;
-    services.emacs.package = (myEmacsWithPackages (epkgs: with epkgs; [
+    services.emacs.package = (myEmacsWithPackages (epkgs: with epkgs; ([
       (pkgs.runCommand "default.el" {} ''
         mkdir -p $out/share/emacs/site-lisp
         cp ${myEmacsConfig} $out/share/emacs/site-lisp/default.el
@@ -84,7 +88,7 @@ in {
       which-key
       yaml-mode
       yasnippet
-    ]));
+    ] ++ (lib.optional cfg.enableExwm (with epkgs; [ exwm ])))));
     services.emacs.defaultEditor = true;
 
     fonts.fonts = with pkgs; [
