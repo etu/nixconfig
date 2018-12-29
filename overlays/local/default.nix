@@ -7,6 +7,7 @@
     ./modules/my-common-graphical.nix
     ./modules/my-desktop-gnome.nix
     ./modules/my-emacs.nix
+    ./modules/my-exwm.nix
     ./modules/my-gaming.nix
     ./modules/my-gpg-utils.nix
     ./modules/my-i3.nix
