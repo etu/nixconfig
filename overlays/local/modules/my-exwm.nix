@@ -4,6 +4,7 @@ with lib;
 
 let
   cfg = config.my.exwm;
+  i3lockCommand = "${pkgs.i3lock}/bin/i3lock --nofork --color=000000";
   loadScript = pkgs.writeText "emacs-exwm-load" ''
     (require 'exwm)
     (require 'exwm-config)
@@ -34,7 +35,7 @@ let
       ;; Special function to lock the screen
       (defun exwm-run-i3lock ()
         (interactive)
-        (exwm-run "${pkgs.i3lock}/bin/i3lock -c 000000"))
+        (exwm-run "${i3lockCommand}"))
       (define-key exwm-mode-map (kbd "s-l") 'exwm-run-i3lock)
       (global-set-key (kbd "s-l") 'exwm-run-i3lock)
 
@@ -90,7 +91,7 @@ in {
         User = config.my.user.username;
         Type = "simple";
         Environment = "DISPLAY=:0";
-        ExecStart = "${pkgs.i3lock}/bin/i3lock -n -c 000000";
+        ExecStart = "${i3lockCommand}";
         ExecStartPost = "${pkgs.coreutils}/bin/sleep 1";
       };
     };
