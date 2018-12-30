@@ -29,20 +29,19 @@ let
         (interactive (list (read-shell-command "$ ")))
         (let ((cmd (concat "systemd-run --user " command)))
           (start-process-shell-command cmd nil cmd)))
-      (define-key exwm-mode-map (kbd "s-e") 'exwm-run)
-      (global-set-key (kbd "s-e") 'exwm-run)
+      (exwm-input-set-key (kbd "s-e") 'exwm-run)
 
       ;; Special function to lock the screen
       (defun exwm-run-i3lock ()
         (interactive)
         (exwm-run "${i3lockCommand}"))
-      (define-key exwm-mode-map (kbd "s-l") 'exwm-run-i3lock)
-      (global-set-key (kbd "s-l") 'exwm-run-i3lock)
+      (exwm-input-set-key (kbd "s-l") 'exwm-run-i3lock)
 
       ;; Special function to run the terminal
       (defun exwm-run-stupidterm ()
         (interactive)
-        (exwm-run "stupidterm")))
+        (exwm-run "stupidterm"))
+      (exwm-input-set-key (kbd "s-t") 'exwm-run-stupidterm))
 
     ;; Load exwm
     (exwm-config-default)
