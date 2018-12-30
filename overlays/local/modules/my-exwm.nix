@@ -7,12 +7,45 @@ let
   loadScript = pkgs.writeText "emacs-exwm-load" ''
     (require 'exwm)
     (require 'exwm-config)
-
+    (require 'exwm-randr)
     (require 'exwm-systemtray)
-    (exwm-systemtray-enable)
-    (setq exwm-systemtray-height 16)
 
+    ;; Set up systray
+    (exwm-systemtray-enable)
+    ;; (setq exwm-systemtray-height 32)
+
+    ;; Display time in modeline
+    (progn
+      (setq display-time-24hr-format t)
+      (display-time-mode 1))
+
+    ;; Display battery mode
+    (display-battery-mode)
+
+    ;; Define a function to easily run shell commands
+    (progn
+      (defun exwm-run (command)
+        (interactive (list (read-shell-command "$ ")))
+        (let ((cmd (concat "systemd-run --user " command)))
+          (start-process-shell-command cmd nil cmd)))
+      (define-key exwm-mode-map (kbd "s-e") 'exwm-run)
+      (global-set-key (kbd "s-e") 'exwm-run)
+
+      ;; Special function to lock the screen
+      (defun exwm-run-i3lock ()
+        (interactive)
+        (exwm-run "${pkgs.i3lock}/bin/i3lock -c 000000"))
+      (define-key exwm-mode-map (kbd "s-l") 'exwm-run-i3lock)
+      (global-set-key (kbd "s-l") 'exwm-run-i3lock)
+
+      ;; Special function to run the terminal
+      (defun exwm-run-stupidterm ()
+        (interactive)
+        (exwm-run "stupidterm")))
+
+    ;; Load exwm
     (exwm-config-default)
+    (exwm-randr-enable)
   '';
 
 in {
@@ -71,8 +104,8 @@ in {
       evince
       gnome3.evolution
       scrot
+      i3lock
       pavucontrol
-      gnome3.networkmanagerapplet
     ];
 
     # Enable exwm with my emacs modules

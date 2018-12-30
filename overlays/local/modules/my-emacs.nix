@@ -88,7 +88,10 @@ in {
       which-key
       yaml-mode
       yasnippet
-    ] ++ (lib.optional cfg.enableExwm (with epkgs; [ exwm ])))));
+    ] ++ (lib.optional cfg.enableExwm (with epkgs; [
+      exwm
+      desktop-environment
+    ])))));
     services.emacs.defaultEditor = true;
 
     fonts.fonts = with pkgs; [
