@@ -6,6 +6,7 @@ let
   cfg = config.my.exwm;
   i3lockCommand = "${pkgs.i3lock}/bin/i3lock --nofork --color=000000";
   loadScript = pkgs.writeText "emacs-exwm-load" ''
+    (require 'desktop-environment)
     (require 'exwm)
     (require 'exwm-config)
     (require 'exwm-randr)
@@ -42,6 +43,11 @@ let
         (interactive)
         (exwm-run "${pkgs.stupidterm}/bin/stupidterm"))
       (exwm-input-set-key (kbd "s-t") 'exwm-run-stupidterm))
+
+    ;; Define desktop environment commands
+    (progn
+      (desktop-environment-mode)
+      (setq desktop-environment-screenshot-command "${pkgs.flameshot}/bin/flameshot gui"))
 
     ;; Load exwm
     (exwm-config-default)
