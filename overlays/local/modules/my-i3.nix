@@ -198,7 +198,6 @@ in {
       i3status
       i3lock
       pavucontrol
-      gnome3.networkmanagerapplet
     ];
 
     # Set up services needed for gnome stuff for evolution

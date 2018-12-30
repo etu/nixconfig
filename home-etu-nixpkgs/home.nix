@@ -187,4 +187,7 @@
       timeout = 8;
     };
   };
+
+  services.pasystray.enable = true;
+  services.network-manager-applet.enable = true;
 }
