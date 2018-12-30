@@ -32,12 +32,6 @@ let
           (start-process-shell-command cmd nil cmd)))
       (exwm-input-set-key (kbd "s-e") 'exwm-run)
 
-      ;; Special function to lock the screen
-      (defun exwm-run-i3lock ()
-        (interactive)
-        (exwm-run "${i3lockCommand}"))
-      (exwm-input-set-key (kbd "s-l") 'exwm-run-i3lock)
-
       ;; Special function to run the terminal
       (defun exwm-run-stupidterm ()
         (interactive)
@@ -47,6 +41,7 @@ let
     ;; Define desktop environment commands
     (progn
       (desktop-environment-mode)
+      (setq desktop-environment-screenlock-command "${i3lockCommand}")
       (setq desktop-environment-screenshot-command "${pkgs.flameshot}/bin/flameshot gui"))
 
     ;; Load exwm
