@@ -188,6 +188,7 @@
     };
   };
 
+  services.flameshot.enable = true;
   services.pasystray.enable = true;
   services.network-manager-applet.enable = true;
 }
