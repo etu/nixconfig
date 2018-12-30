@@ -27,7 +27,7 @@ let
     (progn
       (defun exwm-run (command)
         (interactive (list (read-shell-command "$ ")))
-        (let ((cmd (concat "systemd-run --user " command)))
+        (let ((cmd (concat "${pkgs.systemd}/bin/systemd-run --user " command)))
           (start-process-shell-command cmd nil cmd)))
       (exwm-input-set-key (kbd "s-e") 'exwm-run)
 
@@ -40,7 +40,7 @@ let
       ;; Special function to run the terminal
       (defun exwm-run-stupidterm ()
         (interactive)
-        (exwm-run "stupidterm"))
+        (exwm-run "${pkgs.stupidterm}/bin/stupidterm"))
       (exwm-input-set-key (kbd "s-t") 'exwm-run-stupidterm))
 
     ;; Load exwm
