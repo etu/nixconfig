@@ -9,11 +9,6 @@ let
     (require 'exwm)
     (require 'exwm-config)
     (require 'exwm-randr)
-    (require 'exwm-systemtray)
-
-    ;; Set up systray
-    (exwm-systemtray-enable)
-    ;; (setq exwm-systemtray-height 32)
 
     ;; Display time in modeline
     (progn
@@ -54,6 +49,11 @@ let
             desktop-environment-brightness-small-decrement "-dec 5")
       :config
       (desktop-environment-mode))
+
+    ;; Set up systray
+    (use-package exwm-systemtray
+      :config
+      (exwm-systemtray-enable))
 
     ;; Load exwm
     (exwm-config-default)
