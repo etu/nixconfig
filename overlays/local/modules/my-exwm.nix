@@ -42,7 +42,9 @@ let
     (progn
       (desktop-environment-mode)
       (setq desktop-environment-screenlock-command "${i3lockCommand}")
-      (setq desktop-environment-screenshot-command "${pkgs.flameshot}/bin/flameshot gui"))
+      (setq desktop-environment-screenshot-directory "~"
+            desktop-environment-screenshot-command "${pkgs.flameshot}/bin/flameshot gui"
+            desktop-environment-screenshot-partial-command "${pkgs.flameshot}/bin/flameshot gui"))
 
     ;; Load exwm
     (exwm-config-default)
