@@ -6,7 +6,6 @@ let
   cfg = config.my.exwm;
   i3lockCommand = "${pkgs.i3lock}/bin/i3lock --nofork --color=000000";
   loadScript = pkgs.writeText "emacs-exwm-load" ''
-    (require 'desktop-environment)
     (require 'exwm)
     (require 'exwm-config)
     (require 'exwm-randr)
@@ -39,8 +38,9 @@ let
       (exwm-input-set-key (kbd "s-t") 'exwm-run-stupidterm))
 
     ;; Define desktop environment commands
-    (progn
-      (desktop-environment-mode)
+    (use-package desktop-environment
+      :defer 1
+      :init
       (setq desktop-environment-screenlock-command "${i3lockCommand}")
       (setq desktop-environment-screenshot-directory "~"
             desktop-environment-screenshot-command "${pkgs.flameshot}/bin/flameshot gui"
@@ -51,7 +51,9 @@ let
             desktop-environment-brightness-normal-increment "-inc 10"
             desktop-environment-brightness-normal-decrement "-dec 10"
             desktop-environment-brightness-small-increment "-inc 5"
-            desktop-environment-brightness-small-decrement "-dec 5"))
+            desktop-environment-brightness-small-decrement "-dec 5")
+      :config
+      (desktop-environment-mode))
 
     ;; Load exwm
     (exwm-config-default)
