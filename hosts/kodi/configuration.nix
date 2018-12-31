@@ -95,6 +95,14 @@
   # Enable common cli settings for my systems
   my.common-cli.enable = true;
 
+  # Enable avahi for auto discovery of Kodi
+  services.avahi.enable = true;
+  services.avahi.publish.enable = true;
+  services.avahi.publish.userServices = true;
+
+  # Open ports for avahi zeroconf
+  networking.firewall.allowedUDPPorts = [ 5353 ];
+
   # Open port to remote control Kodi
   networking.firewall.allowedTCPPorts = [ 8080 ];
 
