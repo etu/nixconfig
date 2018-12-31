@@ -44,7 +44,14 @@ let
       (setq desktop-environment-screenlock-command "${i3lockCommand}")
       (setq desktop-environment-screenshot-directory "~"
             desktop-environment-screenshot-command "${pkgs.flameshot}/bin/flameshot gui"
-            desktop-environment-screenshot-partial-command "${pkgs.flameshot}/bin/flameshot gui"))
+            desktop-environment-screenshot-partial-command "${pkgs.flameshot}/bin/flameshot gui")
+      (setq desktop-environment-brightness-get-command "${pkgs.xorg.xbacklight}/bin/xbacklight"
+            desktop-environment-brightness-set-command "${pkgs.xorg.xbacklight}/bin/xbacklight %s"
+            desktop-environment-brightness-get-regexp "\\([0-9]+\\)"
+            desktop-environment-brightness-normal-increment "-inc 10"
+            desktop-environment-brightness-normal-decrement "-dec 10"
+            desktop-environment-brightness-small-increment "-inc 5"
+            desktop-environment-brightness-small-decrement "-dec 5"))
 
     ;; Load exwm
     (exwm-config-default)
