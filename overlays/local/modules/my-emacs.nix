@@ -5,8 +5,6 @@ with lib;
 let
   cfg = config.my.emacs;
 
-  myEmacs = pkgs.emacs.override {};
-  myEmacsWithPackages = (pkgs.emacsPackagesNgGen myEmacs).emacsWithPackages;
   myEmacsConfig = pkgs.writeText "config.el" (builtins.readFile ./emacs-files/base.el);
   myEmacsInit = pkgs.writeText "init.el" ''
     ;;; emacs.el -- starts here
@@ -43,57 +41,17 @@ in {
 
   config = mkIf cfg.enable {
     services.emacs.enable = true;
-    services.emacs.package = (myEmacsWithPackages (epkgs: with epkgs; ([
-      (pkgs.runCommand "default.el" {} ''
-        mkdir -p $out/share/emacs/site-lisp
-        cp ${myEmacsInit} $out/share/emacs/site-lisp/default.el
-      '')
-      _0blayout
-      anzu
-      centimacro
-      column-enforce-mode
-      company
-      company-flx
-      company-go
-      company-jedi
-      company-php
-      company-restclient
-      company-statistics
-      diff-hl
-      direnv
-      dracula-theme
-      es-mode
-      eyebrowse
-      fish-mode
-      flycheck
-      geben
-      gnuplot
-      go-mode
-      helm
-      helm-ag
-      helm-fuzzier
-      helm-projectile
-      htmlize
-      magit
-      markdown-mode
-      nix-mode
-      php-mode
-      phpcbf
-      restclient
-      scss-mode
-      smooth-scrolling
-      telephone-line
-      use-package
-      vcl-mode
-      web-mode
-      webpaste
-      which-key
-      yaml-mode
-      yasnippet
-    ] ++ (lib.optional cfg.enableExwm (with epkgs; [
-      exwm
-      desktop-environment
-    ])))));
+    services.emacs.package = (import ./emacs-files/elisp.nix { inherit pkgs; }).fromEmacsUsePackage {
+      # config = builtins.readFile myEmacsInit; # TODO: Why doesn't this work?
+      config = builtins.readFile ./emacs-files/base.el;
+      override = epkgs: epkgs // {
+        myConfigInit = (pkgs.runCommand "default.el" {} ''
+          mkdir -p  $out/share/emacs/site-lisp
+          cp ${myEmacsInit} $out/share/emacs/site-lisp/default.el
+        '');
+      };
+      extraEmacsPackages = [ "myConfigInit" ] ++ optionals cfg.enableExwm [ "exwm" "desktop-environment" ];
+    };
     services.emacs.defaultEditor = true;
 
     fonts.fonts = with pkgs; [

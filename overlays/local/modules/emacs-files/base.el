@@ -124,18 +124,18 @@
 (add-to-list 'default-frame-alist '(font . "Liberation Mono 10"))
 
 ;; Set cursor color -- https://emacs.stackexchange.com/questions/13291/emacs-cursor-color-is-different-in-daemon-and-non-daemon-modes
-(use-package frame
-  :defer 2
-  :config
+(progn
+  (require 'frame)
+
   (add-hook 'after-make-frame-functions
             (lambda (frame)
               (modify-frame-parameters
                frame (list (cons 'cursor-color "White"))))))
 
 ;; Enable line number mode in programming modes
-(use-package linum
-  :defer 2
-  :config
+(progn
+  (require 'linum)
+
   (setq linum-format "%3d ")
   (add-hook 'prog-mode-hook 'linum-mode))
 
@@ -457,6 +457,7 @@
 (use-package helm-fuzzier
   :defer 2
   :init
+  ;; TODO: Move variables to correct places with correct requires
   (setq helm-mode-fuzzy-match t
         helm-M-x-fuzzy-match t
         helm-buffers-fuzzy-match t
@@ -483,6 +484,7 @@
   :init
   ;; This changes formating of time in clocktables
   ;; So instead of "Dd HH:MM" we get "HH.MM"
+  ;; TODO: Change from this variable since it's deprecated and do the correct require
   (setq org-time-clocksum-use-fractional t)
   :config
   ;; Add advice to override indention
@@ -535,6 +537,23 @@
           (load-theme 'tango-dark)))
 
       (global-set-key [f12] 'toggle-color-theme)))
+
+
+;;;
+;;;
+;;; Install additional modes
+;;;
+;;;
+
+
+(use-package centimacro :defer 2)
+(use-package es-mode :defer 2)
+(use-package fish-mode :defer 2)
+(use-package helm-ag :defer 2)
+(use-package markdown-mode :defer 2)
+(use-package phpcbf :defer 2)
+(use-package vcl-mode :defer 2)
+(use-package yaml-mode :defer 2)
 
 
 ;;;
