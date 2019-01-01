@@ -3,24 +3,26 @@
 with lib;
 
 let
- cfg = config.my.emacs;
+  cfg = config.my.emacs;
 
- myEmacs = pkgs.emacs.override {};
- myEmacsWithPackages = (pkgs.emacsPackagesNgGen myEmacs).emacsWithPackages;
- myEmacsConfig = pkgs.writeText "default.el" ''
-;;; default.el -- Global config starts here
+  myEmacs = pkgs.emacs.override {};
+  myEmacsWithPackages = (pkgs.emacsPackagesNgGen myEmacs).emacsWithPackages;
+  myEmacsConfig = pkgs.writeText "config.el" (builtins.readFile ./emacs-files/base.el);
+  myEmacsInit = pkgs.writeText "init.el" ''
+    ;;; emacs.el -- starts here
+    ;;; Commentary:
+    ;;; Code:
 
-;; Use a hook so the message doesn't get clobbered by other messages.
-(add-hook 'emacs-startup-hook
-          (lambda ()
-            (message "Emacs ready in %s with %d garbage collections."
-                     (format "%.2f seconds"
-                             (float-time
-                              (time-subtract after-init-time before-init-time)))
-                     gcs-done)))
+    ;; Increase the threshold to reduce the amount of garbage collections made
+    ;; during startups.
+    (let ((gc-cons-threshold (* 50 1000 1000))
+          (gc-cons-percentage 0.6)
+          (file-name-handler-alist nil))
 
-;;; default.el ends here
- '';
+      ;; Load config
+      (load-file "${myEmacsConfig}"))
+    ;;; emacs.el ends here
+  '';
 
 in {
   options = {
@@ -44,7 +46,7 @@ in {
     services.emacs.package = (myEmacsWithPackages (epkgs: with epkgs; ([
       (pkgs.runCommand "default.el" {} ''
         mkdir -p $out/share/emacs/site-lisp
-        cp ${myEmacsConfig} $out/share/emacs/site-lisp/default.el
+        cp ${myEmacsInit} $out/share/emacs/site-lisp/default.el
       '')
       _0blayout
       anzu

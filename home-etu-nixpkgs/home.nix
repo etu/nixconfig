@@ -34,15 +34,6 @@
     # Git config file for work
     { target = ".config/git/work_config"; source = ./dotfiles/git/gitconfig_work; }
 
-    # Emacs config
-    { target = ".emacs"; source = ./dotfiles/emacs/emacs.el; }
-    { target = ".config/emacs/config.el";
-      source = pkgs.runCommand "config.el" {} ''
-        cp ${./dotfiles/emacs/config.org} config.org
-        ${pkgs.emacs}/bin/emacs --batch ./config.org -f org-babel-tangle
-        mv config.el $out
-      ''; }
-
     # Stupidterm
     { target = ".config/stupidterm.ini"; source = ./dotfiles/stupidterm.ini; }
   ];
