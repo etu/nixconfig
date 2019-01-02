@@ -306,7 +306,15 @@
                       (error "Program: gocode is missing"))
 
                     (set (make-local-variable 'company-backends) '(company-go))
-                    (company-mode t)))))))
+                    (company-mode t)))))
+
+    ;; Completions for nix options
+    (use-package company-nixos-options
+      :config
+      (add-hook 'nix-mode-hook
+                (lambda ()
+                  (set (make-local-variable 'company-backends) '(company-nixos-options))
+                  (company-mode t))))))
 
 
 ;;;
