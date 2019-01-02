@@ -564,6 +564,7 @@
 (use-package es-mode :defer 2)
 (use-package fish-mode :defer 2)
 (use-package helm-ag :defer 2)
+(use-package helm-nixos-options :defer 2)
 (use-package markdown-mode :defer 2)
 (use-package phpcbf :defer 2)
 (use-package vcl-mode :defer 2)
