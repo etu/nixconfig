@@ -8,7 +8,6 @@ let
   loadScript = pkgs.writeText "emacs-exwm-load" ''
     (require 'exwm)
     (require 'exwm-config)
-    (require 'exwm-randr)
 
     ;; Display time in modeline
     (progn
@@ -54,6 +53,12 @@ let
     (use-package exwm-systemtray
       :config
       (exwm-systemtray-enable))
+
+    ;; Set up randr
+    (use-package exwm-randr
+      :config
+      (setq exwm-randr-workspace-monitor-plist '(1 "eDP1" 9 "HDMI1"))
+      (exwm-randr-enable))
 
     ;; Load exwm
     (exwm-config-default)
