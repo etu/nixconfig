@@ -18,7 +18,12 @@ let
           (file-name-handler-alist nil))
 
       ;; Load config
-      (load-file "${myEmacsConfig}"))
+      (load-file "${myEmacsConfig}")
+
+      ;; Set paths to things
+      (setq gnuplot-program "${pkgs.gnuplot}/bin/gnuplot"
+            phpcbf-executable "${pkgs.phpPackages.phpcbf}/bin/phpcbf"))
+
     ;;; emacs.el ends here
   '';
 
