@@ -314,7 +314,13 @@
       (add-hook 'nix-mode-hook
                 (lambda ()
                   (set (make-local-variable 'company-backends) '(company-nixos-options))
-                  (company-mode t))))))
+                  (company-mode t))))
+
+    ;; Display details of entries automatically
+    (use-package company-quickhelp
+      :config
+      (eval-after-load 'company
+        (company-quickhelp-mode)))))
 
 
 ;;;
