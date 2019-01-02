@@ -112,6 +112,14 @@ in {
       };
     };
 
+    # Enable auto locking of the screen
+    services.xserver.xautolock.enable = true;
+    services.xserver.xautolock.locker = "${i3lockCommand}";
+    services.xserver.xautolock.enableNotifier = true;
+    services.xserver.xautolock.notify = 10;
+    services.xserver.xautolock.notifier = "${pkgs.libnotify}/bin/notify-send \"Locking in 10 seconds\"";
+    services.xserver.xautolock.time = 3;
+
     # Set up services needed for gnome stuff for evolution
     services.gnome3.evolution-data-server.enable = true;
     services.gnome3.gnome-keyring.enable = true;
