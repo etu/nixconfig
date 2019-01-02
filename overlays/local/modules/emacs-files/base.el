@@ -103,22 +103,22 @@
 (use-package dracula-theme
   :config
   (progn
-	(load-theme 'dracula t)
+    (load-theme 'dracula t)
 
     ;; Required to be able to override org-level-faces
     (require 'org)
 
-	(mapc (lambda (args)
-			(face-spec-reset-face (car args))
-			(apply 'set-face-attribute args))
-		  '((font-lock-variable-name-face nil :foreground "#ffb86c")
-			(org-level-1 nil :inherit bold :foreground "#ff79c6")
-			(org-level-2 nil :inherit bold :foreground "#bd93f9")))))
+    (mapc (lambda (args)
+            (face-spec-reset-face (car args))
+            (apply 'set-face-attribute args))
+          '((font-lock-variable-name-face nil :foreground "#ffb86c")
+            (org-level-1 nil :inherit bold :foreground "#ff79c6")
+            (org-level-2 nil :inherit bold :foreground "#bd93f9")))))
 
 (use-package telephone-line
   :config
   (progn
-	(telephone-line-mode 1)))
+    (telephone-line-mode 1)))
 
 ;; Set font -- https://stackoverflow.com/questions/3984730/emacs-gui-with-emacs-daemon-not-loading-fonts-correctly
 (add-to-list 'default-frame-alist '(font . "Liberation Mono 10"))
