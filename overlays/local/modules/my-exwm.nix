@@ -112,6 +112,9 @@ in {
       };
     };
 
+    # Enable autorandr for screen setups.
+    services.autorandr.enable = true;
+
     # Enable auto locking of the screen
     services.xserver.xautolock.enable = true;
     services.xserver.xautolock.locker = "${i3lockCommand}";
