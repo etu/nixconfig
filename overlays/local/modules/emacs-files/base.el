@@ -99,6 +99,13 @@
             ;; Enable column number together with line numbers
             (column-number-mode t)))
 
+;; Bind some keys to manage sizes of buffers easier than with defaults
+(progn
+  (global-set-key (kbd "S-C-<left>") 'shrink-window-horizontally)
+  (global-set-key (kbd "S-C-<right>") 'enlarge-window-horizontally)
+  (global-set-key (kbd "S-C-<down>") 'shrink-window)
+  (global-set-key (kbd "S-C-<up>") 'enlarge-window))
+
 ;; Setup theme
 (use-package dracula-theme
   :config
