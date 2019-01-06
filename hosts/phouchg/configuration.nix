@@ -84,7 +84,6 @@ in {
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
     sequeler
-    androidenv.platformTools
   ];
 
   # Overlay to use PHP from stable to get PHP 7.0 which is gone in unstable
