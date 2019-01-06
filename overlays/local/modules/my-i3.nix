@@ -204,6 +204,9 @@ in {
     services.gnome3.evolution-data-server.enable = true;
     services.gnome3.gnome-keyring.enable = true;
 
+    # Enable autorandr for screen setups.
+    services.autorandr.enable = true;
+
     # Install aditional packages
     environment.systemPackages = with pkgs; [
       arandr
