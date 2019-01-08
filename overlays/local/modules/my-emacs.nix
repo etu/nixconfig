@@ -50,10 +50,18 @@ in {
       # config = builtins.readFile myEmacsInit; # TODO: Why doesn't this work?
       config = builtins.readFile ./emacs-files/base.el;
       override = epkgs: epkgs // {
+        # Add my config initializer as an emacs package
         myConfigInit = (pkgs.runCommand "default.el" {} ''
           mkdir -p  $out/share/emacs/site-lisp
           cp ${myEmacsInit} $out/share/emacs/site-lisp/default.el
         '');
+
+        # Override nix-mode source
+        nix-mode = epkgs.nix-mode.overrideAttrs (oldAttrs: {
+          src = builtins.fetchTarball {
+            url = https://github.com/nixos/nix-mode/archive/master.tar.gz;
+          };
+        });
       };
       extraEmacsPackages = [ "myConfigInit" ] ++ optionals cfg.enableExwm [ "exwm" "desktop-environment" ];
     };
