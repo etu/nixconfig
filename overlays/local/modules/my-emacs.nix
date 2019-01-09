@@ -47,8 +47,10 @@ in {
   config = mkIf cfg.enable {
     services.emacs.enable = true;
     services.emacs.package = (import ./emacs-files/elisp.nix { inherit pkgs; }).fromEmacsUsePackage {
-      # config = builtins.readFile myEmacsInit; # TODO: Why doesn't this work?
-      config = builtins.readFile ./emacs-files/base.el;
+      # Config to parse, use my built config from above
+      config = builtins.readFile myEmacsConfig;
+
+      # Package overrides
       override = epkgs: epkgs // {
         # Add my config initializer as an emacs package
         myConfigInit = (pkgs.runCommand "default.el" {} ''
@@ -63,6 +65,8 @@ in {
           };
         });
       };
+
+      # Extra packages to install
       extraEmacsPackages = [ "myConfigInit" ] ++ optionals cfg.enableExwm [ "exwm" "desktop-environment" ];
     };
     services.emacs.defaultEditor = true;
