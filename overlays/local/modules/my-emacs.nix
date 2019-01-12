@@ -5,7 +5,10 @@ with lib;
 let
   cfg = config.my.emacs;
 
-  myEmacsConfig = pkgs.writeText "config.el" (builtins.readFile ./emacs-files/base.el);
+  myEmacsConfig = pkgs.writeText "config.el" (
+    (builtins.readFile ./emacs-files/base.el)
+    + (builtins.readFile ./emacs-files/eshell.el)
+  );
   myEmacsInit = pkgs.writeText "init.el" ''
     ;;; emacs.el -- starts here
     ;;; Commentary:
