@@ -76,6 +76,9 @@ in {
     services.xserver.xkbOptions = "eurosign:e,ctrl:nocaps,numpad:mac,kpdl:dot";
     services.xserver.xkbVariant = "dvorak";
 
+    # Enable U2F key support
+    hardware.u2f.enable = true;
+
     # Enable networkmanager.
     networking.networkmanager.enable = true;
 
