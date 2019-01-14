@@ -5,10 +5,19 @@ with lib;
 let
   cfg = config.my.emacs;
 
-  myEmacsConfig = pkgs.writeText "config.el" (
+  myEmacsConfigPlain = pkgs.writeText "config-unsubstituted.el" (
     (builtins.readFile ./emacs-files/base.el)
     + (builtins.readFile ./emacs-files/eshell.el)
   );
+
+  myEmacsConfig = (pkgs.runCommand "config.el" (with pkgs; {
+    inherit gnuplot;
+    phpcs = phpPackages.phpcs;
+    phpcbf = phpPackages.phpcbf;
+  }) ''
+    substituteAll ${myEmacsConfigPlain} $out
+  '');
+
   myEmacsInit = pkgs.writeText "init.el" ''
     ;;; emacs.el -- starts here
     ;;; Commentary:
@@ -21,11 +30,7 @@ let
           (file-name-handler-alist nil))
 
       ;; Load config
-      (load-file "${myEmacsConfig}")
-
-      ;; Set paths to things
-      (setq gnuplot-program "${pkgs.gnuplot}/bin/gnuplot"
-            phpcbf-executable "${pkgs.phpPackages.phpcbf}/bin/phpcbf"))
+      (load-file "${myEmacsConfig}"))
 
     ;;; emacs.el ends here
   '';

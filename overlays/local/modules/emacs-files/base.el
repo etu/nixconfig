@@ -357,7 +357,7 @@
   :defer 2
   :init
   (setq flycheck-phpcs-standard "PSR2"
-        flycheck-php-phpcs-executable "phpcs")
+        flycheck-php-phpcs-executable "@phpcs@/bin/phpcs")
   :config
   (global-flycheck-mode))
 
@@ -525,7 +525,9 @@
 ;; Gnuplot
 (use-package gnuplot
   :defer 2
-  :bind (("M-C-g" . org-plot/gnuplot)))
+  :bind (("M-C-g" . org-plot/gnuplot))
+  :config
+  (setq gnuplot-program "@gnuplot@/bin/gnuplot"))
 
 
 ;;;
@@ -573,7 +575,10 @@
 (use-package helm-ag :defer 2)
 (use-package helm-nixos-options :defer 2)
 (use-package markdown-mode :defer 2)
-(use-package phpcbf :defer 2)
+(use-package phpcbf
+  :defer 2
+  :config
+  (setq phpcbf-executable "@phpcbf@/bin/phpcbf"))
 (use-package vcl-mode :defer 2)
 (use-package yaml-mode :defer 2)
 
