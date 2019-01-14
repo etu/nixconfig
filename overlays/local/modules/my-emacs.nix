@@ -15,7 +15,7 @@ let
   # Run my config trough substituteAll to replace all paths with paths to
   # programs etc to have as my actual config file.
   myEmacsConfig = (pkgs.runCommand "config.el" (with pkgs; {
-    inherit gnuplot;
+    inherit gnuplot gocode;
     phpcs = phpPackages.phpcs;
     phpcbf = phpPackages.phpcbf;
   }) ''

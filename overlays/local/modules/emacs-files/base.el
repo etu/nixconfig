@@ -287,9 +287,6 @@
 
         (add-hook 'php-mode-hook
                   '(lambda ()
-                     (unless (executable-find "ctags")
-                       (error "Program: ctags is missing"))
-
                      ;; Add build company-backends with dabbrev and ac-php
                      (set (make-local-variable 'company-backends)
                           '((company-dabbrev-code
@@ -309,8 +306,7 @@
       (progn
         (add-hook 'go-mode-hook
                   (lambda ()
-                    (unless (executable-find "gocode")
-                      (error "Program: gocode is missing"))
+                    (setq company-go-gocode-command "@gocode@/bin/gocode")
 
                     (set (make-local-variable 'company-backends) '(company-go))
                     (company-mode t)))))
