@@ -5,11 +5,15 @@ with lib;
 let
   cfg = config.my.emacs;
 
+  # Create a file with my config without path substitutes, this just mash my
+  # different config files together to one file.
   myEmacsConfigPlain = pkgs.writeText "config-unsubstituted.el" (
     (builtins.readFile ./emacs-files/base.el)
     + (builtins.readFile ./emacs-files/eshell.el)
   );
 
+  # Run my config trough substituteAll to replace all paths with paths to
+  # programs etc to have as my actual config file.
   myEmacsConfig = (pkgs.runCommand "config.el" (with pkgs; {
     inherit gnuplot;
     phpcs = phpPackages.phpcs;
@@ -18,6 +22,7 @@ let
     substituteAll ${myEmacsConfigPlain} $out
   '');
 
+  # Define init file for for emacs to read my config file.
   myEmacsInit = pkgs.writeText "init.el" ''
     ;;; emacs.el -- starts here
     ;;; Commentary:
