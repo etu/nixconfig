@@ -75,6 +75,9 @@
   # Enable virtualbox and friends.
   my.vbox.enable = true;
 
+  # Enable virtualisation
+  virtualisation.kvmgt.enable = true;
+
   # Enable dmrconfig to configure my hamradio.
   programs.dmrconfig.enable = true;
 
