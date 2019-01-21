@@ -82,10 +82,14 @@
   my.user.extraGroups = [
     "scanner"
     "docker"
+    "libvirtd"
   ];
 
   # Home-manager as nix module
   home-manager.users.etu = import ../../home-etu-nixpkgs/home.nix;
+
+  # Enable kvm
+  virtualisation.libvirtd.enable = true;
 
   # Enable docker
   virtualisation.docker.enable = true;

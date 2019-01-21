@@ -71,12 +71,15 @@
 
   # Define a user account.
   my.user.enable = true;
+  my.user.extraGroups = [
+    "libvirtd"
+  ];
 
   # Enable virtualbox and friends.
   my.vbox.enable = true;
 
-  # Enable virtualisation
-  virtualisation.kvmgt.enable = true;
+  # Enable kvm
+  virtualisation.libvirtd.enable = true;
 
   # Enable dmrconfig to configure my hamradio.
   programs.dmrconfig.enable = true;
