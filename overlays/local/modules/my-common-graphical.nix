@@ -56,7 +56,6 @@ in {
       gajim
       feh
       firefox-bin
-      kdeconnect
       mpv
       stupidterm
       tdesktop
