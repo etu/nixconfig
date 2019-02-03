@@ -4,7 +4,7 @@ with lib;
 
 let
   cfg = config.my.exwm;
-  i3lockCommand = "${pkgs.i3lock}/bin/i3lock --nofork --color=000000";
+  i3lockCommand = "${pkgs.i3lock-pixeled}/bin/i3lock-pixeled --nofork";
   loadScript = pkgs.writeText "emacs-exwm-load" ''
     (require 'exwm)
     (require 'exwm-config)
@@ -132,7 +132,7 @@ in {
       evince
       gnome3.evolution
       scrot
-      i3lock
+      i3lock-pixeled
       pavucontrol
     ];
 
