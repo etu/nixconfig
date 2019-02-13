@@ -5,7 +5,7 @@
 { config, pkgs, ... }:
 
 let
-  stablePkgs = import (builtins.fetchTarball {
+  oldStablePkgs = import (builtins.fetchTarball {
     url = https://github.com/NixOS/nixpkgs-channels/archive/nixos-18.03.tar.gz;
   }) {};
 
@@ -89,8 +89,8 @@ in {
   # Overlay to use PHP from stable to get PHP 7.0 which is gone in unstable
   nixpkgs.overlays = [
     (self: super: {
-      php = stablePkgs.php70;
-      phpPackages = stablePkgs.php70Packages;
+      php = oldStablePkgs.php70;
+      phpPackages = oldStablePkgs.php70Packages;
     })
   ];
 }
