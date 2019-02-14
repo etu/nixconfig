@@ -8,6 +8,8 @@
   imports = [
     ./hardware-configuration.nix
     ./networking.nix
+    # Import local modules & overlays
+    ../../overlays/local/default.nix
   ];
 
   # Use the GRUB 2 boot loader.
@@ -28,6 +30,19 @@
   #   consoleKeyMap = "us";
   #   defaultLocale = "en_US.UTF-8";
   # };
+
+  # Auto upgrade system
+  system.autoUpgrade.enable = true;
+  system.autoUpgrade.channel = "https://nixos.org/channels/nixos-18.09-small";
+  system.autoUpgrade.dates = "weekly";
+
+  # Auto garbage collect
+  nix.gc.automatic = true;
+  nix.gc.options = "--delete-older-than 30d";
+
+  # Auto update the config before it upgrades the system
+  my.update-config.enable = true;
+  my.update-config.path = "/nix/persistent/etc/nixos/";
 
   # Set your time zone.
   time.timeZone = "Europe/Stockholm";
