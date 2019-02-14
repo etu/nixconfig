@@ -28,6 +28,12 @@ in {
         defaultText = "root";
         description = "User to run as";
       };
+      path = mkOption {
+        type = types.str;
+        default = "/etc/nixos/";
+        defaultText = "/etc/nixos/";
+        description = "Working directory for the job to update the config";
+      };
       interval = mkOption {
         type = types.str;
         default = "04:30";
@@ -52,7 +58,7 @@ in {
         Type = "oneshot";
         User = cfg.user;
         ExecStart = "${cfg.package}/bin/git pull";
-        WorkingDirectory = "/etc/nixos/";
+        WorkingDirectory = cfg.path;
       };
     };
     systemd.timers.update-nixos-config = {
