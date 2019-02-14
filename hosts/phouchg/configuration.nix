@@ -31,6 +31,8 @@ in {
   # boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelPackages = pkgs.linuxPackages_4_14;
 
+  boot.cleanTmpDir = true;
+
   # Hardware settings
   services.xserver.videoDrivers = ["intel" "modesetting"];
   hardware.cpu.intel.updateMicrocode = true;

@@ -35,6 +35,8 @@
   # Fix touchpad scrolling after suspend.
   boot.kernelParams = [ "psmouse.synaptics_intertouch=0" ];
 
+  boot.cleanTmpDir = true;
+
   # Hardware settings
   services.xserver.videoDrivers = ["intel" "modesetting"];
   hardware.trackpoint.enable = true;

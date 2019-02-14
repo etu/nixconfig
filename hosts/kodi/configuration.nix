@@ -32,6 +32,8 @@
     }
   ];
 
+  boot.cleanTmpDir = true;
+
   services.xserver.videoDrivers = [ "amdgpu" ];
 
   # Auto upgrade system

@@ -27,6 +27,8 @@
   # Needed for the virtual console to work on the RPi 3, as the default of 16M doesn't seem to be enough.
   boot.kernelParams = [ "cma=32M" ];
 
+  boot.cleanTmpDir = true;
+
   # Auto upgrade system
   system.autoUpgrade.enable = true;
   system.autoUpgrade.channel = "https://nixos.org/channels/nixos-18.09-small";
