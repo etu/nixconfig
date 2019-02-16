@@ -1,7 +1,7 @@
 { stdenv, go, fetchFromGitHub }:
 
 stdenv.mkDerivation rec {
-  pname = "flummbot";
+  name = "flummbot";
   version = "20180703";
 
   nativeBuildInputs = [ go ];
