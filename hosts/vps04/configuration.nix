@@ -99,6 +99,11 @@
       home = "/nix/persistent/home/concate";
       uid = 1001;
       openssh.authorizedKeys.keys = [
+        "no-agent-forwarding,no-X11-forwarding,permitopen=\"localhost:8002\",command=\"echo 'This account can only be used for weechat relays'\" ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDfAqVDOBZez9eziBDHmSM48LBK/F8qBwM0WOkIh+QC/xFpIQLybZTsMj4dbhh7xXkkRLPfpje8/vxjB6PoAqbE4YS9mVv87CaplabkUIKxAM1zw+tlmIok+Py+2G4yuhsXFx0Ax1Z+NFV5NxC9D0tOEnC7z3otZ8O9S9YA+3Qr7QT0HYSzi7dkwzxevo1gjXlREJjLHmygxxfVlQ528KuhvilgiQF4lvoqPgdUf5Lpk4ZfqdBvoxGxLBbOoVOa6naclEYO4nsU336m5ihbjrWptnlQS3yUxCuVaoWjbSv2y3LUVky6xeXxK4kuVLDTdk5bl3cWin7ugoHBRJ07OTIZ concate@android"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE/CqVKQd8Bk/e99BQ6floXFMhNZ3d3anPIKl9+RyXzO concate@gaara.2018-07-13"
+        "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDSpRskzDJwIYz6uVK9Yvl0B2I8zlnVC4KOOu/Jr+bhTW9aXvbrhVd6y1u+vicJ78j25MvzH3CXQY0D59CEnYYD1QlHIMN3fRICcrcbTNIhGaeVsTBrzvgeeMLluzTCe0fyve7lY2P1drn55lA+Mg6Au8oSho2904nOjiCcB/glnQ38Mu4nvyjm/dVBw83Dq2sOl+gyCtsTlIv6Gc7r7AafGComXDVrVbicPd2ig654rtz7L1LoCye298CJLXUJhJolfxhP+F4GDAqdjkj4o3MwlYrv6HNu6LYzcWKlagkL5m5LhSYC0uPytXWHYRO/mIvwQmFOlAI1sQ/q/ynHtFnp concate@hei"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH4+d3/gP+eiOTap7+u5tfX94ijF65kA0ilMryZYBuHD concate@hactar.2016-10-15"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB7kQjFkos4fpNsGgHY861B5mddRo2EDOYe7HkHPRZ2f concate@rocklee-2018-12-31"
       ];
     };
 
