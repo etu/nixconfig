@@ -128,7 +128,17 @@
       initialHashedPassword = "$6$NtS91ToW$zfnnlNQVycYfpEC/dHdBrFssy2108m42cWdTb17dyI6Ad/wHZfPJHu2DJXOfVQxrM4OnX1MBESRyiFd.9DfgK.";
       uid = 1003;
     };
+
+    bots = {
+      isNormalUser = true;
+      home = "/nix/persistent/home/bots";
+      uid = 1004;
+    };
   };
+
+  # Enable the flummbot service
+  programs.flummbot.enable = true;
+  programs.flummbot.stateDirectory = "/nix/persistent/home/bots";
 
   # A hack to `loginctl enable-linger m` (for multiplexer sessions to last),
   # until this one is resolved: https://github.com/NixOS/nixpkgs/issues/3702
