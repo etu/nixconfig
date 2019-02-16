@@ -129,6 +129,7 @@
   system.activationScripts.loginctl-enable-linger-m = pkgs.lib.stringAfter [ "users" ] ''
     ${pkgs.systemd}/bin/loginctl enable-linger etu
     ${pkgs.systemd}/bin/loginctl enable-linger concate
+    ${pkgs.systemd}/bin/loginctl enable-linger talyz
   '';
 
   # This value determines the NixOS release with which your system is to be
