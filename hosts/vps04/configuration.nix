@@ -101,6 +101,22 @@
       openssh.authorizedKeys.keys = [
       ];
     };
+
+    talyz = {
+      isNormalUser = true;
+      shell = pkgs.fish;
+      home = "/nix/persistent/home/talyz";
+      uid = 1002;
+      openssh.authorizedKeys.keys = [
+      ];
+    };
+
+    ozeloten = {
+      isNormalUser = true;
+      home = "/nix/persistent/home/ozeloten";
+      initialHashedPassword = "$6$NtS91ToW$zfnnlNQVycYfpEC/dHdBrFssy2108m42cWdTb17dyI6Ad/wHZfPJHu2DJXOfVQxrM4OnX1MBESRyiFd.9DfgK.";
+      uid = 1003;
+    };
   };
 
   # A hack to `loginctl enable-linger m` (for multiplexer sessions to last),
