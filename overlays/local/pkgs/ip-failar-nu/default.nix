@@ -7,8 +7,7 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [ go ];
 
   installPhase = ''
-    mkdir -p $out/bin
-    cp ip-failar-nu $out/bin
+    install -D ip-failar-nu $out/bin/ip-failar-nu
   '';
 
   src = fetchFromGitHub {
