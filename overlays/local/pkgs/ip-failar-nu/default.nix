@@ -1,7 +1,7 @@
 { stdenv, go, fetchFromGitHub }:
 
 stdenv.mkDerivation rec {
-  name = "ip-failar-nu";
+  name = "ip-failar-nu-${version}";
   version = "20180318";
 
   nativeBuildInputs = [ go ];
