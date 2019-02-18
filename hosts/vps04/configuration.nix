@@ -135,7 +135,7 @@
     ozeloten = {
       isNormalUser = true;
       home = "/nix/persistent/home/ozeloten";
-      initialHashedPassword = "$6$NtS91ToW$zfnnlNQVycYfpEC/dHdBrFssy2108m42cWdTb17dyI6Ad/wHZfPJHu2DJXOfVQxrM4OnX1MBESRyiFd.9DfgK.";
+      initialHashedPassword = "$6$Tp21Uo367npe/$/a6taUbyYu3QQo8RAPp6krKAq8wNs67hqSc0KPCzT32N7Aqkud110qddUAywOGKdYPJc/23BqogmUpVBQEoGF/";
       uid = 1003;
     };
 
