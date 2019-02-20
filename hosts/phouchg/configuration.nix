@@ -55,6 +55,9 @@ in {
   # Disable root login for ssh
   services.openssh.permitRootLogin = "no";
 
+  # Enable TLP
+  services.tlp.enable = true;
+
   # Enable common cli settings for my systems
   my.common-cli.enable = true;
 
