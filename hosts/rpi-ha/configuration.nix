@@ -50,6 +50,8 @@
       "discovery"
       "hue"
       "media_player.cast"
+      "media_player.kodi"
+      "notify.kodi"
       "sensor.yr"
       "updater"
       "zwave"
