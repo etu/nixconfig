@@ -49,8 +49,10 @@
     extraComponents = [
       "discovery"
       "hue"
+      "media_player"
       "media_player.cast"
       "media_player.kodi"
+      "notify"
       "notify.kodi"
       "sensor.yr"
       "updater"
