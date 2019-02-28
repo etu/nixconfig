@@ -31,6 +31,9 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.extraModulePackages = [
+    pkgs.linuxPackages_latest.acpi_call
+  ];
 
   # Fix touchpad scrolling after suspend.
   boot.kernelParams = [ "psmouse.synaptics_intertouch=0" ];
@@ -41,6 +44,9 @@
   services.xserver.videoDrivers = ["intel" "modesetting"];
   hardware.trackpoint.enable = true;
   hardware.cpu.intel.updateMicrocode = true;
+
+  # Enable TLP
+  services.tlp.enable = true;
 
   # Enable bluetooth
   hardware.bluetooth.enable = true;
