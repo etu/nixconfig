@@ -30,12 +30,18 @@ in {
   boot.loader.efi.canTouchEfiVariables = true;
   # boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelPackages = pkgs.linuxPackages_4_14;
+  boot.extraModulePackages = [
+    pkgs.linuxPackages_4_14.acpi_call
+  ];
 
   boot.cleanTmpDir = true;
 
   # Hardware settings
   services.xserver.videoDrivers = ["intel" "modesetting"];
   hardware.cpu.intel.updateMicrocode = true;
+
+  # Enable TLP
+  services.tlp.enable = true;
 
   # Enable bluetooth
   hardware.bluetooth.enable = true;
@@ -54,9 +60,6 @@ in {
 
   # Disable root login for ssh
   services.openssh.permitRootLogin = "no";
-
-  # Enable TLP
-  services.tlp.enable = true;
 
   # Enable common cli settings for my systems
   my.common-cli.enable = true;
