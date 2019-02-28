@@ -4,9 +4,9 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports =
-    [ <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
-    ];
+  imports = [
+    <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
+  ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
   boot.kernelModules = [ "kvm-intel" ];
@@ -14,16 +14,16 @@
 
   boot.initrd.luks.devices."disk".device = "/dev/disk/by-uuid/943f1e10-e3ba-4420-a583-135dc2ebfd09";
 
-  fileSystems."/" =
-    { device = "/dev/disk/by-uuid/6952fce7-b3ef-4abc-b0a4-dafebec32b67";
-      fsType = "ext4";
-    };
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/6952fce7-b3ef-4abc-b0a4-dafebec32b67";
+    fsType = "ext4";
+  };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/795B-D0D5";
-      fsType = "vfat";
-      options = [ "noauto" "x-systemd.automount" ];
-    };
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/795B-D0D5";
+    fsType = "vfat";
+    options = [ "noauto" "x-systemd.automount" ];
+  };
 
   swapDevices = [ ];
 
