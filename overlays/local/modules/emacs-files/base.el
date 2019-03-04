@@ -348,6 +348,9 @@
   (setq magit-log-arguments
         '("--graph" "--color" "--decorate" "--show-signature" "-n256")))
 
+;; Install forge for magit
+(use-package forge :defer 2)
+
 ;; Flycheck
 (use-package flycheck
   :defer 2
