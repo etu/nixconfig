@@ -43,6 +43,7 @@
   # Auto update the config before it upgrades the system
   my.update-config.enable = true;
   my.update-config.path = "/nix/persistent/etc/nixos/";
+  my.update-config.user = "etu";
 
   # Set your time zone.
   time.timeZone = "Europe/Stockholm";
