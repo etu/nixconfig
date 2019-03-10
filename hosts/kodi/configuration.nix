@@ -38,7 +38,7 @@
 
   # Auto upgrade system
   system.autoUpgrade.enable = true;
-  system.autoUpgrade.channel = "https://nixos.org/channels/nixos-18.09";
+  system.autoUpgrade.channel = "https://nixos.org/channels/nixos-19.03";
 
   # Auto garbage collect
   nix.gc.automatic = true;
