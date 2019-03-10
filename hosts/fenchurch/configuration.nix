@@ -56,6 +56,9 @@
   # Disable root login for ssh
   services.openssh.permitRootLogin = "no";
 
+  # Enable aspell with dictionaries.
+  my.aspell.enable = true;
+
   # Enable common cli settings for my systems
   my.common-cli.enable = true;
 

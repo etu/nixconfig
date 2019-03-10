@@ -4,6 +4,7 @@
   imports = [
     ./modules/flummbot.nix
     ./modules/ip-failar-nu.nix
+    ./modules/my-aspell.nix
     ./modules/my-common-cli.nix
     ./modules/my-common-graphical.nix
     ./modules/my-desktop-gnome.nix

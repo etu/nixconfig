@@ -70,6 +70,9 @@
   # Enable common cli settings for my systems
   my.common-cli.enable = true;
 
+  # Enable aspell with dictionaries.
+  my.aspell.enable = true;
+
   # Enable gpg related stuff
   my.gpg-utils.enable = true;
 
