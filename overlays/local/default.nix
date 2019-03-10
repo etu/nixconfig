@@ -4,7 +4,6 @@
   imports = [
     ./modules/flummbot.nix
     ./modules/ip-failar-nu.nix
-    ./modules/my-aspell.nix
     ./modules/my-common-cli.nix
     ./modules/my-common-graphical.nix
     ./modules/my-desktop-gnome.nix
@@ -14,6 +13,7 @@
     ./modules/my-gpg-utils.nix
     ./modules/my-i3.nix
     ./modules/my-nfsd.nix
+    ./modules/my-spell.nix
     ./modules/my-update-config.nix
     ./modules/my-user.nix
     ./modules/my-vbox.nix

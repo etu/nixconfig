@@ -54,8 +54,8 @@
     git htop screen weechat irssi
   ];
 
-  # Enable aspell with dictionaries.
-  my.aspell.enable = true;
+  # Enable aspell and hunspell with dictionaries.
+  my.spell.enable = true;
 
   # Install tmux
   programs.tmux.enable = true;

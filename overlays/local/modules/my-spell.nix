@@ -3,16 +3,16 @@
 with lib;
 
 let
- cfg = config.my.aspell;
+ cfg = config.my.spell;
 
 in {
   options = {
-    my.aspell = {
+    my.spell = {
       enable = mkOption {
         type = types.bool;
         default = false;
         description = ''
-          Enable and install aspell with swedish and english dictionary
+          Enable and install aspell and hunspell with swedish and english dictionary
         '';
       };
     };
@@ -25,6 +25,14 @@ in {
       # Dictionaries
       aspellDicts.en aspellDicts.en-computers aspellDicts.en-science
       aspellDicts.sv
+
+      # Also install hunspell with dictionaries
+      (hunspellWithDicts [
+        hunspellDicts.en-gb-ise
+        hunspellDicts.en-gb-ize
+        hunspellDicts.en-us
+        hunspellDicts.sv-se
+      ])
     ];
 
     # Configure aspell system wide
