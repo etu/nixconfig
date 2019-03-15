@@ -29,9 +29,9 @@ in {
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   # boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelPackages = pkgs.linuxPackages_4_14;
+  boot.kernelPackages = pkgs.linuxPackages_4_19;
   boot.extraModulePackages = [
-    pkgs.linuxPackages_4_14.acpi_call
+    pkgs.linuxPackages_4_19.acpi_call
   ];
 
   boot.cleanTmpDir = true;
