@@ -6,17 +6,7 @@ let
  cfg = config.my.spell;
 
 in {
-  options = {
-    my.spell = {
-      enable = mkOption {
-        type = types.bool;
-        default = false;
-        description = ''
-          Enable and install aspell and hunspell with swedish and english dictionary
-        '';
-      };
-    };
-  };
+  options.my.spell.enable = mkEnableOption "Enable and install aspell and hunspell with swedish and english dictionary";
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [

@@ -10,31 +10,25 @@ let
  extraAuthorizedKeys = cfg.extraAuthorizedKeys;
 
 in {
-  options = {
-    my.user = {
-      enable = mkOption {
-        type = types.bool;
-        default = false;
-        description = "Enables my user.";
-      };
-      uid = mkOption {
-        type = types.nullOr types.int;
-        default = 1000;
-      };
-      username = mkOption {
-        type = types.string;
-        default = "etu";
-        description = "My username for this system.";
-      };
-      extraGroups = mkOption {
-        type = types.listOf types.str;
-        default = [];
-      };
-      extraAuthorizedKeys = mkOption {
-        type = types.listOf types.str;
-        default = [];
-        description = "Additional authorized keys";
-      };
+  options.my.user = {
+    enable = mkEnableOption "Enables my user.";
+    uid = mkOption {
+      type = types.nullOr types.int;
+      default = 1000;
+    };
+    username = mkOption {
+      type = types.string;
+      default = "etu";
+      description = "My username for this system.";
+    };
+    extraGroups = mkOption {
+      type = types.listOf types.str;
+      default = [];
+    };
+    extraAuthorizedKeys = mkOption {
+      type = types.listOf types.str;
+      default = [];
+      description = "Additional authorized keys";
     };
   };
 

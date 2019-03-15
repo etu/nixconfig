@@ -66,17 +66,7 @@ let
   '';
 
 in {
-  options = {
-    my.exwm = {
-      enable = mkOption {
-        type = types.bool;
-        default = false;
-        description = ''
-          Enables exwm and auto login for my user
-        '';
-      };
-    };
-  };
+  options.my.exwm.enable = mkEnableOption "Enables exwm and auto login for my user";
 
   config = mkIf cfg.enable {
     nixpkgs.overlays = [

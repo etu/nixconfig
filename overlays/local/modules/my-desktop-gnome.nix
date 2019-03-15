@@ -6,17 +6,7 @@ let
  cfg = config.my.desktop-gnome;
 
 in {
-  options = {
-    my.desktop-gnome = {
-      enable = mkOption {
-        type = types.bool;
-        default = false;
-        description = ''
-          Enables gnome desktop with some settings and auto login on my user
-        '';
-      };
-    };
-  };
+  options.my.desktop-gnome.enable = mkEnableOption "Enables gnome desktop with some settings and auto login on my user";
 
   config = mkIf cfg.enable {
     # Enable autologin through GDM.

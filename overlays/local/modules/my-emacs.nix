@@ -41,20 +41,9 @@ let
   '';
 
 in {
-  options = {
-    my.emacs = {
-      enable = mkOption {
-        type = types.bool;
-        default = false;
-        description = ''
-          Enables emacs with the modules I want.
-        '';
-      };
-      enableExwm = mkOption {
-        type = types.bool;
-        default = false;
-      };
-    };
+  options.my.emacs = {
+    enable = mkEnableOption "Enables emacs with the modules I want";
+    enableExwm = mkEnableOption "Enables EXWM related modules";
   };
 
   config = mkIf cfg.enable {

@@ -7,22 +7,13 @@ let
   ip-failar-nu = cfg.package;
 
 in {
-  options = {
-    programs.ip-failar-nu = {
-      enable = mkOption {
-        type = types.bool;
-        default = false;
-        description = ''
-          A service that responds over http with the connecting clients IP.
-        '';
-      };
-
-      package = mkOption {
-        type = types.package;
-        default = pkgs.ip-failar-nu;
-        defaultText = "pkgs.ip-failar-nu";
-        description = "ip-failar-nu derivation to use";
-      };
+  options.programs.ip-failar-nu = {
+    enable = mkEnableOption "A service that responds over http with the connecting clients IP.";
+    package = mkOption {
+      type = types.package;
+      default = pkgs.ip-failar-nu;
+      defaultText = "pkgs.ip-failar-nu";
+      description = "ip-failar-nu derivation to use";
     };
   };
 

@@ -6,17 +6,7 @@ let
  cfg = config.my.gpg-utils;
 
 in {
-  options = {
-    my.gpg-utils = {
-      enable = mkOption {
-        type = types.bool;
-        default = false;
-        description = ''
-          Enables smartcard and gpg related utils that I use.
-        '';
-      };
-    };
-  };
+  options.my.gpg-utils.enable = mkEnableOption "Enables smartcard and gpg related utils that I use.";
 
   config = mkIf cfg.enable {
     services.pcscd.enable = true;

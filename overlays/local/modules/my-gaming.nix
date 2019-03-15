@@ -6,17 +6,7 @@ let
  cfg = config.my.gaming;
 
 in {
-  options = {
-    my.gaming = {
-      enable = mkOption {
-        type = types.bool;
-        default = false;
-        description = ''
-          Enables gaming related thingys.
-        '';
-      };
-    };
-  };
+  options.my.gaming.enable = mkEnableOption "Enables gaming related thingys.";
 
   config = mkIf cfg.enable {
     # Enable 32bit libs for steam and such.

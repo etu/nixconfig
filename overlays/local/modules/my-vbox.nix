@@ -6,17 +6,7 @@ let
  cfg = config.my.vbox;
 
 in {
-  options = {
-    my.vbox = {
-      enable = mkOption {
-        type = types.bool;
-        default = false;
-        description = ''
-          Enables vbox and related things I use.
-        '';
-      };
-    };
-  };
+  options.my.vbox.enable = mkEnableOption "Enables vbox and related things I use.";
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [

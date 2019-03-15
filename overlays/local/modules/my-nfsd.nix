@@ -6,17 +6,7 @@ let
  cfg = config.my.nfsd;
 
 in {
-  options = {
-    my.nfsd = {
-      enable = mkOption {
-        type = types.bool;
-        default = false;
-        description = ''
-          Enables nfsd and configures ports and stuff.
-        '';
-      };
-    };
-  };
+  options.my.nfsd.enable = mkEnableOption "Enables nfsd and configures ports and stuff.";
 
   config = mkIf cfg.enable {
     # Enable nfs server.

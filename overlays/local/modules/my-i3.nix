@@ -164,17 +164,7 @@ let
   '';
 
 in {
-  options = {
-    my.i3 = {
-      enable = mkOption {
-        type = types.bool;
-        default = false;
-        description = ''
-          Enables i3wm and auto login for my user
-        '';
-      };
-    };
-  };
+  options.my.i3.enable = mkEnableOption "Enables i3wm and auto login for my user";
 
   config = mkIf cfg.enable {
     # Libinput

@@ -6,17 +6,7 @@ let
  cfg = config.my.common-graphical;
 
 in {
-  options = {
-    my.common-graphical = {
-      enable = mkOption {
-        type = types.bool;
-        default = false;
-        description = ''
-          Enables my common graphical thingys.
-        '';
-      };
-    };
-  };
+  options.my.common-graphical.enable = mkEnableOption "Enables my common graphical thingys";
 
   config = mkIf cfg.enable {
     # Sane font defaults.

@@ -6,17 +6,7 @@ let
  cfg = config.my.common-cli;
 
 in {
-  options = {
-    my.common-cli = {
-      enable = mkOption {
-        type = types.bool;
-        default = false;
-        description = ''
-          Enables my common CLI thingys.
-        '';
-      };
-    };
-  };
+  options.my.common-cli.enable = mkEnableOption "Enables my common CLI thingys";
 
   config = mkIf cfg.enable {
     # Set your time zone.
