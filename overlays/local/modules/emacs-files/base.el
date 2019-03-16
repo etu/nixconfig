@@ -51,16 +51,19 @@
 (setq auto-save-list-file-prefix
       (concat user-emacs-cache-directory "/auto-save-list/saves-"))
 
-;; Hide startup screen
-(setq inhibit-startup-screen t)
+;; A bunch of custom vars
+(setq inhibit-startup-screen t        ; Hide startup screen
+      mouse-yank-at-point t)          ; Paste at point, not at cursor
+
+;; Highlight trailing whitespaces in programming/text modes
+(add-hook 'prog-mode-hook (setq-default show-trailing-whitespace t))
+(add-hook 'text-mode-hook (setq-default show-trailing-whitespace t))
 
 ;; A bunch of custom vars
 ;; TODO: Do all need setq-default?
-(setq-default mouse-yank-at-point t      ; Paste at cursor, not at mouse
-              show-trailing-whitespace t ; Highlight trailing whitespaces
-              calendar-week-start-day 1  ; Weeks starts on Mondays
-              tab-width 4                ; Set tab-size to 4 spaces
-              indent-tabs-mode nil)      ; Always indent with spaces
+(setq-default calendar-week-start-day 1 ; Weeks starts on Mondays
+              tab-width 4               ; Set tab-size to 4 spaces
+              indent-tabs-mode nil)     ; Always indent with spaces
 
 ;; Automagic indent on newline
 (global-set-key "\C-m" 'newline-and-indent)
@@ -127,24 +130,13 @@
   (progn
     (telephone-line-mode 1)))
 
-;; Set font -- https://stackoverflow.com/questions/3984730/emacs-gui-with-emacs-daemon-not-loading-fonts-correctly
+;; Set font
 (add-to-list 'default-frame-alist '(font . "Liberation Mono 10"))
-
-;; Set cursor color -- https://emacs.stackexchange.com/questions/13291/emacs-cursor-color-is-different-in-daemon-and-non-daemon-modes
-(progn
-  (require 'frame)
-
-  (add-hook 'after-make-frame-functions
-            (lambda (frame)
-              (modify-frame-parameters
-               frame (list (cons 'cursor-color "White"))))))
 
 ;; Enable line number mode in programming modes
 (progn
-  (require 'linum)
-
-  (setq linum-format "%3d ")
-  (add-hook 'prog-mode-hook 'linum-mode))
+  (require 'display-line-numbers)
+  (add-hook 'prog-mode-hook 'display-line-numbers-mode))
 
 ;; Unbind suspend frame -- Usually not what you want with graphical emacses
 (global-unset-key (kbd "C-z"))
@@ -393,14 +385,6 @@
   :defer 2
   :config
   (which-key-mode 1))
-
-;; Smooth scrolling mode
-(use-package smooth-scrolling
-  :defer 2
-  :init
-  (setq smooth-scroll-margin 2)
-  :config
-  (smooth-scrolling-mode))
 
 ;; Inline diff highlight
 (use-package diff-hl
