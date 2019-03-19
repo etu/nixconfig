@@ -10,9 +10,7 @@ in {
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      (vagrant.override (oldAttrs: rec {
-        withLibvirt = false;
-      }))
+      vagrant
     ];
 
     # Enable virtualbox.
