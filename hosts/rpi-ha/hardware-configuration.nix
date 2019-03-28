@@ -15,7 +15,6 @@
   fileSystems."/" = {
     device = "/dev/disk/by-label/NIXOS_SD";
     fsType = "ext4";
-    options = [ "noauto" "x-systemd.automount" ];
   };
 
   fileSystems."/boot" = {

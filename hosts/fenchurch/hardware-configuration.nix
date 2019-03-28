@@ -34,6 +34,7 @@
   fileSystems."/mnt/hactar" = {
     device = "10.3.0.2:/media/files";
     fsType = "nfs4";
+    noCheck = true;
     options = [ "ro" "noauto" "x-systemd.automount" ];
   };
 
