@@ -15,7 +15,6 @@
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/dca1c92d-cedb-4bc2-810c-43320a1025a7";
     fsType = "ext4";
-    options = [ "noauto" "x-systemd.automount" ];
   };
 
   fileSystems."/boot" = {
@@ -27,8 +26,17 @@
   fileSystems."/mnt/hactar" = {
     device = "10.3.0.2:/media/files";
     fsType = "nfs4";
+    noCheck = true;
     options = [ "ro" "noauto" "x-systemd.automount" ];
   };
+
+  # Ensure that we have network before trying to do NFS
+  systemd.automounts = [{
+    after = [ "network-online.target" ];
+    wants = [ "network-online.target" "network-pre.target" ];
+    wantedBy = [ "display-manager.service" ];
+    where = "/mnt/hactar";
+  }];
 
   swapDevices = [ ];
 
