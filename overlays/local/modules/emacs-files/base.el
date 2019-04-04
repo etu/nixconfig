@@ -99,6 +99,9 @@
             ;; Highlight parenthesises
             (show-paren-mode t)
 
+            ;; Set the width of the fringes to make diff-hl etc to behave
+            (set-fringe-style 8)
+
             ;; Enable column number together with line numbers
             (column-number-mode t)))
 
@@ -517,6 +520,13 @@
   :config
   (setq gnuplot-program "@gnuplot@/bin/gnuplot"))
 
+
+(use-package highlight-symbol
+  :defer 2
+  :ensure t
+  :hook ((python-mode emacs-lisp-mode) . highlight-symbol-mode)
+  :config (progn (setq highlight-symbol-idle-delay 0.5)
+                 (setq highlight-symbol-highlight-single-occurrence nil)))
 
 ;;;
 ;;;
