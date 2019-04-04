@@ -99,9 +99,6 @@
             ;; Highlight parenthesises
             (show-paren-mode t)
 
-            ;; Set the width of the fringes to make diff-hl etc to behave
-            (set-fringe-style 8)
-
             ;; Enable column number together with line numbers
             (column-number-mode t)))
 

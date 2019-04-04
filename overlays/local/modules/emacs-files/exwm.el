@@ -58,7 +58,25 @@
   (setq exwm-randr-workspace-monitor-plist '(1 "eDP1" 9 "HDMI1"))
   (exwm-randr-enable))
 
-;; Load exwm
-(exwm-config-default)
+(progn
+  ;; Bind switch to workspace commands
+  (dotimes (i 10)
+    (exwm-input-set-key (kbd (format "s-%d" i))
+                        `(lambda ()
+                           (interactive)
+                           (exwm-workspace-switch-create ,i))))
+
+  (add-hook 'exwm-update-class-hook
+            (lambda ()
+              (exwm-workspace-rename-buffer exwm-class-name)))
+
+  (add-hook 'exwm-update-title-hook
+            (lambda ()
+              (let ((tilde-exwm-title
+                     (replace-regexp-in-string (getenv "HOME") "~" exwm-title)))
+                (exwm-workspace-rename-buffer (format "%s: %s" exwm-class-name tilde-exwm-title)))))
+
+  (exwm-enable)
+  (exwm-init))
 
 ;;; exwm.el ends here
