@@ -8,13 +8,16 @@
 
 ;; Display time in modeline
 (progn
+  (require 'time)
   (setq display-time-24hr-format t)
   (display-time-mode 1))
 
 ;; Display battery mode
-(display-battery-mode)
+(progn
+  (require 'battery)
+  (display-battery-mode))
 
-;; Define a function to easily run shell commands
+;; Define a function to easily run commands
 (progn
   (defun exwm-run (command)
     (interactive (list (read-shell-command "$ ")))
@@ -29,9 +32,8 @@
   (exwm-input-set-key (kbd "s-t") 'exwm-run-stupidterm))
 
 ;; Define desktop environment commands
-(use-package desktop-environment
-  :defer 1
-  :init
+(progn
+  (require 'desktop-environment)
   (setq desktop-environment-screenlock-command "@i3lockCommand@")
   (setq desktop-environment-screenshot-directory "~"
         desktop-environment-screenshot-command "@flameshot@/bin/flameshot gui"
@@ -43,22 +45,20 @@
         desktop-environment-brightness-normal-decrement "-dec 10"
         desktop-environment-brightness-small-increment "-inc 5"
         desktop-environment-brightness-small-decrement "-dec 5")
-  :config
   (desktop-environment-mode))
 
 ;; Set up systray
-(use-package exwm-systemtray
-  :config
+(progn
+  (require 'exwm-systemtray)
   (exwm-systemtray-enable))
 
-;; Set up randr
-(use-package exwm-randr
-  :config
+;; Set up randr support
+(progn
+  (require 'exwm-randr)
   (setq exwm-randr-workspace-monitor-plist '(1 "eDP1" 9 "HDMI1"))
   (exwm-randr-enable))
 
 ;; Load exwm
 (exwm-config-default)
-(exwm-randr-enable)
 
 ;;; exwm.el ends here
