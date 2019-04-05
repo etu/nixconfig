@@ -66,6 +66,9 @@
                            (interactive)
                            (exwm-workspace-switch-create ,i))))
 
+  ;; Make it possible to do exwm-reset
+  (exwm-input-set-key (kbd "s-r") 'exwm-input-grab-keyboard)
+
   (add-hook 'exwm-update-class-hook
             (lambda ()
               (exwm-workspace-rename-buffer exwm-class-name)))
