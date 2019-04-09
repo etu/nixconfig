@@ -26,10 +26,10 @@
   (exwm-input-set-key (kbd "s-e") 'exwm-run)
 
   ;; Special function to run the terminal
-  (defun exwm-run-stupidterm ()
+  (defun exwm-run-terminal ()
     (interactive)
     (exwm-run "@stupidterm@/bin/stupidterm"))
-  (exwm-input-set-key (kbd "s-t") 'exwm-run-stupidterm))
+  (exwm-input-set-key (kbd "s-t") 'exwm-run-terminal))
 
 ;; Define desktop environment commands
 (progn
