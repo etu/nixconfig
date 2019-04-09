@@ -48,6 +48,7 @@ in {
       firefox-bin
       mpv
       stupidterm
+      kitty
       tdesktop
     ];
 

@@ -36,6 +36,9 @@
 
     # Stupidterm
     { target = ".config/stupidterm.ini"; source = ./dotfiles/stupidterm.ini; }
+
+    # Kitty
+    { target = ".config/kitty/kitty.conf"; source = ./dotfiles/kitty.conf; }
   ];
 
   programs.git = {
