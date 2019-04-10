@@ -99,6 +99,9 @@
             ;; Highlight parenthesises
             (show-paren-mode t)
 
+            ;; Disable the cursor blink
+            (blink-cursor-mode 0)
+
             ;; Enable column number together with line numbers
             (column-number-mode t)))
 
