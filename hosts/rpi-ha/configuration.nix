@@ -13,7 +13,7 @@
   ];
 
   # The NixOS release to be compatible with for stateful data such as databases.
-  system.stateVersion = "17.09";
+  system.stateVersion = "19.03";
 
   networking.hostName = "rpi-ha";
 
@@ -31,7 +31,7 @@
 
   # Auto upgrade system
   system.autoUpgrade.enable = true;
-  system.autoUpgrade.channel = "https://nixos.org/channels/nixos-18.09-small";
+  system.autoUpgrade.channel = "https://nixos.org/channels/nixos-19.03-small";
   system.autoUpgrade.dates = "weekly";
 
   # Auto garbage collect
@@ -64,6 +64,18 @@
 
   # Enable common cli settings for my systems
   my.common-cli.enable = true;
+
+  nix.distributedBuilds = true;
+  nix.buildMachines = [
+    {
+      hostName = "aarch64.nixos.community";
+      maxJobs = 64;
+      sshKey = "/root/.ssh/id_ed25519";
+      sshUser = "etu";
+      system = "aarch64-linux";
+      supportedFeatures = [ "big-parallel" ];
+    }
+  ];
 
   # SSH Keys for remote logins
   users.extraUsers.root.openssh.authorizedKeys.keys = [
