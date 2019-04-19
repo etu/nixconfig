@@ -4,7 +4,12 @@
 
 { config, pkgs, ... }:
 
-{
+let
+  unstablePkgs = import (builtins.fetchTarball {
+    url = https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz;
+  }) {};
+
+in {
   imports = [
     ./hardware-configuration.nix
 
@@ -45,17 +50,20 @@
   services.home-assistant.enable = true;
   services.home-assistant.openFirewall = true;
   services.home-assistant.autoExtraComponents = false;
-  services.home-assistant.package = pkgs.home-assistant.override {
+  services.home-assistant.package = unstablePkgs.home-assistant.override {
     extraComponents = [
+      "cast"
+      "cast.media_player"
       "discovery"
       "hue"
+      "kodi"
+      "kodi.media_player"
+      "kodi.notify"
       "media_player"
-      "media_player.cast"
-      "media_player.kodi"
       "notify"
-      "notify.kodi"
-      "sensor.yr"
-      "updater"
+      "system_health"
+      "yr"
+      "yr.sensor"
       "zwave"
     ];
   };
