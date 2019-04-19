@@ -88,15 +88,11 @@
   gtk.gtk3.extraConfig = {
     gtk-application-prefer-dark-theme = 1;
   };
-  gtk.iconTheme = {
-    package = pkgs.hicolor_icon_theme;
-    name = "hicolor";
-  };
 
   # Set up qt theme as well
   qt = {
     enable = true;
-    useGtkTheme = true;
+    platformTheme = "gtk";
   };
 
   # Enable the dunst notification deamon
