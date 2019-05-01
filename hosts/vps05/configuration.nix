@@ -46,6 +46,34 @@
     { type = "ed25519"; path = "/nix/persistent/etc/ssh/ssh_host_ed25519_key"; }
   ];
 
+  # Gitea dump
+  services.gitea.dump.enable = true;
+
+  # Gitea
+  services.gitea.enable = true;
+  services.gitea.appName = "Elis Git Service";
+  services.gitea.cookieSecure = true;
+  services.gitea.rootUrl = "https://git.elis.nu/";
+  services.gitea.database.type = "postgres";
+  services.gitea.database.passwordFile = "/nix/persistent/var/lib/gitea-db-pass";
+  services.gitea.disableRegistration = true;
+  services.gitea.stateDir = "/nix/persistent/var/lib/gitea";
+
+  # Postgres
+  services.postgresql.enable = true;
+  services.postgresql.package = pkgs.postgresql_11;
+  services.postgresql.dataDir = "/nix/persistent/var/lib/postgresql/11.0";
+
+  # Enable the ip-failar-nu service
+  programs.ip-failar-nu.enable = true;
+
+  # Enable sks keyserver
+  services.sks.enable = true;
+  services.sks.hkpAddress = [ "0.0.0.0" "::0" ];
+  services.sks.dataDir = "/nix/persistent/var/db/sks";
+  services.sks.extraDbConfig = "set_flags               DB_LOG_AUTOREMOVE";
+  # environment.systemPackages = with pkgs; [ pgpkeyserver-lite ];
+
   # Enable common cli settings for my systems
   my.common-cli.enable = true;
 
