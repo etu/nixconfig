@@ -19,16 +19,23 @@
 
 ;; Define a function to easily run commands
 (progn
-  (defun exwm-run (command)
+  (defun exwm-run-systemd (command)
     (interactive (list (read-shell-command "$ ")))
     (let ((cmd (concat "@systemd@/bin/systemd-run --user " command)))
       (start-process-shell-command cmd nil cmd)))
-  (exwm-input-set-key (kbd "s-e") 'exwm-run)
+  (exwm-input-set-key (kbd "s-SPC") 'exwm-run-systemd)
+  (exwm-input-set-key (kbd "s-e") 'exwm-run-systemd)
+
+  (defun exwm-run (command)
+    "Run COMMAND."
+    (interactive (list (read-shell-command "> ")))
+    (start-process-shell-command command nil command))
+  (exwm-input-set-key (kbd "C-s-SPC") 'exwm-run)
 
   ;; Special function to run the terminal
   (defun exwm-run-terminal ()
     (interactive)
-    (exwm-run "@kitty@/bin/kitty"))
+    (exwm-run-systemd "@kitty@/bin/kitty"))
   (exwm-input-set-key (kbd "s-t") 'exwm-run-terminal))
 
 ;; Define desktop environment commands
