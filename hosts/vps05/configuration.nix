@@ -70,9 +70,7 @@
   # Enable sks keyserver
   services.sks.enable = true;
   services.sks.hkpAddress = [ "0.0.0.0" "::0" ];
-  services.sks.dataDir = "/nix/persistent/var/db/sks";
   services.sks.extraDbConfig = "set_flags               DB_LOG_AUTOREMOVE";
-  # environment.systemPackages = with pkgs; [ pgpkeyserver-lite ];
 
   # Enable common cli settings for my systems
   my.common-cli.enable = true;
