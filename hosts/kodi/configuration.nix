@@ -108,6 +108,14 @@
   # Open port to remote control Kodi
   networking.firewall.allowedTCPPorts = [ 8080 ];
 
+  # Networkmanager with network online target
+  # This is a hack to make my NFS not fail to mount 5 times before I get an IP
+  # by DHCP on boot: https://github.com/NixOS/nixpkgs/pull/60954
+  networking.networkmanager.enable = true;
+  systemd.services.NetworkManager-wait-online = {
+    wantedBy = [ "network-online.target" ];
+  };
+
   # SSH Keys for remote logins
   users.extraUsers.root.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILPvVYtcFHwuW/QW5Sqyuno7KrsVq9q9HUOBoaoIlIwu etu@hactar-2016-09-24"
