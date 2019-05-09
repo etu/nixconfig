@@ -8,6 +8,7 @@
   imports = [
     ./hardware-configuration.nix
     ./networking.nix
+    ./persistence.nix
     # Import local modules & overlays
     ../../overlays/local/default.nix
   ];
@@ -18,11 +19,6 @@
   boot.loader.grub.device = "/dev/sda";
 
   networking.hostName = "vps05";
-
-  nix.nixPath = [
-    "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
-    "nixos-config=/nix/persistent/etc/nixos/configuration.nix"
-  ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -41,10 +37,6 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
-  services.openssh.hostKeys = [
-    { type = "rsa";     path = "/nix/persistent/etc/ssh/ssh_host_rsa_key"; bits = 4096; }
-    { type = "ed25519"; path = "/nix/persistent/etc/ssh/ssh_host_ed25519_key"; }
-  ];
 
   # Gitea dump
   services.gitea.dump.enable = true;
@@ -57,12 +49,10 @@
   services.gitea.database.type = "postgres";
   services.gitea.database.passwordFile = "/nix/persistent/var/lib/gitea-db-pass";
   services.gitea.disableRegistration = true;
-  services.gitea.stateDir = "/nix/persistent/var/lib/gitea";
 
   # Postgres
   services.postgresql.enable = true;
   services.postgresql.package = pkgs.postgresql_11;
-  services.postgresql.dataDir = "/nix/persistent/var/lib/postgresql/11.0";
 
   # Enable the ip-failar-nu service
   programs.ip-failar-nu.enable = true;
