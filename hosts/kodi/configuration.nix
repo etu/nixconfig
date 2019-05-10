@@ -7,6 +7,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./persistence.nix
 
     # Import local modules & overlays
     ../../overlays/local/default.nix
@@ -32,8 +33,6 @@
     }
   ];
 
-  boot.cleanTmpDir = true;
-
   services.xserver.videoDrivers = [ "amdgpu" ];
 
   # Auto upgrade system
@@ -56,7 +55,7 @@
   hardware.opengl.driSupport = true;
 
   # Build nix stuff with all the power
-  nix.buildCores = 4;
+  nix.buildCores = 6;
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget

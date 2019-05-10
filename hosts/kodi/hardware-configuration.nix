@@ -13,14 +13,26 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/dca1c92d-cedb-4bc2-810c-43320a1025a7";
-    fsType = "ext4";
+    device = "none";
+    fsType = "tmpfs";
+    options = [ "defaults" "size=1G" "mode=755" ];
   };
 
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/3C6A-C5A8";
     fsType = "vfat";
     options = [ "noauto" "x-systemd.automount" ];
+  };
+
+  fileSystems."/nix" = {
+    device = "/dev/disk/by-uuid/dca1c92d-cedb-4bc2-810c-43320a1025a7";
+    fsType = "ext4";
+  };
+
+  fileSystems."/tmp" = {
+    device = "none";
+    fsType = "tmpfs";
+    options = [ "defaults" "size=3G" "mode=755" "noauto" "x-systemd.automount" ];
   };
 
   fileSystems."/mnt/hactar" = {
