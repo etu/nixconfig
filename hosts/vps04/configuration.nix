@@ -8,6 +8,7 @@
   imports = [
     ./hardware-configuration.nix
     ./networking.nix
+    ./persistence.nix
     # Import local modules & overlays
     ../../overlays/local/default.nix
   ];
@@ -18,11 +19,6 @@
   boot.loader.grub.device = "/dev/sda";
 
   networking.hostName = "vps04";
-
-  nix.nixPath = [
-    "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
-    "nixos-config=/nix/persistent/etc/nixos/configuration.nix"
-  ];
 
   # Select internationalisation properties.
   # i18n = {
@@ -42,7 +38,6 @@
 
   # Auto update the config before it upgrades the system
   my.update-config.enable = true;
-  my.update-config.path = "/nix/persistent/etc/nixos/";
   my.update-config.user = "etu";
 
   # Set your time zone.
@@ -71,10 +66,6 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
-  services.openssh.hostKeys = [
-    { type = "rsa";     path = "/nix/persistent/etc/ssh/ssh_host_rsa_key"; bits = 4096; }
-    { type = "ed25519"; path = "/nix/persistent/etc/ssh/ssh_host_ed25519_key"; }
-  ];
 
   # Set up users accounts:
 
@@ -87,8 +78,7 @@
       isNormalUser = true;
       extraGroups = [ "wheel" ];
       shell = pkgs.fish;
-      home = "/nix/persistent/home/etu";
-      initialHashedPassword = "$6$jpUfLDIhIOQ5qq4b$yj55LOEIUZZKQMzO4UKqSnEJO0n8m5loDM/X7L2a5R0G6p0DxLLh.Y5pQ2Q1qEv8vwd0fR6bPHGRA76JbHXwK.";
+      home = "/home/etu";
       uid = 1000;
       openssh.authorizedKeys.keys = [
         "no-agent-forwarding,no-X11-forwarding,permitopen=\"localhost:8001\",command=\"echo 'This account can only be used for weechat relays'\" ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDELIFRmA2C93sjHebScoj8QPynqdYyl6fgYLOrBMsBKQAKrzsfF4wmA/LYo9Z89l3TmpMqzd4C/315HFO6sO7iHVrUfsC0lToA+FOcN7D40pr8m+AaQtVSI14Mlz4GY3fyeyYyssz7XXMn9LEzgZ8SxZh06YLJM9yL1kprBoRXe3Bxbja38JBSl+8xBWRyNrQBPySrTeuoxRYbJ8DUwtOeSElSP6YDjtMut4PbjLXJ2GNHavXhoQaLiZsW4c4YzcMzjiKEmAZWNg2cNuljXMf3KoKCbxqiD9zWidWhKdMuT+XhuDzTt89JAdWWStkj2N++eeESRozHmDBp9PROJx7Z etu@android-2017-04-24"
@@ -102,7 +92,7 @@
 
     concate = {
       isNormalUser = true;
-      home = "/nix/persistent/home/concate";
+      home = "/home/concate";
       uid = 1001;
       openssh.authorizedKeys.keys = [
         "no-agent-forwarding,no-X11-forwarding,permitopen=\"localhost:8002\",command=\"echo 'This account can only be used for weechat relays'\" ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDQqvuRrzAcmp2neNQi/gDEQy6pe9EF2+pDWOTjmdC3+JDSOnZMHm9PX5e7YLZNk46YMSvia0XALQ16/Ao1xqsgyC1YRa8lWOxFn/8rmMIStSO2HKzX6LNJafqlFm5FAJO7znYYXImB0JHOOF43P8RzxQZ+X/MCt0SKYxsM8JeBKFzyDqlzxA7pqTH81DMENL9xT1rlaElg86JmTJWcQWriJVCCf6wi5bSlArCghQ1gU8oOhDGGB9OhCMj9KeumrbVzyZO5e03anX066bQnfTve8Tg1pxCXPse1kzyqkHrD4mVTA2jmVkiPT72WkZOiegOEi3CA1DfKUIfiFw5i6KNj conacte@android-2048-2018-02-21"
@@ -116,7 +106,7 @@
     talyz = {
       isNormalUser = true;
       shell = pkgs.fish;
-      home = "/nix/persistent/home/talyz";
+      home = "/home/talyz";
       uid = 1002;
       openssh.authorizedKeys.keys = [
         "no-agent-forwarding,no-X11-forwarding,permitopen=\"localhost:8003\",command=\"echo 'This account can only be used for weechat relays'\" ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDZKYLFI5eyv4/aZR8YUBLQagMoH4gyltcXiom/ZA9XpgtKy3fOxmX0NzETxVBdbc/mhU6s9zKNBXWDl5OS17a+GNPStPpUjMGB/ehTK+FkcNOHsqZ60QLHzejWbMfOFiZ9idPsVpvWl8o95YzUAZc61NlVMR1r9fys1CZtFk6ZfYuGLofnG3BafCeMY6BkWZ7Hi/+AoWxe57CIJzwmy3aBpQ7NxpS5vZl8/DGThLuRK4Ew6w1/TmRTTJjTr0USKPSI1V3XYZDkN3BZ4dRyIerpMEPhYfsLum1Qj+Oc60EziERsSadk4UnJt3ye4VjTcv+1za/CeDz6zAjgpEbfEBAN8xpNsfdjeFedw32YGRFhWpC2xg/yho7c2n8w5IOWKObggKZYxLBatzKpg0eYO5B/jBNnM6HIW/wfiKunnYrJMJHwzFSYZCyIRlZKb6yWRcW1+RlvlmlE95bAxPWmrFbEtOoPVESAR6lfTleKPMgjTGJ3KvYzp1k8jplJcQpbPmMiejkheh3tcKWn/Na3EfV3pUWGHtU6CQauHYdDBAfHnAD9baAHEpy3HGYz+0cgH4kKSas4U8ICaFeOE3OEv90caHyGHWaL5ynvq4ywUAlJUWYLIseHq4+aSxKj8aK/Nr6zfDUNAAOEaveT/YUeFk5LxaEXowkW/98nUwZ//G7vKw== talyz@android-2017-03-03"
@@ -129,21 +119,21 @@
 
     ozeloten = {
       isNormalUser = true;
-      home = "/nix/persistent/home/ozeloten";
+      home = "/home/ozeloten";
       initialHashedPassword = "$6$Tp21Uo367npe/$/a6taUbyYu3QQo8RAPp6krKAq8wNs67hqSc0KPCzT32N7Aqkud110qddUAywOGKdYPJc/23BqogmUpVBQEoGF/";
       uid = 1003;
     };
 
     bots = {
       isNormalUser = true;
-      home = "/nix/persistent/home/bots";
+      home = "/home/bots";
       uid = 1004;
     };
   };
 
   # Enable the flummbot service
   programs.flummbot.enable = true;
-  programs.flummbot.stateDirectory = "/nix/persistent/home/bots";
+  programs.flummbot.stateDirectory = "/home/bots";
 
   # A hack to `loginctl enable-linger m` (for multiplexer sessions to last),
   # until this one is resolved: https://github.com/NixOS/nixpkgs/issues/3702
