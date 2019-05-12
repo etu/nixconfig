@@ -20,6 +20,17 @@
 
   networking.hostName = "vps05";
 
+  # Auto upgrade system
+  system.autoUpgrade.enable = true;
+  system.autoUpgrade.channel = "https://nixos.org/channels/nixos-19.03-small";
+
+  # Auto garbage collect
+  nix.gc.automatic = true;
+  nix.gc.options = "--delete-older-than 14d";
+
+  # Auto update the config before it upgrades the system
+  my.update-config.enable = true;
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
