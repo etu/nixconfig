@@ -4,7 +4,18 @@
 
 { config, pkgs, ... }:
 
-{
+let
+  caddyTlsHsts = ''
+      tls {
+        protocols tls1.2
+        key_type p384
+      }
+
+      header / {
+        Strict-Transport-Security max-age=31536000
+      }
+  '';
+in {
   imports = [
     ./hardware-configuration.nix
     ./networking.nix
@@ -48,6 +59,40 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+
+  # Caddy
+  services.caddy.enable = true;
+  services.caddy.agree = true;
+  services.caddy.email = "elis@hirwing.se";
+  services.caddy.config = ''
+    sa.0b.se {
+      ${caddyTlsHsts}
+
+      proxy / https://elis.nu/
+    }
+
+    https://ip.failar.nu {
+      ${caddyTlsHsts}
+
+      proxy / http://127.0.0.1:8123/
+    }
+
+    http://ip.failar.nu {
+      proxy / http://127.0.0.1:8123/
+    }
+
+    # Set up webserver for pgpkeyserver-lite and routes for sks
+    keys.ix.ufs.se {
+      ${caddyTlsHsts}
+
+      root ${pkgs.pgpkeyserver-lite}
+    }
+    keys.ix.ufs.se/pks {
+      ${caddyTlsHsts}
+
+      proxy / http://127.0.0.1:11371/pks
+    }
+  '';
 
   # Open Firewall for HTTP, HTTPS and hkp (keyserver)
   networking.firewall.allowedTCPPorts = [ 80 443 11371 ];
