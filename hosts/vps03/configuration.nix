@@ -49,56 +49,10 @@ in {
   services.caddy.agree = true;
   services.caddy.email = "elis@hirwing.se";
   services.caddy.config = ''
-    elis.nu, www.elis.nu {
-      ${caddyTlsHsts}
-
-      proxy / https://etu.github.io/ {
-        header_upstream Host {host}
-      }
-    }
-
-    sa.0b.se {
-      ${caddyTlsHsts}
-
-      proxy / https://etu.github.io/ {
-        header_upstream Host elis.nu
-      }
-    }
-
-    ix.ufs.se {
-      ${caddyTlsHsts}
-
-      proxy / https://ix-sthlm.github.io/ {
-        header_upstream Host ix.ufs.se
-      }
-    }
-
     git.elis.nu {
       ${caddyTlsHsts}
 
       proxy / http://127.0.0.1:3000
-    }
-
-    https://ip.failar.nu {
-      ${caddyTlsHsts}
-
-      proxy / localhost:8123
-    }
-
-    http://ip.failar.nu {
-      proxy / localhost:8123
-    }
-
-    # Set up webserver for pgpkeyserver-lite and routes for sks
-    keys.ix.ufs.se {
-      ${caddyTlsHsts}
-
-      root ${pkgs.pgpkeyserver-lite}
-    }
-    keys.ix.ufs.se/pks {
-      ${caddyTlsHsts}
-
-      proxy / http://127.0.0.1:11371/pks
     }
   '';
 
