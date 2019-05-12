@@ -49,6 +49,9 @@
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
+  # Open Firewall for HTTP, HTTPS and hkp (keyserver)
+  networking.firewall.allowedTCPPorts = [ 80 443 11371 ];
+
   # Gitea dump
   services.gitea.dump.enable = true;
 
