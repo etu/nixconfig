@@ -22,6 +22,12 @@
     options = [ "bind" "noauto" "x-systemd.automount" ];
   };
 
+  # Persistence of caddy certificaties between boots
+  fileSystems."/var/lib/caddy/acme" = {
+    device = "/nix/persistent/var/lib/caddy/acme";
+    options = [ "bind" "noauto" "x-systemd.automount" ];
+  };
+
   # Persistence of logs between boots
   fileSystems."/var/log" = {
     device = "/nix/persistent/var/log";
