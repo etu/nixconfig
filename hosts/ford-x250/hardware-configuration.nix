@@ -15,8 +15,19 @@
   boot.initrd.luks.devices."disk".device = "/dev/disk/by-uuid/c6db7bdd-2020-4a77-b4fb-d087bd6f4907";
 
   fileSystems."/" = {
+    device = "none";
+    fsType = "tmpfs";
+    options = [ "defaults" "size=1G" "mode=755" ];
+  };
+
+  fileSystems."/nix" = {
     device = "/dev/disk/by-uuid/be3adf2a-bb84-433d-bee7-cb221a2879d8";
     fsType = "ext4";
+  };
+
+  fileSystems."/tmp" = {
+    device = "/nix/persistent/tmp";
+    options = [ "bind" "noauto" "x-systemd.automount" ];
   };
 
   fileSystems."/boot" = {
