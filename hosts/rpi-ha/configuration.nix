@@ -53,17 +53,13 @@ in {
   services.home-assistant.package = unstablePkgs.home-assistant.override {
     extraComponents = [
       "cast"
-      "cast.media_player"
       "discovery"
       "hue"
       "kodi"
-      "kodi.media_player"
-      "kodi.notify"
       "media_player"
       "notify"
       "system_health"
       "yr"
-      "yr.sensor"
       "zwave"
     ];
   };
