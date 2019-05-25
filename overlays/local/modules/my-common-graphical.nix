@@ -28,6 +28,22 @@ in {
       powerline-fonts
       source-code-pro
       symbola
+      # My own font
+      (stdenv.mkDerivation rec {
+        pname = "font-etuvetica";
+        version = "5";
+
+        src = pkgs.fetchurl {
+          url = "https://home.elis.nu/etuvetica${version}/css/fonts/etuvetica.ttf";
+          sha256 = "0z1wf1q7wx8ny54w6fcz91r5xx9m2496jqfybciricmwhgdkz25j";
+        };
+
+        unpackPhase = ":";
+
+        installPhase = ''
+          install --mode=644 -D ${src} $out/share/fonts/truetype/etuvetica.ttf
+        '';
+      })
     ];
 
     # Used for firefox-bin because of mozillas branding and pre-compiled bins
