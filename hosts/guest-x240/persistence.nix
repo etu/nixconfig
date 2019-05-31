@@ -10,7 +10,7 @@
   # Persistence of NetworkManager network connections.
   fileSystems."/etc/NetworkManager/system-connections/" = {
     device = "/nix/persistent/etc/NetworkManager/system-connections/";
-    options = [ "bind" "noauto" "x-systemd.automount" ];
+    options = [ "ro" "bind" "noauto" "x-systemd.automount" ];
   };
 
   # Persistence of logs between boots

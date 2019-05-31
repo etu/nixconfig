@@ -19,13 +19,13 @@
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/84B6-6BB2";
+    device = "/dev/disk/by-uuid/91E5-E24E";
     fsType = "vfat";
     options = [ "noauto" "x-systemd.automount" ];
   };
 
   fileSystems."/nix" = {
-    device = "/dev/disk/by-uuid/d0f1dd73-2380-49f3-801c-27f9131c457b";
+    device = "/dev/disk/by-uuid/47fa9784-7db5-4b27-9c4c-24bcfe7557f0";
     fsType = "xfs";
   };
 

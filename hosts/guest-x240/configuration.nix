@@ -21,9 +21,8 @@
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.extraModulePackages = [
-    pkgs.linuxPackages_latest.acpi_call
+    pkgs.linuxPackages.acpi_call
   ];
 
   # Fix touchpad scrolling after suspend.
@@ -73,6 +72,9 @@
     mpv
     sgtpuzzles
     superTuxKart
+
+    fsarchiver
+    ntfsprogs
   ];
 
   services.xserver.enable = true;
@@ -89,7 +91,7 @@
   services.xserver.xkbVariant = "dvorak";
 
   users.users.guest.isNormalUser = true;
-  users.users.guest.initialPassword = "guest";
+  users.users.guest.initialPassword = "";
   users.users.root.initialHashedPassword = "$6$f0a4BXeQkQ719H$5zOS.B3/gDqDN9/1Zs20JUCCPWpzkYmOx6XjPqyCe5kZD5z744iU8cwxRyNZjPRa63S2oTml7QizxfS4jjMkE1";
 
   # SSH Keys for remote logins
