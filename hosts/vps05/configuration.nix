@@ -65,6 +65,12 @@ in {
   services.caddy.agree = true;
   services.caddy.email = "elis@hirwing.se";
   services.caddy.config = ''
+    git.elis.nu {
+      ${caddyTlsHsts}
+
+      proxy / http://127.0.0.1:3000
+    }
+
     sa.0b.se {
       ${caddyTlsHsts}
 
@@ -104,6 +110,7 @@ in {
   services.gitea.enable = true;
   services.gitea.appName = "Elis Git Service";
   services.gitea.cookieSecure = true;
+  services.gitea.domain = "git.elis.nu";
   services.gitea.rootUrl = "https://git.elis.nu/";
   services.gitea.database.type = "postgres";
   services.gitea.database.passwordFile = "/nix/persistent/var/lib/gitea-db-pass";

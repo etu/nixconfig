@@ -49,7 +49,7 @@ in {
   services.caddy.agree = true;
   services.caddy.email = "elis@hirwing.se";
   services.caddy.config = ''
-    git.elis.nu {
+    vps03.elis.nu {
       ${caddyTlsHsts}
 
       proxy / http://127.0.0.1:3000
@@ -66,7 +66,7 @@ in {
   services.gitea.enable = true;
   services.gitea.appName = "Elis Git Service";
   services.gitea.cookieSecure = true;
-  services.gitea.rootUrl = "https://git.elis.nu/";
+  services.gitea.rootUrl = "https://vps03.elis.nu/";
   services.gitea.database.type = "postgres";
   services.gitea.database.passwordFile = "/var/lib/gitea-db-pass";
   services.gitea.extraConfig = ''
@@ -74,17 +74,11 @@ in {
     DISABLE_REGISTRATION = true
   '';
 
+  systemd.services.gitea-dump.environment.GITEA_CUSTOM = "${config.services.gitea.stateDir}/custom";
+
   # Postgres
   services.postgresql.package = pkgs.postgresql100;
   services.postgresql.dataDir = "/var/lib/postgresql/10.0";
-
-  # Enable the ip-failar-nu service
-  programs.ip-failar-nu.enable = true;
-
-  # Enable sks keyserver
-  services.sks.enable = true;
-  services.sks.hkpAddress = [ "0.0.0.0" "::0" ];
-  environment.systemPackages = with pkgs; [ pgpkeyserver-lite ];
 
   # Enable common cli settings for my systems
   my.common-cli.enable = true;
