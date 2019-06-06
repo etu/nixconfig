@@ -24,7 +24,7 @@
     options = [ "bind" ];
   };
 
-  # Persistence of kodis home directory
+  # Persistence of my home directory
   fileSystems."/home/etu" = {
     device = "/nix/persistent/home/etu";
     options = [ "bind" "noauto" "x-systemd.automount" ];
