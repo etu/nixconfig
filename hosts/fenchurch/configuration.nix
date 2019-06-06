@@ -7,6 +7,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./persistence.nix
 
     # Import local modules & overlays
     ../../overlays/local/default.nix
@@ -31,8 +32,6 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_4_19;
-
-  boot.cleanTmpDir = true;
 
   # Hardware settings
   hardware.cpu.intel.updateMicrocode = true;
@@ -91,6 +90,9 @@
 
   # Enable gaming related thingys.
   my.gaming.enable = true;
+
+  users.users.root.initialHashedPassword = "$6$f0a4BXeQkQ719H$5zOS.B3/gDqDN9/1Zs20JUCCPWpzkYmOx6XjPqyCe5kZD5z744iU8cwxRyNZjPRa63S2oTml7QizxfS4jjMkE1";
+  users.users.etu.initialHashedPassword = "$6$f0a4BXeQkQ719H$5zOS.B3/gDqDN9/1Zs20JUCCPWpzkYmOx6XjPqyCe5kZD5z744iU8cwxRyNZjPRa63S2oTml7QizxfS4jjMkE1";
 
   # Home-manager as nix module
   home-manager.users.etu = import ../../home-etu-nixpkgs/home.nix;

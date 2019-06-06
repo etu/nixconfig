@@ -15,6 +15,12 @@
   boot.initrd.luks.devices."disk".device = "/dev/disk/by-uuid/61ea4dca-c490-4f56-85e4-54873669c7f7";
 
   fileSystems."/" = {
+    device = "none";
+    fsType = "tmpfs";
+    options = [ "defaults" "size=1G" "mode=755" ];
+  };
+
+  fileSystems."/nix" = {
     device = "/dev/disk/by-uuid/cc869eb3-1e03-4952-b53c-9edda00ee243";
     fsType = "ext4";
   };
