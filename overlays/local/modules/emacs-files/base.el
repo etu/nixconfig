@@ -224,7 +224,7 @@
 (use-package nix-mode
   :defer 2
   :mode "\\.nix$"
-  :config (setq nix-indent-function 'nix-indent-line))
+  :config (setq nix-indent-function 'smie-indent-line))
 
 
 ;;;
