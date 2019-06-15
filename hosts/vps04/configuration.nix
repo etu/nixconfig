@@ -135,6 +135,12 @@
   programs.flummbot.enable = true;
   programs.flummbot.stateDirectory = "/home/bots";
 
+  # Enable the bridge for IX Discord / IRC
+  services.matterbridge.enable = true;
+  services.matterbridge.configPath = "/home/bots/matterbridge.toml";
+  services.matterbridge.user = "bots";
+  services.matterbridge.group = "users";
+
   # A hack to `loginctl enable-linger m` (for multiplexer sessions to last),
   # until this one is resolved: https://github.com/NixOS/nixpkgs/issues/3702
   system.activationScripts.loginctl-enable-linger-m = pkgs.lib.stringAfter [ "users" ] ''
