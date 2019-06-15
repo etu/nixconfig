@@ -3,7 +3,7 @@
 with lib;
 
 let
- cfg = config.my.gaming;
+  cfg = config.my.gaming;
 
 in {
   options.my.gaming.enable = mkEnableOption "Enables gaming related thingys.";

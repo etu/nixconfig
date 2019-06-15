@@ -3,11 +3,11 @@
 with lib;
 
 let
- cfg = config.my.user;
- uid = cfg.uid;
- username = cfg.username;
- extraGroups = cfg.extraGroups;
- extraAuthorizedKeys = cfg.extraAuthorizedKeys;
+  cfg = config.my.user;
+  uid = cfg.uid;
+  username = cfg.username;
+  extraGroups = cfg.extraGroups;
+  extraAuthorizedKeys = cfg.extraAuthorizedKeys;
 
 in {
   options.my.user = {

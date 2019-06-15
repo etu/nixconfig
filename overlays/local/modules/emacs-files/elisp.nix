@@ -29,8 +29,7 @@ let
     extraEmacsPackages ? [],
     package ? pkgs.emacs,
     override ? (epkgs: epkgs)
-  }:
-  let
+  }: let
     packages = parsePackages config;
     emacsPackages = pkgs.emacsPackagesNgGen package;
     emacsWithPackages = emacsPackages.emacsWithPackages;

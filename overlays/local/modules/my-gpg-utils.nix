@@ -3,7 +3,7 @@
 with lib;
 
 let
- cfg = config.my.gpg-utils;
+  cfg = config.my.gpg-utils;
 
 in {
   options.my.gpg-utils.enable = mkEnableOption "Enables smartcard and gpg related utils that I use.";

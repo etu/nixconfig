@@ -3,7 +3,7 @@
 with lib;
 
 let
- cfg = config.my.common-graphical;
+  cfg = config.my.common-graphical;
 
 in {
   options.my.common-graphical.enable = mkEnableOption "Enables my common graphical thingys";

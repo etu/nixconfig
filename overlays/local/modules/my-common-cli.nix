@@ -3,7 +3,7 @@
 with lib;
 
 let
- cfg = config.my.common-cli;
+  cfg = config.my.common-cli;
 
 in {
   options.my.common-cli.enable = mkEnableOption "Enables my common CLI thingys";

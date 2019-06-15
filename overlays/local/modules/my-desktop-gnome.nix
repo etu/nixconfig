@@ -3,7 +3,7 @@
 with lib;
 
 let
- cfg = config.my.desktop-gnome;
+  cfg = config.my.desktop-gnome;
 
 in {
   options.my.desktop-gnome.enable = mkEnableOption "Enables gnome desktop with some settings and auto login on my user";

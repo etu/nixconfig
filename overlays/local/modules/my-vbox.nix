@@ -3,7 +3,7 @@
 with lib;
 
 let
- cfg = config.my.vbox;
+  cfg = config.my.vbox;
 
 in {
   options.my.vbox.enable = mkEnableOption "Enables vbox and related things I use.";

@@ -3,7 +3,7 @@
 with lib;
 
 let
- cfg = config.my.nfsd;
+  cfg = config.my.nfsd;
 
 in {
   options.my.nfsd.enable = mkEnableOption "Enables nfsd and configures ports and stuff.";
