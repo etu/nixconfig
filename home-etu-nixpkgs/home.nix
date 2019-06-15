@@ -191,6 +191,7 @@
   # Set up autorandr service to trigger on saved configurations
   programs.autorandr.enable = true;
 
+  services.compton.enable = true;
   services.flameshot.enable = true;
   services.pasystray.enable = true;
   services.network-manager-applet.enable = true;
