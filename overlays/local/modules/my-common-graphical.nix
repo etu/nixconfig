@@ -28,6 +28,7 @@ in {
       powerline-fonts
       source-code-pro
       symbola
+
       # My own font
       (stdenv.mkDerivation rec {
         pname = "font-etuvetica";
@@ -42,6 +43,23 @@ in {
 
         installPhase = ''
           install --mode=644 -D ${src} $out/share/fonts/truetype/etuvetica.ttf
+        '';
+      })
+
+      # Install talyz's font
+      (stdenv.mkDerivation rec {
+        pname = "font-talyz-new-roman";
+        version = "1";
+
+        src = pkgs.fetchurl {
+          url = "https://talyz.github.io/talyz-new-roman/font/TalyzNewRoman.ttf";
+          sha256 = "00pi45pwmm1mialb643ifvp2qf6rhgwkmbk9malmyac815abpb0g";
+        };
+
+        unpackPhase = ":";
+
+        installPhase = ''
+          install --mode=644 -D ${src} $out/share/fonts/truetype/talyz-new-roman.ttf
         '';
       })
     ];
