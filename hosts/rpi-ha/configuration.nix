@@ -4,12 +4,7 @@
 
 { config, pkgs, ... }:
 
-let
-  unstablePkgs = import (builtins.fetchTarball {
-    url = https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz;
-  }) {};
-
-in {
+{
   imports = [
     ./hardware-configuration.nix
 
@@ -45,26 +40,6 @@ in {
 
   # Auto update the config before it upgrades the system
   my.update-config.enable = true;
-
-  # Enable Home Assistant, open port and add the hass user to the dialout group
-  services.home-assistant.enable = true;
-  services.home-assistant.openFirewall = true;
-  services.home-assistant.autoExtraComponents = false;
-  services.home-assistant.package = unstablePkgs.home-assistant.override {
-    extraComponents = [
-      "cast"
-      "discovery"
-      "hue"
-      "kodi"
-      "media_player"
-      "notify"
-      "system_health"
-      "yr"
-      "zwave"
-    ];
-  };
-
-  users.extraUsers.hass.extraGroups = [ "dialout" ];
 
   # Enable common cli settings for my systems
   my.common-cli.enable = true;
