@@ -36,11 +36,11 @@
   services.xserver.videoDrivers = [ "amdgpu" ];
 
   # Auto upgrade system
-  system.autoUpgrade.enable = true;
+  system.autoUpgrade.enable = false;
   system.autoUpgrade.channel = "https://nixos.org/channels/nixos-unstable";
 
   # Auto garbage collect
-  nix.gc.automatic = true;
+  nix.gc.automatic = false;
   nix.gc.options = "--delete-older-than 30d";
 
   # Auto update the config before it upgrades the system
