@@ -4,12 +4,7 @@
 
 { config, pkgs, ... }:
 
-let
-  unstablePkgs = import (builtins.fetchTarball {
-    url = https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz;
-  }) {};
-
-in {
+{
   imports = [
     ./hardware-configuration.nix
     ./persistence.nix
@@ -42,7 +37,7 @@ in {
 
   # Auto upgrade system
   system.autoUpgrade.enable = true;
-  system.autoUpgrade.channel = "https://nixos.org/channels/nixos-19.03";
+  system.autoUpgrade.channel = "https://nixos.org/channels/nixos-unstable";
 
   # Auto garbage collect
   nix.gc.automatic = true;
@@ -124,7 +119,7 @@ in {
   services.home-assistant.enable = true;
   services.home-assistant.openFirewall = true;
   services.home-assistant.autoExtraComponents = false;
-  services.home-assistant.package = unstablePkgs.home-assistant.override {
+  services.home-assistant.package = pkgs.home-assistant.override {
     extraComponents = [
       "cast"
       "discovery"
