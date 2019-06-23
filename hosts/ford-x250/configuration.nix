@@ -31,9 +31,8 @@
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.extraModulePackages = [
-    pkgs.linuxPackages_latest.acpi_call
+    pkgs.linuxPackages.acpi_call
   ];
 
   # Fix touchpad scrolling after suspend.
