@@ -90,6 +90,20 @@ in {
     hardware.pulseaudio = {
       enable = true;
       extraModules = [ pkgs.pulseaudio-modules-bt ];
+
+      daemon.config = {
+        flat-volumes = "no";
+        default-sample-format = "s24le";
+        default-sample-rate = "44100";
+        resample-method = "speex-float-10";
+        avoid-resampling = "true";
+      };
+
+      configFile = pkgs.runCommand "default.pa" {} ''
+        sed 's/load-module module-bluetooth-discover/load-module module-bluetooth-discover a2dp_config="aac_afterburner=on aac_bitrate_mode=0"/' \
+          ${pkgs.pulseaudioFull}/etc/pulse/default.pa > $out
+    '';
+
       package = pkgs.pulseaudioFull;
     };
 
