@@ -39,6 +39,9 @@
 
     # Kitty
     { target = ".config/kitty/kitty.conf"; source = ./dotfiles/kitty.conf; }
+
+    # GnuPG
+    { target = ".gnupg/dirmngr.conf"; text = "keyserver hkps://keys.openpgp.org"; }
   ];
 
   programs.git = {
