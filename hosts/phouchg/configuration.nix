@@ -28,10 +28,10 @@ in {
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelPackages = pkgs.linuxPackages_4_19;
+
+  # Install thinkpad modules for TLP
   boot.extraModulePackages = [
-    pkgs.linuxPackages_4_19.acpi_call
+    pkgs.linuxPackages.acpi_call
   ];
 
   boot.cleanTmpDir = true;
