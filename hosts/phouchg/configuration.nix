@@ -35,6 +35,9 @@
   services.xserver.videoDrivers = ["intel" "modesetting"];
   hardware.cpu.intel.updateMicrocode = true;
 
+  # Enable fwupd for firmware updates etc
+  services.fwupd.enable = true;
+
   # Enable TLP
   services.tlp.enable = true;
 
