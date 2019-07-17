@@ -1,6 +1,8 @@
 { ... }:
 
 {
+  environment.etc."machine-id".source = "/nix/persistent/etc/machine-id";
+
   # Avoid the need to have a moved config and help muscle memory of location
   fileSystems."/etc/nixos" = {
     device = "/nix/persistent/etc/nixos";

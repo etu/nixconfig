@@ -1,6 +1,8 @@
 { ... }:
 
 {
+  environment.etc."machine-id".source = "/nix/persistent/etc/machine-id";
+
   environment.etc."ssh/ssh_host_rsa_key".source = "/nix/persistent/etc/ssh/ssh_host_rsa_key";
   environment.etc."ssh/ssh_host_rsa_key.pub".source = "/nix/persistent/etc/ssh/ssh_host_rsa_key.pub";
   environment.etc."ssh/ssh_host_ed25519_key".source = "/nix/persistent/etc/ssh/ssh_host_ed25519_key";
