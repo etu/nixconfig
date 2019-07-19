@@ -11,7 +11,6 @@
     ./my-emacs.nix
     ./my-gaming.nix
     ./my-gpg-utils.nix
-    ./my-i3.nix
     ./my-nfsd.nix
     ./my-spell.nix
     ./my-update-config.nix
