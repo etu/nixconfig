@@ -8,8 +8,8 @@
   imports = [
     ./hardware-configuration.nix
 
-    # Import local modules & overlays
-    ../../overlays/local/default.nix
+    # Import local modules
+    ../../modules
 
     # Import the home-manager module
     <home-manager/nixos>

@@ -9,8 +9,9 @@
     ./hardware-configuration.nix
     ./networking.nix
     ./persistence.nix
-    # Import local modules & overlays
-    ../../overlays/local/default.nix
+
+    # Import local modules
+    ../../modules
   ];
 
   # Use the GRUB 2 boot loader.

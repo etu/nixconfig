@@ -9,8 +9,8 @@
     ./hardware-configuration.nix
     ./persistence.nix
 
-    # Import local modules & overlays
-    ../../overlays/local/default.nix
+    # Import local modules
+    ../../modules
   ];
 
   # The NixOS release to be compatible with for stateful data such as databases.

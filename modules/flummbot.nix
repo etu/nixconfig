@@ -4,18 +4,26 @@ with lib;
 
 let
   cfg = config.programs.flummbot;
-  flummbot = cfg.package;
+
+  package = pkgs.stdenv.mkDerivation {
+    pname = "flummbot";
+    version = "20180703";
+
+    nativeBuildInputs = [ pkgs.go ];
+    installPhase = "install -D flummbot $out/bin/flummbot";
+
+    src = pkgs.fetchFromGitHub {
+      owner = "etu";
+      repo = "flummbot";
+      rev = "b32f569b6040ebdc7b258c95be4e17e41a152d59";
+      sha256 = "0hw8dprji4l34dcpwhcq4nmnqwwbv33ppv7j4w5k2gkz4894y8nz";
+      fetchSubmodules = true;
+    };
+  };
 
 in {
   options.programs.flummbot = {
     enable = mkEnableOption "Small IRC bot in go used for my channels";
-
-    package = mkOption {
-      type = types.package;
-      default = pkgs.flummbot;
-      defaultText = "pkgs.flummbot";
-      description = "flummbot derivation to use";
-    };
 
     user = mkOption {
       type = types.string;
@@ -37,11 +45,11 @@ in {
       description = "flummbot";
       after = [ "network.target" ];
       wantedBy = [ "multi-user.target" ];
-      path = [ cfg.package ];
+      path = [ package ];
       serviceConfig = {
         Type = "simple";
         User = cfg.user;
-        ExecStart = "${cfg.package}/bin/flummbot -c ${cfg.stateDirectory}/flummbot.toml";
+        ExecStart = "${package}/bin/flummbot -c ${cfg.stateDirectory}/flummbot.toml";
         WorkingDirectory = cfg.stateDirectory;
         Restart = "always";
       };
