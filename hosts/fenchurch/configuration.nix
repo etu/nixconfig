@@ -71,7 +71,7 @@
   my.emacs.enable = true;
 
   # Enable my exwm desktop settings
-  my.exwm.enable = true;
+  my.desktop-exwm.enable = true;
 
   # Define a user account.
   my.user.enable = true;

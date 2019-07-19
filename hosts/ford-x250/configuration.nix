@@ -79,7 +79,7 @@
   my.emacs.enable = true;
 
   # Enable my exwm desktop settings
-  my.exwm.enable = true;
+  my.desktop-exwm.enable = true;
 
   # Enable dmrconfig to configure my hamradio.
   programs.dmrconfig.enable = true;

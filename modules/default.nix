@@ -6,9 +6,9 @@
     ./ip-failar-nu.nix
     ./my-common-cli.nix
     ./my-common-graphical.nix
+    ./my-desktop-exwm.nix
     ./my-desktop-gnome.nix
     ./my-emacs.nix
-    ./my-exwm.nix
     ./my-gaming.nix
     ./my-gpg-utils.nix
     ./my-i3.nix

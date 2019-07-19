@@ -3,7 +3,7 @@
 with lib;
 
 let
-  cfg = config.my.exwm;
+  cfg = config.my.desktop-exwm;
   i3lockCommand = "${pkgs.i3lock-pixeled}/bin/i3lock-pixeled --nofork";
 
   myExwmInitPlain = pkgs.writeText "emacs-exwm-unsubstituted.el" (
@@ -18,7 +18,7 @@ let
   '');
 
 in {
-  options.my.exwm.enable = mkEnableOption "Enables exwm and auto login for my user";
+  options.my.desktop-exwm.enable = mkEnableOption "Enables exwm and auto login for my user";
 
   config = mkIf cfg.enable {
     nixpkgs.overlays = [
