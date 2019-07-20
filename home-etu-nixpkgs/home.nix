@@ -22,6 +22,9 @@
       '';
     }
 
+    # Emacs inhibit startup screen
+    { target = ".emacs"; text = "(custom-set-variables '(inhibit-startup-screen t))"; }
+
     # Tmux config
     { target = ".tmux.conf"; source = ./dotfiles/tmux.conf; }
 
