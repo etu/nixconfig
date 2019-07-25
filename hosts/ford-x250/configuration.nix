@@ -43,6 +43,8 @@
   # Settings needed for ZFS
   boot.supportedFilesystems = [ "zfs" ];
   networking.hostId = "99628816";
+  services.zfs.autoScrub.enable = true;
+  services.zfs.autoSnapshot.enable = true;
 
   # Hardware settings
   services.xserver.videoDrivers = [ "intel" "modesetting" ];
