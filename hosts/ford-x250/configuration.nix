@@ -17,7 +17,7 @@
   ];
 
   # The NixOS release to be compatible with for stateful data such as databases.
-  system.stateVersion = "19.03";
+  system.stateVersion = "19.09";
 
   # Use local nixpkgs checkout
   nix.nixPath = [
@@ -40,8 +40,12 @@
 
   boot.cleanTmpDir = true;
 
+  # Settings needed for ZFS
+  boot.supportedFilesystems = [ "zfs" ];
+  networking.hostId = "99628816";
+
   # Hardware settings
-  services.xserver.videoDrivers = ["intel" "modesetting"];
+  services.xserver.videoDrivers = [ "intel" "modesetting" ];
   hardware.trackpoint.enable = true;
   hardware.cpu.intel.updateMicrocode = true;
 

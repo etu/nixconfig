@@ -8,11 +8,10 @@
     <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
   ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
+  boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
-
-  boot.initrd.luks.devices."disk".device = "/dev/disk/by-uuid/c6db7bdd-2020-4a77-b4fb-d087bd6f4907";
 
   fileSystems."/" = {
     device = "none";
@@ -21,17 +20,22 @@
   };
 
   fileSystems."/nix" = {
-    device = "/dev/disk/by-uuid/be3adf2a-bb84-433d-bee7-cb221a2879d8";
-    fsType = "ext4";
+    device = "zroot/nix";
+    fsType = "zfs";
   };
 
-  fileSystems."/tmp" = {
-    device = "/nix/persistent/tmp";
-    options = [ "bind" "noauto" "x-systemd.automount" ];
+  fileSystems."/persistent" = {
+    device = "zroot/persistent";
+    fsType = "zfs";
+  };
+
+  fileSystems."/var/log" = {
+    device = "zroot/var-log";
+    fsType = "zfs";
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/1E8D-9DCD";
+    device = "/dev/disk/by-uuid/E8E0-FCFB";
     fsType = "vfat";
     options = [ "noauto" "x-systemd.automount" ];
   };
