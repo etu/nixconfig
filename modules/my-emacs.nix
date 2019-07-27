@@ -44,11 +44,19 @@ in {
   options.my.emacs = {
     enable = mkEnableOption "Enables emacs with the modules I want";
     enableExwm = mkEnableOption "Enables EXWM related modules";
+    package = mkOption {
+      type = types.package;
+      default = pkgs.emacs;
+      defaultText = "pkgs.emacs";
+      description = "Which emacs package to use";
+    };
   };
 
   config = mkIf cfg.enable {
     services.emacs.enable = true;
     services.emacs.package = (import ./emacs-files/elisp.nix { inherit pkgs; }).fromEmacsUsePackage {
+      package = cfg.package;
+
       # Config to parse, use my built config from above
       config = builtins.readFile myEmacsConfig;
 
