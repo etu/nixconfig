@@ -9,43 +9,45 @@
   ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
+  boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
-
-  boot.initrd.luks.devices."disk".device = "/dev/disk/by-uuid/61ea4dca-c490-4f56-85e4-54873669c7f7";
 
   fileSystems."/" = {
     device = "none";
     fsType = "tmpfs";
-    options = [ "defaults" "size=1G" "mode=755" ];
-  };
-
-  fileSystems."/nix" = {
-    device = "/dev/disk/by-uuid/cc869eb3-1e03-4952-b53c-9edda00ee243";
-    fsType = "ext4";
+    options = [ "defaults" "size=5G" "mode=755" ];
   };
 
   fileSystems."/home" = {
-    device = "/dev/disk/by-uuid/fdde2451-dfb9-4494-8a73-402cdf83c63b";
-    fsType = "ext4";
-    options = [ "noauto" "x-systemd.automount" ];
+    device = "zroot/home";
+    fsType = "zfs";
+  };
+
+  fileSystems."/nix" = {
+    device = "zroot/nix";
+    fsType = "zfs";
+  };
+
+  fileSystems."/persistent" = {
+    device = "zroot/persistent";
+    fsType = "zfs";
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/AFD2-F740";
+    device = "/dev/disk/by-uuid/6241-1BC1";
     fsType = "vfat";
     options = [ "noauto" "x-systemd.automount" ];
   };
 
-  fileSystems."/mnt/hactar" = {
-    device = "10.3.0.2:/media/files";
-    fsType = "nfs4";
-    noCheck = true;
-    options = [ "ro" "noauto" "x-systemd.automount" ];
+  fileSystems."/boot-fallback" = {
+    device = "/dev/disk/by-uuid/6258-01A0";
+    fsType = "vfat";
+    options = [ "noauto" "x-systemd.automount" ];
   };
 
   swapDevices = [ ];
 
   nix.maxJobs = lib.mkDefault 8;
-  powerManagement.cpuFreqGovernor = "powersave";
+  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
 }

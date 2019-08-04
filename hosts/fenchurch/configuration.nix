@@ -11,46 +11,46 @@
 
     # Import local modules
     ../../modules
-
-    # Import the home-manager module
-    <home-manager/nixos>
   ];
 
   # The NixOS release to be compatible with for stateful data such as databases.
-  system.stateVersion = "18.09";
-
-  # Use local nixpkgs checkout
-  nix.nixPath = [
-    "nixpkgs=/etc/nixos/nixpkgs"
-    "home-manager=/nix/var/nix/profiles/per-user/root/channels/home-manager/"
-    "nixos-config=/etc/nixos/configuration.nix"
-  ];
+  system.stateVersion = "19.09";
 
   networking.hostName = "fenchurch";
-
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelPackages = pkgs.linuxPackages_4_19;
 
   # Hardware settings
   hardware.cpu.intel.updateMicrocode = true;
 
-  # Needed for nvidia drivers
-  nixpkgs.config.allowUnfree = true;
+  # Boot loader settings
+  boot.loader.grub.enable = true;
+  boot.loader.grub.efiSupport = true;
+  boot.loader.grub.device = "nodev";
 
-  # Enable nvidia xserver driver
-  services.xserver.videoDrivers = [ "nvidia" ];
+  boot.loader.grub.mirroredBoots = [
+    { devices = [ "/dev/disk/by-uuid/6258-01A0" ]; path = "/boot-fallback"; }
+  ];
 
-  # Disable nvidia compositing in webkitgtk due to this bug
-  # https://github.com/NixOS/nixpkgs/issues/32580
-  environment.variables.WEBKIT_DISABLE_COMPOSITING_MODE = "1";
+  # Settings needed for ZFS
+  boot.supportedFilesystems = [ "zfs" ];
+  networking.hostId = "23916528";
 
-  # Disable CUPS to print documents.
-  services.printing.enable = false;
-
-  # Build nix stuff with all the power
-  nix.buildCores = 9;
+  # Remote unlocking of encrypted ZFS
+  boot.initrd = {
+    kernelModules = [ "e1000e" ];
+    network.enable = true;
+    # Listen to ssh to let me decrypt zfs
+    network.ssh = {
+      enable = true;
+      port = 2222;
+      hostECDSAKey = /persistent/initrd-ssh-key;
+      authorizedKeys = config.users.users.etu.openssh.authorizedKeys.keys;
+    };
+    # Prompt me for password to decrypt zfs
+    network.postCommands = ''
+        echo "zfs load-key -a; killall zfs" >> /root/.profile
+    '';
+  };
+  networking.useDHCP = true;
 
   # Disable root login for ssh
   services.openssh.permitRootLogin = "no";
@@ -61,17 +61,8 @@
   # Enable common cli settings for my systems
   my.common-cli.enable = true;
 
-  # Enable gpg related stuff
-  my.gpg-utils.enable = true;
-
-  # Enable common graphical stuff
-  my.common-graphical.enable = true;
-
   # Enable emacs deamon stuff
   my.emacs.enable = true;
-
-  # Enable my exwm desktop settings
-  my.desktop-exwm.enable = true;
 
   # Define a user account.
   my.user.enable = true;
@@ -79,21 +70,9 @@
     "libvirtd"
   ];
 
-  # Enable virtualbox and friends.
-  my.vbox.enable = true;
-
-  # Enable kvm
-  virtualisation.libvirtd.enable = true;
-
-  # Enable dmrconfig to configure my hamradio.
-  programs.dmrconfig.enable = true;
-
-  # Enable gaming related thingys.
-  my.gaming.enable = true;
-
   users.users.root.initialHashedPassword = "$6$f0a4BXeQkQ719H$5zOS.B3/gDqDN9/1Zs20JUCCPWpzkYmOx6XjPqyCe5kZD5z744iU8cwxRyNZjPRa63S2oTml7QizxfS4jjMkE1";
   users.users.etu.initialHashedPassword = "$6$f0a4BXeQkQ719H$5zOS.B3/gDqDN9/1Zs20JUCCPWpzkYmOx6XjPqyCe5kZD5z744iU8cwxRyNZjPRa63S2oTml7QizxfS4jjMkE1";
 
-  # Home-manager as nix module
-  home-manager.users.etu = import ../../home-etu-nixpkgs/home.nix;
+  # Enable kvm
+  virtualisation.libvirtd.enable = true;
 }
