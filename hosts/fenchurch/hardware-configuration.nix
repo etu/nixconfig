@@ -34,6 +34,11 @@
     fsType = "zfs";
   };
 
+  fileSystems."/var/log" = {
+    device = "zroot/var-log";
+    fsType = "zfs";
+  };
+
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/6241-1BC1";
     fsType = "vfat";

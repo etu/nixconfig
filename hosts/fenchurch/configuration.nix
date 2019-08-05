@@ -36,6 +36,8 @@
   # Settings needed for ZFS
   boot.supportedFilesystems = [ "zfs" ];
   networking.hostId = "23916528";
+  services.zfs.autoScrub.enable = true;
+  services.zfs.autoSnapshot.enable = true;
 
   # Remote unlocking of encrypted ZFS
   boot.initrd = {
