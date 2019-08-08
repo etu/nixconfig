@@ -75,6 +75,9 @@
 
   # Define a user account.
   my.user.enable = true;
+  my.user.extraGroups = [
+    "docker"
+  ];
 
   # Enable nfsd with firewall rules.
   my.nfsd.enable = true;
@@ -89,5 +92,8 @@
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
     sequeler
+    docker-compose
   ];
+
+  virtualisation.docker.enable = true;
 }
