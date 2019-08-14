@@ -48,9 +48,11 @@ in {
   options.my.desktop-exwm.enable = mkEnableOption "Enables exwm and auto login for my user";
 
   config = mkIf cfg.enable {
+    # Import the emacs overlay from nix community to get the latest
+    # and greatest packages.
     nixpkgs.overlays = [
       (import (builtins.fetchTarball {
-        url = https://github.com/adisbladis/exwm-overlay/archive/master.tar.gz;
+        url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
       }))
     ];
 
