@@ -106,25 +106,6 @@
     wantedBy = [ "network-online.target" ];
   };
 
-  # Enable Home Assistant, open port and add the hass user to the dialout group
-  services.home-assistant.enable = true;
-  services.home-assistant.openFirewall = true;
-  services.home-assistant.autoExtraComponents = false;
-  services.home-assistant.package = pkgs.home-assistant.override {
-    extraComponents = [
-      "cast"
-      "discovery"
-      "hue"
-      "kodi"
-      "media_player"
-      "notify"
-      "system_health"
-      "yr"
-      "zwave"
-    ];
-  };
-  users.users.hass.extraGroups = [ "dialout" ];
-
   # Run docker container with the magic mirror software
   docker-containers.magic-mirror = {
     image = "bastilimbach/docker-magicmirror";

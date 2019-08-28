@@ -20,12 +20,6 @@
     options = [ "bind" ];
   };
 
-  # Persistence of home-assistant configuration
-  fileSystems."/var/lib/hass" = {
-    device = "/nix/persistent/var/lib/hass";
-    options = [ "bind" "noauto" "x-systemd.automount" ];
-  };
-
   # Persistence of kodis home directory
   fileSystems."/home/kodi" = {
     device = "/nix/persistent/home/kodi";

@@ -9,6 +9,9 @@
     ./hardware-configuration.nix
     ./persistence.nix
 
+    # Import local services that are host specific
+    ./services/hass.nix
+
     # Import local modules
     ../../modules
 
