@@ -11,6 +11,7 @@
 
     # Import local services that are host specific
     ./services/hass.nix
+    ./services/magic-mirror.nix
 
     # Import local modules
     ../../modules

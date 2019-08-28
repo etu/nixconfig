@@ -95,8 +95,8 @@
   # Open ports for avahi zeroconf
   networking.firewall.allowedUDPPorts = [ 5353 ];
 
-  # Open port to remote control Kodi (8080) and Magic Mirror (9000)
-  networking.firewall.allowedTCPPorts = [ 8080 9000 ];
+  # Open port to remote control Kodi (8080)
+  networking.firewall.allowedTCPPorts = [ 8080 ];
 
   # Networkmanager with network online target
   # This is a hack to make my NFS not fail to mount 5 times before I get an IP
@@ -104,16 +104,6 @@
   networking.networkmanager.enable = true;
   systemd.services.NetworkManager-wait-online = {
     wantedBy = [ "network-online.target" ];
-  };
-
-  # Run docker container with the magic mirror software
-  docker-containers.magic-mirror = {
-    image = "bastilimbach/docker-magicmirror";
-    ports = [ "9000:8080" ];
-    volumes = [
-      "/nix/persistent/var/lib/magic_mirror/config:/opt/magic_mirror/config"
-      "/nix/persistent/var/lib/magic_mirror/modules:/opt/magic_mirror/modules"
-    ];
   };
 
   # SSH Keys for remote logins
