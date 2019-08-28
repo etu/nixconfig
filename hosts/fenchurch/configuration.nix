@@ -19,6 +19,13 @@
   # The NixOS release to be compatible with for stateful data such as databases.
   system.stateVersion = "19.09";
 
+  # Use local nixpkgs checkout
+  nix.nixPath = [
+    "nixpkgs=/etc/nixos/nixpkgs"
+    "home-manager=/nix/var/nix/profiles/per-user/root/channels/home-manager/"
+    "nixos-config=/etc/nixos/configuration.nix"
+  ];
+
   networking.hostName = "fenchurch";
 
   # Hardware settings
