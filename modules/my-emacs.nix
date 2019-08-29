@@ -54,7 +54,7 @@ in {
 
   config = mkIf cfg.enable {
     services.emacs.enable = true;
-    services.emacs.package = (import ./emacs-files/elisp.nix { inherit pkgs; }).fromEmacsUsePackage {
+    services.emacs.package = (pkgs.emacsWithPackagesFromUsePackage {
       package = cfg.package;
 
       # Config to parse, use my built config from above
@@ -77,8 +77,13 @@ in {
       };
 
       # Extra packages to install
-      extraEmacsPackages = [ "myConfigInit" ] ++ optionals cfg.enableExwm [ "exwm" "desktop-environment" ];
-    };
+      extraEmacsPackages = epkgs: (
+        # Install my config file as a module
+        # Also optinoally install exwm deps
+        [ epkgs.myConfigInit ] ++ optionals cfg.enableExwm [
+          epkgs.exwm epkgs.desktop-environment
+        ]);
+    });
     services.emacs.defaultEditor = true;
 
     fonts.fonts = with pkgs; [
