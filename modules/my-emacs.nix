@@ -53,6 +53,14 @@ in {
   };
 
   config = mkIf cfg.enable {
+    # Import the emacs overlay from nix community to get the latest
+    # and greatest packages.
+    nixpkgs.overlays = [
+      (import (builtins.fetchTarball {
+        url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
+      }))
+    ];
+
     services.emacs.enable = true;
     services.emacs.package = (pkgs.emacsWithPackagesFromUsePackage {
       package = cfg.package;
