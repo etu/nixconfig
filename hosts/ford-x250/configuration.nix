@@ -14,6 +14,9 @@
 
     # Import the home-manager module
     <home-manager/nixos>
+
+    # Import hardware quirks
+    <nixos-hardware/lenovo/thinkpad/x250>
   ];
 
   # The NixOS release to be compatible with for stateful data such as databases.
@@ -21,9 +24,10 @@
 
   # Use local nixpkgs checkout
   nix.nixPath = [
-    "nixpkgs=/etc/nixos/nixpkgs"
     "home-manager=/nix/var/nix/profiles/per-user/root/channels/home-manager/"
     "nixos-config=/etc/nixos/configuration.nix"
+    "nixos-hardware=/nix/var/nix/profiles/per-user/root/channels/nixos-hardware/"
+    "nixpkgs=/etc/nixos/nixpkgs"
   ];
 
   networking.hostName = "ford-x250";
@@ -31,9 +35,7 @@
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.extraModulePackages = [
-    pkgs.linuxPackages.acpi_call
-  ];
+  boot.extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
 
   # Fix touchpad scrolling after suspend.
   boot.kernelParams = [ "psmouse.synaptics_intertouch=0" ];
@@ -48,11 +50,7 @@
 
   # Hardware settings
   services.xserver.videoDrivers = [ "intel" "modesetting" ];
-  hardware.trackpoint.enable = true;
   hardware.cpu.intel.updateMicrocode = true;
-
-  # Enable TLP
-  services.tlp.enable = true;
 
   # Enable bluetooth
   hardware.bluetooth.enable = true;
