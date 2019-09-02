@@ -4,7 +4,12 @@
 
 { config, pkgs, ... }:
 
-{
+let
+  # Declare download path for home-manager to avoid the need to have it as a channel
+  home-manager = builtins.fetchTarball {
+    url = "https://github.com/rycee/home-manager/archive/master.tar.gz";
+  };
+in {
   imports = [
     ./hardware-configuration.nix
     ./persistence.nix
@@ -17,7 +22,7 @@
     ../../modules
 
     # Import the home-manager module
-    <home-manager/nixos>
+    "${home-manager}/nixos"
   ];
 
   # The NixOS release to be compatible with for stateful data such as databases.
@@ -26,7 +31,6 @@
   # Use local nixpkgs checkout
   nix.nixPath = [
     "nixpkgs=/etc/nixos/nixpkgs"
-    "home-manager=/nix/var/nix/profiles/per-user/root/channels/home-manager/"
     "nixos-config=/etc/nixos/configuration.nix"
   ];
 
