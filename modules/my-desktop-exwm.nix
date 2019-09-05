@@ -12,7 +12,7 @@ let
 
   myExwmInit = (pkgs.runCommand "emacs-exwm.el" (with pkgs; {
     inherit systemd kitty flameshot i3lockCommand;
-    xbacklight = xorg.xbacklight;
+    xbacklight = acpilight;
   }) ''
     substituteAll ${myExwmInitPlain} $out
   '');
