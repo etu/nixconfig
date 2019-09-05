@@ -25,6 +25,7 @@ in {
   # The NixOS release to be compatible with for stateful data such as databases.
   system.stateVersion = "19.09";
 
+  # Set hostname
   networking.hostName = "agrajag";
 
   # Use the systemd-boot EFI boot loader.
@@ -44,6 +45,13 @@ in {
   # Hardware settings
   hardware.cpu.amd.updateMicrocode = true;
   hardware.enableRedistributableFirmware = true;
+
+  # Include udev rules to give permissions to the video group to change
+  # backlight using acpilight.
+  hardware.acpilight.enable = true;
+
+  # Set video driver
+  services.xserver.videoDrivers = [ "modesetting" ];
 
   # Enable fwupd for firmware updates etc
   services.fwupd.enable = true;
@@ -77,6 +85,7 @@ in {
 
   # Define a user account.
   my.user.enable = true;
+  my.user.extraGroups = [ "video" ];
 
   users.users.root.initialHashedPassword = "$6$f0a4BXeQkQ719H$5zOS.B3/gDqDN9/1Zs20JUCCPWpzkYmOx6XjPqyCe5kZD5z744iU8cwxRyNZjPRa63S2oTml7QizxfS4jjMkE1";
   users.users.etu.initialHashedPassword = "$6$f0a4BXeQkQ719H$5zOS.B3/gDqDN9/1Zs20JUCCPWpzkYmOx6XjPqyCe5kZD5z744iU8cwxRyNZjPRa63S2oTml7QizxfS4jjMkE1";
