@@ -27,22 +27,6 @@ $ git submodule init
 $ git submodule update
 #+END_SRC
 
-** Set up home-manager
-#+BEGIN_SRC sh
-# Symlink home configs
-$ ln -s /etc/nixos/home-etu-nixpkgs/ /home/etu/.config/nixpkgs
-
-# Add home-manager as channel
-$ sudo nix-channel --add https://github.com/rycee/home-manager/archive/master.tar.gz home-manager
-$ sudo nix-channel --update
-
-# Install home-manager
-$ nix-shell '<home-manager>' -A install
-
-# Build home config
-$ home-manager switch
-#+END_SRC
-
 * Small tips and tricks
 ** Using other channels when defining my own nix.nixPath
 #+BEGIN_SRC nix
