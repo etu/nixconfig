@@ -25,6 +25,12 @@ in {
   # The NixOS release to be compatible with for stateful data such as databases.
   system.stateVersion = "19.09";
 
+  # Use local nixpkgs checkout
+  nix.nixPath = [
+    "nixos-config=/etc/nixos/configuration.nix"
+    "nixpkgs=/etc/nixos/nixpkgs"
+  ];
+
   # Set hostname
   networking.hostName = "agrajag";
 
