@@ -68,6 +68,26 @@ in {
   # Enable bluetooth
   hardware.bluetooth.enable = true;
 
+  # Enable CUPS to print documents.
+  services.printing.enable = true;
+  services.printing.drivers = [
+    pkgs.postscript-lexmark
+  ];
+
+  # Enable printer configuration
+  hardware.printers.ensureDefaultPrinter = "Lexmark_CS510de";
+  hardware.printers.ensurePrinters = [
+    {
+      name = "Lexmark_CS510de";
+      deviceUri = "ipps://192.168.0.124:443/ipp/print";
+      model = "postscript-lexmark/Lexmark-CS510_Series-Postscript-Lexmark.ppd";
+      location = "UFS";
+      ppdOptions = {
+        PageSize = "A4";
+      };
+    }
+  ];
+
   # Disable root login for ssh
   services.openssh.permitRootLogin = "no";
 
