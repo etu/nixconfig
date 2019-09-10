@@ -88,6 +88,9 @@ in {
     }
   ];
 
+  # Enable SANE to handle scanners
+  hardware.sane.enable = true;
+
   # Disable root login for ssh
   services.openssh.permitRootLogin = "no";
 
