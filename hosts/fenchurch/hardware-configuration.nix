@@ -51,6 +51,14 @@
     options = [ "noauto" "x-systemd.automount" ];
   };
 
+  # Mount up the old fileserver readwrite
+  fileSystems."/mnt/hactar" = {
+    device = "downloads@10.3.0.2:/media/files";
+    fsType = "fuse.sshfs";
+    noCheck = true;
+    options = [ "noauto" "x-systemd.automount" "users" "idmap=user" "IdentityFile=/root/.ssh/id_ed25519" "allow_other" "reconnect" ];
+  };
+
   swapDevices = [ ];
 
   nix.maxJobs = lib.mkDefault 8;
