@@ -13,6 +13,7 @@ in {
     extraComponents = [
       "cast"
       "discovery"
+      "esphome"
       "hue"
       "kodi"
       "media_player"
