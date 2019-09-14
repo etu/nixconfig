@@ -27,11 +27,11 @@
   services.xserver.videoDrivers = [ "amdgpu" ];
 
   # Auto upgrade system
-  system.autoUpgrade.enable = false;
-  system.autoUpgrade.channel = "https://nixos.org/channels/nixos-unstable";
+  system.autoUpgrade.enable = true;
+  system.autoUpgrade.channel = "https://nixos.org/channels/nixos-19.09";
 
   # Auto garbage collect
-  nix.gc.automatic = false;
+  nix.gc.automatic = true;
   nix.gc.options = "--delete-older-than 30d";
 
   # Auto update the config before it upgrades the system
@@ -97,14 +97,6 @@
 
   # Open port to remote control Kodi (8080)
   networking.firewall.allowedTCPPorts = [ 8080 ];
-
-  # Networkmanager with network online target
-  # This is a hack to make my NFS not fail to mount 5 times before I get an IP
-  # by DHCP on boot: https://github.com/NixOS/nixpkgs/pull/60954
-  networking.networkmanager.enable = true;
-  systemd.services.NetworkManager-wait-online = {
-    wantedBy = [ "network-online.target" ];
-  };
 
   # SSH Keys for remote logins
   users.extraUsers.root.openssh.authorizedKeys.keys = [
