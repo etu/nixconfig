@@ -5,6 +5,9 @@
 { config, pkgs, ... }:
 
 let
+  # Load secrets
+  secrets = import ../../data/load-secrets.nix;
+
   # Import my ssh public keys
   keys = import ../../data/pubkeys.nix;
 
@@ -77,7 +80,7 @@ in {
   users.mutableUsers = false;
 
   users.users = {
-    root.initialHashedPassword = "$6$jpUfLDIhIOQ5qq4b$yj55LOEIUZZKQMzO4UKqSnEJO0n8m5loDM/X7L2a5R0G6p0DxLLh.Y5pQ2Q1qEv8vwd0fR6bPHGRA76JbHXwK.";
+    root.initialHashedPassword = secrets.hashedRootPassword;
 
     etu = {
       isNormalUser = true;

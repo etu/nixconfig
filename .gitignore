@@ -1,1 +1,5 @@
+# Ignore symlink to host config
 /configuration.nix
+
+# Ignore configurable file with secrets
+/data/secrets.nix

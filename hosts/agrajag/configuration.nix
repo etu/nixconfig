@@ -5,6 +5,9 @@
 { config, pkgs, ... }:
 
 let
+  # Load secrets
+  secrets = import ../../data/load-secrets.nix;
+
   # Declare download path for home-manager to avoid the need to have it as a channel
   home-manager = builtins.fetchTarball {
     url = "https://github.com/rycee/home-manager/archive/master.tar.gz";
@@ -116,8 +119,12 @@ in {
   my.user.enable = true;
   my.user.extraGroups = [ "video" ];
 
-  users.users.root.initialHashedPassword = "$6$f0a4BXeQkQ719H$5zOS.B3/gDqDN9/1Zs20JUCCPWpzkYmOx6XjPqyCe5kZD5z744iU8cwxRyNZjPRa63S2oTml7QizxfS4jjMkE1";
-  users.users.etu.initialHashedPassword = "$6$f0a4BXeQkQ719H$5zOS.B3/gDqDN9/1Zs20JUCCPWpzkYmOx6XjPqyCe5kZD5z744iU8cwxRyNZjPRa63S2oTml7QizxfS4jjMkE1";
+  # Immutable users due to tmpfs
+  users.mutableUsers = false;
+
+  # Set passwords
+  users.users.root.initialHashedPassword = secrets.hashedEtuPassword;
+  users.users.etu.initialHashedPassword = secrets.hashedRootPassword;
 
   # Home-manager as nix module
   home-manager.users.etu = import ../../home-etu-nixpkgs/home.nix;

@@ -5,6 +5,9 @@
 { config, pkgs, ... }:
 
 let
+  # Load secrets
+  secrets = import ../../data/load-secrets.nix;
+
   # Import my ssh public keys
   keys = import ../../data/pubkeys.nix;
 
@@ -95,7 +98,10 @@ in {
   users.users.guest.initialPassword = "";
   users.users.guest.shell = pkgs.fish;
 
+  # Immutable users due to tmpfs
+  users.mutableUsers = false;
+
   # Set up root user
-  users.users.root.initialHashedPassword = "$6$f0a4BXeQkQ719H$5zOS.B3/gDqDN9/1Zs20JUCCPWpzkYmOx6XjPqyCe5kZD5z744iU8cwxRyNZjPRa63S2oTml7QizxfS4jjMkE1";
+  users.users.root.initialHashedPassword = secrets.hashedEtuPassword;
   users.users.root.openssh.authorizedKeys.keys = with keys.etu; hactar ++ agrajag ++ ford-x250;
 }
