@@ -68,7 +68,7 @@ in {
     };
     # Prompt me for password to decrypt zfs
     network.postCommands = ''
-        echo "zfs load-key -a; killall zfs" >> /root/.profile
+      echo "zfs load-key -a; killall zfs" >> /root/.profile
     '';
   };
   networking.useDHCP = true;
