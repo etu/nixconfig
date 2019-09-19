@@ -4,7 +4,11 @@
 
 { config, pkgs, ... }:
 
-{
+let
+  # Import my ssh public keys
+  keys = import ../../data/pubkeys.nix;
+
+in {
   imports = [
     ./hardware-configuration.nix
     ./persistence.nix
@@ -99,11 +103,5 @@
   networking.firewall.allowedTCPPorts = [ 8080 ];
 
   # SSH Keys for remote logins
-  users.extraUsers.root.openssh.authorizedKeys.keys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILPvVYtcFHwuW/QW5Sqyuno7KrsVq9q9HUOBoaoIlIwu etu@hactar-2016-09-24"
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ02fsmCbs2HSQxQV66cA3OnLqbhrZlA+wREUYn/3HzR etu@agrajag-2019-09-04"
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPXaF1OwJAyGuPr3Rb0E+ut1gxVenll82/fLSc7p8UeA etu@fenchurch-2017-07-14"
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINvIdD5t0Tjn+e41dIMt9VM5B0gs9yCuTY4p7Hpklrhr etu@ford-2018-03-05"
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIEWP6z+bCjt2XRO+mFraSRx4lrwVCVysYzruC14aQmD etu@ford-x250-2019-04-19"
-  ];
+  users.users.root.openssh.authorizedKeys.keys = with keys.etu; hactar ++ agrajag ++ ford-x250;
 }
