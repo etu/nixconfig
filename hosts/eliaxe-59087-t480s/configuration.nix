@@ -35,6 +35,10 @@ in {
   boot.supportedFilesystems = [ "zfs" ];
   networking.hostId = "18582527";
 
+  # Snapshot and scrub automatically
+  services.zfs.autoScrub.enable = true;
+  services.zfs.autoSnapshot.enable = true;
+
   # Install thinkpad modules for TLP
   boot.extraModulePackages = [
     pkgs.linuxPackages.acpi_call
