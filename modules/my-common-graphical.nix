@@ -128,5 +128,22 @@ in {
 
     # Define extra groups for user.
     my.user.extraGroups = [ "networkmanager" "dialout" ];
+
+    # Make emojis not be gigantic
+    fonts.fontconfig.localConf = ''
+      <?xml version="1.0" encoding="UTF-8"?>
+      <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+
+      <fontconfig>
+        <match target="pattern">
+          <edit name="family" mode="prepend"><string>Noto Color Emoji</string></edit>
+        </match>
+
+        <match target="font">
+          <test name="family" compare="eq"><string>Noto Color Emoji</string></test>
+          <edit name="pixelsize" mode="assign"><double>27</double></edit>
+        </match>
+      </fontconfig>
+    '';
   };
 }
