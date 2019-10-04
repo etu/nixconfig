@@ -77,7 +77,7 @@ in {
       aspellDicts.en-science
       aspellDicts.sv
 
-      gajim
+      dino
       feh
       firefox-bin
       mpv
