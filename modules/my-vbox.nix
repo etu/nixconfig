@@ -9,10 +9,6 @@ in {
   options.my.vbox.enable = mkEnableOption "Enables vbox and related things I use.";
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [
-      vagrant
-    ];
-
     # Enable virtualbox.
     virtualisation.virtualbox.host.enable = true;
 
