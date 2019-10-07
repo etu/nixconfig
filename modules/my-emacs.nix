@@ -44,6 +44,7 @@ in {
   options.my.emacs = {
     enable = mkEnableOption "Enables emacs with the modules I want";
     enableExwm = mkEnableOption "Enables EXWM related modules";
+    enableWork = mkEnableOption "Enables install of work related modules";
     package = mkOption {
       type = types.package;
       default = pkgs.emacs;
@@ -90,6 +91,8 @@ in {
         # Also optinoally install exwm deps
         [ epkgs.myConfigInit ] ++ optionals cfg.enableExwm [
           epkgs.exwm epkgs.desktop-environment
+        ] ++ optionals cfg.enableExwm [
+          epkgs.es-mode epkgs.vcl-mode
         ]);
     });
     services.emacs.defaultEditor = true;
