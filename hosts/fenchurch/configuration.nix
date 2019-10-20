@@ -21,6 +21,7 @@ in {
     ./services/hass.nix
     ./services/jellyfin.nix
     ./services/magic-mirror.nix
+    ./services/usenet.nix
 
     # Import local modules
     ../../modules
@@ -106,4 +107,7 @@ in {
 
   # Enable kvm
   virtualisation.libvirtd.enable = true;
+
+  users.users.downloads = { group = "downloads"; uid = 947; };
+  users.groups.downloads.gid = 947;
 }

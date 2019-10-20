@@ -39,6 +39,11 @@
     fsType = "zfs";
   };
 
+  fileSystems."/var/lib/nzbget-dst" = {
+    device = "zroot/var-lib-nzbget-dst";
+    fsType = "zfs";
+  };
+
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/6241-1BC1";
     fsType = "vfat";
@@ -56,7 +61,12 @@
     device = "downloads@10.3.0.2:/media/files";
     fsType = "fuse.sshfs";
     noCheck = true;
-    options = [ "noauto" "x-systemd.automount" "users" "idmap=user" "IdentityFile=/root/.ssh/id_ed25519" "allow_other" "reconnect" ];
+    options = [
+      "noauto" "x-systemd.automount" "users" "idmap=user"
+      "IdentityFile=/root/.ssh/id_ed25519"
+      "allow_other" "reconnect"
+      "uid=947" "gid=947"
+    ];
   };
 
   swapDevices = [ ];
