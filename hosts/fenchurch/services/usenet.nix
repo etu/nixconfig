@@ -47,7 +47,7 @@
         isReadOnly = false;
       };
       "lidarr" = {
-        mountPoint = "/var/empty/.config/Lidarr";
+        mountPoint = "/var/lib/lidarr/.config/Lidarr";
         hostPath = "/persistent/var/lib/lidarr";
         isReadOnly = false;
       };
