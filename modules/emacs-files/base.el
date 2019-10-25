@@ -523,7 +523,6 @@
 
 (use-package highlight-symbol
   :defer 2
-  :ensure t
   :hook ((python-mode emacs-lisp-mode) . highlight-symbol-mode)
   :config (progn (setq highlight-symbol-idle-delay 0.5)
                  (setq highlight-symbol-highlight-single-occurrence nil)))
