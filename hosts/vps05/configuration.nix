@@ -140,7 +140,7 @@ in {
   # Set up users accounts:
   users.mutableUsers = false;
 
-  users.users.root.openssh.authorizedKeys.keys = with keys.etu; hactar ++ agrajag ++ ford-x250 ++ phouchg;
+  users.users.root.openssh.authorizedKeys.keys = with keys.etu; hactar ++ agrajag ++ ford-x250 ++ work;
 
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database
