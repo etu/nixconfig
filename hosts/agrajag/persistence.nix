@@ -20,15 +20,9 @@
     options = [ "bind" "noauto" "x-systemd.automount" ];
   };
 
-  # Persistence of my home directory
-  fileSystems."/home/etu" = {
-    device = "/persistent/home/etu";
-    options = [ "bind" "noauto" "x-systemd.automount" ];
-  };
-
   # Persistence of roots dotfiles between boots
   fileSystems."/root" = {
-    device = "/persistent/home/root";
+    device = "/home/root";
     options = [ "bind" "noauto" "x-systemd.automount" ];
   };
 }
