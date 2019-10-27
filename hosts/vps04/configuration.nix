@@ -37,7 +37,7 @@ in {
 
   # Auto upgrade system
   system.autoUpgrade.enable = true;
-  system.autoUpgrade.channel = "https://nixos.org/channels/nixos-19.03-small";
+  system.autoUpgrade.channel = "https://nixos.org/channels/nixos-19.09-small";
   system.autoUpgrade.dates = "weekly";
 
   # Auto garbage collect
