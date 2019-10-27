@@ -5,19 +5,18 @@ with lib;
 let
   cfg = config.programs.ip-failar-nu;
 
-  package = pkgs.stdenv.mkDerivation {
+  package = pkgs.buildGoPackage {
     pname = "ip-failar-nu";
     version = "20180318";
 
-    nativeBuildInputs = [ pkgs.go ];
-    installPhase = "install -D ip-failar-nu $out/bin/ip-failar-nu";
+    goPackagePath = "github.com/etu/ip.failar.nu";
+    goDeps = ./ip-failar-nu-deps.nix;
 
     src = pkgs.fetchFromGitHub {
       owner = "etu";
       repo = "ip.failar.nu";
-      rev = "925218c6615659e56faabbab64146dff8c38b55c";
-      sha256 = "0qmvya8ilgj3y38dxy7qk64cxpfjrbp78iihj8nl97iqq29s5lf0";
-      fetchSubmodules = true;
+      rev = "c98fe6421ed79ee78a370fb067445f2865258560";
+      sha256 = "0pddnswcswkf8z7c6ajhf2ps2n6kfhrgnx6kcph7jz81n5488vyz";
     };
   };
 
@@ -35,7 +34,7 @@ in {
       serviceConfig = {
         Type = "simple";
         User = "nobody";
-        ExecStart = "${package}/bin/ip-failar-nu";
+        ExecStart = "${package}/bin/ip.failar.nu";
         Restart = "always";
       };
     };
