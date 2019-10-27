@@ -5,19 +5,18 @@ with lib;
 let
   cfg = config.programs.flummbot;
 
-  package = pkgs.stdenv.mkDerivation {
+  package = pkgs.buildGoPackage {
     pname = "flummbot";
     version = "20180703";
 
-    nativeBuildInputs = [ pkgs.go ];
-    installPhase = "install -D flummbot $out/bin/flummbot";
+    goPackagePath = "github.com/etu/flummbot";
+    goDeps = ./flummbot-deps.nix;
 
     src = pkgs.fetchFromGitHub {
       owner = "etu";
       repo = "flummbot";
-      rev = "b32f569b6040ebdc7b258c95be4e17e41a152d59";
-      sha256 = "0hw8dprji4l34dcpwhcq4nmnqwwbv33ppv7j4w5k2gkz4894y8nz";
-      fetchSubmodules = true;
+      rev = "f27d5c89cb79b10979d9d8ca237bacba8e4d673d";
+      sha256 = "0gpkjqrjvmi90jvqihxzx2j06kknga8xybf71lmj9h7l768mly0f";
     };
   };
 
