@@ -16,7 +16,7 @@ in {
       gnupg
 
       # Install pass with expensions
-      (pass.withExtensions (ext: with ext; [ pass-otp pass-update ]))
+      (pass.withExtensions (ext: with ext; [ pass-otp pass-update pass-checkup ]))
 
       # Keysigning party
       signing-party
