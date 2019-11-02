@@ -11,6 +11,12 @@ in {
   config = mkIf cfg.enable {
     services.pcscd.enable = true;
 
+    programs.gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+      pinentryFlavor = "gnome3";
+    };
+
     environment.systemPackages = with pkgs; [
       # Install gnupg
       gnupg
