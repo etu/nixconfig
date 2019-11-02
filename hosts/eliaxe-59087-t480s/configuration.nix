@@ -80,11 +80,9 @@ in {
   # Enable common graphical stuff
   my.common-graphical.enable = true;
 
-  # Enable emacs deamon stuff
+  # Enable emacs and EXWM
   my.emacs.enable = true;
-
-  # Enable my exwm desktop settings
-  my.desktop-exwm.enable = true;
+  my.emacs.enableExwm = true;
 
   # Define a user account.
   my.user.enable = true;
