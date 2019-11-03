@@ -21,15 +21,14 @@ let
 
   # Run my config trough substituteAll to replace all paths with paths to
   # programs etc to have as my actual config file.
-  myEmacsConfig = (pkgs.runCommand "config.el" (with pkgs; {
+  myEmacsConfig = (pkgs.runCommand "config.el" (with pkgs; ({
     inherit gnuplot gocode;
     phpcs = phpPackages.phpcs;
     phpcbf = phpPackages.phpcbf;
-
-    # EXWM related packages
+  } // lib.optionalAttrs cfg.enableExwm { # EXWM related packages
     inherit systemd kitty flameshot i3lockCommand;
     xbacklight = acpilight;
-  }) ''
+  })) ''
     substituteAll ${myEmacsConfigPlain} $out
   '');
 
@@ -55,7 +54,7 @@ let
 in {
   options.my.emacs = {
     enable = mkEnableOption "Enables emacs with the modules I want";
-    enableExwm = mkEnableOption "Enables EXWM related modules";
+    enableExwm = mkEnableOption "Enables EXWM config and graphical environment";
     enableWork = mkEnableOption "Enables install of work related modules";
     package = mkOption {
       type = types.package;
