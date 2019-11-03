@@ -28,9 +28,7 @@ let
   } // lib.optionalAttrs cfg.enableExwm { # EXWM related packages
     inherit systemd kitty flameshot i3lockCommand;
     xbacklight = acpilight;
-  })) ''
-    substituteAll ${myEmacsConfigPlain} $out
-  '');
+  })) "substituteAll ${myEmacsConfigPlain} $out");
 
 
   # Define init file for for emacs to read my config file.
