@@ -20,7 +20,7 @@ in {
       default = 1000;
     };
     username = mkOption {
-      type = types.string;
+      type = types.str;
       default = "etu";
       description = "My username for this system.";
     };

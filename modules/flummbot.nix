@@ -25,14 +25,14 @@ in {
     enable = mkEnableOption "Small IRC bot in go used for my channels";
 
     user = mkOption {
-      type = types.string;
+      type = types.str;
       default = "bots";
       defaultText = "bots";
       description = "Username, used for storage of config file ~/flummbot.toml";
     };
 
     stateDirectory = mkOption {
-      type = types.string;
+      type = types.str;
       default = "/home/bots";
       defaultText = "/home/bots";
       description = "Directory where configs and database is stored";
