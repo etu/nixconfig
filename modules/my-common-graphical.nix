@@ -13,7 +13,6 @@ in {
     fonts.enableFontDir = true;
     fonts.enableGhostscriptFonts = true;
     fonts.fontconfig.cache32Bit = true;
-    fonts.fontconfig.ultimate.enable = true;
 
     # Install some extra fonts.
     fonts.fonts = with pkgs; [
