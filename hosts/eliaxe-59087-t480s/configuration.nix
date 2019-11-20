@@ -40,9 +40,7 @@ in {
   services.zfs.autoSnapshot.enable = true;
 
   # Install thinkpad modules for TLP
-  boot.extraModulePackages = [
-    pkgs.linuxPackages.acpi_call
-  ];
+  boot.extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
 
   # Hardware settings
   services.xserver.videoDrivers = ["modesetting"];
