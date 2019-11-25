@@ -36,6 +36,9 @@ in {
   };
 
   config = mkIf cfg.enable {
+    # Let ~/bin/ be in $PATH
+    environment.homeBinInPath = true;
+
     # Define my user account
     users.extraUsers.${username} = {
       isNormalUser = true;
