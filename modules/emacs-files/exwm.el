@@ -41,7 +41,7 @@
 ;; Define desktop environment commands
 (progn
   (require 'desktop-environment)
-  (setq desktop-environment-screenlock-command "@i3lockCommand@")
+  (setq desktop-environment-screenlock-command "@lockCommand@")
   (setq desktop-environment-screenshot-directory "~"
         desktop-environment-screenshot-command "@flameshot@/bin/flameshot gui"
         desktop-environment-screenshot-partial-command "@flameshot@/bin/flameshot gui")

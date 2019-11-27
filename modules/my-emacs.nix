@@ -6,8 +6,13 @@ let
   cfg = config.my.emacs;
 
 
-  # i3lock command to use
-  i3lockCommand = "${pkgs.i3lock-pixeled}/bin/i3lock-pixeled --nofork";
+  # Extract the path executed by the systemd-service, to get the flags used by
+  # the service. But replace the path with the security wrapper dir so we get
+  # the suid enabled path to the binary.
+  physlockCommand = builtins.replaceStrings
+    [ (pkgs.physlock + "/bin") ]
+    [ config.security.wrapperDir ]
+    config.systemd.services.physlock.serviceConfig.ExecStart;
 
 
   # Create a file with my config without path substitutes, this just mash my
@@ -26,7 +31,8 @@ let
     phpcs = phpPackages.phpcs;
     phpcbf = phpPackages.phpcbf;
   } // lib.optionalAttrs cfg.enableExwm { # EXWM related packages
-    inherit systemd kitty flameshot i3lockCommand;
+    inherit systemd kitty flameshot;
+    lockCommand = physlockCommand;
     xbacklight = acpilight;
   })) "substituteAll ${myEmacsConfigPlain} $out");
 
@@ -139,12 +145,16 @@ in {
 
       # Enable auto locking of the screen
       xautolock.enable = true;
-      xautolock.locker = "${i3lockCommand}";
+      xautolock.locker = physlockCommand;
       xautolock.enableNotifier = true;
-      xautolock.notify = 10;
-      xautolock.notifier = "${pkgs.libnotify}/bin/notify-send \"Locking in 10 seconds\"";
+      xautolock.notify = 15;
+      xautolock.notifier = "${pkgs.libnotify}/bin/notify-send 'Locking in 15 seconds'";
       xautolock.time = 3;
     };
+
+    # Enable physlock and make a suid wrapper for it
+    services.physlock.enable = cfg.enableExwm;
+    services.physlock.allowAnyUser = cfg.enableExwm;
 
     # Enable autorandr for screen setups.
     services.autorandr.enable = cfg.enableExwm;
