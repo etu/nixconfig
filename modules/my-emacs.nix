@@ -74,6 +74,8 @@ in {
 
     services.emacs = mkIf cfg.enable {
       enable = true;
+      defaultEditor = true;
+
       package = (pkgs.emacsWithPackagesFromUsePackage {
         package = cfg.package;
 
@@ -108,8 +110,6 @@ in {
           lib.optionals cfg.enableWork [ epkgs.es-mode epkgs.vcl-mode ]
         );
       });
-
-      defaultEditor = true;
     };
 
 
