@@ -113,7 +113,9 @@ in {
           lib.optionals cfg.enableExwm [ epkgs.exwm epkgs.desktop-environment ] ++
 
           # Install work deps
-          lib.optionals cfg.enableWork [ epkgs.es-mode epkgs.vcl-mode ]
+          lib.optionals cfg.enableWork [
+            epkgs.es-mode epkgs.vcl-mode epkgs.vue-mode epkgs.vue-html-mode
+          ]
         );
       });
     };
