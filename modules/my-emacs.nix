@@ -150,7 +150,7 @@ in {
       xautolock.locker = physlockCommand;
       xautolock.enableNotifier = true;
       xautolock.notify = 15;
-      xautolock.notifier = "${pkgs.libnotify}/bin/notify-send 'Locking in 15 seconds'";
+      xautolock.notifier = "${pkgs.libnotify}/bin/notify-send \"Locking in 15 seconds\"";
       xautolock.time = 3;
     };
 
