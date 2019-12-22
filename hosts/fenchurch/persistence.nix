@@ -14,6 +14,12 @@
     options = [ "bind" "noauto" "x-systemd.automount" ];
   };
 
+  # Bind mount for persistent certificates for nginx
+  fileSystems."/var/lib/acme" = {
+    device = "/persistent/var/lib/acme";
+    options = [ "bind" "noauto" "x-systemd.automount" ];
+  };
+
   # Persistence of roots dotfiles between boots
   fileSystems."/root" = {
     device = "/persistent/home/root";
