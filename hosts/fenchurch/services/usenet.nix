@@ -41,9 +41,6 @@
 
       users.users.downloads = { group = "downloads"; uid = 947; };
       users.groups.downloads.gid = 947;
-
-      # Don't know why I need this, but dns resolvs didn't work without it
-      environment.systemPackages = [ pkgs.bind ];
     };
 
     forwardPorts = [
