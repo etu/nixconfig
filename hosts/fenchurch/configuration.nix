@@ -8,6 +8,9 @@ let
   # Load secrets
   secrets = import ../../data/load-secrets.nix;
 
+  # Import my ssh public keys
+  keys = import ../../data/pubkeys.nix;
+
   # Declare download path for home-manager to avoid the need to have it as a channel
   home-manager = builtins.fetchTarball {
     url = "https://github.com/rycee/home-manager/archive/master.tar.gz";
@@ -103,6 +106,14 @@ in {
   # Set passwords
   users.users.root.initialHashedPassword = secrets.hashedEtuPassword;
   users.users.etu.initialHashedPassword = secrets.hashedRootPassword;
+
+  # Add account for concate
+  users.users.concate = {
+    isNormalUser = true;
+    home = "/home/concate";
+    uid = 1001;
+    openssh.authorizedKeys.keys = keys.concate;
+  };
 
   # Home-manager as nix module
   home-manager.users.etu = import ../../home-etu-nixpkgs/home.nix;
