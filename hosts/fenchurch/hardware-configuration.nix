@@ -56,18 +56,15 @@
     options = [ "noauto" "x-systemd.automount" ];
   };
 
-  # Mount up the old fileserver readwrite
-  fileSystems."/mnt/hactar" = {
-    device = "downloads@10.3.0.2:/media/files";
-    fsType = "fuse.sshfs";
-    noCheck = true;
-    options = [
-      "noauto" "x-systemd.automount" "users" "idmap=user"
-      "IdentityFile=/root/.ssh/id_ed25519"
-      "allow_other" "reconnect"
-      "uid=947" "gid=947"
-    ];
+  # Define mount point for the raid
+  fileSystems."/media/legacy" = {
+    device = "/dev/mapper/cryptraid";
+    fsType = "ext4";
+    options = [ "noauto" ];
   };
+
+  # And install cryptsetup to unlock the raid
+  environment.systemPackages = with pkgs; [ cryptsetup ];
 
   swapDevices = [ ];
 
