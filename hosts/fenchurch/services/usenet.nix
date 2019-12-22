@@ -31,7 +31,6 @@
 
   # Enable usenet related services in a container
   containers.usenet = {
-    autoStart = true;
     config = { config, pkgs, ... }: {
       nixpkgs.config.allowUnfree = true; # nzbget needs unrar
 
