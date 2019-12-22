@@ -4,11 +4,30 @@
   # Make sure to have nginx enabled
   services.nginx.enable = true;
   services.nginx.virtualHosts = {
-    "series.elis.nu".locations."/".proxyPass = "http://127.0.0.1:8989/"; # Sonarr
-    "movies.elis.nu".locations."/".proxyPass = "http://127.0.0.1:7878/"; # Radarr
-    "music.elis.nu".locations."/".proxyPass  = "http://127.0.0.1:8686/"; # Lidarr
-    "nzbget.elis.nu".locations."/".proxyPass = "http://127.0.0.1:6789/"; # Nzbget
+    # Sonarr
+    "series.lan" = {
+      listen = [ { addr = "0.0.0.0"; port = 81; } ];
+      locations."/".proxyPass = "http://127.0.0.1:8989/";
+    };
+    # Radarr
+    "movies.lan" = {
+      listen = [ { addr = "0.0.0.0"; port = 81; } ];
+      locations."/".proxyPass = "http://127.0.0.1:7878/";
+    };
+    # Lidarr
+    "music.lan" = {
+      listen = [ { addr = "0.0.0.0"; port = 81; } ];
+      locations."/".proxyPass  = "http://127.0.0.1:8686/";
+    };
+    # Nzbget
+    "nzbget.lan" = {
+      listen = [ { addr = "0.0.0.0"; port = 81; } ];
+      locations."/".proxyPass = "http://127.0.0.1:6789/";
+    };
   };
+
+  # Open NGiNX port
+  networking.firewall.allowedTCPPorts = [ 81 ];
 
   # Enable usenet related services in a container
   containers.usenet = {
@@ -63,7 +82,7 @@
       };
       "hactar-media" = {
         mountPoint = "/media";
-        hostPath = "/mnt/hactar";
+        hostPath = "/media/legacy/files";
         isReadOnly = false;
       };
     };
