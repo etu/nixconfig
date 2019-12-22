@@ -16,6 +16,7 @@
       "notify"
       "system_health"
       "yr"
+      "zha"
       "zwave"
     ];
   };
