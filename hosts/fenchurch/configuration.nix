@@ -21,6 +21,7 @@ in {
     ./services/hass.nix
     ./services/jellyfin.nix
     ./services/magic-mirror.nix
+    ./services/nfs.nix
     ./services/usenet.nix
 
     # Import local modules
