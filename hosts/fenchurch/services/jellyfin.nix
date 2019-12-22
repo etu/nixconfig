@@ -28,12 +28,12 @@
       };
       "/mnt/hactar" = {
         mountPoint = "/media";
-        hostPath = "/mnt/hactar";
+        hostPath = "/media/legacy/files";
         isReadOnly = true;
       };
     };
   };
 
   # Open NGiNX port
-  networking.firewall.allowedTCPPorts = [ 80 ];
+  networking.firewall.allowedTCPPorts = [ 80 443 ];
 }
