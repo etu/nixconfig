@@ -81,6 +81,9 @@ in {
   };
   networking.useDHCP = true;
 
+  # Enable apcupsd.
+  services.apcupsd.enable = true;
+
   # Disable root login for ssh
   services.openssh.permitRootLogin = "no";
 
