@@ -24,6 +24,7 @@ in {
     ./services/hass.nix
     ./services/jellyfin.nix
     ./services/magic-mirror.nix
+    ./services/netdata.nix
     ./services/nfs.nix
     ./services/usenet.nix
 
