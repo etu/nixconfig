@@ -3,31 +3,33 @@
 {
   # Make sure to have nginx enabled
   services.nginx.enable = true;
-  services.nginx.virtualHosts = {
+  services.nginx.virtualHosts = let
+    onlyLan = ''
+      allow 10.3.0.0/24;
+      deny all;
+    '';
+  in {
     # Sonarr
-    "series.lan" = {
-      listen = [ { addr = "0.0.0.0"; port = 81; } ];
-      locations."/".proxyPass = "http://127.0.0.1:8989/";
+    "series.lan".locations."/" = {
+      proxyPass = "http://127.0.0.1:8989/";
+      extraConfig = onlyLan;
     };
     # Radarr
-    "movies.lan" = {
-      listen = [ { addr = "0.0.0.0"; port = 81; } ];
-      locations."/".proxyPass = "http://127.0.0.1:7878/";
+    "movies.lan".locations."/" = {
+      proxyPass = "http://127.0.0.1:7878/";
+      extraConfig = onlyLan;
     };
     # Lidarr
-    "music.lan" = {
-      listen = [ { addr = "0.0.0.0"; port = 81; } ];
-      locations."/".proxyPass  = "http://127.0.0.1:8686/";
+    "music.lan".locations."/" = {
+      proxyPass  = "http://127.0.0.1:8686/";
+      extraConfig = onlyLan;
     };
     # Nzbget
-    "nzbget.lan" = {
-      listen = [ { addr = "0.0.0.0"; port = 81; } ];
-      locations."/".proxyPass = "http://127.0.0.1:6789/";
+    "nzbget.lan".locations."/" = {
+      proxyPass = "http://127.0.0.1:6789/";
+      extraConfig = onlyLan;
     };
   };
-
-  # Open NGiNX port
-  networking.firewall.allowedTCPPorts = [ 81 ];
 
   # Enable usenet related services in a container
   containers.usenet = {

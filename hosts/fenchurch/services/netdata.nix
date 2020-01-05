@@ -4,8 +4,10 @@
   # Make sure to have NGiNX enabled
   services.nginx.enable = true;
   services.nginx.virtualHosts."netdata.lan" = {
-    listen = [ { addr = "0.0.0.0"; port = 81; } ];
     locations."/".extraConfig = ''
+      allow 10.3.0.0/24;
+      deny all;
+
       proxy_pass http://127.0.0.1:19999;
       proxy_http_version 1.1;
       proxy_set_header Host $host;
@@ -14,9 +16,6 @@
       proxy_set_header Connection $connection_upgrade;
     '';
   };
-
-  # Open NGiNX port
-  networking.firewall.allowedTCPPorts = [ 81 ];
 
   # Enable Netdata
   services.netdata.enable = true;
