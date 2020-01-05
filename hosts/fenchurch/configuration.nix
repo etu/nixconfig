@@ -21,6 +21,7 @@ in {
     ./persistence.nix
 
     # Import local services that are host specific
+    ./services/freshrss.nix
     ./services/hass.nix
     ./services/jellyfin.nix
     ./services/magic-mirror.nix
