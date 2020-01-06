@@ -9,6 +9,7 @@ let
 in {
   users.users.guests = {
     isNormalUser = true;
+    createHome = false;
     uid = 1002;
     home = path;
     openssh.authorizedKeys.keys = keys.talyz ++ keys.guests;
