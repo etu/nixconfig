@@ -31,10 +31,10 @@ in {
       # My own font
       (stdenv.mkDerivation rec {
         pname = "font-etuvetica";
-        version = "5";
+        version = "1";
 
         src = pkgs.fetchurl {
-          url = "https://home.elis.nu/etuvetica${version}/css/fonts/etuvetica.ttf";
+          url = "https://elis.nu/etuvetica/css/fonts/etuvetica.ttf";
           sha256 = "0z1wf1q7wx8ny54w6fcz91r5xx9m2496jqfybciricmwhgdkz25j";
         };
 
