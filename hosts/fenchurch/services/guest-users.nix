@@ -24,6 +24,6 @@ in {
 
   fileSystems."${path}/files" = {
     device = "/media/legacy/files";
-    options = [ "bind" "noauto" "x-systemd.automount" ];
+    options = [ "ro" "bind" "noauto" "x-systemd.automount" ];
   };
 }
