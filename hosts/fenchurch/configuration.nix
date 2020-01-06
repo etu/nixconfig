@@ -22,6 +22,7 @@ in {
 
     # Import local services that are host specific
     ./services/freshrss.nix
+    ./services/guest-users.nix
     ./services/hass.nix
     ./services/jellyfin.nix
     ./services/magic-mirror.nix
