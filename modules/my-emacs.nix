@@ -171,7 +171,6 @@ in {
       gnome3.adwaita-icon-theme # Icons for gnome packages that sometimes use them but don't depend on them
       gnome3.evolution
       scrot
-      i3lock-pixeled
       pavucontrol
     ]);
   };
