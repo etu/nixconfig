@@ -136,8 +136,7 @@ in {
       displayManager.lightdm.autoLogin.user = config.my.user.username;
 
       # Needed for autologin
-      desktopManager.default = "none";
-      windowManager.default = "exwm";
+      displayManager.defaultSession = "none+exwm";
 
       # Set up the login session
       windowManager.session = singleton {
