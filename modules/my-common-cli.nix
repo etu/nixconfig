@@ -14,13 +14,14 @@ in {
 
     # Select internationalisation properties.
     i18n = {
-      consoleFont = "Lat2-Terminus16";
-      consoleKeyMap = "dvorak-sv-a1";
       defaultLocale = "en_US.UTF-8";
       supportedLocales = [
         "all"
       ];
     };
+
+    console.font = "Lat2-Terminus16";
+    console.keyMap = "dvorak-sv-a1";
 
     # Enable the OpenSSH daemon.
     services.openssh.enable = true;
