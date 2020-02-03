@@ -40,7 +40,7 @@ in {
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelPackages = pkgs.linuxPackages_5_3;
+  boot.kernelPackages = pkgs.linuxPackages_5_5;
 
   # Install thinkpad modules for TLP
   boot.extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
