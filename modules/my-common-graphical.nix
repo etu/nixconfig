@@ -109,7 +109,7 @@ in {
 
     # Keyboard layout.
     services.xserver.layout = "se";
-    services.xserver.xkbOptions = "eurosign:e,ctrl:nocaps,numpad:mac,kpdl:dot";
+    services.xserver.xkbOptions = "eurosign:e,ctrl:nocaps,numpad:mac,kpdl:dot,compose:sclk";
     services.xserver.xkbVariant = "dvorak";
 
     # Enable U2F key support
