@@ -514,11 +514,11 @@
                    (concat str "- "))))))
 
 ;; Gnuplot
-;;(use-package gnuplot
-;;  :defer 2
-;;  :bind (("M-C-g" . org-plot/gnuplot))
-;;  :config
-;;  (setq gnuplot-program "@gnuplot@/bin/gnuplot"))
+(use-package gnuplot
+  :defer 2
+  :bind (("M-C-g" . org-plot/gnuplot))
+  :config
+  (setq gnuplot-program "@gnuplot@/bin/gnuplot"))
 
 
 (use-package highlight-symbol
