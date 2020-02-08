@@ -527,6 +527,13 @@
   :config (progn (setq highlight-symbol-idle-delay 0.5)
                  (setq highlight-symbol-highlight-single-occurrence nil)))
 
+
+;; Display emojis in Emacs
+(use-package emojify
+  :defer 2
+  :config (global-emojify-mode))
+
+
 ;;;
 ;;;
 ;;; Custom functions
