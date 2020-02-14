@@ -93,6 +93,9 @@ in {
   # Install ADB for occational android device things
   programs.adb.enable = true;
 
+  # Install netdata for system monitoring
+  services.netdata.enable = true;
+
   # Set passwords
   users.users.root.initialHashedPassword = secrets.hashedEtuPassword;
   users.users.etu.initialHashedPassword = secrets.hashedRootPassword;
