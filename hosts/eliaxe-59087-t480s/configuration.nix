@@ -85,9 +85,13 @@ in {
 
   # Define a user account.
   my.user.enable = true;
+  my.user.extraGroups = [ "adbusers" ];
 
   # Immutable users due to tmpfs
   users.mutableUsers = false;
+
+  # Install ADB for occational android device things
+  programs.adb.enable = true;
 
   # Set passwords
   users.users.root.initialHashedPassword = secrets.hashedEtuPassword;
