@@ -46,6 +46,7 @@ in {
       bat
       bc                # Dependency for some fish functions
       curl
+      fd
       file
       fzf
       git
