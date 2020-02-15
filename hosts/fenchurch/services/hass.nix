@@ -28,6 +28,7 @@
       "hue"
       "kodi"
       "media_player"
+      "mobile_app"
       "notify"
       "system_health"
       "yr"
