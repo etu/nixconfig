@@ -141,7 +141,11 @@ in {
       # Set up the login session
       windowManager.session = singleton {
         name = "exwm";
-        start = "${config.services.emacs.package}/bin/emacs";
+        start = ''
+          ${pkgs.xorg.xmodmap}/bin/xmodmap -e 'keycode 78 = Multi_key' # Keybind Scroll Lock to Compose
+          ${pkgs.xorg.xmodmap}/bin/xmodmap -e 'keycode 94 = Multi_key' # Keybind <> to Compose
+          ${config.services.emacs.package}/bin/emacs
+        '';
       };
 
       # Enable auto locking of the screen

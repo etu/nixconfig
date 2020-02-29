@@ -21,7 +21,7 @@ in {
     };
 
     console.font = "Lat2-Terminus16";
-    console.keyMap = "dvorak-sv-a1";
+    console.keyMap = "dvorak";
 
     # Enable the OpenSSH daemon.
     services.openssh.enable = true;
