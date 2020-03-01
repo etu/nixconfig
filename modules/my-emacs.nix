@@ -142,8 +142,8 @@ in {
       windowManager.session = singleton {
         name = "exwm";
         start = ''
-          ${pkgs.xorg.xmodmap}/bin/xmodmap -e 'keycode 78 = Multi_key' # Keybind Scroll Lock to Compose
-          ${pkgs.xorg.xmodmap}/bin/xmodmap -e 'keycode 94 = Multi_key' # Keybind <> to Compose
+          # Keybind:                           ScrollLock -> Compose,      <> -> Compose
+          ${pkgs.xorg.xmodmap}/bin/xmodmap -e 'keycode 78 = Multi_key' -e 'keycode 94 = Multi_key'
           ${config.services.emacs.package}/bin/emacs
         '';
       };
