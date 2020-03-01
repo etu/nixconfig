@@ -29,6 +29,13 @@
     # Kitty
     ".config/kitty/kitty.conf" = { source = ./dotfiles/kitty.conf; };
 
+    # Lorrirc
+    ".direnvrc".text = ''
+      use_nix() {
+        eval "$(lorri direnv)"
+      }
+    '';
+
     # GnuPG
     ".gnupg/dirmngr.conf" = { text = "keyserver hkps://keys.openpgp.org"; };
   };

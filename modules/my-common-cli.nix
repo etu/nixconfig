@@ -37,6 +37,9 @@ in {
     networking.firewall.enable = true;
     networking.firewall.allowPing = true;
 
+    # Enable lorri on all systems.
+    services.lorri.enable = true;
+
     # Root shell
     users.extraUsers.root.shell = pkgs.fish;
 
