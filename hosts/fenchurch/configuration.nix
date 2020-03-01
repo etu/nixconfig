@@ -127,6 +127,10 @@ in {
   # Enable kvm
   virtualisation.libvirtd.enable = true;
 
+  # Set up Letsencrypt
+  security.acme.email = "elis@hirwing.se";
+  security.acme.acceptTerms = true;
+
   users.users.downloads = { group = "downloads"; uid = 947; };
   users.groups.downloads.gid = 947;
 }
