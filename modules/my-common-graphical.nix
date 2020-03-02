@@ -83,6 +83,13 @@ in {
       stupidterm
       kitty
       tdesktop
+
+      # Add a command to run the compose xmodmap again
+      (writeScriptBin "fixcompose" ''
+        #!${stdenv.shell}
+
+        ${xorg.xmodmap}/bin/xmodmap -e 'keycode 78 = Multi_key' -e 'keycode 94 = Multi_key'
+      '')
     ];
 
     # Enable pulseaudio.
