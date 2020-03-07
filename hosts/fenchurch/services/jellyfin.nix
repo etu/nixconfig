@@ -7,6 +7,7 @@
     "jellyfin.elis.nu" = {
       forceSSL = true;
       enableACME = true;
+      locations."/".proxyWebsockets = true;
       locations."/".proxyPass = "http://127.0.0.1:8096/";
     };
   };

@@ -7,17 +7,12 @@ let
 in {
   # Make sure to have NGiNX enabled
   services.nginx.enable = true;
-  services.nginx.virtualHosts."hass.lan" = {
-    locations."/".extraConfig = ''
+  services.nginx.virtualHosts."hass.lan".locations."/" = {
+    proxyWebsockets = true;
+    proxyPass = "http://127.0.0.1:8123";
+    extraConfig = ''
       allow 10.3.0.0/24;
       deny all;
-
-      proxy_pass http://127.0.0.1:8123;
-      proxy_http_version 1.1;
-      proxy_set_header Host $host;
-      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-      proxy_set_header Upgrade $http_upgrade;
-      proxy_set_header Connection $connection_upgrade;
     '';
   };
 
