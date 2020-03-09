@@ -11,10 +11,6 @@ let
   # Import my ssh public keys
   keys = import ../../data/pubkeys.nix;
 
-  # Declare download path for home-manager to avoid the need to have it as a channel
-  home-manager = builtins.fetchTarball {
-    url = "https://github.com/rycee/home-manager/archive/master.tar.gz";
-  };
 in {
   imports = [
     ./hardware-configuration.nix
@@ -32,9 +28,6 @@ in {
 
     # Import local modules
     ../../modules
-
-    # Import the home-manager module
-    "${home-manager}/nixos"
   ];
 
   # The NixOS release to be compatible with for stateful data such as databases.
@@ -122,7 +115,7 @@ in {
   };
 
   # Home-manager as nix module
-  home-manager.users.etu = import ../../home-etu-nixpkgs/home.nix;
+  my.home-manager.enable = true;
 
   # Enable kvm
   virtualisation.libvirtd.enable = true;

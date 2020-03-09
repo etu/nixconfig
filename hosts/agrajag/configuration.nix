@@ -8,10 +8,6 @@ let
   # Load secrets
   secrets = import ../../data/load-secrets.nix;
 
-  # Declare download path for home-manager to avoid the need to have it as a channel
-  home-manager = builtins.fetchTarball {
-    url = "https://github.com/rycee/home-manager/archive/master.tar.gz";
-  };
 in {
   imports = [
     # Include the results of the hardware scan.
@@ -20,9 +16,6 @@ in {
 
     # Import local modules
     ../../modules
-
-    # Import the home-manager module
-    "${home-manager}/nixos"
   ];
 
   # The NixOS release to be compatible with for stateful data such as databases.
@@ -125,5 +118,5 @@ in {
   users.users.etu.initialHashedPassword = secrets.hashedRootPassword;
 
   # Home-manager as nix module
-  home-manager.users.etu = import ../../home-etu-nixpkgs/home.nix;
+  my.home-manager.enable = true;
 }

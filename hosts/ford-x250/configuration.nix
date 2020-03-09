@@ -13,10 +13,6 @@ let
     url = "https://github.com/NixOS/nixos-hardware/archive/master.tar.gz";
   };
 
-  # Declare download path for home-manager to avoid the need to have it as a channel
-  home-manager = builtins.fetchTarball {
-    url = "https://github.com/rycee/home-manager/archive/master.tar.gz";
-  };
 in {
   imports = [
     ./hardware-configuration.nix
@@ -24,9 +20,6 @@ in {
 
     # Import local modules
     ../../modules
-
-    # Import the home-manager module
-    "${home-manager}/nixos"
 
     # Include hardware quirks
     "${nixos-hardware}/lenovo/thinkpad/x250"
@@ -113,7 +106,7 @@ in {
   users.users.etu.initialHashedPassword = secrets.hashedRootPassword;
 
   # Home-manager as nix module
-  home-manager.users.etu = import ../../home-etu-nixpkgs/home.nix;
+  my.home-manager.enable = true;
 
   # Enable kvm
   virtualisation.libvirtd.enable = true;
