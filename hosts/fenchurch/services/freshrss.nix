@@ -7,7 +7,7 @@
     "freshrss.elis.nu" = {
       forceSSL = true;
       enableACME = true;
-      proxyPass = "http://127.0.0.1:18888/";
+      locations."/".proxyPass = "http://127.0.0.1:18888/";
     };
   };
 
