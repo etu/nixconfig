@@ -124,6 +124,7 @@ in {
 
     # Enable networkmanager.
     networking.networkmanager.enable = true;
+    networking.networkmanager.wifi.backend = "iwd";
 
     # 1714-1764 is KDE Connect.
     networking.firewall.allowedTCPPortRanges = [ { from = 1714; to = 1764; } ];
