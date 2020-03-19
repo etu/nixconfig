@@ -54,6 +54,21 @@ in {
           }
         '';
 
+        # .XCompose
+        ".XCompose".text = ''
+          include "%L"
+
+          # Default already
+          # <Multi_key> <a> <a>: "å"
+          # <Multi_key> <A> <A>: "Å"
+
+          # Some nice binds
+          <Multi_key> <a> <e>: "ä"
+          <Multi_key> <A> <E>: "Ä"
+          <Multi_key> <o> <e>: "ö"
+          <Multi_key> <O> <E>: "Ö"
+        '';
+
         # GnuPG
         ".gnupg/dirmngr.conf" = { text = "keyserver hkps://keys.openpgp.org"; };
       };
