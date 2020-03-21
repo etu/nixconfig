@@ -9,6 +9,7 @@
   ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
+  boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
@@ -19,20 +20,35 @@
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/3C6A-C5A8";
+    device = "/dev/disk/by-uuid/9CF3-D6E4";
     fsType = "vfat";
     options = [ "noauto" "x-systemd.automount" ];
   };
 
   fileSystems."/nix" = {
-    device = "/dev/disk/by-uuid/dca1c92d-cedb-4bc2-810c-43320a1025a7";
-    fsType = "ext4";
+    device = "zroot/nix";
+    fsType = "zfs";
   };
 
   fileSystems."/tmp" = {
     device = "none";
     fsType = "tmpfs";
     options = [ "defaults" "size=3G" "mode=755" "noauto" "x-systemd.automount" ];
+  };
+
+  fileSystems."/home" = {
+    device = "zroot/home";
+    fsType = "zfs";
+  };
+
+  fileSystems."/persistent" = {
+    device = "zroot/persistent";
+    fsType = "zfs";
+  };
+
+  fileSystems."/var/log" = {
+    device = "zroot/var-log";
+    fsType = "zfs";
   };
 
   fileSystems."/mnt/hactar" = {

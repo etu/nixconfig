@@ -18,7 +18,7 @@ in {
   ];
 
   # The NixOS release to be compatible with for stateful data such as databases.
-  system.stateVersion = "18.09";
+  system.stateVersion = "20.09";
 
   networking.hostName = "kodi";
 
@@ -27,12 +27,18 @@ in {
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  # Settings needed for ZFS
+  boot.supportedFilesystems = [ "zfs" ];
+  networking.hostId = "10227851";
+  services.zfs.autoScrub.enable = true;
+  services.zfs.autoSnapshot.enable = true;
+
   # AMD GPU drivers
   services.xserver.videoDrivers = [ "amdgpu" ];
 
   # Auto upgrade system
   system.autoUpgrade.enable = true;
-  system.autoUpgrade.channel = "https://nixos.org/channels/nixos-19.09";
+  system.autoUpgrade.channel = "https://nixos.org/channels/nixos-unstable";
 
   # Auto garbage collect
   nix.gc.automatic = true;
