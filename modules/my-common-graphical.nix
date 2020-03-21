@@ -99,8 +99,8 @@ in {
 
       daemon.config = {
         flat-volumes = "no";
-        default-sample-format = "s24le";
-        default-sample-rate = "44100";
+        # default-sample-format = "s24le";
+        # default-sample-rate = "44100";
         resample-method = "speex-float-10";
         avoid-resampling = "true";
       };
