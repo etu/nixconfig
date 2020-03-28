@@ -8,8 +8,16 @@ let
   # Load secrets
   secrets = import ../../data/load-secrets.nix;
 
+  # Declare download path for nixos-hardware to avoid the need to have it as a channel
+  nixos-hardware = builtins.fetchTarball {
+    url = "https://github.com/NixOS/nixos-hardware/archive/master.tar.gz";
+  };
+
 in {
   imports = [
+    # Include hardware quirks
+    "${nixos-hardware}/lenovo/thinkpad/t495"
+
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./persistence.nix
@@ -35,9 +43,6 @@ in {
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_5_5;
 
-  # Install thinkpad modules for TLP
-  boot.extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
-
   # Settings needed for ZFS
   boot.supportedFilesystems = [ "zfs" ];
   networking.hostId = "27416952";
@@ -45,7 +50,6 @@ in {
   services.zfs.autoSnapshot.enable = true;
 
   # Hardware settings
-  hardware.cpu.amd.updateMicrocode = true;
   hardware.enableRedistributableFirmware = true;
 
   # Include udev rules to give permissions to the video group to change
