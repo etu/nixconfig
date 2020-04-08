@@ -65,10 +65,9 @@ in {
 
       # PHP utils
       php
-      phpPackages.composer
-      phpPackages.xdebug
-      phpPackages.phpcbf
-      phpPackages.phpcs
+      php.packages.composer
+      php.packages.phpcbf
+      php.packages.phpcs
     ];
   };
 }
