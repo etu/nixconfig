@@ -1,0 +1,3 @@
+#!/bin/sh
+
+exec git log --graph --decorate --pretty=format:'%C(yellow)%h %Cgreen%cd%C(bold red)%d%Creset %s' --abbrev-commit --date=short

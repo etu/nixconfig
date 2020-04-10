@@ -71,6 +71,17 @@ in {
 
         # GnuPG
         ".gnupg/dirmngr.conf" = { text = "keyserver hkps://keys.openpgp.org"; };
+
+        # Some extra scripts
+        "bin/256colors2.pl".source = ./dotfiles/bin/256colors2.pl;
+        "bin/git-branchclean".source = ./dotfiles/bin/git-branchclean;
+        "bin/git-git".source = ./dotfiles/bin/git-git;
+        "bin/git-lol".source = ./dotfiles/bin/git-lol;
+        "bin/git-refetch-tags".source = ./dotfiles/bin/git-refetch-tags;
+        "bin/restow".source = ./dotfiles/bin/restow;
+        "bin/pp".source = ./dotfiles/bin/prettyping;
+        "bin/prettyping".source = ./dotfiles/bin/prettyping;
+        "bin/spacecolors".source = ./dotfiles/bin/spacecolors;
       };
 
       programs.git = {

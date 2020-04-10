@@ -1,0 +1,29 @@
+#!/bin/sh
+
+# Enter directory
+cd $HOME/.dotfiles
+
+# Update directory
+git pull
+
+case $(hostname) in
+    "agrajag")
+        stow --dotfiles caff pass skeleton
+        ;;
+
+    "eliaxe-59087-t480s")
+        stow --dotfiles caff pass skeleton
+        ;;
+
+    "fenchurch")
+        stow --dotfiles skeleton
+        ;;
+
+    "ford-x250")
+        stow --dotfiles caff pass skeleton
+        ;;
+
+    *)
+        echo "This computer is not recognized by restow."
+        ;;
+esac

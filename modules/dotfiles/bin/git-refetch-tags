@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# Drop all tags
+git tag -l | xargs git tag -d
+
+# Fetch all tags from remote
+git fetch --tags
