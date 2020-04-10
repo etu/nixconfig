@@ -531,8 +531,10 @@
 ;; Display emojis in Emacs
 (use-package emojify
   :defer 2
-  :config (global-emojify-mode))
-
+  :config (progn (setq emojify-display-style 'unicode
+                       emojify-emoji-styles '(unicode)
+                       emojify-program-contexts nil)
+                 (global-emojify-mode)))
 
 ;;;
 ;;;
