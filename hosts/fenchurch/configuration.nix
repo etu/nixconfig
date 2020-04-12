@@ -67,7 +67,10 @@ in {
     network.ssh = {
       enable = true;
       port = 2222;
-      hostECDSAKey = /persistent/initrd-ssh-key;
+      hostKeys = [
+        /persistent/etc/initrd-ssh/ssh_host_rsa_key
+        /persistent/etc/initrd-ssh/ssh_host_ed_25519_key
+      ];
       authorizedKeys = config.users.users.etu.openssh.authorizedKeys.keys;
     };
     # Prompt me for password to decrypt zfs
