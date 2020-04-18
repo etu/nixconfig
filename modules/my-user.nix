@@ -33,6 +33,13 @@ in {
       default = [];
       description = "Additional authorized keys";
     };
+    persistent = {
+      homeDir = mkOption {
+        type = types.str;
+        default = "/persistent/home/etu";
+        description = "Location of persistent home files";
+      };
+    };
   };
 
   config = mkIf cfg.enable {

@@ -16,8 +16,16 @@ in {
 
   config = lib.mkIf cfg.enable {
     home-manager.users.etu = { pkgs, ... }: {
+      # Import a persistance module for home-manager.
+      imports = [ ./home-manager/persistence.nix ];
+
       programs.home-manager.enable = true;
       programs.home-manager.path = home-manager-url;
+
+      home.persistence.${config.my.user.persistent.homeDir} = {
+        files = [];
+        directories = [];
+      };
 
       home.file = {
         # Home nix config.
