@@ -39,6 +39,14 @@ in {
         default = "/persistent/home/etu";
         description = "Location of persistent home files";
       };
+      extraFiles = mkOption {
+        type = types.listOf types.str;
+        default = [];
+      };
+      extraDirectories = mkOption {
+        type = types.listOf types.str;
+        default = [];
+      };
     };
   };
 

@@ -23,8 +23,8 @@ in {
       programs.home-manager.path = home-manager-url;
 
       home.persistence.${config.my.user.persistent.homeDir} = {
-        files = [];
-        directories = [];
+        files = [] ++ config.my.user.persistent.extraFiles;
+        directories = [] ++ config.my.user.persistent.extraDirectories;
       };
 
       home.file = {
