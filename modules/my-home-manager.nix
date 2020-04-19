@@ -83,9 +83,6 @@ in {
           <Multi_key> <O> <E>: "Ö"
         '';
 
-        # GnuPG
-        ".gnupg/dirmngr.conf" = { text = "keyserver hkps://keys.openpgp.org"; };
-
         # Some extra scripts
         "bin/256colors2.pl".source = ./dotfiles/bin/256colors2.pl;
         "bin/git-branchclean".source = ./dotfiles/bin/git-branchclean;
