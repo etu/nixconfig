@@ -62,9 +62,6 @@ in {
   # Enable fwupd for firmware updates etc
   services.fwupd.enable = true;
 
-  # Enable TLP
-  services.tlp.enable = true;
-
   # Enable bluetooth
   hardware.bluetooth.enable = true;
 
