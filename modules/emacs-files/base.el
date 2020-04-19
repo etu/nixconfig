@@ -366,8 +366,7 @@
 ;; Webpaste
 (use-package webpaste
   :defer 2
-  :bind (("C-c C-p C-b" . webpaste-paste-buffer)
-         ("C-c C-p C-r" . webpaste-paste-region)))
+  :bind (("C-c C-p C-p" . webpaste-paste-buffer-or-region)))
 
 ;; Yasnippet (Yet Another Snippet Extension)
 (use-package yasnippet
