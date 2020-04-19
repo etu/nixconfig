@@ -24,13 +24,13 @@
     fsType = "zfs";
   };
 
-  fileSystems."/home" = {
-    device = "zroot/home";
+  fileSystems."/persistent" = {
+    device = "zroot/persistent";
     fsType = "zfs";
   };
 
-  fileSystems."/persistent" = {
-    device = "zroot/persistent";
+  fileSystems."/persistent/home" = {
+    device = "zroot/home";
     fsType = "zfs";
   };
 

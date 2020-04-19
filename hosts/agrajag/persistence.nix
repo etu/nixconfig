@@ -22,7 +22,37 @@
 
   # Persistence of roots dotfiles between boots
   fileSystems."/root" = {
-    device = "/home/root";
+    device = "/persistent/home/root";
     options = [ "bind" "noauto" "x-systemd.automount" ];
+  };
+
+  my.user.persistent = {
+    extraFiles = [
+      ".config/fish/fish_variables"
+    ];
+    extraDirectories = [
+      ".caffrc"
+      ".dotfiles"
+      ".gnupg"
+      ".local/share/TelegramDesktop/tdata"
+      ".local/share/dino"
+      ".local/share/direnv"
+      ".local/share/emacs"
+      ".local/share/fish"
+      ".mozilla/firefox"
+      ".msmtprc"
+      ".password-store"
+      ".ssh"
+      "Downloads"
+      "code"
+      "documents"
+      "org"
+
+      # Evolution
+      ".config/evolution"
+      ".config/goa-1.0"
+      ".local/share/evolution"
+      ".local/share/keyrings"
+    ];
   };
 }
