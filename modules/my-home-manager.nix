@@ -16,10 +16,12 @@ in {
 
   config = lib.mkIf cfg.enable {
     # Make sure to start the home-manager activation before I log it.
-    systemd.services.home-manager-etu.before = [ "display-manager.service" ];
-    systemd.services.home-manager-etu.wantedBy = [ "multi-user.target" ];
+    systemd.services."home-manager-${config.my.user.username}" = {
+      before = [ "display-manager.service" ];
+      wantedBy = [ "multi-user.target" ];
+    };
 
-    home-manager.users.etu = { pkgs, ... }: {
+    home-manager.users.${config.my.user.username} = { pkgs, ... }: {
       # Import a persistance module for home-manager.
       imports = [ ./home-manager/persistence.nix ];
 
