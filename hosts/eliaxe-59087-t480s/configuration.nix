@@ -23,7 +23,7 @@ in {
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelPackages = pkgs.linuxPackages_4_19;
+  boot.kernelPackages = pkgs.linuxPackages_5_5;
 
   # Enable ZFS support
   boot.supportedFilesystems = [ "zfs" ];
@@ -78,13 +78,16 @@ in {
 
   # Define a user account.
   my.user.enable = true;
-  my.user.extraGroups = [ "adbusers" ];
+  my.user.extraGroups = [ "adbusers" "docker" ];
 
   # Immutable users due to tmpfs
   users.mutableUsers = false;
 
   # Install ADB for occational android device things
   programs.adb.enable = true;
+
+  # Enable docker deamon
+  virtualisation.docker.enable = true;
 
   # Install netdata for system monitoring
   services.netdata.enable = true;
