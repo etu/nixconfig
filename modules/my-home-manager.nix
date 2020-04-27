@@ -108,7 +108,7 @@ in {
         ignores = [ ".ac-php-conf.json" ];
 
         includes = [
-          { condition = "gitdir:~/tvnu/"; path = "~/.config/git/work_config"; }
+          { condition = "gitdir:/persistent/home/etu/tvnu/"; path = "~/.config/git/work_config"; }
         ];
       };
 
