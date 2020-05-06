@@ -17,6 +17,10 @@
   my.user.persistent = {
     extraFiles = [
       ".config/fish/fish_variables"
+
+      # Mumble files
+      ".config/Mumble/Mumble.conf"
+      ".local/share/Mumble/Mumble/mumble.sqlite"
     ];
     extraDirectories = [
       ".caffrc"
