@@ -20,12 +20,6 @@
     options = [ "bind" "noauto" "x-systemd.automount" ];
   };
 
-  # Persistence of roots dotfiles between boots
-  fileSystems."/root" = {
-    device = "/persistent/home/root";
-    options = [ "bind" "noauto" "x-systemd.automount" ];
-  };
-
   my.user.persistent = {
     extraFiles = [
       ".config/fish/fish_variables"
