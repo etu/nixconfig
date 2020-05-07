@@ -19,6 +19,8 @@
       ".config/fish/fish_variables"
 
       # Work
+      ".docker/config.json"
+      ".kube/config"
       ".transifexrc"
       "bin/gh-md-toc"
       "bin/git-tvlog"
@@ -46,8 +48,6 @@
       ".chef"
       ".config/Slack"
       ".config/VirtualBox"
-      ".docker"
-      ".kube"
       ".vagrant.d"
       "VirtualBox VMs"
       "tvnu"
