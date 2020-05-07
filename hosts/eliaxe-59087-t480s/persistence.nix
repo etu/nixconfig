@@ -14,12 +14,6 @@
   # Persistence of NetworkManager network connections.
   environment.etc."NetworkManager/system-connections".source = "/persistent/etc/NetworkManager/system-connections";
 
-  # Persistence of roots dotfiles between boots
-  fileSystems."/root" = {
-    device = "/persistent/home/root";
-    options = [ "bind" "noauto" "x-systemd.automount" ];
-  };
-
   my.user.persistent = {
     extraFiles = [
       ".config/fish/fish_variables"
