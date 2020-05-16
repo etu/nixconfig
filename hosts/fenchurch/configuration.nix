@@ -15,6 +15,7 @@ in {
   imports = [
     ./hardware-configuration.nix
     ./persistence.nix
+    ./raid-target.nix
 
     # Import local services that are host specific
     ./services/freshrss.nix

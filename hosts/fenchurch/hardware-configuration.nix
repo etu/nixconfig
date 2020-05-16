@@ -61,6 +61,10 @@
     device = "/dev/mapper/cryptraid";
     fsType = "ext4";
     options = [ "noauto" ];
+    encrypted = {
+      blkDev = "/dev/disk/by-uuid/c8454f1f-39eb-49f9-9756-a69c41068ede";
+      label = "cryptraid";
+    };
   };
 
   # And install cryptsetup to unlock the raid
