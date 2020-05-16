@@ -18,12 +18,10 @@
     freshrssSrc = pkgs.fetchFromGitHub {
       owner = "FreshRSS";
       repo = "FreshRSS";
-      rev = "1.15.3";
-      sha256 = "0xnflvqhifk0icqqclv4qbs43x77syi3szha5mzqxf2fxyzrs358";
+      rev = "1.16.0";
+      sha256 = "1yfq1nh6bwf6lr85wp4krvcbrx0dvpxzsaal4imbskr15f3cjbk7";
     };
   in {
-    autoStart = true;
-
     bindMounts = {
       "freshrss-data" = {
         mountPoint = "${dataDir}/data";
