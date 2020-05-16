@@ -62,7 +62,7 @@ in {
       extraGroups = [ "wheel" ] ++ extraGroups;
       shell = pkgs.fish;
       openssh.authorizedKeys.keys = with keys.etu;
-        fenchurch ++ agrajag ++ ford-x250 ++ work ++ extraAuthorizedKeys;
+        fenchurch ++ agrajag ++ work ++ extraAuthorizedKeys;
     };
 
     # List packages installed in system profile. To search by name, run:

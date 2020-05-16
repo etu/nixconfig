@@ -88,7 +88,7 @@ in {
       shell = pkgs.fish;
       home = "/home/etu";
       uid = 1000;
-      openssh.authorizedKeys.keys = with keys.etu; weechat ++ fenchurch ++ agrajag ++ ford-x250 ++ work;
+      openssh.authorizedKeys.keys = with keys.etu; weechat ++ fenchurch ++ agrajag ++ work;
     };
 
     concate = {

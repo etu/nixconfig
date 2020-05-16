@@ -19,10 +19,6 @@ case $(hostname) in
         stow --dotfiles skeleton
         ;;
 
-    "ford-x250")
-        stow --dotfiles caff pass skeleton
-        ;;
-
     *)
         echo "This computer is not recognized by restow."
         ;;

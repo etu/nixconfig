@@ -103,5 +103,5 @@ in {
 
   # Set up root user
   users.users.root.initialHashedPassword = secrets.hashedEtuPassword;
-  users.users.root.openssh.authorizedKeys.keys = with keys.etu; fenchurch ++ agrajag ++ ford-x250;
+  users.users.root.openssh.authorizedKeys.keys = with keys.etu; fenchurch ++ agrajag ++ work;
 }

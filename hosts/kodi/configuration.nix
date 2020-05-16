@@ -109,5 +109,5 @@ in {
   networking.firewall.allowedTCPPorts = [ 8080 ];
 
   # SSH Keys for remote logins
-  users.users.root.openssh.authorizedKeys.keys = with keys.etu; fenchurch ++ agrajag ++ ford-x250;
+  users.users.root.openssh.authorizedKeys.keys = with keys.etu; fenchurch ++ agrajag ++ work;
 }
