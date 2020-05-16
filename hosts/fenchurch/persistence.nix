@@ -32,7 +32,6 @@
       ".local/share/direnv"
       ".local/share/emacs"
       ".local/share/fish"
-      ".password-store"
       ".ssh"
       "backups"
       "code"
