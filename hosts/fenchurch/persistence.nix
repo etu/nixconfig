@@ -9,10 +9,7 @@
   environment.etc."ssh/ssh_host_ed25519_key.pub".source = "/persistent/etc/ssh/ssh_host_ed25519_key.pub";
 
   # Avoid the need to have a moved config and help muscle memory of location
-  fileSystems."/etc/nixos" = {
-    device = "/persistent/etc/nixos";
-    options = [ "bind" "noauto" "x-systemd.automount" ];
-  };
+  environment.etc."nixos".source = "/persistent/etc/nixos";
 
   # Bind mount for persistent certificates for nginx
   fileSystems."/var/lib/acme" = {
@@ -20,9 +17,27 @@
     options = [ "bind" "noauto" "x-systemd.automount" ];
   };
 
-  # Persistence of roots dotfiles between boots
-  fileSystems."/root" = {
-    device = "/persistent/home/root";
+  # Persistance of concates home directory
+  fileSystems."/home/concate" = {
+    device = "/persistent/home/concate";
     options = [ "bind" "noauto" "x-systemd.automount" ];
+  };
+
+  my.user.persistent = {
+    extraFiles = [
+      ".config/fish/fish_variables"
+    ];
+    extraDirectories = [
+      ".dotfiles"
+      ".local/share/direnv"
+      ".local/share/emacs"
+      ".local/share/fish"
+      ".password-store"
+      ".ssh"
+      "backups"
+      "code"
+      "documents"
+      "org"
+    ];
   };
 }

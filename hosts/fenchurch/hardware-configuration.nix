@@ -19,11 +19,6 @@
     options = [ "defaults" "size=5G" "mode=755" ];
   };
 
-  fileSystems."/home" = {
-    device = "zroot/home";
-    fsType = "zfs";
-  };
-
   fileSystems."/nix" = {
     device = "zroot/nix";
     fsType = "zfs";
@@ -31,6 +26,11 @@
 
   fileSystems."/persistent" = {
     device = "zroot/persistent";
+    fsType = "zfs";
+  };
+
+  fileSystems."/persistent/home" = {
+    device = "zroot/home";
     fsType = "zfs";
   };
 
