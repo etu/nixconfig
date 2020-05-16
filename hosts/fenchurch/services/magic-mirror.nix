@@ -2,7 +2,8 @@
 
 {
   # Run docker container with the magic mirror software
-  docker-containers.magic-mirror = {
+  virtualisation.oci-containers.backend = "podman";
+  virtualisation.oci-containers.containers.magic-mirror = {
     image = "bastilimbach/docker-magicmirror";
     ports = [ "9000:8080" ];
     volumes = [
