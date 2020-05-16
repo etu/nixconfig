@@ -78,11 +78,6 @@
         enable = true;
         package = pkgs.postgresql_11;
         dataDir = "/var/lib/postgresql/11";
-        enableTCPIP = true;
-        authentication = ''
-          local all all trust
-          host all all ::1/128 trust
-        '';
       };
 
       # Set up FreshRSS service to configure the web root
