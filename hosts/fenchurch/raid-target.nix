@@ -3,6 +3,7 @@
 {
   config.systemd.targets.cryptraid = {
     wants = [
+      "systemd-cryptsetup@cryptraid.service"
       "media-legacy.mount"
       "container@jellyfin.service"
       "container@usenet.service"
@@ -12,16 +13,11 @@
     ];
   };
 
-  config.systemd.services."container@jellyfin" = {
-    after = [ "media-legacy.mount" ];
-  };
-
-  config.systemd.services."container@usenet" = {
-    after = [ "media-legacy.mount" ];
-  };
+  config.systemd.services."container@jellyfin".after = [ "media-legacy.mount" ];
+  config.systemd.services."container@usenet".after = [ "media-legacy.mount" ];
 
   config.systemd.services.nfs-server = {
-    wantedBy = [ "cryptraid.target" ];
+    wantedBy = lib.mkForce [ "cryptraid.target" ];
     after = [ "media-legacy.mount" ];
   };
 }

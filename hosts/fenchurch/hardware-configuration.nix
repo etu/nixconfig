@@ -67,6 +67,12 @@
     };
   };
 
+  # Write a crypttab file for the raid
+  environment.etc.crypttab.text = "cryptraid UUID=c8454f1f-39eb-49f9-9756-a69c41068ede none noauto";
+
+  # Include hook for systemd
+  systemd.packages = [ pkgs.systemd-cryptsetup-generator ];
+
   # And install cryptsetup to unlock the raid
   environment.systemPackages = with pkgs; [ cryptsetup ];
 
