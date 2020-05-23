@@ -34,6 +34,7 @@ let
     inherit systemd kitty flameshot;
     lockCommand = physlockCommand;
     xbacklight = acpilight;
+    rofi = rofi.override { plugins = [ pkgs.rofi-emoji ]; };
   })) "substituteAll ${myEmacsConfigPlain} $out");
 
 

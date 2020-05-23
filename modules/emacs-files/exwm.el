@@ -36,7 +36,12 @@
   (defun exwm-run-terminal ()
     (interactive)
     (exwm-run-systemd "@kitty@/bin/kitty"))
-  (exwm-input-set-key (kbd "s-t") 'exwm-run-terminal))
+  (exwm-input-set-key (kbd "s-t") 'exwm-run-terminal)
+
+  (defun exwm-run-rofi-emoji ()
+    (interactive)
+    (exwm-run "@rofi@/bin/rofi -show emoji -theme glue_pro_blue"))
+  (exwm-input-set-key (kbd "C-x , e") 'exwm-run-rofi-emoji))
 
 ;; Define desktop environment commands
 (progn
