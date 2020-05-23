@@ -102,6 +102,6 @@ in {
   users.mutableUsers = false;
 
   # Set up root user
-  users.users.root.initialHashedPassword = secrets.hashedEtuPassword;
+  users.users.root.initialHashedPassword = secrets.hashedRootPassword;
   users.users.root.openssh.authorizedKeys.keys = with keys.etu; fenchurch ++ agrajag ++ work;
 }

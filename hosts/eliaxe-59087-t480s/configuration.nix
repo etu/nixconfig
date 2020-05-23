@@ -93,8 +93,8 @@ in {
   services.netdata.enable = true;
 
   # Set passwords
-  users.users.root.initialHashedPassword = secrets.hashedEtuPassword;
-  users.users.etu.initialHashedPassword = secrets.hashedRootPassword;
+  users.users.root.initialHashedPassword = secrets.hashedRootPassword;
+  users.users.etu.initialHashedPassword = secrets.hasheEtuPassword;
 
   # Enable nfsd with firewall rules.
   my.nfsd.enable = true;

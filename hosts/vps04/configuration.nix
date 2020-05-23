@@ -109,7 +109,7 @@ in {
     ozeloten = {
       isNormalUser = true;
       home = "/home/ozeloten";
-      initialHashedPassword = "$6$Tp21Uo367npe/$/a6taUbyYu3QQo8RAPp6krKAq8wNs67hqSc0KPCzT32N7Aqkud110qddUAywOGKdYPJc/23BqogmUpVBQEoGF/";
+      initialHashedPassword = secrets.hashedOzelotenPassword;
       uid = 1003;
     };
 
