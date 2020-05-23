@@ -108,7 +108,7 @@ in {
 
   # Set passwords
   users.users.root.initialHashedPassword = secrets.hashedRootPassword;
-  users.users.etu.initialHashedPassword = secrets.hasheEtuPassword;
+  users.users.etu.initialHashedPassword = secrets.hashedEtuPassword;
 
   # Add account for concate
   users.users.concate = {

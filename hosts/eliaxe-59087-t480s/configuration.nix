@@ -94,7 +94,7 @@ in {
 
   # Set passwords
   users.users.root.initialHashedPassword = secrets.hashedRootPassword;
-  users.users.etu.initialHashedPassword = secrets.hasheEtuPassword;
+  users.users.etu.initialHashedPassword = secrets.hashedEtuPassword;
 
   # Enable nfsd with firewall rules.
   my.nfsd.enable = true;
