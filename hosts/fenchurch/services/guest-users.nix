@@ -27,4 +27,9 @@ in {
     device = "/media/legacy/files";
     options = [ "ro" "bind" "noauto" "x-systemd.automount" ];
   };
+
+  fileSystems."${path}/files/upload" = {
+    device = "/media/legacy/files/upload";
+    options = [ "rw" "bind" "noauto" "x-systemd.automount" ];
+  };
 }
