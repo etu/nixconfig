@@ -41,7 +41,7 @@
   (defun exwm-run-rofi-emoji ()
     (interactive)
     (exwm-run "@rofi@/bin/rofi -show emoji -theme glue_pro_blue"))
-  (exwm-input-set-key (kbd "C-x , e") 'exwm-run-rofi-emoji))
+  (exwm-input-set-key (kbd "s-u") 'exwm-run-rofi-emoji))
 
 ;; Define desktop environment commands
 (progn
