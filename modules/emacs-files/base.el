@@ -55,9 +55,15 @@
 (setq inhibit-startup-screen t        ; Hide startup screen
       mouse-yank-at-point t)          ; Paste at point, not at cursor
 
-;; Highlight trailing whitespaces in programming/text modes
-(add-hook 'prog-mode-hook (setq-default show-trailing-whitespace t))
-(add-hook 'text-mode-hook (setq-default show-trailing-whitespace t))
+;; Enable certain modes in all programming/text modes
+;;  - Show trailing whitespace
+;;  - Highlight current line
+(add-hook 'prog-mode-hook (lambda ()
+                            (setq show-trailing-whitespace t)
+                            (hl-line-mode 1)))
+(add-hook 'text-mode-hook (lambda ()
+                            (setq show-trailing-whitespace t)
+                            (hl-line-mode 1)))
 
 ;; A bunch of custom vars
 ;; TODO: Do all need setq-default?
@@ -80,9 +86,6 @@
           (lambda ()
             ;; Auto reread from disk when file changes
             (global-auto-revert-mode t)
-
-            ;; Enable line highlight mode everywhere
-            (global-hl-line-mode 1)
 
             ;; Enable Winner Mode
             (winner-mode 1)
