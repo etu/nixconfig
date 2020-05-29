@@ -41,7 +41,7 @@ in {
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelPackages = pkgs.linuxPackages_5_5;
+  boot.kernelPackages = pkgs.linuxPackages_5_6;
 
   # Settings needed for ZFS
   boot.supportedFilesystems = [ "zfs" ];
