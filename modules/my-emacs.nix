@@ -19,7 +19,6 @@ let
   # different config files together to one file.
   myEmacsConfigPlain = pkgs.writeText "config-unsubstituted.el" (
     (builtins.readFile ./emacs-files/base.el) +
-    (builtins.readFile ./emacs-files/eshell.el) +
     (lib.optionalString cfg.enableExwm (builtins.readFile ./emacs-files/exwm.el))
   );
 
@@ -43,6 +42,15 @@ let
     ;;; emacs.el -- starts here
     ;;; Commentary:
     ;;; Code:
+
+    ;; Add a startup hook that logs the startup time to the messages buffer
+    (add-hook 'emacs-startup-hook
+        (lambda ()
+            (message "Emacs ready in %s with %d garbage collections."
+                (format "%.2f seconds"
+                    (float-time
+                        (time-subtract after-init-time before-init-time)))
+                    gcs-done)))
 
     ;; Increase the threshold to reduce the amount of garbage collections made
     ;; during startups.
