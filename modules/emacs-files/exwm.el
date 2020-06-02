@@ -3,20 +3,13 @@
 ;;; Code:
 
 
-(require 'use-package)
+(require 'battery)
 (require 'exwm)
 (require 'exwm-config)
-
-;; Display time in modeline
-(progn
-  (require 'time)
-  (setq display-time-24hr-format t)
-  (display-time-mode 1))
-
-;; Display battery mode
-(progn
-  (require 'battery)
-  (display-battery-mode))
+(require 'exwm-randr)
+(require 'exwm-systemtray)
+(require 'time)
+(require 'use-package)
 
 ;; Define a function to easily run commands
 (progn
@@ -66,16 +59,12 @@
    desktop-environment-brightness-small-decrement "-dec 5")
   :hook (exwm-init . desktop-environment-mode))
 
-;; Set up systray
-(progn
-  (require 'exwm-systemtray)
-  (exwm-systemtray-enable))
+;; Display time in modeline
+(setq display-time-24hr-format t)
+(add-hook 'exwm-init-hook 'display-time-mode)
 
-;; Set up randr support
-(progn
-  (require 'exwm-randr)
-  (setq exwm-randr-workspace-monitor-plist '(1 "eDP1" 9 "HDMI1"))
-  (exwm-randr-enable))
+;; Display battery mode
+(add-hook 'exwm-init-hook 'display-battery-mode)
 
 (progn
   ;; Bind switch to workspace commands
@@ -98,6 +87,8 @@
                      (replace-regexp-in-string (getenv "HOME") "~" exwm-title)))
                 (exwm-workspace-rename-buffer (format "%s: %s" exwm-class-name tilde-exwm-title)))))
 
+  (exwm-systemtray-enable)
+  (exwm-randr-enable)
   (exwm-enable)
   (exwm-init))
 

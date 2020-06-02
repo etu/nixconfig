@@ -119,7 +119,7 @@ in {
           [ epkgs.myConfigInit ] ++
 
           # Install exwm deps
-          lib.optionals cfg.enableExwm [ epkgs.exwm epkgs.desktop-environment ] ++
+          lib.optionals cfg.enableExwm [ epkgs.exwm ] ++
 
           # Install work deps
           lib.optionals cfg.enableWork [
