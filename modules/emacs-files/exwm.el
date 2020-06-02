@@ -3,6 +3,7 @@
 ;;; Code:
 
 
+(require 'use-package)
 (require 'exwm)
 (require 'exwm-config)
 
@@ -44,20 +45,26 @@
   (exwm-input-set-key (kbd "s-u") 'exwm-run-rofi-emoji))
 
 ;; Define desktop environment commands
-(progn
-  (require 'desktop-environment)
-  (setq desktop-environment-screenlock-command "@lockCommand@")
-  (setq desktop-environment-screenshot-directory "~"
-        desktop-environment-screenshot-command "@flameshot@/bin/flameshot gui"
-        desktop-environment-screenshot-partial-command "@flameshot@/bin/flameshot gui")
-  (setq desktop-environment-brightness-get-command "@xbacklight@/bin/xbacklight"
-        desktop-environment-brightness-set-command "@xbacklight@/bin/xbacklight %s"
-        desktop-environment-brightness-get-regexp "\\([0-9]+\\)"
-        desktop-environment-brightness-normal-increment "-inc 10"
-        desktop-environment-brightness-normal-decrement "-dec 10"
-        desktop-environment-brightness-small-increment "-inc 5"
-        desktop-environment-brightness-small-decrement "-dec 5")
-  (desktop-environment-mode))
+(use-package desktop-environment
+  :init
+  (setq
+   ;; Lock command
+   desktop-environment-screenlock-command "@lockCommand@"
+
+   ;; Screenshot settings
+   desktop-environment-screenshot-directory "~"
+   desktop-environment-screenshot-command "@flameshot@/bin/flameshot gui"
+   desktop-environment-screenshot-partial-command "@flameshot@/bin/flameshot gui"
+
+   ;; Screen brightness settings
+   desktop-environment-brightness-get-command "@xbacklight@/bin/xbacklight"
+   desktop-environment-brightness-set-command "@xbacklight@/bin/xbacklight %s"
+   desktop-environment-brightness-get-regexp "\\([0-9]+\\)"
+   desktop-environment-brightness-normal-increment "-inc 10"
+   desktop-environment-brightness-normal-decrement "-dec 10"
+   desktop-environment-brightness-small-increment "-inc 5"
+   desktop-environment-brightness-small-decrement "-dec 5")
+  :hook (exwm-init . desktop-environment-mode))
 
 ;; Set up systray
 (progn
