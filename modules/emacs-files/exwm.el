@@ -4,12 +4,12 @@
 
 
 (require 'battery)
+(require 'desktop-environment)
 (require 'exwm)
 (require 'exwm-config)
 (require 'exwm-randr)
 (require 'exwm-systemtray)
 (require 'time)
-(require 'use-package)
 
 ;; Define a function to easily run commands
 (progn
@@ -38,8 +38,7 @@
   (exwm-input-set-key (kbd "s-u") 'exwm-run-rofi-emoji))
 
 ;; Define desktop environment commands
-(use-package desktop-environment
-  :init
+(progn
   (setq
    ;; Lock command
    desktop-environment-screenlock-command "@lockCommand@"
@@ -57,7 +56,7 @@
    desktop-environment-brightness-normal-decrement "-dec 10"
    desktop-environment-brightness-small-increment "-inc 5"
    desktop-environment-brightness-small-decrement "-dec 5")
-  :hook (exwm-init . desktop-environment-mode))
+  (desktop-environment-mode 1))
 
 ;; Display time in modeline
 (setq display-time-24hr-format t)

@@ -15,26 +15,31 @@ let
     config.systemd.services.physlock.serviceConfig.ExecStart;
 
 
-  # Create a file with my config without path substitutes, this just mash my
-  # different config files together to one file.
-  myEmacsConfigPlain = pkgs.writeText "config-unsubstituted.el" (
-    (builtins.readFile ./emacs-files/base.el) +
-    (lib.optionalString cfg.enableExwm (builtins.readFile ./emacs-files/exwm.el))
-  );
+  # Create a file with my config without path substitutes in place.
+  myEmacsConfigPlain = pkgs.writeText "config-unsubstituted.el"
+    (builtins.readFile ./emacs-files/base.el);
+
+  # Create a file with my exwm config without path substitutes in place.
+  myExwmConfigPlain = pkgs.writeText "exwm-config-unsubstituted.el"
+    (builtins.readFile ./emacs-files/exwm.el);
 
 
   # Run my config trough substituteAll to replace all paths with paths to
   # programs etc to have as my actual config file.
-  myEmacsConfig = (pkgs.runCommand "config.el" (with pkgs; ({
+  myEmacsConfig = (pkgs.runCommand "config.el" (with pkgs; {
     inherit gnuplot gocode;
     phpcs = phpPackages.phpcs;
     phpcbf = phpPackages.phpcbf;
-  } // lib.optionalAttrs cfg.enableExwm { # EXWM related packages
+  }) "substituteAll ${myEmacsConfigPlain} $out");
+
+  # Run my exwm config through substituteAll to replace all paths with paths
+  # to programs etc to have as my actual config file.
+  myExwmConfig = (pkgs.runCommand "exwm-config.el" (with pkgs; {
     inherit systemd kitty flameshot;
     lockCommand = physlockCommand;
     xbacklight = acpilight;
     rofi = rofi.override { plugins = [ pkgs.rofi-emoji ]; };
-  })) "substituteAll ${myEmacsConfigPlain} $out");
+  }) "substituteAll ${myExwmConfigPlain} $out");
 
 
   # Define init file for for emacs to read my config file.
@@ -119,7 +124,7 @@ in {
           [ epkgs.myConfigInit ] ++
 
           # Install exwm deps
-          lib.optionals cfg.enableExwm [ epkgs.exwm ] ++
+          lib.optionals cfg.enableExwm [ epkgs.exwm epkgs.desktop-environment ] ++
 
           # Install work deps
           lib.optionals cfg.enableWork [
@@ -153,7 +158,7 @@ in {
         start = ''
           # Keybind:                           ScrollLock -> Compose,      <> -> Compose
           ${pkgs.xorg.xmodmap}/bin/xmodmap -e 'keycode 78 = Multi_key' -e 'keycode 94 = Multi_key'
-          ${config.services.emacs.package}/bin/emacs
+          ${config.services.emacs.package}/bin/emacs -l ${myExwmConfig}
         '';
       };
 
