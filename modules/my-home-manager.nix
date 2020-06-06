@@ -3,6 +3,10 @@
 let
   cfg = config.my.home-manager;
 
+  nixos-impermanence = builtins.fetchTarball {
+    url = "https://github.com/nix-community/impermanence/archive/master.tar.gz";
+  };
+
   home-manager-url = "https://github.com/rycee/home-manager/archive/master.tar.gz";
 
   # Declare download path for home-manager to avoid the need to have it as a channel
@@ -23,7 +27,7 @@ in {
 
     home-manager.users.${config.my.user.username} = { pkgs, ... }: {
       # Import a persistance module for home-manager.
-      imports = [ ./home-manager/persistence.nix ];
+      imports = [ "${nixos-impermanence}/home-manager.nix" ];
 
       programs.home-manager.enable = true;
       programs.home-manager.path = home-manager-url;
