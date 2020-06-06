@@ -3,6 +3,7 @@
 {
   imports = [
     ./flummbot.nix
+    ./impermanence.nix
     ./ip-failar-nu.nix
     ./my-common-cli.nix
     ./my-common-graphical.nix
