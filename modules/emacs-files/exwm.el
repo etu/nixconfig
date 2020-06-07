@@ -89,6 +89,11 @@
   (exwm-systemtray-enable)
   (exwm-randr-enable)
   (exwm-enable)
-  (exwm-init))
+  (exwm-init)
+
+  ;; Loop through and create all workspaces
+  (dolist (i '(0 9 8 7 6 5 4 3 2 1))
+    (exwm-workspace-switch-create i)))
+
 
 ;;; exwm.el ends here
