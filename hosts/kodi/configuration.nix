@@ -91,6 +91,9 @@ in
   users.extraUsers.kodi.isNormalUser = true;
   users.extraUsers.kodi.uid = 1000;
 
+  # Make sure to kill all users processes on logout.
+  services.logind.killUserProcesses = true;
+
   # Need access to use HDMI CEC Dongle
   users.extraUsers.kodi.extraGroups = [ "dialout" ];
 
