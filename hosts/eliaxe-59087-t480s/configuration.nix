@@ -3,13 +3,19 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
-
 let
   # Load secrets
   secrets = import ../../data/load-secrets.nix;
 
-in {
+  # Find import path of nixos-hardware
+  nixos-hardware = (import ../../nix/sources.nix).nixos-hardware;
+
+in
+{
   imports = [
+    # Include hardware quirks
+    "${nixos-hardware}/lenovo/thinkpad/t480s"
+
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./persistence.nix
@@ -37,7 +43,7 @@ in {
   boot.extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
 
   # Hardware settings
-  services.xserver.videoDrivers = ["modesetting"];
+  services.xserver.videoDrivers = [ "modesetting" ];
   hardware.cpu.intel.updateMicrocode = true;
 
   # Enable fwupd for firmware updates etc
