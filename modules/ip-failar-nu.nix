@@ -1,7 +1,6 @@
 { config, lib, pkgs, ... }:
 
 with lib;
-
 let
   cfg = config.programs.ip-failar-nu;
 
@@ -20,7 +19,8 @@ let
     };
   };
 
-in {
+in
+{
   options.programs.ip-failar-nu = {
     enable = mkEnableOption "A service that responds over http with the connecting clients IP.";
   };

@@ -1,11 +1,11 @@
 { config, lib, pkgs, ... }:
 
 with lib;
-
 let
   cfg = config.my.common-graphical;
 
-in {
+in
+{
   options.my.common-graphical.enable = mkEnableOption "Enables my common graphical thingys";
 
   config = mkIf cfg.enable {
@@ -89,7 +89,8 @@ in {
         #!${stdenv.shell}
 
         ${xorg.xmodmap}/bin/xmodmap -e 'keycode 78 = Multi_key' -e 'keycode 94 = Multi_key'
-      '')
+      ''
+      )
     ];
 
     # Enable pulseaudio.
@@ -127,8 +128,8 @@ in {
     networking.networkmanager.wifi.backend = "iwd";
 
     # 1714-1764 is KDE Connect.
-    networking.firewall.allowedTCPPortRanges = [ { from = 1714; to = 1764; } ];
-    networking.firewall.allowedUDPPortRanges = [ { from = 1714; to = 1764; } ];
+    networking.firewall.allowedTCPPortRanges = [{ from = 1714; to = 1764; }];
+    networking.firewall.allowedUDPPortRanges = [{ from = 1714; to = 1764; }];
 
     # 8000 is for random web sharing things.
     networking.firewall.allowedTCPPorts = [ 8000 ];

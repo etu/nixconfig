@@ -1,11 +1,11 @@
 { config, lib, pkgs, ... }:
 
 with lib;
-
 let
   cfg = config.my.desktop-gnome;
 
-in {
+in
+{
   options.my.desktop-gnome.enable = mkEnableOption "Enables gnome desktop with some settings and auto login on my user";
 
   config = mkIf cfg.enable {

@@ -1,11 +1,11 @@
 { config, lib, pkgs, ... }:
 
 with lib;
-
 let
   cfg = config.my.vbox;
 
-in {
+in
+{
   options.my.vbox.enable = mkEnableOption "Enables vbox and related things I use.";
 
   config = mkIf cfg.enable {

@@ -1,7 +1,6 @@
 { config, lib, pkgs, ... }:
 
 with lib;
-
 let
   cfg = config.my.emacs;
 
@@ -10,37 +9,46 @@ let
   # Extract the path executed by the systemd-service, to get the flags used by
   # the service. But replace the path with the security wrapper dir so we get
   # the suid enabled path to the binary.
-  physlockCommand = builtins.replaceStrings
-    [ (pkgs.physlock + "/bin") ]
-    [ config.security.wrapperDir ]
-    config.systemd.services.physlock.serviceConfig.ExecStart;
+  physlockCommand =
+    builtins.replaceStrings
+      [ (pkgs.physlock + "/bin") ]
+      [ config.security.wrapperDir ]
+      config.systemd.services.physlock.serviceConfig.ExecStart;
 
 
   # Create a file with my config without path substitutes in place.
-  myEmacsConfigPlain = pkgs.writeText "config-unsubstituted.el"
-    (builtins.readFile ./emacs-files/base.el);
+  myEmacsConfigPlain =
+    pkgs.writeText "config-unsubstituted.el"
+      (builtins.readFile ./emacs-files/base.el);
 
   # Create a file with my exwm config without path substitutes in place.
-  myExwmConfigPlain = pkgs.writeText "exwm-config-unsubstituted.el"
-    (builtins.readFile ./emacs-files/exwm.el);
+  myExwmConfigPlain =
+    pkgs.writeText "exwm-config-unsubstituted.el"
+      (builtins.readFile ./emacs-files/exwm.el);
 
 
   # Run my config trough substituteAll to replace all paths with paths to
   # programs etc to have as my actual config file.
-  myEmacsConfig = (pkgs.runCommand "config.el" (with pkgs; {
-    inherit gnuplot gocode;
-    phpcs = phpPackages.phpcs;
-    phpcbf = phpPackages.phpcbf;
-  }) "substituteAll ${myEmacsConfigPlain} $out");
+  myEmacsConfig = (
+    pkgs.runCommand "config.el"
+      (with pkgs; {
+        inherit gnuplot gocode;
+        phpcs = phpPackages.phpcs;
+        phpcbf = phpPackages.phpcbf;
+      }) "substituteAll ${myEmacsConfigPlain} $out"
+  );
 
   # Run my exwm config through substituteAll to replace all paths with paths
   # to programs etc to have as my actual config file.
-  myExwmConfig = (pkgs.runCommand "exwm-config.el" (with pkgs; {
-    inherit systemd kitty flameshot;
-    lockCommand = physlockCommand;
-    xbacklight = acpilight;
-    rofi = rofi.override { plugins = [ pkgs.rofi-emoji ]; };
-  }) "substituteAll ${myExwmConfigPlain} $out");
+  myExwmConfig = (
+    pkgs.runCommand "exwm-config.el"
+      (with pkgs; {
+        inherit systemd kitty flameshot;
+        lockCommand = physlockCommand;
+        xbacklight = acpilight;
+        rofi = rofi.override { plugins = [ pkgs.rofi-emoji ]; };
+      }) "substituteAll ${myExwmConfigPlain} $out"
+  );
 
 
   # Define init file for for emacs to read my config file.
@@ -70,7 +78,8 @@ let
     ;;; emacs.el ends here
   '';
 
-in {
+in
+{
   options.my.emacs = {
     enable = mkEnableOption "Enables emacs with the modules I want";
     enableExwm = mkEnableOption "Enables EXWM config and graphical environment";
@@ -103,10 +112,12 @@ in {
         # Package overrides
         override = epkgs: epkgs // {
           # Add my config initializer as an emacs package
-          myConfigInit = (pkgs.runCommand "my-emacs-default-package" {} ''
+          myConfigInit = (pkgs.runCommand "my-emacs-default-package"
+            { } ''
             mkdir -p  $out/share/emacs/site-lisp
             cp ${myEmacsInit} $out/share/emacs/site-lisp/default.el
-          '');
+          ''
+          );
 
           # Override nix-mode source
           nix-mode = epkgs.nix-mode.overrideAttrs (oldAttrs: {
@@ -126,7 +137,10 @@ in {
 
           # Install work deps
           lib.optionals cfg.enableWork [
-            epkgs.es-mode epkgs.vcl-mode epkgs.vue-mode epkgs.vue-html-mode
+            epkgs.es-mode
+            epkgs.vcl-mode
+            epkgs.vue-mode
+            epkgs.vue-html-mode
           ]
         );
       });

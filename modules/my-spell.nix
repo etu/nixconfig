@@ -1,11 +1,11 @@
 { config, lib, pkgs, ... }:
 
 with lib;
-
 let
   cfg = config.my.spell;
 
-in {
+in
+{
   options.my.spell.enable = mkEnableOption "Enable and install aspell and hunspell with swedish and english dictionary";
 
   config = mkIf cfg.enable {
@@ -13,7 +13,9 @@ in {
       aspell
 
       # Dictionaries
-      aspellDicts.en aspellDicts.en-computers aspellDicts.en-science
+      aspellDicts.en
+      aspellDicts.en-computers
+      aspellDicts.en-science
       aspellDicts.sv
 
       # Also install hunspell with dictionaries

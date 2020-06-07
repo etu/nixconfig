@@ -1,11 +1,11 @@
 { config, lib, pkgs, ... }:
 
 with lib;
-
 let
   cfg = config.my.common-cli;
 
-in {
+in
+{
   options.my.common-cli.enable = mkEnableOption "Enables my common CLI thingys";
 
   config = mkIf cfg.enable {
@@ -47,7 +47,7 @@ in {
     # $ nix-env -qaP | grep wget
     environment.systemPackages = with pkgs; [
       bat
-      bc                # Dependency for some fish functions
+      bc # Dependency for some fish functions
       curl
       fd
       file

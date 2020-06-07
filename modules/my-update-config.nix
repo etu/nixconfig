@@ -1,12 +1,12 @@
 { config, lib, pkgs, ... }:
 
 with lib;
-
 let
   cfg = config.my.update-config;
   git = cfg.package;
 
-in {
+in
+{
   options.my.update-config = {
     enable = mkEnableOption "Enable auto updating of the nix config";
     package = mkOption {

@@ -1,11 +1,11 @@
 { config, lib, pkgs, ... }:
 
 with lib;
-
 let
   cfg = config.my.nfsd;
 
-in {
+in
+{
   options.my.nfsd.enable = mkEnableOption "Enables nfsd and configures ports and stuff.";
 
   config = mkIf cfg.enable {

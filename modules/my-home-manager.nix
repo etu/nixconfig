@@ -1,11 +1,11 @@
 { config, lib, pkgs, ... }:
-
 let
   cfg = config.my.home-manager;
 
   impermanence = (import ../nix/sources.nix).impermanence;
   home-manager = (import ../nix/sources.nix).home-manager;
-in {
+in
+{
   options.my.home-manager.enable = lib.mkEnableOption "Enables my home-manager config";
 
   # Import the home-manager module
@@ -25,8 +25,8 @@ in {
       programs.home-manager.enable = true;
 
       home.persistence.${config.my.user.persistent.homeDir} = {
-        files = [] ++ config.my.user.persistent.extraFiles;
-        directories = [] ++ config.my.user.persistent.extraDirectories;
+        files = [ ] ++ config.my.user.persistent.extraFiles;
+        directories = [ ] ++ config.my.user.persistent.extraDirectories;
       };
 
       home.file = {
@@ -120,15 +120,15 @@ in {
         treeView = true;
         meters = {
           left = [
-            { kind = "LeftCPUs";   mode = 1; }
-            { kind = "Memory";     mode = 1; }
-            { kind = "Swap";       mode = 1; }
+            { kind = "LeftCPUs"; mode = 1; }
+            { kind = "Memory"; mode = 1; }
+            { kind = "Swap"; mode = 1; }
           ];
           right = [
-            { kind = "RightCPUs";   mode = 1; }
-            { kind = "Tasks";       mode = 2; }
+            { kind = "RightCPUs"; mode = 1; }
+            { kind = "Tasks"; mode = 2; }
             { kind = "LoadAverage"; mode = 2; }
-            { kind = "Uptime";      mode = 2; }
+            { kind = "Uptime"; mode = 2; }
           ];
         };
       };

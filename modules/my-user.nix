@@ -1,7 +1,6 @@
 { config, lib, pkgs, ... }:
 
 with lib;
-
 let
   cfg = config.my.user;
   uid = cfg.uid;
@@ -12,7 +11,8 @@ let
   # Import my ssh public keys
   keys = import ../data/pubkeys.nix;
 
-in {
+in
+{
   options.my.user = {
     enable = mkEnableOption "Enables my user.";
     uid = mkOption {
@@ -26,11 +26,11 @@ in {
     };
     extraGroups = mkOption {
       type = types.listOf types.str;
-      default = [];
+      default = [ ];
     };
     extraAuthorizedKeys = mkOption {
       type = types.listOf types.str;
-      default = [];
+      default = [ ];
       description = "Additional authorized keys";
     };
     persistent = {
@@ -41,11 +41,11 @@ in {
       };
       extraFiles = mkOption {
         type = types.listOf types.str;
-        default = [];
+        default = [ ];
       };
       extraDirectories = mkOption {
         type = types.listOf types.str;
-        default = [];
+        default = [ ];
       };
     };
   };

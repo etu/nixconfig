@@ -1,11 +1,11 @@
 { config, lib, pkgs, ... }:
 
 with lib;
-
 let
   cfg = config.my.gpg-utils;
 
-in {
+in
+{
   options.my.gpg-utils.enable = mkEnableOption "Enables smartcard and gpg related utils that I use.";
 
   config = mkIf cfg.enable {

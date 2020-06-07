@@ -1,7 +1,6 @@
 { config, lib, pkgs, ... }:
 
 with lib;
-
 let
   cfg = config.programs.flummbot;
 
@@ -20,7 +19,8 @@ let
     };
   };
 
-in {
+in
+{
   options.programs.flummbot = {
     enable = mkEnableOption "Small IRC bot in go used for my channels";
 
