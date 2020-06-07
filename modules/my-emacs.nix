@@ -1,6 +1,5 @@
 { config, lib, pkgs, ... }:
 
-with lib;
 let
   cfg = config.my.emacs;
 
@@ -90,25 +89,25 @@ let
 in
 {
   options.my.emacs = {
-    enable = mkEnableOption "Enables emacs with the modules I want";
-    enableExwm = mkEnableOption "Enables EXWM config and graphical environment";
-    enableWork = mkEnableOption "Enables install of work related modules";
-    package = mkOption {
-      type = types.package;
+    enable = lib.mkEnableOption "Enables emacs with the modules I want";
+    enableExwm = lib.mkEnableOption "Enables EXWM config and graphical environment";
+    enableWork = lib.mkEnableOption "Enables install of work related modules";
+    package = lib.mkOption {
+      type = lib.types.package;
       default = pkgs.emacs;
       defaultText = "pkgs.emacs";
       description = "Which emacs package to use";
     };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     # Import the emacs overlay from nix community to get the latest
     # and greatest packages.
-    nixpkgs.overlays = mkIf cfg.enable [
+    nixpkgs.overlays = lib.mkIf cfg.enable [
       (import emacs-overlay)
     ];
 
-    services.emacs = mkIf cfg.enable {
+    services.emacs = lib.mkIf cfg.enable {
       enable = true;
       defaultEditor = true;
 
@@ -157,13 +156,13 @@ in
     };
 
 
-    fonts.fonts = mkIf cfg.enable (with pkgs; [
+    fonts.fonts = lib.mkIf cfg.enable (with pkgs; [
       emacs-all-the-icons-fonts
     ]);
 
 
     # Libinput
-    services.xserver = mkIf cfg.enableExwm {
+    services.xserver = lib.mkIf cfg.enableExwm {
       libinput.enable = true;
 
       # Loginmanager
@@ -175,7 +174,7 @@ in
       displayManager.defaultSession = "none+exwm";
 
       # Set up the login session
-      windowManager.session = singleton {
+      windowManager.session = lib.singleton {
         name = "exwm";
         start = ''
           # Keybind:                           ScrollLock -> Compose,      <> -> Compose
@@ -205,7 +204,7 @@ in
     services.gnome3.gnome-keyring.enable = cfg.enableExwm;
 
     # Install aditional packages
-    environment.systemPackages = mkIf cfg.enableExwm (with pkgs; [
+    environment.systemPackages = lib.mkIf cfg.enableExwm (with pkgs; [
       evince
       gnome3.adwaita-icon-theme # Icons for gnome packages that sometimes use them but don't depend on them
       gnome3.evolution

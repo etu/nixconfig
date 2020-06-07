@@ -1,14 +1,13 @@
 { config, lib, pkgs, ... }:
 
-with lib;
 let
   cfg = config.my.common-graphical;
 
 in
 {
-  options.my.common-graphical.enable = mkEnableOption "Enables my common graphical thingys";
+  options.my.common-graphical.enable = lib.mkEnableOption "Enables my common graphical thingys";
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     # Sane font defaults.
     fonts.enableFontDir = true;
     fonts.enableGhostscriptFonts = true;

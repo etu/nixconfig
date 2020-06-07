@@ -1,6 +1,5 @@
 { config, lib, pkgs, ... }:
 
-with lib;
 let
   cfg = config.my.update-config;
   git = cfg.package;
@@ -8,27 +7,27 @@ let
 in
 {
   options.my.update-config = {
-    enable = mkEnableOption "Enable auto updating of the nix config";
-    package = mkOption {
-      type = types.package;
+    enable = lib.mkEnableOption "Enable auto updating of the nix config";
+    package = lib.mkOption {
+      type = lib.types.package;
       default = pkgs.git;
       defaultText = "pkgs.git";
       description = "git derivation to use";
     };
-    user = mkOption {
-      type = types.str;
+    user = lib.mkOption {
+      type = lib.types.str;
       default = "root";
       defaultText = "root";
       description = "User to run as";
     };
-    path = mkOption {
-      type = types.str;
+    path = lib.mkOption {
+      type = lib.types.str;
       default = "/etc/nixos/";
       defaultText = "/etc/nixos/";
       description = "Working directory for the job to update the config";
     };
-    interval = mkOption {
-      type = types.str;
+    interval = lib.mkOption {
+      type = lib.types.str;
       default = "04:30";
       example = "hourly";
       description = ''
@@ -41,7 +40,7 @@ in
     };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     systemd.services.update-nixos-config = {
       description = "update-nixos-config";
       after = [ "network.target" ];

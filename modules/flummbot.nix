@@ -1,6 +1,5 @@
 { config, lib, pkgs, ... }:
 
-with lib;
 let
   cfg = config.programs.flummbot;
 
@@ -22,24 +21,24 @@ let
 in
 {
   options.programs.flummbot = {
-    enable = mkEnableOption "Small IRC bot in go used for my channels";
+    enable = lib.mkEnableOption "Small IRC bot in go used for my channels";
 
-    user = mkOption {
-      type = types.str;
+    user = lib.mkOption {
+      type = lib.types.str;
       default = "bots";
       defaultText = "bots";
       description = "Username, used for storage of config file ~/flummbot.toml";
     };
 
-    stateDirectory = mkOption {
-      type = types.str;
+    stateDirectory = lib.mkOption {
+      type = lib.types.str;
       default = "/home/bots";
       defaultText = "/home/bots";
       description = "Directory where configs and database is stored";
     };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     systemd.services.flummbot = {
       description = "flummbot";
       after = [ "network.target" ];

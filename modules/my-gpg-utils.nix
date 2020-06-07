@@ -1,14 +1,13 @@
 { config, lib, pkgs, ... }:
 
-with lib;
 let
   cfg = config.my.gpg-utils;
 
 in
 {
-  options.my.gpg-utils.enable = mkEnableOption "Enables smartcard and gpg related utils that I use.";
+  options.my.gpg-utils.enable = lib.mkEnableOption "Enables smartcard and gpg related utils that I use.";
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     services.pcscd.enable = true;
 
     programs.gnupg.agent = {

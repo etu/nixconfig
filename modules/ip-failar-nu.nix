@@ -1,6 +1,5 @@
 { config, lib, pkgs, ... }:
 
-with lib;
 let
   cfg = config.programs.ip-failar-nu;
 
@@ -22,10 +21,10 @@ let
 in
 {
   options.programs.ip-failar-nu = {
-    enable = mkEnableOption "A service that responds over http with the connecting clients IP.";
+    enable = lib.mkEnableOption "A service that responds over http with the connecting clients IP.";
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     systemd.services.ip-failar-nu = {
       description = "ip-failar-nu";
       after = [ "network.target" ];

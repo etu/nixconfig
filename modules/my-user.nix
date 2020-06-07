@@ -1,6 +1,5 @@
 { config, lib, pkgs, ... }:
 
-with lib;
 let
   cfg = config.my.user;
   uid = cfg.uid;
@@ -14,43 +13,43 @@ let
 in
 {
   options.my.user = {
-    enable = mkEnableOption "Enables my user.";
-    uid = mkOption {
-      type = types.nullOr types.int;
+    enable = lib.mkEnableOption "Enables my user.";
+    uid = lib.mkOption {
+      type = lib.types.nullOr lib.types.int;
       default = 1000;
     };
-    username = mkOption {
-      type = types.str;
+    username = lib.mkOption {
+      type = lib.types.str;
       default = "etu";
       description = "My username for this system.";
     };
-    extraGroups = mkOption {
-      type = types.listOf types.str;
+    extraGroups = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
       default = [ ];
     };
-    extraAuthorizedKeys = mkOption {
-      type = types.listOf types.str;
+    extraAuthorizedKeys = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
       default = [ ];
       description = "Additional authorized keys";
     };
     persistent = {
-      homeDir = mkOption {
-        type = types.str;
+      homeDir = lib.mkOption {
+        type = lib.types.str;
         default = "/persistent/home/etu";
         description = "Location of persistent home files";
       };
-      extraFiles = mkOption {
-        type = types.listOf types.str;
+      extraFiles = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
         default = [ ];
       };
-      extraDirectories = mkOption {
-        type = types.listOf types.str;
+      extraDirectories = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
         default = [ ];
       };
     };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     # Let ~/bin/ be in $PATH
     environment.homeBinInPath = true;
 
