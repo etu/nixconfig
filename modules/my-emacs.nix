@@ -50,33 +50,42 @@ let
       }) "substituteAll ${myExwmConfigPlain} $out"
   );
 
+  myEmacsLispLoader = extraLisp: loadFile: pkgs.writeText "${loadFile.name}-init.el"
+    ''
+      ;;; ${loadFile.name}-init.el -- starts here
+      ;;; Commentary:
+      ;;; Code:
 
-  # Define init file for for emacs to read my config file.
-  myEmacsInit = pkgs.writeText "init.el" ''
-    ;;; emacs.el -- starts here
-    ;;; Commentary:
-    ;;; Code:
+      ;; Extra injected lisp.
+      ${extraLisp}
 
-    ;; Add a startup hook that logs the startup time to the messages buffer
-    (add-hook 'emacs-startup-hook
-        (lambda ()
-            (message "Emacs ready in %s with %d garbage collections."
-                (format "%.2f seconds"
-                    (float-time
-                        (time-subtract after-init-time before-init-time)))
-                    gcs-done)))
+      ;; Increase the threshold to reduce the amount of garbage collections made
+      ;; during startups.
+      (let ((gc-cons-threshold (* 50 1000 1000))
+            (gc-cons-percentage 0.6)
+            (file-name-handler-alist nil))
 
-    ;; Increase the threshold to reduce the amount of garbage collections made
-    ;; during startups.
-    (let ((gc-cons-threshold (* 50 1000 1000))
-          (gc-cons-percentage 0.6)
-          (file-name-handler-alist nil))
+        ;; Load config
+        (load-file "${loadFile}"))
 
-      ;; Load config
-      (load-file "${myEmacsConfig}"))
+      ;;; ${loadFile.name}-init.el ends here
+    '';
 
-    ;;; emacs.el ends here
-  '';
+  myEmacsInit =
+    myEmacsLispLoader
+      ''
+        ;; Add a startup hook that logs the startup time to the messages buffer
+        (add-hook 'emacs-startup-hook
+            (lambda ()
+                (message "Emacs ready in %s with %d garbage collections."
+                    (format "%.2f seconds"
+                        (float-time
+                            (time-subtract after-init-time before-init-time)))
+                        gcs-done)))
+      ''
+      myEmacsConfig;
+
+  myExwmInit = myEmacsLispLoader "" myExwmConfig;
 
 in
 {
@@ -112,11 +121,12 @@ in
         # Package overrides
         override = epkgs: epkgs // {
           # Add my config initializer as an emacs package
-          myConfigInit = (pkgs.runCommand "my-emacs-default-package"
-            { } ''
-            mkdir -p  $out/share/emacs/site-lisp
-            cp ${myEmacsInit} $out/share/emacs/site-lisp/default.el
-          ''
+          myConfigInit = (
+            pkgs.runCommand "my-emacs-default-package"
+              { } ''
+              mkdir -p  $out/share/emacs/site-lisp
+              cp ${myEmacsInit} $out/share/emacs/site-lisp/default.el
+            ''
           );
 
           # Override nix-mode source
@@ -170,7 +180,7 @@ in
         start = ''
           # Keybind:                           ScrollLock -> Compose,      <> -> Compose
           ${pkgs.xorg.xmodmap}/bin/xmodmap -e 'keycode 78 = Multi_key' -e 'keycode 94 = Multi_key'
-          ${config.services.emacs.package}/bin/emacs -l ${myExwmConfig}
+          ${config.services.emacs.package}/bin/emacs -l ${myExwmInit}
         '';
       };
 
