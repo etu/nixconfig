@@ -3,14 +3,14 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
-
 let
   # Load secrets
   secrets = import ../../data/load-secrets.nix;
 
-  # Declare download path for nixos-hardware to avoid the need to have it as a channel
+  # Find import path of nixos-hardware
   nixos-hardware = (import ../../nix/sources.nix).nixos-hardware;
-in {
+in
+{
   imports = [
     # Include hardware quirks
     "${nixos-hardware}/lenovo/thinkpad/t495"
