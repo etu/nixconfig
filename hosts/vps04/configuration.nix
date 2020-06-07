@@ -3,7 +3,6 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
-
 let
   # Load secrets
   secrets = import ../../data/load-secrets.nix;
@@ -11,7 +10,8 @@ let
   # Import my ssh public keys
   keys = import ../../data/pubkeys.nix;
 
-in {
+in
+{
   imports = [
     ./hardware-configuration.nix
     ./networking.nix
@@ -54,7 +54,11 @@ in {
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    git htop screen weechat irssi
+    git
+    htop
+    irssi
+    screen
+    weechat
   ];
 
   # Enable aspell and hunspell with dictionaries.
