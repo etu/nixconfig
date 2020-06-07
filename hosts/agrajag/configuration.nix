@@ -9,10 +9,7 @@ let
   secrets = import ../../data/load-secrets.nix;
 
   # Declare download path for nixos-hardware to avoid the need to have it as a channel
-  nixos-hardware = builtins.fetchTarball {
-    url = "https://github.com/NixOS/nixos-hardware/archive/master.tar.gz";
-  };
-
+  nixos-hardware = (import ../../nix/sources.nix).nixos-hardware;
 in {
   imports = [
     # Include hardware quirks

@@ -1,0 +1,50 @@
+{
+    "emacs-overlay": {
+        "branch": "master",
+        "description": "Bleeding edge emacs overlay [maintainer=@adisbladis] ",
+        "homepage": "",
+        "owner": "nix-community",
+        "repo": "emacs-overlay",
+        "rev": "a6e7f617d342867bc0f7f2a4b114f8ca0118fef5",
+        "sha256": "0z77mqzjz1zf6jlkh0mwj50pqy80vks171ki816b8qfh1g4axn2d",
+        "type": "tarball",
+        "url": "https://github.com/nix-community/emacs-overlay/archive/a6e7f617d342867bc0f7f2a4b114f8ca0118fef5.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "home-manager": {
+        "branch": "master",
+        "description": "Manage a user environment using Nix",
+        "homepage": "https://rycee.gitlab.io/home-manager/",
+        "owner": "rycee",
+        "repo": "home-manager",
+        "rev": "b33802ca7f0675fa8f64dd0f322ab7a57e45ba6a",
+        "sha256": "05x7zp69pfkpidmmp32figi3aq3n37qlch96vq8vab4cazqz4b6v",
+        "type": "tarball",
+        "url": "https://github.com/rycee/home-manager/archive/b33802ca7f0675fa8f64dd0f322ab7a57e45ba6a.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "impermanence": {
+        "branch": "master",
+        "description": "Modules to help you handle persistent state on systems with ephemeral root storage [maintainer=@talyz]",
+        "homepage": "",
+        "owner": "nix-community",
+        "repo": "impermanence",
+        "rev": "def13ddc2e7158da093e8a504a43dbba4dac5aa1",
+        "sha256": "0n41kw6gvf4gmhx8jz3k0l4s5py442k7m4dgk35c4grfl3j98wrk",
+        "type": "tarball",
+        "url": "https://github.com/nix-community/impermanence/archive/def13ddc2e7158da093e8a504a43dbba4dac5aa1.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "nixos-hardware": {
+        "branch": "master",
+        "description": "A collection of NixOS modules covering hardware quirks.",
+        "homepage": "",
+        "owner": "NixOS",
+        "repo": "nixos-hardware",
+        "rev": "2f2c2d9ef5dcc663a504819ad73cc98a4cd26458",
+        "sha256": "159qnxmy720jqhg4zm8di0my1r56ya94m6kd117n8kng8hdsmvgi",
+        "type": "tarball",
+        "url": "https://github.com/NixOS/nixos-hardware/archive/2f2c2d9ef5dcc663a504819ad73cc98a4cd26458.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    }
+}

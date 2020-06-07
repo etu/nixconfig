@@ -5,6 +5,7 @@ with lib;
 let
   cfg = config.my.emacs;
 
+  emacs-overlay = (import ../nix/sources.nix).emacs-overlay;
 
   # Extract the path executed by the systemd-service, to get the flags used by
   # the service. But replace the path with the security wrapper dir so we get
@@ -86,11 +87,8 @@ in {
     # Import the emacs overlay from nix community to get the latest
     # and greatest packages.
     nixpkgs.overlays = mkIf cfg.enable [
-      (import (builtins.fetchTarball {
-        url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
-      }))
+      (import emacs-overlay)
     ];
-
 
     services.emacs = mkIf cfg.enable {
       enable = true;
