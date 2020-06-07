@@ -3,24 +3,24 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
-
 let
   # Import my ssh public keys
   keys = import ../../data/pubkeys.nix;
 
   # Caddy template
   caddyTlsHsts = ''
-      tls {
-        protocols tls1.2
-        key_type p384
-      }
+    tls {
+      protocols tls1.2
+      key_type p384
+    }
 
-      header / {
-        Strict-Transport-Security max-age=31536000
-      }
+    header / {
+      Strict-Transport-Security max-age=31536000
+    }
   '';
 
-in {
+in
+{
   imports = [
     ./hardware-configuration.nix
     ./networking.nix
