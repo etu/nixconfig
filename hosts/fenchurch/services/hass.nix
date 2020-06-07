@@ -1,10 +1,11 @@
 { config, pkgs, ... }:
-
 let
-  hpkgs = import (builtins.fetchTarball {
-    url = https://github.com/NixOS/nixpkgs-channels/archive/b0bbacb52134a7e731e549f4c0a7a2a39ca6b481.tar.gz;
-  }) {};
-in {
+  hpkgs = import
+    (builtins.fetchTarball {
+      url = https://github.com/NixOS/nixpkgs-channels/archive/b0bbacb52134a7e731e549f4c0a7a2a39ca6b481.tar.gz;
+    }) { };
+in
+{
   # Make sure to have NGiNX enabled
   services.nginx.enable = true;
   services.nginx.virtualHosts."hass.lan".locations."/" = {
@@ -19,7 +20,7 @@ in {
   # Enable Home Assistant, open port and add the hass user to the dialout group
   services.home-assistant.enable = true;
   services.home-assistant.autoExtraComponents = false;
-  services.home-assistant.package = hpkgs.home-assistant.override {
+  services.home-assistant.package = pkgs.home-assistant.override {
     extraComponents = [
       "cast"
       "discovery"

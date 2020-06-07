@@ -1,12 +1,12 @@
 { config, pkgs, ... }:
-
 let
   # Import my ssh public keys
   keys = import ../../../data/pubkeys.nix;
 
   # home / chroot path
   path = "/home/guests";
-in {
+in
+{
   users.users.guests = {
     isNormalUser = true;
     createHome = false;

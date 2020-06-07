@@ -3,33 +3,35 @@
 {
   # Make sure to have nginx enabled
   services.nginx.enable = true;
-  services.nginx.virtualHosts = let
-    onlyLan = ''
-      allow 10.3.0.0/24;
-      deny all;
-    '';
-  in {
-    # Sonarr
-    "series.lan".locations."/" = {
-      proxyPass = "http://127.0.0.1:8989/";
-      extraConfig = onlyLan;
+  services.nginx.virtualHosts =
+    let
+      onlyLan = ''
+        allow 10.3.0.0/24;
+        deny all;
+      '';
+    in
+    {
+      # Sonarr
+      "series.lan".locations."/" = {
+        proxyPass = "http://127.0.0.1:8989/";
+        extraConfig = onlyLan;
+      };
+      # Radarr
+      "movies.lan".locations."/" = {
+        proxyPass = "http://127.0.0.1:7878/";
+        extraConfig = onlyLan;
+      };
+      # Lidarr
+      "music.lan".locations."/" = {
+        proxyPass = "http://127.0.0.1:8686/";
+        extraConfig = onlyLan;
+      };
+      # Nzbget
+      "nzbget.lan".locations."/" = {
+        proxyPass = "http://127.0.0.1:6789/";
+        extraConfig = onlyLan;
+      };
     };
-    # Radarr
-    "movies.lan".locations."/" = {
-      proxyPass = "http://127.0.0.1:7878/";
-      extraConfig = onlyLan;
-    };
-    # Lidarr
-    "music.lan".locations."/" = {
-      proxyPass  = "http://127.0.0.1:8686/";
-      extraConfig = onlyLan;
-    };
-    # Nzbget
-    "nzbget.lan".locations."/" = {
-      proxyPass = "http://127.0.0.1:6789/";
-      extraConfig = onlyLan;
-    };
-  };
 
   # nzbget needs unrar and p7zip
   nixpkgs.config.allowUnfree = true;
