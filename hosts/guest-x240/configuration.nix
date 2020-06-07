@@ -3,7 +3,6 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
-
 let
   # Load secrets
   secrets = import ../../data/load-secrets.nix;
@@ -11,7 +10,8 @@ let
   # Import my ssh public keys
   keys = import ../../data/pubkeys.nix;
 
-in {
+in
+{
   imports = [
     ./hardware-configuration.nix
     ./persistence.nix
@@ -38,7 +38,7 @@ in {
   boot.cleanTmpDir = true;
 
   # Hardware settings
-  services.xserver.videoDrivers = ["intel" "modesetting"];
+  services.xserver.videoDrivers = [ "intel" "modesetting" ];
   hardware.trackpoint.enable = true;
   hardware.cpu.intel.updateMicrocode = true;
 
