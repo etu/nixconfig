@@ -3,12 +3,12 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
-
 let
   # Import my ssh public keys
   keys = import ../../data/pubkeys.nix;
 
-in {
+in
+{
   imports = [
     ./hardware-configuration.nix
     ./persistence.nix
@@ -72,8 +72,8 @@ in {
 
   # Set display resolution
   services.xserver.extraDisplaySettings = ''
-      Depth        24
-      Modes        "1920x1080"
+    Depth        24
+    Modes        "1920x1080"
   '';
 
   # Enable Kodi.
