@@ -5,10 +5,10 @@
         "homepage": "",
         "owner": "nix-community",
         "repo": "emacs-overlay",
-        "rev": "a6e7f617d342867bc0f7f2a4b114f8ca0118fef5",
-        "sha256": "0z77mqzjz1zf6jlkh0mwj50pqy80vks171ki816b8qfh1g4axn2d",
+        "rev": "154346e5de1b244d4c11e5490dedf35754d76915",
+        "sha256": "1msikq7hivvn38hrs790czq4glw1j7kxf77zrcqfk1civcc16ifj",
         "type": "tarball",
-        "url": "https://github.com/nix-community/emacs-overlay/archive/a6e7f617d342867bc0f7f2a4b114f8ca0118fef5.tar.gz",
+        "url": "https://github.com/nix-community/emacs-overlay/archive/154346e5de1b244d4c11e5490dedf35754d76915.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "home-manager": {
@@ -17,10 +17,10 @@
         "homepage": "https://rycee.gitlab.io/home-manager/",
         "owner": "rycee",
         "repo": "home-manager",
-        "rev": "b33802ca7f0675fa8f64dd0f322ab7a57e45ba6a",
-        "sha256": "05x7zp69pfkpidmmp32figi3aq3n37qlch96vq8vab4cazqz4b6v",
+        "rev": "1f174f668109765183f96b43d56ee24ab02c1c05",
+        "sha256": "06ba3nxkzva9q6dxzymyy62x75kf1qf7y8x711jwjravgda14bsq",
         "type": "tarball",
-        "url": "https://github.com/rycee/home-manager/archive/b33802ca7f0675fa8f64dd0f322ab7a57e45ba6a.tar.gz",
+        "url": "https://github.com/rycee/home-manager/archive/1f174f668109765183f96b43d56ee24ab02c1c05.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "impermanence": {
@@ -29,10 +29,10 @@
         "homepage": "",
         "owner": "nix-community",
         "repo": "impermanence",
-        "rev": "def13ddc2e7158da093e8a504a43dbba4dac5aa1",
-        "sha256": "0n41kw6gvf4gmhx8jz3k0l4s5py442k7m4dgk35c4grfl3j98wrk",
+        "rev": "a45918b80cf845b18cdfc1a1ac0807652a137f55",
+        "sha256": "1s1s5qga21zj5mbf9n3d49kzd9cb6jmj8pssqqj4x3c1bbm2hics",
         "type": "tarball",
-        "url": "https://github.com/nix-community/impermanence/archive/def13ddc2e7158da093e8a504a43dbba4dac5aa1.tar.gz",
+        "url": "https://github.com/nix-community/impermanence/archive/a45918b80cf845b18cdfc1a1ac0807652a137f55.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixos-hardware": {
