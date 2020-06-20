@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 let
   # Load secrets
   secrets = import ../../data/load-secrets.nix;
@@ -54,6 +54,11 @@ in
   boot.loader.grub.mirroredBoots = [
     { devices = [ "/dev/disk/by-uuid/6258-01A0" ]; path = "/boot-fallback"; }
   ];
+
+  # Roll back certain filesystems to empty state on boot
+  boot.initrd.postDeviceCommands = lib.mkAfter ''
+    zfs rollback -r zroot/var-lib-nzbget-dst@empty
+  '';
 
   # Settings needed for ZFS
   boot.supportedFilesystems = [ "zfs" ];
