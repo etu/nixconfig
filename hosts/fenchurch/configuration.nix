@@ -26,6 +26,7 @@ in
     ./services/netdata.nix
     ./services/nfs.nix
     ./services/usenet.nix
+    ./services/home-nginx.nix
 
     # Import local modules
     ../../modules
