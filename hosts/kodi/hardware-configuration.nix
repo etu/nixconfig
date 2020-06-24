@@ -44,6 +44,7 @@
   fileSystems."/persistent" = {
     device = "zroot/persistent";
     fsType = "zfs";
+    neededForBoot = true;
   };
 
   fileSystems."/var/log" = {
