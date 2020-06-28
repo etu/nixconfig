@@ -52,9 +52,6 @@ in
         # Fish functions
         ".config/fish/functions" = { source = ./dotfiles/fish/functions; };
 
-        # Git config file for work
-        ".config/git/work_config" = { source = ./dotfiles/git/gitconfig_work; };
-
         # Kitty
         ".config/kitty/kitty.conf" = { source = ./dotfiles/kitty.conf; };
 
@@ -94,19 +91,28 @@ in
 
       programs.git = {
         enable = true;
-        userName = "Elis Hirwing";
-        userEmail = "elis@hirwing.se";
 
-        signing = {
-          key = "67FE98F28C44CF221828E12FD57EFA625C9A925F";
-          signByDefault = true;
+        # Default configs
+        extraConfig = {
+          commit.gpgSign = true;
+
+          user.name = "Elis Hirwing";
+          user.email = "elis@hirwing.se";
+          user.signingKey = "67FE98F28C44CF221828E12FD57EFA625C9A925F";
         };
 
+        # Global ignores
         ignores = [ ".ac-php-conf.json" ];
 
-        includes = [
-          { condition = "gitdir:/persistent/home/etu/tvnu/"; path = "~/.config/git/work_config"; }
-        ];
+        # Conditonally included configs
+        includes = [{
+          condition = "gitdir:~/tvnu/";
+          contents = {
+            commit.gpgSign = false;
+            user.email = "elis.hirwing@schibsted.com";
+            user.signingKey = "";
+          };
+        }];
       };
 
       programs.browserpass.enable = true;
