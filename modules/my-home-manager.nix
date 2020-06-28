@@ -99,6 +99,10 @@ in
           user.name = "Elis Hirwing";
           user.email = "elis@hirwing.se";
           user.signingKey = "67FE98F28C44CF221828E12FD57EFA625C9A925F";
+
+          # Set default "git pull" behaviour so it doesn't try to default to
+          # either "git fetch; git merge" (default) or "git fetch; git rebase".
+          pull.ff = "only";
         };
 
         # Global ignores
