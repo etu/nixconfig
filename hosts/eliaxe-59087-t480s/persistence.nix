@@ -47,6 +47,7 @@
 
       # Work
       ".chef"
+      ".config/autorandr"
       ".config/Slack"
       ".config/VirtualBox"
       ".vagrant.d"
