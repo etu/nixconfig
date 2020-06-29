@@ -110,7 +110,7 @@ in
 
         # Conditonally included configs
         includes = [{
-          condition = "gitdir:~/tvnu/";
+          condition = "gitdir:/persistent/home/etu/tvnu/";
           contents = {
             commit.gpgSign = false;
             user.email = "elis.hirwing@schibsted.com";
