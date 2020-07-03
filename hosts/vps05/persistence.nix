@@ -24,9 +24,9 @@
     options = [ "bind" "noauto" "x-systemd.automount" ];
   };
 
-  # Persistence of caddy certificaties between boots
-  fileSystems."/var/lib/caddy/acme" = {
-    device = "/nix/persistent/var/lib/caddy/acme";
+  # Bind mount for persistent certificates for nginx
+  fileSystems."/var/lib/acme" = {
+    device = "/nix/persistent/var/lib/acme";
     options = [ "bind" "noauto" "x-systemd.automount" ];
   };
 

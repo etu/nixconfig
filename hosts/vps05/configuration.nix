@@ -7,18 +7,6 @@ let
   # Import my ssh public keys
   keys = import ../../data/pubkeys.nix;
 
-  # Caddy template
-  caddyTlsHsts = ''
-    tls {
-      protocols tls1.2
-      key_type p384
-    }
-
-    header / {
-      Strict-Transport-Security max-age=31536000
-    }
-  '';
-
 in
 {
   imports = [
@@ -39,7 +27,7 @@ in
 
   # Auto upgrade system
   system.autoUpgrade.enable = true;
-  system.autoUpgrade.channel = "https://nixos.org/channels/nixos-19.09-small";
+  system.autoUpgrade.channel = "https://nixos.org/channels/nixos-20.03-small";
 
   # Auto garbage collect
   nix.gc.automatic = true;
@@ -66,45 +54,36 @@ in
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
-  # Caddy
-  services.caddy.enable = true;
-  services.caddy.agree = true;
-  services.caddy.email = "elis@hirwing.se";
-  services.caddy.config = ''
-    git.elis.nu {
-      ${caddyTlsHsts}
+  # Set up Letsencrypt
+  security.acme.email = "elis@hirwing.se";
+  security.acme.acceptTerms = true;
 
-      proxy / http://127.0.0.1:3000
-    }
-
-    sa.0b.se {
-      ${caddyTlsHsts}
-
-      proxy / https://elis.nu/
-    }
-
-    https://ip.failar.nu {
-      ${caddyTlsHsts}
-
-      proxy / http://127.0.0.1:8123/
-    }
-
-    http://ip.failar.nu {
-      proxy / http://127.0.0.1:8123/
-    }
-
-    # Set up webserver for pgpkeyserver-lite and routes for sks
-    keys.ix.ufs.se {
-      ${caddyTlsHsts}
-
-      root ${pkgs.pgpkeyserver-lite}
-    }
-    keys.ix.ufs.se/pks {
-      ${caddyTlsHsts}
-
-      proxy / http://127.0.0.1:11371/pks
-    }
-  '';
+  # Set up NGiNX
+  services.nginx.enable = true;
+  services.nginx.virtualHosts = {
+    "git.elis.nu" = {
+      forceSSL = true;
+      enableACME = true;
+      locations."/".proxyPass = "http://127.0.0.1:3000/";
+    };
+    "sa.0b.se" = {
+      forceSSL = true;
+      enableACME = true;
+      locations."/".proxyPass = "https://elis.nu/";
+    };
+    "ip.failar.nu" = {
+      addSSL = true;
+      enableACME = true;
+      locations."/".proxyPass = "http://127.0.0.1:8123/";
+      locations."/".extraConfig = "proxy_set_header         X-Forwarded-For     $proxy_add_x_forwarded_for;";
+    };
+    "keys.ix.ufs.se" = {
+      forceSSL = true;
+      enableACME = true;
+      locations."/".root = pkgs.pgpkeyserver-lite;
+      locations."/pks".proxyPass = "http://127.0.0.1:11371/pks";
+    };
+  };
 
   # Open Firewall for HTTP, HTTPS and hkp (keyserver)
   networking.firewall.allowedTCPPorts = [ 80 443 11371 ];
