@@ -31,7 +31,7 @@
       };
     };
 
-    config = { config, pkgs, ... }: {
+    config = { config, pkgs, lib, ... }: {
       services.matomo.enable = true;
       services.matomo.nginx = {
         forceSSL = false;
@@ -39,6 +39,9 @@
 
         listen = [{ addr = "0.0.0.0"; port = 18889; }];
       };
+
+      systemd.services.matomo-archive-processing.serviceConfig.ExecStart = lib.mkForce
+        "${config.services.matomo.package}/bin/matomo-console core:archive --url=https://matomo.elis.nu";
 
       services.nginx.enable = true;
       services.mysql.enable = true;
