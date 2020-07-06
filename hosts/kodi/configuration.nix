@@ -87,6 +87,11 @@ in
   services.xserver.displayManager.lightdm.autoLogin.enable = true;
   services.xserver.displayManager.lightdm.autoLogin.user = "kodi";
 
+  # Override display manager to start after the network is up so kodi doesn't
+  # try to access my network mount point before the network is up.
+  systemd.services.display-manager.after = [ "network-online.target" ];
+  systemd.services.display-manager.wants = [ "network-online.target" "network-pre.target" ];
+
   # Define a user account.
   users.extraUsers.kodi.isNormalUser = true;
   users.extraUsers.kodi.uid = 1000;

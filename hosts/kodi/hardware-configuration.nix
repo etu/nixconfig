@@ -59,14 +59,6 @@
     options = [ "ro" "noauto" "x-systemd.automount" ];
   };
 
-  # Ensure that we have network before trying to do NFS
-  systemd.automounts = [{
-    after = [ "network-online.target" ];
-    wants = [ "network-online.target" "network-pre.target" ];
-    wantedBy = [ "display-manager.service" ];
-    where = "/mnt/hactar";
-  }];
-
   swapDevices = [ ];
 
   nix.maxJobs = lib.mkDefault 8;
