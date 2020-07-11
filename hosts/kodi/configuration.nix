@@ -84,8 +84,8 @@ in
 
   # Enable lightdm autologin.
   services.xserver.displayManager.lightdm.enable = true;
-  services.xserver.displayManager.lightdm.autoLogin.enable = true;
-  services.xserver.displayManager.lightdm.autoLogin.user = "kodi";
+  services.xserver.displayManager.autoLogin.enable = true;
+  services.xserver.displayManager.autoLogin.user = "kodi";
 
   # Override display manager to start after the network is up so kodi doesn't
   # try to access my network mount point before the network is up.

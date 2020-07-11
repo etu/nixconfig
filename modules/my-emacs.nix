@@ -167,8 +167,8 @@ in
 
       # Loginmanager
       displayManager.lightdm.enable = true;
-      displayManager.lightdm.autoLogin.enable = true;
-      displayManager.lightdm.autoLogin.user = config.my.user.username;
+      displayManager.autoLogin.enable = true;
+      displayManager.autoLogin.user = config.my.user.username;
 
       # Needed for autologin
       displayManager.defaultSession = "none+exwm";
