@@ -88,6 +88,11 @@ in
       # View all events in o logbook
       logbook = { };
 
+      # Media players
+      media_player = [
+        { platform = "kodi"; host = "kodi.lan"; }
+      ];
+
       # Enable logging
       logger = {
         default = "info";
