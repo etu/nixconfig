@@ -108,9 +108,12 @@ in
         };
       };
 
-      # Sensors
-      sensor = [
-        { platform = "yr"; name = "Weather"; }
+      # Pull in weather data
+      weather = [
+        {
+          platform = "openweathermap";
+          api_key = "!secret openweathermap_api_key";
+        }
       ];
     };
   };
