@@ -2,7 +2,7 @@
 let
   hpkgs = import
     (builtins.fetchTarball {
-      url = https://github.com/NixOS/nixpkgs/archive/f7334cad427d8eb80a51247a443cfc85514fdba0.tar.gz;
+      url = https://github.com/NixOS/nixpkgs/archive/df8552e534c6c89074f21c89a79eac709ac701bf.tar.gz;
     }) { };
 in
 {
@@ -64,8 +64,8 @@ in
 
       # ZHA
       zha = {
-        usb_path = "/dev/serial/by-id/usb-dresden_elektronik_ingenieurtechnik_GmbH_ConBee_II_DE2124653-if00";
-        radio_type = "deconz";
+        # usb_path = "/dev/serial/by-id/usb-dresden_elektronik_ingenieurtechnik_GmbH_ConBee_II_DE2124653-if00";
+        # radio_type = "deconz";
         database_path = "/var/lib/hass/zigbee.db";
         enable_quirks = false;
       };
