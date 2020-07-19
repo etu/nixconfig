@@ -2,7 +2,7 @@
 let
   hpkgs = import
     (builtins.fetchTarball {
-      url = https://github.com/NixOS/nixpkgs/archive/df8552e534c6c89074f21c89a79eac709ac701bf.tar.gz;
+      url = https://github.com/NixOS/nixpkgs/archive/b314827afdf6385df5e107d687bdcc9e2f24cb64.tar.gz;
     }) { };
 in
 {
@@ -87,6 +87,11 @@ in
 
       # View all events in o logbook
       logbook = { };
+
+      # Automatic chromecast detection
+      cast = [
+        { media_player = { }; }
+      ];
 
       # Media players
       media_player = [
