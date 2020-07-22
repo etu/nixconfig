@@ -446,13 +446,13 @@
 
 
 ;; Helm fuzzier mode
-(use-package helm-fuzzier
-  :defer 2
-  :init (setq helm-mode-fuzzy-match t
-              helm-M-x-fuzzy-match t
-              helm-buffers-fuzzy-match t
-              helm-recentf-fuzzy-match t)
-  :config (helm-fuzzier-mode 1))
+;;(use-package helm-fuzzier
+;;  :defer 2
+;;  :init (setq helm-mode-fuzzy-match t
+;;              helm-M-x-fuzzy-match t
+;;              helm-buffers-fuzzy-match t
+;;              helm-recentf-fuzzy-match t)
+;;  :config (helm-fuzzier-mode 1))
 
 
 ;;;
