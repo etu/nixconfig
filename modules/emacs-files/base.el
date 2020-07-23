@@ -174,11 +174,13 @@
 ;;;
 
 (use-package dracula-theme
+  :ensure t
   :config
   (load-theme 'dracula t))
 
 
 (use-package telephone-line
+  :ensure t
   :config
   (telephone-line-mode t))
 
@@ -193,24 +195,28 @@
 
 ;; Go mode
 (use-package go-mode
+  :ensure t
   :defer 2
   :init (add-hook 'before-save-hook 'gofmt-before-save))
 
 
 ;; PHP mode
 (use-package php-mode
+  :ensure t
   :defer 2
   :init (setq php-mode-coding-style 'psr2))
 
 
 ;; SCSS mode
 (use-package scss-mode
+  :ensure t
   :defer 2
   :init (setq scss-compile-at-save nil))
 
 
 ;; Web mode
 (use-package web-mode
+  :ensure t
   :defer 2
   :mode "\\.twig$"
   :mode "\\.html$"
@@ -221,6 +227,7 @@
 
 ;; Rest client mode
 (use-package restclient
+  :ensure t
   :defer 2
   :mode "\\.rest$"
   ;; Add hook to override C-c C-c in this mode to stay in window
@@ -233,6 +240,7 @@
 
 ;; Nix mode
 (use-package nix-mode
+  :ensure t
   :defer 2
   :mode "\\.nix$"
   :init (setq nix-indent-function 'smie-indent-line))
@@ -244,6 +252,7 @@
 
 
 (use-package company
+  :ensure t
   :defer 2
   ;; TODO: Keybind company-complete to something good
   :bind ("<backtab>" . company-complete)
@@ -252,13 +261,16 @@
               company-idle-delay 0.1)
   :config
   (progn
-    (use-package company-flx)
+    (use-package company-flx
+      :ensure t)
     (use-package company-statistics
+      :ensure t
       :init (setq company-statistics-file (concat user-emacs-data-directory "/company-statistics.dat")))
 
 
     ;; Completions for restclient mode
     (use-package company-restclient
+      :ensure t
       :config
       (add-hook 'restclient-mode-hook
                 (lambda ()
@@ -270,6 +282,7 @@
 
     ;; Completions for php mode
     (use-package company-php
+      :ensure t
       :init (setq ac-php-tags-path (concat user-emacs-cache-directory "/ac-php"))
       :config
       (progn
@@ -291,6 +304,7 @@
 
     ;; Completions for go code
     (use-package company-go
+      :ensure t
       :init (setq company-go-gocode-command "@gocode@/bin/gocode")
       :config (add-hook 'go-mode-hook
                         (lambda ()
@@ -299,6 +313,7 @@
 
     ;; Completions for nix options
     (use-package company-nixos-options
+      :ensure t
       :config (add-hook 'nix-mode-hook
                         (lambda ()
                           (set (make-local-variable 'company-backends) '(company-nixos-options)))))
@@ -306,6 +321,7 @@
 
     ;; Display details of entries automatically
     (use-package company-quickhelp
+      :ensure t
       :config
       (eval-after-load 'company (company-quickhelp-mode)))
 
@@ -323,6 +339,7 @@
 
 ;; Magit
 (use-package magit
+  :ensure t
   :defer 2
   :bind ("C-x g" . magit-status)     ; Display the main magit popup
   :init
@@ -332,6 +349,7 @@
 
 ;; Interactive search and replace
 (use-package anzu
+  :ensure t
   :defer 2
   :bind (("M-%" . anzu-query-replace)
          ("C-M-%" . anzu-query-replace-regexp)))
@@ -339,6 +357,7 @@
 
 ;; Flycheck
 (use-package flycheck
+  :ensure t
   :defer 2
   :init
   (setq flycheck-phpcs-standard "PSR2"
@@ -349,12 +368,14 @@
 
 ;; Webpaste
 (use-package webpaste
+  :ensure t
   :defer 2
   :bind (("C-c C-p C-p" . webpaste-paste-buffer-or-region)))
 
 
 ;; Which-key to press next
 (use-package which-key
+  :ensure t
   :defer 2
   :config
   (which-key-mode 1))
@@ -362,6 +383,7 @@
 
 ;; Inline diff highlight
 (use-package diff-hl
+  :ensure t
   :defer 2
   :config
   (progn
@@ -371,6 +393,7 @@
 
 ;; Long lines highlight
 (use-package column-enforce-mode
+  :ensure t
   :defer 2
   :config
   (progn
@@ -382,18 +405,21 @@
 
 ;; Remote debugger for PHP
 (use-package geben
+  :ensure t
   :defer 2
   :init (setq geben-temporary-file-directory (concat user-emacs-cache-directory "/geben")))
 
 
 ;; Direnv
 (use-package direnv
+  :ensure t
   :defer 1
   :config (direnv-mode))
 
 
 ;; pdf-tools
 (use-package pdf-tools
+  :ensure t
   :defer 2
   :config
   (pdf-tools-install))
@@ -401,6 +427,7 @@
 
 ;; Highlight symbols
 (use-package highlight-symbol
+  :ensure t
   :defer 2
   :hook (prog-mode . highlight-symbol-mode)
   :init (setq highlight-symbol-idle-delay 0.5
@@ -409,6 +436,7 @@
 
 ;; Vterm
 (use-package vterm
+  :ensure t
   :defer 2
   :init (setq vterm-kill-buffer-on-exit t))
 
@@ -418,6 +446,7 @@
 ;;;
 
 (use-package helm
+  :ensure t
   :defer 2
   :bind (("C-x C-f" . helm-find-files)
          ("M-x" . helm-M-x)
@@ -434,6 +463,7 @@
 
 ;; Set up projectile for helm
 (use-package helm-projectile
+  :ensure t
   :defer 2
   :bind (("C-x , p" . helm-projectile-switch-project)
          ("C-x , f" . helm-projectile-find-file)
@@ -461,6 +491,7 @@
 
 ;; Highlight code-blocks in org-files
 (use-package org
+  :ensure t
   :init
   (setq org-src-fontify-natively t))
 
@@ -491,6 +522,7 @@
 
 ;; Gnuplot
 (use-package gnuplot
+  :ensure t
   :defer 2
   :bind (("M-C-g" . org-plot/gnuplot))
   :init (setq gnuplot-program "@gnuplot@/bin/gnuplot"))
@@ -518,23 +550,24 @@
 ;;; Install additional modes
 ;;;
 
-(use-package centimacro :defer 2)
-(use-package es-mode :defer 2)
-(use-package fish-mode :defer 2)
-(use-package helm-ag :defer 2)
-(use-package helm-nixos-options :defer 2)
-(use-package markdown-mode :defer 2)
+(use-package centimacro :defer 2 :ensure t)
+(use-package es-mode :defer 2 :ensure t)
+(use-package fish-mode :defer 2 :ensure t)
+(use-package helm-ag :defer 2 :ensure t)
+(use-package helm-nixos-options :defer 2 :ensure t)
+(use-package markdown-mode :defer 2 :ensure t)
 (use-package phpcbf
+  :ensure t
   :defer 2
   :init (setq phpcbf-executable "@phpcbf@/bin/phpcbf"))
-(use-package vcl-mode :defer 2)
-(use-package yaml-mode :defer 2)
+(use-package vcl-mode :defer 2 :ensure t)
+(use-package yaml-mode :defer 2 :ensure t)
 
 
 ;; Rust
-(use-package rust-mode :defer 2)
-(use-package flycheck-rust :defer 2)
-(use-package racer :defer 2)
+(use-package rust-mode :defer 2 :ensure t)
+(use-package flycheck-rust :defer 2 :ensure t)
+(use-package racer :defer 2 :ensure t)
 
 
 ;;;
