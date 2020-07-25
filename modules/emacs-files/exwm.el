@@ -29,11 +29,11 @@
 ;; Display time in modeline
 (use-package time
   :init (setq display-time-24hr-format t)
-  :hook (exwm-init-hook . display-time-mode))
+  :config (add-hook 'exwm-init-hook 'display-time-mode))
 
 ;; Display battery mode
 (use-package battery
-  :hook (exwm-init-hook . display-battery-mode))
+  :config (add-hook 'exwm-init-hook 'display-battery-mode))
 
 ;; Define a function to easily run commands
 (use-package exwm
