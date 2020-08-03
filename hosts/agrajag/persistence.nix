@@ -25,6 +25,7 @@
     ];
     extraDirectories = [
       ".caffrc"
+      ".config/autorandr"
       ".dotfiles"
       ".gnupg"
       ".local/share/TelegramDesktop/tdata"
