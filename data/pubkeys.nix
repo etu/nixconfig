@@ -2,7 +2,7 @@
   etu = {
     # Android relay client
     weechat = [
-      "no-agent-forwarding,no-X11-forwarding,permitopen=\"localhost:8001\",command=\"echo 'This account can only be used for weechat relays'\" ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDELIFRmA2C93sjHebScoj8QPynqdYyl6fgYLOrBMsBKQAKrzsfF4wmA/LYo9Z89l3TmpMqzd4C/315HFO6sO7iHVrUfsC0lToA+FOcN7D40pr8m+AaQtVSI14Mlz4GY3fyeyYyssz7XXMn9LEzgZ8SxZh06YLJM9yL1kprBoRXe3Bxbja38JBSl+8xBWRyNrQBPySrTeuoxRYbJ8DUwtOeSElSP6YDjtMut4PbjLXJ2GNHavXhoQaLiZsW4c4YzcMzjiKEmAZWNg2cNuljXMf3KoKCbxqiD9zWidWhKdMuT+XhuDzTt89JAdWWStkj2N++eeESRozHmDBp9PROJx7Z etu@android-2017-04-24"
+      "no-agent-forwarding,no-X11-forwarding,permitopen=\"127.0.0.1:8001\",command=\"echo 'This account can only be used for weechat relays'\" ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC5veqjY/i/5k6QTyluIBSsYGwgKxUsdsVWgcLbvzWb/GnTx1Ia1SXYvExGrdbfEGyeZEdbsK+PAJlMVJegt/jgE8015Ga0jRwlW6y4G19FB0UrCJU/vVCnyfuH7DgswtVQ98795VET4tfWVZTziaTyrPFi+lAw7afsI5orL5FzzH6+k33M3KSDuSoIgdGgcl+KjVyil4EbO+1k0TqtE7hnD3Lu23G2gyHOSSSB9B6cFrYWWVdxNttUCkNWqwpO6IDZ6ZzBgLZSxxDqgLBjjDYlbtGw4dWk5+39x72K1Rjsj+IiCxgwpk6lCg/QFe0QGIQN9QAe07Frm5hYPx4hXltamePbWti/K7nq4HEsG389R4RjWc6CXjY9SXt0kWLlrdN+cdCncgvQxlKlm/d15BNpnXE7P2aRyGmCeyQBuMCaJ1L5EShC/QXudl/b348dZN3z+51BYVLOQb5J7p2dWUTndN2W4lKf5k2vNeM2vtiZKSMy755GIbwEGv2PX2KYsBH8jcCHEW9sw4IMZxNQW/85dsjW6FPu6EyTlMAJC7H9BO1PJGb7hCTpLic5U3Y/q0Yrj/z/r04z5OX+8BnR+qug56fYMzGJ7oCYAG+JwP80Uw0wIThxiZX0eB7dhuo4DrIlMo30WJXMNw5d5z/WrYYLkifMIirZ/Dal/gfu7QuF9Q== etu@android-2020-08-14"
     ];
 
     # New fileserver
