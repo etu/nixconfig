@@ -100,9 +100,11 @@ in
   # Enable common graphical stuff
   my.common-graphical.enable = true;
 
-  # Enable emacs and EXWM
+  # Enable emacs
   my.emacs.enable = true;
-  my.emacs.enableExwm = true;
+
+  # Enable i3
+  my.i3.enable = true;
 
   # Define a user account.
   my.user.enable = true;
