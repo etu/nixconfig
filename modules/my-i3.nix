@@ -1,11 +1,10 @@
 { config, lib, pkgs, ... }:
 
-with lib;
-
 let
   cfg = config.my.i3;
 
   physlockCommand = "/run/wrappers/bin/physlock -ds";
+  rofi = pkgs.rofi.override { plugins = [ pkgs.rofi-emoji ]; };
 
   myI3Config = pkgs.writeText "i3wm.config" ''
     # i3 config file (v4)
@@ -25,10 +24,10 @@ let
     bindsym $mod+Return exec ${cfg.package}/bin/i3-sensible-terminal
 
     # Kill focused window
-    bindsym $mod+Shift+aring kill
+    bindsym $mod+Shift+quotedbl kill
 
     # Start rofi (to launch and select programs)
-    bindsym $mod+e exec ${pkgs.rofi}/bin/rofi -show combi -theme glue_pro_blue
+    bindsym $mod+e exec ${rofi}/bin/rofi -show combi -theme glue_pro_blue
 
     # Change focus (Emacs style)
     bindsym $mod+b focus left
@@ -65,8 +64,8 @@ let
 
     # Change container layout (stacked, tabbed, toggle split)
     bindsym $mod+o layout stacking
-    bindsym $mod+adiaeresis layout tabbed
-    bindsym $mod+odiaeresis layout toggle split
+    bindsym $mod+comma layout tabbed
+    bindsym $mod+period layout toggle split
 
     # Toggle tiling / floating
     bindsym $mod+Shift+space floating toggle
@@ -94,37 +93,55 @@ let
     set $ws10 "10"
 
     # Switch to workspace
-    bindsym $mod+1 workspace $ws1
-    bindsym $mod+2 workspace $ws2
-    bindsym $mod+3 workspace $ws3
-    bindsym $mod+4 workspace $ws4
-    bindsym $mod+5 workspace $ws5
-    bindsym $mod+6 workspace $ws6
-    bindsym $mod+7 workspace $ws7
-    bindsym $mod+8 workspace $ws8
-    bindsym $mod+9 workspace $ws9
-    bindsym $mod+0 workspace $ws10
+    bindsym $mod+1 workspace number $ws1
+    bindsym $mod+2 workspace number $ws2
+    bindsym $mod+3 workspace number $ws3
+    bindsym $mod+4 workspace number $ws4
+    bindsym $mod+5 workspace number $ws5
+    bindsym $mod+6 workspace number $ws6
+    bindsym $mod+7 workspace number $ws7
+    bindsym $mod+8 workspace number $ws8
+    bindsym $mod+9 workspace number $ws9
+    bindsym $mod+0 workspace number $ws10
 
     # Move focused container to workspace
-    bindsym $mod+Shift+1 move container to workspace $ws1
-    bindsym $mod+Shift+2 move container to workspace $ws2
-    bindsym $mod+Shift+3 move container to workspace $ws3
-    bindsym $mod+Shift+4 move container to workspace $ws4
-    bindsym $mod+Shift+5 move container to workspace $ws5
-    bindsym $mod+Shift+6 move container to workspace $ws6
-    bindsym $mod+Shift+7 move container to workspace $ws7
-    bindsym $mod+Shift+8 move container to workspace $ws8
-    bindsym $mod+Shift+9 move container to workspace $ws9
-    bindsym $mod+Shift+0 move container to workspace $ws10
+    bindsym $mod+Shift+1 move container to workspace number $ws1
+    bindsym $mod+Shift+2 move container to workspace number $ws2
+    bindsym $mod+Shift+3 move container to workspace number $ws3
+    bindsym $mod+Shift+4 move container to workspace number $ws4
+    bindsym $mod+Shift+5 move container to workspace number $ws5
+    bindsym $mod+Shift+6 move container to workspace number $ws6
+    bindsym $mod+Shift+7 move container to workspace number $ws7
+    bindsym $mod+Shift+8 move container to workspace number $ws8
+    bindsym $mod+Shift+9 move container to workspace number $ws9
+    bindsym $mod+Shift+0 move container to workspace number $ws10
 
-    # Reload the configuration file
-    bindsym $mod+Shift+j reload
+    # Printscreen
+    bindsym Print exec ${pkgs.flameshot}/bin/flameshot gui
+
+    # Backlight
+    bindsym XF86MonBrightnessUp exec ${pkgs.acpilight}/bin/xbacklight -inc 10
+    bindsym XF86MonBrightnessDown exec ${pkgs.acpilight}/bin/xbacklight -dec 10
+
+    # Audio
+    bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+    bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -10%
+    bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +10%
+    bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
+    # Misc buttons
+    bindsym XF86Tools exec emacs
+    bindsym XF86Display exec ${pkgs.autorandr}/bin/autorandr -cf
+    bindsym XF86Favorites exec emacs
+
+    # Rofi emoji picker
+    bindsym $mod+i exec ${rofi}/bin/rofi -show emoji -theme glue_pro_blue
 
     # Restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
     bindsym $mod+Shift+l restart
 
     # Exit i3 (logs you out of your X session)
-    bindsym $mod+Shift+odiaeresis exec "${cfg.package}/bin/i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' '${cfg.package}/bin/i3-msg exit'"
+    bindsym $mod+Shift+greater exec "${cfg.package}/bin/i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' '${cfg.package}/bin/i3-msg exit'"
 
     # Resize window (you can also use the mouse for that)
     mode "resize" {
@@ -166,7 +183,7 @@ let
   '';
 
 in {
-  options.my.i3.enable = mkEnableOption "Enables i3wm and auto login for my user";
+  options.my.i3.enable = lib.mkEnableOption "Enables i3wm and auto login for my user";
   options.my.i3.package = lib.mkOption {
     type = lib.types.package;
     default = pkgs.i3;
@@ -174,7 +191,7 @@ in {
     description = "Which i3 package to use";
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     # Libinput
     services.xserver.libinput.enable = true;
 
@@ -190,6 +207,14 @@ in {
     services.xserver.windowManager.i3.enable = true;
     services.xserver.windowManager.i3.package = cfg.package;
     services.xserver.windowManager.i3.configFile = myI3Config;
+    services.xserver.windowManager.i3.extraSessionCommands = ''
+      # Keybind:                           ScrollLock -> Compose,      <> -> Compose
+      ${pkgs.xorg.xmodmap}/bin/xmodmap -e 'keycode 78 = Multi_key' -e 'keycode 94 = Multi_key'
+
+      if test -L ~/.background; then
+        ${pkgs.feh}/bin/feh --bg-fill ~/.background
+      fi
+    '';
 
     # Set up services needed for gnome stuff for evolution
     services.gnome3.evolution-data-server.enable = true;
