@@ -4,7 +4,9 @@ with lib;
 
 let
   cfg = config.my.i3;
-  myI3wmPkg = pkgs.i3;
+
+  physlockCommand = "/run/wrappers/bin/physlock -ds";
+
   myI3Config = pkgs.writeText "i3wm.config" ''
     # i3 config file (v4)
     #
@@ -20,7 +22,7 @@ let
     floating_modifier $mod
 
     # Start a terminal
-    bindsym $mod+Return exec ${myI3wmPkg}/bin/i3-sensible-terminal
+    bindsym $mod+Return exec ${cfg.package}/bin/i3-sensible-terminal
 
     # Kill focused window
     bindsym $mod+Shift+aring kill
@@ -122,7 +124,7 @@ let
     bindsym $mod+Shift+l restart
 
     # Exit i3 (logs you out of your X session)
-    bindsym $mod+Shift+odiaeresis exec "${myI3wmPkg}/bin/i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' '${myI3wmPkg}/bin/i3-msg exit'"
+    bindsym $mod+Shift+odiaeresis exec "${cfg.package}/bin/i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' '${cfg.package}/bin/i3-msg exit'"
 
     # Resize window (you can also use the mouse for that)
     mode "resize" {
@@ -151,7 +153,7 @@ let
 
     bindsym $mod+r mode "resize"
 
-    bindsym $mod+l exec ${pkgs.i3lock}/bin/i3lock -n -c 000000
+    bindsym $mod+l exec "${physlockCommand}"
 
     # Start i3bar to display a workspace bar (plus the system information i3status
     # finds out, if available)
@@ -165,6 +167,12 @@ let
 
 in {
   options.my.i3.enable = mkEnableOption "Enables i3wm and auto login for my user";
+  options.my.i3.package = lib.mkOption {
+    type = lib.types.package;
+    default = pkgs.i3;
+    defaultText = "pkgs.i3";
+    description = "Which i3 package to use";
+  };
 
   config = mkIf cfg.enable {
     # Libinput
@@ -172,23 +180,16 @@ in {
 
     # Loginmanager
     services.xserver.displayManager.lightdm.enable = true;
-    services.xserver.displayManager.lightdm.autoLogin.enable = true;
-    services.xserver.displayManager.lightdm.autoLogin.user = config.my.user.username;
+    services.xserver.displayManager.autoLogin.enable = true;
+    services.xserver.displayManager.autoLogin.user = config.my.user.username;
 
     # Needed for autologin
-    services.xserver.desktopManager.default = "none";
-    services.xserver.windowManager.default = "i3";
+    services.xserver.displayManager.defaultSession = "none+i3";
 
     # Set up i3
     services.xserver.windowManager.i3.enable = true;
-    services.xserver.windowManager.i3.package = myI3wmPkg;
+    services.xserver.windowManager.i3.package = cfg.package;
     services.xserver.windowManager.i3.configFile = myI3Config;
-    services.xserver.windowManager.i3.extraPackages = with pkgs; [
-      dmenu
-      i3status
-      i3lock
-      pavucontrol
-    ];
 
     # Set up services needed for gnome stuff for evolution
     services.gnome3.evolution-data-server.enable = true;
@@ -199,33 +200,23 @@ in {
 
     # Install aditional packages
     environment.systemPackages = with pkgs; [
-      arandr
       evince
+      gnome3.adwaita-icon-theme # Icons for gnome packages that sometimes use them but don't depend on them
       gnome3.evolution
       scrot
+      pavucontrol
     ];
 
     # Configure TERMINAL for i3-sensible-terminal
-    environment.variables.TERMINAL = "stupidterm";
+    environment.variables.TERMINAL = "kitty";
 
-    # Enable i3lock on suspend
-    systemd.services.i3lock = {
-      description = "Lock screen before suspend";
-      before = [ "sleep.target" ];
-      wantedBy = [ "suspend.target" ];
-
-      serviceConfig = {
-        User = config.my.user.username;
-        Type = "simple";
-        Environment = "DISPLAY=:0";
-        ExecStart = "${pkgs.i3lock}/bin/i3lock -n -c 000000";
-        ExecStartPost = "${pkgs.coreutils}/bin/sleep 1";
-      };
-    };
+    # Enable physlock and make a suid wrapper for it
+    services.physlock.enable = true;
+    services.physlock.allowAnyUser = true;
 
     # Enable auto locking of the screen
     services.xserver.xautolock.enable = true;
-    services.xserver.xautolock.locker = "${pkgs.i3lock}/bin/i3lock -n -c 000000";
+    services.xserver.xautolock.locker = physlockCommand;
     services.xserver.xautolock.enableNotifier = true;
     services.xserver.xautolock.notify = 10;
     services.xserver.xautolock.notifier = "${pkgs.libnotify}/bin/notify-send \"Locking in 10 seconds\"";

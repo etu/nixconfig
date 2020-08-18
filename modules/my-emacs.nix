@@ -192,15 +192,15 @@ in
     };
 
     # Enable physlock and make a suid wrapper for it
-    services.physlock.enable = cfg.enableExwm;
-    services.physlock.allowAnyUser = cfg.enableExwm;
+    services.physlock.enable = lib.mkIf cfg.enableExwm true;
+    services.physlock.allowAnyUser = lib.mkIf cfg.enableExwm true;
 
     # Enable autorandr for screen setups.
-    services.autorandr.enable = cfg.enableExwm;
+    services.autorandr.enable = lib.mkIf cfg.enableExwm true;
 
     # Set up services needed for gnome stuff for evolution
-    services.gnome3.evolution-data-server.enable = cfg.enableExwm;
-    services.gnome3.gnome-keyring.enable = cfg.enableExwm;
+    services.gnome3.evolution-data-server.enable = lib.mkIf cfg.enableExwm true;
+    services.gnome3.gnome-keyring.enable = lib.mkIf cfg.enableExwm true;
 
     # Install aditional packages
     environment.systemPackages = lib.mkIf cfg.enableExwm (with pkgs; [
