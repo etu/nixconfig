@@ -15,6 +15,7 @@
     ./my-i3.nix
     ./my-nfsd.nix
     ./my-spell.nix
+    ./my-sway.nix
     ./my-update-config.nix
     ./my-user.nix
     ./my-vbox.nix
