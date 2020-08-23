@@ -313,6 +313,9 @@ in {
       pavucontrol
     ];
 
+    # Configure Firefox to use Wayland
+    environment.variables.MOZ_ENABLE_WAYLAND = "1";
+
     # Needed for autologin
     services.xserver.displayManager.defaultSession = "sway";
 
