@@ -19,7 +19,10 @@ in
       wantedBy = [ "multi-user.target" ];
     };
 
-    home-manager.users.${config.my.user.username} = { pkgs, ... }: {
+    home-manager.users.${config.my.user.username} = { pkgs, ... }: let
+      isX11 = config.my.i3.enable or config.my.emacs.enableExwm;
+      isWayland = config.my.sway.enable;
+    in {
       # Import a persistance module for home-manager.
       imports = [ "${impermanence}/home-manager.nix" ];
 
@@ -157,7 +160,7 @@ in
       };
 
       # Enable the dunst notification deamon
-      services.dunst.enable = true;
+      services.dunst.enable = isX11;
       services.dunst.settings = {
         global = {
           # font = "";
@@ -249,11 +252,19 @@ in
         };
       };
 
-      # Set up autorandr service to trigger on saved configurations
-      programs.autorandr.enable = true;
+      # Set up mako, a notification deamon for wayland
+      programs.mako.enable = isWayland;
+      programs.mako.backgroundColor = "#191311";
+      programs.mako.borderColor = "#3B7C87";
+      programs.mako.borderSize = 3;
+      programs.mako.defaultTimeout = 6000;
 
-      services.picom.enable = true;
-      services.flameshot.enable = true;
+      # Set up autorandr service to trigger on saved configurations
+      programs.autorandr.enable = isX11;
+
+      services.picom.enable = isX11;
+
+      services.flameshot.enable = isX11;
       services.pasystray.enable = true;
       services.network-manager-applet.enable = true;
     };

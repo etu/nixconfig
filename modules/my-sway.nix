@@ -268,6 +268,12 @@ let
     ##
 
     #
+    # Start things:
+    #
+      # Notification deamon:
+      exec mako
+
+    #
     # Status Bar:
     #
     # Read `man 5 sway-bar` for more information about this section.
@@ -294,6 +300,18 @@ in {
     services.xserver.displayManager.lightdm.enable = true;
     services.xserver.displayManager.autoLogin.enable = true;
     services.xserver.displayManager.autoLogin.user = config.my.user.username;
+
+    # Set up services needed for gnome stuff for evolution
+    services.gnome3.evolution-data-server.enable = true;
+    services.gnome3.gnome-keyring.enable = true;
+
+    # Install aditional packages
+    environment.systemPackages = with pkgs; [
+      evince
+      gnome3.adwaita-icon-theme # Icons for gnome packages that sometimes use them but don't depend on them
+      gnome3.evolution
+      pavucontrol
+    ];
 
     # Needed for autologin
     services.xserver.displayManager.defaultSession = "sway";
