@@ -109,7 +109,7 @@ let
       bindsym $mod+Return exec $term
 
       # Kill focused window:
-      bindsym $mod+Shift+quotedbl kill
+      bindsym $mod+Shift+apostrophe kill
 
       # Start your launcher:
       bindsym $mod+e exec ${rofi}/bin/rofi -show combi -theme glue_pro_blue | xargs swaymsg exec --
