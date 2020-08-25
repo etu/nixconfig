@@ -265,8 +265,8 @@ in
       services.picom.enable = isX11;
 
       services.flameshot.enable = isX11;
-      services.pasystray.enable = true;
-      services.network-manager-applet.enable = true;
+      services.pasystray.enable = isX11;
+      services.network-manager-applet.enable = isX11;
     };
   };
 }
