@@ -263,6 +263,7 @@ in
       programs.autorandr.enable = isX11;
 
       services.picom.enable = isX11;
+      services.picom.vSync = (config.networking.hostName == "agrajag");
 
       services.flameshot.enable = isX11;
       services.pasystray.enable = isX11;
