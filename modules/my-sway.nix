@@ -263,6 +263,9 @@ let
       bindsym Print exec ${pkgs.sway-contrib.grimshot}/bin/grimshot copy area
       bindsym Shift+Print exec ${pkgs.sway-contrib.grimshot}/bin/grimshot save area
 
+      # Rofi emoji picker:
+      bindsym $mod+i exec ${rofi}/bin/rofi -show emoji -theme glue_pro_blue
+
     ##
     ## Visuals
     ##
@@ -332,6 +335,23 @@ in {
 
     # Needed for autologin
     services.xserver.displayManager.defaultSession = "sway";
+
+    # Make the emojis in xwayland reasonably sized
+    fonts.fontconfig.localConf = ''
+      <?xml version="1.0" encoding="UTF-8"?>
+      <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+
+      <fontconfig>
+        <match target="pattern">
+          <edit name="family" mode="prepend"><string>Noto Color Emoji</string></edit>
+        </match>
+
+        <match target="font">
+          <test name="family" compare="eq"><string>Noto Color Emoji</string></test>
+          <edit name="pixelsize" mode="assign"><double>700</double></edit>
+        </match>
+      </fontconfig>
+    '';
 
     environment.etc."sway/config".source = mySwayConfig;
   };
