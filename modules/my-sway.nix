@@ -8,8 +8,7 @@ let
   # TODO:
   # - Network manager applet
   # - Pulse audio systray
-  # - Dunst
-  # - Media keys
+  # - Media keys (Missing: XF86Display)
 
   # Here I define a custom XKB keymap to pass to sway for all my keyboard
   # related settings in one go. No xmodmap or thing like that needed.
@@ -262,6 +261,21 @@ let
       # Printscreen:
       bindsym Print exec ${pkgs.sway-contrib.grimshot}/bin/grimshot copy area
       bindsym Shift+Print exec ${pkgs.sway-contrib.grimshot}/bin/grimshot save area
+
+      # Backlight:
+      bindsym XF86MonBrightnessUp exec ${pkgs.acpilight}/bin/xbacklight -inc 10
+      bindsym XF86MonBrightnessDown exec ${pkgs.acpilight}/bin/xbacklight -dec 10
+
+      # Audio:
+      bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+      bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -10%
+      bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +10%
+      bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
+      # Misc buttons:
+      bindsym XF86Tools exec emacs
+      # bindsym XF86Display exec pkgs.autorandr/bin/autorandr -cf
+      bindsym XF86Favorites exec emacs
 
       # Rofi emoji picker:
       bindsym $mod+i exec ${rofi}/bin/rofi -show emoji -theme glue_pro_blue
