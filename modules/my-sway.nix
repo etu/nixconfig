@@ -316,6 +316,20 @@ in {
     # Configure Firefox to use Wayland
     environment.variables.MOZ_ENABLE_WAYLAND = "1";
 
+    # Set XDG portal related variables
+    environment.variables.XDG_SESSION_TYPE = "wayland";
+    environment.variables.XDG_CURRENT_DESKTOP = "sway";
+
+    # Make sure that the user session imports the environment
+    programs.sway.extraSessionCommands = "systemctl --user import-environment";
+
+    # Set up Pipewire
+    services.pipewire.enable = true;
+
+    # Set up XDG Portals
+    xdg.portal.enable = true;
+    xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-wlr ];
+
     # Needed for autologin
     services.xserver.displayManager.defaultSession = "sway";
 
