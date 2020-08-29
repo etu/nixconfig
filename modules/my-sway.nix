@@ -288,7 +288,7 @@ let
     # Start things:
     #
       # Notification deamon:
-      exec mako
+      exec ${pkgs.mako}/bin/mako
 
     #
     # Status Bar:
