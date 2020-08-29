@@ -284,6 +284,20 @@ let
     ## Visuals
     ##
 
+      # Set gaps
+      gaps inner 5
+
+      # Set borders instead of title bars for some programs
+      for_window [app_id="kitty"] border pixel 3
+      for_window [app_id="firefox"] border pixel 3
+      for_window [class="Brave-browser"] border pixel 3
+      for_window [class="Chromium-browser"] border pixel 3
+      for_window [class="Emacs"] border pixel 3
+
+      # Apply opacity to some programs
+      for_window [app_id="kitty"] opacity set 0.9
+      for_window [class="Emacs"] opacity set 0.99
+
     #
     # Start things:
     #
@@ -306,8 +320,8 @@ let
   waybarConfig = pkgs.writeText "waybar-config.json" (builtins.toJSON {
     height = 30; # Height of bar
 
-    margin-top = 5;
-    margin-bottom = 5;
+    margin-top = 0;
+    margin-bottom = 0;
     margin-right = 100;
     margin-left = 100;
 
