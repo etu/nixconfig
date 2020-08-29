@@ -17,6 +17,7 @@ in
     fonts.fonts = with pkgs; [
       dejavu_fonts
       emacs-all-the-icons-fonts
+      font-awesome # Needed for waybar
       inconsolata
       liberation_ttf
       noto-fonts

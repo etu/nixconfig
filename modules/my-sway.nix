@@ -4,10 +4,10 @@ let
   cfg = config.my.sway;
 
   rofi = pkgs.rofi.override { plugins = [ pkgs.rofi-emoji ]; };
+  waybar = pkgs.waybar.override { pulseSupport = true; };
 
   # TODO:
   # - Network manager applet
-  # - Pulse audio systray
   # - Media keys (Missing: XF86Display)
 
   # Here I define a custom XKB keymap to pass to sway for all my keyboard
@@ -153,9 +153,9 @@ let
     # Workspaces:
     #
       # Define the names for the workspaces we want to create:
-      set $ws1 "1 - Misc"
-      set $ws2 "2 - Web"
-      set $ws3 "3 - Emacs"
+      set $ws1 "1"
+      set $ws2 "2"
+      set $ws3 "3"
       set $ws4 "4"
       set $ws5 "5"
       set $ws6 "6"
@@ -295,11 +295,95 @@ let
     #
     # Read `man 5 sway-bar` for more information about this section.
       bar {
-        position top
+        # Hide the default bar
+        mode invisible
 
-        status_command ${pkgs.i3status}/bin/i3status
+        # Run waybar as a bar
+        status_command ${waybar}/bin/waybar --config ${waybarConfig}
       }
   '';
+
+  waybarConfig = pkgs.writeText "waybar-config.json" (builtins.toJSON {
+    height = 30; # Height of bar
+
+    margin-top = 5;
+    margin-bottom = 5;
+    margin-right = 100;
+    margin-left = 100;
+
+    modules-left = [ "backlight" "cpu" "memory" "temperature" "battery" "battery#bat2" ];
+    modules-center = [ "sway/workspaces" "sway/mode" ];
+    modules-right = [ "idle_inhibitor" "pulseaudio" "network" "clock" "tray" ];
+
+    "sway/workspaces" = {
+      disable-scroll = true;
+      format = "{icon}";
+      format-icons = {
+        "1" = ""; # Ⅰ
+        "2" = ""; # Ⅱ
+        "3" = ""; # Ⅲ
+        "4" = "Ⅳ";
+        "5" = "Ⅴ";
+        "6" = "Ⅵ";
+        "7" = "Ⅶ";
+        "8" = "Ⅷ";
+        "9" = if config.networking.hostName == "eliaxe-59087-t480s" then "" else "Ⅸ";
+        "10" = ""; # Ⅹ
+        urgent = "";
+        focused = "";
+        default = "";
+      };
+    };
+
+    "sway/mode".format = "<span style=\"italic\">{}</span>";
+
+    "battery#bat2".bat = "BAT2";
+
+    backlight.format = "{percent}% {icon}";
+    backlight.format-icons = [ "" "" ];
+
+    battery.format = "{capacity}% {icon}";
+    battery.format-alt = "{time} {icon}";
+    battery.format-charging = "{capacity}% ";
+    battery.format-full =  "{capacity}% {icon}";
+    battery.format-good = "{capacity}% {icon}";
+    battery.format-icons = [ ""  ""  ""  ""  "" ];
+    battery.format-plugged = "{capacity}% ";
+    battery.states = { good = 80; warning = 30; critical = 15; };
+
+    clock.format = "<span color=\"#88c0d0\"></span> {:%Y-%m-%d %H:%M:%S}";
+    clock.interval = 5;
+
+    cpu.format = "{usage}% ";
+    cpu.tooltip =  true;
+
+    idle_inhibitor.format = "{icon}";
+    idle_inhibitor.format-icons.activated = "";
+    idle_inhibitor.format-icons.deactivated = "";
+
+    memory.format = "{}% ";
+
+    network.format-alt = "{ifname}: {ipaddr}/{cidr}";
+    network.format-disconnected = "Disconnected ⚠";
+    network.format-ethernet = "{ifname}: {ipaddr}/{cidr} ";
+    network.format-linked = "{ifname} (No IP) ";
+    network.format-wifi = "{essid} ({signalStrength}%) ";
+
+    pulseaudio.format = "{volume}% {icon} {format_source}";
+    pulseaudio.format-bluetooth = "{volume}% {icon} {format_source}";
+    pulseaudio.format-bluetooth-muted = " {icon} {format_source}";
+    pulseaudio.format-muted = " {format_source}";
+    pulseaudio.format-source = "{volume}% ";
+    pulseaudio.format-source-muted = "";
+    pulseaudio.format-icons = { headphone = ""; hands-free = ""; headset = "";
+                                phone = ""; portable = ""; car = "";
+                                default = [ "" "" "" ]; };
+    pulseaudio.on-click = "${pkgs.pavucontrol}/bin/pavucontrol";
+
+    temperature.critical-threshold = 80;
+    temperature.format = "{icon} {temperatureC}°C";
+    temperature.format-icons = [ "" "" "" ];
+  });
 
 in {
   options.my.sway.enable = lib.mkEnableOption "Enables sway and auto login for my user";
