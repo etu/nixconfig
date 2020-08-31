@@ -103,8 +103,8 @@ in
   # Enable emacs
   my.emacs.enable = true;
 
-  # Enable i3
-  my.i3.enable = true;
+  # Enable sway
+  my.sway.enable = true;
 
   # Define a user account.
   my.user.enable = true;
