@@ -1,5 +1,4 @@
 { config, lib, pkgs, ... }:
-
 let
   cfg = config.my.i3;
 
@@ -219,7 +218,8 @@ let
       }
   '';
 
-in {
+in
+{
   options.my.i3.enable = lib.mkEnableOption "Enables i3wm and auto login for my user";
   options.my.i3.package = lib.mkOption {
     type = lib.types.package;

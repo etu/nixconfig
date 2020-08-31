@@ -1,5 +1,4 @@
 { config, lib, pkgs, ... }:
-
 let
   cfg = config.my.emacs;
 
@@ -117,7 +116,7 @@ in
         # Config to parse, use my built config from above and optionally my exwm
         # config to be able to pull in use-package dependencies from there.
         config = builtins.readFile myEmacsConfig +
-                 lib.optionalString cfg.enableExwm (builtins.readFile myExwmConfig);
+          lib.optionalString cfg.enableExwm (builtins.readFile myExwmConfig);
 
         # Package overrides
         override = epkgs: epkgs // {
