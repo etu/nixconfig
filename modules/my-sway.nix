@@ -1,5 +1,4 @@
 { config, lib, pkgs, ... }:
-
 let
   cfg = config.my.sway;
 
@@ -325,9 +324,9 @@ let
     margin-right = 100;
     margin-left = 100;
 
-    modules-left = [ "backlight" "cpu" "memory" "temperature" "battery" "battery#bat2" ];
+    modules-left = [ "idle_inhibitor" "backlight" "cpu" "memory" "temperature" "battery" "battery#bat2" ];
     modules-center = [ "sway/workspaces" "sway/mode" ];
-    modules-right = [ "idle_inhibitor" "pulseaudio" "network" "clock" "tray" ];
+    modules-right = [ "pulseaudio" "network" "clock" "tray" ];
 
     "sway/workspaces" = {
       disable-scroll = true;
@@ -359,9 +358,9 @@ let
     battery.format = "{capacity}% {icon}";
     battery.format-alt = "{time} {icon}";
     battery.format-charging = "{capacity}% ";
-    battery.format-full =  "{capacity}% {icon}";
+    battery.format-full = "{capacity}% {icon}";
     battery.format-good = "{capacity}% {icon}";
-    battery.format-icons = [ ""  ""  ""  ""  "" ];
+    battery.format-icons = [ "" "" "" "" "" ];
     battery.format-plugged = "{capacity}% ";
     battery.states = { good = 80; warning = 30; critical = 15; };
 
@@ -369,7 +368,7 @@ let
     clock.interval = 5;
 
     cpu.format = "{usage}% ";
-    cpu.tooltip =  true;
+    cpu.tooltip = true;
 
     idle_inhibitor.format = "{icon}";
     idle_inhibitor.format-icons.activated = "";
@@ -389,9 +388,15 @@ let
     pulseaudio.format-muted = " {format_source}";
     pulseaudio.format-source = "{volume}% ";
     pulseaudio.format-source-muted = "";
-    pulseaudio.format-icons = { headphone = ""; hands-free = ""; headset = "";
-                                phone = ""; portable = ""; car = "";
-                                default = [ "" "" "" ]; };
+    pulseaudio.format-icons = {
+      headphone = "";
+      hands-free = "";
+      headset = "";
+      phone = "";
+      portable = "";
+      car = "";
+      default = [ "" "" "" ];
+    };
     pulseaudio.on-click = "${pkgs.pavucontrol}/bin/pavucontrol";
 
     temperature.critical-threshold = 80;
@@ -399,7 +404,8 @@ let
     temperature.format-icons = [ "" "" "" ];
   });
 
-in {
+in
+{
   options.my.sway.enable = lib.mkEnableOption "Enables sway and auto login for my user";
   options.my.sway.package = lib.mkOption {
     type = lib.types.package;
