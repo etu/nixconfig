@@ -5,6 +5,9 @@ let
   rofi = pkgs.rofi.override { plugins = [ pkgs.rofi-emoji ]; };
   waybar = pkgs.waybar.override { pulseSupport = true; };
 
+  # Lock command
+  lockCommand = "${pkgs.swaylock-effects}/bin/swaylock -f --effect-greyscale --effect-pixelate 5 -S";
+
   # TODO:
   # - Network manager applet
   # - Media keys (Missing: XF86Display)
@@ -72,10 +75,10 @@ let
       # your displays after another 300 seconds, and turn your screens back on when
       # resumed. It will also lock your screen before your computer goes to sleep.
       exec ${pkgs.swayidle}/bin/swayidle -w \
-        timeout 300 '${pkgs.swaylock-effects}/bin/swaylock -f --effect-greyscale --effect-pixelate 5 -S' \
+        timeout 300 '${lockCommand}' \
         timeout 600 '${cfg.package}/bin/swaymsg "output * dpms off"' \
              resume '${cfg.package}/bin/swaymsg "output * dpms on"' \
-        before-sleep '${pkgs.swaylock-effects}/bin/swaylock -f --effect-greyscale --effect-pixelate 5 -S'
+        before-sleep '${lockCommand}'
 
     ##
     ## Input configuration
@@ -278,6 +281,9 @@ let
 
       # Rofi emoji picker:
       bindsym $mod+i exec ${rofi}/bin/rofi -show emoji -theme glue_pro_blue
+
+      # Launch screen locker
+      bindsym $mod+l exec ${lockCommand}
 
     ##
     ## Visuals
