@@ -78,7 +78,10 @@ in
 
       dino
       feh
+
+      chromium
       firefox-bin
+
       mpv
       stupidterm
       kitty
