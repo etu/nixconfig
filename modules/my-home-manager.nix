@@ -150,17 +150,8 @@ in
           showProgramPath = false;
           treeView = true;
           meters = {
-            left = [
-              { kind = "LeftCPUs"; mode = 1; }
-              { kind = "Memory"; mode = 1; }
-              { kind = "Swap"; mode = 1; }
-            ];
-            right = [
-              { kind = "RightCPUs"; mode = 1; }
-              { kind = "Tasks"; mode = 2; }
-              { kind = "LoadAverage"; mode = 2; }
-              { kind = "Uptime"; mode = 2; }
-            ];
+            left = [  "LeftCPUs"  "Memory" "Swap"        "ZFSARC" "ZFSCARC" ];
+            right = [ "RightCPUs" "Tasks"  "LoadAverage" "Uptime" "Battery" ];
           };
         };
 
