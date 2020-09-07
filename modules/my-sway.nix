@@ -296,6 +296,7 @@ let
       for_window [app_id="kitty"] border pixel 3
       for_window [app_id="firefox"] border pixel 3
       for_window [app_id="firefox" title="Firefox - Sharing Indicator"] floating enable
+      for_window [app_id="firefox" title="Picture-in-Picture"] floating enable
       for_window [class="Brave-browser"] border pixel 3
       for_window [class="Chromium-browser"] border pixel 3
       for_window [class="Emacs"] border pixel 3
