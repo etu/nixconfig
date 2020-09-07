@@ -43,7 +43,7 @@ in
   boot.extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
 
   # Hardware settings
-  services.xserver.videoDrivers = [ "modesetting" ];
+  services.xserver.videoDrivers = [ "intel" ];
   hardware.cpu.intel.updateMicrocode = true;
 
   # Enable fwupd for firmware updates etc
