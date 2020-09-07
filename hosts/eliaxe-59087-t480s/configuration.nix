@@ -80,7 +80,7 @@ in
 
   # Enable emacs and EXWM
   my.emacs.enable = true;
-  my.emacs.enableExwm = true;
+  my.sway.enable = true;
 
   # Define a user account.
   my.user.enable = true;
