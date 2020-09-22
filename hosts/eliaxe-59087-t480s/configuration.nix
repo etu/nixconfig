@@ -95,6 +95,11 @@ in
   # Enable docker deamon
   virtualisation.docker.enable = true;
 
+  # Enable podman
+  virtualisation.podman.enable = true;
+  environment.systemPackages = with pkgs; [ podman-compose ];
+  # For future reference: virtualisation.podman.dockerCompat = false;
+
   # Install netdata for system monitoring
   services.netdata.enable = true;
 
