@@ -87,6 +87,7 @@
   (add-hook 'prog-mode-hook my-hook)
   (add-hook 'text-mode-hook my-hook))
 
+(add-hook 'text-mode-hook 'flyspell-mode)
 
 ;; Automagic indent on newline
 (global-set-key "\C-m" 'newline-and-indent)
