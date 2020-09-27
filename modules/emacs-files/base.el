@@ -306,15 +306,6 @@
         (define-key php-mode-map (kbd "C-t") 'ac-php-location-stack-back)))
 
 
-    ;; Completions for go code
-    (use-package company-go
-      :ensure t
-      :init (setq company-go-gocode-command "@gocode@/bin/gocode")
-      :config (add-hook 'go-mode-hook
-                        (lambda ()
-                          (set (make-local-variable 'company-backends) '(company-go)))))
-
-
     ;; Completions for nix options
     (use-package company-nixos-options
       :ensure t
@@ -334,6 +325,27 @@
                                 (company-mode t)
                                 (company-statistics-mode t)
                                 (company-flx-mode t)))))
+
+
+;;;
+;;; LSP Mode
+;;;
+(use-package lsp-mode
+  :ensure t
+  :defer 2
+  :commands (lsp lsp-deferred)
+  :hook (go-mode . lsp-deferred)
+  :init (setq lsp-keymap-prefix "s-c"
+              lsp-go-gopls-server-path "@gopls@/bin/gopls"))
+
+(use-package lsp-ui
+  :ensure t
+  :defer 2
+  :commands lsp-ui-mode)
+
+(use-package helm-lsp
+  :ensure t
+  :defer 2)
 
 
 ;;;
@@ -362,7 +374,7 @@
 ;; Flycheck
 (use-package flycheck
   :ensure t
-  :defer 2
+  :defer 1
   :init
   (setq flycheck-phpcs-standard "PSR2"
         flycheck-php-phpcs-executable "@phpcs@/bin/phpcs")
