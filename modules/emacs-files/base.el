@@ -76,11 +76,13 @@
 ;; Enable certain modes in all programming/text modes
 ;;  - Show trailing whitespace
 ;;  - Highlight current line
+;;  - Long line indicator
 
 (let ((my-hook (lambda ()
                  (setq show-trailing-whitespace t)
                  (hl-line-mode 1)
-                 (display-line-numbers-mode 1))))
+                 (display-line-numbers-mode 1)
+                 (display-fill-column-indicator-mode t))))
 
   (add-hook 'prog-mode-hook my-hook)
   (add-hook 'text-mode-hook my-hook))
@@ -296,7 +298,9 @@
                             company-gtags
                             company-etags
                             company-keywords
-                            company-ac-php-backend)))))
+                            company-ac-php-backend)))
+
+                    (set (make-local-variable 'fill-column) 120)))
 
         (define-key php-mode-map (kbd "C-]") 'ac-php-find-symbol-at-point)
         (define-key php-mode-map (kbd "C-t") 'ac-php-location-stack-back)))
@@ -391,18 +395,6 @@
     (add-hook 'text-mode-hook 'diff-hl-mode)))
 
 
-;; Long lines highlight
-(use-package column-enforce-mode
-  :ensure t
-  :defer 2
-  :config
-  (progn
-    ;; Make/Add hooks
-    (add-hook 'prog-mode-hook 'column-enforce-mode)
-    (add-hook 'php-mode-hook (make-column-rule 120))
-    (add-hook 'org-mode-hook (make-column-rule 77))))
-
-
 ;; Remote debugger for PHP
 (use-package geben
   :ensure t
@@ -493,7 +485,10 @@
 (use-package org
   :ensure t
   :init
-  (setq org-src-fontify-natively t))
+  (progn
+    (setq org-src-fontify-natively t)
+    (add-hook 'org-mode-hook (lambda ()
+                               (set (make-local-variable 'fill-column) 77)))))
 
 
 ;; Workhour clocking settings
