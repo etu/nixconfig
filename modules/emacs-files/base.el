@@ -426,6 +426,17 @@
               highlight-symbol-highlight-single-occurrence nil))
 
 
+;; Highlight indentation for certain modes
+(use-package highlight-indent-guides
+  :ensure t
+  :defer 2
+  :init (setq highlight-indent-guides-method 'character
+              highlight-indent-guides-responsive 'top)
+  :config
+  (add-hook 'yaml-mode-hook (lambda ()
+                              (highlight-indent-guides-mode t))))
+
+
 ;; Vterm
 (use-package vterm
   :ensure t
