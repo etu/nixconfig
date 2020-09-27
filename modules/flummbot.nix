@@ -4,7 +4,7 @@ let
 
   package = pkgs.buildGoPackage {
     pname = "flummbot";
-    version = "20180703";
+    version = "20200927";
 
     goPackagePath = "github.com/etu/flummbot";
     goDeps = ./flummbot-deps.nix;
@@ -12,8 +12,8 @@ let
     src = pkgs.fetchFromGitHub {
       owner = "etu";
       repo = "flummbot";
-      rev = "b1f72875ad5311cf7e97fc301a0c40bf9be008bc";
-      sha256 = "16bb6b71i873g3ffmn9jwygkamc3p7j4lnivkxaclik1ivb54xgk";
+      rev = "484056f5b392fa4416a7b899f11dfa73181663f9";
+      sha256 = "1kqkmmbc89fn9xz6fwd3dn6lx0lyrq9sz1bi8kkkd1w5ikcxzmlb";
     };
   };
 
