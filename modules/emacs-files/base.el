@@ -336,7 +336,7 @@
   :defer 2
   :commands (lsp lsp-deferred)
   :hook (go-mode . lsp-deferred)
-  :init (setq lsp-keymap-prefix "s-c"
+  :init (setq lsp-keymap-prefix "M-l"
               lsp-go-gopls-server-path "@gopls@/bin/gopls"))
 
 (use-package lsp-ui
