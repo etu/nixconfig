@@ -85,6 +85,47 @@ let
 
   myExwmInit = myEmacsLispLoader "" myExwmConfig;
 
+  myEmacsPackage = pkgs.emacsWithPackagesFromUsePackage {
+    package = cfg.package;
+
+    # Config to parse, use my built config from above and optionally my exwm
+    # config to be able to pull in use-package dependencies from there.
+    config = builtins.readFile myEmacsConfig +
+             lib.optionalString cfg.enableExwm (builtins.readFile myExwmConfig);
+
+    # Package overrides
+    override = epkgs: epkgs // {
+      # Add my config initializer as an emacs package
+      myConfigInit = (
+        pkgs.runCommand "my-emacs-default-package" { } ''
+          mkdir -p $out/share/emacs/site-lisp
+          cp ${myEmacsInit} $out/share/emacs/site-lisp/default.el
+        ''
+      );
+
+      # Override nix-mode source
+      nix-mode = epkgs.nix-mode.overrideAttrs (oldAttrs: {
+        src = builtins.fetchTarball {
+          url = https://github.com/nixos/nix-mode/archive/master.tar.gz;
+        };
+      });
+    };
+
+    # Extra packages to install
+    extraEmacsPackages = epkgs: (
+      # Install my config file as a module
+      [ epkgs.myConfigInit ] ++
+
+      # Install work deps
+      lib.optionals cfg.enableWork [
+        epkgs.es-mode
+        epkgs.vcl-mode
+        epkgs.vue-mode
+        epkgs.vue-html-mode
+      ]
+    );
+  };
+
 in
 {
   options.my.emacs = {
@@ -109,48 +150,7 @@ in
     services.emacs = lib.mkIf cfg.enable {
       enable = true;
       defaultEditor = true;
-
-      package = (pkgs.emacsWithPackagesFromUsePackage {
-        package = cfg.package;
-
-        # Config to parse, use my built config from above and optionally my exwm
-        # config to be able to pull in use-package dependencies from there.
-        config = builtins.readFile myEmacsConfig +
-          lib.optionalString cfg.enableExwm (builtins.readFile myExwmConfig);
-
-        # Package overrides
-        override = epkgs: epkgs // {
-          # Add my config initializer as an emacs package
-          myConfigInit = (
-            pkgs.runCommand "my-emacs-default-package"
-              { } ''
-              mkdir -p  $out/share/emacs/site-lisp
-              cp ${myEmacsInit} $out/share/emacs/site-lisp/default.el
-            ''
-          );
-
-          # Override nix-mode source
-          nix-mode = epkgs.nix-mode.overrideAttrs (oldAttrs: {
-            src = builtins.fetchTarball {
-              url = https://github.com/nixos/nix-mode/archive/master.tar.gz;
-            };
-          });
-        };
-
-        # Extra packages to install
-        extraEmacsPackages = epkgs: (
-          # Install my config file as a module
-          [ epkgs.myConfigInit ] ++
-
-          # Install work deps
-          lib.optionals cfg.enableWork [
-            epkgs.es-mode
-            epkgs.vcl-mode
-            epkgs.vue-mode
-            epkgs.vue-html-mode
-          ]
-        );
-      });
+      package = myEmacsPackage;
     };
 
 
