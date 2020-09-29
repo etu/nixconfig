@@ -207,7 +207,9 @@
 (use-package php-mode
   :ensure t
   :defer 2
-  :init (setq php-mode-coding-style 'psr2))
+  :init (setq php-mode-coding-style 'psr2)
+  :config (add-hook 'php-mode-hook (lambda ()
+                                     (set (make-local-variable 'fill-column) 120))))
 
 
 ;; SCSS mode
@@ -283,30 +285,6 @@
                   (company-mode t))))
 
 
-    ;; Completions for php mode
-    (use-package company-php
-      :ensure t
-      :init (setq ac-php-tags-path (concat user-emacs-cache-directory "/ac-php"))
-      :config
-      (progn
-        (use-package php-mode)
-
-        (add-hook 'php-mode-hook
-                  (lambda ()
-                    ;; Add build company-backends with dabbrev and ac-php
-                    (set (make-local-variable 'company-backends)
-                         '((company-dabbrev-code
-                            company-gtags
-                            company-etags
-                            company-keywords
-                            company-ac-php-backend)))
-
-                    (set (make-local-variable 'fill-column) 120)))
-
-        (define-key php-mode-map (kbd "C-]") 'ac-php-find-symbol-at-point)
-        (define-key php-mode-map (kbd "C-t") 'ac-php-location-stack-back)))
-
-
     ;; Completions for nix options
     (use-package company-nixos-options
       :ensure t
@@ -335,9 +313,14 @@
   :ensure t
   :defer 2
   :commands (lsp lsp-deferred)
-  :hook (go-mode . lsp-deferred)
+  :hook ((go-mode . lsp-deferred)
+         (php-mode . lsp))
   :init (setq lsp-keymap-prefix "M-l"
               lsp-go-gopls-server-path "@gopls@/bin/gopls"))
+
+;; (define-key php-mode-map (kbd "C-]") 'ac-php-find-symbol-at-point)
+;; (define-key php-mode-map (kbd "C-t") 'ac-php-location-stack-back)
+
 
 (use-package lsp-ui
   :ensure t
