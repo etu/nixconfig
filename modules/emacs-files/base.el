@@ -468,7 +468,7 @@
          ("C-x , f" . helm-projectile-find-file)
          ("C-x , b" . projectile-ibuffer)
          ("C-x , i" . projectile-invalidate-cache)
-         ("C-x , a" . helm-projectile-ag)
+         ("C-x , a" . helm-projectile-rg)
          ("C-x , k" . projectile-kill-buffers))
   :init (setq projectile-enable-caching t)
   :config (projectile-mode))
@@ -555,7 +555,7 @@
 (use-package centimacro :defer 2 :ensure t)
 (use-package es-mode :defer 2 :ensure t)
 (use-package fish-mode :defer 2 :ensure t)
-(use-package helm-ag :defer 2 :ensure t)
+(use-package helm-rg :defer 2 :ensure t)
 (use-package helm-nixos-options :defer 2 :ensure t)
 (use-package markdown-mode :defer 2 :ensure t)
 (use-package phpcbf
