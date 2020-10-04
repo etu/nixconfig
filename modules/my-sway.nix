@@ -389,6 +389,7 @@ let
     network.format-ethernet = "{ifname}: {ipaddr}/{cidr} ";
     network.format-linked = "{ifname} (No IP) ";
     network.format-wifi = "{essid} ({signalStrength}%) ";
+    network.interval = 15;
 
     pulseaudio.format = "{volume}% {icon} {format_source}";
     pulseaudio.format-bluetooth = "{volume}% {icon} {format_source}";
