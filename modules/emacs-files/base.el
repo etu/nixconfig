@@ -440,6 +440,13 @@
   :init (setq vterm-kill-buffer-on-exit t))
 
 
+;; EditorConfig
+(use-package editorconfig
+  :ensure t
+  :defer 2
+  :config (editorconfig-mode 1))
+
+
 ;;;
 ;;; Helm
 ;;;
