@@ -315,8 +315,7 @@
   :commands (lsp lsp-deferred)
   :hook ((go-mode . lsp-deferred)
          (php-mode . lsp))
-  :init (setq lsp-keymap-prefix "M-l"
-              lsp-go-gopls-server-path "@gopls@/bin/gopls"))
+  :init (setq lsp-keymap-prefix "M-l"))
 
 ;; (define-key php-mode-map (kbd "C-]") 'ac-php-find-symbol-at-point)
 ;; (define-key php-mode-map (kbd "C-t") 'ac-php-location-stack-back)

@@ -30,7 +30,7 @@ let
   myEmacsConfig = (
     pkgs.runCommand "config.el"
       (with pkgs; {
-        inherit gnuplot gopls;
+        inherit gnuplot;
         phpcs = phpPackages.phpcs;
         phpcbf = phpPackages.phpcbf;
       }) "substituteAll ${myEmacsConfigPlain} $out"
