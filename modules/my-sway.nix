@@ -3,7 +3,6 @@ let
   cfg = config.my.sway;
 
   rofi = pkgs.rofi.override { plugins = [ pkgs.rofi-emoji ]; };
-  waybar = pkgs.waybar.override { pulseSupport = true; };
 
   # Lock command
   lockCommand = "${pkgs.swaylock-effects}/bin/swaylock -f --effect-greyscale --effect-pixelate 5 -S";
@@ -320,7 +319,7 @@ let
         mode invisible
 
         # Run waybar as a bar
-        status_command ${waybar}/bin/waybar --config ${waybarConfig}
+        status_command ${pkgs.waybar}/bin/waybar --config ${waybarConfig}
       }
   '';
 

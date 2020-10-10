@@ -79,7 +79,7 @@ in
       feh
 
       chromium
-      firefox-bin
+      firefox
 
       mpv
       stupidterm
