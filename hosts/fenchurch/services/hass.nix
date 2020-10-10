@@ -2,7 +2,7 @@
 let
   hpkgs = import
     (builtins.fetchTarball {
-      url = https://github.com/NixOS/nixpkgs/archive/b314827afdf6385df5e107d687bdcc9e2f24cb64.tar.gz;
+      url = https://github.com/NixOS/nixpkgs/archive/61525137fd1002f6f2a5eb0ea27d480713362cd5.tar.gz;
     }) { };
 in
 {
@@ -99,24 +99,7 @@ in
       ];
 
       # Enable logging
-      logger = {
-        default = "info";
-        logs = {
-          "bellows.ezsp" = "debug";
-          "bellows.zigbee.application" = "debug";
-          "homeassistant.components.zha" = "debug";
-          "homeassistant.core" = "debug";
-          "mobile_app" = "debug";
-          "zhaquirks" = "debug";
-          "zigpy" = "debug";
-          "zigpy_cc" = "debug";
-          "zigpy_deconz.api" = "debug";
-          "zigpy_deconz.zigbee.application" = "debug";
-          "zigpy_xbee.api" = "debug";
-          "zigpy_xbee.zigbee.application" = "debug";
-          "zigpy_zigate" = "debug";
-        };
-      };
+      logger.default = "info";
 
       # Pull in weather data
       weather = [
