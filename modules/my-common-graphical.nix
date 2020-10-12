@@ -8,7 +8,7 @@ in
 
   config = lib.mkIf cfg.enable {
     # Sane font defaults.
-    fonts.enableFontDir = true;
+    fonts.fontDir.enable = true;
     fonts.enableGhostscriptFonts = true;
     fonts.fontconfig.cache32Bit = true;
 
