@@ -528,6 +528,16 @@
                    (concat str "- "))))))
 
 
+;; Restclient mode for org-babel
+(use-package ob-restclient
+  :ensure t
+  :defer 2
+  :config
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((restclient . t))))
+
+
 ;; Gnuplot
 (use-package gnuplot
   :ensure t
