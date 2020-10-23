@@ -103,6 +103,16 @@ let
         ''
       );
 
+      cell-mode = let
+        cellModeSrc = builtins.fetchurl {
+          url = "https://gitlab.com/dto/mosaic-el/-/raw/f737583aab836cdf8891231d8ed6aa20df9377aa/cell.el";
+          sha256 = "0clydvm1jq1wcjwms5465ngzyb76vwl9l9gcd1dxvv1898h03b9c";
+        };
+      in pkgs.runCommand "cell-mode" {} ''
+        mkdir -p $out/share/emacs/site-lisp
+        cp ${cellModeSrc} $out/share/emacs/site-lisp/cell.el
+      '';
+
       # Override nix-mode source
       nix-mode = epkgs.nix-mode.overrideAttrs (oldAttrs: {
         src = builtins.fetchTarball {
@@ -114,7 +124,7 @@ let
     # Extra packages to install
     extraEmacsPackages = epkgs: (
       # Install my config file as a module
-      [ epkgs.myConfigInit ] ++
+      [ epkgs.myConfigInit epkgs.cell-mode ] ++
 
       # Install work deps
       lib.optionals cfg.enableWork [
