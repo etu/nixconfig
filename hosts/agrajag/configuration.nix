@@ -108,7 +108,7 @@ in
 
   # Define a user account.
   my.user.enable = true;
-  my.user.extraGroups = [ "video" ];
+  my.user.extraGroups = [ "video" "docker" ];
 
   # Immutable users due to tmpfs
   users.mutableUsers = false;
@@ -119,4 +119,7 @@ in
 
   # Home-manager as nix module
   my.home-manager.enable = true;
+
+  # Set up docker
+  virtualisation.docker.enable = true;
 }
