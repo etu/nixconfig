@@ -91,6 +91,11 @@ in
           "bin/pp".source = ./dotfiles/bin/prettyping;
           "bin/prettyping".source = ./dotfiles/bin/prettyping;
           "bin/spacecolors".source = ./dotfiles/bin/spacecolors;
+
+          "bin/keep".source = pkgs.runCommand "keep" { } ''
+            cp ${./dotfiles/bin/keep} $out
+            substituteInPlace $out --replace /bin/zsh ${pkgs.zsh}/bin/zsh
+          '';
         };
 
         programs.git = {

@@ -1,0 +1,17 @@
+#!/bin/zsh
+#
+# Shamelessly stolen from someone :-)
+#
+# keep - poor man's version control, make freshly numbered copies
+
+[[ $# = 0 ]] && exit 255
+
+for f; do
+  f=$f:A
+  v=($f.<->(nOnN[1]))
+  if [[ -n "$v" ]] && cmp $v $f >/dev/null 2>&1; then
+    print -u2 $v not modified
+  else
+    cp -va $f $f.$((${${v:-.0}##*.} + 1))
+  fi
+done
