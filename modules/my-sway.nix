@@ -299,10 +299,12 @@ let
       for_window [class="Brave-browser"] border pixel 3
       for_window [class="Chromium-browser"] border pixel 3
       for_window [class="Emacs"] border pixel 3
+      for_window [app_id="emacs"] border pixel 3
 
       # Apply opacity to some programs
       for_window [app_id="kitty"] opacity set 0.9
       for_window [class="Emacs"] opacity set 0.99
+      for_window [app_id="emacs"] opacity set 0.99
 
     #
     # Start things:
