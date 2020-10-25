@@ -103,7 +103,7 @@ in
 
   # Enable emacs deamon stuff
   my.emacs.enable = true;
-  my.emacs.package = pkgs.emacs-nox;
+  my.emacs.package = "nox";
 
   # Define a user account.
   my.user.enable = true;

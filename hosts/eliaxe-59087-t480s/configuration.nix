@@ -78,8 +78,11 @@ in
   # Enable common graphical stuff
   my.common-graphical.enable = true;
 
-  # Enable emacs and EXWM
+  # Enable emacs deamon stuff
   my.emacs.enable = true;
+  my.emacs.package = "wayland";
+
+  # Enable sway
   my.sway.enable = true;
 
   # Define a user account.

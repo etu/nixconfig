@@ -102,6 +102,7 @@ in
 
   # Enable emacs
   my.emacs.enable = true;
+  my.emacs.package = "wayland";
 
   # Enable sway
   my.sway.enable = true;
