@@ -3,6 +3,7 @@ let
   cfg = config.my.emacs;
 
   emacs-overlay = (import ../nix/sources.nix).emacs-overlay;
+  waylandPkgs = (import (import ../nix/sources.nix).wayland) {} pkgs;
 
   # Extract the path executed by the systemd-service, to get the flags used by
   # the service. But replace the path with the security wrapper dir so we get
@@ -86,7 +87,7 @@ let
   myExwmInit = myEmacsLispLoader "" myExwmConfig;
 
   myEmacsPackage = pkgs.emacsWithPackagesFromUsePackage {
-    package = cfg.package;
+    package = emacsPackages."${cfg.package}";
 
     # Config to parse, use my built config from above and optionally my exwm
     # config to be able to pull in use-package dependencies from there.
@@ -136,6 +137,11 @@ let
     );
   };
 
+  emacsPackages = {
+    default = pkgs.emacs;
+    nox = pkgs.emacs-nox;
+    wayland = waylandPkgs.emacs-pgtk;
+  };
 in
 {
   options.my.emacs = {
@@ -143,9 +149,9 @@ in
     enableExwm = lib.mkEnableOption "Enables EXWM config and graphical environment";
     enableWork = lib.mkEnableOption "Enables install of work related modules";
     package = lib.mkOption {
-      type = lib.types.package;
-      default = pkgs.emacs;
-      defaultText = "pkgs.emacs";
+      type = lib.types.str;
+      default = "default";
+      defaultText = "default";
       description = "Which emacs package to use";
     };
   };
