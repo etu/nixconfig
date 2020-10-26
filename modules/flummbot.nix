@@ -12,8 +12,8 @@ let
     src = pkgs.fetchFromGitHub {
       owner = "etu";
       repo = "flummbot";
-      rev = "484056f5b392fa4416a7b899f11dfa73181663f9";
-      sha256 = "1kqkmmbc89fn9xz6fwd3dn6lx0lyrq9sz1bi8kkkd1w5ikcxzmlb";
+      rev = "665c93029743498f69d95683aaa9392275516e4e";
+      sha256 = "183skk32z9zd7wlwfkhb7idd1y4hkcsxpkhqlbxhiyl509dcjkzy";
     };
   };
 
