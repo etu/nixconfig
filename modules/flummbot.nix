@@ -12,8 +12,8 @@ let
     src = pkgs.fetchFromGitHub {
       owner = "etu";
       repo = "flummbot";
-      rev = "665c93029743498f69d95683aaa9392275516e4e";
-      sha256 = "183skk32z9zd7wlwfkhb7idd1y4hkcsxpkhqlbxhiyl509dcjkzy";
+      rev = "ac418a21e37dc13e6bed716eb5f75ce179696910";
+      sha256 = "1z72na4pffn4lgs23jvway5k7ggmlnc0qhwcny20d6y84qchgfzm";
     };
   };
 
@@ -46,7 +46,7 @@ in
       serviceConfig = {
         Type = "simple";
         User = cfg.user;
-        ExecStart = "${package}/bin/flummbot -c ${cfg.stateDirectory}/flummbot.toml";
+        ExecStart = "${package}/bin/flummbot --config ${cfg.stateDirectory}/flummbot.toml";
         WorkingDirectory = cfg.stateDirectory;
         Restart = "always";
       };
