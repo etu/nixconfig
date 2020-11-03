@@ -1,8 +1,8 @@
-{ config, pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 {
   imports = [
-    "${(import ../nix/sources.nix).impermanence}/nixos.nix"
+    "${inputs.impermanence}/nixos.nix"
     ./flummbot.nix
     ./ip-failar-nu.nix
     ./my-common-cli.nix

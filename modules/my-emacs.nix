@@ -1,9 +1,6 @@
-{ config, lib, pkgs, ... }:
+{ config, inputs, lib, pkgs, ... }:
 let
   cfg = config.my.emacs;
-
-  emacs-overlay = (import ../nix/sources.nix).emacs-overlay;
-  waylandPkgs = (import (import ../nix/sources.nix).wayland) {} pkgs;
 
   # Extract the path executed by the systemd-service, to get the flags used by
   # the service. But replace the path with the security wrapper dir so we get
@@ -115,11 +112,11 @@ let
       '';
 
       # Override nix-mode source
-      nix-mode = epkgs.nix-mode.overrideAttrs (oldAttrs: {
-        src = builtins.fetchTarball {
-          url = https://github.com/nixos/nix-mode/archive/master.tar.gz;
-        };
-      });
+      #nix-mode = epkgs.nix-mode.overrideAttrs (oldAttrs: {
+      #  src = builtins.fetchTarball {
+      #    url = https://github.com/nixos/nix-mode/archive/master.tar.gz;
+      #  };
+      #});
     };
 
     # Extra packages to install
@@ -142,7 +139,7 @@ let
   emacsPackages = {
     default = pkgs.emacs;
     nox = pkgs.emacs-nox;
-    wayland = waylandPkgs.emacs-pgtk;
+    wayland = (inputs.wayland.overlay {} pkgs).emacs-pgtk;
   };
 in
 {
@@ -162,7 +159,7 @@ in
     # Import the emacs overlay from nix community to get the latest
     # and greatest packages.
     nixpkgs.overlays = lib.mkIf cfg.enable [
-      (import emacs-overlay)
+      (inputs.emacs-overlay.overlay)
     ];
 
     services.emacs = lib.mkIf cfg.enable {

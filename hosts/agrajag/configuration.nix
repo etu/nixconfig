@@ -2,18 +2,15 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ pkgs, inputs, ... }:
 let
   # Load secrets
   secrets = import ../../data/load-secrets.nix;
-
-  # Find import path of nixos-hardware
-  nixos-hardware = (import ../../nix/sources.nix).nixos-hardware;
 in
 {
   imports = [
     # Include hardware quirks
-    "${nixos-hardware}/lenovo/thinkpad/t495"
+    inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t495
 
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -23,104 +20,107 @@ in
     ../../modules
   ];
 
-  # The NixOS release to be compatible with for stateful data such as databases.
-  system.stateVersion = "19.09";
+  config = {
+    # The NixOS release to be compatible with for stateful data such as databases.
+    system.stateVersion = "21.03";
 
-  # Use local nixpkgs checkout
-  nix.nixPath = [
-    "nixos-config=/etc/nixos/configuration.nix"
-    "nixpkgs=/etc/nixos/nixpkgs"
-  ];
+    # Set hostname
+    networking.hostName = "agrajag";
 
-  # Set hostname
-  networking.hostName = "agrajag";
+    # Use the systemd-boot EFI boot loader.
+    boot.loader.systemd-boot.enable = true;
+    boot.loader.efi.canTouchEfiVariables = true;
+    boot.kernelPackages = pkgs.linuxPackages_5_9;
 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelPackages = pkgs.linuxPackages_5_9;
+    # Settings needed for ZFS
+    boot.supportedFilesystems = [ "zfs" ];
+    networking.hostId = "27416952";
+    services.zfs.autoScrub.enable = true;
+    services.zfs.autoSnapshot.enable = true;
 
-  # Settings needed for ZFS
-  boot.supportedFilesystems = [ "zfs" ];
-  networking.hostId = "27416952";
-  services.zfs.autoScrub.enable = true;
-  services.zfs.autoSnapshot.enable = true;
+    # Use nix with flakes support
+    nix.package = pkgs.nixFlakes;
+    nix.extraOptions = "experimental-features = nix-command flakes";
 
-  # Hardware settings
-  hardware.enableRedistributableFirmware = true;
+    # Set nixpkgs to NIX_PATH to ease the transaction to flakes.
+    nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
-  # Include udev rules to give permissions to the video group to change
-  # backlight using acpilight.
-  hardware.acpilight.enable = true;
+    # Hardware settings
+    hardware.enableRedistributableFirmware = true;
 
-  # Set video driver
-  services.xserver.videoDrivers = [ "modesetting" ];
+    # Include udev rules to give permissions to the video group to change
+    # backlight using acpilight.
+    hardware.acpilight.enable = true;
 
-  # Enable fwupd for firmware updates etc
-  services.fwupd.enable = true;
+    # Set video driver
+    services.xserver.videoDrivers = [ "modesetting" ];
 
-  # Enable bluetooth
-  hardware.bluetooth.enable = true;
+    # Enable fwupd for firmware updates etc
+    services.fwupd.enable = true;
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-  services.printing.drivers = [
-    pkgs.postscript-lexmark
-  ];
+    # Enable bluetooth
+    hardware.bluetooth.enable = true;
 
-  # Enable printer configuration
-  hardware.printers.ensureDefaultPrinter = "Lexmark_CS510de";
-  hardware.printers.ensurePrinters = [
-    {
-      name = "Lexmark_CS510de";
-      deviceUri = "ipps://192.168.0.124:443/ipp/print";
-      model = "postscript-lexmark/Lexmark-CS510_Series-Postscript-Lexmark.ppd";
-      location = "UFS";
-      ppdOptions = {
-        PageSize = "A4";
-      };
-    }
-  ];
+    # Enable CUPS to print documents.
+    services.printing.enable = true;
+    services.printing.drivers = [
+      pkgs.postscript-lexmark
+    ];
 
-  # Enable SANE to handle scanners
-  hardware.sane.enable = true;
+    # Enable printer configuration
+    hardware.printers.ensureDefaultPrinter = "Lexmark_CS510de";
+    hardware.printers.ensurePrinters = [
+      {
+        name = "Lexmark_CS510de";
+        deviceUri = "ipps://192.168.0.124:443/ipp/print";
+        model = "postscript-lexmark/Lexmark-CS510_Series-Postscript-Lexmark.ppd";
+        location = "UFS";
+        ppdOptions = {
+          PageSize = "A4";
+        };
+      }
+    ];
 
-  # Disable root login for ssh
-  services.openssh.permitRootLogin = "no";
+    # Enable SANE to handle scanners
+    hardware.sane.enable = true;
 
-  # Enable common cli settings for my systems
-  my.common-cli.enable = true;
+    # Disable root login for ssh
+    services.openssh.permitRootLogin = "no";
 
-  # Enable aspell and hunspell with dictionaries.
-  my.spell.enable = true;
+    # Enable common cli settings for my systems
+    my.common-cli.enable = true;
 
-  # Enable gpg related stuff
-  my.gpg-utils.enable = true;
+    # Enable aspell and hunspell with dictionaries.
+    my.spell.enable = true;
 
-  # Enable common graphical stuff
-  my.common-graphical.enable = true;
+    # Enable gpg related stuff
+    my.gpg-utils.enable = true;
 
-  # Enable emacs
-  my.emacs.enable = true;
-  my.emacs.package = "wayland";
+    # Enable common graphical stuff
+    my.common-graphical.enable = true;
 
-  # Enable sway
-  my.sway.enable = true;
+    # Enable emacs
+    my.emacs.enable = true;
+    my.emacs.package = "wayland";
 
-  # Define a user account.
-  my.user.enable = true;
-  my.user.extraGroups = [ "video" "docker" ];
+    # Enable sway
+    my.sway.enable = true;
 
-  # Immutable users due to tmpfs
-  users.mutableUsers = false;
+    # Define a user account.
+    my.user.enable = true;
+    my.user.extraGroups = [ "video" "docker" ];
 
-  # Set passwords
-  users.users.root.initialHashedPassword = secrets.hashedRootPassword;
-  users.users.etu.initialHashedPassword = secrets.hashedEtuPassword;
+    # Immutable users due to tmpfs
+    users.mutableUsers = false;
 
-  # Home-manager as nix module
-  my.home-manager.enable = true;
+    # Set passwords
+    users.users.root.initialHashedPassword = secrets.hashedRootPassword;
+    users.users.etu.initialHashedPassword = secrets.hashedEtuPassword;
 
-  # Set up docker
-  virtualisation.docker.enable = true;
+    # Home-manager as nix module
+    my.home-manager.enable = true;
+
+    # Set up docker
+    virtualisation.docker.enable = true;
+  };
 }
