@@ -2,15 +2,26 @@
   description = "etu/nixconfig";
 
   inputs = {
+    # Emacs Overlay
     emacs-overlay.url = "github:nix-community/emacs-overlay";
+
+    # Home Manager
     home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    # NixOS hardware quirks
     nixos-hardware.url = "github:NixOS/nixos-hardware";
+
+    # Main nixpkgs channel
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+    # Wayland overlay
     wayland.url = "github:colemickens/nixpkgs-wayland";
-    impermanence = {
-      flake = false;
-      url = "https://github.com/nix-community/impermanence/archive/8fc761e8c34.tar.gz";
-     };
+    wayland.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Persistance things
+    impermanence.url = "https://github.com/nix-community/impermanence/archive/8fc761e8c34.tar.gz";
+    impermanence.flake = false;
   };
 
   outputs = inputs:
