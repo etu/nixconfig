@@ -24,6 +24,7 @@
     in
     {
       nixosConfigurations.agrajag = mkSystem "x86_64-linux" inputs.nixpkgs "agrajag";
+      nixosConfigurations.fenchurch = mkSystem "x86_64-linux" inputs.nixpkgs "fenchurch";
 
       devShell.x86_64-linux = import ./shell.nix { pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux; };
       devShell.aarch64-linux = import ./shell.nix { pkgs = inputs.nixpkgs.legacyPackages.aarch64-linux; };
