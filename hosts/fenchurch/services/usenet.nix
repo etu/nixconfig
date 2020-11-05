@@ -11,6 +11,11 @@
       '';
     in
     {
+      # Bazarr
+      "subs.lan".locations."/" = {
+        proxyPass = "http://127.0.0.1:6767/";
+        extraConfig = onlyLan;
+      };
       # Sonarr
       "series.lan".locations."/" = {
         proxyPass = "http://127.0.0.1:8989/";
@@ -40,6 +45,7 @@
   # Enable usenet related services in a container
   containers.usenet = {
     config = { config, pkgs, ... }: {
+      services.bazarr = { enable = true; user = "downloads"; group = "downloads"; };
       services.sonarr = { enable = true; user = "downloads"; group = "downloads"; };
       services.radarr = { enable = true; user = "downloads"; group = "downloads"; };
       services.lidarr = { enable = true; user = "downloads"; group = "downloads"; };
@@ -50,6 +56,7 @@
     };
 
     forwardPorts = [
+      { containerPort = 6767; hostPort = 6767; protocol = "tcp"; } # Bazarr
       { containerPort = 8989; hostPort = 8989; protocol = "tcp"; } # Sonarr
       { containerPort = 7878; hostPort = 7878; protocol = "tcp"; } # Radarr
       { containerPort = 8686; hostPort = 8686; protocol = "tcp"; } # Lidarr
@@ -57,6 +64,11 @@
     ];
 
     bindMounts = {
+      "bazarr" = {
+        mountPoint = "/var/lib/bazarr";
+        hostPath = "/persistent/var/lib/bazarr";
+        isReadOnly = false;
+      };
       "sonarr" = {
         mountPoint = "/var/lib/sonarr/.config/NzbDrone";
         hostPath = "/persistent/var/lib/sonarr";
