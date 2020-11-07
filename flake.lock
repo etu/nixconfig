@@ -47,6 +47,26 @@
         "type": "github"
       }
     },
+    "flummbot": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1604775931,
+        "narHash": "sha256-VOhi0gnIOIx4NZqgFMmz0vInD0YMUirQA+Pe1PMZVtA=",
+        "owner": "etu",
+        "repo": "flummbot",
+        "rev": "eaa78832366f556c59adddb0e70e105f29686d77",
+        "type": "github"
+      },
+      "original": {
+        "owner": "etu",
+        "repo": "flummbot",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -113,6 +133,7 @@
     "root": {
       "inputs": {
         "emacs-overlay": "emacs-overlay",
+        "flummbot": "flummbot",
         "home-manager": "home-manager",
         "impermanence": "impermanence",
         "nixos-hardware": "nixos-hardware",

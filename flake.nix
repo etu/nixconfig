@@ -5,6 +5,10 @@
     # Emacs Overlay
     emacs-overlay.url = "github:nix-community/emacs-overlay";
 
+    # Import my irc-bot as a flake
+    flummbot.url = "github:etu/flummbot";
+    flummbot.inputs.nixpkgs.follows = "nixpkgs";
+
     # Home Manager
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
