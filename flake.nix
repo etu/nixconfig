@@ -44,6 +44,7 @@
     {
       nixosConfigurations.agrajag = mkSystem "x86_64-linux" inputs.nixpkgs "agrajag";
       nixosConfigurations.fenchurch = mkSystem "x86_64-linux" inputs.nixpkgs "fenchurch";
+      nixosConfigurations.vps04 = mkSystem "x86_64-linux" inputs.nixpkgs "vps04";
       nixosConfigurations.vps05 = mkSystem "x86_64-linux" inputs.nixpkgs "vps05";
 
       devShell.x86_64-linux = import ./shell.nix { pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux; };
