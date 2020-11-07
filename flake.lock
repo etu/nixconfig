@@ -99,6 +99,26 @@
         "url": "https://github.com/nix-community/impermanence/archive/8fc761e8c34.tar.gz"
       }
     },
+    "ip-failar-nu": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1604754988,
+        "narHash": "sha256-5oc2ItDpSNbJBTL7iDArVuLhW1lt8N7IZT8s0azup4c=",
+        "owner": "etu",
+        "repo": "ip.failar.nu",
+        "rev": "a676c0c4eb858cba568ffd4cdc3d8485da807352",
+        "type": "github"
+      },
+      "original": {
+        "owner": "etu",
+        "repo": "ip.failar.nu",
+        "type": "github"
+      }
+    },
     "nixos-hardware": {
       "locked": {
         "lastModified": 1604571579,
@@ -136,6 +156,7 @@
         "flummbot": "flummbot",
         "home-manager": "home-manager",
         "impermanence": "impermanence",
+        "ip-failar-nu": "ip-failar-nu",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
         "wayland": "wayland"

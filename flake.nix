@@ -9,6 +9,10 @@
     flummbot.url = "github:etu/flummbot";
     flummbot.inputs.nixpkgs.follows = "nixpkgs";
 
+    # Import my tiny web service to respond with the client IP
+    ip-failar-nu.url = "github:etu/ip.failar.nu";
+    ip-failar-nu.inputs.nixpkgs.follows = "nixpkgs";
+
     # Home Manager
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";

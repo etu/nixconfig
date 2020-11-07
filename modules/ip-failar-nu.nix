@@ -1,21 +1,8 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, inputs, pkgs, ... }:
 let
   cfg = config.programs.ip-failar-nu;
 
-  package = pkgs.buildGoPackage {
-    pname = "ip-failar-nu";
-    version = "20180318";
-
-    goPackagePath = "github.com/etu/ip.failar.nu";
-    goDeps = ./ip-failar-nu-deps.nix;
-
-    src = pkgs.fetchFromGitHub {
-      owner = "etu";
-      repo = "ip.failar.nu";
-      rev = "c98fe6421ed79ee78a370fb067445f2865258560";
-      sha256 = "0pddnswcswkf8z7c6ajhf2ps2n6kfhrgnx6kcph7jz81n5488vyz";
-    };
-  };
+  package = inputs.ip-failar-nu.defaultPackage.x86_64-linux;
 
 in
 {
