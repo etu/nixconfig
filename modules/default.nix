@@ -3,7 +3,7 @@
 {
   imports = [
     "${inputs.impermanence}/nixos.nix"
-    ./flummbot.nix
+    inputs.flummbot.nixosModule
     ./ip-failar-nu.nix
     ./my-common-cli.nix
     ./my-common-graphical.nix

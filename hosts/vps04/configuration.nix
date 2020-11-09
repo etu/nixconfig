@@ -129,8 +129,10 @@ in
     };
 
     # Enable the flummbot service
-    programs.flummbot.enable = true;
-    programs.flummbot.stateDirectory = "/home/bots";
+    services.flummbot.enable = true;
+    services.flummbot.user = "bots";
+    services.flummbot.group = "bots";
+    services.flummbot.stateDirectory = "/home/bots";
 
     # Enable the bridge for IX Discord / IRC
     services.matterbridge.enable = true;
