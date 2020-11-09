@@ -117,7 +117,7 @@ in
     services.postgresql.package = pkgs.postgresql_11;
 
     # Enable the ip-failar-nu service
-    programs.ip-failar-nu.enable = true;
+    services.ip-failar-nu.enable = true;
 
     # Enable sks keyserver
     services.sks.enable = true;

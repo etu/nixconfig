@@ -106,11 +106,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1604754988,
-        "narHash": "sha256-5oc2ItDpSNbJBTL7iDArVuLhW1lt8N7IZT8s0azup4c=",
+        "lastModified": 1604950292,
+        "narHash": "sha256-m9Uf/3WuTiFzCrzEoQpKcnlPa09ybe7FtZT90bBTfjg=",
         "owner": "etu",
         "repo": "ip.failar.nu",
-        "rev": "a676c0c4eb858cba568ffd4cdc3d8485da807352",
+        "rev": "f3be8500757e87c91e9284edda73d96d46540709",
         "type": "github"
       },
       "original": {
