@@ -1,61 +1,33 @@
 * My NixOS configs
-Clone into =/etc/nixos/=.
+  Clone into =/etc/nixos/=.
 
-** Symlink system config
-Symlink configuration.nix to this directory to use on that system you're on:
-#+BEGIN_SRC sh
-$ ln -s hosts/<hostname>/configuration.nix .
-#+END_SRC
-
-** Set up nixos channels
-Add one nixos channel, choose unstable or stable depending on usecase:
-#+BEGIN_SRC sh
-# Add unstable channel for laptops or desktops etc
-$ sudo nix-channel --add https://nixos.org/channels/nixos-unstable nixos
-$ sudo nix-channel --update
-
-# Else add stable channels on utility systems like, servers.
-$ sudo nix-channel --add https://nixos.org/channels/nixos-18.09 nixos
-$ sudo nix-channel --update
-#+END_SRC
-
-If the host is defining it's own nixPath in the =configuration.nix= file that
-you linked you need to set up the submodule:
-#+BEGIN_SRC sh
-# Set up submodules
-$ git submodule init
-$ git submodule update
-#+END_SRC
+  This requires an installation of nix with working flakes.
 
 * Small tips and tricks
-** Using other channels when defining my own nix.nixPath
-#+BEGIN_SRC nix
-# Define variable that imports and configures the channel
-nixos-small = (import /nix/var/nix/profiles/per-user/root/channels/nixos-small/nixpkgs {
-  config.allowUnfree = true;
-});
-
-# Installing packages
-environment.systemPackages = with pkgs; [
-  firefox
-
-  # Example usage of packages from other channel
-  nixos-small.emacs
-];
-#+END_SRC
+** Installing from different flakes
+   #+BEGIN_SRC nix
+     # Take inputs as an argument
+     {
+       config = inputs: {
+         environment.systemPackages = with inputs.nixpkgs.x86_64-linux; [
+           cowsay
+         ];
+       };
+     }
+   #+END_SRC
 
 ** Sample overlay to overwrite package
-Sample overlay to downgrade PHP to a specific version:
+   Sample overlay to downgrade PHP to a specific version:
 
-#+BEGIN_SRC nix
-{ pkgs, ... }:
+   #+BEGIN_SRC nix
+     { pkgs, ... }:
 
-{
-  nixpkgs.overlays = [
-    (self: super: {
-      php = self.php70;
-      phpPackages = self.php70Packages;
-    })
-  ];
-}
-#+END_SRC
+     {
+       nixpkgs.overlays = [
+         (self: super: {
+           php = self.php70;
+           phpPackages = self.php70Packages;
+         })
+       ];
+     }
+   #+END_SRC
