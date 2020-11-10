@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, inputs, pkgs, ... }:
 let
   # Import my ssh public keys
   keys = import ../../data/pubkeys.nix;
@@ -17,105 +17,114 @@ in
     ../../modules
   ];
 
-  # The NixOS release to be compatible with for stateful data such as databases.
-  system.stateVersion = "20.09";
+  config = {
+    # The NixOS release to be compatible with for stateful data such as databases.
+    system.stateVersion = "20.09";
 
-  networking.hostName = "kodi";
+    networking.hostName = "kodi";
 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+    # Use the systemd-boot EFI boot loader.
+    boot.loader.systemd-boot.enable = true;
+    boot.loader.efi.canTouchEfiVariables = true;
+    boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  # Settings needed for ZFS
-  boot.supportedFilesystems = [ "zfs" ];
-  networking.hostId = "10227851";
-  services.zfs.autoScrub.enable = true;
-  services.zfs.autoSnapshot.enable = true;
+    # Settings needed for ZFS
+    boot.supportedFilesystems = [ "zfs" ];
+    networking.hostId = "10227851";
+    services.zfs.autoScrub.enable = true;
+    services.zfs.autoSnapshot.enable = true;
 
-  # AMD GPU drivers
-  services.xserver.videoDrivers = [ "amdgpu" ];
+    # AMD GPU drivers
+    services.xserver.videoDrivers = [ "amdgpu" ];
 
-  # Auto upgrade system
-  system.autoUpgrade.enable = true;
-  system.autoUpgrade.channel = "https://nixos.org/channels/nixos-unstable";
+    # Use nix with flakes support
+    nix.package = pkgs.nixFlakes;
+    nix.extraOptions = "experimental-features = nix-command flakes";
 
-  # Auto garbage collect
-  nix.gc.automatic = true;
-  nix.gc.options = "--delete-older-than 30d";
+    # Set nixpkgs to NIX_PATH to ease the transaction to flakes.
+    nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
-  # Auto update the config before it upgrades the system
-  my.update-config.enable = true;
+    # Auto upgrade system
+    #system.autoUpgrade.enable = true;
+    #system.autoUpgrade.channel = "https://nixos.org/channels/nixos-unstable";
 
-  # Enable some firmwares.
-  hardware.cpu.amd.updateMicrocode = true;
-  hardware.enableRedistributableFirmware = true;
+    # Auto garbage collect
+    #nix.gc.automatic = true;
+    #nix.gc.options = "--delete-older-than 30d";
 
-  # OpenGL stuff
-  hardware.opengl.enable = true;
-  hardware.opengl.driSupport = true;
+    # Auto update the config before it upgrades the system
+    #my.update-config.enable = true;
 
-  # Build nix stuff with all the power
-  nix.buildCores = 6;
+    # Enable some firmwares.
+    hardware.cpu.amd.updateMicrocode = true;
+    hardware.enableRedistributableFirmware = true;
 
-  # List packages installed in system profile. To search by name, run:
-  # $ nix-env -qaP | grep wget
-  environment.systemPackages = with pkgs; [
-    lm_sensors
-    nvme-cli
-  ];
+    # OpenGL stuff
+    hardware.opengl.enable = true;
+    hardware.opengl.driSupport = true;
 
-  # List services that you want to enable:
+    # Build nix stuff with all the power
+    nix.buildCores = 6;
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
+    # List packages installed in system profile. To search by name, run:
+    # $ nix-env -qaP | grep wget
+    environment.systemPackages = with pkgs; [
+      lm_sensors
+      nvme-cli
+    ];
 
-  # Set display resolution
-  services.xserver.extraDisplaySettings = ''
-    Depth        24
-    Modes        "1920x1080"
-  '';
+    # List services that you want to enable:
 
-  # Enable Kodi.
-  services.xserver.desktopManager.kodi.enable = true;
+    # Enable the X11 windowing system.
+    services.xserver.enable = true;
 
-  # Enable Kodi plugins.
-  nixpkgs.config.kodi.enableSVTPlay = true;
+    # Set display resolution
+    services.xserver.extraDisplaySettings = ''
+      Depth        24
+      Modes        "1920x1080"
+    '';
 
-  # Enable lightdm autologin.
-  services.xserver.displayManager.lightdm.enable = true;
-  services.xserver.displayManager.autoLogin.enable = true;
-  services.xserver.displayManager.autoLogin.user = "kodi";
+    # Enable Kodi.
+    services.xserver.desktopManager.kodi.enable = true;
 
-  # Override display manager to start after the network is up so kodi doesn't
-  # try to access my network mount point before the network is up.
-  systemd.services.display-manager.after = [ "network-online.target" ];
-  systemd.services.display-manager.wants = [ "network-online.target" "network-pre.target" ];
+    # Enable Kodi plugins.
+    nixpkgs.config.kodi.enableSVTPlay = true;
 
-  # Define a user account.
-  users.extraUsers.kodi.isNormalUser = true;
-  users.extraUsers.kodi.uid = 1000;
+    # Enable lightdm autologin.
+    services.xserver.displayManager.lightdm.enable = true;
+    services.xserver.displayManager.autoLogin.enable = true;
+    services.xserver.displayManager.autoLogin.user = "kodi";
 
-  # Make sure to kill all users processes on logout.
-  services.logind.killUserProcesses = true;
+    # Override display manager to start after the network is up so kodi doesn't
+    # try to access my network mount point before the network is up.
+    systemd.services.display-manager.after = [ "network-online.target" ];
+    systemd.services.display-manager.wants = [ "network-online.target" "network-pre.target" ];
 
-  # Need access to use HDMI CEC Dongle
-  users.extraUsers.kodi.extraGroups = [ "dialout" ];
+    # Define a user account.
+    users.extraUsers.kodi.isNormalUser = true;
+    users.extraUsers.kodi.uid = 1000;
 
-  # Enable common cli settings for my systems
-  my.common-cli.enable = true;
+    # Make sure to kill all users processes on logout.
+    services.logind.killUserProcesses = true;
 
-  # Enable avahi for auto discovery of Kodi
-  services.avahi.enable = true;
-  services.avahi.publish.enable = true;
-  services.avahi.publish.userServices = true;
+    # Need access to use HDMI CEC Dongle
+    users.extraUsers.kodi.extraGroups = [ "dialout" ];
 
-  # Open ports for avahi zeroconf
-  networking.firewall.allowedUDPPorts = [ 5353 ];
+    # Enable common cli settings for my systems
+    my.common-cli.enable = true;
 
-  # Open port to remote control Kodi (8080)
-  networking.firewall.allowedTCPPorts = [ 8080 ];
+    # Enable avahi for auto discovery of Kodi
+    services.avahi.enable = true;
+    services.avahi.publish.enable = true;
+    services.avahi.publish.userServices = true;
 
-  # SSH Keys for remote logins
-  users.users.root.openssh.authorizedKeys.keys = with keys.etu; fenchurch ++ agrajag ++ work;
+    # Open ports for avahi zeroconf
+    networking.firewall.allowedUDPPorts = [ 5353 ];
+
+    # Open port to remote control Kodi (8080)
+    networking.firewall.allowedTCPPorts = [ 8080 ];
+
+    # SSH Keys for remote logins
+    users.users.root.openssh.authorizedKeys.keys = with keys.etu; fenchurch ++ agrajag ++ work;
+  };
 }
