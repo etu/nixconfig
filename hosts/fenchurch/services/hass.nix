@@ -1,10 +1,5 @@
 { config, pkgs, ... }:
-let
-  hpkgs = import
-    (builtins.fetchTarball {
-      url = https://github.com/NixOS/nixpkgs/archive/61525137fd1002f6f2a5eb0ea27d480713362cd5.tar.gz;
-    }) { };
-in
+
 {
   # Make sure to have NGiNX enabled
   services.nginx.enable = true;
@@ -20,7 +15,7 @@ in
   # Enable Home Assistant, open port and add the hass user to the dialout group
   services.home-assistant = {
     enable = true;
-    package = hpkgs.home-assistant;
+    package = pkgs.home-assistant;
     config = {
       # Basic settings
       homeassistant = {

@@ -2,19 +2,16 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, inputs, pkgs, ... }:
 let
   # Load secrets
   secrets = import ../../data/load-secrets.nix;
-
-  # Find import path of nixos-hardware
-  nixos-hardware = (import ../../nix/sources.nix).nixos-hardware;
 
 in
 {
   imports = [
     # Include hardware quirks
-    "${nixos-hardware}/lenovo/thinkpad/t480s"
+    inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t480s
 
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -24,104 +21,110 @@ in
     ../../modules
   ];
 
-  networking.hostName = "eliaxe-59087-t480s";
+  config = {
+    # The NixOS release to be compatible with for stateful data such as databases.
+    system.stateVersion = "19.09";
 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelPackages = pkgs.linuxPackages_5_8;
+    networking.hostName = "eliaxe-59087-t480s";
 
-  # Enable ZFS support
-  boot.supportedFilesystems = [ "zfs" ];
-  networking.hostId = "18582527";
+    # Use the systemd-boot EFI boot loader.
+    boot.loader.systemd-boot.enable = true;
+    boot.loader.efi.canTouchEfiVariables = true;
+    boot.kernelPackages = pkgs.linuxPackages_5_8;
 
-  # Snapshot and scrub automatically
-  services.zfs.autoScrub.enable = true;
-  services.zfs.autoSnapshot.enable = true;
+    # Enable ZFS support
+    boot.supportedFilesystems = [ "zfs" ];
+    networking.hostId = "18582527";
 
-  # Install thinkpad modules for TLP
-  boot.extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
+    # Snapshot and scrub automatically
+    services.zfs.autoScrub.enable = true;
+    services.zfs.autoSnapshot.enable = true;
 
-  # Hardware settings
-  services.xserver.videoDrivers = [ "intel" ];
-  hardware.cpu.intel.updateMicrocode = true;
+    # Install thinkpad modules for TLP
+    boot.extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
 
-  # Enable fwupd for firmware updates etc
-  services.fwupd.enable = true;
+    # Use nix with flakes support
+    nix.package = pkgs.nixFlakes;
+    nix.extraOptions = "experimental-features = nix-command flakes";
 
-  # Enable TLP
-  services.tlp.enable = true;
+    # Set nixpkgs to NIX_PATH to ease the transaction to flakes.
+    nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
-  # Enable bluetooth
-  hardware.bluetooth.enable = true;
+    # Hardware settings
+    services.xserver.videoDrivers = [ "intel" ];
+    hardware.cpu.intel.updateMicrocode = true;
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
+    # Enable fwupd for firmware updates etc
+    services.fwupd.enable = true;
 
-  # Enable nfs server exports.
-  services.nfs.server.exports = ''
-    /home/etu/tvnu/projects 192.168.5.102(rw,no_subtree_check,all_squash,anonuid=1000,anongid=100)
-  '';
+    # Enable TLP
+    services.tlp.enable = true;
 
-  # Disable root login for ssh
-  services.openssh.permitRootLogin = "no";
+    # Enable bluetooth
+    hardware.bluetooth.enable = true;
 
-  # Enable aspell and hunspell with dictionaries.
-  my.spell.enable = true;
+    # Enable CUPS to print documents.
+    services.printing.enable = true;
 
-  # Enable common cli settings for my systems
-  my.common-cli.enable = true;
+    # Enable nfs server exports.
+    services.nfs.server.exports = ''
+      /home/etu/tvnu/projects 192.168.5.102(rw,no_subtree_check,all_squash,anonuid=1000,anongid=100)
+    '';
 
-  # Enable gpg related stuff
-  my.gpg-utils.enable = true;
+    # Disable root login for ssh
+    services.openssh.permitRootLogin = "no";
 
-  # Enable common graphical stuff
-  my.common-graphical.enable = true;
+    # Enable aspell and hunspell with dictionaries.
+    my.spell.enable = true;
 
-  # Enable emacs deamon stuff
-  my.emacs.enable = true;
-  my.emacs.package = "wayland";
+    # Enable common cli settings for my systems
+    my.common-cli.enable = true;
 
-  # Enable sway
-  my.sway.enable = true;
+    # Enable gpg related stuff
+    my.gpg-utils.enable = true;
 
-  # Define a user account.
-  my.user.enable = true;
-  my.user.extraGroups = [ "adbusers" "docker" ];
+    # Enable common graphical stuff
+    my.common-graphical.enable = true;
 
-  # Immutable users due to tmpfs
-  users.mutableUsers = false;
+    # Enable emacs deamon stuff
+    my.emacs.enable = true;
+    my.emacs.package = "wayland";
 
-  # Install ADB for occational android device things
-  programs.adb.enable = true;
+    # Enable sway
+    my.sway.enable = true;
 
-  # Enable docker deamon
-  virtualisation.docker.enable = true;
+    # Define a user account.
+    my.user.enable = true;
+    my.user.extraGroups = [ "adbusers" "docker" ];
 
-  # Enable podman
-  virtualisation.podman.enable = true;
-  environment.systemPackages = with pkgs; [ podman-compose ];
-  # For future reference: virtualisation.podman.dockerCompat = false;
+    # Immutable users due to tmpfs
+    users.mutableUsers = false;
 
-  # Install netdata for system monitoring
-  services.netdata.enable = true;
+    # Install ADB for occational android device things
+    programs.adb.enable = true;
 
-  # Set passwords
-  users.users.root.initialHashedPassword = secrets.hashedRootPassword;
-  users.users.etu.initialHashedPassword = secrets.hashedEtuPassword;
+    # Enable docker deamon
+    virtualisation.docker.enable = true;
 
-  # Enable nfsd with firewall rules.
-  my.nfsd.enable = true;
+    # Enable podman
+    virtualisation.podman.enable = true;
+    environment.systemPackages = with pkgs; [ podman-compose ];
+    # For future reference: virtualisation.podman.dockerCompat = false;
 
-  # Enable vbox and friends.
-  my.vbox.enable = true;
+    # Install netdata for system monitoring
+    services.netdata.enable = true;
 
-  # Home-manager as nix module
-  my.home-manager.enable = true;
+    # Set passwords
+    users.users.root.initialHashedPassword = secrets.hashedRootPassword;
+    users.users.etu.initialHashedPassword = secrets.hashedEtuPassword;
 
-  # This value determines the NixOS release with which your system is to be
-  # compatible, in order to avoid breaking some software such as database
-  # servers. You should change this only after NixOS release notes say you
-  # should.
-  system.stateVersion = "19.09"; # Did you read the comment?
+    # Enable nfsd with firewall rules.
+    my.nfsd.enable = true;
+
+    # Enable vbox and friends.
+    my.vbox.enable = true;
+
+    # Home-manager as nix module
+    my.home-manager.enable = true;
+  };
 }

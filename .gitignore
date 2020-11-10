@@ -3,3 +3,7 @@
 
 # Ignore configurable file with secrets
 /data/secrets.nix
+
+# Ignore build symlinks
+result*
+.tmp

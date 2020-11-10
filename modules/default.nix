@@ -1,10 +1,10 @@
-{ config, pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 {
   imports = [
-    "${(import ../nix/sources.nix).impermanence}/nixos.nix"
-    ./flummbot.nix
-    ./ip-failar-nu.nix
+    "${inputs.impermanence}/nixos.nix"
+    inputs.flummbot.nixosModule
+    inputs.ip-failar-nu.nixosModule
     ./my-common-cli.nix
     ./my-common-graphical.nix
     ./my-desktop-gnome.nix

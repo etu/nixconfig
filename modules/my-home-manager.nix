@@ -1,15 +1,12 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 let
   cfg = config.my.home-manager;
-
-  impermanence = (import ../nix/sources.nix).impermanence;
-  home-manager = (import ../nix/sources.nix).home-manager;
 in
 {
   options.my.home-manager.enable = lib.mkEnableOption "Enables my home-manager config";
 
   # Import the home-manager module
-  imports = [ "${home-manager}/nixos" ];
+  imports = [ inputs.home-manager.nixosModules.home-manager ];
 
   config = lib.mkIf cfg.enable {
     # Make sure to start the home-manager activation before I log it.
@@ -25,7 +22,7 @@ in
       in
       {
         # Import a persistance module for home-manager.
-        imports = [ "${impermanence}/home-manager.nix" ];
+        imports = [ "${inputs.impermanence}/home-manager.nix" ];
 
         programs.home-manager.enable = true;
 
@@ -281,6 +278,8 @@ in
         services.flameshot.enable = isX11;
         services.pasystray.enable = isX11;
         services.network-manager-applet.enable = isX11;
+
+        home.stateVersion = "20.09";
       };
   };
 }

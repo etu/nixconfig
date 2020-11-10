@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, inputs, pkgs, ... }:
 let
   # Load secrets
   secrets = import ../../data/load-secrets.nix;
@@ -21,130 +21,125 @@ in
     ../../modules
   ];
 
-  # Use the GRUB 2 boot loader.
-  boot.loader.grub.enable = true;
-  boot.loader.grub.version = 2;
-  boot.loader.grub.device = "/dev/sda";
+  config = {
+    # The NixOS release to be compatible with for stateful data such as databases.
+    system.stateVersion = "18.09";
 
-  networking.hostName = "vps04";
+    # Use the GRUB 2 boot loader.
+    boot.loader.grub.enable = true;
+    boot.loader.grub.version = 2;
+    boot.loader.grub.device = "/dev/sda";
 
-  # Select internationalisation properties.
-  # i18n = {
-  #   consoleFont = "Lat2-Terminus16";
-  #   consoleKeyMap = "us";
-  #   defaultLocale = "en_US.UTF-8";
-  # };
+    networking.hostName = "vps04";
 
-  # Auto upgrade system
-  system.autoUpgrade.enable = true;
-  system.autoUpgrade.channel = "https://nixos.org/channels/nixos-unstable-small";
-  system.autoUpgrade.dates = "weekly";
+    # Use nix with flakes support
+    nix.package = pkgs.nixFlakes;
+    nix.extraOptions = "experimental-features = nix-command flakes";
 
-  # Auto garbage collect
-  nix.gc.automatic = true;
-  nix.gc.options = "--delete-older-than 30d";
+    # Set nixpkgs to NIX_PATH to ease the transaction to flakes.
+    nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
-  # Auto update the config before it upgrades the system
-  my.update-config.enable = true;
-  my.update-config.user = "etu";
+    # Auto upgrade system
+    #system.autoUpgrade.enable = true;
+    #system.autoUpgrade.channel = "https://nixos.org/channels/nixos-unstable-small";
+    #system.autoUpgrade.dates = "weekly";
 
-  # Set your time zone.
-  time.timeZone = "Europe/Stockholm";
+    # Auto garbage collect
+    #nix.gc.automatic = true;
+    #nix.gc.options = "--delete-older-than 30d";
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    git
-    htop
-    irssi
-    screen
-    weechat
-  ];
+    # Auto update the config before it upgrades the system
+    #my.update-config.enable = true;
+    #my.update-config.user = "etu";
 
-  # Enable aspell and hunspell with dictionaries.
-  my.spell.enable = true;
+    # Set your time zone.
+    time.timeZone = "Europe/Stockholm";
 
-  # Install tmux
-  programs.tmux.enable = true;
-  programs.tmux.clock24 = true;
+    # List packages installed in system profile. To search, run:
+    # $ nix search wget
+    environment.systemPackages = with pkgs; [
+      git
+      htop
+      irssi
+      screen
+      weechat
+    ];
 
-  # Install mosh
-  programs.mosh.enable = true;
+    # Enable aspell and hunspell with dictionaries.
+    my.spell.enable = true;
 
-  # Install fish
-  programs.fish.enable = true;
+    # Install tmux
+    programs.tmux.enable = true;
+    programs.tmux.clock24 = true;
 
-  # List services that you want to enable:
+    # Install mosh
+    programs.mosh.enable = true;
 
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
+    # Install fish
+    programs.fish.enable = true;
 
-  # Set up users accounts:
+    # List services that you want to enable:
 
-  users.mutableUsers = false;
+    # Enable the OpenSSH daemon.
+    services.openssh.enable = true;
 
-  users.users = {
-    root.initialHashedPassword = secrets.hashedRootPassword;
+    # Set up users accounts:
 
-    etu = {
-      isNormalUser = true;
-      extraGroups = [ "wheel" ];
-      shell = pkgs.fish;
-      home = "/home/etu";
-      uid = 1000;
-      openssh.authorizedKeys.keys = with keys.etu; weechat ++ fenchurch ++ agrajag ++ work;
+    users.mutableUsers = false;
+
+    users.users = {
+      root.initialHashedPassword = secrets.hashedRootPassword;
+
+      etu = {
+        isNormalUser = true;
+        extraGroups = [ "wheel" ];
+        shell = pkgs.fish;
+        home = "/home/etu";
+        uid = 1000;
+        openssh.authorizedKeys.keys = with keys.etu; weechat ++ fenchurch ++ agrajag ++ work;
+      };
+
+      concate = {
+        isNormalUser = true;
+        home = "/home/concate";
+        uid = 1001;
+        openssh.authorizedKeys.keys = keys.concate;
+      };
+
+      talyz = {
+        isNormalUser = true;
+        shell = pkgs.fish;
+        home = "/home/talyz";
+        uid = 1002;
+        openssh.authorizedKeys.keys = keys.talyz;
+      };
+
+      ozeloten = {
+        isNormalUser = true;
+        home = "/home/ozeloten";
+        initialHashedPassword = secrets.hashedOzelotenPassword;
+        uid = 1003;
+      };
+
+      bots = {
+        isNormalUser = true;
+        home = "/home/bots";
+        uid = 1004;
+      };
     };
 
-    concate = {
-      isNormalUser = true;
-      home = "/home/concate";
-      uid = 1001;
-      openssh.authorizedKeys.keys = keys.concate;
-    };
+    # Enable the flummbot service
+    services.flummbot.enable = true;
+    services.flummbot.user = "bots";
+    services.flummbot.group = "bots";
+    services.flummbot.stateDirectory = "/home/bots";
 
-    talyz = {
-      isNormalUser = true;
-      shell = pkgs.fish;
-      home = "/home/talyz";
-      uid = 1002;
-      openssh.authorizedKeys.keys = keys.talyz;
-    };
-
-    ozeloten = {
-      isNormalUser = true;
-      home = "/home/ozeloten";
-      initialHashedPassword = secrets.hashedOzelotenPassword;
-      uid = 1003;
-    };
-
-    bots = {
-      isNormalUser = true;
-      home = "/home/bots";
-      uid = 1004;
-    };
+    # A hack to `loginctl enable-linger m` (for multiplexer sessions to last),
+    # until this one is resolved: https://github.com/NixOS/nixpkgs/issues/3702
+    system.activationScripts.loginctl-enable-linger-m = pkgs.lib.stringAfter [ "users" ] ''
+      ${pkgs.systemd}/bin/loginctl enable-linger etu
+      ${pkgs.systemd}/bin/loginctl enable-linger concate
+      ${pkgs.systemd}/bin/loginctl enable-linger talyz
+    '';
   };
-
-  # Enable the flummbot service
-  programs.flummbot.enable = true;
-  programs.flummbot.stateDirectory = "/home/bots";
-
-  # Enable the bridge for IX Discord / IRC
-  services.matterbridge.enable = true;
-  services.matterbridge.configPath = "/home/bots/matterbridge.toml";
-  services.matterbridge.user = "bots";
-  services.matterbridge.group = "users";
-
-  # A hack to `loginctl enable-linger m` (for multiplexer sessions to last),
-  # until this one is resolved: https://github.com/NixOS/nixpkgs/issues/3702
-  system.activationScripts.loginctl-enable-linger-m = pkgs.lib.stringAfter [ "users" ] ''
-    ${pkgs.systemd}/bin/loginctl enable-linger etu
-    ${pkgs.systemd}/bin/loginctl enable-linger concate
-    ${pkgs.systemd}/bin/loginctl enable-linger talyz
-  '';
-
-  # This value determines the NixOS release with which your system is to be
-  # compatible, in order to avoid breaking some software such as database
-  # servers. You should change this only after NixOS release notes say you
-  # should.
-  system.stateVersion = "18.09"; # Did you read the comment?
 }
