@@ -1,18 +1,11 @@
 { config, lib, pkgs, ... }:
 let
-  cfg = config.my.update-config;
-  git = cfg.package;
+  cfg = config.my.auto-upgrade;
 
 in
 {
-  options.my.update-config = {
+  options.my.auto-upgrade = {
     enable = lib.mkEnableOption "Enable auto updating of the nix config";
-    package = lib.mkOption {
-      type = lib.types.package;
-      default = pkgs.git;
-      defaultText = "pkgs.git";
-      description = "git derivation to use";
-    };
     user = lib.mkOption {
       type = lib.types.str;
       default = "root";
@@ -30,7 +23,7 @@ in
       default = "04:30";
       example = "hourly";
       description = ''
-        Run a gitea dump at this interval. Runs by default at 04:31 every day.
+        Update configs at this interval. Runs by default at 04:30 every day.
 
         The format is described in
         <citerefentry><refentrytitle>systemd.time</refentrytitle>
@@ -40,17 +33,33 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    # Enable auto upgrader
+    system.autoUpgrade.enable = true;
+
+    # Auto garbage collect
+    nix.gc.automatic = true;
+    nix.gc.options = "--delete-older-than 30d";
+
+    # Set up service
     systemd.services.update-nixos-config = {
       description = "update-nixos-config";
       after = [ "network.target" ];
       wantedBy = [ "default.target" ];
+      path = with pkgs; [ git nixFlakes ];
       serviceConfig = {
         Type = "oneshot";
         User = cfg.user;
-        ExecStart = "${cfg.package}/bin/git pull";
+        ExecStart = pkgs.writeScript "update-config-and-flakes.sh" ''
+          #!/bin/sh
+          git reset --hard HEAD
+          git pull
+          nix flake update --update-input nixpkgs
+        '';
         WorkingDirectory = cfg.path;
       };
     };
+
+    # Run service
     systemd.timers.update-nixos-config = {
       description = "Update timer for update-nixos-config";
       partOf = [ "update-nixos-config.service" ];

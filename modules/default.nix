@@ -5,6 +5,7 @@
     "${inputs.impermanence}/nixos.nix"
     inputs.flummbot.nixosModule
     inputs.ip-failar-nu.nixosModule
+    ./my-auto-upgrade.nix
     ./my-common-cli.nix
     ./my-common-graphical.nix
     ./my-desktop-gnome.nix
@@ -16,7 +17,6 @@
     ./my-nfsd.nix
     ./my-spell.nix
     ./my-sway.nix
-    ./my-update-config.nix
     ./my-user.nix
     ./my-vbox.nix
   ];
