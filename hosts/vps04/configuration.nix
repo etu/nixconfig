@@ -40,17 +40,8 @@ in
     nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
     # Auto upgrade system
-    #system.autoUpgrade.enable = true;
-    #system.autoUpgrade.channel = "https://nixos.org/channels/nixos-unstable-small";
-    #system.autoUpgrade.dates = "weekly";
-
-    # Auto garbage collect
-    #nix.gc.automatic = true;
-    #nix.gc.options = "--delete-older-than 30d";
-
-    # Auto update the config before it upgrades the system
-    #my.update-config.enable = true;
-    #my.update-config.user = "etu";
+    my.auto-upgrade.enable = true;
+    my.auto-upgrade.user = "etu";
 
     # Set your time zone.
     time.timeZone = "Europe/Stockholm";

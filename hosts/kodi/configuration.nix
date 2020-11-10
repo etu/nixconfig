@@ -45,15 +45,7 @@ in
     nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
     # Auto upgrade system
-    #system.autoUpgrade.enable = true;
-    #system.autoUpgrade.channel = "https://nixos.org/channels/nixos-unstable";
-
-    # Auto garbage collect
-    #nix.gc.automatic = true;
-    #nix.gc.options = "--delete-older-than 30d";
-
-    # Auto update the config before it upgrades the system
-    #my.update-config.enable = true;
+    my.auto-upgrade.enable = true;
 
     # Enable some firmwares.
     hardware.cpu.amd.updateMicrocode = true;
