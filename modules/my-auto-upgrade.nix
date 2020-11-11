@@ -35,6 +35,7 @@ in
   config = lib.mkIf cfg.enable {
     # Enable auto upgrader
     system.autoUpgrade.enable = true;
+    system.autoUpgrade.flags = lib.mkForce [ ];
 
     # Auto garbage collect
     nix.gc.automatic = true;
