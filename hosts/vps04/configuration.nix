@@ -42,6 +42,7 @@ in
     # Auto upgrade system
     my.auto-upgrade.enable = true;
     my.auto-upgrade.user = "etu";
+    system.autoUpgrade.dates = "Mon *-*-* 04:40:00";
 
     # Set your time zone.
     time.timeZone = "Europe/Stockholm";
