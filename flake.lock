@@ -54,11 +54,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1604948622,
-        "narHash": "sha256-BCanm0RcK4r7u5R6srRvgvo4ZYTrbzaMNIab0NSA1dY=",
+        "lastModified": 1605211193,
+        "narHash": "sha256-ndz4RmQrw6KmBcZSF9iK7FhCvnarMklSjAPdzbl4KMs=",
         "owner": "etu",
         "repo": "flummbot",
-        "rev": "2bb2f9bb06b482ecb7ccc58da4e5482f587893a8",
+        "rev": "d67752da7a35bd4877b54b24f989b2a760bb3042",
         "type": "github"
       },
       "original": {
