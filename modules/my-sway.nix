@@ -349,8 +349,8 @@ let
         "6" = "Ⅵ";
         "7" = "Ⅶ";
         "8" = "Ⅷ";
-        "9" = if config.networking.hostName == "eliaxe-59087-t480s" then "" else "Ⅸ";
-        "10" = ""; # Ⅹ
+        "9" = "Ⅸ";
+        "10" = if config.networking.hostName == "eliaxe-59087-t480s" then "" else ""; # Ⅹ
         urgent = "";
         focused = "";
         default = "";
