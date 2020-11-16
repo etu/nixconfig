@@ -32,24 +32,22 @@
     impermanence.flake = false;
   };
 
-  outputs = inputs:
-    let
-      mkSystem = system: pkgs': hostname:
-        pkgs'.lib.nixosSystem {
-          inherit system;
-          modules = [ (./. + "/hosts/${hostname}/configuration.nix") ];
-          specialArgs = { inherit inputs; };
-        };
-    in
-    {
-      nixosConfigurations.agrajag = mkSystem "x86_64-linux" inputs.nixpkgs "agrajag";
-      nixosConfigurations.eliaxe-59087-t480s = mkSystem "x86_64-linux" inputs.nixpkgs "eliaxe-59087-t480s";
-      nixosConfigurations.fenchurch = mkSystem "x86_64-linux" inputs.nixpkgs "fenchurch";
-      nixosConfigurations.kodi = mkSystem "x86_64-linux" inputs.nixpkgs "kodi";
-      nixosConfigurations.vps04 = mkSystem "x86_64-linux" inputs.nixpkgs "vps04";
-      nixosConfigurations.vps05 = mkSystem "x86_64-linux" inputs.nixpkgs "vps05";
+  outputs = inputs: let
+    mkSystem = system: pkgs': hostname:
+      pkgs'.lib.nixosSystem {
+        inherit system;
+        modules = [ (./. + "/hosts/${hostname}/configuration.nix") ];
+        specialArgs = { inherit inputs; };
+      };
+  in {
+    nixosConfigurations.agrajag = mkSystem "x86_64-linux" inputs.nixpkgs "agrajag";
+    nixosConfigurations.eliaxe-59087-t480s = mkSystem "x86_64-linux" inputs.nixpkgs "eliaxe-59087-t480s";
+    nixosConfigurations.fenchurch = mkSystem "x86_64-linux" inputs.nixpkgs "fenchurch";
+    nixosConfigurations.kodi = mkSystem "x86_64-linux" inputs.nixpkgs "kodi";
+    nixosConfigurations.vps04 = mkSystem "x86_64-linux" inputs.nixpkgs "vps04";
+    nixosConfigurations.vps05 = mkSystem "x86_64-linux" inputs.nixpkgs "vps05";
 
-      devShell.x86_64-linux = import ./shell.nix { pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux; };
-      devShell.aarch64-linux = import ./shell.nix { pkgs = inputs.nixpkgs.legacyPackages.aarch64-linux; };
-    };
+    devShell.x86_64-linux = import ./shell.nix { pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux; };
+    devShell.aarch64-linux = import ./shell.nix { pkgs = inputs.nixpkgs.legacyPackages.aarch64-linux; };
+  };
 }
