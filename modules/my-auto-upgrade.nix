@@ -54,7 +54,7 @@ in
           #!/bin/sh
           git reset --hard HEAD
           git pull
-          nix flake update --update-input nixpkgs
+          nix flake update --recreate-lock-file
         '';
         WorkingDirectory = cfg.path;
       };
