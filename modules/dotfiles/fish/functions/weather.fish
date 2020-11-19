@@ -5,5 +5,5 @@ function weather
         set location $argv[1]
     end
 
-    curl "http://wttr.in/$location?lang=sv&M"
+    curl "https://wttr.in/$location?lang=sv&M"
 end
