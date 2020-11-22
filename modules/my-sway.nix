@@ -275,9 +275,9 @@ let
       bindsym XF86AudioMicMute exec ${pactl} set-source-mute @DEFAULT_SOURCE@ toggle
 
       # Misc buttons:
-      bindsym XF86Tools exec emacs
+      bindsym XF86Tools exec ${config.services.emacs.package}/bin/emacs
+      bindsym XF86Favorites exec ${config.services.emacs.package}/bin/emacs
       # bindsym XF86Display exec pkgs.autorandr/bin/autorandr -cf
-      bindsym XF86Favorites exec emacs
 
       # Rofi emoji picker:
       bindsym $mod+i exec ${rofi}/bin/rofi -show emoji -theme glue_pro_blue
