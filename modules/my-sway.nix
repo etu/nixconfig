@@ -3,6 +3,7 @@ let
   cfg = config.my.sway;
 
   rofi = pkgs.rofi.override { plugins = [ pkgs.rofi-emoji ]; };
+  pactl = "${config.hardware.pulseaudio.package}/bin/pactl";
 
   # Lock command
   lockCommand = "${pkgs.swaylock-effects}/bin/swaylock -f --effect-greyscale --effect-pixelate 5 -S";
@@ -268,10 +269,10 @@ let
       bindsym XF86MonBrightnessDown exec ${pkgs.acpilight}/bin/xbacklight -dec 10
 
       # Audio:
-      bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
-      bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -10%
-      bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +10%
-      bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+      bindsym XF86AudioMute exec ${pactl} set-sink-mute @DEFAULT_SINK@ toggle
+      bindsym XF86AudioLowerVolume exec ${pactl} set-sink-volume @DEFAULT_SINK@ -10%
+      bindsym XF86AudioRaiseVolume exec ${pactl} set-sink-volume @DEFAULT_SINK@ +10%
+      bindsym XF86AudioMicMute exec ${pactl} set-source-mute @DEFAULT_SOURCE@ toggle
 
       # Misc buttons:
       bindsym XF86Tools exec emacs
