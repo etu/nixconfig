@@ -50,4 +50,10 @@
       ".local/share/keyrings"
     ];
   };
+
+  # Bind mount for persistent certificates for nginx
+  fileSystems."/var/lib/libvirt" = {
+    device = "/persistent/var/lib/libvirt";
+    options = [ "bind" "noauto" "x-systemd.automount" ];
+  };
 }

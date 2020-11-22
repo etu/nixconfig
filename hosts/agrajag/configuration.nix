@@ -108,7 +108,7 @@ in
 
     # Define a user account.
     my.user.enable = true;
-    my.user.extraGroups = [ "video" "docker" ];
+    my.user.extraGroups = [ "video" "docker" "libvirtd" ];
 
     # Immutable users due to tmpfs
     users.mutableUsers = false;
@@ -122,5 +122,10 @@ in
 
     # Set up docker
     virtualisation.docker.enable = true;
+
+    # Set up virt-manager
+    virtualisation.libvirtd.enable = true;
+    programs.dconf.enable = true;
+    environment.systemPackages = with pkgs; [ virt-manager ];
   };
 }
