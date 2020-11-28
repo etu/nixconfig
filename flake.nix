@@ -23,10 +23,6 @@
     # Main nixpkgs channel
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    # Wayland overlay
-    wayland.url = "github:colemickens/nixpkgs-wayland";
-    wayland.inputs.nixpkgs.follows = "nixpkgs";
-
     # Persistance things
     impermanence.url = "https://github.com/nix-community/impermanence/archive/8fc761e8c34.tar.gz";
     impermanence.flake = false;
