@@ -307,28 +307,14 @@
 
 
 ;;;
-;;; LSP Mode
+;;; LSP
 ;;;
-(use-package lsp-mode
+(use-package eglot
   :ensure t
   :defer 2
-  :commands (lsp lsp-deferred)
-  :hook ((go-mode . lsp-deferred)
-         (php-mode . lsp))
-  :init (setq lsp-keymap-prefix "M-l"))
-
-;; (define-key php-mode-map (kbd "C-]") 'ac-php-find-symbol-at-point)
-;; (define-key php-mode-map (kbd "C-t") 'ac-php-location-stack-back)
-
-
-(use-package lsp-ui
-  :ensure t
-  :defer 2
-  :commands lsp-ui-mode)
-
-(use-package helm-lsp
-  :ensure t
-  :defer 2)
+  :commands (eglot eglot-ensure)
+  :hook ((go-mode . eglot-ensure)
+         (php-mode . eglot-ensure)))
 
 
 ;;;
