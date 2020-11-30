@@ -312,6 +312,7 @@
 (use-package eglot
   :ensure t
   :defer 2
+  :config (add-to-list 'eglot-server-programs '(php-mode . ("php-language-server")))
   :commands (eglot eglot-ensure)
   :hook ((go-mode . eglot-ensure)
          (php-mode . eglot-ensure)))
