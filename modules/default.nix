@@ -1,10 +1,13 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 
-{
+let
+  # Load sources
+  sources = import ../nix/sources.nix;
+in {
   imports = [
-    "${inputs.impermanence}/nixos.nix"
-    inputs.flummbot.nixosModule
-    inputs.ip-failar-nu.nixosModule
+    "${sources.impermanence}/nixos.nix"
+    #inputs.flummbot.nixosModule
+    #inputs.ip-failar-nu.nixosModule
     ./my-auto-upgrade.nix
     ./my-common-cli.nix
     ./my-common-graphical.nix

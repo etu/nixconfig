@@ -1,6 +1,9 @@
-{ config, inputs, lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 let
   cfg = config.my.emacs;
+
+  # Load sources
+  sources = import ../nix/sources.nix;
 
   # Extract the path executed by the systemd-service, to get the flags used by
   # the service. But replace the path with the security wrapper dir so we get
@@ -139,7 +142,7 @@ let
   emacsPackages = {
     default = pkgs.emacs;
     nox = pkgs.emacs-nox;
-    wayland = (inputs.emacs-overlay.overlay pkgs (pkgs // { inherit lib; })).emacsPgtk;
+    wayland = (import sources.emacs-overlay pkgs (pkgs // { inherit lib; })).emacsPgtk;
   };
 in
 {
@@ -159,7 +162,7 @@ in
     # Import the emacs overlay from nix community to get the latest
     # and greatest packages.
     nixpkgs.overlays = lib.mkIf cfg.enable [
-      (inputs.emacs-overlay.overlay)
+      (import sources.emacs-overlay)
     ];
 
     services.emacs = lib.mkIf cfg.enable {
