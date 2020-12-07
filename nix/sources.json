@@ -35,6 +35,18 @@
         "url": "https://github.com/nix-community/impermanence/archive/8fc761e8c348db5c31a53ae125ce29b23abfd872.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "ip-failar-nu": {
+        "branch": "master",
+        "description": "Go program that listen to port 8123 and respond with connecting clients IP address",
+        "homepage": null,
+        "owner": "etu",
+        "repo": "ip.failar.nu",
+        "rev": "68e6773ee44b44dcf3202af300491e59427e40fe",
+        "sha256": "0vmlmq81cbwwg2j41xd0yiixdkvk05d1c59y890wm1zq299ri2ab",
+        "type": "tarball",
+        "url": "https://github.com/etu/ip.failar.nu/archive/68e6773ee44b44dcf3202af300491e59427e40fe.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "nixos-hardware": {
         "branch": "master",
         "description": "A collection of NixOS modules covering hardware quirks.",

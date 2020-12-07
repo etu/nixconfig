@@ -6,8 +6,8 @@ let
 in {
   imports = [
     "${sources.impermanence}/nixos.nix"
+    "${sources.ip-failar-nu}/nixos.nix"
     #inputs.flummbot.nixosModule
-    #inputs.ip-failar-nu.nixosModule
     ./my-auto-upgrade.nix
     ./my-common-cli.nix
     ./my-common-graphical.nix
