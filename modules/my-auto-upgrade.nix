@@ -46,14 +46,16 @@ in
       description = "update-nixos-config";
       after = [ "network.target" ];
       wantedBy = [ "default.target" ];
-      path = with pkgs; [ git nixFlakes ];
+      path = with pkgs; [ git niv ];
       serviceConfig = {
         Type = "oneshot";
         User = cfg.user;
-        ExecStart = pkgs.writeScript "update-config-and-flakes.sh" ''
+        ExecStart = pkgs.writeScript "update-config-and-external-deps.sh" ''
           #!/bin/sh
           git reset --hard HEAD
           git pull
+          niv update flummbot
+          niv update ip-failar-nu
         '';
         WorkingDirectory = cfg.path;
       };
