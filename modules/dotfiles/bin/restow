@@ -19,6 +19,10 @@ case $(hostname) in
         stow --dotfiles skeleton
         ;;
 
+    "vps04")
+        stow --dotfiles weechat
+        ;;
+
     *)
         echo "This computer is not recognized by restow."
         ;;
