@@ -35,7 +35,7 @@ in
   config = lib.mkIf cfg.enable {
     # Enable auto upgrader
     system.autoUpgrade.enable = true;
-    system.autoUpgrade.flags = lib.mkForce [ ];
+    system.autoUpgrade.channel = "https://nixos.org/channels/nixos-unstable";
 
     # Auto garbage collect
     nix.gc.automatic = true;
@@ -54,7 +54,6 @@ in
           #!/bin/sh
           git reset --hard HEAD
           git pull
-          nix flake update --recreate-lock-file
         '';
         WorkingDirectory = cfg.path;
       };

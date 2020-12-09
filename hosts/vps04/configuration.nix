@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, inputs, pkgs, ... }:
+{ config, pkgs, ... }:
 let
   # Load secrets
   secrets = import ../../data/load-secrets.nix;
@@ -21,117 +21,111 @@ in
     ../../modules
   ];
 
-  config = {
-    # The NixOS release to be compatible with for stateful data such as databases.
-    system.stateVersion = "18.09";
+  # The NixOS release to be compatible with for stateful data such as databases.
+  system.stateVersion = "18.09";
 
-    # Use the GRUB 2 boot loader.
-    boot.loader.grub.enable = true;
-    boot.loader.grub.version = 2;
-    boot.loader.grub.device = "/dev/sda";
+  # Use the GRUB 2 boot loader.
+  boot.loader.grub.enable = true;
+  boot.loader.grub.version = 2;
+  boot.loader.grub.device = "/dev/sda";
 
-    networking.hostName = "vps04";
+  networking.hostName = "vps04";
 
-    # Use nix with flakes support
-    nix.package = pkgs.nixFlakes;
-    nix.extraOptions = "experimental-features = nix-command flakes";
+  # Set NIX_PATH for nixos config and nixpkgs
+  nix.nixPath = [ "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos" "nixos-config=/etc/nixos/hosts/vps04/configuration.nix" ];
 
-    # Set nixpkgs to NIX_PATH to ease the transaction to flakes.
-    nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+  # Auto upgrade system
+  my.auto-upgrade.enable = true;
+  my.auto-upgrade.user = "etu";
+  system.autoUpgrade.dates = "Mon *-*-* 04:40:00";
 
-    # Auto upgrade system
-    my.auto-upgrade.enable = true;
-    my.auto-upgrade.user = "etu";
-    system.autoUpgrade.dates = "Mon *-*-* 04:40:00";
+  # Set your time zone.
+  time.timeZone = "Europe/Stockholm";
 
-    # Set your time zone.
-    time.timeZone = "Europe/Stockholm";
+  # List packages installed in system profile. To search, run:
+  # $ nix search wget
+  environment.systemPackages = with pkgs; [
+    git
+    htop
+    irssi
+    screen
+    weechat
+  ];
 
-    # List packages installed in system profile. To search, run:
-    # $ nix search wget
-    environment.systemPackages = with pkgs; [
-      git
-      htop
-      irssi
-      screen
-      weechat
-    ];
+  # Enable aspell and hunspell with dictionaries.
+  my.spell.enable = true;
 
-    # Enable aspell and hunspell with dictionaries.
-    my.spell.enable = true;
+  # Install tmux
+  programs.tmux.enable = true;
+  programs.tmux.clock24 = true;
 
-    # Install tmux
-    programs.tmux.enable = true;
-    programs.tmux.clock24 = true;
+  # Install mosh
+  programs.mosh.enable = true;
 
-    # Install mosh
-    programs.mosh.enable = true;
+  # Install fish
+  programs.fish.enable = true;
 
-    # Install fish
-    programs.fish.enable = true;
+  # List services that you want to enable:
 
-    # List services that you want to enable:
+  # Enable the OpenSSH daemon.
+  services.openssh.enable = true;
 
-    # Enable the OpenSSH daemon.
-    services.openssh.enable = true;
+  # Set up users accounts:
 
-    # Set up users accounts:
+  users.mutableUsers = false;
 
-    users.mutableUsers = false;
+  users.users = {
+    root.initialHashedPassword = secrets.hashedRootPassword;
 
-    users.users = {
-      root.initialHashedPassword = secrets.hashedRootPassword;
-
-      etu = {
-        isNormalUser = true;
-        extraGroups = [ "wheel" ];
-        shell = pkgs.fish;
-        home = "/home/etu";
-        uid = 1000;
-        openssh.authorizedKeys.keys = with keys.etu; weechat ++ fenchurch ++ agrajag ++ work;
-      };
-
-      concate = {
-        isNormalUser = true;
-        home = "/home/concate";
-        uid = 1001;
-        openssh.authorizedKeys.keys = keys.concate;
-      };
-
-      talyz = {
-        isNormalUser = true;
-        shell = pkgs.fish;
-        home = "/home/talyz";
-        uid = 1002;
-        openssh.authorizedKeys.keys = keys.talyz;
-      };
-
-      ozeloten = {
-        isNormalUser = true;
-        home = "/home/ozeloten";
-        initialHashedPassword = secrets.hashedOzelotenPassword;
-        uid = 1003;
-      };
-
-      bots = {
-        isNormalUser = true;
-        home = "/home/bots";
-        uid = 1004;
-      };
+    etu = {
+      isNormalUser = true;
+      extraGroups = [ "wheel" ];
+      shell = pkgs.fish;
+      home = "/home/etu";
+      uid = 1000;
+      openssh.authorizedKeys.keys = with keys.etu; weechat ++ fenchurch ++ agrajag ++ work;
     };
 
-    # Enable the flummbot service
-    services.flummbot.enable = true;
-    services.flummbot.user = "bots";
-    services.flummbot.group = "bots";
-    services.flummbot.stateDirectory = "/home/bots";
+    concate = {
+      isNormalUser = true;
+      home = "/home/concate";
+      uid = 1001;
+      openssh.authorizedKeys.keys = keys.concate;
+    };
 
-    # A hack to `loginctl enable-linger m` (for multiplexer sessions to last),
-    # until this one is resolved: https://github.com/NixOS/nixpkgs/issues/3702
-    system.activationScripts.loginctl-enable-linger-m = pkgs.lib.stringAfter [ "users" ] ''
-      ${pkgs.systemd}/bin/loginctl enable-linger etu
-      ${pkgs.systemd}/bin/loginctl enable-linger concate
-      ${pkgs.systemd}/bin/loginctl enable-linger talyz
-    '';
+    talyz = {
+      isNormalUser = true;
+      shell = pkgs.fish;
+      home = "/home/talyz";
+      uid = 1002;
+      openssh.authorizedKeys.keys = keys.talyz;
+    };
+
+    ozeloten = {
+      isNormalUser = true;
+      home = "/home/ozeloten";
+      initialHashedPassword = secrets.hashedOzelotenPassword;
+      uid = 1003;
+    };
+
+    bots = {
+      isNormalUser = true;
+      home = "/home/bots";
+      uid = 1004;
+    };
   };
+
+  # Enable the flummbot service
+  services.flummbot.enable = true;
+  services.flummbot.user = "bots";
+  services.flummbot.group = "bots";
+  services.flummbot.stateDirectory = "/home/bots";
+
+  # A hack to `loginctl enable-linger m` (for multiplexer sessions to last),
+  # until this one is resolved: https://github.com/NixOS/nixpkgs/issues/3702
+  system.activationScripts.loginctl-enable-linger-m = pkgs.lib.stringAfter [ "users" ] ''
+    ${pkgs.systemd}/bin/loginctl enable-linger etu
+    ${pkgs.systemd}/bin/loginctl enable-linger concate
+    ${pkgs.systemd}/bin/loginctl enable-linger talyz
+  '';
 }

@@ -1,12 +1,15 @@
-{ config, lib, pkgs, inputs, ... }:
+{ config, lib, pkgs, ... }:
 let
   cfg = config.my.home-manager;
+
+  # Load sources
+  sources = import ../nix/sources.nix;
 in
 {
   options.my.home-manager.enable = lib.mkEnableOption "Enables my home-manager config";
 
   # Import the home-manager module
-  imports = [ inputs.home-manager.nixosModules.home-manager ];
+  imports = [ "${sources.home-manager}/nixos" ];
 
   config = lib.mkIf cfg.enable {
     # Make sure to start the home-manager activation before I log it.
@@ -22,7 +25,7 @@ in
       in
       {
         # Import a persistance module for home-manager.
-        imports = [ "${inputs.impermanence}/home-manager.nix" ];
+        imports = [ "${sources.impermanence}/home-manager.nix" ];
 
         programs.home-manager.enable = true;
 
