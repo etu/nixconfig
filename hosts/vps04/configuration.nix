@@ -70,21 +70,20 @@ in
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
+  # Enable my common cli utils
+  my.common-cli.enable = true;
+
+  # Enable my user and home-manager for my user
+  my.home-manager.enable = true;
+  my.user.enable = true;
+  my.user.extraAuthorizedKeys = keys.etu.weechat;
+
   # Set up users accounts:
 
   users.mutableUsers = false;
 
   users.users = {
     root.initialHashedPassword = secrets.hashedRootPassword;
-
-    etu = {
-      isNormalUser = true;
-      extraGroups = [ "wheel" ];
-      shell = pkgs.fish;
-      home = "/home/etu";
-      uid = 1000;
-      openssh.authorizedKeys.keys = with keys.etu; weechat ++ fenchurch ++ agrajag ++ work;
-    };
 
     concate = {
       isNormalUser = true;
