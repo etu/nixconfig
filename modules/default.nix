@@ -7,7 +7,7 @@ in {
   imports = [
     "${sources.impermanence}/nixos.nix"
     "${sources.ip-failar-nu}/nixos.nix"
-    #inputs.flummbot.nixosModule
+    "${sources.flummbot}/nixos.nix"
     ./my-auto-upgrade.nix
     ./my-common-cli.nix
     ./my-common-graphical.nix

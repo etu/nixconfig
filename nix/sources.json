@@ -11,6 +11,18 @@
         "url": "https://github.com/nix-community/emacs-overlay/archive/7a5064539be6861e2d1744ed8c57b906bf129950.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "flummbot": {
+        "branch": "master",
+        "description": "Small IRC-Bot in go for my channel",
+        "homepage": null,
+        "owner": "etu",
+        "repo": "flummbot",
+        "rev": "b1fc645d10d90b1d0b201449b5739b0a8b099b0e",
+        "sha256": "1fbbhlq34wk6r2mali013y5yq8rm07kyz3ax763d123lvva2fvsm",
+        "type": "tarball",
+        "url": "https://github.com/etu/flummbot/archive/b1fc645d10d90b1d0b201449b5739b0a8b099b0e.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "home-manager": {
         "branch": "master",
         "description": "Manage a user environment using Nix  [maintainer=@rycee] ",
