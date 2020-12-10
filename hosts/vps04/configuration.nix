@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 let
   # Load secrets
   secrets = import ../../data/load-secrets.nix;
@@ -72,6 +72,9 @@ in
 
   # Enable my common cli utils
   my.common-cli.enable = true;
+
+  # Override password auth disabling set in my.common-cli.enable
+  services.openssh.passwordAuthentication = lib.mkForce true;
 
   # Enable my user and home-manager for my user
   my.home-manager.enable = true;
