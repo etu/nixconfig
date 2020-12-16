@@ -261,8 +261,7 @@ let
     # Other keybindings:
     #
       # Printscreen:
-      bindsym Print exec ${pkgs.sway-contrib.grimshot}/bin/grimshot copy area
-      bindsym Shift+Print exec ${pkgs.sway-contrib.grimshot}/bin/grimshot save area
+      bindsym Print exec ${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp)" - | ${pkgs.swappy}/bin/swappy -f -
 
       # Backlight:
       bindsym XF86MonBrightnessUp exec ${pkgs.acpilight}/bin/xbacklight -inc 10
