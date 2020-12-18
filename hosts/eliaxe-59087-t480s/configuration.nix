@@ -61,6 +61,8 @@ in
   # Enable bluetooth
   hardware.bluetooth.enable = true;
 
+  services.hardware.bolt.enable = true;
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
