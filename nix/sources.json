@@ -5,22 +5,22 @@
         "homepage": "",
         "owner": "nix-community",
         "repo": "emacs-overlay",
-        "rev": "8c5359e7079fb8c8140468a3f8731a0265206ef5",
-        "sha256": "1jkdfmh8ykmvj0x1r0ri8d0d4vn2qnmgh83xdn65cnyjcjpiimv2",
+        "rev": "ce0e53038d6c74d7e169ee933e097651d3fd9bc4",
+        "sha256": "193n4652snlnqy090mkwvmwbrcsqmvqyiczsz59fw4wy3lb07905",
         "type": "tarball",
-        "url": "https://github.com/nix-community/emacs-overlay/archive/8c5359e7079fb8c8140468a3f8731a0265206ef5.tar.gz",
+        "url": "https://github.com/nix-community/emacs-overlay/archive/ce0e53038d6c74d7e169ee933e097651d3fd9bc4.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "flummbot": {
         "branch": "master",
         "description": "Small IRC-Bot in go for my channel",
-        "homepage": null,
+        "homepage": "https://github.com/etu/flummbot",
         "owner": "etu",
         "repo": "flummbot",
-        "rev": "b1fc645d10d90b1d0b201449b5739b0a8b099b0e",
-        "sha256": "1fbbhlq34wk6r2mali013y5yq8rm07kyz3ax763d123lvva2fvsm",
+        "rev": "9603ec1b5264846888c23d6734e61f1351f1626f",
+        "sha256": "1gvnbhw6d16kxpkvcz5wr8j2wxkk3w9751jycw99v7vybzi8h587",
         "type": "tarball",
-        "url": "https://github.com/etu/flummbot/archive/b1fc645d10d90b1d0b201449b5739b0a8b099b0e.tar.gz",
+        "url": "https://github.com/etu/flummbot/archive/9603ec1b5264846888c23d6734e61f1351f1626f.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "home-manager": {
@@ -29,10 +29,10 @@
         "homepage": "https://nix-community.github.io/home-manager/",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "e3828769e877b1869129a3816515a8c0ea454977",
-        "sha256": "0cjhk5cbx9kjnqd1cck9izj4x7m3xv8mnyxa61mj46pc71gxhkiz",
+        "rev": "e87bccabc318475ab712470657b85435354b53f7",
+        "sha256": "05kky25r92kcgj0sq0dswhs58bihmp8s34lfbfsl00g09w63iqqb",
         "type": "tarball",
-        "url": "https://github.com/nix-community/home-manager/archive/e3828769e877b1869129a3816515a8c0ea454977.tar.gz",
+        "url": "https://github.com/nix-community/home-manager/archive/e87bccabc318475ab712470657b85435354b53f7.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "impermanence": {
@@ -50,13 +50,13 @@
     "ip-failar-nu": {
         "branch": "master",
         "description": "Go program that listen to port 8123 and respond with connecting clients IP address",
-        "homepage": null,
+        "homepage": "https://github.com/etu/ip.failar.nu",
         "owner": "etu",
         "repo": "ip.failar.nu",
-        "rev": "b2cbc6c411aa1575916fe1acb7e829af2acf321c",
-        "sha256": "185micvx6bdnhfa7r1xb87qfskbl399r3j9094sdknaf0x5m9ibq",
+        "rev": "a4c7463748cf4c782747848f6de73bb0733cb91f",
+        "sha256": "1w9pdwi9bp09m1h5bfr72kj1zxrj5072vgmxdcaswaldpqzlk79p",
         "type": "tarball",
-        "url": "https://github.com/etu/ip.failar.nu/archive/b2cbc6c411aa1575916fe1acb7e829af2acf321c.tar.gz",
+        "url": "https://github.com/etu/ip.failar.nu/archive/a4c7463748cf4c782747848f6de73bb0733cb91f.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixos-hardware": {
