@@ -527,7 +527,7 @@
 
 ;; Gnuplot
 (use-package gnuplot
-  :ensure t
+  ;; :ensure t                          ; The install is currently broken
   :defer 2
   :bind (("M-C-g" . org-plot/gnuplot))
   :init (setq gnuplot-program "@gnuplot@/bin/gnuplot"))
