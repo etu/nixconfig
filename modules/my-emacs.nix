@@ -129,7 +129,6 @@ let
 
       # Install work deps
       lib.optionals cfg.enableWork [
-        epkgs.dockerfile-mode
         epkgs.es-mode
         epkgs.jenkinsfile-mode
         epkgs.vcl-mode

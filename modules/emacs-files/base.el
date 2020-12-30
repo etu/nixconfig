@@ -556,6 +556,7 @@
 ;;;
 
 (use-package centimacro :defer 2 :ensure t)
+(use-package dockerfile-mode :defer 2 :ensure t)
 (use-package es-mode :defer 2 :ensure t)
 (use-package fish-mode :defer 2 :ensure t)
 (use-package helm-rg :defer 2 :ensure t)
