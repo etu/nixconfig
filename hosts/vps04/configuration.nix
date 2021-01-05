@@ -39,9 +39,6 @@ in
   my.auto-upgrade.user = "etu";
   system.autoUpgrade.dates = "Mon *-*-* 04:40:00";
 
-  # Set your time zone.
-  time.timeZone = "Europe/Stockholm";
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
