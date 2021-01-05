@@ -28,6 +28,10 @@ in
 
   networking.hostName = "vps05";
 
+  # Set up ZFS
+  boot.supportedFilesystems = [ "zfs" ];
+  networking.hostId = "8425e349";
+
   # Set NIX_PATH for nixos config and nixpkgs
   nix.nixPath = [ "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos" "nixos-config=/etc/nixos/hosts/vps05/configuration.nix" ];
 
@@ -96,7 +100,7 @@ in
   services.gitea.domain = "git.elis.nu";
   services.gitea.rootUrl = "https://git.elis.nu/";
   services.gitea.database.type = "postgres";
-  services.gitea.database.passwordFile = "/nix/persistent/var/lib/gitea-db-pass";
+  services.gitea.database.passwordFile = "/persistent/var/lib/gitea-db-pass";
   services.gitea.disableRegistration = true;
 
   # Postgres

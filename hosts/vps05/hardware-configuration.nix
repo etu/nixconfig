@@ -8,7 +8,8 @@
     <nixpkgs/nixos/modules/profiles/qemu-guest.nix>
   ];
 
-  boot.initrd.availableKernelModules = [ "ata_piix" "uhci_hcd" "virtio_pci" "sd_mod" "sr_mod" ];
+  boot.initrd.availableKernelModules = [ "ahci" "xhci_pci" "virtio_pci" "sd_mod" "sr_mod" ];
+  boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
@@ -18,14 +19,30 @@
     options = [ "defaults" "size=1G" "mode=755" ];
   };
 
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/1eab9330-fad5-4e0b-9e79-60c3318bf635";
-    fsType = "ext4";
+  fileSystems."/nix" = {
+    device = "zroot/nix";
+    fsType = "zfs";
   };
 
-  fileSystems."/nix" = {
-    device = "/dev/disk/by-uuid/a40eef7f-f374-4c53-a21a-97dc662b13de";
-    fsType = "ext4";
+  fileSystems."/var/log" = {
+    device = "zroot/var-log";
+    fsType = "zfs";
+  };
+
+  fileSystems."/persistent" = {
+    device = "zroot/persistent";
+    fsType = "zfs";
+  };
+
+  fileSystems."/etc/nixos" = {
+    device = "/persistent/etc/nixos";
+    fsType = "none";
+    options = [ "bind" ];
+  };
+
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/C5E1-A34A";
+    fsType = "vfat";
   };
 
   swapDevices = [ ];
