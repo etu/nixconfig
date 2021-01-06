@@ -31,6 +31,8 @@ in
   # Set up ZFS
   boot.supportedFilesystems = [ "zfs" ];
   networking.hostId = "8425e349";
+  services.zfs.autoScrub.enable = true;
+  services.zfs.autoSnapshot.enable = true;
 
   # Set NIX_PATH for nixos config and nixpkgs
   nix.nixPath = [ "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos" "nixos-config=/etc/nixos/hosts/vps05/configuration.nix" ];
