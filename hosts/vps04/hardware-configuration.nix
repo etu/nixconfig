@@ -8,7 +8,8 @@
     <nixpkgs/nixos/modules/profiles/qemu-guest.nix>
   ];
 
-  boot.initrd.availableKernelModules = [ "ata_piix" "uhci_hcd" "virtio_pci" "sd_mod" "sr_mod" ];
+  boot.initrd.availableKernelModules = [ "ahci" "xhci_pci" "virtio_pci" "sd_mod" "sr_mod" ];
+  boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
@@ -19,16 +20,35 @@
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/5afa9957-c9c4-4d98-bf08-e07d44535986";
+    device = "/dev/disk/by-uuid/d915951b-f86e-4ef7-86fe-5194f02e1d0d";
     fsType = "ext4";
   };
 
   fileSystems."/nix" = {
-    device = "/dev/disk/by-uuid/fe46208d-b2a2-4d48-abfe-b0057c7a8dea";
-    fsType = "ext4";
+    device = "zroot/nix";
+    fsType = "zfs";
+  };
+
+  fileSystems."/persistent/home" = {
+    device = "zroot/home";
+    fsType = "zfs";
+  };
+
+  fileSystems."/persistent" = {
+    device = "zroot/persistent";
+    fsType = "zfs";
+  };
+
+  fileSystems."/var/log" = {
+    device = "zroot/var-log";
+    fsType = "zfs";
+  };
+
+  fileSystems."/etc/nixos" = {
+    device = "/persistent/etc/nixos";
+    fsType = "none";
+    options = [ "bind" ];
   };
 
   swapDevices = [ ];
-
-  nix.maxJobs = lib.mkDefault 1;
 }

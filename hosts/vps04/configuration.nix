@@ -22,7 +22,7 @@ in
   ];
 
   # The NixOS release to be compatible with for stateful data such as databases.
-  system.stateVersion = "18.09";
+  system.stateVersion = "20.09";
 
   # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
@@ -30,6 +30,10 @@ in
   boot.loader.grub.device = "/dev/sda";
 
   networking.hostName = "vps04";
+
+  # Set up ZFS
+  boot.supportedFilesystems = [ "zfs" ];
+  networking.hostId = "8425e390";
 
   # Set NIX_PATH for nixos config and nixpkgs
   nix.nixPath = [ "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos" "nixos-config=/etc/nixos/hosts/vps04/configuration.nix" ];
@@ -75,8 +79,18 @@ in
 
   # Enable my user and home-manager for my user
   my.home-manager.enable = true;
-  my.user.enable = true;
-  my.user.extraAuthorizedKeys = keys.etu.weechat;
+  my.user = {
+    enable = true;
+    extraAuthorizedKeys = keys.etu.weechat;
+    persistent.extraFiles = [
+      ".config/fish/fish_variables"
+    ];
+    persistent.extraDirectories = [
+      ".dotfiles"
+      ".ssh"
+      ".weechat"
+    ];
+  };
 
   # Set up users accounts:
 
