@@ -92,9 +92,6 @@ in
   # Open Firewall for HTTP, HTTPS and hkp (keyserver)
   networking.firewall.allowedTCPPorts = [ 80 443 11371 ];
 
-  # Gitea dump
-  services.gitea.dump.enable = true;
-
   # Gitea
   services.gitea.enable = true;
   services.gitea.appName = "Elis Git Service";
