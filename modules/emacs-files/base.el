@@ -248,7 +248,7 @@
   :ensure t
   :defer 2
   :mode "\\.nix$"
-  :init (setq nix-indent-function 'smie-indent-line))
+  :init (setq nix-indent-function 'nix-indent-line))
 
 
 ;;;
