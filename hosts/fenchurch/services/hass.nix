@@ -11,13 +11,11 @@ in
 {
   # Make sure to have NGiNX enabled
   services.nginx.enable = true;
-  services.nginx.virtualHosts."hass.lan".locations."/" = {
-    proxyWebsockets = true;
-    proxyPass = "http://127.0.0.1:8123";
-    extraConfig = ''
-      allow 10.3.0.0/24;
-      deny all;
-    '';
+  services.nginx.virtualHosts."hass.elis.nu" = {
+    forceSSL = true;
+    enableACME = true;
+    locations."/".proxyWebsockets = true;
+    locations."/".proxyPass = "http://127.0.0.1:8123/";
   };
 
   # Enable Home Assistant, open port and add the hass user to the dialout group
@@ -44,7 +42,7 @@ in
       # Http settings
       http = {
         server_host = "127.0.0.1";
-        base_url = "http://hass.lan";
+        base_url = "https://hass.elis.nu";
         use_x_forwarded_for = true;
         trusted_proxies = "127.0.0.1";
         server_port = 8123;
