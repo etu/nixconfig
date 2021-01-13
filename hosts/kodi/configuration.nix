@@ -30,6 +30,7 @@ in
   boot.supportedFilesystems = [ "zfs" ];
   networking.hostId = "10227851";
   services.zfs.autoScrub.enable = true;
+  services.zfs.autoScrub.interval = "Sun, 21:00:00";
   services.zfs.autoSnapshot.enable = true;
 
   # Set NIX_PATH for nixos config and nixpkgs
