@@ -40,6 +40,9 @@ in
 
   # Auto upgrade system
   my.auto-upgrade.enable = true;
+  my.auto-upgrade.interval = "*-*-* 01:00:00";
+  system.autoUpgrade.dates = "*-*-* 01:15:00";
+  nix.gc.dates = "*-*-* 01:30:00";
 
   # Enable some firmwares.
   hardware.cpu.amd.updateMicrocode = true;
