@@ -56,7 +56,7 @@
     device = "10.3.0.2:/media/legacy/files";
     fsType = "nfs";
     noCheck = true;
-    options = [ "ro" "noauto" "x-systemd.automount" ];
+    options = [ "ro" "noauto" "x-systemd.automount" "soft" "timeo=120" "retrans=5" ];
   };
 
   swapDevices = [ ];
