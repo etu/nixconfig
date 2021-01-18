@@ -46,7 +46,7 @@ in
       description = "update-nixos-config";
       after = [ "network.target" ];
       wantedBy = [ "default.target" ];
-      path = with pkgs; [ git niv nix ];
+      path = with pkgs; [ git niv nix gnutar ];
       serviceConfig = {
         Type = "oneshot";
         User = cfg.user;
