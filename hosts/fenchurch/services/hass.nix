@@ -68,7 +68,7 @@ in
           action = [
             {
               service = "light.turn_on";
-              data.entity_id = [ "light.tv_wall_strip" ];
+              data.entity_id = "light.tv_wall_strip";
             }
             {
               service = "switch.turn_on";
@@ -112,7 +112,7 @@ in
           id = "turn-off-tv-wall-strip";
           alias = "Turn off TV Wall Strip";
           trigger = { platform = "time"; at = "01:30:00"; };
-          action.data.entity_id = [ "light.tv_wall_strip" ];
+          action.data.entity_id = "light.tv_wall_strip";
           action.service = "light.turn_off";
         }
 
@@ -142,18 +142,11 @@ in
         {
           id = "turn-on-other-hallway-ceilinglamp";
           alias = "Turn on other hallway ceilinglamp";
-          trigger = [
-            {
-              platform = "state";
-              entity_id = "light.ceilinglamp_hallway_1";
-              to = "on";
-            }
-            {
-              platform = "state";
-              entity_id = "light.ceilinglamp_hallway_2";
-              to = "on";
-            }
-          ];
+          trigger = {
+            platform = "state";
+            entity_id = [ "light.ceilinglamp_hallway_1" "light.ceilinglamp_hallway_2" ];
+            to = "on";
+          };
           action.data.entity_id = [ "light.ceilinglamp_hallway_1" "light.ceilinglamp_hallway_2" ];
           action.service = "light.turn_on";
         }
@@ -163,14 +156,14 @@ in
           id = "turn-on-media-center-power-for-updates";
           alias = "Turn on media center power for updates";
           trigger = { platform = "time"; at = "00:55:00"; };
-          action.data.entity_id = [ "switch.media_center_power" ];
+          action.data.entity_id = "switch.media_center_power";
           action.service = "switch.turn_on";
         }
         {
           id = "turn-off-media-center-power";
           alias = "Turn off media center power";
           trigger = { platform = "time"; at = "02:30:00"; };
-          action.data.entity_id = [ "switch.media_center_power" ];
+          action.data.entity_id = "switch.media_center_power";
           action.service = "switch.turn_off";
         }
 
@@ -218,8 +211,7 @@ in
         {
           id = "vacuum-start-regardless-if-were-lazy";
           alias = "Vacuum: Start regardless if we haven't left the house";
-          trigger.platform = "time";
-          trigger.at = "18:00:00";
+          trigger = { platform = "time"; at = "18:00:00"; };
           condition = {
             condition = "and";
             conditions = [
