@@ -66,14 +66,8 @@ in
             offset = "-00:45:00";
           };
           action = [
-            {
-              service = "light.turn_on";
-              data.entity_id = "light.tv_wall_strip";
-            }
-            {
-              service = "switch.turn_on";
-              data.entity_id = [ "switch.floorlamp_office" "switch.floorlamp_livingroom" ];
-            }
+            { service = "light.turn_on"; data.entity_id = "light.tv_wall_strip"; }
+            { service = "switch.turn_on"; data.entity_id = [ "switch.floorlamp_office" "switch.floorlamp_livingroom" ]; }
           ];
         }
 
@@ -85,13 +79,7 @@ in
             { platform = "time"; at = "00:00:00"; }
             {
               platform = "state";
-              entity_id = "switch.floorlamp_livingroom";
-              to = "on";
-              for.minutes = 30;
-            }
-            {
-              platform = "state";
-              entity_id = "switch.floorlamp_office";
+              entity_id = [ "switch.floorlamp_livingroom" "switch.floorlamp_office" ];
               to = "on";
               for.minutes = 30;
             }
