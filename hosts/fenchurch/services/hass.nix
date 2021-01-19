@@ -242,8 +242,7 @@ in
               }
             ];
           };
-          action.service = "vacuum.start";
-          action.entity_id = "vacuum.jean_luc";
+          action.service = "script.vacuum_start_cleaning";
         }
 
         # Start the vacuum cleaner in the evening if the lazy humans haven't left the house.
@@ -272,8 +271,7 @@ in
               }
             ];
           };
-          action.service = "vacuum.start";
-          action.entity_id = "vacuum.jean_luc";
+          action.service = "script.vacuum_start_cleaning";
         }
 
         # Toggle flag when the vacuum is done to not vacuum several times a day
@@ -326,8 +324,16 @@ in
         };
       };
 
-      # Include scripts
-      script = "!include scripts.yaml";
+      # Scripts
+      script = {
+        vacuum_start_cleaning = {
+          alias = "Vacuum: Start robot vacuum cleaning";
+          sequence = [
+            { service = "vacuum.start"; entity_id = "vacuum.jean_luc"; }
+            # { service = "vacuum.set_fan_speed"; data = { entity_id = "vacuum.jean_luc"; fan_speed = 75; }; }
+          ];
+        };
+      };
 
       # ZWave
       zwave = {
