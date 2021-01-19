@@ -57,6 +57,9 @@ in
       # Include automations
       automation = "!include automations.yaml";
 
+      # Include scripts
+      script = "!include scripts.yaml";
+
       # ZWave
       zwave = {
         usb_path = "/dev/serial/by-id/usb-0658_0200-if00";
@@ -79,6 +82,9 @@ in
 
       # Make the ui configurable through ui-lovelace.yaml
       lovelace.mode = "yaml";
+      lovelace.resources = [
+        { url = "/local/vacuum-card.js";  type = "module"; }
+      ];
 
       # Enable support for tracking state changes over time
       history = { };
@@ -101,6 +107,16 @@ in
 
       # Enable logging
       logger.default = "info";
+
+      # Enable vacuum cleaner
+      vacuum = [
+        {
+          name = "Jean-Luc";
+          platform = "xiaomi_miio";
+          host = "!secret vacuum_host";
+          token = "!secret vacuum_token";
+        }
+      ];
 
       # Pull in weather data
       weather = [
