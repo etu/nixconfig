@@ -206,6 +206,18 @@ in
         }
       ];
 
+      # Binary sensors
+      binary_sensor = [
+        {
+          platform = "template";
+          sensors.humans_home = {
+            friendly_name = "Humans home";
+            device_class = "presence";
+            value_template = "{{ is_state('device_tracker.elis_oneplus_nord', 'home') or is_state('device_tracker.caroline_oneplus_nord', 'home') }}";
+          };
+        }
+      ];
+
       # Include scripts
       script = "!include scripts.yaml";
 
