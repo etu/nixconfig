@@ -56,34 +56,25 @@ in
 
       # Include automations
       automation = [
-        # Turn on the LED strip in the evening
+        # Turn on the LED strip and floor lights in the evening
         {
           id = "turn-on-evening-lights";
           alias = "Turn on evening lights";
-          trigger = [
+          trigger = {
+            platform = "sun";
+            event = "sunset";
+            offset = "-00:45:00";
+          };
+          action = [
             {
-              platform = "sun";
-              event = "sunset";
-              offset = "-00:45:00";
+              service = "light.turn_on";
+              data.entity_id = [ "light.tv_wall_strip" ];
+            }
+            {
+              service = "switch.turn_on";
+              data.entity_id = [ "switch.floorlamp_office" "switch.floorlamp_livingroom" ];
             }
           ];
-          action.data.entity_id = [ "light.tv_wall_strip" ];
-          action.service = "light.turn_on";
-        }
-
-        # Turn on the floor lamps in the evening
-        {
-          id = "turn-on-evening-switches";
-          alias = "Turn on evening switches";
-          trigger = [
-            {
-              platform = "sun";
-              event = "sunset";
-              offset = "-00:45:00";
-            }
-          ];
-          action.data.entity_id = [ "switch.floorlamp_office" "switch.floorlamp_livingroom" ];
-          action.service = "switch.turn_on";
         }
 
         # Turn off the floor lamps in the evening
@@ -120,17 +111,15 @@ in
         {
           id = "turn-off-tv-wall-strip";
           alias = "Turn off TV Wall Strip";
-          trigger = [
-            { platform = "time"; at = "01:30:00"; }
-          ];
+          trigger = { platform = "time"; at = "01:30:00"; };
           action.data.entity_id = [ "light.tv_wall_strip" ];
           action.service = "light.turn_off";
         }
 
         # Turn off hallway ceiling lamps timers
         {
-          id = "turn-off-hallway-ceilinglamp-1-timer";
-          alias = "Turn off hallway ceilinglamp 1 timer";
+          id = "turn-off-hallway-ceilinglamps";
+          alias = "Turn off hallway ceilinglamps";
           trigger = [
             {
               platform = "state";
@@ -138,14 +127,6 @@ in
               for.minutes = 20;
               to = "on";
             }
-          ];
-          action.data.entity_id = [ "light.ceilinglamp_hallway_1" ];
-          action.service = "light.turn_off";
-        }
-        {
-          id = "turn-off-hallway-ceilinglamp-2-timer";
-          alias = "Turn off hallway ceilinglamp 2 timer";
-          trigger = [
             {
               platform = "state";
               entity_id = "light.ceilinglamp_hallway_2";
@@ -153,35 +134,27 @@ in
               to = "on";
             }
           ];
-          action.data.entity_id = [ "light.ceilinglamp_hallway_2" ];
+          action.data.entity_id = [ "light.ceilinglamp_hallway_1" "light.ceilinglamp_hallway_2" ];
           action.service = "light.turn_off";
         }
 
         # Turn on the other hallway lamp
         {
-          id = "turn-on-other-hallway-ceilinglamp-1";
-          alias = "Turn on other hallway ceilinglamp 1";
+          id = "turn-on-other-hallway-ceilinglamp";
+          alias = "Turn on other hallway ceilinglamp";
           trigger = [
             {
               platform = "state";
               entity_id = "light.ceilinglamp_hallway_1";
               to = "on";
             }
-          ];
-          action.data.entity_id = [ "light.ceilinglamp_hallway_2" ];
-          action.service = "light.turn_on";
-        }
-        {
-          id = "turn-on-other-hallway-ceilinglamp-2";
-          alias = "Turn on other hallway ceilinglamp 2";
-          trigger = [
             {
               platform = "state";
               entity_id = "light.ceilinglamp_hallway_2";
               to = "on";
             }
           ];
-          action.data.entity_id = [ "light.ceilinglamp_hallway_1" ];
+          action.data.entity_id = [ "light.ceilinglamp_hallway_1" "light.ceilinglamp_hallway_2" ];
           action.service = "light.turn_on";
         }
 
@@ -189,18 +162,14 @@ in
         {
           id = "turn-on-media-center-power-for-updates";
           alias = "Turn on media center power for updates";
-          trigger = [
-            { platform = "time"; at = "00:55:00"; }
-          ];
+          trigger = { platform = "time"; at = "00:55:00"; };
           action.data.entity_id = [ "switch.media_center_power" ];
           action.service = "switch.turn_on";
         }
         {
           id = "turn-off-media-center-power";
           alias = "Turn off media center power";
-          trigger = [
-            { platform = "time"; at = "02:30:00"; }
-          ];
+          trigger = { platform = "time"; at = "02:30:00"; };
           action.data.entity_id = [ "switch.media_center_power" ];
           action.service = "switch.turn_off";
         }
