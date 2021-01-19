@@ -204,6 +204,101 @@ in
           action.data.entity_id = [ "switch.media_center_power" ];
           action.service = "switch.turn_off";
         }
+
+        # Start the vacuum cleaner during the day if nobody is home
+        {
+          id = "vacuum-start-timer-nobody-home";
+          alias = "Vacuum: Check every 15 minutes if nobody is home to start";
+          trigger.platform = "time_pattern";
+          trigger.minutes = "/15";
+          condition = {
+            condition = "and";
+            conditions = [
+              {
+                condition = "state";
+                entity_id = "input_boolean.vacuum_scheduled_cleaning";
+                state = "on";
+              }
+              {
+                condition = "time";
+                after = "11:00:00";
+                before = "18:00:00";
+                # weekday = [ "mon" "tue" "wed" "thu" "fri" "sat" "sun" ];
+              }
+              {
+                condition = "state";
+                entity_id = "input_boolean.vacuum_cleaned_today";
+                state = "off";
+              }
+              {
+                condition = "state";
+                entity_id = "vacuum.jean_luc";
+                state = "docked";
+              }
+              {
+                condition = "state";
+                entity_id = "binary_sensor.humans_home";
+                state = "off";
+              }
+            ];
+          };
+          action.service = "vacuum.start";
+          action.entity_id = "vacuum.jean_luc";
+        }
+
+        # Start the vacuum cleaner in the evening if the lazy humans haven't left the house.
+        {
+          id = "vacuum-start-regardless-if-were-lazy";
+          alias = "Vacuum: Start regardless if we haven't left the house";
+          trigger.platform = "time";
+          trigger.at = "18:00:00";
+          condition = {
+            condition = "and";
+            conditions = [
+              {
+                condition = "state";
+                entity_id = "input_boolean.vacuum_scheduled_cleaning";
+                state = "on";
+              }
+              {
+                condition = "state";
+                entity_id = "input_boolean.vacuum_cleaned_today";
+                state = "off";
+              }
+              {
+                condition = "state";
+                entity_id = "vacuum.jean_luc";
+                state = "docked";
+              }
+            ];
+          };
+          action.service = "vacuum.start";
+          action.entity_id = "vacuum.jean_luc";
+        }
+
+        # Toggle flag when the vacuum is done to not vacuum several times a day
+        {
+          id = "vacuum-log-return-to-dock";
+          alias = "Vacuum: Log return to dock";
+          trigger = {
+            platform = "state";
+            entity_id = "vacuum.jean_luc";
+            from = "returning";
+            to = "docked";
+          };
+          action.data.entity_id = "input_boolean.vacuum_cleaned_today";
+          action.service = "input_boolean.turn_on";
+        }
+
+        # Reset toggle to allow vacuum cleaning the next day
+        {
+          id = "vacuum-reset-cleaned-today";
+          alias = "Vacuum: Reset cleaned today";
+          trigger.platform = "time";
+          trigger.at = "01:00:00";
+          action.data.entity_id = "input_boolean.vacuum_cleaned_today";
+          action.service = "input_boolean.turn_off";
+        }
       ];
 
       # Binary sensors
@@ -217,6 +312,19 @@ in
           };
         }
       ];
+
+      # Boolean variables for states of things
+      input_boolean = {
+        vacuum_cleaned_today = {
+          name = "Vacuum Robot cleaned today";
+          initial = "off";
+        };
+        vacuum_scheduled_cleaning = {
+          name = "Vacuum robot scedule";
+          icon = "mdi:calendar-clock";
+          initial = "on";
+        };
+      };
 
       # Include scripts
       script = "!include scripts.yaml";
