@@ -120,20 +120,12 @@ in
         {
           id = "turn-off-hallway-ceilinglamps";
           alias = "Turn off hallway ceilinglamps";
-          trigger = [
-            {
-              platform = "state";
-              entity_id = "light.ceilinglamp_hallway_1";
-              for.minutes = 20;
-              to = "on";
-            }
-            {
-              platform = "state";
-              entity_id = "light.ceilinglamp_hallway_2";
-              for.minutes = 15;
-              to = "on";
-            }
-          ];
+          trigger = {
+            platform = "state";
+            entity_id = [ "light.ceilinglamp_hallway_1" "light.ceilinglamp_hallway_2" ];
+            for.minutes = 15;
+            to = "on";
+          };
           action.data.entity_id = [ "light.ceilinglamp_hallway_1" "light.ceilinglamp_hallway_2" ];
           action.service = "light.turn_off";
         }
@@ -171,17 +163,16 @@ in
         {
           id = "turn-off-media-center-to-conserve-power";
           alias = "Turn off media center to conserve power";
-          trigger = { platform = "state"; entity_id = "binary_sensor.humans_home"; state = "off"; };
+          trigger = { platform = "state"; entity_id = "binary_sensor.humans_home"; to = "off"; };
           condition = { condition = "time"; before = "00:55:00"; after = "02:30:00"; };
           action = { service = "switch.turn_off"; data.entity_id = "switch.media_center_power"; };
         }
 
         # Start the vacuum cleaner during the day if nobody is home
         {
-          id = "vacuum-start-timer-nobody-home";
-          alias = "Vacuum: Check every 15 minutes if nobody is home to start";
-          trigger.platform = "time_pattern";
-          trigger.minutes = "/15";
+          id = "vacuum-start-if-nobody-home";
+          alias = "Vacuum: Start vacuuming when nobody is home";
+          trigger = { platform = "state"; entity_id = "binary_sensor.humans_home"; to = "off"; };
           condition = {
             condition = "and";
             conditions = [
@@ -205,11 +196,6 @@ in
                 condition = "state";
                 entity_id = "vacuum.jean_luc";
                 state = "docked";
-              }
-              {
-                condition = "state";
-                entity_id = "binary_sensor.humans_home";
-                state = "off";
               }
             ];
           };
