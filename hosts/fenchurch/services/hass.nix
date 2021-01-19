@@ -167,6 +167,15 @@ in
           action.service = "switch.turn_off";
         }
 
+        # Turn off media center when the lazy humans left it on
+        {
+          id = "turn-off-media-center-to-conserve-power";
+          alias = "Turn off media center to conserve power";
+          trigger = { platform = "state"; entity_id = "binary_sensor.humans_home"; state = "off"; };
+          condition = { condition = "time"; before = "00:55:00"; after = "02:30:00"; };
+          action = { service = "switch.turn_off"; data.entity_id = "switch.media_center_power"; };
+        }
+
         # Start the vacuum cleaner during the day if nobody is home
         {
           id = "vacuum-start-timer-nobody-home";
