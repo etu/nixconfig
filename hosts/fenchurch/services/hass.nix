@@ -154,11 +154,14 @@ in
           action = { service = "switch.turn_off"; data.entity_id = "switch.media_center_power"; };
         }
 
-        # Start the vacuum cleaner during the day if nobody is home
+        # Start the vacuum cleaner if nobody is home or in the evening.
         {
-          id = "vacuum-start-if-nobody-home";
-          alias = "Vacuum: Start vacuuming when nobody is home";
-          trigger = { platform = "state"; entity_id = "binary_sensor.humans_home"; to = "off"; };
+          id = "vacuum-start-cleaning";
+          alias = "Vacuum: Start cleaning";
+          trigger = [
+            { platform = "state"; entity_id = "binary_sensor.humans_home"; to = "off"; }
+            { platform = "time"; at = "18:00:00"; }
+          ];
           condition = [
             {
               condition = "state";
@@ -168,33 +171,8 @@ in
             {
               condition = "time";
               after = "11:00:00";
-              before = "18:00:00";
+              before = "18:00:10";
               # weekday = [ "mon" "tue" "wed" "thu" "fri" "sat" "sun" ];
-            }
-            {
-              condition = "state";
-              entity_id = "input_boolean.vacuum_cleaned_today";
-              state = "off";
-            }
-            {
-              condition = "state";
-              entity_id = "vacuum.jean_luc";
-              state = "docked";
-            }
-          ];
-          action.service = "script.vacuum_start_cleaning";
-        }
-
-        # Start the vacuum cleaner in the evening if the lazy humans haven't left the house.
-        {
-          id = "vacuum-start-regardless-if-were-lazy";
-          alias = "Vacuum: Start regardless if we haven't left the house";
-          trigger = { platform = "time"; at = "18:00:00"; };
-          condition = [
-            {
-              condition = "state";
-              entity_id = "input_boolean.vacuum_scheduled_cleaning";
-              state = "on";
             }
             {
               condition = "state";
