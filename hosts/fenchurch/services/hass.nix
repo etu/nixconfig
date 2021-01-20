@@ -84,13 +84,11 @@ in
               for.minutes = 30;
             }
           ];
-          condition = [
-            {
-              condition = "time";
-              after = "00:00:00";
-              before = "10:00:00";
-            }
-          ];
+          condition = {
+            condition = "time";
+            after = "00:00:00";
+            before = "10:00:00";
+          };
           action.data.entity_id = [ "switch.floorlamp_office" "switch.floorlamp_livingroom" ];
           action.service = "switch.turn_off";
         }
@@ -161,32 +159,29 @@ in
           id = "vacuum-start-if-nobody-home";
           alias = "Vacuum: Start vacuuming when nobody is home";
           trigger = { platform = "state"; entity_id = "binary_sensor.humans_home"; to = "off"; };
-          condition = {
-            condition = "and";
-            conditions = [
-              {
-                condition = "state";
-                entity_id = "input_boolean.vacuum_scheduled_cleaning";
-                state = "on";
-              }
-              {
-                condition = "time";
-                after = "11:00:00";
-                before = "18:00:00";
-                # weekday = [ "mon" "tue" "wed" "thu" "fri" "sat" "sun" ];
-              }
-              {
-                condition = "state";
-                entity_id = "input_boolean.vacuum_cleaned_today";
-                state = "off";
-              }
-              {
-                condition = "state";
-                entity_id = "vacuum.jean_luc";
-                state = "docked";
-              }
-            ];
-          };
+          condition = [
+            {
+              condition = "state";
+              entity_id = "input_boolean.vacuum_scheduled_cleaning";
+              state = "on";
+            }
+            {
+              condition = "time";
+              after = "11:00:00";
+              before = "18:00:00";
+              # weekday = [ "mon" "tue" "wed" "thu" "fri" "sat" "sun" ];
+            }
+            {
+              condition = "state";
+              entity_id = "input_boolean.vacuum_cleaned_today";
+              state = "off";
+            }
+            {
+              condition = "state";
+              entity_id = "vacuum.jean_luc";
+              state = "docked";
+            }
+          ];
           action.service = "script.vacuum_start_cleaning";
         }
 
@@ -195,26 +190,23 @@ in
           id = "vacuum-start-regardless-if-were-lazy";
           alias = "Vacuum: Start regardless if we haven't left the house";
           trigger = { platform = "time"; at = "18:00:00"; };
-          condition = {
-            condition = "and";
-            conditions = [
-              {
-                condition = "state";
-                entity_id = "input_boolean.vacuum_scheduled_cleaning";
-                state = "on";
-              }
-              {
-                condition = "state";
-                entity_id = "input_boolean.vacuum_cleaned_today";
-                state = "off";
-              }
-              {
-                condition = "state";
-                entity_id = "vacuum.jean_luc";
-                state = "docked";
-              }
-            ];
-          };
+          condition = [
+            {
+              condition = "state";
+              entity_id = "input_boolean.vacuum_scheduled_cleaning";
+              state = "on";
+            }
+            {
+              condition = "state";
+              entity_id = "input_boolean.vacuum_cleaned_today";
+              state = "off";
+            }
+            {
+              condition = "state";
+              entity_id = "vacuum.jean_luc";
+              state = "docked";
+            }
+          ];
           action.service = "script.vacuum_start_cleaning";
         }
 
