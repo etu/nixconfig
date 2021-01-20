@@ -149,7 +149,7 @@ in
         {
           id = "turn-off-media-center-to-conserve-power";
           alias = "Turn off media center to conserve power";
-          trigger = { platform = "state"; entity_id = "binary_sensor.humans_home"; to = "off"; };
+          trigger = { platform = "state"; entity_id = "binary_sensor.humans_home"; to = "off"; for.minutes = 5; };
           condition = { condition = "time"; before = "00:55:00"; after = "02:30:00"; };
           action = { service = "switch.turn_off"; data.entity_id = "switch.media_center_power"; };
         }
@@ -159,7 +159,7 @@ in
           id = "vacuum-start-cleaning";
           alias = "Vacuum: Start cleaning";
           trigger = [
-            { platform = "state"; entity_id = "binary_sensor.humans_home"; to = "off"; }
+            { platform = "state"; entity_id = "binary_sensor.humans_home"; to = "off"; for.minutes = 5; }
             { platform = "time"; at = "18:00:00"; }
           ];
           condition = [
