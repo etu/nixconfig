@@ -9,28 +9,18 @@
       "8.8.8.8"
       "8.8.4.4"
     ];
-    defaultGateway = "172.31.1.1";
-    defaultGateway6 = "fe80::1";
-    interfaces = {
-      eth0 = {
-        ipv4 = {
-          addresses = [
-            { address = "116.203.56.235"; prefixLength = 32; }
-          ];
-          routes = [
-            { address = "172.31.1.1"; prefixLength = 32; }
-          ];
-        };
-        ipv6 = {
-          addresses = [
-            { address = "2a01:4f8:c2c:e040::1"; prefixLength = 64; }
-          ];
-          routes = [
-            { address = "fe80::1"; prefixLength = 64; }
-            { address = "::"; prefixLength = 0; via = "fe80::1"; }
-          ];
-        };
-      };
+    defaultGateway = { address = "172.31.1.1"; interface = "eth0"; };
+    defaultGateway6 = { address = "fe80::1"; interface = "eth0"; };
+    interfaces.eth0 = {
+      ipv4.addresses = [
+        { address = "116.203.56.235"; prefixLength = 32; }
+      ];
+      ipv4.routes = [
+        { address = "172.31.1.1"; prefixLength = 32; }
+      ];
+      ipv6.addresses = [
+        { address = "2a01:4f8:c2c:e040::1"; prefixLength = 64; }
+      ];
     };
   };
   services.udev.extraRules = ''
