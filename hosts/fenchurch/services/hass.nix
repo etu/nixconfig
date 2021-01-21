@@ -149,7 +149,7 @@ in
         {
           id = "turn-off-media-center-to-conserve-power";
           alias = "Turn off media center to conserve power";
-          trigger = { platform = "state"; entity_id = "binary_sensor.humans_home"; to = "off"; for.minutes = 5; };
+          trigger = { platform = "state"; entity_id = "binary_sensor.humans_home"; to = "off"; for.seconds = 30; };
           condition = { condition = "time"; before = "00:55:00"; after = "02:30:00"; };
           action = { service = "switch.turn_off"; data.entity_id = "switch.media_center_power"; };
         }
@@ -159,7 +159,7 @@ in
           id = "vacuum-start-cleaning";
           alias = "Vacuum: Start cleaning";
           trigger = [
-            { platform = "state"; entity_id = "binary_sensor.humans_home"; to = "off"; for.minutes = 5; }
+            { platform = "state"; entity_id = "binary_sensor.humans_home"; to = "off"; for.seconds = 30; }
             { platform = "time"; at = "18:00:00"; }
           ];
           condition = [
@@ -170,8 +170,8 @@ in
             }
             {
               condition = "time";
-              after = "11:00:00";
-              before = "18:00:10";
+              after = "07:00:00";
+              before = "20:30:00";
               # weekday = [ "mon" "tue" "wed" "thu" "fri" "sat" "sun" ];
             }
             {
@@ -228,11 +228,11 @@ in
       # Boolean variables for states of things
       input_boolean = {
         vacuum_cleaned_today = {
-          name = "Vacuum Robot cleaned today";
+          name = "Vacuum: Robot cleaned today";
           initial = "off";
         };
         vacuum_scheduled_cleaning = {
-          name = "Vacuum robot scedule";
+          name = "Vacuum: Robot scedule";
           icon = "mdi:calendar-clock";
           initial = "on";
         };
