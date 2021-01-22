@@ -39,11 +39,12 @@ in
         time_zone = "Europe/Stockholm";
       };
 
+      # Enable meta default config module that pulls in lots of default
+      # modules: https://www.home-assistant.io/integrations/default_config/
+      default_config = { };
+
       # Discover some devices automatically
       discovery = { };
-
-      # Show some system health data
-      system_health = { };
 
       # Http settings
       http = {
@@ -53,12 +54,6 @@ in
         trusted_proxies = "127.0.0.1";
         server_port = 8123;
       };
-
-      # Enables a map showing the location of tracked devies
-      map = { };
-
-      # Track the sun
-      sun = { };
 
       # Include automations
       automation = [
@@ -269,26 +264,14 @@ in
         enable_quirks = false;
       };
 
-      # Enable mobile app
-      mobile_app = { };
-
-      # Enable configuration UI
-      config = { };
-
       # Make the ui configurable through ui-lovelace.yaml
       lovelace.mode = "yaml";
       lovelace.resources = [
         { url = "/local/vacuum-card.js";  type = "module"; }
       ];
 
-      # Enable support for tracking state changes over time
-      history = { };
-
       # Purge tracked history after 10 days
       recorder.purge_keep_days = 10;
-
-      # View all events in o logbook
-      logbook = { };
 
       # Automatic chromecast detection
       cast = [
