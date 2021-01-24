@@ -303,7 +303,154 @@ in
           api_key = "!secret openweathermap_api_key";
         }
       ];
-    };
+    }; # END config = {
+
+    lovelaceConfig = {
+      title = "Home";
+      views = [
+        {
+          title = "Home";
+          icon = "mdi:information-outline";
+          panel = false;
+          path = "home";
+          cards = [
+            # Panel with all lamps
+            {
+              type = "entities";
+              title = "Lights";
+              show_header_toggle = true;
+              entities = [
+                { entity = "light.tv_wall_strip"; }
+                { entity = "light.ceilinglamp_hallway_1"; }
+                { entity = "light.ceilinglamp_hallway_2"; }
+                { entity = "light.ikea_ceilinglamp_bulb_kitchen"; }
+                { entity = "light.ikea_ceilinglamp_livingroom"; }
+                { entity = "switch.floorlamp_office"; }
+                { entity = "switch.floorlamp_livingroom"; }
+                { entity = "switch.ceilinglamp_bedroom"; }
+                { entity = "switch.ceilinglamp_office"; }
+              ];
+            }
+            # Panel with settings
+            {
+              type = "entities";
+              title = "Settings";
+              show_header_toggle = false;
+              entities = [
+                { entity = "input_boolean.vacuum_scheduled_cleaning"; }
+                { entity = "switch.media_center_power"; }
+              ];
+            }
+            # Weather forecast
+            { type = "weather-forecast"; entity = "weather.openweathermap"; }
+            # Kodi status
+            { type = "media-control"; entity = "media_player.kodi"; }
+            # Vacuum cleaner
+            {
+              type = "custom:vacuum-card";
+              entity = "vacuum.jean_luc";
+              stats.default = [
+                { attribute = "filter_left"; unit = "hours"; subtitle = "Filter"; }
+                { attribute = "side_brush_left"; unit = "hours"; subtitle = "Side brunch"; }
+                { attribute = "main_brush_left"; unit = "hours"; subtitle = "Main brunsh"; }
+                { attribute = "sensor_dirty_left"; unit = "hours"; subtitle = "Sensors"; }
+              ];
+              stats.cleaning = [
+                { attribute = "cleaned_area"; unit = "m2"; subtitle = "Cleaning area"; }
+                { attribute = "cleaning_time"; unit = "minutes"; subtitle = "Cleaning time"; }
+              ];
+            }
+          ];
+        }
+        {
+          title = "Floorplan";
+          icon = "mdi:map";
+          panel = true;
+          path = "floorplan";
+          cards = [
+            {
+              type = "picture-elements";
+              title = "Floorplan";
+              image = "/local/img/floorplan.png";
+              elements = [
+                # Add floorlamp in the livingroom to the floorplan
+                {
+                  type = "state-icon";
+                  entity = "switch.floorlamp_livingroom";
+                  title = "Floorlamp Livingroom";
+                  icon = "mdi:floor-lamp";
+                  tap_action.action = "toggle";
+                  style = { top = "50%"; left = "70%"; };
+                }
+                # Add floorlamp in the office to the floorplan
+                {
+                  type = "state-icon";
+                  entity = "switch.floorlamp_office";
+                  title = "Floorlamp Office";
+                  icon = "mdi:floor-lamp";
+                  tap_action.action = "toggle";
+                  style = { top = "48%"; left = "54%"; };
+                }
+                # Add ceilinglamp in the office to the floorplan
+                {
+                  type = "state-icon";
+                  entity = "switch.ceilinglamp_office";
+                  title = "Ceilinglamp Office";
+                  icon = "mdi:ceiling-light";
+                  tap_action.action = "toggle";
+                  style = { top = "34%"; left = "44%"; };
+                }
+                # Add ceilinglamp in the bedroom to the floorplan
+                {
+                  type = "state-icon";
+                  entity = "switch.ceilinglamp_bedroom";
+                  title = "Ceilinglamp Bedroom";
+                  icon = "mdi:ceiling-light";
+                  tap_action.action = "toggle";
+                  style = { top = "72%"; left = "80%"; };
+                }
+                # Add Hue lightstrip in the livingroom to the floorplan
+                {
+                  type = "state-icon";
+                  entity = "light.tv_wall_strip";
+                  title = "Hue Lightstrip";
+                  icon = "mdi:led-strip";
+                  tap_action.action = "toggle";
+                  style = { top = "52%"; left = "87%"; };
+                }
+                # Add Ikea lamp in kitchen
+                {
+                  type = "state-icon";
+                  entity = "light.ikea_ceilinglamp_bulb_kitchen";
+                  title = "Ikea Kitchen lamp";
+                  icon = "mdi:ceiling-light";
+                  tap_action.action = "toggle";
+                  style = { top = "23%"; left = "26%"; };
+                }
+                # Add first ceilinglamp in the hallway to the floorplan
+                {
+                  type = "state-icon";
+                  entity = "light.ceilinglamp_hallway_1";
+                  title = "Ceilinglamp Hallway 1";
+                  icon = "mdi:ceiling-light";
+                  tap_action.action = "toggle";
+                  style = { top = "66%"; left = "27%"; };
+                }
+                # Add second ceilinglamp in the hallway to the floorplan
+                {
+                  type = "state-icon";
+                  entity = "light.ceilinglamp_hallway_2";
+                  title = "Ceilinglamp Hallway 2";
+                  icon = "mdi:ceiling-light";
+                  tap_action.action = "toggle";
+                  style = { top = "66%"; left = "56%"; };
+                }
+              ];
+            }
+          ];
+        }
+      ];
+    }; # END lovelaceConfig  = {
   };
 
   users.users.hass.extraGroups = [ "dialout" ];
