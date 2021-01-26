@@ -221,8 +221,8 @@ in
     # Install aditional packages
     environment.systemPackages = lib.mkIf cfg.enableExwm (with pkgs; [
       evince
+      evolution
       gnome3.adwaita-icon-theme # Icons for gnome packages that sometimes use them but don't depend on them
-      gnome3.evolution
       scrot
       pavucontrol
     ]);
