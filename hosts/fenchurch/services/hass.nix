@@ -313,6 +313,13 @@ in
           icon = "mdi:information-outline";
           panel = false;
           path = "home";
+          # Show badges on top
+          badges = [
+            { entity = "binary_sensor.humans_home"; }
+            { entity = "person.elis_hirwing"; }
+            { entity = "person.caroline_hirwing"; }
+            { entity = "input_boolean.vacuum_cleaned_today"; }
+          ];
           cards = [
             # Panel with all lamps
             {
@@ -320,15 +327,15 @@ in
               title = "Lights";
               show_header_toggle = true;
               entities = [
-                { entity = "light.tv_wall_strip"; }
-                { entity = "light.ceilinglamp_hallway_1"; }
-                { entity = "light.ceilinglamp_hallway_2"; }
-                { entity = "light.ikea_ceilinglamp_bulb_kitchen"; }
-                { entity = "light.ikea_ceilinglamp_livingroom"; }
-                { entity = "switch.floorlamp_office"; }
-                { entity = "switch.floorlamp_livingroom"; }
-                { entity = "switch.ceilinglamp_bedroom"; }
-                { entity = "switch.ceilinglamp_office"; }
+                { entity = "light.tv_wall_strip"; icon = "mdi:led-strip"; }
+                { entity = "light.ceilinglamp_hallway_1"; icon = "mdi:ceiling-light"; }
+                { entity = "light.ceilinglamp_hallway_2"; icon = "mdi:ceiling-light"; }
+                { entity = "light.ikea_ceilinglamp_bulb_kitchen"; icon = "mdi:ceiling-light"; }
+                { entity = "light.ikea_ceilinglamp_livingroom"; icon = "mdi:ceiling-light"; }
+                { entity = "switch.floorlamp_office"; icon = "mdi:floor-lamp"; }
+                { entity = "switch.floorlamp_livingroom"; icon = "mdi:floor-lamp"; }
+                { entity = "switch.ceilinglamp_bedroom"; icon = "mdi:ceiling-light"; }
+                { entity = "switch.ceilinglamp_office"; icon = "mdi:ceiling-light"; }
               ];
             }
             # Panel with settings
