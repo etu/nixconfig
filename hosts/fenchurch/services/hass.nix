@@ -452,6 +452,15 @@ in
                   tap_action.action = "toggle";
                   style = { top = "66%"; left = "56%"; };
                 }
+                # Add Ikea lamp in livingroom
+                {
+                  type = "state-icon";
+                  entity = "light.ikea_ceilinglamp_livingroom";
+                  title = "IKEA Ceilinglamp Livingroom";
+                  icon = "mdi:ceiling-light";
+                  tap_action.action = "toggle";
+                  style = { top = "31%"; left = "78%"; };
+                }
               ];
             }
           ];
