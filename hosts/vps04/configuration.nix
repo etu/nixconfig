@@ -81,6 +81,8 @@ in
     Match User ozeloten
       PasswordAuthentication yes
   '';
+  security.pam.services.sshd.unixAuth = lib.mkForce true;
+  services.openssh.challengeResponseAuthentication = false;
 
   # Enable my user and home-manager for my user
   my.home-manager.enable = true;
