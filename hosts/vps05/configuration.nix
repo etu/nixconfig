@@ -120,5 +120,5 @@ in
   # Set up users accounts:
   users.mutableUsers = false;
 
-  users.users.root.openssh.authorizedKeys.keys = with keys.etu; fenchurch ++ agrajag ++ work;
+  users.users.root.openssh.authorizedKeys.keys = keys.etu.all;
 }

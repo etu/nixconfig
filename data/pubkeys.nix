@@ -1,5 +1,5 @@
 {
-  etu = {
+  etu = let
     # Android relay client
     weechat = [
       "no-agent-forwarding,no-X11-forwarding,permitopen=\"127.0.0.1:8001\",command=\"echo 'This account can only be used for weechat relays'\" ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC5veqjY/i/5k6QTyluIBSsYGwgKxUsdsVWgcLbvzWb/GnTx1Ia1SXYvExGrdbfEGyeZEdbsK+PAJlMVJegt/jgE8015Ga0jRwlW6y4G19FB0UrCJU/vVCnyfuH7DgswtVQ98795VET4tfWVZTziaTyrPFi+lAw7afsI5orL5FzzH6+k33M3KSDuSoIgdGgcl+KjVyil4EbO+1k0TqtE7hnD3Lu23G2gyHOSSSB9B6cFrYWWVdxNttUCkNWqwpO6IDZ6ZzBgLZSxxDqgLBjjDYlbtGw4dWk5+39x72K1Rjsj+IiCxgwpk6lCg/QFe0QGIQN9QAe07Frm5hYPx4hXltamePbWti/K7nq4HEsG389R4RjWc6CXjY9SXt0kWLlrdN+cdCncgvQxlKlm/d15BNpnXE7P2aRyGmCeyQBuMCaJ1L5EShC/QXudl/b348dZN3z+51BYVLOQb5J7p2dWUTndN2W4lKf5k2vNeM2vtiZKSMy755GIbwEGv2PX2KYsBH8jcCHEW9sw4IMZxNQW/85dsjW6FPu6EyTlMAJC7H9BO1PJGb7hCTpLic5U3Y/q0Yrj/z/r04z5OX+8BnR+qug56fYMzGJ7oCYAG+JwP80Uw0wIThxiZX0eB7dhuo4DrIlMo30WJXMNw5d5z/WrYYLkifMIirZ/Dal/gfu7QuF9Q== etu@android-2020-08-14"
@@ -20,6 +20,12 @@
     work = [
       "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC30zMfq5/ZBnLPXiz4qtTsg3SU6voKQMumADNhTpVSKo3erANR5zTb1WPfjM4IWLCcWfksWDNOOeMaKM0hGgdnGbfrXpIOJwKNHaSp11cvQ6wTMAGV3B3ItJHOV+Czw4kEeUB+Tic8m+U2jnTPLXC4x3B7bdXHhdhmQbTpEq9pabe8eRQM54/9SuG6M9y8G3g35s3edsXrEnh/OI62a66F5aOugQH4fX5ehfGg3zk7LLu7U8bX9FGOeOVCCEBsfm5ysczNAO3v1iA4G9N8vgfAHJNZfKglYSQIi9nyURxcqT511OFTGK1cyWHGjqCNK286Plx90u0SVQvvG+9hkq2l/kbgmNpEYlTmAs22y+6j7R+gpSCMxJSfjXfJeyVcCTKo2CT9+SQRDz+pz+wyv/NgnaqXuP65RlwS0OIhdT6YheaFfbhkuMzFD78VDWOacLamWVQz/yTe5o+GhTavWVZyZ4Y9Wf+LB4sQtM9S5AqWpSCHDfA9nF6E9oWPbAZ4l+VD4vNQdrmByh+3uk+XP9/ytJVyJDd88MmxnC1yiN3xT7rQaUoUCmYy0Z7BLBYvBb2fU+JrJ8Eew6uf23SGYUtZuxanNANslBdvD0t68xCEHIxsVecpqRtbG8699bZEoWWbAFS1WO5EBAcYRfKV/4SQxLTO0J+HGQSRkgL7Ex1ioQ== etu@phouchg-4096-2016-04-18"
     ];
+  in {
+    # Include all separate units
+    inherit weechat fenchurch agrajag work;
+
+    # Include a meta name of all computers
+    all = fenchurch ++ agrajag ++ work;
   };
 
   concate = [
