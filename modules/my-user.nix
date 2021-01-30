@@ -59,7 +59,7 @@ in
       description = "Elis Hirwing,,,,";
       extraGroups = [ "wheel" ] ++ extraGroups;
       shell = pkgs.fish;
-      openssh.authorizedKeys.keys = keys.etu.all ++ extraAuthorizedKeys;
+      openssh.authorizedKeys.keys = keys.etu.computers ++ extraAuthorizedKeys;
     };
 
     # List packages installed in system profile. To search by name, run:

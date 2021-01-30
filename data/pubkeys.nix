@@ -25,7 +25,7 @@ let
     inherit weechat fenchurch agrajag work;
 
     # Include a meta name of all computers
-    all = fenchurch ++ agrajag ++ work;
+    computers = fenchurch ++ agrajag ++ work;
   };
 
   concate = [
@@ -69,5 +69,5 @@ let
 in {
   inherit etu concate talyz;
 
-  guests = etu.all ++ concate ++ talyz ++ guests;
+  guests = etu.computers ++ concate ++ talyz ++ guests;
 }

@@ -120,5 +120,5 @@ in
   # Set up users accounts:
   users.mutableUsers = false;
 
-  users.users.root.openssh.authorizedKeys.keys = keys.etu.all;
+  users.users.root.openssh.authorizedKeys.keys = keys.etu.computers;
 }

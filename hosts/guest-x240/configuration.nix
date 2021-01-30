@@ -104,5 +104,5 @@ in
 
   # Set up root user
   users.users.root.initialHashedPassword = secrets.hashedRootPassword;
-  users.users.root.openssh.authorizedKeys.keys = keys.etu.all;
+  users.users.root.openssh.authorizedKeys.keys = keys.etu.computers;
 }
