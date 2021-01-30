@@ -318,7 +318,6 @@ in
             { entity = "binary_sensor.humans_home"; }
             { entity = "person.elis_hirwing"; }
             { entity = "person.caroline_hirwing"; }
-            { entity = "input_boolean.vacuum_cleaned_today"; }
           ];
           cards = [
             # Panel with all lamps
@@ -344,6 +343,7 @@ in
               title = "Settings";
               show_header_toggle = false;
               entities = [
+                { entity = "input_boolean.vacuum_cleaned_today"; }
                 { entity = "input_boolean.vacuum_scheduled_cleaning"; }
                 { entity = "switch.media_center_power"; }
               ];
