@@ -38,6 +38,9 @@ in
     # Enable lorri on all systems.
     services.lorri.enable = true;
 
+    # Enable doas on all systems.
+    security.doas.enable = true;
+
     # Root shell
     users.extraUsers.root.shell = pkgs.fish;
 
