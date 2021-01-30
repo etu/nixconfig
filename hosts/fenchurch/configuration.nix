@@ -85,7 +85,7 @@ in
 
   # Set NIX_PATH for nixos config and nixpkgs
   nix.nixPath = [
-    "nixpkgs=/etc/nixos/nix/nixpkgs-unstable"
+    "nixpkgs=/etc/nixos/nix/nixos-unstable"
     "nixos-config=/etc/nixos/hosts/fenchurch/configuration.nix"
   ];
 

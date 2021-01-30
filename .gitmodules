@@ -1,4 +1,4 @@
 [submodule "nixpkgs"]
-	path = nix/nixpkgs-unstable
+	path = nix/nixos-unstable
 	url = https://github.com/NixOS/nixpkgs.git
 	branch = nixos-unstable
