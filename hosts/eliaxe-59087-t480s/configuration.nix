@@ -46,7 +46,10 @@ in
   boot.extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
 
   # Set NIX_PATH for nixos config and nixpkgs
-  nix.nixPath = [ "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos" "nixos-config=/etc/nixos/hosts/eliaxe-59087-t480s/configuration.nix" ];
+  nix.nixPath = [
+    "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
+    "nixos-config=/etc/nixos/hosts/eliaxe-59087-t480s/configuration.nix"
+  ];
 
   # Hardware settings
   services.xserver.videoDrivers = [ "intel" ];

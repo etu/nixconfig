@@ -35,7 +35,10 @@ in
   services.zfs.autoSnapshot.enable = true;
 
   # Set NIX_PATH for nixos config and nixpkgs
-  nix.nixPath = [ "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos" "nixos-config=/etc/nixos/hosts/vps05/configuration.nix" ];
+  nix.nixPath = [
+    "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
+    "nixos-config=/etc/nixos/hosts/vps05/configuration.nix"
+  ];
 
   # Auto upgrade system
   my.auto-upgrade.enable = true;

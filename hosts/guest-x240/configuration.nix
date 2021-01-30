@@ -41,7 +41,10 @@ in
   hardware.cpu.intel.updateMicrocode = true;
 
   # Set NIX_PATH for nixos config and nixpkgs
-  nix.nixPath = [ "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos" "nixos-config=/etc/nixos/hosts/guest-x240/configuration.nix" ];
+  nix.nixPath = [
+    "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
+    "nixos-config=/etc/nixos/hosts/guest-x240/configuration.nix"
+  ];
 
   # Enable TLP
   services.tlp.enable = true;

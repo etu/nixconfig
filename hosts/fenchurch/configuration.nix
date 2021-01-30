@@ -83,12 +83,11 @@ in
   services.zfs.autoScrub.enable = true;
   services.zfs.autoSnapshot.enable = true;
 
-  # Use nix with flakes support
-  #nix.package = pkgs.nixFlakes;
-  #nix.extraOptions = "experimental-features = nix-command flakes";
-
   # Set NIX_PATH for nixos config and nixpkgs
-  nix.nixPath = [ "nixpkgs=/etc/nixos/nixpkgs" "nixos-config=/etc/nixos/hosts/fenchurch/configuration.nix"];
+  nix.nixPath = [
+    "nixpkgs=/etc/nixos/nix/nixpkgs-unstable"
+    "nixos-config=/etc/nixos/hosts/fenchurch/configuration.nix"
+  ];
 
   # Hardware settings
   hardware.cpu.intel.updateMicrocode = true;

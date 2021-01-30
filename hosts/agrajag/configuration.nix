@@ -40,7 +40,10 @@ in {
   services.zfs.autoSnapshot.enable = true;
 
   # Set NIX_PATH for nixos config and nixpkgs
-  nix.nixPath = [ "nixpkgs=/etc/nixos/nixpkgs" "nixos-config=/etc/nixos/hosts/agrajag/configuration.nix" ];
+  nix.nixPath = [
+    "nixpkgs=/etc/nixos/nix/nixpkgs-unstable"
+    "nixos-config=/etc/nixos/hosts/agrajag/configuration.nix"
+  ];
 
   # Hardware settings
   hardware.enableRedistributableFirmware = true;
