@@ -76,8 +76,11 @@ in
   # Enable my common cli utils
   my.common-cli.enable = true;
 
-  # Override password auth disabling set in my.common-cli.enable
-  services.openssh.passwordAuthentication = lib.mkForce true;
+  # Allow password login for a user
+  services.openssh.extraConfig = ''
+    Match User ozeloten
+      PasswordAuthentication yes
+  '';
 
   # Enable my user and home-manager for my user
   my.home-manager.enable = true;
@@ -100,6 +103,7 @@ in
 
   users.users = {
     root.initialHashedPassword = secrets.hashedRootPassword;
+    etu.initialHashedPassword = secrets.hashedEtuPassword;
 
     concate = {
       isNormalUser = true;
