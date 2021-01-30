@@ -1,4 +1,4 @@
-{
+let
   etu = let
     # Android relay client
     weechat = [
@@ -66,4 +66,8 @@
     # CoopDot
     "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC/Y3PXxqlSa9TFH0d7LVcBzOVO11zidbt9wgzxm88gFWxD+vk+ctQZZ2HjQXD+KQkyLHPMukALDiXESW8P3ecDxqy70UjRlFUKzLouFvg2bM2ghMVfNvhgCUYJ1kN6EJGAYX4VgR2ivONRiW3I65sV1/nC4u7ZJjA2sERPP4p8OemCsJRybXs9SmkF4xjLRFjK51UnnuRyXwZWVcYipUvsbBq3Y6ULHvuqk64h8MQs0N4mzr2qeZ+Kko8/zq0KjznHJ86WLLCXXMxZKP5Eo99WyTqCbAyGzoC2ojnls2SKAN7e3hLJfjdqq+HKhFhED4odmk6xfb4VZQpv3vqXAZh9 coopdot@darke"
   ];
+in {
+  inherit etu concate talyz;
+
+  guests = etu.all ++ concate ++ talyz ++ guests;
 }

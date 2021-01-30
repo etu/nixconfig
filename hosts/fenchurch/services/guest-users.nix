@@ -12,7 +12,7 @@ in
     createHome = false;
     uid = 1002;
     home = path;
-    openssh.authorizedKeys.keys = keys.talyz ++ keys.guests;
+    openssh.authorizedKeys.keys = keys.guests;
   };
 
   services.openssh.extraConfig = ''
