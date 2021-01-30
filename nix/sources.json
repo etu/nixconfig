@@ -17,10 +17,10 @@
         "homepage": "https://github.com/etu/flummbot",
         "owner": "etu",
         "repo": "flummbot",
-        "rev": "fa3c938dbb36a862dfd145f76d280a97e91c2b5e",
-        "sha256": "0x1wmsyb8hx5mya2lvrvq2ph5kcravyzkz0qcr49ql36n40vkaj2",
+        "rev": "ed5f156e993cb2e397c20c6231c6ece3a38bc9d2",
+        "sha256": "0c4c08blx2wvmh6ipkb2lzn0glcz930jc5n64q4v7h5syvlp4sgs",
         "type": "tarball",
-        "url": "https://github.com/etu/flummbot/archive/fa3c938dbb36a862dfd145f76d280a97e91c2b5e.tar.gz",
+        "url": "https://github.com/etu/flummbot/archive/ed5f156e993cb2e397c20c6231c6ece3a38bc9d2.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "home-manager": {
