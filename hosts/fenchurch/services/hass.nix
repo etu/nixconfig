@@ -3,8 +3,8 @@
 let
   hpkgs = import
     (builtins.fetchTarball {
-      url = "https://github.com/NixOS/nixpkgs/archive/0734f95e256632273f8e0220c64351fb43ec0a3e.tar.gz";
-      sha256 = "1pjmjpblhkxw2gkfrph53s3460xqxxamqcfqb2rxjrnpkck3rlcf";
+      url = "https://github.com/NixOS/nixpkgs/archive/891f607d5301d6730cb1f9dcf3618bcb1ab7f10e.tar.gz";
+      sha256 = "1cr39f0sbr0h5d83dv1q34mcpwnkwwbdk5fqlyqp2mnxghzwssng";
     }) { };
 
 in
