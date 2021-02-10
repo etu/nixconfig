@@ -45,6 +45,8 @@
   # Enable usenet related services in a container
   containers.usenet = {
     config = { config, pkgs, ... }: {
+      nixpkgs.config.allowUnfree = true;
+
       services.bazarr = { enable = true; user = "downloads"; group = "downloads"; };
       services.sonarr = { enable = true; user = "downloads"; group = "downloads"; };
       services.radarr = { enable = true; user = "downloads"; group = "downloads"; };
