@@ -318,6 +318,8 @@ in
             { entity = "binary_sensor.humans_home"; }
             { entity = "person.elis_hirwing"; }
             { entity = "person.caroline_hirwing"; }
+            { entity = "sensor.livingroom_temperature"; }
+            { entity = "sensor.livingroom_humidity"; }
           ];
           cards = [
             # Panel with all lamps
