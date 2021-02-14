@@ -28,7 +28,6 @@ in
     ./services/nfs.nix
     ./services/usenet.nix
     ./services/home-nginx.nix
-    ./services/matomo.nix
 
     # Import local modules
     ../../modules
