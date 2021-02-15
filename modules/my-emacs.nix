@@ -86,8 +86,8 @@ let
 
   myExwmInit = myEmacsLispLoader "" myExwmConfig;
 
-  myEmacsPackage = pkgs.emacsWithPackagesFromUsePackage {
-    package = emacsPackages."${cfg.package}";
+  myEmacsPackage = emacsPackage: pkgs.emacsWithPackagesFromUsePackage {
+    package = emacsPackage;
 
     # Config to parse, use my built config from above and optionally my exwm
     # config to be able to pull in use-package dependencies from there.
@@ -167,7 +167,7 @@ in
     services.emacs = lib.mkIf cfg.enable {
       enable = true;
       defaultEditor = true;
-      package = myEmacsPackage;
+      package = myEmacsPackage emacsPackages."${cfg.package}";
     };
 
 
