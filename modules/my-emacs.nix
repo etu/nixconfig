@@ -225,6 +225,13 @@ in
       gnome3.adwaita-icon-theme # Icons for gnome packages that sometimes use them but don't depend on them
       scrot
       pavucontrol
+    ])) ++ (lib.optionals (config.my.emacs.package == "wayland") ([
+      (let
+        x11Emacs = (myEmacsPackage emacsPackages.default);
+      in pkgs.runCommand "emacs-x11" {} ''
+        mkdir -p $out/bin
+        ln -s ${x11Emacs}/bin/emacs $out/bin/emacs-x11
+      '')
     ]));
   };
 }
