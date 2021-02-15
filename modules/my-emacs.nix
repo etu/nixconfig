@@ -219,12 +219,12 @@ in
     services.gnome3.gnome-keyring.enable = lib.mkIf cfg.enableExwm true;
 
     # Install aditional packages
-    environment.systemPackages = lib.mkIf cfg.enableExwm (with pkgs; [
+    environment.systemPackages = (lib.optionals cfg.enableExwm (with pkgs; [
       evince
       evolution
       gnome3.adwaita-icon-theme # Icons for gnome packages that sometimes use them but don't depend on them
       scrot
       pavucontrol
-    ]);
+    ]));
   };
 }
