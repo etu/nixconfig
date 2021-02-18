@@ -33,7 +33,6 @@ let
       (with pkgs; {
         inherit gnuplot;
         phpcs = phpPackages.phpcs;
-        phpcbf = phpPackages.phpcbf;
       }) "substituteAll ${myEmacsConfigPlain} $out"
   );
 

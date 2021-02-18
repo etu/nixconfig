@@ -562,10 +562,6 @@
 (use-package helm-rg :defer 2 :ensure t)
 (use-package helm-nixos-options :defer 2 :ensure t)
 (use-package markdown-mode :defer 2 :ensure t)
-(use-package phpcbf
-  :ensure t
-  :defer 2
-  :init (setq phpcbf-executable "@phpcbf@/bin/phpcbf"))
 (use-package vcl-mode :defer 2 :ensure t)
 (use-package yaml-mode :defer 2 :ensure t)
 
