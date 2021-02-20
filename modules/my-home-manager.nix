@@ -79,6 +79,9 @@ in
             <Multi_key> <A> <E>: "Ä"
             <Multi_key> <o> <e>: "ö"
             <Multi_key> <O> <E>: "Ö"
+
+            # Table flip multi key
+            <Multi_key> <t> <f>: "(ノಠ益ಠ)ノ彡┻━┻"
           '';
 
           # Some extra scripts
