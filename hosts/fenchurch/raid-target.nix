@@ -10,7 +10,6 @@
       "nfs-server.service"
       "container@freshrss.service"
       "podman-magic-mirror.service"
-      "container@matomo.service"
     ];
   };
 
