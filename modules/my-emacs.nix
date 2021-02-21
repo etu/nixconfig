@@ -28,25 +28,19 @@ let
 
   # Run my config trough substituteAll to replace all paths with paths to
   # programs etc to have as my actual config file.
-  myEmacsConfig = (
-    pkgs.runCommand "config.el"
-      (with pkgs; {
-        inherit gnuplot;
-        phpcs = phpPackages.phpcs;
-      }) "substituteAll ${myEmacsConfigPlain} $out"
-  );
+  myEmacsConfig = pkgs.runCommand "config.el" (with pkgs; {
+    inherit gnuplot;
+    phpcs = phpPackages.phpcs;
+  }) "substituteAll ${myEmacsConfigPlain} $out";
 
   # Run my exwm config through substituteAll to replace all paths with paths
   # to programs etc to have as my actual config file.
-  myExwmConfig = (
-    pkgs.runCommand "exwm-config.el"
-      (with pkgs; {
-        inherit systemd kitty flameshot;
-        lockCommand = physlockCommand;
-        xbacklight = acpilight;
-        rofi = rofi.override { plugins = [ pkgs.rofi-emoji ]; };
-      }) "substituteAll ${myExwmConfigPlain} $out"
-  );
+  myExwmConfig = pkgs.runCommand "exwm-config.el" (with pkgs; {
+    inherit systemd kitty flameshot;
+    lockCommand = physlockCommand;
+    xbacklight = acpilight;
+    rofi = rofi.override { plugins = [ pkgs.rofi-emoji ]; };
+  }) "substituteAll ${myExwmConfigPlain} $out";
 
   myEmacsLispLoader = extraLisp: loadFile: pkgs.writeText "${loadFile.name}-init.el"
     ''
