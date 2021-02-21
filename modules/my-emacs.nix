@@ -88,6 +88,10 @@ let
   myEmacsPackage = emacsPackage: pkgs.emacsWithPackagesFromUsePackage {
     package = emacsPackage;
 
+    # Don't assume ensuring of all use-package declarations, this is
+    # the default behaviour, but this gets rid of the notice.
+    alwaysEnsure = false;
+
     # Config to parse, use my built config from above and optionally my exwm
     # config to be able to pull in use-package dependencies from there.
     config = builtins.readFile myEmacsConfig +
