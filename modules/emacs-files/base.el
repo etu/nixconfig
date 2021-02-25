@@ -191,6 +191,10 @@
 (add-to-list 'default-frame-alist '(font . "Liberation Mono 10"))
 
 
+;; Use Noto Color Emoji for symbols
+(set-fontset-font t 'symbol "Noto Color Emoji" nil 'append)
+
+
 ;;;
 ;;; Major modes
 ;;;
