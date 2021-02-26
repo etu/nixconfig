@@ -115,10 +115,6 @@ in
     networking.networkmanager.enable = true;
     networking.networkmanager.wifi.backend = "iwd";
 
-    # 1714-1764 is KDE Connect.
-    networking.firewall.allowedTCPPortRanges = [{ from = 1714; to = 1764; }];
-    networking.firewall.allowedUDPPortRanges = [{ from = 1714; to = 1764; }];
-
     # 8000 is for random web sharing things.
     networking.firewall.allowedTCPPorts = [ 8000 ];
 
