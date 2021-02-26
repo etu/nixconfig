@@ -428,6 +428,9 @@ in
   config = lib.mkIf cfg.enable {
     programs.sway.enable = true;
 
+    # Install fonts needed for waybar
+    fonts.fonts = [ pkgs.font-awesome ];
+
     # Loginmanager
     services.xserver.displayManager.lightdm.enable = true;
     services.xserver.displayManager.autoLogin.enable = true;
