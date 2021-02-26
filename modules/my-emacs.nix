@@ -168,9 +168,10 @@ in
     };
 
 
-    fonts.fonts = lib.mkIf cfg.enable (with pkgs; [
-      emacs-all-the-icons-fonts
-    ]);
+    # Install emacs icons symbols if we have any kind of graphical emacs
+    fonts.fonts = lib.mkIf (cfg.enable && config.my.emacs.package != "nox") [
+      pkgs.emacs-all-the-icons-fonts
+    ];
 
 
     # Libinput

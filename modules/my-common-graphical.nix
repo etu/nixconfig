@@ -15,7 +15,6 @@ in
     # Install some extra fonts.
     fonts.fonts = with pkgs; [
       dejavu_fonts
-      emacs-all-the-icons-fonts
       inconsolata
       liberation_ttf
       noto-fonts
