@@ -7,19 +7,15 @@ in
   options.my.common-graphical.enable = lib.mkEnableOption "Enables my common graphical thingys";
 
   config = lib.mkIf cfg.enable {
-    # Sane font defaults.
-    fonts.fontDir.enable = true;
+    # Set up default fonts
+    fonts.enableDefaultFonts = true;
     fonts.enableGhostscriptFonts = true;
-    fonts.fontconfig.cache32Bit = true;
 
     # Install some extra fonts.
     fonts.fonts = with pkgs; [
-      dejavu_fonts
       inconsolata
-      liberation_ttf
       noto-fonts
       noto-fonts-cjk
-      noto-fonts-emoji
       noto-fonts-extra
       powerline-fonts
       source-code-pro
