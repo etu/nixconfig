@@ -11,6 +11,13 @@ in
     fonts.enableDefaultFonts = true;
     fonts.enableGhostscriptFonts = true;
 
+    # Configure fontconfig to actually use more of Noto Color Emoji in
+    # alacritty.
+    fonts.fontconfig.defaultFonts.monospace = [
+      "DejaVu Sans Mono"
+      "Noto Color Emoji"
+    ];
+
     # Install some extra fonts.
     fonts.fonts = with pkgs; [
       # My own font
