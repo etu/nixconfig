@@ -25,7 +25,6 @@ in
       noto-fonts-extra
       powerline-fonts
       source-code-pro
-      symbola
 
       # My own font
       (stdenv.mkDerivation rec {
@@ -61,9 +60,6 @@ in
         '';
       })
     ];
-
-    # Used for firefox-bin because of mozillas branding and pre-compiled bins
-    nixpkgs.config.allowUnfree = true;
 
     # List packages installed in system profile. To search by name, run:
     # $ nix-env -qaP | grep wget
