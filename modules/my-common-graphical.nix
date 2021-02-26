@@ -13,13 +13,6 @@ in
 
     # Install some extra fonts.
     fonts.fonts = with pkgs; [
-      inconsolata
-      noto-fonts
-      noto-fonts-cjk
-      noto-fonts-extra
-      powerline-fonts
-      source-code-pro
-
       # My own font
       (stdenv.mkDerivation rec {
         pname = "font-etuvetica";
