@@ -192,7 +192,8 @@
 
 
 ;; Use Noto Color Emoji for symbols
-(set-fontset-font t 'symbol "Noto Color Emoji" nil 'append)
+(if (fboundp 'set-fontset-font)
+    (set-fontset-font t 'symbol "Noto Color Emoji" nil 'append))
 
 
 ;;;
