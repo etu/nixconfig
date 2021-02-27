@@ -23,7 +23,7 @@
 
     (defun exwm-run-terminal ()
       (interactive)
-      (exwm-run-systemd "@kitty@/bin/kitty"))
+      (exwm-run-systemd "@alacritty@/bin/alacritty"))
 
     (defun exwm-run-rofi-emoji ()
       (interactive)

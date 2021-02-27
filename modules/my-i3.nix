@@ -22,7 +22,7 @@ let
       set $down n
 
       # Terminal emulator
-      set $term ${pkgs.kitty}/bin/kitty
+      set $term ${pkgs.alacritty}/bin/alacritty
 
     ##
     ## Key bindings
@@ -262,6 +262,7 @@ in
 
     # Install aditional packages
     environment.systemPackages = with pkgs; [
+      alacritty
       evince
       evolution
       gnome3.adwaita-icon-theme # Icons for gnome packages that sometimes use them but don't depend on them
@@ -270,7 +271,7 @@ in
     ];
 
     # Configure TERMINAL for i3-sensible-terminal
-    environment.variables.TERMINAL = "kitty";
+    environment.variables.TERMINAL = "alacritty";
 
     # Enable physlock and make a suid wrapper for it
     services.physlock.enable = true;

@@ -52,7 +52,7 @@ let
       set $down n
 
       # Terminal emulator
-      set $term ${pkgs.kitty}/bin/kitty
+      set $term ${pkgs.alacritty}/bin/alacritty
 
     ##
     ## Output configuration
@@ -292,7 +292,7 @@ let
       gaps inner 5
 
       # Set borders instead of title bars for some programs
-      for_window [app_id="kitty"] border pixel 3
+      for_window [app_id="Alacritty"] border pixel 3
       for_window [app_id="firefox"] border pixel 3
       for_window [app_id="firefox" title="Firefox - Sharing Indicator"] floating enable
       for_window [app_id="firefox" title="Firefox — Sharing Indicator"] floating enable
@@ -303,7 +303,7 @@ let
       for_window [app_id="emacs"] border pixel 3
 
       # Apply opacity to some programs
-      for_window [app_id="kitty"] opacity set 0.9
+      for_window [app_id="Alacritty"] opacity set 0.9
       for_window [class="Emacs"] opacity set 0.99
       for_window [app_id="emacs"] opacity set 0.99
 

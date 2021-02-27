@@ -36,7 +36,7 @@ let
   # Run my exwm config through substituteAll to replace all paths with paths
   # to programs etc to have as my actual config file.
   myExwmConfig = pkgs.runCommand "exwm-config.el" (with pkgs; {
-    inherit systemd kitty flameshot;
+    inherit systemd alacritty flameshot;
     lockCommand = physlockCommand;
     xbacklight = acpilight;
     rofi = rofi.override { plugins = [ pkgs.rofi-emoji ]; };
@@ -218,6 +218,7 @@ in
 
     # Install aditional packages
     environment.systemPackages = (lib.optionals cfg.enableExwm (with pkgs; [
+      alacritty
       evince
       evolution
       gnome3.adwaita-icon-theme # Icons for gnome packages that sometimes use them but don't depend on them

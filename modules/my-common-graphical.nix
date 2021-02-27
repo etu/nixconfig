@@ -66,7 +66,6 @@ in
 
       mpv
       stupidterm
-      kitty
       tdesktop
 
       # Add a command to run the compose xmodmap again
