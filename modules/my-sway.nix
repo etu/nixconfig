@@ -457,6 +457,9 @@ in
     environment.variables.XDG_SESSION_TYPE = "wayland";
     environment.variables.XDG_CURRENT_DESKTOP = "sway";
 
+    # Run QT programs in wayland mode
+    environment.variables.QT_QPA_PLATFORM = "wayland";
+
     # Make sure that the user session imports the environment
     programs.sway.extraSessionCommands = "systemctl --user import-environment";
 
