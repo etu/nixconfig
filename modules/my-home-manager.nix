@@ -20,8 +20,9 @@ in
 
     home-manager.users.${config.my.user.username} = { pkgs, ... }:
       let
-        isX11 = config.my.i3.enable or config.my.emacs.enableExwm;
+        isX11 = config.my.i3.enable || config.my.emacs.enableExwm;
         isWayland = config.my.sway.enable;
+        isGraphical = isX11 || isWayland;
       in
       {
         # Import a persistance module for home-manager.
@@ -40,9 +41,6 @@ in
 
           # Nano config
           ".nanorc".text = "set constantshow # Show linenumbers -c as default";
-
-          # Mpv config file - Don't show images embedded in music files
-          ".config/mpv/mpv.conf".text = "no-audio-display";
 
           # Emacs inhibit startup screen
           ".emacs".text = "(custom-set-variables '(inhibit-startup-screen t))";
@@ -63,6 +61,25 @@ in
             }
           '';
 
+          # Some extra scripts
+          "bin/256colors2.pl".source = ./dotfiles/bin/256colors2.pl;
+          "bin/git-branchclean".source = ./dotfiles/bin/git-branchclean;
+          "bin/git-git".source = ./dotfiles/bin/git-git;
+          "bin/git-lol".source = ./dotfiles/bin/git-lol;
+          "bin/git-refetch-tags".source = ./dotfiles/bin/git-refetch-tags;
+          "bin/restow".source = ./dotfiles/bin/restow;
+          "bin/pp".source = ./dotfiles/bin/prettyping;
+          "bin/prettyping".source = ./dotfiles/bin/prettyping;
+          "bin/spacecolors".source = ./dotfiles/bin/spacecolors;
+
+          "bin/keep".source = pkgs.runCommand "keep" { } ''
+            cp ${./dotfiles/bin/keep} $out
+            substituteInPlace $out --replace /bin/zsh ${pkgs.zsh}/bin/zsh
+          '';
+        } // lib.optionalAttrs isGraphical {
+          # Mpv config file - Don't show images embedded in music files
+          ".config/mpv/mpv.conf".text = "no-audio-display";
+
           # .XCompose
           ".XCompose".text = ''
             include "%L"
@@ -80,25 +97,9 @@ in
             # Table flip multi key
             <Multi_key> <t> <f>: "(ノಠ益ಠ)ノ彡┻━┻"
           '';
-
-          # Some extra scripts
-          "bin/256colors2.pl".source = ./dotfiles/bin/256colors2.pl;
-          "bin/git-branchclean".source = ./dotfiles/bin/git-branchclean;
-          "bin/git-git".source = ./dotfiles/bin/git-git;
-          "bin/git-lol".source = ./dotfiles/bin/git-lol;
-          "bin/git-refetch-tags".source = ./dotfiles/bin/git-refetch-tags;
-          "bin/restow".source = ./dotfiles/bin/restow;
-          "bin/pp".source = ./dotfiles/bin/prettyping;
-          "bin/prettyping".source = ./dotfiles/bin/prettyping;
-          "bin/spacecolors".source = ./dotfiles/bin/spacecolors;
-
-          "bin/keep".source = pkgs.runCommand "keep" { } ''
-            cp ${./dotfiles/bin/keep} $out
-            substituteInPlace $out --replace /bin/zsh ${pkgs.zsh}/bin/zsh
-          '';
         };
 
-        programs.alacritty.enable = true;
+        programs.alacritty.enable = isGraphical;
         programs.alacritty.settings = {
           env.TERM = "xterm-256color";
           font.size = 10;
@@ -137,7 +138,7 @@ in
 
           # Default configs
           extraConfig = {
-            commit.gpgSign = true;
+            commit.gpgSign = isGraphical;
 
             user.name = "Elis Hirwing";
             user.email = "elis@hirwing.se";
@@ -162,10 +163,10 @@ in
           }];
         };
 
-        programs.browserpass.enable = true;
+        programs.browserpass.enable = isGraphical;
 
         xdg.mimeApps = {
-          enable = true;
+          enable = isGraphical;
           defaultApplications = {
             "text/html" = [ "firefox.desktop" ];
             "x-scheme-handler/http" = [ "firefox.desktop" ];
@@ -195,14 +196,14 @@ in
         };
 
         # GTK theme configs
-        gtk.enable = true;
+        gtk.enable = isGraphical;
         gtk.gtk3.extraConfig = {
           gtk-application-prefer-dark-theme = 1;
         };
 
         # Set up qt theme as well
         qt = {
-          enable = true;
+          enable = isGraphical;
           platformTheme = "gtk";
         };
 
