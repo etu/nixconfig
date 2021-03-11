@@ -2,6 +2,6 @@
 
 git fetch --prune
 
-if [ "x$(git branch --merged | grep -Ev '(^\*|master|release)')" != "x" ]; then
-    git branch --merged | grep -Ev '(^\*|master|release)' | xargs git branch -d
+if [ "x$(git branch --merged | grep -Ev '(^\*|main|master|release)')" != "x" ]; then
+    git branch --merged | grep -Ev '(^\*|main|master|release)' | xargs git branch -d
 fi
