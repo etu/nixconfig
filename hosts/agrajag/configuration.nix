@@ -96,9 +96,6 @@ in {
   # Enable gpg related stuff
   my.gpg-utils.enable = true;
 
-  # Enable common graphical stuff
-  my.common-graphical.enable = true;
-
   # Enable emacs
   my.emacs.enable = true;
   my.emacs.package = "wayland";

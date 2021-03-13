@@ -1,12 +1,12 @@
 { config, lib, pkgs, ... }:
 let
-  cfg = config.my.common-graphical;
+  isX11 = config.my.i3.enable || config.my.emacs.enableExwm;
+  isWayland = config.my.sway.enable;
+  isGraphical = isX11 || isWayland;
 
 in
 {
-  options.my.common-graphical.enable = lib.mkEnableOption "Enables my common graphical thingys";
-
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf isGraphical {
     # Set up default fonts
     fonts.enableDefaultFonts = true;
     fonts.enableGhostscriptFonts = true;
