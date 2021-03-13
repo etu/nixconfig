@@ -61,6 +61,8 @@ in
       dino
       feh
 
+      pavucontrol
+
       chromium
       firefox
 
