@@ -70,6 +70,8 @@ in
       stupidterm
       tdesktop
 
+      pulseeffects-pw
+
       # Add a command to run the compose xmodmap again
       (writeScriptBin "fixcompose" ''
         #!${stdenv.shell}
@@ -79,21 +81,10 @@ in
       )
     ];
 
-    # Enable pulseaudio.
-    hardware.pulseaudio = {
-      enable = true;
-      extraModules = [ pkgs.pulseaudio-modules-bt ];
-
-      daemon.config = {
-        flat-volumes = "no";
-        # default-sample-format = "s24le";
-        # default-sample-rate = "44100";
-        resample-method = "speex-float-10";
-        avoid-resampling = "true";
-      };
-
-      package = pkgs.pulseaudioFull;
-    };
+    # Set up Pipewire for audio
+    services.pipewire.enable = true;
+    services.pipewire.alsa.enable = true;
+    services.pipewire.pulse.enable = true;
 
     # Enable the X11 windowing system.
     services.xserver.enable = true;
