@@ -23,7 +23,6 @@ in
     ./services/hass.nix
     ./services/jellyfin.nix
     ./services/magic-mirror.nix
-    ./services/murmur.nix
     ./services/netdata.nix
     ./services/nfs.nix
     ./services/usenet.nix
