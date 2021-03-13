@@ -30,6 +30,7 @@
     ];
     extraDirectories = [
       ".caffrc"
+      ".config/pipewire/media-session.d"
       ".dotfiles"
       ".gnupg"
       ".local/share/TelegramDesktop/tdata"
