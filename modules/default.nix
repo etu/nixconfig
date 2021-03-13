@@ -11,7 +11,6 @@ in {
     ./my-auto-upgrade.nix
     ./my-common-cli.nix
     ./my-common-graphical.nix
-    ./my-desktop-gnome.nix
     ./my-emacs.nix
     ./my-gaming.nix
     ./my-gpg-utils.nix
