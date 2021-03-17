@@ -117,6 +117,9 @@ in {
   # Home-manager as nix module
   my.home-manager.enable = true;
 
+  # Enable steam things
+  my.gaming.enable = true;
+
   # Set up docker
   virtualisation.docker.enable = true;
 

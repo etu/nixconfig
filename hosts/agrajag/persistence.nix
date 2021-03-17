@@ -44,6 +44,13 @@
       "documents"
       "org"
 
+      # Steam
+      ".steam"
+      ".local/share/Steam"
+
+      # Minecraft
+      ".minecraft"
+
       # Evolution
       ".config/evolution"
       ".config/goa-1.0"
