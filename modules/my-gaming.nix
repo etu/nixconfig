@@ -13,8 +13,10 @@ in
       driSupport32Bit = true;
     };
 
-    # Support 32bit pulseaudio
-    hardware.pulseaudio.support32Bit = true;
+    nixpkgs.config.allowUnfree = true;
+
+    # Support 32bit audio things
+    services.pipewire.alsa.support32Bit = true;
 
     # Enable udev rules for steam controller
     services.udev.extraRules = ''
@@ -29,6 +31,7 @@ in
     # List packages installed in system profile. To search by name, run:
     # $ nix-env -qaP | grep wget
     environment.systemPackages = with pkgs; [
+      minecraft
       mumble
       sc-controller
       steam
