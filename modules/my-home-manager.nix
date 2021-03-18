@@ -62,7 +62,6 @@ in
           '';
 
           # Some extra scripts
-          "bin/256colors2.pl".source = ./dotfiles/bin/256colors2.pl;
           "bin/git-branchclean".source = ./dotfiles/bin/git-branchclean;
           "bin/git-git".source = ./dotfiles/bin/git-git;
           "bin/git-lol".source = ./dotfiles/bin/git-lol;

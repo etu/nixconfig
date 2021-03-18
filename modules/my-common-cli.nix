@@ -70,6 +70,14 @@ in
         mkdir -p $out/bin
         ln -s ${pkgs.prettyping}/bin/prettyping $out/bin/pp
       '')
+
+      # Install some color test scripts from xterm
+      (pkgs.runCommand "xterm-color-scripts" { } ''
+        tar -xf ${pkgs.xterm.src}
+
+        install -Dm755 xterm-${pkgs.xterm.version}/vttests/256colors2.pl $out/bin/256colors2.pl
+        install -Dm755 xterm-${pkgs.xterm.version}/vttests/88colors2.pl $out/bin/88colors2.pl
+      '')
     ];
   };
 }
