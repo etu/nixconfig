@@ -61,6 +61,15 @@ in
       ripgrep
       tmux
       whois
+
+      # Install prettyping
+      prettyping
+
+      # With pp shortcut
+      (pkgs.runCommand "prettyping-pp" { } ''
+        mkdir -p $out/bin
+        ln -s ${pkgs.prettyping}/bin/prettyping $out/bin/pp
+      '')
     ];
   };
 }

@@ -68,8 +68,6 @@ in
           "bin/git-lol".source = ./dotfiles/bin/git-lol;
           "bin/git-refetch-tags".source = ./dotfiles/bin/git-refetch-tags;
           "bin/restow".source = ./dotfiles/bin/restow;
-          "bin/pp".source = ./dotfiles/bin/prettyping;
-          "bin/prettyping".source = ./dotfiles/bin/prettyping;
           "bin/spacecolors".source = ./dotfiles/bin/spacecolors;
 
           "bin/keep".source = pkgs.runCommand "keep" { } ''
