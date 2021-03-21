@@ -17,7 +17,6 @@
 
   my.user.persistent = {
     extraFiles = [
-      ".background"
       ".config/fish/fish_variables"
 
       # Work
