@@ -42,9 +42,6 @@ in
           # Nano config
           ".nanorc".text = "set constantshow # Show linenumbers -c as default";
 
-          # Emacs inhibit startup screen
-          ".emacs".text = "(custom-set-variables '(inhibit-startup-screen t))";
-
           # Tmux config
           ".tmux.conf".source = ./dotfiles/tmux.conf;
 
@@ -73,6 +70,9 @@ in
             cp ${./dotfiles/bin/keep} $out
             substituteInPlace $out --replace /bin/zsh ${pkgs.zsh}/bin/zsh
           '';
+        } // lib.optionalAttrs config.my.emacs.enable {
+          # Emacs inhibit startup screen
+          ".emacs".text = "(custom-set-variables '(inhibit-startup-screen t))";
         } // lib.optionalAttrs isGraphical {
           # Mpv config file - Don't show images embedded in music files
           ".config/mpv/mpv.conf".text = "no-audio-display";
