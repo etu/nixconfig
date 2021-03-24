@@ -30,7 +30,7 @@ in
   boot.supportedFilesystems = [ "zfs" ];
   networking.hostId = "10227851";
   services.zfs.autoScrub.enable = true;
-  services.zfs.autoScrub.interval = "Sun, 21:00:00";
+  services.zfs.autoScrub.interval = "Mon, 00:01:00";
   services.zfs.autoSnapshot.enable = true;
 
   # Set NIX_PATH for nixos config and nixpkgs
@@ -44,9 +44,9 @@ in
 
   # Auto upgrade system
   my.auto-upgrade.enable = true;
-  my.auto-upgrade.interval = "*-*-* 01:00:00";
-  system.autoUpgrade.dates = "*-*-* 01:15:00";
-  nix.gc.dates = "*-*-* 01:30:00";
+  my.auto-upgrade.interval = "Mon, 00:01:00";
+  system.autoUpgrade.dates = "Mon 00:02:00";
+  nix.gc.dates = "Mon 00:12:00";
 
   # Enable some firmwares.
   hardware.cpu.amd.updateMicrocode = true;
