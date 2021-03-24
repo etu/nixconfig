@@ -134,14 +134,14 @@ in
         {
           id = "turn-on-media-center-power-for-updates";
           alias = "Turn on media center power for updates";
-          trigger = { platform = "time"; at = "00:55:00"; };
+          trigger = { platform = "time"; at = "23:59:00"; weekday = [ "sun" ]; };
           action.data.entity_id = "switch.media_center_power";
           action.service = "switch.turn_on";
         }
         {
           id = "turn-off-media-center-power";
           alias = "Turn off media center power";
-          trigger = { platform = "time"; at = "02:30:00"; };
+          trigger = { platform = "time"; at = "00:30:00"; };
           action.data.entity_id = "switch.media_center_power";
           action.service = "switch.turn_off";
         }
