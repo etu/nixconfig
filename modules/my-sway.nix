@@ -8,19 +8,13 @@ let
   # Lock command
   lockCommand = "${pkgs.swaylock-effects}/bin/swaylock -f --effect-greyscale --effect-pixelate 5 -S";
 
-  sunpaper = let
+  sunpaper = pkgs.stdenv.mkDerivation {
     pname = "sunpaper";
     version = "2021-03-19";
-    sunwait = (import (pkgs.fetchzip {
-      url = "https://github.com/NixOS/nixpkgs/archive/19f61789773d7c2b7eb52026dd7e8f3cc6dd6637.tar.gz";
-      sha256 = "0hzc1fbnk9lam8sjbx44priz8c12qvrm2s1xky4jypfj18gkwwz8";
-    }) { }).sunwait;
-  in pkgs.stdenv.mkDerivation {
-    inherit pname version;
 
     src = pkgs.fetchFromGitHub {
       owner = "hexive";
-      repo = pname;
+      repo = "sunpaper";
       rev = "bc6c684825b74a14951d8f4ba940227296861d3c";
       sha256 = "0855x445fqi4yzif6n9g24j9jf6ah9kq7lkq8pxv4cmr34mvd5rg";
     };
@@ -31,7 +25,7 @@ let
       install -Dm755 sunpaper.sh $out/bin/sunpaper
 
       substituteInPlace $out/bin/sunpaper                             \
-        --replace "sunwait" "${sunwait}/bin/sunwait"                  \
+        --replace "sunwait" "${pkgs.sunwait}/bin/sunwait"             \
         --replace "setwallpaper" "${pkgs.wallutils}/bin/setwallpaper" \
         --replace 'wallpaperMode="scale"' 'wallpaperMode="center"'    \
         --replace 'latitude="38.9072N"' 'latitude="59.32904N"'        \
