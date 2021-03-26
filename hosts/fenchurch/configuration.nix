@@ -42,6 +42,11 @@ in
   boot.loader.grub.enable = true;
   boot.loader.grub.efiSupport = true;
   boot.loader.grub.device = "nodev";
+  boot.loader.grub.extraInstallCommands = ''
+    mkdir -p /boot/EFI/Microsoft/Boot/ /boot-fallback/EFI/Microsoft/Boot/
+    cp /boot/EFI/grub/grubx64.efi /boot/EFI/Microsoft/Boot/bootmgfw.efi
+    cp /boot-fallback/EFI/grub/grubx64.efi /boot-fallback/EFI/Microsoft/Boot/bootmgfw.efi
+  '';
 
   boot.loader.grub.mirroredBoots = [
     { devices = [ "/dev/disk/by-uuid/6258-01A0" ]; path = "/boot-fallback"; }
