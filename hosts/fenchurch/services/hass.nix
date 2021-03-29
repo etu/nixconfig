@@ -134,7 +134,8 @@ in
         {
           id = "turn-on-media-center-power-for-updates";
           alias = "Turn on media center power for updates";
-          trigger = { platform = "time"; at = "23:59:00"; weekday = [ "sun" ]; };
+          trigger = { platform = "time"; at = "23:59:00"; };
+          condition = { condition = "time"; weekday = [ "sun" ]; };
           action.data.entity_id = "switch.media_center_power";
           action.service = "switch.turn_on";
         }
