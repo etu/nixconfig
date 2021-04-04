@@ -314,13 +314,27 @@
 ;;;
 ;;; LSP
 ;;;
+(use-package lsp-mode
+  :ensure t
+  :defer 2
+  :commands (lsp lsp-deferred)
+  :hook (php-mode . lsp)
+  :init (setq lsp-keymap-prefix "M-l"))
+
+(use-package lsp-ui
+  :ensure t
+  :defer 2
+  :commands lsp-ui-mode)
+
+(use-package helm-lsp
+  :ensure t
+  :defer 2)
+
 (use-package eglot
   :ensure t
   :defer 2
-  :config (add-to-list 'eglot-server-programs '(php-mode . ("php-language-server")))
   :commands (eglot eglot-ensure)
-  :hook ((go-mode . eglot-ensure)
-         (php-mode . eglot-ensure)))
+  :hook (go-mode . eglot-ensure))
 
 
 ;;;
