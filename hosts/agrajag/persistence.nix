@@ -63,4 +63,10 @@
     device = "/persistent/var/lib/libvirt";
     options = [ "bind" "noauto" "x-systemd.automount" ];
   };
+
+  # Bind mount for persistent docker state
+  fileSystems."/var/lib/docker" = {
+    device = "/persistent/var/lib/docker";
+    options = [ "bind" "noauto" "x-systemd.automount" ];
+  };
 }
