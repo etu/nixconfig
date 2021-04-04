@@ -58,7 +58,7 @@
     ];
   };
 
-  # Bind mount for persistent certificates for nginx
+  # Bind mount for persistent libvirt state
   fileSystems."/var/lib/libvirt" = {
     device = "/persistent/var/lib/libvirt";
     options = [ "bind" "noauto" "x-systemd.automount" ];
