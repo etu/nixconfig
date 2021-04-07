@@ -50,6 +50,7 @@ in
       bat
       bc # Dependency for some fish functions
       curl
+      duf
       fd
       file
       fzf
