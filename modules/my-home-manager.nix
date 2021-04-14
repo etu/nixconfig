@@ -93,6 +93,9 @@ in
 
             # Table flip multi key
             <Multi_key> <t> <f>: "(ノಠ益ಠ)ノ彡┻━┻"
+
+            # Shruggie
+            <Multi_key> <s> <h>: "¯\\_(ツ)_/¯"
           '';
         };
 
