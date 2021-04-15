@@ -344,6 +344,15 @@ let
       # Notification deamon:
       exec ${pkgs.mako}/bin/mako
 
+      # Import variables needed for screen sharing to work.
+      exec ${pkgs.systemd}/bin/systemctl --user import-environment XDG_SESSION_TYPE XDG_CURRENT_DESKTOP
+
+      # Import variables needed for screen sharing and gnome3 pinentry to work.
+      exec ${pkgs.dbus}/bin/dbus-update-activation-environment WAYLAND_DISPLAY
+
+      # Import variables needed for some other things to work properly.
+      exec ${pkgs.systemd}/bin/systemctl --user import-environment WAYLAND_DISPLAY DISPLAY DBUS_SESSION_BUS_ADDRESS SWAYSOCK
+
     #
     # Status Bar:
     #
@@ -498,9 +507,6 @@ in
 
     # Run QT programs in wayland mode
     environment.variables.QT_QPA_PLATFORM = "wayland";
-
-    # Make sure that the user session imports the environment
-    programs.sway.extraSessionCommands = "systemctl --user import-environment";
 
     # Set up Pipewire
     services.pipewire.enable = true;
