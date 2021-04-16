@@ -103,33 +103,6 @@ in
           action.service = "light.turn_off";
         }
 
-        # Turn off hallway ceiling lamps timers
-        {
-          id = "turn-off-hallway-ceilinglamps";
-          alias = "Turn off hallway ceilinglamps";
-          trigger = {
-            platform = "state";
-            entity_id = [ "light.ceilinglamp_hallway_1" "light.ceilinglamp_hallway_2" ];
-            for.minutes = 15;
-            to = "on";
-          };
-          action.data.entity_id = [ "light.ceilinglamp_hallway_1" "light.ceilinglamp_hallway_2" ];
-          action.service = "light.turn_off";
-        }
-
-        # Turn on the other hallway lamp
-        {
-          id = "turn-on-other-hallway-ceilinglamp";
-          alias = "Turn on other hallway ceilinglamp";
-          trigger = {
-            platform = "state";
-            entity_id = [ "light.ceilinglamp_hallway_1" "light.ceilinglamp_hallway_2" ];
-            to = "on";
-          };
-          action.data.entity_id = [ "light.ceilinglamp_hallway_1" "light.ceilinglamp_hallway_2" ];
-          action.service = "light.turn_on";
-        }
-
         # Turn on media center power for updates in the evening
         {
           id = "turn-on-media-center-power-for-updates";
@@ -330,14 +303,10 @@ in
               show_header_toggle = true;
               entities = [
                 { entity = "light.tv_wall_strip"; icon = "mdi:led-strip"; }
-                { entity = "light.ceilinglamp_hallway_1"; icon = "mdi:ceiling-light"; }
-                { entity = "light.ceilinglamp_hallway_2"; icon = "mdi:ceiling-light"; }
                 { entity = "light.ikea_ceilinglamp_bulb_kitchen"; icon = "mdi:ceiling-light"; }
                 { entity = "light.ikea_ceilinglamp_livingroom"; icon = "mdi:ceiling-light"; }
                 { entity = "switch.floorlamp_office"; icon = "mdi:floor-lamp"; }
                 { entity = "switch.floorlamp_livingroom"; icon = "mdi:floor-lamp"; }
-                { entity = "switch.ceilinglamp_bedroom"; icon = "mdi:ceiling-light"; }
-                { entity = "switch.ceilinglamp_office"; icon = "mdi:ceiling-light"; }
               ];
             }
             # Panel with settings
@@ -401,24 +370,6 @@ in
                   tap_action.action = "toggle";
                   style = { top = "48%"; left = "54%"; };
                 }
-                # Add ceilinglamp in the office to the floorplan
-                {
-                  type = "state-icon";
-                  entity = "switch.ceilinglamp_office";
-                  title = "Ceilinglamp Office";
-                  icon = "mdi:ceiling-light";
-                  tap_action.action = "toggle";
-                  style = { top = "34%"; left = "44%"; };
-                }
-                # Add ceilinglamp in the bedroom to the floorplan
-                {
-                  type = "state-icon";
-                  entity = "switch.ceilinglamp_bedroom";
-                  title = "Ceilinglamp Bedroom";
-                  icon = "mdi:ceiling-light";
-                  tap_action.action = "toggle";
-                  style = { top = "72%"; left = "80%"; };
-                }
                 # Add Hue lightstrip in the livingroom to the floorplan
                 {
                   type = "state-icon";
@@ -436,24 +387,6 @@ in
                   icon = "mdi:ceiling-light";
                   tap_action.action = "toggle";
                   style = { top = "23%"; left = "26%"; };
-                }
-                # Add first ceilinglamp in the hallway to the floorplan
-                {
-                  type = "state-icon";
-                  entity = "light.ceilinglamp_hallway_1";
-                  title = "Ceilinglamp Hallway 1";
-                  icon = "mdi:ceiling-light";
-                  tap_action.action = "toggle";
-                  style = { top = "66%"; left = "27%"; };
-                }
-                # Add second ceilinglamp in the hallway to the floorplan
-                {
-                  type = "state-icon";
-                  entity = "light.ceilinglamp_hallway_2";
-                  title = "Ceilinglamp Hallway 2";
-                  icon = "mdi:ceiling-light";
-                  tap_action.action = "toggle";
-                  style = { top = "66%"; left = "56%"; };
                 }
                 # Add Ikea lamp in livingroom
                 {
