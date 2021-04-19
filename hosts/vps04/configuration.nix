@@ -133,7 +133,6 @@ in
     };
 
     bots = {
-      isNormalUser = true;
       home = "/home/bots";
       uid = 1004;
     };
