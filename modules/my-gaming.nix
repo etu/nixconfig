@@ -34,7 +34,17 @@ in
       minecraft
       mumble
       sc-controller
-      steam
+
+      # Steam with extra libs for Loop Hero
+      (steam.override {
+        extraPkgs = pkgs: [
+          pkgs.openssl_1_1
+          pkgs.libnghttp2
+          pkgs.libidn2
+          pkgs.rtmpdump
+          pkgs.libpsl
+        ];
+      })
     ];
   };
 }
