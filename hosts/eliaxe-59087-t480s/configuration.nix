@@ -47,7 +47,7 @@ in
 
   # Set NIX_PATH for nixos config and nixpkgs
   nix.nixPath = [
-    "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
+    "nixpkgs=/etc/nixos/nix/nixos-unstable"
     "nixos-config=/etc/nixos/hosts/eliaxe-59087-t480s/configuration.nix"
   ];
 
