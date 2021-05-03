@@ -8,8 +8,8 @@ let
   # Lock command
   lockCommand = "${pkgs.swaylock-effects}/bin/swaylock -f --effect-greyscale --effect-pixelate 5 -S";
 
-  sunpaper = pkgs.stdenv.mkDerivation {
-    pname = "sunpaper";
+  wallpaper = pkgs.stdenv.mkDerivation {
+    pname = "wallpaper";
     version = "2021-03-19";
 
     src = pkgs.fetchFromGitHub {
@@ -20,22 +20,7 @@ let
     };
 
     installPhase = ''
-      mkdir -p $out/bin $out/share/sunpaper-backgrounds
-
-      install -Dm755 sunpaper.sh $out/bin/sunpaper
-
-      substituteInPlace $out/bin/sunpaper                             \
-        --replace "sunwait" "${pkgs.sunwait}/bin/sunwait"             \
-        --replace "setwallpaper" "${pkgs.wallutils}/bin/setwallpaper" \
-        --replace 'wallpaperMode="scale"' 'wallpaperMode="center"'    \
-        --replace 'latitude="38.9072N"' 'latitude="59.32904N"'        \
-        --replace 'longitude="77.0369W"' 'longitude="18.06698W"'      \
-        --replace 'wallpaperPath="$HOME/sunpaper/images/Corporate-Synergy"' "wallpaperPath=\"$out/share/sunpaper-backgrounds\""
-
-      # Crop and resize images to fit my monitor
-      for i in $(seq 1 8); do
-        ${pkgs.graphicsmagick}/bin/gm convert -crop 7680x2160+0+375 -resize 5120x1440 images/Lakeside/$i.jpg $out/share/sunpaper-backgrounds/$i.jpg
-      done
+      ${pkgs.graphicsmagick}/bin/gm convert -crop 7680x2160+0+375 -resize 5120x1440 images/Lakeside/5.jpg $out
     '';
   };
 
@@ -89,7 +74,7 @@ let
     ## Output configuration
     ##
       # Default wallpaper
-      # output * bg ~/.background fill
+      output * bg ${wallpaper} fill
 
       # Example configuration:
       #
@@ -402,12 +387,6 @@ let
 
     "battery#bat2".bat = "BAT2";
 
-    "custom/sunpaper" = {
-      exec = "${sunpaper}/bin/sunpaper";
-      interval = 15;
-      tooltip = false;
-    };
-
     backlight.format = "{percent}% {icon}";
     backlight.format-icons = [ "" "" ];
 
@@ -494,8 +473,6 @@ in
       pavucontrol
       wdisplays
       wlr-randr
-
-      sunpaper
     ];
 
     # Configure Firefox to use Wayland
