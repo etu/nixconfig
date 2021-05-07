@@ -6,7 +6,7 @@
   services.nginx.virtualHosts =
     let
       onlyLan = ''
-        allow 10.3.0.0/24;
+        allow 192.168.0.0/24;
         deny all;
       '';
     in
