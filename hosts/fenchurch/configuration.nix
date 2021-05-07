@@ -143,6 +143,6 @@ in
   security.acme.email = "elis@hirwing.se";
   security.acme.acceptTerms = true;
 
-  users.users.downloads = { group = "downloads"; uid = 947; };
+  users.users.downloads = { group = "downloads"; uid = 947; isSystemUser = true; };
   users.groups.downloads.gid = 947;
 }

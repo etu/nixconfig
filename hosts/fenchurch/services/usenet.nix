@@ -53,7 +53,7 @@
       services.lidarr = { enable = true; user = "downloads"; group = "downloads"; };
       services.nzbget = { enable = true; user = "downloads"; group = "downloads"; };
 
-      users.users.downloads = { group = "downloads"; uid = 947; };
+      users.users.downloads = { group = "downloads"; uid = 947; isSystemUser = true; };
       users.groups.downloads.gid = 947;
     };
 
