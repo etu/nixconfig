@@ -97,6 +97,10 @@ in
   users.extraUsers.kodi.isNormalUser = true;
   users.extraUsers.kodi.uid = 1000;
 
+  # Enable wake on lan
+  services.wakeonlan.interfaces = [ { interface = "enp8s0"; method = "magicpacket"; } ];
+  systemd.targets.multi-user.wants = [ "post-resume.service" ];
+
   # Make sure to kill all users processes on logout.
   services.logind.killUserProcesses = true;
 
