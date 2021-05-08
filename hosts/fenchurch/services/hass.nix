@@ -68,7 +68,7 @@ in
           };
           action = [
             { service = "light.turn_on"; data.entity_id = "light.tv_wall_strip"; }
-            { service = "switch.turn_on"; data.entity_id = [ "switch.floorlamp_office" "switch.floorlamp_livingroom" ]; }
+            { service = "switch.turn_on"; data.entity_id = [ "switch.floorlamp_office" "switch.floorlamp_bookshelf" ]; }
           ];
         }
 
@@ -80,7 +80,7 @@ in
             { platform = "time"; at = "00:00:00"; }
             {
               platform = "state";
-              entity_id = [ "switch.floorlamp_livingroom" "switch.floorlamp_office" ];
+              entity_id = [ "switch.floorlamp_office" "switch.floorlamp_bookshelf" ];
               to = "on";
               for.minutes = 30;
             }
@@ -90,7 +90,7 @@ in
             after = "00:00:00";
             before = "10:00:00";
           };
-          action.data.entity_id = [ "switch.floorlamp_office" "switch.floorlamp_livingroom" ];
+          action.data.entity_id = [ "switch.floorlamp_office" "switch.floorlamp_bookshelf" ];
           action.service = "switch.turn_off";
         }
 
@@ -306,7 +306,7 @@ in
                 { entity = "light.ikea_ceilinglamp_bulb_kitchen"; icon = "mdi:ceiling-light"; }
                 { entity = "light.ikea_ceilinglamp_livingroom"; icon = "mdi:ceiling-light"; }
                 { entity = "switch.floorlamp_office"; icon = "mdi:floor-lamp"; }
-                { entity = "switch.floorlamp_livingroom"; icon = "mdi:floor-lamp"; }
+                { entity = "switch.floorlamp_bookshelf"; icon = "mdi:floor-lamp"; }
               ];
             }
             # Panel with settings
@@ -355,7 +355,7 @@ in
                 # Add floorlamp in the livingroom to the floorplan
                 {
                   type = "state-icon";
-                  entity = "switch.floorlamp_livingroom";
+                  entity = "switch.floorlamp_bookshelf";
                   title = "Floorlamp Livingroom";
                   icon = "mdi:floor-lamp";
                   tap_action.action = "toggle";
