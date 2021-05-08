@@ -204,7 +204,7 @@ in
       input_boolean = {
         vacuum_cleaned_today = {
           name = "Vacuum: Robot cleaned today";
-          initial = "off";
+          initial = "on";
         };
         vacuum_scheduled_cleaning = {
           name = "Vacuum: Robot scedule";
