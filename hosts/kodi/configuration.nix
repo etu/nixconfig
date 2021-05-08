@@ -79,9 +79,10 @@ in
 
   # Enable Kodi.
   services.xserver.desktopManager.kodi.enable = true;
-
-  # Enable Kodi plugins.
-  nixpkgs.config.kodi.enableSVTPlay = true;
+  services.xserver.desktopManager.kodi.package = pkgs.kodi-wayland.withPackages (p: with p; [
+    svtplay
+    youtube
+  ]);
 
   # Enable lightdm autologin.
   services.xserver.displayManager.lightdm.enable = true;
