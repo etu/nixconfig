@@ -303,8 +303,6 @@ in
               show_header_toggle = true;
               entities = [
                 { entity = "light.tv_wall_strip"; icon = "mdi:led-strip"; }
-                { entity = "light.ikea_ceilinglamp_bulb_kitchen"; icon = "mdi:ceiling-light"; }
-                { entity = "light.ikea_ceilinglamp_livingroom"; icon = "mdi:ceiling-light"; }
                 { entity = "switch.floorlamp_office"; icon = "mdi:floor-lamp"; }
                 { entity = "switch.floorlamp_bookshelf"; icon = "mdi:floor-lamp"; }
               ];
@@ -378,24 +376,6 @@ in
                   icon = "mdi:led-strip";
                   tap_action.action = "toggle";
                   style = { top = "52%"; left = "87%"; };
-                }
-                # Add Ikea lamp in kitchen
-                {
-                  type = "state-icon";
-                  entity = "light.ikea_ceilinglamp_bulb_kitchen";
-                  title = "Ikea Kitchen lamp";
-                  icon = "mdi:ceiling-light";
-                  tap_action.action = "toggle";
-                  style = { top = "23%"; left = "26%"; };
-                }
-                # Add Ikea lamp in livingroom
-                {
-                  type = "state-icon";
-                  entity = "light.ikea_ceilinglamp_livingroom";
-                  title = "IKEA Ceilinglamp Livingroom";
-                  icon = "mdi:ceiling-light";
-                  tap_action.action = "toggle";
-                  style = { top = "31%"; left = "78%"; };
                 }
               ];
             }
