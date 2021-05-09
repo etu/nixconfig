@@ -71,18 +71,11 @@ in
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  # Set display resolution
-  services.xserver.extraDisplaySettings = ''
-    Depth        24
-    Modes        "1920x1080"
-  '';
-
   # Enable Kodi.
   services.xserver.desktopManager.kodi.enable = true;
-  services.xserver.desktopManager.kodi.package = pkgs.kodi-wayland.withPackages (p: with p; [
-    svtplay
-    youtube
-  ]);
+
+  # Enable Kodi plugins.
+  nixpkgs.config.kodi.enableSVTPlay = true;
 
   # Enable lightdm autologin.
   services.xserver.displayManager.lightdm.enable = true;
