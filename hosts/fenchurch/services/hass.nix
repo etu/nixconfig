@@ -178,7 +178,7 @@ in
           alias = "Create correct automation state when home again";
           trigger = { platform = "state"; entity_id = "binary_sensor.humans_home"; to = "on"; };
           action = [
-            { service = "automation.trigger"; entity_id = [ "automation.turn-on-evening-lights" "automation.turn-on-office-lamp" ]; }
+            { service = "automation.trigger"; data.entity_id = [ "automation.turn-on-evening-lights" "automation.turn-on-office-lamp" ]; }
           ];
         }
 
