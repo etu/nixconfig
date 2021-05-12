@@ -80,9 +80,9 @@ in
               state = "on";
             }
             {
-              condition = "time";
-              after = "14:00:00";
-              before = "23:50:00";
+              condition = "state";
+              after = "sunset";
+              after_offset = "-01:00:00";
             }
           ];
           action = [
@@ -118,9 +118,9 @@ in
               weekday = [ "mon" "tue" "wed" "thu" "fri" ];
             }
             {
-              condition = "time";
-              after = "07:00:00";
-              before = "14:00:00";
+              condition = "state";
+              after = "sunset";
+              after_offset = "-00:30:00";
             }
             {
               condition = "state";
