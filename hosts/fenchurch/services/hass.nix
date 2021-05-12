@@ -101,7 +101,7 @@ in
           condition = [
             {
               condition = "time";
-              weekeday = [ "mon" "tue" "wed" "thu" "fri" ];
+              weekday = [ "mon" "tue" "wed" "thu" "fri" ];
             }
             {
               condition = "time";
