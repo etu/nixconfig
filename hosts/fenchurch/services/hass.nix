@@ -72,24 +72,31 @@ in
           ];
         }
 
-        # Turn off the floor lamps in the evening
+        # Turn on office lamp in the morning
         {
-          id = "turn-off-evening-switches";
-          alias = "Turn off evening switches";
-          trigger = [
-            { platform = "time"; at = "00:00:00"; }
-            {
-              platform = "state";
-              entity_id = [ "switch.floorlamp_office" "switch.floorlamp_bookshelf" ];
-              to = "on";
-              for.minutes = 30;
-            }
-          ];
+          id = "turn-on-office-lamp";
+          alias = "Turn on office lamp";
+          trigger = {
+            platform = "time";
+            at = "07:00:00";
+          };
           condition = {
             condition = "time";
-            after = "00:00:00";
-            before = "10:00:00";
+            weekeday = [ "mon" "tue" "wed" "thu" "fri" ];
           };
+          action = {
+            service = "switch.turn_on";
+            data.entity_id = "switch.floorlamp_office";
+          };
+        }
+
+        # Turn off the floor lamps in the evening
+        {
+          id = "turn-off-evening-lights";
+          alias = "Turn off evening lights";
+          trigger = [
+            { platform = "time"; at = "00:00:00"; }
+          ];
           action.data.entity_id = [ "switch.floorlamp_office" "switch.floorlamp_bookshelf" ];
           action.service = "switch.turn_off";
         }
