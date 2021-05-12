@@ -66,9 +66,27 @@ in
             event = "sunset";
             offset = "-00:45:00";
           };
+          condition = [
+            {
+              conition = "state";
+              entity_id = "binary_sensor.humans_home";
+              state = "on";
+            }
+            {
+              condition = "time";
+              after = "14:00:00";
+              before = "23:50:00";
+            }
+          ];
           action = [
-            { service = "light.turn_on"; data.entity_id = "light.tv_wall_strip"; }
-            { service = "switch.turn_on"; data.entity_id = [ "switch.floorlamp_office" "switch.floorlamp_bookshelf" ]; }
+            {
+              service = "light.turn_on";
+              data.entity_id = "light.tv_wall_strip";
+            }
+            {
+              service = "switch.turn_on";
+              data.entity_id = [ "switch.floorlamp_office" "switch.floorlamp_bookshelf" ];
+            }
           ];
         }
 
@@ -80,10 +98,22 @@ in
             platform = "time";
             at = "07:00:00";
           };
-          condition = {
-            condition = "time";
-            weekeday = [ "mon" "tue" "wed" "thu" "fri" ];
-          };
+          condition = [
+            {
+              condition = "time";
+              weekeday = [ "mon" "tue" "wed" "thu" "fri" ];
+            }
+            {
+              condition = "time";
+              after = "07:00:00";
+              before = "14:00:00";
+            }
+            {
+              conition = "state";
+              entity_id = "binary_sensor.humans_home";
+              state = "on";
+            }
+          ];
           action = {
             service = "switch.turn_on";
             data.entity_id = "switch.floorlamp_office";
@@ -94,20 +124,17 @@ in
         {
           id = "turn-off-evening-lights";
           alias = "Turn off evening lights";
-          trigger = [
-            { platform = "time"; at = "00:00:00"; }
+          trigger = { platform = "time"; at = "00:00:00"; };
+          action = [
+            {
+              data.entity_id = [ "switch.floorlamp_office" "switch.floorlamp_bookshelf" ];
+              service = "switch.turn_off";
+            }
+            {
+              data.entity_id = "light.tv_wall_strip";
+              service = "light.turn_off";
+            }
           ];
-          action.data.entity_id = [ "switch.floorlamp_office" "switch.floorlamp_bookshelf" ];
-          action.service = "switch.turn_off";
-        }
-
-        # Turn off the LED strip in the evening
-        {
-          id = "turn-off-tv-wall-strip";
-          alias = "Turn off TV Wall Strip";
-          trigger = { platform = "time"; at = "01:30:00"; };
-          action.data.entity_id = "light.tv_wall_strip";
-          action.service = "light.turn_off";
         }
 
         # Turn on media center power for updates in the evening
@@ -143,6 +170,16 @@ in
           trigger = { platform = "state"; entity_id = "binary_sensor.humans_home"; to = "off"; for.seconds = 30; };
           action.data.entity_id = [ "switch.floorlamp_office" "switch.floorlamp_bookshelf" ];
           action.service = "switch.turn_off";
+        }
+
+        # Create the correct automation state when returning to home
+        {
+          id = "create-correct-automation-state-when-home-again";
+          alias = "Create correct automation state when home again";
+          trigger = { platform = "state"; entity_id = "binary_sensor.humans_home"; to = "on"; };
+          action = [
+            { service = "automation.trigger"; entity_id = [ "automation.turn-on-evening-lights" "automation.turn-on-office-lamp" ]; }
+          ];
         }
 
         # Start the vacuum cleaner if nobody is home or in the evening.
