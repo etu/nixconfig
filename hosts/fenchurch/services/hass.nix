@@ -68,7 +68,7 @@ in
           };
           condition = [
             {
-              conition = "state";
+              condition = "state";
               entity_id = "binary_sensor.humans_home";
               state = "on";
             }
@@ -109,7 +109,7 @@ in
               before = "14:00:00";
             }
             {
-              conition = "state";
+              condition = "state";
               entity_id = "binary_sensor.humans_home";
               state = "on";
             }
