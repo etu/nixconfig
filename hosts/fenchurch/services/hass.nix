@@ -136,6 +136,15 @@ in
           action = { service = "switch.turn_off"; data.entity_id = "switch.media_center_power"; };
         }
 
+        # Turn off lamps when not home
+        {
+          id = "turn-off-lamps-when-not-home";
+          alias = "Turn off lamps when not home";
+          trigger = { platform = "state"; entity_id = "binary_sensor.humans_home"; to = "off"; for.seconds = 30; };
+          action.data.entity_id = [ "switch.floorlamp_office" "switch.floorlamp_bookshelf" ];
+          action.service = "switch.turn_off";
+        }
+
         # Start the vacuum cleaner if nobody is home or in the evening.
         {
           id = "vacuum-start-cleaning";
