@@ -61,11 +61,18 @@ in
         {
           id = "turn-on-evening-lights";
           alias = "Turn on evening lights";
-          trigger = {
-            platform = "sun";
-            event = "sunset";
-            offset = "-00:45:00";
-          };
+          trigger = [
+            {
+              platform = "sun";
+              event = "sunset";
+              offset = "-00:45:00";
+            }
+            {
+              platform = "state";
+              entity_id = "binary_sensor.humans_home";
+              to = "on";
+            }
+          ];
           condition = [
             {
               condition = "state";
@@ -94,10 +101,17 @@ in
         {
           id = "turn-on-office-lamp";
           alias = "Turn on office lamp";
-          trigger = {
-            platform = "time";
-            at = "07:00:00";
-          };
+          trigger = [
+            {
+              platform = "time";
+              at = "07:00:00";
+            }
+            {
+              platform = "state";
+              entity_id = "binary_sensor.humans_home";
+              to = "on";
+            }
+          ];
           condition = [
             {
               condition = "time";
@@ -170,16 +184,6 @@ in
           trigger = { platform = "state"; entity_id = "binary_sensor.humans_home"; to = "off"; for.seconds = 30; };
           action.data.entity_id = [ "switch.floorlamp_office" "switch.floorlamp_bookshelf" ];
           action.service = "switch.turn_off";
-        }
-
-        # Create the correct automation state when returning to home
-        {
-          id = "create-correct-automation-state-when-home-again";
-          alias = "Create correct automation state when home again";
-          trigger = { platform = "state"; entity_id = "binary_sensor.humans_home"; to = "on"; };
-          action = [
-            { service = "automation.trigger"; data.entity_id = [ "automation.turn-on-evening-lights" "automation.turn-on-office-lamp" ]; }
-          ];
         }
 
         # Start the vacuum cleaner if nobody is home or in the evening.
