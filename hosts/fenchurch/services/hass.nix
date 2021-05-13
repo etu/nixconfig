@@ -80,7 +80,7 @@ in
               state = "on";
             }
             {
-              condition = "state";
+              condition = "sun";
               after = "sunset";
               after_offset = "-01:00:00";
             }
@@ -118,7 +118,7 @@ in
               weekday = [ "mon" "tue" "wed" "thu" "fri" ];
             }
             {
-              condition = "state";
+              condition = "sun";
               after = "sunset";
               after_offset = "-00:30:00";
             }
