@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 let
   # Load secrets
   secrets = import ../../data/load-secrets.nix;
@@ -39,6 +39,9 @@ in {
   services.zfs.autoScrub.enable = true;
   services.zfs.autoSnapshot.enable = true;
 
+  # Install thinkpad modules for TLP
+  boot.extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
+
   # Set NIX_PATH for nixos config and nixpkgs
   nix.nixPath = [
     "nixpkgs=/etc/nixos/nix/nixos-unstable"
@@ -57,6 +60,13 @@ in {
 
   # Enable fwupd for firmware updates etc
   services.fwupd.enable = true;
+
+  # Enable TLP
+  services.tlp.enable = true;
+  services.tlp.settings = {
+    START_CHARGE_THRESH_BAT0 = 40;
+    STOP_CHARGE_THRESH_BAT0 = 70;
+  };
 
   # Enable bluetooth
   hardware.bluetooth.enable = true;
