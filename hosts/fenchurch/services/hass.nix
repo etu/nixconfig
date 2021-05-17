@@ -114,13 +114,20 @@ in
           ];
           condition = [
             {
-              condition = "time";
-              weekday = [ "mon" "tue" "wed" "thu" "fri" ];
-            }
-            {
-              condition = "sun";
-              after = "sunset";
-              after_offset = "-00:30:00";
+              condition = "or";
+              conditions = [
+                {
+                  condition = "time";
+                  after = "07:00:00";
+                  before = "16:00:00";
+                  weekday = [ "mon" "tue" "wed" "thu" "fri" ];
+                }
+                {
+                  condition = "sun";
+                  after = "sunset";
+                  after_offset = "-01:00:00";
+                }
+              ];
             }
             {
               condition = "state";
@@ -134,11 +141,14 @@ in
           };
         }
 
-        # Turn off the floor lamps in the evening
+        # Turn off the floor lamps in the evening or when not home
         {
-          id = "turn-off-evening-lights";
-          alias = "Turn off evening lights";
-          trigger = { platform = "time"; at = "00:00:00"; };
+          id = "turn-off-lights";
+          alias = "Turn off lights";
+          trigger = [
+            { platform = "time"; at = "00:00:00"; }
+            { platform = "state"; entity_id = "binary_sensor.humans_home"; to = "off"; for.seconds = 30; }
+          ];
           action = [
             {
               data.entity_id = [ "switch.floorlamp_office" "switch.floorlamp_bookshelf" ];
@@ -175,15 +185,6 @@ in
           trigger = { platform = "state"; entity_id = "binary_sensor.humans_home"; to = "off"; for.seconds = 30; };
           condition = { condition = "time"; before = "00:55:00"; after = "02:30:00"; };
           action = { service = "switch.turn_off"; data.entity_id = "switch.media_center_power"; };
-        }
-
-        # Turn off lamps when not home
-        {
-          id = "turn-off-lamps-when-not-home";
-          alias = "Turn off lamps when not home";
-          trigger = { platform = "state"; entity_id = "binary_sensor.humans_home"; to = "off"; for.seconds = 30; };
-          action.data.entity_id = [ "switch.floorlamp_office" "switch.floorlamp_bookshelf" ];
-          action.service = "switch.turn_off";
         }
 
         # Start the vacuum cleaner if nobody is home or in the evening.
