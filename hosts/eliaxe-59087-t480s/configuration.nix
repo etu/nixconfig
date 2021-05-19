@@ -60,6 +60,10 @@ in
 
   # Enable TLP
   services.tlp.enable = true;
+  services.tlp.settings = {
+    START_CHARGE_THRESH_BAT0 = 40; # Default 96
+    STOP_CHARGE_THRESH_BAT0 = 70;  # Default 100
+  };
 
   # Enable bluetooth
   hardware.bluetooth.enable = true;
