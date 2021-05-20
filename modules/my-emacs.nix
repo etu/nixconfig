@@ -213,8 +213,8 @@ in
     services.autorandr.enable = lib.mkIf cfg.enableExwm true;
 
     # Set up services needed for gnome stuff for evolution
-    services.gnome3.evolution-data-server.enable = lib.mkIf cfg.enableExwm true;
-    services.gnome3.gnome-keyring.enable = lib.mkIf cfg.enableExwm true;
+    services.gnome.evolution-data-server.enable = lib.mkIf cfg.enableExwm true;
+    services.gnome.gnome-keyring.enable = lib.mkIf cfg.enableExwm true;
 
     # Install aditional packages
     environment.systemPackages = (lib.optionals cfg.enableExwm (with pkgs; [

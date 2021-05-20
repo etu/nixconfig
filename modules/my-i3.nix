@@ -254,8 +254,8 @@ in
     '';
 
     # Set up services needed for gnome stuff for evolution
-    services.gnome3.evolution-data-server.enable = true;
-    services.gnome3.gnome-keyring.enable = true;
+    services.gnome.evolution-data-server.enable = true;
+    services.gnome.gnome-keyring.enable = true;
 
     # Enable autorandr for screen setups.
     services.autorandr.enable = true;
