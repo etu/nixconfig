@@ -184,14 +184,18 @@ in
         # Htop configurations
         programs.htop = {
           enable = true;
-          hideUserlandThreads = true;
-          highlightBaseName = true;
-          shadowOtherUsers = true;
-          showProgramPath = false;
-          treeView = true;
-          meters = {
-            left = [  "LeftCPUs"  "Memory" "Swap"        "ZFSARC" "ZFSCARC" ];
-            right = [ "RightCPUs" "Tasks"  "LoadAverage" "Uptime" "Battery" ];
+          settings = {
+            hide_userland_threads = true;
+            highlight_base_name = true;
+            shadow_other_users = true;
+            show_program_path = true;
+            tree_view = true;
+
+            left_meters = [ "LeftCPUs" "Memory" "Swap" "ZFSARC" "ZFSCARC" ];
+            left_meter_modes = [ 1 1 1 2 2 ];
+
+            right_meters = [ "RightCPUs" "Tasks" "LoadAverage" "Uptime" "Battery" ];
+            right_meter_modes = [ 1 2 2 2 2 ];
           };
         };
 
