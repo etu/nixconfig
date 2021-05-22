@@ -37,7 +37,22 @@ in {
   boot.supportedFilesystems = [ "zfs" ];
   networking.hostId = "27416952";
   services.zfs.autoScrub.enable = true;
-  services.zfs.autoSnapshot.enable = true;
+
+  # Set up Sanoid for snapshots
+  services.sanoid = let
+    template = {
+      frequently = 7;
+      hourly = 36;
+      daily = 14;
+      weekly = 4;
+      monthly = 0;
+    };
+  in {
+    enable = true;
+    interval = "*-*-* *:00,15,30,45:00";
+    datasets."zroot/persistent".settings = template;
+    datasets."zroot/home".settings = template;
+  };
 
   # Install thinkpad modules for TLP
   boot.extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
