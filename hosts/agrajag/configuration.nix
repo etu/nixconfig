@@ -39,20 +39,12 @@ in {
   services.zfs.autoScrub.enable = true;
 
   # Set up Sanoid for snapshots
-  services.sanoid = let
-    template = {
-      frequently = 7;
-      hourly = 36;
-      daily = 14;
-      weekly = 4;
-      monthly = 0;
-    };
-  in {
-    enable = true;
-    interval = "*-*-* *:00,15,30,45:00";
-    datasets."zroot/persistent".settings = template;
-    datasets."zroot/home".settings = template;
-  };
+  my.backup.enable = true;
+  my.backup.enableSanoid = true;
+  my.backup.filesystems = [
+    "zroot/home"
+    "zroot/persistent"
+  ];
 
   # Set up Syncoid to sync snapshots
   services.syncoid = {
