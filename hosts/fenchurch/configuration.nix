@@ -86,6 +86,11 @@ in
   services.zfs.autoScrub.enable = true;
   services.zfs.autoSnapshot.enable = true;
 
+  # Allow syncoid on other computers to sync here.
+  users.users.root.openssh.authorizedKeys.keys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL+UdcqycUWaMS+KcVTjXtNAKjM+2edz1hWNNCrZ9vRQ syncoid@agrajag-2021-05-22"
+  ];
+
   # Set NIX_PATH for nixos config and nixpkgs
   nix.nixPath = [
     "nixpkgs=/etc/nixos/nix/nixos-unstable"
@@ -100,9 +105,6 @@ in
 
   # Enable apcupsd.
   services.apcupsd.enable = true;
-
-  # Disable root login for ssh
-  services.openssh.permitRootLogin = "no";
 
   # Enable aspell and hunspell with dictionaries.
   my.spell.enable = true;

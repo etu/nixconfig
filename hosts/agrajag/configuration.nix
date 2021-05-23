@@ -54,6 +54,20 @@ in {
     datasets."zroot/home".settings = template;
   };
 
+  # Set up Syncoid to sync snapshots
+  services.syncoid = {
+    enable = true;
+    interval = "*-*-* *:15:00";
+    commonArgs = [ "--no-sync-snap" ];
+    sshKey = "/persistent/etc/syncoid/id_ed25519";
+    user = "root";
+    group = "root";
+    commands = {
+      "zroot/persistent".target = "root@home.elis.nu:zroot/backups/agrajag/persistent";
+      "zroot/home".target = "root@home.elis.nu:zroot/backups/agrajag/home";
+    };
+  };
+
   # Install thinkpad modules for TLP
   boot.extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
 
