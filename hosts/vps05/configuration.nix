@@ -32,7 +32,14 @@ in
   boot.supportedFilesystems = [ "zfs" ];
   networking.hostId = "8425e349";
   services.zfs.autoScrub.enable = true;
-  services.zfs.autoSnapshot.enable = true;
+
+  # Set up Sanoid for snapshots
+  my.backup.enable = true;
+  my.backup.enableSanoid = true;
+  my.backup.enableSyncoid = true;
+  my.backup.filesystems = [
+    "zroot/persistent"
+  ];
 
   # Set NIX_PATH for nixos config and nixpkgs
   nix.nixPath = [
