@@ -7,6 +7,7 @@ in
 {
   options.my.backup.enable = lib.mkEnableOption "Enables backup related thingys.";
   options.my.backup.enableSanoid = lib.mkEnableOption "Enables snapshot creation.";
+  options.my.backup.enableSyncoid = lib.mkEnableOption "Enables snapshot syncing.";
   options.my.backup.filesystems = lib.mkOption {
     default = [];
     example = [ "zroot/home" "zroot/persistent" ];
@@ -30,6 +31,28 @@ in
       datasets = builtins.listToAttrs (map (datasetName: {
         name = datasetName;
         value = { settings = { frequently = 7; hourly = 36; daily = 14; weekly = 4; monthly = 0; }; };
+      }) cfg.filesystems);
+    };
+
+    # Enable syncoid for syncing snapshots.
+    services.syncoid = {
+      enable = cfg.enableSyncoid;
+      interval = "*-*-* *:15:00";
+      commonArgs = [ "--no-sync-snap" ];
+      sshKey = "/root/.ssh/id_ed25519";
+      user = "root";
+      group = "root";
+
+      #
+      # Make the commands configuration for syncoid that normally looks
+      # like:
+      #
+      # commands."zroot/persistent".target = "user@host:path/to/dataset";
+      # commands."zroot/home".target = "user@host:path/to/dataset";
+      #
+      commands = builtins.listToAttrs (map (datasetName: {
+        name = datasetName;
+        value = { target = "root@home.elis.nu:zroot/backups/${config.networking.hostName}/${datasetName}"; };
       }) cfg.filesystems);
     };
   };
