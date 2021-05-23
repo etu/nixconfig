@@ -138,6 +138,7 @@ in {
 
   # Set up docker
   virtualisation.docker.enable = true;
+  virtualisation.docker.storageDriver = "zfs";
 
   # Set up virt-manager
   virtualisation.libvirtd.enable = true;

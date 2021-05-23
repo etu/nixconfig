@@ -40,11 +40,6 @@
     fsType = "zfs";
   };
 
-  fileSystems."/var/lib/docker" = {
-    device = "zroot/var-lib-docker";
-    fsType = "zfs";
-  };
-
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/4159-8AE1";
     fsType = "vfat";
