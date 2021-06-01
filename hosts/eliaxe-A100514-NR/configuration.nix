@@ -40,7 +40,15 @@ in
 
   # Snapshot and scrub automatically
   services.zfs.autoScrub.enable = true;
-  services.zfs.autoSnapshot.enable = true;
+
+  # Set up Sanoid for snapshots
+  my.backup.enable = true;
+  my.backup.enableSanoid = true;
+  my.backup.enableSyncoid = true;
+  my.backup.filesystems = [
+    "zroot/home"
+    "zroot/persistent"
+  ];
 
   # Install thinkpad modules for TLP
   boot.extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
