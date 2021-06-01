@@ -14,7 +14,7 @@ in
 {
   imports = [
     # Include hardware quirks
-    "${sources.nixos-hardware}/lenovo/thinkpad/t480s"
+    "${sources.nixos-hardware}/lenovo/thinkpad/t14s/amd/gen1"
 
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -25,18 +25,18 @@ in
   ];
 
   # The NixOS release to be compatible with for stateful data such as databases.
-  system.stateVersion = "19.09";
+  system.stateVersion = "21.11";
 
-  networking.hostName = "eliaxe-59087-t480s";
+  networking.hostName = "eliaxe-A100514-NR";
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelPackages = pkgs.linuxPackages_5_10;
+  boot.kernelPackages = pkgs.linuxPackages_5_11;
 
   # Enable ZFS support
   boot.supportedFilesystems = [ "zfs" ];
-  networking.hostId = "18582527";
+  networking.hostId = "18582528";
 
   # Snapshot and scrub automatically
   services.zfs.autoScrub.enable = true;
@@ -48,12 +48,8 @@ in
   # Set NIX_PATH for nixos config and nixpkgs
   nix.nixPath = [
     "nixpkgs=/etc/nixos/nix/nixos-unstable"
-    "nixos-config=/etc/nixos/hosts/eliaxe-59087-t480s/configuration.nix"
+    "nixos-config=/etc/nixos/hosts/eliaxe-A100514-NR/configuration.nix"
   ];
-
-  # Hardware settings
-  services.xserver.videoDrivers = [ "intel" ];
-  hardware.cpu.intel.updateMicrocode = true;
 
   # Enable fwupd for firmware updates etc
   services.fwupd.enable = true;
@@ -67,8 +63,6 @@ in
 
   # Enable bluetooth
   hardware.bluetooth.enable = true;
-
-  services.hardware.bolt.enable = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;

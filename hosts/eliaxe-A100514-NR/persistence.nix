@@ -63,10 +63,4 @@
       ".local/share/keyrings"
     ];
   };
-
-  # Bind mount for persistent docker state
-  fileSystems."/var/lib/docker" = {
-    device = "/persistent/var/lib/docker";
-    options = [ "bind" "noauto" "x-systemd.automount" ];
-  };
 }
