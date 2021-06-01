@@ -22,7 +22,6 @@
       # Work
       ".docker/config.json"
       ".kube/config"
-      ".transifexrc"
       "bin/gh-md-toc"
       "bin/git-tvlog"
       "bin/mydump"
@@ -48,7 +47,6 @@
 
       # Work
       ".chef"
-      ".config/autorandr"
       ".config/Slack"
       ".config/VirtualBox"
       ".hotel"
