@@ -496,6 +496,14 @@
 ;;  :config (helm-fuzzier-mode 1))
 
 
+;; Editorconfig to read per-project rules.
+(use-package editorconfig
+  :ensure t
+  :defer 2
+  :config
+  (editorconfig-mode 1))
+
+
 ;;;
 ;;; Org
 ;;;
