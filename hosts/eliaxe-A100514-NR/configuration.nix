@@ -111,6 +111,7 @@ in
 
   # Enable docker deamon
   virtualisation.docker.enable = true;
+  virtualisation.docker.storageDriver = "zfs";
 
   # Enable podman
   virtualisation.podman.enable = true;
