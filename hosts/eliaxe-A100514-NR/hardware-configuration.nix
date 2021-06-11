@@ -46,6 +46,11 @@
     options = [ "noauto" "x-systemd.automount" ];
   };
 
+  fileSystems."/root/.ssh" = {
+    device = "/persistent/home/root/.ssh";
+    options = [ "bind" "noauto" "x-systemd.automount" ];
+  };
+
   swapDevices = [ ];
 
   nix.maxJobs = lib.mkDefault 8;
