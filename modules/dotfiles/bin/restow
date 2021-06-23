@@ -11,7 +11,7 @@ case $(hostname) in
         stow --dotfiles caff pass skeleton
         ;;
 
-    "eliaxe-59087-t480s")
+    "eliaxe-A100514-NR")
         stow --dotfiles caff pass skeleton
         ;;
 
