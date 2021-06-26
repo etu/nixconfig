@@ -51,7 +51,7 @@ let
     };
   '';
 
-  mySwayConfig = pkgs.writeText "sway.config" ''
+  mySwayConfig = pkgs.writeText "sway.config" (''
     # sway config file
     #
     # Read `man 5 sway` for a complete reference.
@@ -273,6 +273,15 @@ let
       # Show scratchpad window and cycle through them:
       bindsym $mod+minus scratchpad show
 
+    '' + (lib.optionalString config.my.gaming.enable ''
+    #
+    # Add keybindings related to the "gaming" module:
+    #
+      # Add PTT button for mumble:
+      bindsym --no-repeat           Super_L exec ${pkgs.glib}/bin/gdbus call -e -d net.sourceforge.mumble.mumble -o / -m net.sourceforge.mumble.Mumble.startTalking
+      bindsym --no-repeat --release Super_L exec ${pkgs.glib}/bin/gdbus call -e -d net.sourceforge.mumble.mumble -o / -m net.sourceforge.mumble.Mumble.stopTalking
+    '') + ''
+
     #
     # Other keybindings:
     #
@@ -349,7 +358,7 @@ let
         # Run waybar as a bar
         status_command ${pkgs.waybar}/bin/waybar --config ${waybarConfig}
       }
-  '';
+  '');
 
   waybarConfig = pkgs.writeText "waybar-config.json" (builtins.toJSON {
     height = 30; # Height of bar
