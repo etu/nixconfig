@@ -44,6 +44,7 @@ in
       }))
 
       sc-controller
+      obs-studio
 
       # Steam with extra libs for Loop Hero
       (steam.override {

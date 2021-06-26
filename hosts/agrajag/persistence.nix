@@ -26,6 +26,7 @@
     extraDirectories = [
       ".caffrc"
       ".config/autorandr"
+      ".config/obs-studio"
       ".config/pipewire/media-session.d"
       ".dotfiles"
       ".gnupg"
