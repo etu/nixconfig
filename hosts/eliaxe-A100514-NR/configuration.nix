@@ -32,7 +32,7 @@ in
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelPackages = pkgs.linuxPackages_5_11;
+  boot.kernelPackages = pkgs.linuxPackages_5_12;
 
   # Enable ZFS support
   boot.supportedFilesystems = [ "zfs" ];
@@ -133,4 +133,8 @@ in
 
   # Home-manager as nix module
   my.home-manager.enable = true;
+
+  # Enable ClamAV.
+  services.clamav.daemon.enable = true;
+  services.clamav.updater.enable = true;
 }
