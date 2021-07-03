@@ -217,6 +217,13 @@
                                      (set (make-local-variable 'fill-column) 120))))
 
 
+;; Dart mode
+(use-package dart-mode
+  :ensure t
+  :defer 2
+  :init (add-hook 'dart-mode 'lsp))
+
+
 ;; SCSS mode
 (use-package scss-mode
   :ensure t
@@ -335,6 +342,10 @@
   :defer 2
   :commands (eglot eglot-ensure)
   :hook (go-mode . eglot-ensure))
+
+(use-package lsp-dart
+  :ensure t
+  :defer 2)
 
 
 ;;;
