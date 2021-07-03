@@ -30,7 +30,12 @@ in
       #
       datasets = builtins.listToAttrs (map (datasetName: {
         name = datasetName;
-        value = { settings = { frequently = 7; hourly = 36; daily = 14; weekly = 4; monthly = 0; }; };
+        value = {
+          frequently = 7;
+          hourly = 36;
+          daily = 14;
+          weekly = 4;
+        };
       }) cfg.filesystems);
     };
 
