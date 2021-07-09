@@ -20,6 +20,10 @@ in
 
     # Install some extra fonts.
     fonts.fonts = with pkgs; [
+      # Cantarell fonts seems to be used by GTK applications (was mostly
+      # noticable in Firefox UI elements).
+      cantarell_fonts
+
       # My own font
       (stdenv.mkDerivation rec {
         pname = "font-etuvetica";
