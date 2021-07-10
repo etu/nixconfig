@@ -47,9 +47,6 @@ in
     "nixos-config=/etc/nixos/hosts/vps05/configuration.nix"
   ];
 
-  # Auto upgrade system
-  my.auto-upgrade.enable = true;
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [

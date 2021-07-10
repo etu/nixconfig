@@ -34,12 +34,6 @@
     fsType = "zfs";
   };
 
-  fileSystems."/etc/nixos" = {
-    device = "/persistent/etc/nixos";
-    fsType = "none";
-    options = [ "bind" ];
-  };
-
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/C5E1-A34A";
     fsType = "vfat";

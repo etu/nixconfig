@@ -70,5 +70,17 @@
         "type": "tarball",
         "url": "https://github.com/NixOS/nixos-hardware/archive/41775780a0b6b32b3d32dcc32bb9bc6df809062d.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "nixus": {
+        "branch": "master",
+        "description": null,
+        "homepage": "",
+        "owner": "Infinisil",
+        "repo": "nixus",
+        "rev": "38deef1b97ae0c98ede4b2e46292377c4aac45f7",
+        "sha256": "1zxbjgqa0qq6mp9dcn3a7n1i549m3ql8s7np82gywh5pg87isbwc",
+        "type": "tarball",
+        "url": "https://github.com/Infinisil/nixus/archive/38deef1b97ae0c98ede4b2e46292377c4aac45f7.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }
