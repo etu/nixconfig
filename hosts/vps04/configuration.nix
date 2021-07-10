@@ -43,11 +43,6 @@ in
     "nixos-config=/etc/nixos/hosts/vps04/configuration.nix"
   ];
 
-  # Auto upgrade system
-  my.auto-upgrade.enable = true;
-  my.auto-upgrade.user = "etu";
-  system.autoUpgrade.dates = "Mon *-*-* 04:40:00";
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -107,8 +102,12 @@ in
   users.mutableUsers = false;
 
   users.users = {
-    root.initialHashedPassword = secrets.hashedRootPassword;
     etu.initialHashedPassword = secrets.hashedEtuPassword;
+
+    root = {
+      initialHashedPassword = secrets.hashedRootPassword;
+      openssh.authorizedKeys.keys = keys.etu.computers;
+    };
 
     concate = {
       isNormalUser = true;

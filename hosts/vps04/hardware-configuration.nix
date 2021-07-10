@@ -44,11 +44,5 @@
     fsType = "zfs";
   };
 
-  fileSystems."/etc/nixos" = {
-    device = "/persistent/etc/nixos";
-    fsType = "none";
-    options = [ "bind" ];
-  };
-
   swapDevices = [ ];
 }
