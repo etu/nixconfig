@@ -40,12 +40,6 @@ in
   services.zfs.autoScrub.interval = "Mon, 00:01:00";
   services.zfs.autoSnapshot.enable = true;
 
-  # Set NIX_PATH for nixos config and nixpkgs
-  nix.nixPath = [
-    "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
-    "nixos-config=/etc/nixos/hosts/kodi/configuration.nix"
-  ];
-
   # AMD GPU drivers
   services.xserver.videoDrivers = [ "amdgpu" ];
 

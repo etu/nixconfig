@@ -41,12 +41,6 @@ in
     "zroot/persistent"
   ];
 
-  # Set NIX_PATH for nixos config and nixpkgs
-  nix.nixPath = [
-    "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
-    "nixos-config=/etc/nixos/hosts/vps05/configuration.nix"
-  ];
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
