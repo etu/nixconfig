@@ -49,12 +49,6 @@ in
   # AMD GPU drivers
   services.xserver.videoDrivers = [ "amdgpu" ];
 
-  # Auto upgrade system
-  my.auto-upgrade.enable = true;
-  my.auto-upgrade.interval = "Mon, 00:01:00";
-  system.autoUpgrade.dates = "Mon 00:02:00";
-  nix.gc.dates = "Mon 00:12:00";
-
   # Enable some firmwares.
   hardware.cpu.amd.updateMicrocode = true;
   hardware.enableRedistributableFirmware = true;
