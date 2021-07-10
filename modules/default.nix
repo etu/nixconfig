@@ -12,6 +12,7 @@ in {
     ./my-backup.nix
     ./my-common-cli.nix
     ./my-common-graphical.nix
+    ./my-deploy-user.nix
     ./my-emacs.nix
     ./my-gaming.nix
     ./my-gpg-utils.nix

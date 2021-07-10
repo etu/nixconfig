@@ -121,5 +121,8 @@ in
   # Set up users accounts:
   users.mutableUsers = false;
 
+  # Enable a user to do deployments with
+  my.deploy-user.enable = true;
+
   users.users.root.openssh.authorizedKeys.keys = keys.etu.computers;
 }

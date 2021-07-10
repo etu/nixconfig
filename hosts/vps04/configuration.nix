@@ -91,6 +91,9 @@ in
     ];
   };
 
+  # Enable a user to do deployments with
+  my.deploy-user.enable = true;
+
   # Set up users accounts:
 
   users.mutableUsers = false;

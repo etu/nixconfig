@@ -2,7 +2,8 @@ let
   # Load niv sources
   sources = import ../nix/sources.nix;
   nixusPath = "${sources.nixus}/default.nix";
-in import nixusPath {} ({ config, ... }: {
+in
+import nixusPath { } ({ config, ... }: {
   # Set a nixpkgs version for all nodes
   defaults = { ... }: {
     nixpkgs = ../nix/nixos-unstable;
