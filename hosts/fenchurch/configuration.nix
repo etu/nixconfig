@@ -102,7 +102,7 @@ in
 
   # Allow syncoid on other computers to sync here.
   users.users.root.openssh.authorizedKeys.keys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL+UdcqycUWaMS+KcVTjXtNAKjM+2edz1hWNNCrZ9vRQ syncoid@agrajag-2021-05-22"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICdtbbrBHT1i29nFdaf54zsJ4Yrt2tOLnNotaRIneazp root@agrajag-2021-07-11"
   ];
 
   # Set NIX_PATH for nixos config and nixpkgs
