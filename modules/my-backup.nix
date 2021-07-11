@@ -47,18 +47,6 @@ in
       sshKey = "/root/.ssh/id_ed25519";
       user = "root";
       group = "root";
-
-      #
-      # Make the commands configuration for syncoid that normally looks
-      # like:
-      #
-      # commands."zroot/persistent".target = "user@host:path/to/dataset";
-      # commands."zroot/home".target = "user@host:path/to/dataset";
-      #
-      commands = builtins.listToAttrs (map (datasetName: {
-        name = datasetName;
-        value = { target = "root@home.elis.nu:zroot/backups/${config.networking.hostName}/${datasetName}"; };
-      }) cfg.filesystems);
     };
   };
 }
