@@ -135,6 +135,9 @@ in
   my.user.enable = true;
   my.user.extraGroups = [ "libvirtd" ];
 
+  # Enable a user to do deployments with
+  my.deploy-user.enable = true;
+
   # Immutable users due to tmpfs
   users.mutableUsers = false;
 
