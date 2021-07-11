@@ -113,4 +113,7 @@ in
 
   # SSH Keys for remote logins
   users.users.root.openssh.authorizedKeys.keys = keys.etu.computers;
+
+  # Enable a user to do deployments with
+  my.deploy-user.enable = true;
 }
