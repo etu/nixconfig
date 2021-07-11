@@ -35,7 +35,14 @@ in
   boot.supportedFilesystems = [ "zfs" ];
   networking.hostId = "8425e390";
   services.zfs.autoScrub.enable = true;
-  services.zfs.autoSnapshot.enable = true;
+
+  # Set up Sanoid for snapshots
+  my.backup.enable = true;
+  my.backup.enableSanoid = true;
+  my.backup.filesystems = [
+    "zroot/home"
+    "zroot/persistent"
+  ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -103,7 +110,7 @@ in
 
     root = {
       initialHashedPassword = secrets.hashedRootPassword;
-      openssh.authorizedKeys.keys = keys.etu.computers;
+      openssh.authorizedKeys.keys = keys.etu.computers ++ keys.etu.deploy;
     };
 
     concate = {
