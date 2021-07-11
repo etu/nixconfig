@@ -84,12 +84,18 @@ in
 
   # ZFS scrubbing and snapshotting
   services.zfs.autoScrub.enable = true;
-  services.zfs.autoSnapshot.enable = true;
+
+  # Set up Sanoid for snapshots
+  my.backup.enable = true;
+  my.backup.enableSanoid = true;
+  my.backup.enableSyncoid = true;
+  services.syncoid.commands = {
+    "root@vps05.elis.nu:zroot/persistent".target = "zroot/backups/vps05/zroot/persistent";
+  };
 
   # Allow syncoid on other computers to sync here.
   users.users.root.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL+UdcqycUWaMS+KcVTjXtNAKjM+2edz1hWNNCrZ9vRQ syncoid@agrajag-2021-05-22"
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINAt45HarxGIXMNdJ3NpMX2gFquZz9Jm2U70v4/QsOZD syncoid@vps05-2021-05-23"
   ];
 
   # Set NIX_PATH for nixos config and nixpkgs
