@@ -12,7 +12,7 @@ in
     # Add a deploy user for deployments
     users.users.deploy = {
       isNormalUser = true;
-      openssh.authorizedKeys.keys = keys.etu.computers;
+      openssh.authorizedKeys.keys = keys.etu.deploy ++ keys.etu.computers;
     };
 
     # It needs to be a trusted user to copy things to the store
