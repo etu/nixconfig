@@ -37,8 +37,15 @@ in
   boot.supportedFilesystems = [ "zfs" ];
   networking.hostId = "10227851";
   services.zfs.autoScrub.enable = true;
-  services.zfs.autoScrub.interval = "Mon, 00:01:00";
-  services.zfs.autoSnapshot.enable = true;
+  services.zfs.autoScrub.interval = "Sun, 18:00:00";
+
+  # Set up Sanoid for snapshots
+  my.backup.enable = true;
+  my.backup.enableSanoid = true;
+  my.backup.filesystems = [
+    "zroot/home"
+    "zroot/persistent"
+  ];
 
   # AMD GPU drivers
   services.xserver.videoDrivers = [ "amdgpu" ];
@@ -112,7 +119,7 @@ in
   networking.firewall.allowedTCPPorts = [ 8080 ];
 
   # SSH Keys for remote logins
-  users.users.root.openssh.authorizedKeys.keys = keys.etu.computers;
+  users.users.root.openssh.authorizedKeys.keys = keys.etu.computers ++ keys.etu.deploy;
 
   # Enable a user to do deployments with
   my.deploy-user.enable = true;
