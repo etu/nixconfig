@@ -36,7 +36,6 @@ in
   # Set up Sanoid for snapshots
   my.backup.enable = true;
   my.backup.enableSanoid = true;
-  my.backup.enableSyncoid = true;
   my.backup.filesystems = [
     "zroot/persistent"
   ];
@@ -124,5 +123,5 @@ in
   # Enable a user to do deployments with
   my.deploy-user.enable = true;
 
-  users.users.root.openssh.authorizedKeys.keys = keys.etu.computers;
+  users.users.root.openssh.authorizedKeys.keys = keys.etu.computers ++ keys.etu.deploy;
 }
