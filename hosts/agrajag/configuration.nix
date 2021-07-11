@@ -129,4 +129,17 @@ in {
   programs.dconf.enable = true;
   environment.systemPackages = with pkgs; [ virt-manager ];
   virtualisation.spiceUSBRedirection.enable = true;
+
+  # Set up remote builds
+  nix.buildMachines = [{
+    hostName = "home.elis.nu";
+    system = "x86_64-linux";
+    maxJobs = 5;
+    sshUser = "root";
+    sshKey = "/persistent/home/root/.ssh/id_ed25519";
+  }];
+  nix.distributedBuilds = true;
+  nix.extraOptions = ''
+		builders-use-substitutes = true
+	'';
 }
