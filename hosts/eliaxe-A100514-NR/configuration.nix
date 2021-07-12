@@ -50,6 +50,11 @@ in
     "zroot/persistent"
   ];
 
+  services.syncoid.commands = {
+    "zroot/home".target = "root@home.elis.nu:zroot/backups/eliaxe-A100514-NR/zroot/home";
+    "zroot/persistent".target = "root@home.elis.nu:zroot/backups/eliaxe-A100514-NR/zroot/persistent";
+  };
+
   # Install thinkpad modules for TLP
   boot.extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
 
