@@ -84,6 +84,11 @@ in
     "keys.ix.ufs.se" = {
       forceSSL = true;
       enableACME = true;
+      globalRedirect = "keys.proxxi.org";
+    };
+    "keys.proxxi.org" = {
+      forceSSL = true;
+      enableACME = true;
       locations."/".root = pkgs.pgpkeyserver-lite;
       locations."/pks".proxyPass = "http://127.0.0.1:11371/pks";
     };
