@@ -8,7 +8,6 @@ in {
     "${sources.impermanence}/nixos.nix"
     "${sources.ip-failar-nu}/nixos.nix"
     "${sources.flummbot}/nixos.nix"
-    ./my-auto-upgrade.nix
     ./my-backup.nix
     ./my-common-cli.nix
     ./my-common-graphical.nix
