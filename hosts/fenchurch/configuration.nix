@@ -107,12 +107,6 @@ in
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICanCC9f9xSYqKSxJPOmitbN0CLKVJG1AdnBYnDz9HQY root@eliaxe-A100514-NR-2021-07-12"
   ];
 
-  # Set NIX_PATH for nixos config and nixpkgs
-  nix.nixPath = [
-    "nixpkgs=/etc/nixos/nix/nixos-unstable"
-    "nixos-config=/etc/nixos/hosts/fenchurch/configuration.nix"
-  ];
-
   # Hardware settings
   hardware.cpu.intel.updateMicrocode = true;
 
