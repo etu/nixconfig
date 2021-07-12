@@ -58,6 +58,7 @@ in
       host
       htop
       ncdu
+      nix-top
       pv
       ripgrep
       tmux
