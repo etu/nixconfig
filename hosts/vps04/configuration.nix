@@ -110,7 +110,7 @@ in
 
     root = {
       initialHashedPassword = secrets.hashedRootPassword;
-      openssh.authorizedKeys.keys = keys.etu.computers ++ keys.etu.deploy;
+      openssh.authorizedKeys.keys = keys.etu.computers ++ keys.etu.syncoid;
     };
 
     concate = {

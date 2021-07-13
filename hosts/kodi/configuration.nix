@@ -119,7 +119,7 @@ in
   networking.firewall.allowedTCPPorts = [ 8080 ];
 
   # SSH Keys for remote logins
-  users.users.root.openssh.authorizedKeys.keys = keys.etu.computers ++ keys.etu.deploy;
+  users.users.root.openssh.authorizedKeys.keys = keys.etu.computers ++ keys.etu.syncoid;
 
   # Enable a user to do deployments with
   my.deploy-user.enable = true;

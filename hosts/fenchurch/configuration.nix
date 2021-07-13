@@ -105,10 +105,7 @@ in
   };
 
   # Allow syncoid on other computers to sync here.
-  users.users.root.openssh.authorizedKeys.keys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICdtbbrBHT1i29nFdaf54zsJ4Yrt2tOLnNotaRIneazp root@agrajag-2021-07-11"
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICanCC9f9xSYqKSxJPOmitbN0CLKVJG1AdnBYnDz9HQY root@eliaxe-A100514-NR-2021-07-12"
-  ];
+  users.users.root.openssh.authorizedKeys.keys = keys.etu.syncoid;
 
   # Hardware settings
   hardware.cpu.intel.updateMicrocode = true;

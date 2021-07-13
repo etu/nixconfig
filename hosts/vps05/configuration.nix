@@ -128,5 +128,5 @@ in
   # Enable a user to do deployments with
   my.deploy-user.enable = true;
 
-  users.users.root.openssh.authorizedKeys.keys = keys.etu.computers ++ keys.etu.deploy;
+  users.users.root.openssh.authorizedKeys.keys = keys.etu.computers ++ keys.etu.syncoid;
 }
