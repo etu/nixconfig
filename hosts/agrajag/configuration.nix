@@ -136,7 +136,7 @@ in {
     system = "x86_64-linux";
     maxJobs = 5;
     sshUser = "root";
-    sshKey = "/persistent/home/root/.ssh/id_ed25519";
+    sshKey = "/persistent/home/syncoid/.ssh/id_ed25519";
   }];
   nix.distributedBuilds = true;
   nix.extraOptions = ''
