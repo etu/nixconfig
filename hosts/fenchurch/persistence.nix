@@ -21,12 +21,6 @@
     options = [ "bind" "noauto" "x-systemd.automount" ];
   };
 
-  # Persist root's .ssh directory
-  fileSystems."/root/.ssh" = {
-    device = "/persistent/home/root/.ssh";
-    options = [ "bind" "noauto" "x-systemd.automount" ];
-  };
-
   my.user.persistent = {
     extraFiles = [
       ".config/fish/fish_variables"
