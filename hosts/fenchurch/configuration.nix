@@ -143,14 +143,6 @@ in
   users.users.root.initialHashedPassword = secrets.hashedRootPassword;
   users.users.etu.initialHashedPassword = secrets.hashedEtuPassword;
 
-  # Add account for concate
-  users.users.concate = {
-    isNormalUser = true;
-    home = "/home/concate";
-    uid = 1001;
-    openssh.authorizedKeys.keys = keys.concate;
-  };
-
   # Home-manager as nix module
   my.home-manager.enable = true;
 

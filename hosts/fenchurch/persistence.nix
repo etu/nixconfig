@@ -15,12 +15,6 @@
     options = [ "bind" "noauto" "x-systemd.automount" ];
   };
 
-  # Persistance of concates home directory
-  fileSystems."/home/concate" = {
-    device = "/persistent/home/concate";
-    options = [ "bind" "noauto" "x-systemd.automount" ];
-  };
-
   my.user.persistent = {
     extraFiles = [
       ".config/fish/fish_variables"
