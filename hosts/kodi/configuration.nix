@@ -42,10 +42,10 @@ in
   # Set up Sanoid for snapshots
   my.backup.enable = true;
   my.backup.enableSanoid = true;
-  my.backup.filesystems = [
-    "zroot/home"
-    "zroot/persistent"
-  ];
+
+  # Enable snapshotting for some filesystems
+  services.sanoid.datasets."zroot/home".useTemplate = [ "default" ];
+  services.sanoid.datasets."zroot/persistent".useTemplate = [ "default" ];
 
   # AMD GPU drivers
   services.xserver.videoDrivers = [ "amdgpu" ];

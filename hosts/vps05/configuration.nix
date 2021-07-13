@@ -36,9 +36,9 @@ in
   # Set up Sanoid for snapshots
   my.backup.enable = true;
   my.backup.enableSanoid = true;
-  my.backup.filesystems = [
-    "zroot/persistent"
-  ];
+
+  # Enable snapshotting for some filesystems
+  services.sanoid.datasets."zroot/persistent".useTemplate = [ "default" ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

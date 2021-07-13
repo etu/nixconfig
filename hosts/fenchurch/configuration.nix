@@ -88,10 +88,10 @@ in
   my.backup.enable = true;
   my.backup.enableSanoid = true;
   my.backup.enableSyncoid = true;
-  my.backup.filesystems = [
-    "zroot/home"
-    "zroot/persistent"
-  ];
+
+  # Enable snapshotting for some filesystems
+  services.sanoid.datasets."zroot/home".useTemplate = [ "default" ];
+  services.sanoid.datasets."zroot/persistent".useTemplate = [ "default" ];
 
   services.syncoid.commands = {
     "root@vps04.elis.nu:zroot/home".target = "zroot/backups/vps04/zroot/home";
