@@ -11,30 +11,57 @@
       '';
     in
     {
+      # Index file
+      "local.elis.nu".locations."/" = {
+        root = pkgs.writeTextDir "index.html" ''
+          <!DOCTYPE html>
+          <html lang="en">
+            <head>
+              <meta charset="utf-8" />
+              <title>Links</title>
+            </head>
+            <body>
+              <ul>
+                <li><a href="/bazarr">Bazarr (Subtitles)</a></li>
+                <li><a href="/sonarr">Sonarr (Series)</a></li>
+                <li><a href="/radarr">Radarr (Movies)</a></li>
+                <li><a href="/lidarr">Lidarr (Music)</a></li>
+                <li><a href="/nzbget">NzbGet</a></li>
+              </ul>
+            </body>
+          </html>
+        '';
+        extraConfig = onlyLan;
+      };
       # Bazarr
-      "subs.lan".locations."/" = {
-        proxyPass = "http://127.0.0.1:6767/";
+      "local.elis.nu".locations."/bazarr" = {
+        proxyPass = "http://127.0.0.1:6767/bazarr";
         extraConfig = onlyLan;
       };
       # Sonarr
-      "series.lan".locations."/" = {
-        proxyPass = "http://127.0.0.1:8989/";
+      "local.elis.nu".locations."/sonarr" = {
+        proxyPass = "http://127.0.0.1:8989/sonarr";
         extraConfig = onlyLan;
       };
       # Radarr
-      "movies.lan".locations."/" = {
-        proxyPass = "http://127.0.0.1:7878/";
+      "local.elis.nu".locations."/radarr" = {
+        proxyPass = "http://127.0.0.1:7878/radarr";
         extraConfig = onlyLan;
       };
       # Lidarr
-      "music.lan".locations."/" = {
-        proxyPass = "http://127.0.0.1:8686/";
+      "local.elis.nu".locations."/lidarr" = {
+        proxyPass = "http://127.0.0.1:8686/lidarr";
         extraConfig = onlyLan;
       };
       # Nzbget
-      "nzbget.lan".locations."/" = {
-        proxyPass = "http://127.0.0.1:6789/";
-        extraConfig = onlyLan;
+      "local.elis.nu".locations."~ ^/nzbget($|./*)" = {
+        proxyPass = "http://127.0.0.1:6789";
+        extraConfig = onlyLan + ''
+          rewrite /nzbget/(.*) /$1 break;
+          proxy_set_header Host $host;
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        '';
       };
     };
 
