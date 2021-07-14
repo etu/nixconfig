@@ -65,13 +65,10 @@
       };
     };
 
-  # nzbget needs unrar and p7zip
-  nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.permittedInsecurePackages = [ pkgs.p7zip.name ];
-
   # Enable usenet related services in a container
   containers.usenet = {
     config = { config, pkgs, ... }: {
+      # nzbget needs unrar
       nixpkgs.config.allowUnfree = true;
 
       services.bazarr = { enable = true; user = "downloads"; group = "downloads"; };
