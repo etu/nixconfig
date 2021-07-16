@@ -26,7 +26,10 @@ in
       in
       {
         # Import a persistance module for home-manager.
-        imports = [ "${sources.impermanence}/home-manager.nix" ];
+        imports = [
+          "${sources.impermanence}/home-manager.nix"
+          ./home-manager/weechat.nix
+        ];
 
         programs.home-manager.enable = true;
 
