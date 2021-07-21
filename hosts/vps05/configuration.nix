@@ -40,13 +40,6 @@ in
   # Enable snapshotting for some filesystems
   services.sanoid.datasets."zroot/persistent".useTemplate = [ "default" ];
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    git
-    htop
-  ];
-
   # Install mosh
   programs.mosh.enable = true;
 
