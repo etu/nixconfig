@@ -89,8 +89,7 @@ in
     "keys.proxxi.org" = {
       forceSSL = true;
       enableACME = true;
-      locations."/".root = pkgs.pgpkeyserver-lite;
-      locations."/pks".proxyPass = "http://127.0.0.1:11371/pks";
+      locations."/".proxyPass = "http://127.0.0.1:11371/";
     };
   };
 
@@ -110,14 +109,19 @@ in
   # Postgres
   services.postgresql.enable = true;
   services.postgresql.package = pkgs.postgresql_11;
+  services.postgresql.ensureDatabases = [
+    "hockeypuck"
+  ];
+  services.postgresql.ensureUsers = [{
+    name = "hockeypuck";
+    ensurePermissions."DATABASE hockeypuck" = "ALL PRIVILEGES";
+  }];
 
   # Enable the ip-failar-nu service
   services.ip-failar-nu.enable = true;
 
-  # Enable sks keyserver
-  services.sks.enable = true;
-  services.sks.hkpAddress = [ "0.0.0.0" "::0" ];
-  services.sks.extraDbConfig = "set_flags               DB_LOG_AUTOREMOVE";
+  # Enable hockeypuck keyserver
+  services.hockeypuck.enable = true;
 
   # Enable common cli settings for my systems
   my.common-cli.enable = true;
