@@ -6,13 +6,6 @@
 let
   # Import my ssh public keys
   keys = import ../../data/pubkeys.nix;
-
-  kodipkgs = import
-    (builtins.fetchTarball {
-      url = "https://github.com/NixOS/nixpkgs/archive/44442c4ad1d1526c98f2501b2755083434a69c5b.tar.gz";
-      sha256 = "0hqjii3qj7ddk7w70yxaawvdis4ag2b012djsas4zg1aab0zqvkr";
-    }) { };
-
 in
 {
   imports = [
@@ -75,7 +68,6 @@ in
 
   # Enable Kodi.
   services.xserver.desktopManager.kodi.enable = true;
-  services.xserver.desktopManager.kodi.package = kodipkgs.kodi;
 
   # Enable Kodi plugins.
   nixpkgs.config.kodi.enableSVTPlay = true;
