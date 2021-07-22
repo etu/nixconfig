@@ -17,14 +17,15 @@
 
   my.user.persistent = {
     extraFiles = [
+      ".caffrc"
       ".config/fish/fish_variables"
+      ".msmtprc"
 
       # Mumble files
       ".config/Mumble/Mumble.conf"
       ".local/share/Mumble/Mumble/mumble.sqlite"
     ];
     extraDirectories = [
-      ".caffrc"
       ".config/autorandr"
       ".config/obs-studio"
       ".config/pipewire/media-session.d"
@@ -36,7 +37,6 @@
       ".local/share/emacs"
       ".local/share/fish"
       ".mozilla/firefox"
-      ".msmtprc"
       ".password-store"
       ".ssh"
       "Downloads"

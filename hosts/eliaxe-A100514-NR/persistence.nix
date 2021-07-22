@@ -17,7 +17,9 @@
 
   my.user.persistent = {
     extraFiles = [
+      ".caffrc"
       ".config/fish/fish_variables"
+      ".msmtprc"
 
       # Work
       ".docker/config.json"
@@ -27,7 +29,6 @@
       "bin/mydump"
     ];
     extraDirectories = [
-      ".caffrc"
       ".config/pipewire/media-session.d"
       ".dotfiles"
       ".gnupg"
@@ -37,7 +38,6 @@
       ".local/share/emacs"
       ".local/share/fish"
       ".mozilla/firefox"
-      ".msmtprc"
       ".password-store"
       ".ssh"
       "Downloads"
