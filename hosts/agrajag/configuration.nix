@@ -120,6 +120,10 @@ in {
   # Enable steam things
   my.gaming.enable = true;
 
+  # Allow user mounts to specify allow others, this is useful for sudo
+  # operations within fuse mounted directories.
+  programs.fuse.userAllowOther = true;
+
   # Set up docker
   virtualisation.docker.enable = true;
   virtualisation.docker.storageDriver = "zfs";

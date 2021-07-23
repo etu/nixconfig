@@ -33,6 +33,7 @@ in
         home.persistence.${config.my.user.persistent.homeDir} = {
           files = [ ] ++ config.my.user.persistent.extraFiles;
           directories = [ ] ++ config.my.user.persistent.extraDirectories;
+          allowOther = config.programs.fuse.userAllowOther;
         };
 
         home.file = {

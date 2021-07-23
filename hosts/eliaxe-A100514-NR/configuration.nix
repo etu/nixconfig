@@ -114,6 +114,10 @@ in
   # Install ADB for occational android device things
   programs.adb.enable = true;
 
+  # Allow user mounts to specify allow others, this is useful for sudo
+  # operations within fuse mounted directories.
+  programs.fuse.userAllowOther = true;
+
   # Enable docker deamon
   virtualisation.docker.enable = true;
   virtualisation.docker.storageDriver = "zfs";
