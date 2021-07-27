@@ -170,6 +170,7 @@
         server-sparv = mkSystem {name = "server-sparv";};
         live-iso = mkSystem {name = "live-iso";};
         pi-octonix = mkArmSystem {name = "pi-octonix";};
+        pi-nix-star = mkArmSystem {name = "pi-nix-star";};
       };
 
       # Specify deploy-rs deployments
