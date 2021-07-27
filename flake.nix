@@ -157,6 +157,7 @@
         vps06 = mkSystem {name = "vps06";};
         server-sparv = mkSystem {name = "server-sparv";};
         live-iso = mkSystem {name = "live-iso";};
+        pi-nix-star = mkArmSystem {name = "pi-nix-star";};
       };
 
       # Specify deploy-rs deployments
