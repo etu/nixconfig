@@ -134,10 +134,13 @@ in {
   environment.systemPackages = with pkgs; [ virt-manager ];
   virtualisation.spiceUSBRedirection.enable = true;
 
+  # Set up tools to allow for cross compiling things.
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
   # Set up remote builds
   nix.buildMachines = [{
     hostName = "home.elis.nu";
-    system = "x86_64-linux";
+    systems = [ "x86_64-linux" "aarch64-linux" ];
     maxJobs = 5;
     sshUser = "root";
     sshKey = "/persistent/home/syncoid/.ssh/id_ed25519";
