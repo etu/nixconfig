@@ -146,6 +146,9 @@ in
   # Enable kvm
   virtualisation.libvirtd.enable = true;
 
+  # Set up tools to allow for cross compiling things.
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
   # Set up Letsencrypt
   security.acme.email = "elis@hirwing.se";
   security.acme.acceptTerms = true;
