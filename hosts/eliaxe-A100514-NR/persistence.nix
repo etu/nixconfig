@@ -30,6 +30,7 @@
     ];
     extraDirectories = [
       ".config/pipewire/media-session.d"
+      ".config/syncthing"
       ".dotfiles"
       ".gnupg"
       ".local/share/TelegramDesktop/tdata"

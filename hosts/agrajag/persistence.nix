@@ -29,6 +29,7 @@
       ".config/autorandr"
       ".config/obs-studio"
       ".config/pipewire/media-session.d"
+      ".config/syncthing"
       ".dotfiles"
       ".gnupg"
       ".local/share/TelegramDesktop/tdata"

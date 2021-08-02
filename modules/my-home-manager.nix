@@ -212,6 +212,9 @@ in
           platformTheme = "gtk";
         };
 
+        # Enable syncthing.
+        services.syncthing.enable = isGraphical;
+
         # Enable the dunst notification deamon
         services.dunst.enable = isX11;
         services.dunst.settings = {
