@@ -525,6 +525,11 @@
   :init
   (progn
     (setq org-src-fontify-natively t)
+
+    ;; Set path for org agenda files
+    (if (file-directory-p "~/org")
+        (setq org-agenda-files '("~/org")))
+
     (add-hook 'org-mode-hook (lambda ()
                                (set (make-local-variable 'fill-column) 77)))))
 
