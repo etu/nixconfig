@@ -527,8 +527,8 @@
     (setq org-src-fontify-natively t)
 
     ;; Set path for org agenda files
-    (if (file-directory-p "~/org")
-        (setq org-agenda-files '("~/org")))
+    (if (file-directory-p "/persistent/home/etu/.dotfiles/skeleton/org")
+        (setq org-agenda-files '("/persistent/home/etu/.dotfiles/skeleton/org")))
 
     (add-hook 'org-mode-hook (lambda ()
                                (set (make-local-variable 'fill-column) 77)))))
