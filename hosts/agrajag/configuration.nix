@@ -134,18 +134,28 @@ in {
   environment.systemPackages = with pkgs; [ virt-manager ];
   virtualisation.spiceUSBRedirection.enable = true;
 
-  # Set up tools to allow for cross compiling things.
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+  # Add community server to known hosts
+  programs.ssh.knownHosts."aarch64.nixos.community".publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMUTz5i9u5H2FHNAmZJyoJfIGyUm/HfGhfwnc142L3ds";
 
   # Set up remote builds
-  nix.buildMachines = [{
-    hostName = "home.elis.nu";
-    systems = [ "x86_64-linux" "aarch64-linux" ];
-    maxJobs = 5;
-    sshUser = "root";
-    sshKey = "/persistent/home/syncoid/.ssh/id_ed25519";
-  }];
   nix.distributedBuilds = true;
+  nix.buildMachines = [
+    {
+      hostName = "home.elis.nu";
+      maxJobs = 8;
+      sshKey = "/persistent/home/syncoid/.ssh/id_ed25519";
+      sshUser = "root";
+      system = "x86_64-linux";
+    }
+    {
+      hostName = "aarch64.nixos.community";
+      maxJobs = 64;
+      sshKey = "/persistent/home/etu/.ssh/id_ed25519_aarch64_nixos_community";
+      sshUser = "etu";
+      system = "aarch64-linux";
+      supportedFeatures = [ "big-parallel" ];
+    }
+  ];
   nix.extraOptions = ''
     builders-use-substitutes = true
 
