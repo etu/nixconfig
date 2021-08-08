@@ -5,6 +5,7 @@ let
   sources = import ../nix/sources.nix;
 in {
   imports = [
+    "${sources.agenix}/modules/age.nix"
     "${sources.impermanence}/nixos.nix"
     "${sources.ip-failar-nu}/nixos.nix"
     "${sources.flummbot}/nixos.nix"

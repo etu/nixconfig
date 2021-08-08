@@ -22,6 +22,7 @@ in
     ./services/guest-users.nix
     ./services/hass.nix
     ./services/jellyfin.nix
+    ./services/nagios.nix
     ./services/netdata.nix
     ./services/nfs.nix
     ./services/usenet.nix
