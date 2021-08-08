@@ -1,4 +1,16 @@
 {
+    "agenix": {
+        "branch": "master",
+        "description": "age-encrypted secrets for NixOS",
+        "homepage": "",
+        "owner": "ryantm",
+        "repo": "agenix",
+        "rev": "e6752e7b8592502df42066f156165471e62d902d",
+        "sha256": "0p07c5xy46jwdixvykkyfv7k30z867gs7xl8skhi4smzayqn0080",
+        "type": "tarball",
+        "url": "https://github.com/ryantm/agenix/archive/e6752e7b8592502df42066f156165471e62d902d.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "emacs-overlay": {
         "branch": "master",
         "description": "Bleeding edge emacs overlay [maintainer=@adisbladis] ",
