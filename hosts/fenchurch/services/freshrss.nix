@@ -115,7 +115,8 @@
         systemd.services.freshrss-updater = {
           description = "freshrss feed updater";
           after = [ "freshrss-config.service" ];
-          wantedBy = [ "default.target" ];
+          wantedBy = [ "multi-user.target" ];
+          startAt = "*:0/5";
 
           serviceConfig = {
             Type = "oneshot";
@@ -124,14 +125,6 @@
             WorkingDirectory = dataDir;
             ExecStart = "${pkgs.php}/bin/php ${dataDir}/app/actualize_script.php";
           };
-        };
-
-        # Timer to run the updater.
-        systemd.timers.freshrss-updater = {
-          description = "freshrss feed updater timer";
-          partOf = [ "freshrss-updater.service" ];
-          wantedBy = [ "timers.target" ];
-          timerConfig.OnCalendar = "*:0/5";
         };
       };
     };
