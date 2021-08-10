@@ -7,6 +7,9 @@ let
   # Load secrets
   secrets = import ../../data/load-secrets.nix;
 
+  # Import my ssh public keys
+  keys = import ../../data/pubkeys.nix;
+
   # Load inputs
   sources = import ../../nix/sources.nix;
 in {
@@ -135,7 +138,7 @@ in {
   virtualisation.spiceUSBRedirection.enable = true;
 
   # Add community server to known hosts
-  programs.ssh.knownHosts."aarch64.nixos.community".publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMUTz5i9u5H2FHNAmZJyoJfIGyUm/HfGhfwnc142L3ds";
+  programs.ssh.knownHosts."aarch64.nixos.community".publicKey = keys.systems."aarch64.nixos.community";
 
   # Set up remote builds
   nix.distributedBuilds = true;
