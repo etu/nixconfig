@@ -46,12 +46,21 @@ in
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    git
-    htop
-    irssi
-    screen
-    weechat
+  environment.systemPackages = [
+    pkgs.git
+    pkgs.htop
+    pkgs.irssi
+    pkgs.screen
+
+    # Install weechat with weechat-matrix
+    (pkgs.weechat.override {
+      configure = { availablePlugins, ... }: {
+        scripts = [ pkgs.weechatScripts.weechat-matrix ];
+      };
+    })
+
+    # Install weechat-matrix helper scripts
+    pkgs.weechatScripts.weechat-matrix
   ];
 
   # Enable aspell and hunspell with dictionaries.
