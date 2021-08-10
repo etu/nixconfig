@@ -140,6 +140,20 @@ in {
   # Add community server to known hosts
   programs.ssh.knownHosts."aarch64.nixos.community".publicKey = keys.systems."aarch64.nixos.community";
 
+  age.secrets."etu@aarch64.nixos.community.age" = {
+    file = ../../secrets/sshkeys/etu_at_aarch64.nixos.community.age;
+    path = "/persistent/home/etu/.ssh/etu@aarch64.nixos.community";
+    owner = "etu";
+    mode = "400";
+  };
+
+  age.secrets."etu@aarch64.nixos.community.pub.age" = {
+    file = ../../secrets/sshkeys/etu_at_aarch64.nixos.community.pub.age;
+    path = "/persistent/home/etu/.ssh/etu@aarch64.nixos.community.pub";
+    owner = "etu";
+    mode = "400";
+  };
+
   # Set up remote builds
   nix.distributedBuilds = true;
   nix.buildMachines = [
@@ -153,7 +167,7 @@ in {
     {
       hostName = "aarch64.nixos.community";
       maxJobs = 64;
-      sshKey = "/persistent/home/etu/.ssh/id_ed25519_aarch64_nixos_community";
+      sshKey = config.age.secrets."etu@aarch64.nixos.community.age".path;
       sshUser = "etu";
       system = "aarch64-linux";
       supportedFeatures = [ "big-parallel" ];
