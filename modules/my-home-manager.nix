@@ -158,7 +158,7 @@ in
 
           # Conditonally included configs
           includes = [{
-            condition = "gitdir:/persistent/home/etu/tvnu/";
+            condition = "gitdir:/home/etu/tvnu/";
             contents = {
               commit.gpgSign = false;
               user.email = "elis.hirwing@schibsted.com";
