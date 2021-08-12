@@ -82,7 +82,7 @@ in
 
   # Enable nfs server exports.
   services.nfs.server.exports = ''
-    /home/etu/tvnu/projects 192.168.5.102(rw,no_subtree_check,all_squash,anonuid=1000,anongid=100)
+    /persistent/home/etu/tvnu/projects 192.168.5.102(rw,no_subtree_check,all_squash,anonuid=1000,anongid=100)
   '';
 
   # Disable root login for ssh
