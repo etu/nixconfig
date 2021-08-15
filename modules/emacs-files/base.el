@@ -530,6 +530,10 @@
     (if (file-directory-p "/persistent/home/etu/.dotfiles/skeleton/org")
         (setq org-agenda-files '("/persistent/home/etu/.dotfiles/skeleton/org")))
 
+    ;; Disable indentation of text and content to be based on the headlines
+    ;; amount of stars.
+    (setq org-adapt-indentation nil)
+
     (add-hook 'org-mode-hook (lambda ()
                                (set (make-local-variable 'fill-column) 77)))))
 

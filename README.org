@@ -1,33 +1,33 @@
 * My NixOS configs
-  Clone into =/etc/nixos/=.
+Clone into =/etc/nixos/=.
 
-  This requires an installation of nix with working flakes.
+This requires an installation of nix with working flakes.
 
 * Small tips and tricks
 ** Installing from different flakes
-   #+BEGIN_SRC nix
-     # Take inputs as an argument
-     {
-       config = inputs: {
-         environment.systemPackages = with inputs.nixpkgs.x86_64-linux; [
-           cowsay
-         ];
-       };
-     }
-   #+END_SRC
+#+BEGIN_SRC nix
+  # Take inputs as an argument
+  {
+    config = inputs: {
+      environment.systemPackages = with inputs.nixpkgs.x86_64-linux; [
+        cowsay
+      ];
+    };
+  }
+#+END_SRC
 
 ** Sample overlay to overwrite package
-   Sample overlay to downgrade PHP to a specific version:
+Sample overlay to downgrade PHP to a specific version:
 
-   #+BEGIN_SRC nix
-     { pkgs, ... }:
+#+BEGIN_SRC nix
+  { pkgs, ... }:
 
-     {
-       nixpkgs.overlays = [
-         (self: super: {
-           php = self.php70;
-           phpPackages = self.php70Packages;
-         })
-       ];
-     }
-   #+END_SRC
+  {
+    nixpkgs.overlays = [
+      (self: super: {
+        php = self.php70;
+        phpPackages = self.php70Packages;
+      })
+    ];
+  }
+#+END_SRC
