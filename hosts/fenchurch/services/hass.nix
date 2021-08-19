@@ -88,7 +88,7 @@ in
           action = [
             {
               service = "light.turn_on";
-              data.entity_id = "light.tv_wall_strip";
+              data.entity_id = [ "light.elis_desk_lamps" "light.tv_wall_strip" ];
             }
             {
               service = "switch.turn_on";
@@ -135,10 +135,16 @@ in
               state = "on";
             }
           ];
-          action = {
-            service = "switch.turn_on";
-            data.entity_id = "switch.floorlamp_office";
-          };
+          action = [
+            {
+              service = "light.turn_on";
+              data.entity_id = "light.elis_desk_lamps";
+            }
+            {
+              service = "switch.turn_on";
+              data.entity_id = "switch.floorlamp_office";
+            }
+          ];
         }
 
         # Turn off the floor lamps in the evening or when not home
@@ -155,7 +161,7 @@ in
               service = "switch.turn_off";
             }
             {
-              data.entity_id = "light.tv_wall_strip";
+              data.entity_id = [ "light.elis_desk_lamps" "light.tv_wall_strip" ];
               service = "light.turn_off";
             }
           ];
@@ -363,6 +369,7 @@ in
                 { entity = "light.tv_wall_strip"; icon = "mdi:led-strip"; }
                 { entity = "switch.floorlamp_office"; icon = "mdi:floor-lamp"; }
                 { entity = "switch.floorlamp_bookshelf"; icon = "mdi:floor-lamp"; }
+                { entity = "light.elis_desk_lamps"; icon = "mdi:desk-lamp"; }
               ];
             }
             # Panel with settings
