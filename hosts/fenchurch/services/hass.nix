@@ -404,48 +404,6 @@ in
             }
           ];
         }
-        {
-          title = "Floorplan";
-          icon = "mdi:map";
-          panel = true;
-          path = "floorplan";
-          cards = [
-            {
-              type = "picture-elements";
-              title = "Floorplan";
-              image = "/local/img/floorplan.png";
-              elements = [
-                # Add floorlamp in the livingroom to the floorplan
-                {
-                  type = "state-icon";
-                  entity = "switch.floorlamp_bookshelf";
-                  title = "Floorlamp Livingroom";
-                  icon = "mdi:floor-lamp";
-                  tap_action.action = "toggle";
-                  style = { top = "50%"; left = "70%"; };
-                }
-                # Add floorlamp in the office to the floorplan
-                {
-                  type = "state-icon";
-                  entity = "switch.floorlamp_office";
-                  title = "Floorlamp Office";
-                  icon = "mdi:floor-lamp";
-                  tap_action.action = "toggle";
-                  style = { top = "48%"; left = "54%"; };
-                }
-                # Add Hue lightstrip in the livingroom to the floorplan
-                {
-                  type = "state-icon";
-                  entity = "light.tv_wall_strip";
-                  title = "Hue Lightstrip";
-                  icon = "mdi:led-strip";
-                  tap_action.action = "toggle";
-                  style = { top = "52%"; left = "87%"; };
-                }
-              ];
-            }
-          ];
-        }
       ];
     }; # END lovelaceConfig  = {
   };
