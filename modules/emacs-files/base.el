@@ -542,10 +542,9 @@
 (use-package org
   :defer 2
   :init
-  ;; This changes formating of time in clocktables
-  ;; So instead of "Dd HH:MM" we get "HH.MM"
-  ;; TODO: Change from this variable since it's deprecated and do the correct require
-  (setq org-time-clocksum-use-fractional t)
+  ;; This changes formating of time in clocktables from "1d HH:MM" to "HH:MM"
+  (setq org-duration-format '((special . h:mm)))
+
   :config
   ;; Add advice to override indention
   ;; Define function to re-do indent of items in clocktable
