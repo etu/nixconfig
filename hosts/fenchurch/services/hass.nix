@@ -24,6 +24,14 @@ in
     '';
   };
 
+# Include agenix encripted secret
+  age.secrets.hass-secrets-yaml = {
+    file = ../../../secrets/home-assistant/secrets.yaml.age;
+    path = "/persistent/var/lib/hass/secrets.yaml";
+    owner = "hass";
+    group = "hass";
+  };
+
   # Enable Home Assistant, open port and add the hass user to the dialout group
   services.home-assistant = {
     enable = true;
