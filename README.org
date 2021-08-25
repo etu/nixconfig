@@ -1,33 +1,97 @@
 * My NixOS configs
-Clone into =/etc/nixos/=.
+This is my personal NixOS configuration repository. It's not a flake
+compatible NixOS configuration repository. It was for a while until I rolled
+it back.
 
-This requires an installation of nix with working flakes.
+I have this repository cloned to ~/etc/nixos/~. This repository is pretty
+much self contained and should be fairly pure.
 
-* Small tips and tricks
-** Installing from different flakes
-#+BEGIN_SRC nix
-  # Take inputs as an argument
-  {
-    config = inputs: {
-      environment.systemPackages = with inputs.nixpkgs.x86_64-linux; [
-        cowsay
-      ];
-    };
-  }
+The repository doesn't require symbolic linking of the used host system
+configuration to the root of this directory since I make sure to set the
+~NIX_PATH~ environment variable to point directly at the real file location.
+
+This makes the initial rebuild requiring a ~NIX_PATH~ that looks something
+like the following to build correctly:
+#+BEGIN_SRC
+NIX_PATH=nixpkgs=/etc/nixos/nix/nixos-unstable:nixos-config=/etc/nixos/hosts/<HOSTNAME>/configuration.nix
 #+END_SRC
 
-** Sample overlay to overwrite package
-Sample overlay to downgrade PHP to a specific version:
+** Files and Directories in this repository
+*** ~data/~
+**** ~data/load-secrets.nix~
+This file isn't a good place to store real secrets, it's pretty much only
+reasonable to have dummy hashes and do the loading of a file named
+~data/secrets.nix~ which can contain real secrets and shouldn't be committed
+in the repository.
 
-#+BEGIN_SRC nix
-  { pkgs, ... }:
+**** ~data/pubkeys.nix~
+This file contains public SSH keys for all the systems I have and care about,
+but also for trusted users that should have access to accounts on different
+systems. This becomes a central place to manage said keys for said users.
 
-  {
-    nixpkgs.overlays = [
-      (self: super: {
-        php = self.php70;
-        phpPackages = self.php70Packages;
-      })
-    ];
-  }
+*** ~deploy/private.nix~
+This file uses [[https://github.com/Infinisil/nixus][nixus]] to generate a deployment script for all systems that
+aren't /hands on/ systems (such as laptops), so this includes all VPSes,
+servers, and other systems that aren't used as desktop systems.
+
+To build the deployment script for all these systems, it's as simple as:
+#+BEGIN_SRC bash
+  nix-build deploy/private.nix
 #+END_SRC
+
+This will give a symbolic link named ~result~ which can be used to deploy all
+of the systems at once.
+
+Just run it:
+#+BEGIN_SRC bash
+  ./result
+#+END_SRC
+
+*** ~hosts/~
+**** ~hosts/agrajag/~
+Main private laptop, deployed like a normal NixOS system using
+~nixos-rebuild~ to build new generations. ZFS snapshots are pushed from this
+system to fenchurch whenever this system is online.
+
+**** ~hosts/eliaxe-A100514-NR/~
+Work laptop, deployed like a normal NixOS system using ~nixos-rebuild~ to
+build new generations. ZFS snapshots are pushed from this system to fenchurch
+whenever this system is online.
+
+**** ~hosts/fenchurch/~
+Home file server, deployed using ~deploy/private.nix~. Also used as build
+machines for the laptops. It's also my primary location to store ZFS
+snapshots that I backup from all of the other systems. It runs home assistant
+and some other things.
+
+**** ~hosts/kodi/~
+Computer that runs Kodi in fullscreen. Nothing special. ZFS snapshots are
+pulled from this system to fenchurch.
+
+**** ~hosts/vps04/~
+System for IRC clients and an IRC bot. Nothing else. ZFS snapshots are pulled
+from this system to fenchurch.
+
+**** ~hosts/vps05/~
+System that runs Gitea, a Hockeypuck GPG keyserver, [[https://ip.failar.nu/][ip.failar.nu]] among some
+other things.
+
+*** ~modules/~
+This directory contains a whole bunch of modules that I've come up with to
+make it easier for me to quickly configure multiple systems to do similar
+things. So I've made my own modules with my own options.
+
+Here's things like Emacs, [[https://github.com/nix-community/home-manager][home-manager]], sway configuration, the list goes on.
+
+*** ~nix/~
+Contains nix sources, like the checkout of ~nixpkgs~ that I'm building my
+systems on. Also contains the ~sources.json~ which is the state directory of
+[[https://github.com/nmattia/niv][niv]] that I use to easily pin external resources.
+
+*** ~secrets/~
+This is the directory with real secrets managed with [[https://github.com/ryantm/agenix][agenix]] which [[https://github.com/FiloSottile/age][age]] encrypt
+files using the public SSH keys for my users on my primary laptops and the
+public SSH-key on the host of intended use. This way I can see, edit and
+update encryption keys on my primary laptops and commit these files to the
+repository. But then also the target system of intended use can decrypt it
+with it's stateful private SSH key.
