@@ -24,7 +24,7 @@ in
     '';
   };
 
-# Include agenix encripted secret
+  # Include agenix encripted secret
   age.secrets.hass-secrets-yaml = {
     file = ../../../secrets/home-assistant/secrets.yaml.age;
     path = "/persistent/var/lib/hass/secrets.yaml";
@@ -319,16 +319,6 @@ in
       # Purge tracked history after 10 days
       recorder.purge_keep_days = 10;
 
-      # Automatic chromecast detection
-      cast = [
-        { media_player = { }; }
-      ];
-
-      # Media players
-      media_player = [
-        { platform = "kodi"; host = "kodi.lan"; }
-      ];
-
       # Enable logging
       logger.default = "info";
 
@@ -393,8 +383,6 @@ in
             }
             # Weather forecast
             { type = "weather-forecast"; entity = "weather.openweathermap"; }
-            # Kodi status
-            { type = "media-control"; entity = "media_player.kodi"; }
             # Vacuum cleaner
             {
               type = "custom:vacuum-card";
@@ -415,8 +403,6 @@ in
       ];
     }; # END lovelaceConfig  = {
   };
-
-  users.users.hass.extraGroups = [ "dialout" ];
 
   # Bind mount home assistants files to have persistence of hass configs
   fileSystems."/var/lib/hass" = {
