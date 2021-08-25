@@ -147,6 +147,12 @@ in
   services.clamav.daemon.enable = true;
   services.clamav.updater.enable = true;
 
+  # Install Spotify.
+  environment.systemPackages = [ pkgs.spotify ];
+
+  # Enable blueman.
+  services.blueman.enable = true;
+
   # Set up remote builds
   nix.distributedBuilds = true;
   nix.buildMachines = [{

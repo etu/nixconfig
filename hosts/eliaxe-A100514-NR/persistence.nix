@@ -21,6 +21,9 @@
       ".config/fish/fish_variables"
       ".msmtprc"
 
+      # Spotify
+      ".config/spotify/prefs"
+
       # Work
       ".docker/config.json"
       ".kube/config"
@@ -45,6 +48,9 @@
       "code"
       "documents"
       "org"
+
+      # Spotify
+      ".config/spotify/Users"
 
       # Work
       ".chef"
