@@ -190,6 +190,7 @@ in
           enable = true;
           settings = {
             hide_userland_threads = true;
+            hide_kernel_threads = true;
             highlight_base_name = true;
             shadow_other_users = true;
             show_program_path = true;
