@@ -122,11 +122,6 @@ in
   virtualisation.docker.enable = true;
   virtualisation.docker.storageDriver = "zfs";
 
-  # Enable podman
-  virtualisation.podman.enable = true;
-  environment.systemPackages = with pkgs; [ podman-compose ];
-  # For future reference: virtualisation.podman.dockerCompat = false;
-
   # Install netdata for system monitoring
   services.netdata.enable = true;
 
