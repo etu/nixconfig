@@ -137,6 +137,13 @@ in {
   environment.systemPackages = with pkgs; [ virt-manager ];
   virtualisation.spiceUSBRedirection.enable = true;
 
+  # Include agenix encripted secret for secret password file
+  age.secrets.hass-secrets-yaml = {
+    file = ../../secrets/nixos-data-secrets.nix.age;
+    path = "/persistent/etc/nixos/data/secrets.nix";
+    owner = "etu";
+  };
+
   # Add community server to known hosts
   programs.ssh.knownHosts."aarch64.nixos.community".publicKey = keys.systems."aarch64.nixos.community";
 

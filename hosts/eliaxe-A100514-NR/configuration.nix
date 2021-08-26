@@ -138,6 +138,13 @@ in
   # Home-manager as nix module
   my.home-manager.enable = true;
 
+  # Include agenix encripted secret for secret password file
+  age.secrets.hass-secrets-yaml = {
+    file = ../../secrets/nixos-data-secrets.nix.age;
+    path = "/persistent/etc/nixos/data/secrets.nix";
+    owner = "etu";
+  };
+
   # Enable ClamAV.
   services.clamav.daemon.enable = true;
   services.clamav.updater.enable = true;
