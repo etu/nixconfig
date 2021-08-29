@@ -263,6 +263,16 @@
   :init (setq nix-indent-function 'nix-indent-line))
 
 
+;; Java for a temporary thing with weird requirements.
+(use-package lsp-java :ensure t :defer 2)
+(use-package java-mode
+  :defer 2
+  :hook (java-mode-hook . lsp)
+  :init (add-hook 'java-mode-hook (lambda ()
+                                    (setq c-basic-offset 3
+                                          fill-column 100))))
+
+
 ;;;
 ;;; Company mode and backends
 ;;;
