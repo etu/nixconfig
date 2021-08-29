@@ -41,10 +41,10 @@
         "homepage": "https://nix-community.github.io/home-manager/",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "9029fd2b9de2147480efab55f351343f4fed73b9",
-        "sha256": "1jnn3xxnx6k3sa3ws78zhv7lq83713y580qvgqd54spz9c9x5iiz",
+        "rev": "33db7cc6a66d1c1cb77c23ae8e18cefd0425a0c8",
+        "sha256": "0c389qdjjz5a3afyy06q09gal22hi46s0w07dd9d7bpvpfsnk6dp",
         "type": "tarball",
-        "url": "https://github.com/nix-community/home-manager/archive/9029fd2b9de2147480efab55f351343f4fed73b9.tar.gz",
+        "url": "https://github.com/nix-community/home-manager/archive/33db7cc6a66d1c1cb77c23ae8e18cefd0425a0c8.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "impermanence": {
@@ -77,10 +77,10 @@
         "homepage": "",
         "owner": "NixOS",
         "repo": "nixos-hardware",
-        "rev": "de40acde6c056a7c5f3c9ad4dca0c172fa35d207",
-        "sha256": "14c5jjf0791dxy9bpsnqmrzph1nafzqk7ffvlpm0pw3gbs073rl2",
+        "rev": "342048461da7fc743e588ee744080c045613a226",
+        "sha256": "18lzd51ihsdsjbv5677ngv4kvdi3gcdwp9zi4208585gkhmjjgpv",
         "type": "tarball",
-        "url": "https://github.com/NixOS/nixos-hardware/archive/de40acde6c056a7c5f3c9ad4dca0c172fa35d207.tar.gz",
+        "url": "https://github.com/NixOS/nixos-hardware/archive/342048461da7fc743e588ee744080c045613a226.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nixus": {
