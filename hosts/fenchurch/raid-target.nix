@@ -2,14 +2,14 @@
 
 {
   config.systemd.targets.cryptraid = {
+    wantedBy = [ "multi-user.target" ];
     wants = [
-      "systemd-cryptsetup@cryptraid.service"
-      "media-legacy.mount"
+      "container@freshrss.service"
       "container@jellyfin.service"
       "container@usenet.service"
+      "media-legacy.mount"
       "nfs-server.service"
-      "container@freshrss.service"
-      "podman-magic-mirror.service"
+      "systemd-cryptsetup@cryptraid.service"
     ];
   };
 
