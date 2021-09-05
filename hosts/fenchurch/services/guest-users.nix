@@ -25,11 +25,13 @@ in
 
   fileSystems."${path}/files" = {
     device = "/media/legacy/files";
-    options = [ "ro" "bind" "noauto" "x-systemd.automount" ];
+    options = [ "ro" "bind" ];
+    depends = [ "/media/legacy/files" ];
   };
 
   fileSystems."${path}/files/upload" = {
     device = "/media/legacy/files/upload";
-    options = [ "rw" "bind" "noauto" "x-systemd.automount" ];
+    options = [ "rw" "bind" ];
+    depends = [ "/media/legacy/files" "${path}/files" ];
   };
 }
