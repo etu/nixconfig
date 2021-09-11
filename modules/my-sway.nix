@@ -19,8 +19,27 @@ let
       sha256 = "0855x445fqi4yzif6n9g24j9jf6ah9kq7lkq8pxv4cmr34mvd5rg";
     };
 
-    installPhase = ''
-      ${pkgs.graphicsmagick}/bin/gm convert -crop 7680x2160+0+375 -resize 5120x1440 images/Lakeside/5.jpg $out
+    installPhase = let
+      # upper left corner of rectangle.
+      base = { x = 3835; y = 35; };
+      rect = {
+        xy0 = "${toString base.x},${toString base.y}";
+        # Add 720p to the coordinates to find the lower right corner.
+        xy1 = "${toString (base.x + 1280)},${toString (base.y + 720)}";
+      };
+      # Add some pixels to the base coordinates to place the text nicely.
+      text.xy = "${toString (base.x + 1115)},${toString (base.y + 60)}";
+    in ''
+      mkdir -p $out
+
+      # Resize for normal background
+      ${pkgs.graphicsmagick}/bin/gm convert -crop 7680x2160+0+375 -resize 5120x1440 images/Lakeside/5.jpg $out/default.jpg
+
+      # Draw a 720p rectangle on top
+      ${pkgs.graphicsmagick}/bin/gm convert -fill '#FFFFFFBB' -draw 'rectangle ${rect.xy0} ${rect.xy1}' $out/default.jpg 720pfigure.jpg
+
+      # Draw a text on top of this
+      ${pkgs.imagemagickBig}/bin/convert -fill '#FFFFFF' -pointsize 72 -draw 'text ${text.xy} "720p"' 720pfigure.jpg $out/720pfigure.jpg
     '';
   };
 
@@ -74,7 +93,7 @@ let
     ## Output configuration
     ##
       # Default wallpaper
-      output * bg ${wallpaper} fill
+      output * bg ${wallpaper}/default.jpg fill
 
       # Example configuration:
       #
@@ -482,6 +501,14 @@ in
       pavucontrol
       wdisplays
       wlr-randr
+
+      # Scripts to switch between backgrounds
+      (writeShellScriptBin "sway-defaultbg" ''
+        ${cfg.package}/bin/swaymsg "output * bg ${wallpaper}/default.jpg fill"
+      '')
+      (writeShellScriptBin "sway-720pfigure" ''
+        ${cfg.package}/bin/swaymsg "output * bg ${wallpaper}/720pfigure.jpg fill"
+      '')
     ];
 
     # Configure Firefox to use Wayland
