@@ -284,6 +284,19 @@ let
       bindsym $mod+r mode "resize"
 
     #
+    # Passthrough mode:
+    #
+      # These bindings trigger as soon as you enter the resize mode
+      mode "passthrough" {
+        # Exit passthrough mode:
+        bindsym Shift+Escape mode "default"
+        bindsym $mod+Shift+r mode "default"
+      }
+
+      # Enter passthrough mode:
+      bindsym $mod+Shift+r mode "passthrough"
+
+    #
     # Scratchpad:
     #
       # Move window to scratchpad:
@@ -345,6 +358,9 @@ let
       for_window [class="Chromium-browser"] border pixel 3
       for_window [class="Emacs"] border pixel 3
       for_window [app_id="emacs"] border pixel 3
+
+      # Set border instead of title bars when running sway inside of sway
+      for_window [app_id="wlroots"] border pixel 3
 
       # Apply opacity to some programs
       for_window [app_id="Alacritty"] opacity set 0.9
