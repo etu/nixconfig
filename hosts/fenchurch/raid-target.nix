@@ -3,6 +3,7 @@
 {
   config.systemd.targets.cryptraid = {
     wantedBy = [ "multi-user.target" ];
+    after = [ "network-online.target" ];
     wants = [
       "container@freshrss.service"
       "container@jellyfin.service"
