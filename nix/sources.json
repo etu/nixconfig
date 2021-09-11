@@ -5,10 +5,10 @@
         "homepage": "",
         "owner": "ryantm",
         "repo": "agenix",
-        "rev": "e6752e7b8592502df42066f156165471e62d902d",
-        "sha256": "0p07c5xy46jwdixvykkyfv7k30z867gs7xl8skhi4smzayqn0080",
+        "rev": "5c5bc282565f03f9c5b3d6e72b7cb985706148a6",
+        "sha256": "0azpwwcy9s0x11mzjlpr8ybhakz4i48vdidkw01giadl8j6yn6vc",
         "type": "tarball",
-        "url": "https://github.com/ryantm/agenix/archive/e6752e7b8592502df42066f156165471e62d902d.tar.gz",
+        "url": "https://github.com/ryantm/agenix/archive/5c5bc282565f03f9c5b3d6e72b7cb985706148a6.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "emacs-overlay": {
@@ -17,10 +17,10 @@
         "homepage": "",
         "owner": "nix-community",
         "repo": "emacs-overlay",
-        "rev": "7cdbd95bb1dfa7b3e3d40b9e33c4002abbfd4ba4",
-        "sha256": "0kc0rrkk3ai3w7im4dqy7q7m42s9jdw5z6gh6hmgnxcxivckg9fa",
+        "rev": "d0d0e2069806f4abf999d033aa3baadd24870230",
+        "sha256": "11kznbxflqvmvck9njvl3kxm572y1cz6hsc3wzr5nvby17wkq78k",
         "type": "tarball",
-        "url": "https://github.com/nix-community/emacs-overlay/archive/7cdbd95bb1dfa7b3e3d40b9e33c4002abbfd4ba4.tar.gz",
+        "url": "https://github.com/nix-community/emacs-overlay/archive/d0d0e2069806f4abf999d033aa3baadd24870230.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "flummbot": {
