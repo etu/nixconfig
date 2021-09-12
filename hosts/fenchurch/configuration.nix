@@ -21,12 +21,13 @@ in
     ./services/freshrss.nix
     ./services/guest-users.nix
     ./services/hass.nix
+    ./services/home-nginx.nix
     ./services/jellyfin.nix
+    ./services/murmur.nix
     ./services/nagios.nix
     ./services/netdata.nix
     ./services/nfs.nix
     ./services/usenet.nix
-    ./services/home-nginx.nix
 
     # Import local modules
     ../../modules
