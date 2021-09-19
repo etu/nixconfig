@@ -31,6 +31,7 @@ let
   myEmacsConfig = pkgs.runCommand "config.el" (with pkgs; {
     inherit gnuplot;
     phpcs = phpPackages.phpcs;
+    intelephense = callPackage ./packages/vscode-intelephense.nix { };
   }) "substituteAll ${myEmacsConfigPlain} $out";
 
   # Run my exwm config through substituteAll to replace all paths with paths

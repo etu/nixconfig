@@ -335,7 +335,6 @@
   :ensure t
   :defer 2
   :commands (lsp lsp-deferred)
-  :hook (php-mode . lsp)
   :init (setq lsp-keymap-prefix "M-l"))
 
 (use-package lsp-ui
@@ -351,7 +350,9 @@
   :ensure t
   :defer 2
   :commands (eglot eglot-ensure)
-  :hook (go-mode . eglot-ensure))
+  :hook ((go-mode . eglot-ensure)
+         (php-mode . eglot))
+  :config (add-to-list 'eglot-server-programs '((php-mode phps-mode) . ("@intelephense@/bin/intelephense" "--stdio"))))
 
 (use-package lsp-dart
   :ensure t
