@@ -5,9 +5,12 @@
     wantedBy = [ "multi-user.target" ];
     after = [ "network-online.target" ];
     wants = [
+      # Containers
       "container@freshrss.service"
       "container@jellyfin.service"
       "container@usenet.service"
+      "podman-home-assistant.service"
+
       "media-legacy.mount"
       "nfs-server.service"
       "systemd-cryptsetup@cryptraid.service"
