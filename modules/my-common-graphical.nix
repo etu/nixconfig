@@ -68,7 +68,7 @@ in
       pavucontrol
 
       chromium
-      firefox
+      firefox-bin
 
       mpv
       stupidterm
