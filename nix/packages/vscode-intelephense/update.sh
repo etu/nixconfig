@@ -1,6 +1,9 @@
 #!/usr/bin/env nix-shell
 #!nix-shell -i bash -p nodejs nodePackages.node2nix
 
+# Switch to scripts directory
+cd $(dirname $0)
+
 # Update vscode-intelephense dependency
 npm update
 
