@@ -20,19 +20,30 @@
   };
 
   virtualisation.oci-containers.backend = "podman";
-  virtualisation.oci-containers.containers.home-assistant = {
-    autoStart = false;
-    environment.TZ = config.time.timeZone;
-    image = "ghcr.io/home-assistant/home-assistant:2021.9.7";
-    ports = [ "8123" ];
-    extraOptions = [
-      "--privileged"
-      "--net=host"
-      "--device=/dev/ttyACM0:/dev/ttyACM0"
-      "--device=/dev/ttyACM1:/dev/ttyACM1"
-    ];
-    volumes = [
-      "/persistent/var/lib/hass:/config"
-    ];
+  virtualisation.oci-containers.containers = {
+    home-assistant = {
+      environment.TZ = config.time.timeZone;
+      image = "ghcr.io/home-assistant/home-assistant:2021.10.2";
+      ports = [ "8123" ];
+      extraOptions = [
+        "--privileged"
+        "--net=host"
+        "--device=/dev/ttyACM0:/dev/ttyACM0"
+        "--device=/dev/ttyACM1:/dev/ttyACM1"
+      ];
+      volumes = [
+        "/persistent/var/lib/hass:/config"
+      ];
+      dependsOn = [ "mqtt" ];
+    };
+    mqtt = {
+      image = "eclipse-mosquitto:2.0.12";
+      ports = [ "1883:1883" ];
+      volumes = [
+        "/persistent/var/lib/mqtt/config:/mosquitto/config:ro"
+        "/persistent/var/lib/mqtt/data:/mosquitto/data"
+        "/persistent/var/lib/mqtt/log:/mosquitto/log"
+      ];
+    };
   };
 }
