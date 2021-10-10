@@ -133,8 +133,6 @@ let
         epkgs.es-mode
         epkgs.jenkinsfile-mode
         epkgs.vcl-mode
-        epkgs.vue-html-mode
-        epkgs.vue-mode
       ]
     );
   };

@@ -266,6 +266,19 @@
                                           fill-column 100))))
 
 
+;; Set up Vue mode
+(use-package vue-mode
+  :defer 2
+  :ensure t
+  :config
+  (progn
+    (add-hook 'vue-mode-hook (lambda ()
+                               (set (make-local-variable 'tab-width) 2)
+                               (setq js-indent-level 2
+                                     css-indent-offset 2
+                                     vue-html-extra-indent 2)))))
+
+
 ;;;
 ;;; Company mode and backends
 ;;;
