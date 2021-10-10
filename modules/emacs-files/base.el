@@ -217,13 +217,6 @@
                                      (set (make-local-variable 'fill-column) 120))))
 
 
-;; Dart mode
-(use-package dart-mode
-  :ensure t
-  :defer 2
-  :init (add-hook 'dart-mode 'lsp))
-
-
 ;; SCSS mode
 (use-package scss-mode
   :ensure t
@@ -353,10 +346,6 @@
   :hook ((go-mode . eglot-ensure)
          (php-mode . eglot))
   :config (add-to-list 'eglot-server-programs '((php-mode phps-mode) . ("@intelephense@/bin/intelephense" "--stdio"))))
-
-(use-package lsp-dart
-  :ensure t
-  :defer 2)
 
 
 ;;;
