@@ -23,13 +23,12 @@
   virtualisation.oci-containers.containers = {
     home-assistant = {
       environment.TZ = config.time.timeZone;
-      image = "ghcr.io/home-assistant/home-assistant:2021.10.2";
+      image = "ghcr.io/home-assistant/home-assistant:2021.10.3";
       ports = [ "8123" ];
       extraOptions = [
         "--privileged"
         "--net=host"
-        "--device=/dev/ttyACM0:/dev/ttyACM0"
-        "--device=/dev/ttyACM1:/dev/ttyACM1"
+        "--device=/dev/serial/by-id/usb-dresden_elektronik_ingenieurtechnik_GmbH_ConBee_II_DE2124653-if00:/dev/ttyACM0"
       ];
       volumes = [
         "/persistent/var/lib/hass:/config"
