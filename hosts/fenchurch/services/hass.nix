@@ -34,7 +34,7 @@
       volumes = [
         "/persistent/var/lib/hass:/config"
       ];
-      dependsOn = [ "mqtt" ];
+      dependsOn = [ "mqtt" "zwavejs2mqtt" ];
     };
     mqtt = {
       image = "eclipse-mosquitto:2.0.12";
@@ -43,6 +43,19 @@
         "/persistent/var/lib/mqtt/config:/mosquitto/config:ro"
         "/persistent/var/lib/mqtt/data:/mosquitto/data"
         "/persistent/var/lib/mqtt/log:/mosquitto/log"
+      ];
+    };
+    zwavejs2mqtt = {
+      image = "zwavejs/zwavejs2mqtt:5.8.0";
+      ports = [
+        "3000:3000"
+        # "8091:8091" # Admin interface port
+      ];
+      extraOptions = [
+        "--device=/dev/serial/by-id/usb-0658_0200-if00:/dev/zwave"
+      ];
+      volumes = [
+        "/persistent/var/lib/zwavejs2mqtt:/usr/src/app/store"
       ];
     };
   };
