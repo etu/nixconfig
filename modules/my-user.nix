@@ -67,7 +67,13 @@ in
     environment.systemPackages = with pkgs; [
       direnv
       dnsutils
+
+      # Parse different formats and command outputs to json
+      jc
+
+      # Parse json
       jq
+
       nfs-utils
       sshfs-fuse
       stow
