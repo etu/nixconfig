@@ -27,6 +27,7 @@ in
     ./services/nagios.nix
     ./services/netdata.nix
     ./services/nfs.nix
+    ./services/syncthing.nix
     ./services/usenet.nix
 
     # Import local modules
