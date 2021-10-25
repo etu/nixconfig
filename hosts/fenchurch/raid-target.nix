@@ -37,6 +37,7 @@ in {
   # Add a pre start check for network to be up for certain services.
   config.systemd.services."podman-home-assistant".preStart = preStart;
   config.systemd.services."podman-mqtt".preStart = preStart;
+  config.systemd.services."podman-zwavejs2mqtt".preStart = preStart;
   config.systemd.services."container@freshrss".preStart = preStart;
   config.systemd.services."container@jellyfin".preStart = preStart;
   config.systemd.services."container@usenet".preStart = preStart;
