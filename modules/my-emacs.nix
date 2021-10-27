@@ -31,15 +31,17 @@ let
 
   # Run my config trough substituteAll to replace all paths with paths to
   # programs etc to have as my actual config file.
-  myEmacsConfig = pkgs.runCommand "config.el" (with pkgs; {
+  myEmacsConfig = pkgs.runCommandNoCC "config.el" (with pkgs; {
     inherit (myPackages) intelephense;
     inherit (phpPackages) phpcs;
     inherit gnuplot;
+    fontname = config.my.fonts.monospace;
+    fontsize = config.my.fonts.size;
   }) "substituteAll ${myEmacsConfigPlain} $out";
 
   # Run my exwm config through substituteAll to replace all paths with paths
   # to programs etc to have as my actual config file.
-  myExwmConfig = pkgs.runCommand "exwm-config.el" (with pkgs; {
+  myExwmConfig = pkgs.runCommandNoCC "exwm-config.el" (with pkgs; {
     inherit systemd alacritty flameshot;
     lockCommand = physlockCommand;
     xbacklight = acpilight;
@@ -99,7 +101,7 @@ let
     override = epkgs: epkgs // {
       # Add my config initializer as an emacs package
       myConfigInit = (
-        pkgs.runCommand "my-emacs-default-package" { } ''
+        pkgs.runCommandNoCC "my-emacs-default-package" { } ''
           mkdir -p $out/share/emacs/site-lisp
           cp ${myEmacsInit} $out/share/emacs/site-lisp/default.el
         ''
@@ -110,7 +112,7 @@ let
           url = "https://gitlab.com/dto/mosaic-el/-/raw/f737583aab836cdf8891231d8ed6aa20df9377aa/cell.el";
           sha256 = "0clydvm1jq1wcjwms5465ngzyb76vwl9l9gcd1dxvv1898h03b9c";
         };
-      in pkgs.runCommand "cell-mode" {} ''
+      in pkgs.runCommandNoCC "cell-mode" {} ''
         mkdir -p $out/share/emacs/site-lisp
         cp ${cellModeSrc} $out/share/emacs/site-lisp/cell.el
       '';
@@ -216,7 +218,7 @@ in
     ])) ++ (lib.optionals (config.my.emacs.package == "wayland") ([
       (let
         x11Emacs = (myEmacsPackage emacsPackages.default);
-      in pkgs.runCommand "emacs-x11" {} ''
+      in pkgs.runCommandNoCC "emacs-x11" {} ''
         mkdir -p $out/bin
         ln -s ${x11Emacs}/bin/emacs $out/bin/emacs-x11
       '')

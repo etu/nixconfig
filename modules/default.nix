@@ -14,6 +14,7 @@ in {
     ./my-common-graphical.nix
     ./my-deploy-user.nix
     ./my-emacs.nix
+    ./my-fonts.nix
     ./my-gaming.nix
     ./my-gpg-utils.nix
     ./my-home-manager.nix

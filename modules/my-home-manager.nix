@@ -68,7 +68,7 @@ in
           "bin/restow".source = ./dotfiles/bin/restow;
           "bin/spacecolors".source = ./dotfiles/bin/spacecolors;
 
-          "bin/keep".source = pkgs.runCommand "keep" { } ''
+          "bin/keep".source = pkgs.runCommandNoCC "keep" { } ''
             cp ${./dotfiles/bin/keep} $out
             substituteInPlace $out --replace /bin/zsh ${pkgs.zsh}/bin/zsh
           '';
@@ -104,7 +104,8 @@ in
         programs.alacritty.enable = isGraphical;
         programs.alacritty.settings = {
           env.TERM = "xterm-256color";
-          font.size = 10;
+          font.size = config.my.fonts.size;
+          font.normal.family = config.my.fonts.monospace;
           bell = {
             duration = 250;
             color = "#441111";
@@ -204,15 +205,18 @@ in
 
         # GTK theme configs
         gtk.enable = isGraphical;
-        gtk.gtk3.extraConfig = {
-          gtk-application-prefer-dark-theme = 1;
-        };
+        gtk.font.name = config.my.fonts.normal;
+        gtk.font.size = config.my.fonts.size;
+        gtk.gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
 
         # Set up qt theme as well
         qt = {
           enable = isGraphical;
           platformTheme = "gtk";
         };
+
+        # Set the rofi font
+        programs.rofi.font = "${config.my.fonts.monospace} ${toString config.my.fonts.size}";
 
         # Enable syncthing.
         services.syncthing.enable = isGraphical;
@@ -316,6 +320,7 @@ in
         programs.mako.borderColor = "#3B7C87";
         programs.mako.borderSize = 3;
         programs.mako.defaultTimeout = 6000;
+        programs.mako.font = "${config.my.fonts.monospace} ${toString config.my.fonts.size}";
 
         # Set up autorandr service to trigger on saved configurations
         programs.autorandr.enable = isX11;

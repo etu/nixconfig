@@ -188,7 +188,7 @@
   (telephone-line-mode t))
 
 
-(add-to-list 'default-frame-alist '(font . "Liberation Mono 10"))
+(add-to-list 'default-frame-alist '(font . "@fontname@ @fontsize@"))
 
 
 ;; Use Noto Color Emoji for symbols

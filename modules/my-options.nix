@@ -19,6 +19,28 @@
         description = "Which emacs package to use.";
       };
     };
+    fonts = {
+      size = lib.mkOption {
+        type = lib.types.int;
+        default = 10;
+        description = "Default font size";
+      };
+      biggerSize = lib.mkOption {
+        type = lib.types.int;
+        default = 13;
+        description = "Default font size";
+      };
+      monospace = lib.mkOption {
+        type = lib.types.str;
+        default = "DejaVu Sans Mono"; # Previously used in Emacs: Liberation Mono
+        description = "Which default font to use";
+      };
+      normal = lib.mkOption {
+        type = lib.types.str;
+        default = "DejaVu Sans";
+        description = "Default non monospace font to use";
+      };
+    };
     gaming.enable = lib.mkEnableOption "Enables gaming related thingys";
     gpg-utils.enable = lib.mkEnableOption "Enables smartcard and gpg related utils that I use";
     home-manager.enable = lib.mkEnableOption "Enables my home-manager config";

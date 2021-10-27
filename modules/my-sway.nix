@@ -348,6 +348,9 @@ let
       # Set gaps
       gaps inner 5
 
+      # Set fonts
+      font "${config.my.fonts.monospace} ${toString config.my.fonts.size}"
+
       # Set borders instead of title bars for some programs
       for_window [app_id="Alacritty"] border pixel 3
       for_window [app_id="firefox"] border pixel 3
@@ -391,9 +394,16 @@ let
         mode invisible
 
         # Run waybar as a bar
-        status_command ${pkgs.waybar}/bin/waybar --config ${waybarConfig}
+        status_command ${pkgs.waybar}/bin/waybar --config ${waybarConfig} --style ${waybarStyles}
       }
   '');
+
+  # Grab the default stylesheet and patch the font family and size.
+  waybarStyles = pkgs.runCommandNoCC "waybar-styles.css" { } ''
+    sed -e 's/font-family: /font-family: ${config.my.fonts.normal}, /'              \
+        -e 's/font-size: 13px/font-size: ${toString config.my.fonts.biggerSize}px/' \
+        ${pkgs.waybar}/etc/xdg/waybar/style.css > $out
+  '';
 
   waybarConfig = pkgs.writeText "waybar-config.json" (builtins.toJSON {
     height = 30; # Height of bar
@@ -420,7 +430,7 @@ let
         "7" = "Ⅶ";
         "8" = "Ⅷ";
         "9" = "Ⅸ";
-        "10" = if config.networking.hostName == "eliaxe-59087-t480s" then "" else ""; # Ⅹ
+        "10" = "Ⅹ";
         urgent = "";
         focused = "";
         default = "";
