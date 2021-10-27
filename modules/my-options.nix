@@ -32,7 +32,7 @@
       };
       monospace = lib.mkOption {
         type = lib.types.str;
-        default = "DejaVu Sans Mono"; # Previously used in Emacs: Liberation Mono
+        default = "JetBrainsMono";
         description = "Which default font to use";
       };
       normal = lib.mkOption {

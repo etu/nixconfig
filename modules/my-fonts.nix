@@ -20,6 +20,8 @@ in
 
     # Install some extra fonts.
     fonts.fonts = with pkgs; [
+      jetbrains-mono
+
       # Cantarell fonts seems to be used by GTK applications (was mostly
       # noticable in Firefox UI elements).
       cantarell_fonts
