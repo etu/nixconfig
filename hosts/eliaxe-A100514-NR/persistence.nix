@@ -54,10 +54,10 @@
       ".config/spotify/Users"
 
       # Work
+      ".chalet"
       ".chef"
       ".config/Slack"
       ".config/VirtualBox"
-      ".hotel"
       ".vagrant.d"
       "VirtualBox VMs"
       "tvnu"
