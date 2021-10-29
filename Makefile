@@ -11,7 +11,7 @@ update-intelephense:
 
 update-hass:
 	@echo "Updating to latest home assistant container"
-	sed -i -r 's#(ghcr.io/home-assistant/home-assistant):[0-9]{4}\.[0-9]{1,2}\.[0-9]{1,2}#\1:'`git ls-remote --tags 'https://github.com/home-assistant/core.git' | cut -d '/' -f 3 | grep -e '^20' | sort -V | tail -n 1`'#' hosts/fenchurch/services/hass.nix
+	sed -i -r 's#(ghcr.io/home-assistant/home-assistant):[0-9]{4}\.[0-9]{1,2}\.[0-9]{1,2}#\1:'`git ls-remote --tags 'https://github.com/home-assistant/core.git' | cut -d '/' -f 3 | grep -e '^20' | grep -v b | sort -V | tail -n 1`'#' hosts/fenchurch/services/hass.nix
 
 update-zwavejs2mqtt:
 	@echo "Updating to latest zwavejs2mqtt container"
