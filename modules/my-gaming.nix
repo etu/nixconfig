@@ -4,8 +4,6 @@ let
 
 in
 {
-  options.my.gaming.enable = lib.mkEnableOption "Enables gaming related thingys.";
-
   config = lib.mkIf cfg.enable {
     # Enable 32bit libs for steam and such.
     hardware.opengl = {

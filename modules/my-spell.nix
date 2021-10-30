@@ -4,8 +4,6 @@ let
 
 in
 {
-  options.my.spell.enable = lib.mkEnableOption "Enable and install aspell and hunspell with swedish and english dictionary";
-
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       aspell

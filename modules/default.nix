@@ -18,6 +18,7 @@ in {
     ./my-gpg-utils.nix
     ./my-home-manager.nix
     ./my-nfsd.nix
+    ./my-options.nix
     ./my-spell.nix
     ./my-sway.nix
     ./my-user.nix

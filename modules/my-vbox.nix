@@ -4,8 +4,6 @@ let
 
 in
 {
-  options.my.vbox.enable = lib.mkEnableOption "Enables vbox and related things I use.";
-
   config = lib.mkIf cfg.enable {
     # Enable virtualbox.
     virtualisation.virtualbox.host.enable = true;

@@ -52,7 +52,7 @@ in
   services.openssh.enable = true;
 
   # Set up Letsencrypt
-  security.acme.email = "elis@hirwing.se";
+  security.acme.email = config.my.user.email;
   security.acme.acceptTerms = true;
 
   # Set up NGiNX

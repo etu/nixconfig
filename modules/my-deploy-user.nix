@@ -7,7 +7,6 @@ let
 
 in
 {
-  options.my.deploy-user.enable = lib.mkEnableOption "Enables my deploy user";
   config = lib.mkIf cfg.enable {
     # Add a deploy user for deployments
     users.users.deploy = {

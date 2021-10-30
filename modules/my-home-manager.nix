@@ -6,8 +6,6 @@ let
   sources = import ../nix/sources.nix;
 in
 {
-  options.my.home-manager.enable = lib.mkEnableOption "Enables my home-manager config";
-
   # Import the home-manager module
   imports = [ "${sources.home-manager}/nixos" ];
 
@@ -144,9 +142,9 @@ in
           extraConfig = {
             commit.gpgSign = isGraphical;
 
-            user.name = "Elis Hirwing";
-            user.email = "elis@hirwing.se";
-            user.signingKey = "67FE98F28C44CF221828E12FD57EFA625C9A925F";
+            user.name = config.my.user.realname;
+            user.email = config.my.user.email;
+            user.signingKey = config.my.user.signingKey;
 
             # Set default "git pull" behaviour so it doesn't try to default to
             # either "git fetch; git merge" (default) or "git fetch; git rebase".
@@ -158,10 +156,10 @@ in
 
           # Conditonally included configs
           includes = [{
-            condition = "gitdir:/home/etu/tvnu/";
+            condition = "gitdir:/home/${config.my.user.username}/tvnu/";
             contents = {
               commit.gpgSign = false;
-              user.email = "elis.hirwing@schibsted.com";
+              user.email = config.my.user.workEmail;
               user.signingKey = "";
             };
           }];

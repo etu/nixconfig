@@ -7,10 +7,6 @@ let
   keys = import ../data/pubkeys.nix;
 in
 {
-  options.my.backup.enable = lib.mkEnableOption "Enables backup related thingys.";
-  options.my.backup.enableSanoid = lib.mkEnableOption "Enables snapshot creation.";
-  options.my.backup.enableSyncoid = lib.mkEnableOption "Enables snapshot syncing.";
-
   config = lib.mkIf cfg.enable {
     # Enable sanoid snapshoting with rules for creating snapshots.
     services.sanoid = {

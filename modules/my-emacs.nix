@@ -144,18 +144,6 @@ let
   };
 in
 {
-  options.my.emacs = {
-    enable = lib.mkEnableOption "Enables emacs with the modules I want";
-    enableExwm = lib.mkEnableOption "Enables EXWM config and graphical environment";
-    enableWork = lib.mkEnableOption "Enables install of work related modules";
-    package = lib.mkOption {
-      type = lib.types.str;
-      default = "default";
-      defaultText = "default";
-      description = "Which emacs package to use";
-    };
-  };
-
   config = lib.mkIf cfg.enable {
     # Import the emacs overlay from nix community to get the latest
     # and greatest packages.

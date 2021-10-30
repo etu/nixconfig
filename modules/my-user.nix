@@ -11,43 +11,6 @@ let
 
 in
 {
-  options.my.user = {
-    enable = lib.mkEnableOption "Enables my user.";
-    uid = lib.mkOption {
-      type = lib.types.nullOr lib.types.int;
-      default = 1000;
-    };
-    username = lib.mkOption {
-      type = lib.types.str;
-      default = "etu";
-      description = "My username for this system.";
-    };
-    extraGroups = lib.mkOption {
-      type = lib.types.listOf lib.types.str;
-      default = [ ];
-    };
-    extraAuthorizedKeys = lib.mkOption {
-      type = lib.types.listOf lib.types.str;
-      default = [ ];
-      description = "Additional authorized keys";
-    };
-    persistent = {
-      homeDir = lib.mkOption {
-        type = lib.types.str;
-        default = "/persistent/home/etu";
-        description = "Location of persistent home files";
-      };
-      extraFiles = lib.mkOption {
-        type = lib.types.listOf lib.types.str;
-        default = [ ];
-      };
-      extraDirectories = lib.mkOption {
-        type = lib.types.listOf lib.types.str;
-        default = [ ];
-      };
-    };
-  };
-
   config = lib.mkIf cfg.enable {
     # Let ~/bin/ be in $PATH
     environment.homeBinInPath = true;
@@ -56,7 +19,7 @@ in
     users.extraUsers.${username} = {
       isNormalUser = true;
       uid = uid;
-      description = "Elis Hirwing,,,,";
+      description = "${config.my.user.realname},,,,";
       extraGroups = [ "wheel" ] ++ extraGroups;
       shell = pkgs.fish;
       openssh.authorizedKeys.keys = keys.etu.computers ++ extraAuthorizedKeys;

@@ -4,8 +4,6 @@ let
 
 in
 {
-  options.my.common-cli.enable = lib.mkEnableOption "Enables my common CLI thingys";
-
   config = lib.mkIf cfg.enable {
     # Set your time zone.
     time.timeZone = "Europe/Stockholm";

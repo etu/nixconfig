@@ -4,8 +4,6 @@ let
 
 in
 {
-  options.my.gpg-utils.enable = lib.mkEnableOption "Enables smartcard and gpg related utils that I use.";
-
   config = lib.mkIf cfg.enable {
     services.pcscd.enable = true;
 

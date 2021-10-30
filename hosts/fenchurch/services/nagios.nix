@@ -5,8 +5,8 @@ let
     define contact {
       contact_name admin
       use generic-contact
-      alias Elis Hirwing
-      email elis@hirwing.se
+      alias ${config.my.user.realname}
+      email ${config.my.user.email}
     }
   '';
 

@@ -4,8 +4,6 @@ let
 
 in
 {
-  options.my.nfsd.enable = lib.mkEnableOption "Enables nfsd and configures ports and stuff.";
-
   config = lib.mkIf cfg.enable {
     # Enable nfs server.
     services.nfs.server.enable = true;

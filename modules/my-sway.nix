@@ -486,14 +486,6 @@ let
 
 in
 {
-  options.my.sway.enable = lib.mkEnableOption "Enables sway and auto login for my user";
-  options.my.sway.package = lib.mkOption {
-    type = lib.types.package;
-    default = pkgs.sway;
-    defaultText = "pkgs.sway";
-    description = "Which sway package to use";
-  };
-
   config = lib.mkIf cfg.enable {
     programs.sway.enable = true;
 
