@@ -17,7 +17,6 @@ in {
     ./my-gaming.nix
     ./my-gpg-utils.nix
     ./my-home-manager.nix
-    ./my-i3.nix
     ./my-nfsd.nix
     ./my-spell.nix
     ./my-sway.nix

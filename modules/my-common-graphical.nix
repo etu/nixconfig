@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
 let
-  isX11 = config.my.i3.enable || config.my.emacs.enableExwm;
+  isX11 = config.my.emacs.enableExwm;
   isWayland = config.my.sway.enable;
   isGraphical = isX11 || isWayland;
 
