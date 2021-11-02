@@ -23,7 +23,7 @@
   virtualisation.oci-containers.containers = {
     home-assistant = {
       environment.TZ = config.time.timeZone;
-      image = "ghcr.io/home-assistant/home-assistant:2021.10.6";
+      image = "ghcr.io/home-assistant/home-assistant:2021.10.7";
       ports = [ "8123" ];
       extraOptions = [
         "--privileged"
@@ -36,7 +36,7 @@
       dependsOn = [ "mqtt" "zwavejs2mqtt" ];
     };
     mqtt = {
-      image = "eclipse-mosquitto:2.0.12";
+      image = "eclipse-mosquitto:2.0.13";
       ports = [ "1883:1883" ];
       volumes = [
         "/persistent/var/lib/mqtt/config:/mosquitto/config:ro"
