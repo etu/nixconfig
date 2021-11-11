@@ -25,6 +25,7 @@
       };
     in
     {
+      autoStart = true;
       bindMounts = {
         "freshrss-data" = {
           mountPoint = "${dataDir}/data";

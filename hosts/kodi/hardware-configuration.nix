@@ -53,7 +53,7 @@
   };
 
   fileSystems."/mnt/hactar" = {
-    device = "192.168.0.101:/media/legacy/files";
+    device = "192.168.0.101:/media/zstorage/files";
     fsType = "nfs";
     noCheck = true;
     options = [ "ro" "noauto" "x-systemd.automount" "hard" ];

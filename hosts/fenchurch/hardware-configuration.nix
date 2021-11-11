@@ -57,22 +57,11 @@
     options = [ "noauto" "x-systemd.automount" ];
   };
 
-  # Define mount point for the raid
-  fileSystems."/media/legacy" = {
-    device = "/dev/mapper/cryptraid";
-    fsType = "ext4";
-    options = [ "noauto" "x-systemd.automount" ];
-    encrypted = {
-      blkDev = "/dev/disk/by-uuid/c8454f1f-39eb-49f9-9756-a69c41068ede";
-      label = "cryptraid";
-    };
+  fileSystems."/media/zstorage/files" = {
+    device = "zstorage/restore";
+    fsType = "zfs";
+    neededForBoot = true;
   };
-
-  # Write a crypttab file for the raid
-  environment.etc.crypttab.text = "cryptraid UUID=c8454f1f-39eb-49f9-9756-a69c41068ede /persistent/etc/cryptraid_keyfile1";
-
-  # And install cryptsetup to unlock the raid
-  environment.systemPackages = with pkgs; [ cryptsetup ];
 
   swapDevices = [ ];
 

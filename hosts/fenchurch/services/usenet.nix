@@ -67,6 +67,7 @@
 
   # Enable usenet related services in a container
   containers.usenet = {
+    autoStart = true;
     config = { config, pkgs, ... }: {
       # nzbget needs unrar
       nixpkgs.config.allowUnfree = true;
@@ -122,7 +123,7 @@
       };
       "hactar-media" = {
         mountPoint = "/media";
-        hostPath = "/media/legacy/files";
+        hostPath = "/media/zstorage/files";
         isReadOnly = false;
       };
     };

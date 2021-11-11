@@ -15,6 +15,7 @@
 
   # Enable Jellyfin
   containers.jellyfin = {
+    autoStart = true;
     additionalCapabilities = [ "CAP_IPC_LOCK" ];
     config = { config, pkgs, ... }: {
       services.jellyfin = { enable = true; user = "downloads"; group = "downloads"; };
@@ -33,7 +34,7 @@
       };
       "/mnt/hactar" = {
         mountPoint = "/media";
-        hostPath = "/media/legacy/files";
+        hostPath = "/media/zstorage/files";
         isReadOnly = true;
       };
     };

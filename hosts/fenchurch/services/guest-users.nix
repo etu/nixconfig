@@ -24,14 +24,14 @@ in
   '';
 
   fileSystems."${path}/files" = {
-    device = "/media/legacy/files";
+    device = "/media/zstorage/files";
     options = [ "ro" "bind" ];
-    depends = [ "/media/legacy/files" ];
+    depends = [ "/media/zstorage/files" ];
   };
 
   fileSystems."${path}/files/upload" = {
-    device = "/media/legacy/files/upload";
+    device = "/media/zstorage/files/upload";
     options = [ "rw" "bind" ];
-    depends = [ "/media/legacy/files" "${path}/files" ];
+    depends = [ "/media/zstorage/files" "${path}/files" ];
   };
 }
