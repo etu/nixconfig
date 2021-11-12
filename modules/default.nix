@@ -25,19 +25,4 @@ in {
     ./my-user.nix
     ./my-vbox.nix
   ];
-
-  # Pull in the 5.14 kernel from an older nixpkgs to get specifically
-  # the 5.14.14 kernel since 5.14.15 seems to have some odd hardware
-  # issues on my laptop.
-  nixpkgs.overlays = let
-    kpkgs = import
-    (builtins.fetchTarball {
-      url = "https://github.com/NixOS/nixpkgs/archive/34ad3ff.tar.gz";
-      sha256 = "02li241rz5668nfyp88zfjilxf0mr9yansa93fbl38hjwkhf3ix6";
-    }) { };
-  in [
-    (self: super: {
-      linuxPackages_5_14 = kpkgs.linuxPackages_5_14;
-    })
-  ];
 }
