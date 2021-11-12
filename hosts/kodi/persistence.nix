@@ -13,5 +13,6 @@
   fileSystems."/root" = {
     device = "/home/root";
     options = [ "bind" "noauto" "x-systemd.automount" ];
+    noCheck = true;
   };
 }

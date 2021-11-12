@@ -13,6 +13,7 @@
   fileSystems."/var/lib/acme" = {
     device = "/persistent/var/lib/acme";
     options = [ "bind" "noauto" "x-systemd.automount" ];
+    noCheck = true;
   };
 
   my.user.persistent = {

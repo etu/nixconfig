@@ -27,11 +27,13 @@ in
     device = "/media/zstorage/files";
     options = [ "ro" "bind" ];
     depends = [ "/media/zstorage/files" ];
+    noCheck = true;
   };
 
   fileSystems."${path}/files/upload" = {
     device = "/media/zstorage/files/upload";
     options = [ "rw" "bind" ];
     depends = [ "/media/zstorage/files" "${path}/files" ];
+    noCheck = true;
   };
 }

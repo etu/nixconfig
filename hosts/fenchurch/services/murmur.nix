@@ -14,5 +14,6 @@
   fileSystems."/var/lib/murmur" = {
     device = "/persistent/var/lib/murmur";
     options = [ "bind" "noauto" "x-systemd.automount" ];
+    noCheck = true;
   };
 }

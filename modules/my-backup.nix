@@ -36,6 +36,7 @@ in
     fileSystems."/var/lib/syncoid/.ssh" = lib.mkIf cfg.enableSyncoid {
       device = "/persistent/home/syncoid/.ssh";
       options = [ "bind" "noauto" "x-systemd.automount" ];
+      noCheck = true;
     };
 
     # Add known hosts so syncoid don't bail out on unknown hosts
