@@ -23,6 +23,7 @@ in
       ForceCommand internal-sftp
   '';
 
+  # Read only filesystems
   fileSystems."${path}/files" = {
     device = "/media/zstorage/files";
     options = [ "ro" "bind" ];
@@ -30,6 +31,35 @@ in
     noCheck = true;
   };
 
+  fileSystems."${path}/files/audio" = {
+    device = "/media/zstorage/files/audio";
+    options = [ "ro" "bind" ];
+    depends = [ "/media/zstorage/files" "${path}/files" ];
+    noCheck = true;
+  };
+
+  fileSystems."${path}/files/ebooks" = {
+    device = "/media/zstorage/files/ebooks";
+    options = [ "ro" "bind" ];
+    depends = [ "/media/zstorage/files" "${path}/files" ];
+    noCheck = true;
+  };
+
+  fileSystems."${path}/files/software" = {
+    device = "/media/zstorage/files/software";
+    options = [ "ro" "bind" ];
+    depends = [ "/media/zstorage/files" "${path}/files" ];
+    noCheck = true;
+  };
+
+  fileSystems."${path}/files/video" = {
+    device = "/media/zstorage/files/video";
+    options = [ "ro" "bind" ];
+    depends = [ "/media/zstorage/files" "${path}/files" ];
+    noCheck = true;
+  };
+
+  # Read write upload directory
   fileSystems."${path}/files/upload" = {
     device = "/media/zstorage/files/upload";
     options = [ "rw" "bind" ];

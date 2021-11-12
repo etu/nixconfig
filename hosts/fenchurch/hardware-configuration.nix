@@ -58,10 +58,42 @@
   };
 
   fileSystems."/media/zstorage/files" = {
-    device = "zstorage/restore";
+    device = "zstorage/files";
     fsType = "zfs";
     neededForBoot = true;
   };
+
+  # Storage related mounts
+  fileSystems."/media/zstorage/files/audio" = {
+    device = "zstorage/files/audio";
+    fsType = "zfs";
+    options = [ "noauto" "x-systemd.automount" ];
+  };
+
+  fileSystems."/media/zstorage/files/ebooks" = {
+    device = "zstorage/files/ebooks";
+    fsType = "zfs";
+    options = [ "noauto" "x-systemd.automount" ];
+  };
+
+  fileSystems."/media/zstorage/files/software" = {
+    device = "zstorage/files/software";
+    fsType = "zfs";
+    options = [ "noauto" "x-systemd.automount" ];
+  };
+
+  fileSystems."/media/zstorage/files/upload" = {
+    device = "zstorage/files/upload";
+    fsType = "zfs";
+    options = [ "noauto" "x-systemd.automount" ];
+  };
+
+  fileSystems."/media/zstorage/files/video" = {
+    device = "zstorage/files/video";
+    fsType = "zfs";
+    options = [ "noauto" "x-systemd.automount" ];
+  };
+
 
   swapDevices = [ ];
 
