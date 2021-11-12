@@ -155,12 +155,4 @@ in
   services.flummbot.user = "bots";
   services.flummbot.group = "bots";
   services.flummbot.stateDirectory = "/home/bots";
-
-  # A hack to `loginctl enable-linger m` (for multiplexer sessions to last),
-  # until this one is resolved: https://github.com/NixOS/nixpkgs/issues/3702
-  system.activationScripts.loginctl-enable-linger-m = pkgs.lib.stringAfter [ "users" ] ''
-    ${pkgs.systemd}/bin/loginctl enable-linger etu
-    ${pkgs.systemd}/bin/loginctl enable-linger concate
-    ${pkgs.systemd}/bin/loginctl enable-linger talyz
-  '';
 }
