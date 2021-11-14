@@ -19,23 +19,31 @@
   };
 
   fileSystems."/boot" = {
-    # device = "/dev/disk/by-uuid/91E5-E24E";
-    device = "/dev/sda3";
+    device = "/dev/disk/by-uuid/91E5-E24E";
     fsType = "vfat";
     options = [ "noauto" "x-systemd.automount" ];
   };
 
   fileSystems."/nix" = {
-    # device = "/dev/disk/by-uuid/47fa9784-7db5-4b27-9c4c-24bcfe7557f0";
-    device = "/dev/sda4";
-    fsType = "xfs";
+    device = "zroot/nix";
+    fsType = "zfs";
   };
 
-  fileSystems."/mnt/hactar" = {
-    device = "192.168.0.101:/media/files";
-    fsType = "nfs4";
+  fileSystems."/persistent" = {
+    device = "zroot/persistent";
+    fsType = "zfs";
+  };
+
+  fileSystems."/var/log" = {
+    device = "zroot/var-log";
+    fsType = "zfs";
+  };
+
+  fileSystems."/mnt/files" = {
+    device = "192.168.0.101:/media/zstorage/files";
+    fsType = "nfs";
     noCheck = true;
-    options = [ "ro" "noauto" "x-systemd.automount" ];
+    options = [ "ro" "noauto" "x-systemd.automount" "hard" ];
   };
 
   # Ensure that we have network before trying to do NFS
@@ -43,7 +51,7 @@
     after = [ "network-online.target" ];
     wants = [ "network-online.target" "network-pre.target" ];
     wantedBy = [ "display-manager.service" ];
-    where = "/mnt/hactar";
+    where = "/mnt/files";
   }];
 
   swapDevices = [ ];

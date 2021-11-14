@@ -25,6 +25,11 @@ in
 
   networking.hostName = "guest-x240";
 
+  # Settings needed for ZFS
+  boot.supportedFilesystems = [ "zfs" ];
+  networking.hostId = "31516063";
+  services.zfs.autoScrub.enable = true;
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -42,7 +47,7 @@ in
 
   # Set NIX_PATH for nixos config and nixpkgs
   nix.nixPath = [
-    "nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
+    "nixpkgs=/etc/nixos/nix/nixos-unstable"
     "nixos-config=/etc/nixos/hosts/guest-x240/configuration.nix"
   ];
 
@@ -78,7 +83,7 @@ in
     firefox-bin
     mpv
     sgtpuzzles
-    # superTuxKart
+    superTuxKart
 
     fsarchiver
     ntfsprogs
