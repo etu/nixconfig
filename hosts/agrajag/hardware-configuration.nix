@@ -41,7 +41,7 @@
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/4159-8AE1";
+    device = "/dev/disk/by-uuid/D646-84B5";
     fsType = "vfat";
     options = [ "noauto" "x-systemd.automount" ];
   };
