@@ -121,7 +121,7 @@
         hostPath = "/var/lib/nzbget-dst";
         isReadOnly = false;
       };
-      "hactar-media" = {
+      "media" = {
         mountPoint = "/media";
         hostPath = "/media/zstorage/files";
         isReadOnly = false;

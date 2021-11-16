@@ -27,12 +27,12 @@
       { containerPort = 8096; hostPort = 8096; protocol = "tcp"; }
     ];
     bindMounts = {
-      "/var/lib/jellyfin" = {
+      "jellyfin" = {
         mountPoint = "/var/lib/jellyfin";
         hostPath = "/persistent/var/lib/jellyfin";
         isReadOnly = false;
       };
-      "/mnt/hactar" = {
+      "media" = {
         mountPoint = "/media";
         hostPath = "/media/zstorage/files";
         isReadOnly = true;
