@@ -107,6 +107,14 @@ in
   services.sanoid.datasets."zroot/backups".recursive = true;
   services.sanoid.datasets."zroot/backups".autosnap = false;
 
+  # Enable snapshotting for bulk storage
+  services.sanoid.datasets."zstorage/files".use_template = [ "storage" ];
+  services.sanoid.datasets."zstorage/files/audio".use_template = [ "storage" ];
+  services.sanoid.datasets."zstorage/files/ebooks".use_template = [ "storage" ];
+  services.sanoid.datasets."zstorage/files/software".use_template = [ "storage" ];
+  services.sanoid.datasets."zstorage/files/upload".use_template = [ "storage" ];
+  services.sanoid.datasets."zstorage/files/video".use_template = [ "storage" ];
+
   services.syncoid.commands = {
     "root@vps04.elis.nu:zroot/home".target = "zroot/backups/vps04/zroot/home";
     "root@vps04.elis.nu:zroot/persistent".target = "zroot/backups/vps04/zroot/persistent";
