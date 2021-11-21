@@ -139,7 +139,7 @@ in
   my.home-manager.enable = true;
 
   # Include agenix encripted secret for secret password file
-  age.secrets.hass-secrets-yaml = {
+  age.secrets.nixos-data-secrets = {
     file = ../../secrets/nixos-data-secrets.nix.age;
     path = "/persistent/etc/nixos/data/secrets.nix";
     owner = "etu";
