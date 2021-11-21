@@ -13,6 +13,7 @@ in
       enable = cfg.enableSanoid;
       interval = "*-*-* *:00,15,30,45:00";
 
+      # Default snapshotting rules
       templates.default = {
         autosnap = true;
         autoprune = true;
@@ -21,6 +22,17 @@ in
         daily = 14;
         weekly = 4;
         monthly = 2;
+      };
+
+      # Bulk storage snapshotting rules
+      templates.storage = {
+        autosnap = true;
+        autoprune = true;
+        frequently = 0;
+        hourly = 24;
+        daily = 7;
+        weekly = 3;
+        monthly = 1;
       };
     };
 
