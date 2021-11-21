@@ -47,8 +47,8 @@ in
   my.backup.enableSyncoid = true;
 
   # Enable snapshotting for some filesystems
-  services.sanoid.datasets."zroot/home".useTemplate = [ "default" ];
-  services.sanoid.datasets."zroot/persistent".useTemplate = [ "default" ];
+  services.sanoid.datasets."zroot/home".use_template = [ "default" ];
+  services.sanoid.datasets."zroot/persistent".use_template = [ "default" ];
 
   services.syncoid.commands = {
     "zroot/home".target = "root@home.elis.nu:zroot/backups/eliaxe-A100514-NR/zroot/home";

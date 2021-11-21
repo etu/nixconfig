@@ -101,9 +101,9 @@ in
   my.backup.enableSyncoid = true;
 
   # Enable snapshotting for some filesystems
-  services.sanoid.datasets."zroot/home".useTemplate = [ "default" ];
-  services.sanoid.datasets."zroot/persistent".useTemplate = [ "default" ];
-  services.sanoid.datasets."zroot/backups".useTemplate = [ "default" ];
+  services.sanoid.datasets."zroot/home".use_template = [ "default" ];
+  services.sanoid.datasets."zroot/persistent".use_template = [ "default" ];
+  services.sanoid.datasets."zroot/backups".use_template = [ "default" ];
   services.sanoid.datasets."zroot/backups".recursive = true;
   services.sanoid.datasets."zroot/backups".autosnap = false;
 
