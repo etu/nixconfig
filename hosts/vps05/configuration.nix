@@ -38,7 +38,7 @@ in
   my.backup.enableSanoid = true;
 
   # Enable snapshotting for some filesystems
-  services.sanoid.datasets."zroot/persistent".use_template = [ "default" ];
+  services.sanoid.datasets."zroot/persistent".use_template = [ "persistent" ];
 
   # Install mosh
   programs.mosh.enable = true;
