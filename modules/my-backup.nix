@@ -20,7 +20,7 @@ in
         frequently = 7;
         hourly = 36;
         daily = 14;
-        weekly = 4;
+        weekly = 3;
         monthly = 2;
       };
 
