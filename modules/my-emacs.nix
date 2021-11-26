@@ -31,22 +31,22 @@ let
 
   # Run my config trough substituteAll to replace all paths with paths to
   # programs etc to have as my actual config file.
-  myEmacsConfig = pkgs.runCommandNoCC "config.el" (with pkgs; {
+  myEmacsConfig = pkgs.runCommandNoCC "config.el" {
     inherit (myPackages) intelephense;
-    inherit (phpPackages) phpcs;
-    inherit gnuplot;
+    inherit (pkgs.phpPackages) phpcs;
+    inherit (pkgs) gnuplot;
     fontname = config.my.fonts.monospace;
     fontsize = config.my.fonts.size;
-  }) "substituteAll ${myEmacsConfigPlain} $out";
+  } "substituteAll ${myEmacsConfigPlain} $out";
 
   # Run my exwm config through substituteAll to replace all paths with paths
   # to programs etc to have as my actual config file.
-  myExwmConfig = pkgs.runCommandNoCC "exwm-config.el" (with pkgs; {
-    inherit systemd alacritty flameshot;
+  myExwmConfig = pkgs.runCommandNoCC "exwm-config.el" {
+    inherit (pkgs) systemd alacritty flameshot;
     lockCommand = physlockCommand;
-    xbacklight = acpilight;
-    rofi = rofi.override { plugins = [ pkgs.rofi-emoji ]; };
-  }) "substituteAll ${myExwmConfigPlain} $out";
+    xbacklight = pkgs.acpilight;
+    rofi = pkgs.rofi.override { plugins = [ pkgs.rofi-emoji ]; };
+  } "substituteAll ${myExwmConfigPlain} $out";
 
   myEmacsLispLoader = extraLisp: loadFile: pkgs.writeText "${loadFile.name}-init.el"
     ''
@@ -209,13 +209,13 @@ in
     services.gnome.gnome-keyring.enable = lib.mkIf cfg.enableExwm true;
 
     # Install aditional packages
-    environment.systemPackages = (lib.optionals cfg.enableExwm (with pkgs; [
-      alacritty
-      evince
-      evolution
-      gnome3.adwaita-icon-theme # Icons for gnome packages that sometimes use them but don't depend on them
-      scrot
-    ])) ++ (lib.optionals (config.my.emacs.package == "wayland") ([
+    environment.systemPackages = (lib.optionals cfg.enableExwm [
+      pkgs.alacritty
+      pkgs.evince
+      pkgs.evolution
+      pkgs.gnome3.adwaita-icon-theme # Icons for gnome packages that sometimes use them but don't depend on them
+      pkgs.scrot
+    ]) ++ (lib.optionals (config.my.emacs.package == "wayland") ([
       (let
         x11Emacs = (myEmacsPackage emacsPackages.default);
       in pkgs.runCommandNoCC "emacs-x11" {} ''
