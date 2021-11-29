@@ -64,6 +64,16 @@ in
     "nixos-config=/etc/nixos/hosts/eliaxe-A100514-NR/configuration.nix"
   ];
 
+  # Hardware settings
+  hardware.enableRedistributableFirmware = true;
+
+  # Include udev rules to give permissions to the video group to change
+  # backlight using acpilight.
+  hardware.acpilight.enable = true;
+
+  # Set video driver
+  services.xserver.videoDrivers = [ "modesetting" ];
+
   # Enable fwupd for firmware updates etc
   services.fwupd.enable = true;
 
@@ -106,7 +116,7 @@ in
 
   # Define a user account.
   my.user.enable = true;
-  my.user.extraGroups = [ "adbusers" "docker" ];
+  my.user.extraGroups = [ "video" "adbusers" "docker" ];
 
   # Immutable users due to tmpfs
   users.mutableUsers = false;
