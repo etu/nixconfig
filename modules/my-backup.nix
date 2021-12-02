@@ -29,7 +29,7 @@ in
         autosnap = true;
         autoprune = true;
         frequently = 0;
-        hourly = 24;
+        hourly = 0;
         daily = 7;
         weekly = 3;
         monthly = 2;
@@ -40,7 +40,7 @@ in
         autosnap = true;
         autoprune = true;
         frequently = 0;
-        hourly = 24;
+        hourly = 0;
         daily = 7;
         weekly = 3;
         monthly = 1;
