@@ -5,10 +5,10 @@
         "homepage": "",
         "owner": "ryantm",
         "repo": "agenix",
-        "rev": "52ea2f8c3231cc2b5302fa28c63588aacb77ea29",
-        "sha256": "1sqgbriwmvxcmqp0zbk7873psk9g60a53fgrr9p0jafki5zzgvdx",
+        "rev": "c53ac31e44285ef77f239cc985aa43c03533172f",
+        "sha256": "0kdns51gc4r33hfz88k9axcw003kap548xnzdml5nfx253y0hlp6",
         "type": "tarball",
-        "url": "https://github.com/ryantm/agenix/archive/52ea2f8c3231cc2b5302fa28c63588aacb77ea29.tar.gz",
+        "url": "https://github.com/ryantm/agenix/archive/c53ac31e44285ef77f239cc985aa43c03533172f.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "emacs-overlay": {
@@ -17,10 +17,10 @@
         "homepage": "",
         "owner": "nix-community",
         "repo": "emacs-overlay",
-        "rev": "931eaf998fd6ebbbd662798b5756f962fb4cda6a",
-        "sha256": "1izvpisn6s4q6kndch8f923b1q4nxzx71g4mc06swhh3di99zzsz",
+        "rev": "9cce92048722406de131a04f785a135f8e362466",
+        "sha256": "024hizjbyknni96z5ryi4nw2jf7lb4b617k7hlrbnijw89dp5c2y",
         "type": "tarball",
-        "url": "https://github.com/nix-community/emacs-overlay/archive/931eaf998fd6ebbbd662798b5756f962fb4cda6a.tar.gz",
+        "url": "https://github.com/nix-community/emacs-overlay/archive/9cce92048722406de131a04f785a135f8e362466.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "flummbot": {
@@ -41,10 +41,10 @@
         "homepage": "https://nix-community.github.io/home-manager/",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "de54d513c74bf8f4f3a58954b80b5f690639fe72",
-        "sha256": "00nf361vaawkdp0kkhxxmbyj61ljdvyl2mz0c57yws67ssr37awa",
+        "rev": "781d25b315def05cd7ede3765226c54216f0b1fe",
+        "sha256": "14cbfsslf1qbgkif3hrgn6x5rxa9h6b61jh4jmjbfi6mbnxvn8r9",
         "type": "tarball",
-        "url": "https://github.com/nix-community/home-manager/archive/de54d513c74bf8f4f3a58954b80b5f690639fe72.tar.gz",
+        "url": "https://github.com/nix-community/home-manager/archive/781d25b315def05cd7ede3765226c54216f0b1fe.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "impermanence": {

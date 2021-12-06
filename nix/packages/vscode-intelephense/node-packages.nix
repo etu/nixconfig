@@ -733,13 +733,13 @@ let
         sha512 = "JV/yugV2uzW5iMRSiZAyDtQd+nxtUnjeLt0acNdw98kKLrvuRVyB80tsREOE7yvGVgalhZ6RNXCmEHkUKBKxew==";
       };
     };
-    "intelephense-1.7.1" = {
+    "intelephense-1.8.0" = {
       name = "intelephense";
       packageName = "intelephense";
-      version = "1.7.1";
+      version = "1.8.0";
       src = fetchurl {
-        url = "https://registry.npmjs.org/intelephense/-/intelephense-1.7.1.tgz";
-        sha512 = "fIAeUVrsGs2/yX/GopLwXIw17t3aekM1KrOJ7r9xJhA1VlGoR+YtIFxdXLcOnC1oRRdBkEz46xZEHZh5W+3vwQ==";
+        url = "https://registry.npmjs.org/intelephense/-/intelephense-1.8.0.tgz";
+        sha512 = "DigAEcRfvGX1f/FExvvHTuImCu9EC7XtvAFDISsXvMTFTnMlAnNKcQvcVcZDWREa9NRKXSH5HD8a7lV+a25eBg==";
       };
     };
     "is-extglob-2.1.1" = {
@@ -1517,7 +1517,7 @@ let
       sources."inflight-1.0.6"
       sources."inherits-2.0.4"
       sources."ini-1.3.8"
-      sources."intelephense-1.7.1"
+      sources."intelephense-1.8.0"
       sources."is-extglob-2.1.1"
       sources."is-glob-4.0.3"
       sources."is-number-7.0.0"
