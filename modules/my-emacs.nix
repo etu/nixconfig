@@ -85,6 +85,25 @@ let
 
   myExwmInit = myEmacsLispLoader "" myExwmConfig;
 
+  # Define language servers to include in the wrapper for Emacs
+  languageServers = [
+    pkgs.gopls                                   # Go language server
+    pkgs.nodePackages.bash-language-server       # Bash language server
+    pkgs.nodePackages.intelephense               # PHP language server
+    pkgs.nodePackages.typescript-language-server # JS/TS language server
+    pkgs.rnix-lsp                                # Nix language server
+  ];
+
+  # Function to wrap emacs to contain the path for language servers
+  wrapEmacsWithLanguageServers = (
+    { emacs, binName ? "emacs" }: pkgs.runCommandNoCC
+    "${emacs.name}-with-language-server"
+    { nativeBuildInputs = [ pkgs.makeWrapper ]; }
+    ''
+      makeWrapper ${emacs}/bin/emacs $out/bin/${binName} --prefix PATH : ${lib.makeBinPath languageServers}
+    ''
+  );
+
   myEmacsPackage = emacsPackage: pkgs.emacsWithPackagesFromUsePackage {
     package = emacsPackage;
 
@@ -156,7 +175,9 @@ in
     services.emacs = lib.mkIf cfg.enable {
       enable = true;
       defaultEditor = true;
-      package = myEmacsPackage emacsPackages."${cfg.package}";
+      package = (wrapEmacsWithLanguageServers {
+        emacs = (myEmacsPackage emacsPackages."${cfg.package}");
+      });
     };
 
 
@@ -216,12 +237,10 @@ in
       pkgs.gnome3.adwaita-icon-theme # Icons for gnome packages that sometimes use them but don't depend on them
       pkgs.scrot
     ]) ++ (lib.optionals (config.my.emacs.package == "wayland") ([
-      (let
-        x11Emacs = (myEmacsPackage emacsPackages.default);
-      in pkgs.runCommandNoCC "emacs-x11" {} ''
-        mkdir -p $out/bin
-        ln -s ${x11Emacs}/bin/emacs $out/bin/emacs-x11
-      '')
+      (wrapEmacsWithLanguageServers {
+        emacs = (myEmacsPackage emacsPackages.default);
+        binName = "emacs-x11";
+      })
     ]));
   };
 }
