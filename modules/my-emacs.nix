@@ -5,9 +5,6 @@ let
   # Load sources
   sources = import ../nix/sources.nix;
 
-  # Load packages
-  myPackages = pkgs.callPackage ../nix/packages { };
-
   # Extract the path executed by the systemd-service, to get the flags used by
   # the service. But replace the path with the security wrapper dir so we get
   # the suid enabled path to the binary.
@@ -32,7 +29,6 @@ let
   # Run my config trough substituteAll to replace all paths with paths to
   # programs etc to have as my actual config file.
   myEmacsConfig = pkgs.runCommandNoCC "config.el" {
-    inherit (myPackages) intelephense;
     inherit (pkgs.phpPackages) phpcs;
     inherit (pkgs) gnuplot;
     fontname = config.my.fonts.monospace;
