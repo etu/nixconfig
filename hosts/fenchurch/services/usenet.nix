@@ -68,9 +68,9 @@
   # Enable usenet related services in a container
   containers.usenet = {
     autoStart = true;
-    config = { config, pkgs, ... }: {
+    config = { config, lib, pkgs, ... }: {
       # nzbget needs unrar
-      nixpkgs.config.allowUnfree = true;
+      nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "unrar" ];
 
       services.bazarr = { enable = true; user = "downloads"; group = "downloads"; };
       services.sonarr = { enable = true; user = "downloads"; group = "downloads"; };

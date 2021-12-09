@@ -78,7 +78,6 @@ in
     wantedBy = [ "network-online.target" ];
   };
 
-  nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
     firefox-bin
     mpv

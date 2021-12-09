@@ -11,8 +11,6 @@ in
       driSupport32Bit = true;
     };
 
-    nixpkgs.config.allowUnfree = true;
-
     # Support 32bit audio things
     services.pipewire.alsa.support32Bit = true;
 
