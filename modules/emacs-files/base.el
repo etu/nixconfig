@@ -370,7 +370,7 @@
   :defer 1
   :init
   (setq flycheck-phpcs-standard "PSR2"
-        flycheck-php-phpcs-executable "@phpcs@/bin/phpcs")
+        flycheck-php-phpcs-executable "phpcs")
   :config
   (add-hook 'prog-mode-hook 'flycheck-mode))
 
@@ -568,8 +568,7 @@
 (use-package gnuplot
   :ensure t
   :defer 2
-  :bind (("M-C-g" . org-plot/gnuplot))
-  :init (setq gnuplot-program "@gnuplot@/bin/gnuplot"))
+  :bind (("M-C-g" . org-plot/gnuplot)))
 
 
 ;;;

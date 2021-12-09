@@ -29,8 +29,6 @@ let
   # Run my config trough substituteAll to replace all paths with paths to
   # programs etc to have as my actual config file.
   myEmacsConfig = pkgs.runCommandNoCC "config.el" {
-    inherit (pkgs.phpPackages) phpcs;
-    inherit (pkgs) gnuplot;
     fontname = config.my.fonts.monospace;
     fontsize = config.my.fonts.size;
   } "substituteAll ${myEmacsConfigPlain} $out";
@@ -82,21 +80,26 @@ let
   myExwmInit = myEmacsLispLoader "" myExwmConfig;
 
   # Define language servers to include in the wrapper for Emacs
-  languageServers = [
+  extraBinPaths = [
+    # Language Servers
     pkgs.gopls                                   # Go language server
     pkgs.nodePackages.bash-language-server       # Bash language server
     pkgs.nodePackages.intelephense               # PHP language server
     pkgs.nodePackages.typescript-language-server # JS/TS language server
     pkgs.rnix-lsp                                # Nix language server
+
+    # Other programs
+    pkgs.gnuplot                                 # For use with org mode
+    pkgs.phpPackages.phpcs                       # PHP codestyle checker
   ];
 
   # Function to wrap emacs to contain the path for language servers
-  wrapEmacsWithLanguageServers = (
+  wrapEmacsWithExtraBinPaths = (
     { emacs, binName ? "emacs" }: pkgs.runCommandNoCC
-    "${emacs.name}-with-language-server"
+    "${emacs.name}-with-extra-bin-paths"
     { nativeBuildInputs = [ pkgs.makeWrapper ]; }
     ''
-      makeWrapper ${emacs}/bin/emacs $out/bin/${binName} --prefix PATH : ${lib.makeBinPath languageServers}
+      makeWrapper ${emacs}/bin/emacs $out/bin/${binName} --prefix PATH : ${lib.makeBinPath extraBinPaths}
     ''
   );
 
@@ -171,7 +174,7 @@ in
     services.emacs = lib.mkIf cfg.enable {
       enable = true;
       defaultEditor = true;
-      package = (wrapEmacsWithLanguageServers {
+      package = (wrapEmacsWithExtraBinPaths {
         emacs = (myEmacsPackage emacsPackages."${cfg.package}");
       });
     };
@@ -233,7 +236,7 @@ in
       pkgs.gnome3.adwaita-icon-theme # Icons for gnome packages that sometimes use them but don't depend on them
       pkgs.scrot
     ]) ++ (lib.optionals (config.my.emacs.package == "wayland") ([
-      (wrapEmacsWithLanguageServers {
+      (wrapEmacsWithExtraBinPaths {
         emacs = (myEmacsPackage emacsPackages.default);
         binName = "emacs-x11";
       })
