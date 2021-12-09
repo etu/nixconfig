@@ -330,7 +330,7 @@
 (use-package eglot
   :ensure t
   :defer 2
-  :commands (eglot eglot-ensure)
+  :commands eglot-ensure
   :hook ((php-mode . eglot-ensure)
          (go-mode . eglot-ensure)
          (sh-mode . eglot-ensure)
