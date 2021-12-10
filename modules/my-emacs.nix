@@ -82,15 +82,17 @@ let
   # Define language servers to include in the wrapper for Emacs
   extraBinPaths = [
     # Language Servers
-    pkgs.gopls                                   # Go language server
-    pkgs.nodePackages.bash-language-server       # Bash language server
-    pkgs.nodePackages.intelephense               # PHP language server
-    pkgs.nodePackages.typescript-language-server # JS/TS language server
-    pkgs.rnix-lsp                                # Nix language server
+    pkgs.gopls                                          # Go language server
+    pkgs.nodePackages.bash-language-server              # Bash language server
+    pkgs.nodePackages.dockerfile-language-server-nodejs # Docker language server
+    pkgs.nodePackages.intelephense                      # PHP language server
+    pkgs.nodePackages.typescript-language-server        # JS/TS language server
+    pkgs.nodePackages.vscode-css-languageserver-bin     # CSS/LESS/SASS language server
+    pkgs.rnix-lsp                                       # Nix language server
 
     # Other programs
-    pkgs.gnuplot                                 # For use with org mode
-    pkgs.phpPackages.phpcs                       # PHP codestyle checker
+    pkgs.gnuplot                                        # For use with org mode
+    pkgs.phpPackages.phpcs                              # PHP codestyle checker
   ];
 
   # Function to wrap emacs to contain the path for language servers

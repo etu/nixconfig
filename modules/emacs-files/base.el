@@ -331,14 +331,19 @@
   :ensure t
   :defer 2
   :commands eglot-ensure
-  :hook ((php-mode . eglot-ensure)
+  :hook ((css-mode . eglot-ensure)
+         (dockerfile-mode . eglot-ensure)
          (go-mode . eglot-ensure)
-         (sh-mode . eglot-ensure)
+         (js-mode . eglot-ensure)
          (nix-mode . eglot-ensure)
-         (js-mode . eglot-ensure))
+         (php-mode . eglot-ensure)
+         (scss-mode . eglot-ensure)
+         (sh-mode . eglot-ensure))
   :config
   (progn
-    (add-to-list 'eglot-server-programs '((php-mode phps-mode) . ("intelephense" "--stdio")))))
+    (add-to-list 'eglot-server-programs '(dockerfile-mode . ("docker-langserver" "--stdio")))
+    (add-to-list 'eglot-server-programs '((php-mode phps-mode) . ("intelephense" "--stdio")))
+    (add-to-list 'eglot-server-programs '((scss-mode css-mode) . ("css-languageserver" "--stdio")))))
 
 
 ;;;
