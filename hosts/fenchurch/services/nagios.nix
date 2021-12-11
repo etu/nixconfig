@@ -57,6 +57,27 @@ let
       use                 generic-service
       contacts            admin
     }
+
+    define service {
+      use                 local-service
+      host_name           home.elis.nu
+      service_description Root Pool
+      check_command       check_local_disk!20%!10%!/persistent
+    }
+
+    define service {
+      use                 local-service
+      host_name           home.elis.nu
+      service_description Storage Pool
+      check_command       check_local_disk!20%!10%!/media/zstorage/files
+    }
+
+    define service {
+      use                 local-service
+      host_name           home.elis.nu
+      service_description Current Load
+      check_command       check_local_load!5.0,4.0,3.0!10.0,6.0,4.0
+    }
   '';
 in
 {
