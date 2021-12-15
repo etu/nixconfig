@@ -24,6 +24,7 @@ in
     ./services/home-nginx.nix
     ./services/jellyfin.nix
     ./services/murmur.nix
+    ./services/monitoring.nix
     ./services/nagios.nix
     ./services/netdata.nix
     ./services/nfs.nix

@@ -25,4 +25,5 @@ in
   "nagios-elis-nu.age".publicKeys = etu ++ hosts.fenchurch;
   "sshkeys/etu_at_aarch64.nixos.community.pub.age".publicKeys = etu ++ hosts.agrajag;
   "sshkeys/etu_at_aarch64.nixos.community.age".publicKeys = etu ++ hosts.agrajag;
+  "monitoring/grafana-admin-password.age".publicKeys = etu ++ hosts.fenchurch;
 }
