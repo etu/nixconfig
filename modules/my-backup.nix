@@ -17,9 +17,9 @@ in
       templates.home = {
         autosnap = true;
         autoprune = true;
-        frequently = 7;
-        hourly = 24;
-        daily = 7;
+        frequently = 3;
+        hourly = 23;
+        daily = 6;
         weekly = 3;
         monthly = 2;
       };
@@ -30,7 +30,7 @@ in
         autoprune = true;
         frequently = 0;
         hourly = 0;
-        daily = 7;
+        daily = 6;
         weekly = 3;
         monthly = 2;
       };
@@ -41,7 +41,7 @@ in
         autoprune = true;
         frequently = 0;
         hourly = 0;
-        daily = 7;
+        daily = 6;
         weekly = 3;
         monthly = 1;
       };
