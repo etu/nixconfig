@@ -27,6 +27,7 @@
                 <li><a href="/radarr">Radarr (Movies)</a></li>
                 <li><a href="/lidarr">Lidarr (Music)</a></li>
                 <li><a href="/nzbget">NzbGet</a></li>
+                <li><a href="/changedetection">Changedetection</a></li>
               </ul>
             </body>
           </html>
