@@ -7,6 +7,8 @@ let
   # Import my ssh public keys
   keys = import ../../data/pubkeys.nix;
 
+  # Load nivSources
+  nivSources = import ../../nix/sources.nix;
 in
 {
   imports = [
@@ -48,6 +50,34 @@ in
 
   # List services that you want to enable:
 
+  # Override identity paths for agenix since the openssh default paths
+  # relies on a symlink being created in /etc/ssh to point at the
+  # right path to make it to work as it would be in the right place.
+  age.identityPaths = [
+    "/persistent/etc/ssh/ssh_host_ed25519_key"
+    "/persistent/etc/ssh/ssh_host_rsa_key"
+  ];
+
+  # Include agenix encripted secrets for cloudflare origin server
+  # certificates so we can have an encrypted connection from
+  # cloudflare to this server.
+  age.secrets.xn--hlsobrev-0za-se-pem = {
+    file = ../../secrets/certs/xn--hlsobrev-0za.se.pem.age;
+    owner = "nginx";
+  };
+  age.secrets.xn--hlsobrev-0za-se-key = {
+    file = ../../secrets/certs/xn--hlsobrev-0za.se.key.age;
+    owner = "nginx";
+  };
+  age.secrets.halsobrev-se-pem = {
+    file = ../../secrets/certs/halsobrev.se.pem.age;
+    owner = "nginx";
+  };
+  age.secrets.halsobrev-se-key = {
+    file = ../../secrets/certs/halsobrev.se.key.age;
+    owner = "nginx";
+  };
+
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
@@ -83,6 +113,28 @@ in
       forceSSL = true;
       enableACME = true;
       locations."/".proxyPass = "http://127.0.0.1:11371/";
+    };
+    # Serve main domain.
+    "xn--hlsobrev-0za.se" = {
+      sslCertificate = config.age.secrets.xn--hlsobrev-0za-se-pem.path;
+      sslCertificateKey = config.age.secrets.xn--hlsobrev-0za-se-key.path;
+      addSSL = true;
+      locations."/".root = pkgs.callPackage "${nivSources.halsobrev}/default.nix" {};
+    };
+    # Redirect from www to main domain.
+    "www.xn--hlsobrev-0za.se" = {
+      addSSL = true;
+      sslCertificate = config.age.secrets.xn--hlsobrev-0za-se-pem.path;
+      sslCertificateKey = config.age.secrets.xn--hlsobrev-0za-se-key.path;
+      globalRedirect = "xn--hlsobrev-0za.se";
+    };
+    # Redirect from alt domain to main domain.
+    "halsobrev.se" = {
+      addSSL = true;
+      sslCertificate = config.age.secrets.halsobrev-se-pem.path;
+      sslCertificateKey = config.age.secrets.halsobrev-se-key.path;
+      serverAliases = [ "www.halsobrev.se" ];
+      globalRedirect = "xn--hlsobrev-0za.se";
     };
   };
 
