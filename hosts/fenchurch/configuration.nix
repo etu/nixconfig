@@ -184,7 +184,7 @@ in
   virtualisation.libvirtd.enable = true;
 
   # Set up Letsencrypt
-  security.acme.email = config.my.user.email;
+  security.acme.defaults.email = config.my.user.email;
   security.acme.acceptTerms = true;
 
   users.users.downloads = { group = "downloads"; uid = 947; isSystemUser = true; };
