@@ -43,7 +43,7 @@ in
         hourly = 0;
         daily = 6;
         weekly = 3;
-        monthly = 1;
+        monthly = 2;
       };
     };
 
