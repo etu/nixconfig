@@ -17,10 +17,10 @@
         "homepage": "",
         "owner": "nix-community",
         "repo": "emacs-overlay",
-        "rev": "0d01d3b11249a471c80ab2c972646c4c809b8237",
-        "sha256": "0w2xp1l2mby3hidc12qsls8hm9md1rar3yvrdlzfqy15gax87ir7",
+        "rev": "5fcafb9229a347b2f5f5dc4ec9f0f5f977b42b85",
+        "sha256": "150s4syrv7500mm69mw1k685gznifakvah2xjb5lgin0fxwi0cns",
         "type": "tarball",
-        "url": "https://github.com/nix-community/emacs-overlay/archive/0d01d3b11249a471c80ab2c972646c4c809b8237.tar.gz",
+        "url": "https://github.com/nix-community/emacs-overlay/archive/5fcafb9229a347b2f5f5dc4ec9f0f5f977b42b85.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "flummbot": {
@@ -47,10 +47,10 @@
         "homepage": "https://nix-community.github.io/home-manager/",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "a5dd5d5f197724f3065fd39c59c7ccea3c8dcb8f",
-        "sha256": "1il82ld3yv79mdr02yw6s5xmw31dz80ax22j9a8ris76xw2z2azx",
+        "rev": "a69f3e9b0390f03defb834b15e80c236a537157d",
+        "sha256": "0slk3hqc5z934c41mz166nqfvkmmf0pddzpsr3fr3csnq40r360j",
         "type": "tarball",
-        "url": "https://github.com/nix-community/home-manager/archive/a5dd5d5f197724f3065fd39c59c7ccea3c8dcb8f.tar.gz",
+        "url": "https://github.com/nix-community/home-manager/archive/a69f3e9b0390f03defb834b15e80c236a537157d.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "impermanence": {
@@ -59,10 +59,10 @@
         "homepage": "",
         "owner": "nix-community",
         "repo": "impermanence",
-        "rev": "29d781b47b0ee6014abd541c132c647d18ab098e",
-        "sha256": "1x585i2vpf06cq9ldha0s3qlba11zdzw57y1wkj1djlq5fzkqyl8",
+        "rev": "ff2240b04ffb9322241b9f6374305cbf6a98a285",
+        "sha256": "0jh1akn8d93xydacmlcslfjgbdm84r2kj96x6nym203gk8l016gx",
         "type": "tarball",
-        "url": "https://github.com/nix-community/impermanence/archive/29d781b47b0ee6014abd541c132c647d18ab098e.tar.gz",
+        "url": "https://github.com/nix-community/impermanence/archive/ff2240b04ffb9322241b9f6374305cbf6a98a285.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "ip-failar-nu": {

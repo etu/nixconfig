@@ -15,7 +15,7 @@
 
   virtualisation.oci-containers.backend = "podman";
   virtualisation.oci-containers.containers.changedetection = {
-    image = "dgtlmoon/changedetection.io:0.39.6";
+    image = "dgtlmoon/changedetection.io:0.39.7";
     ports = [ "0.0.0.0:5000:5000" ];
     volumes = [
       "/persistent/var/lib/changedetection:/datastore"
