@@ -1,13 +1,25 @@
-{ ... }:
+{ config, ... }:
 
 {
-  environment.persistence."/persistent".files = [
-    "/etc/machine-id"
-    "/etc/ssh/ssh_host_rsa_key"
-    "/etc/ssh/ssh_host_rsa_key.pub"
-    "/etc/ssh/ssh_host_ed25519_key"
-    "/etc/ssh/ssh_host_ed25519_key.pub"
-  ];
+  environment.persistence."/persistent" = {
+    files = [
+      "/etc/machine-id"
+      "/etc/ssh/ssh_host_rsa_key"
+      "/etc/ssh/ssh_host_rsa_key.pub"
+      "/etc/ssh/ssh_host_ed25519_key"
+      "/etc/ssh/ssh_host_ed25519_key.pub"
+    ];
+    users.${config.my.user.username} = {
+      files = [
+        ".config/fish/fish_variables"
+      ];
+      directories = [
+        ".dotfiles"
+        ".ssh"
+        ".weechat"
+      ];
+    };
+  };
 
   # Persistence of all users dotfiles between boots
   fileSystems."/home/bots" = {

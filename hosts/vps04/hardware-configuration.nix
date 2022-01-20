@@ -32,6 +32,7 @@
   fileSystems."/persistent/home" = {
     device = "zroot/home";
     fsType = "zfs";
+    neededForBoot = true;
   };
 
   fileSystems."/persistent" = {

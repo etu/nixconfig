@@ -25,17 +25,10 @@ in
       {
         # Import a persistance module for home-manager.
         imports = [
-          "${sources.impermanence}/home-manager.nix"
           ./home-manager/weechat.nix
         ];
 
         programs.home-manager.enable = true;
-
-        home.persistence.${config.my.user.persistent.homeDir} = {
-          files = [ ] ++ config.my.user.persistent.extraFiles;
-          directories = [ ] ++ config.my.user.persistent.extraDirectories;
-          allowOther = config.programs.fuse.userAllowOther;
-        };
 
         home.file = {
           # Home nix config.

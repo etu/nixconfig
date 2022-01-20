@@ -95,21 +95,6 @@
         default = [ ];
         description = "Additional authorized keys.";
       };
-      persistent = {
-        homeDir = lib.mkOption {
-          type = lib.types.str;
-          default = "/persistent/home/etu";
-          description = "Location of persistent home files.";
-        };
-        extraFiles = lib.mkOption {
-          type = lib.types.listOf lib.types.str;
-          default = [ ];
-        };
-        extraDirectories = lib.mkOption {
-          type = lib.types.listOf lib.types.str;
-          default = [ ];
-        };
-      };
     };
     vbox.enable = lib.mkEnableOption "Enables vbox and related things I use";
   };

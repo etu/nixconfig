@@ -1,4 +1,4 @@
-{ ... }:
+{ config, ... }:
 
 {
   environment.persistence."/persistent" = {
@@ -13,60 +13,59 @@
       "/etc/ssh/ssh_host_ed25519_key"
       "/etc/ssh/ssh_host_ed25519_key.pub"
     ];
-  };
+    users.${config.my.user.username} = {
+      files = [
+        ".caffrc"
+        ".config/fish/fish_variables"
+        ".msmtprc"
 
-  my.user.persistent = {
-    extraFiles = [
-      ".caffrc"
-      ".config/fish/fish_variables"
-      ".msmtprc"
+        # Spotify
+        ".config/spotify/prefs"
 
-      # Spotify
-      ".config/spotify/prefs"
+        # Work
+        ".docker/config.json"
+        ".kube/config"
+        "bin/gh-md-toc"
+        "bin/git-tvlog"
+        "bin/mydump"
+      ];
+      directories = [
+        ".config/pipewire/media-session.d"
+        ".config/syncthing"
+        ".config/tvnu"
+        ".dotfiles"
+        ".gnupg"
+        ".local/share/TelegramDesktop/tdata"
+        ".local/share/dino"
+        ".local/share/direnv"
+        ".local/share/emacs"
+        ".local/share/fish"
+        ".mozilla/firefox"
+        ".password-store"
+        ".ssh"
+        "Downloads"
+        "code"
+        "documents"
+        "org"
 
-      # Work
-      ".docker/config.json"
-      ".kube/config"
-      "bin/gh-md-toc"
-      "bin/git-tvlog"
-      "bin/mydump"
-    ];
-    extraDirectories = [
-      ".config/pipewire/media-session.d"
-      ".config/syncthing"
-      ".config/tvnu"
-      ".dotfiles"
-      ".gnupg"
-      ".local/share/TelegramDesktop/tdata"
-      ".local/share/dino"
-      ".local/share/direnv"
-      ".local/share/emacs"
-      ".local/share/fish"
-      ".mozilla/firefox"
-      ".password-store"
-      ".ssh"
-      "Downloads"
-      "code"
-      "documents"
-      "org"
+        # Spotify
+        ".config/spotify/Users"
 
-      # Spotify
-      ".config/spotify/Users"
+        # Work
+        ".chalet"
+        ".chef"
+        ".config/Slack"
+        ".config/VirtualBox"
+        ".vagrant.d"
+        "VirtualBox VMs"
+        "tvnu"
 
-      # Work
-      ".chalet"
-      ".chef"
-      ".config/Slack"
-      ".config/VirtualBox"
-      ".vagrant.d"
-      "VirtualBox VMs"
-      "tvnu"
-
-      # Evolution
-      ".config/evolution"
-      ".config/goa-1.0"
-      ".local/share/evolution"
-      ".local/share/keyrings"
-    ];
+        # Evolution
+        ".config/evolution"
+        ".config/goa-1.0"
+        ".local/share/evolution"
+        ".local/share/keyrings"
+      ];
+    };
   };
 }

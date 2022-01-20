@@ -59,10 +59,10 @@
         "homepage": "",
         "owner": "nix-community",
         "repo": "impermanence",
-        "rev": "ff2240b04ffb9322241b9f6374305cbf6a98a285",
-        "sha256": "0jh1akn8d93xydacmlcslfjgbdm84r2kj96x6nym203gk8l016gx",
+        "rev": "05cc388c3e459996ef0552ba74f529b84343497a",
+        "sha256": "0xzinz2d2gzjnpsy4s8fdlrm8h9gp4s38vin6g107l0w3477gsdi",
         "type": "tarball",
-        "url": "https://github.com/nix-community/impermanence/archive/ff2240b04ffb9322241b9f6374305cbf6a98a285.tar.gz",
+        "url": "https://github.com/nix-community/impermanence/archive/05cc388c3e459996ef0552ba74f529b84343497a.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "ip-failar-nu": {
