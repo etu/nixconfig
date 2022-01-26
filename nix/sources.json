@@ -17,10 +17,10 @@
         "homepage": "",
         "owner": "nix-community",
         "repo": "emacs-overlay",
-        "rev": "5fcafb9229a347b2f5f5dc4ec9f0f5f977b42b85",
-        "sha256": "150s4syrv7500mm69mw1k685gznifakvah2xjb5lgin0fxwi0cns",
+        "rev": "e4f09393c327bf56be25476ccd0f7628637445bb",
+        "sha256": "05w2ba80ijghf5225gn3zwb9di9icawdjcfa8mh2863j5agpjx0j",
         "type": "tarball",
-        "url": "https://github.com/nix-community/emacs-overlay/archive/5fcafb9229a347b2f5f5dc4ec9f0f5f977b42b85.tar.gz",
+        "url": "https://github.com/nix-community/emacs-overlay/archive/e4f09393c327bf56be25476ccd0f7628637445bb.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "flummbot": {
@@ -47,10 +47,10 @@
         "homepage": "https://nix-community.github.io/home-manager/",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "a69f3e9b0390f03defb834b15e80c236a537157d",
-        "sha256": "0slk3hqc5z934c41mz166nqfvkmmf0pddzpsr3fr3csnq40r360j",
+        "rev": "990ca662c4b92636053ea399f5fb80702830522c",
+        "sha256": "03hbamw3av7zj25izwd5yi7pj01v3yngkn48phyhbyg661d4wndi",
         "type": "tarball",
-        "url": "https://github.com/nix-community/home-manager/archive/a69f3e9b0390f03defb834b15e80c236a537157d.tar.gz",
+        "url": "https://github.com/nix-community/home-manager/archive/990ca662c4b92636053ea399f5fb80702830522c.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "impermanence": {
@@ -95,10 +95,10 @@
         "homepage": "",
         "owner": "Infinisil",
         "repo": "nixus",
-        "rev": "817ef8a9a9e37e9fbf414507daaf8e477640e1c7",
-        "sha256": "1lrns4lm7kskg7vcdw3m3kpwn669q7qbrmj8n24399ghr699v70h",
+        "rev": "60ea7eb5e18d58ac7742234855b7192112fd4049",
+        "sha256": "0c9jkhd6xmgaw2gzbcsf7k1p42sn8dyhla71x1bp902mnfdgjsxx",
         "type": "tarball",
-        "url": "https://github.com/Infinisil/nixus/archive/817ef8a9a9e37e9fbf414507daaf8e477640e1c7.tar.gz",
+        "url": "https://github.com/Infinisil/nixus/archive/60ea7eb5e18d58ac7742234855b7192112fd4049.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }

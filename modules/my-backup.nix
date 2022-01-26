@@ -65,35 +65,35 @@ in
     # Add known hosts so syncoid don't bail out on unknown hosts
     programs.ssh.knownHosts = {
       fenchurch-ec = {
-        hostNames = [ "home.elis.nu" "local.elis.nu" "192.168.0.101" ];
+        extraHostNames = [ "home.elis.nu" "local.elis.nu" "192.168.0.101" ];
         publicKey = keys.systems.fenchurch.ec;
       };
       fenchurch-rsa = {
-        hostNames = [ "home.elis.nu" "local.elis.nu" "192.168.1.101" ];
+        extraHostNames = [ "home.elis.nu" "local.elis.nu" "192.168.1.101" ];
         publicKey = keys.systems.fenchurch.rsa;
       };
       vps04-ec = {
-        hostNames = [ "vps04.elis.nu" ];
+        extraHostNames = [ "vps04.elis.nu" ];
         publicKey = keys.systems.vps04.ec;
       };
       vps04-rsa = {
-        hostNames = [ "vps04.elis.nu" ];
+        extraHostNames = [ "vps04.elis.nu" ];
         publicKey = keys.systems.vps04.rsa;
       };
       vps05-ec = {
-        hostNames = [ "vps05.elis.nu" ];
+        extraHostNames = [ "vps05.elis.nu" ];
         publicKey = keys.systems.vps05.ec;
       };
       vps05-rsa = {
-        hostNames = [ "vps05.elis.nu" ];
+        extraHostNames = [ "vps05.elis.nu" ];
         publicKey = keys.systems.vps05.rsa;
       };
       kodi-ec = {
-        hostNames = [ "192.168.0.105" ];
+        extraHostNames = [ "192.168.0.105" ];
         publicKey = keys.systems.kodi.ec;
       };
       kodi-rsa = {
-        hostNames = [ "192.168.0.105" ];
+        extraHostNames = [ "192.168.0.105" ];
         publicKey = keys.systems.kodi.rsa;
       };
     };
