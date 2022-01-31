@@ -359,6 +359,8 @@ let
       for_window [app_id="firefox" title="Picture-in-Picture"] floating enable
       for_window [class="Brave-browser"] border pixel 3
       for_window [class="Chromium-browser"] border pixel 3
+      for_window [class="Google-chrome"] border pixel 3
+      for_window [title="Welcome to Google Chrome"] floating enable
       for_window [class="Emacs"] border pixel 3
       for_window [app_id="emacs"] border pixel 3
 
