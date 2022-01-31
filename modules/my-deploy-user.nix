@@ -15,7 +15,7 @@ in
     };
 
     # It needs to be a trusted user to copy things to the store
-    nix.trustedUsers = [ "deploy" ];
+    nix.settings.trusted-users = [ "deploy" ];
 
     # And it needs to be able to execute things as sudo at arbitrary
     # paths to be able to switch generations and things like that.
