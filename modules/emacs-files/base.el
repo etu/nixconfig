@@ -178,14 +178,12 @@
 
 (use-package dracula-theme
   :ensure t
-  :config
-  (load-theme 'dracula t))
+  :config (load-theme 'dracula t))
 
 
 (use-package telephone-line
   :ensure t
-  :config
-  (telephone-line-mode t))
+  :config (telephone-line-mode t))
 
 
 (add-to-list 'default-frame-alist '(font . "@fontname@ @fontsize@"))
@@ -204,14 +202,12 @@
 ;; Go mode
 (use-package go-mode
   :ensure t
-  :defer 2
   :init (add-hook 'before-save-hook 'gofmt-before-save))
 
 
 ;; PHP mode
 (use-package php-mode
   :ensure t
-  :defer 2
   :init (setq php-mode-coding-style 'psr2)
   :config (add-hook 'php-mode-hook (lambda ()
                                      (set (make-local-variable 'fill-column) 120))))
@@ -220,14 +216,12 @@
 ;; SCSS mode
 (use-package scss-mode
   :ensure t
-  :defer 2
   :init (setq scss-compile-at-save nil))
 
 
 ;; Web mode
 (use-package web-mode
   :ensure t
-  :defer 2
   :mode "\\.twig$"
   :mode "\\.html$"
   :init (setq web-mode-markup-indent-offset 4    ; HTML
@@ -238,27 +232,24 @@
 ;; Rest client mode
 (use-package restclient
   :ensure t
-  :defer 2
   :mode "\\.rest$"
   ;; Add hook to override C-c C-c in this mode to stay in window
   :init (add-hook 'restclient-mode-hook
-                  '(lambda ()
-                     (local-set-key
-                      (kbd "C-c C-c")
-                      'restclient-http-send-current-stay-in-window))))
+                  (lambda ()
+                    (local-set-key
+                     (kbd "C-c C-c")
+                     'restclient-http-send-current-stay-in-window))))
 
 
 ;; Nix mode
 (use-package nix-mode
   :ensure t
-  :defer 2
   :mode "\\.nix$"
   :init (setq nix-indent-function 'nix-indent-line))
 
 
 ;; Set up Vue mode
 (use-package vue-mode
-  :defer 2
   :ensure t
   :config
   (progn
@@ -276,7 +267,6 @@
 
 (use-package company
   :ensure t
-  :defer 2
   ;; TODO: Keybind company-complete to something good
   :bind ("<backtab>" . company-complete)
   ;; Make the tooltip behave well
@@ -284,8 +274,7 @@
               company-idle-delay 0.1)
   :config
   (progn
-    (use-package company-flx
-      :ensure t)
+    (use-package company-flx :ensure t)
     (use-package company-statistics
       :ensure t
       :init (setq company-statistics-file (concat user-emacs-data-directory "/company-statistics.dat")))
@@ -294,13 +283,12 @@
     ;; Completions for restclient mode
     (use-package company-restclient
       :ensure t
-      :config
-      (add-hook 'restclient-mode-hook
-                (lambda ()
-                  (set (make-local-variable 'company-backends)
-                       '(company-restclient))
+      :config (add-hook 'restclient-mode-hook
+                        (lambda ()
+                          (set (make-local-variable 'company-backends)
+                               '(company-restclient))
 
-                  (company-mode t))))
+                          (company-mode t))))
 
 
     ;; Completions for nix options
@@ -314,8 +302,7 @@
     ;; Display details of entries automatically
     (use-package company-quickhelp
       :ensure t
-      :config
-      (eval-after-load 'company (company-quickhelp-mode)))
+      :config (eval-after-load 'company (company-quickhelp-mode)))
 
 
     (add-hook 'prog-mode-hook (lambda ()
@@ -329,7 +316,6 @@
 ;;;
 (use-package eglot
   :ensure t
-  :defer 2
   :commands eglot-ensure
   :hook ((css-mode . eglot-ensure)
          (dockerfile-mode . eglot-ensure)
@@ -339,11 +325,10 @@
          (php-mode . eglot-ensure)
          (scss-mode . eglot-ensure)
          (sh-mode . eglot-ensure))
-  :config
-  (progn
-    (add-to-list 'eglot-server-programs '(dockerfile-mode . ("docker-langserver" "--stdio")))
-    (add-to-list 'eglot-server-programs '((php-mode phps-mode) . ("intelephense" "--stdio")))
-    (add-to-list 'eglot-server-programs '((scss-mode css-mode) . ("css-languageserver" "--stdio")))))
+  :config (progn
+            (add-to-list 'eglot-server-programs '(dockerfile-mode . ("docker-langserver" "--stdio")))
+            (add-to-list 'eglot-server-programs '((php-mode phps-mode) . ("intelephense" "--stdio")))
+            (add-to-list 'eglot-server-programs '((scss-mode css-mode) . ("css-languageserver" "--stdio")))))
 
 
 ;;;
@@ -354,17 +339,14 @@
 ;; Magit
 (use-package magit
   :ensure t
-  :defer 2
   :bind ("C-x g" . magit-status)     ; Display the main magit popup
-  :init
-  (setq magit-log-arguments
-        '("--graph" "--color" "--decorate" "--show-signature" "-n256")))
+  :init (setq magit-log-arguments
+              '("--graph" "--color" "--decorate" "--show-signature" "-n256")))
 
 
 ;; Interactive search and replace
 (use-package anzu
   :ensure t
-  :defer 2
   :bind (("M-%" . anzu-query-replace)
          ("C-M-%" . anzu-query-replace-regexp)))
 
@@ -372,65 +354,52 @@
 ;; Flycheck
 (use-package flycheck
   :ensure t
-  :defer 1
-  :init
-  (setq flycheck-phpcs-standard "PSR2"
-        flycheck-php-phpcs-executable "phpcs")
-  :config
-  (add-hook 'prog-mode-hook 'flycheck-mode))
+  :init (setq flycheck-phpcs-standard "PSR2"
+              flycheck-php-phpcs-executable "phpcs")
+  :config (add-hook 'prog-mode-hook 'flycheck-mode))
 
 
 ;; Webpaste
 (use-package webpaste
   :ensure t
-  :defer 2
   :bind (("C-c C-p C-p" . webpaste-paste-buffer-or-region)))
 
 
 ;; Which-key to press next
 (use-package which-key
   :ensure t
-  :defer 2
-  :config
-  (which-key-mode 1))
+  :config (which-key-mode 1))
 
 
 ;; Inline diff highlight
 (use-package diff-hl
   :ensure t
-  :defer 2
-  :config
-  (progn
-    (add-hook 'prog-mode-hook 'diff-hl-mode)
-    (add-hook 'text-mode-hook 'diff-hl-mode)))
+  :config (progn
+            (add-hook 'prog-mode-hook 'diff-hl-mode)
+            (add-hook 'text-mode-hook 'diff-hl-mode)))
 
 
 ;; Remote debugger for PHP
 (use-package geben
   :ensure t
-  :defer 2
   :init (setq geben-temporary-file-directory (concat user-emacs-cache-directory "/geben")))
 
 
 ;; Direnv
 (use-package direnv
   :ensure t
-  :defer 1
   :config (direnv-mode))
 
 
 ;; pdf-tools
 (use-package pdf-tools
   :ensure t
-  :defer 2
-  :config
-  (pdf-tools-install))
+  :config (pdf-tools-install))
 
 
 ;; Highlight symbols
 (use-package highlight-symbol
   :ensure t
-  :defer 2
   :hook (prog-mode . highlight-symbol-mode)
   :init (setq highlight-symbol-idle-delay 0.5
               highlight-symbol-highlight-single-occurrence nil))
@@ -439,25 +408,21 @@
 ;; Highlight indentation for certain modes
 (use-package highlight-indent-guides
   :ensure t
-  :defer 2
   :init (setq highlight-indent-guides-method 'character
               highlight-indent-guides-responsive 'top)
-  :config
-  (add-hook 'yaml-mode-hook (lambda ()
-                              (highlight-indent-guides-mode t))))
+  :config (add-hook 'yaml-mode-hook (lambda ()
+                                      (highlight-indent-guides-mode t))))
 
 
 ;; Vterm
 (use-package vterm
   :ensure t
-  :defer 2
   :init (setq vterm-kill-buffer-on-exit t))
 
 
 ;; EditorConfig
 (use-package editorconfig
   :ensure t
-  :defer 2
   :config (editorconfig-mode 1))
 
 
@@ -467,7 +432,6 @@
 
 (use-package helm
   :ensure t
-  :defer 2
   :bind (("C-x C-f" . helm-find-files)
          ("M-x" . helm-M-x)
          ("C-x b" . helm-mini)
@@ -484,7 +448,6 @@
 ;; Set up projectile for helm
 (use-package helm-projectile
   :ensure t
-  :defer 2
   :bind (("C-x , p" . helm-projectile-switch-project)
          ("C-x , f" . helm-projectile-find-file)
          ("C-x , b" . projectile-ibuffer)
@@ -497,7 +460,6 @@
 
 ;; Helm fuzzier mode
 ;;(use-package helm-fuzzier
-;;  :defer 2
 ;;  :init (setq helm-mode-fuzzy-match t
 ;;              helm-M-x-fuzzy-match t
 ;;              helm-buffers-fuzzy-match t
@@ -508,9 +470,7 @@
 ;; Editorconfig to read per-project rules.
 (use-package editorconfig
   :ensure t
-  :defer 2
-  :config
-  (editorconfig-mode 1))
+  :config (editorconfig-mode 1))
 
 
 ;;;
@@ -538,10 +498,8 @@
 
 ;; Workhour clocking settings
 (use-package org
-  :defer 2
-  :init
   ;; This changes formating of time in clocktables from "1d HH:MM" to "HH:MM"
-  (setq org-duration-format '((special . h:mm)))
+  :init (setq org-duration-format '((special . h:mm)))
 
   :config
   ;; Add advice to override indention
@@ -562,17 +520,14 @@
 ;; Restclient mode for org-babel
 (use-package ob-restclient
   :ensure t
-  :defer 2
-  :config
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((restclient . t))))
+  :config (org-babel-do-load-languages
+           'org-babel-load-languages
+           '((restclient . t))))
 
 
 ;; Gnuplot
 (use-package gnuplot
   :ensure t
-  :defer 2
   :bind (("M-C-g" . org-plot/gnuplot)))
 
 
@@ -598,21 +553,21 @@
 ;;; Install additional modes
 ;;;
 
-(use-package centimacro :defer 2 :ensure t)
-(use-package dockerfile-mode :defer 2 :ensure t)
-(use-package es-mode :defer 2 :ensure t)
-(use-package fish-mode :defer 2 :ensure t)
-(use-package helm-rg :defer 2 :ensure t)
-(use-package helm-nixos-options :defer 2 :ensure t)
-(use-package markdown-mode :defer 2 :ensure t)
-(use-package vcl-mode :defer 2 :ensure t)
-(use-package yaml-mode :defer 2 :ensure t)
+(use-package centimacro :ensure t)
+(use-package dockerfile-mode :ensure t)
+(use-package es-mode :ensure t)
+(use-package fish-mode :ensure t)
+(use-package helm-rg :ensure t)
+(use-package helm-nixos-options :ensure t)
+(use-package markdown-mode :ensure t)
+(use-package vcl-mode :ensure t)
+(use-package yaml-mode :ensure t)
 
 
 ;; Rust
-(use-package rust-mode :defer 2 :ensure t)
-(use-package flycheck-rust :defer 2 :ensure t)
-(use-package racer :defer 2 :ensure t)
+(use-package rust-mode :ensure t)
+(use-package flycheck-rust :ensure t)
+(use-package racer :ensure t)
 
 
 ;;;
