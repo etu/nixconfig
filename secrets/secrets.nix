@@ -7,10 +7,11 @@ let
 
   # Computers host keys
   hosts = let
-    inherit (keys.systems) agrajag fenchurch vps05 work;
+    inherit (keys.systems) agrajag fenchurch vps04 vps05 work;
   in {
     agrajag = [ agrajag.rsa agrajag.ec ];
     fenchurch = [ fenchurch.rsa fenchurch.ec ];
+    vps04 = [ vps04.rsa vps04.ec ];
     vps05 = [ vps05.rsa vps05.ec ];
     work = [ work.rsa work.ec ];
 
@@ -23,6 +24,7 @@ let
   };
 in
 {
+  "flummbot.toml".publicKeys = etu ++ hosts.vps04;
   "nixos-data-secrets.nix.age".publicKeys = etu ++ hosts.agrajag ++ hosts.work;
   "sshkeys/etu_at_aarch64.nixos.community.pub.age".publicKeys = etu ++ hosts.agrajag;
   "sshkeys/etu_at_aarch64.nixos.community.age".publicKeys = etu ++ hosts.agrajag;

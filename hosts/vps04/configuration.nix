@@ -78,6 +78,14 @@ in
 
   # List services that you want to enable:
 
+  # Override identity paths for agenix since the openssh default paths
+  # relies on a symlink being created in /etc/ssh to point at the
+  # right path to make it to work as it would be in the right place.
+  age.identityPaths = [
+    "/persistent/etc/ssh/ssh_host_ed25519_key"
+    "/persistent/etc/ssh/ssh_host_rsa_key"
+  ];
+
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
@@ -145,4 +153,12 @@ in
   services.flummbot.user = "bots";
   services.flummbot.group = "bots";
   services.flummbot.stateDirectory = "/home/bots";
+
+  # Flummbot config file
+  age.secrets.flummbot-toml = {
+    file = ../../secrets/flummbot.toml;
+    owner = "bots";
+    group = "bots";
+    path = "${config.services.flummbot.stateDirectory}/flummbot.toml";
+  };
 }
