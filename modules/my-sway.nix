@@ -6,7 +6,7 @@ let
   pactl = "${config.hardware.pulseaudio.package}/bin/pactl";
 
   # Lock command
-  lockCommand = "${pkgs.swaylock-effects}/bin/swaylock -f --effect-greyscale --effect-pixelate 5 -S";
+  lockCommand = "${pkgs.swaylock}/bin/swaylock -f -k -i ${wallpaper}/dark.jpg";
 
   wallpaper = pkgs.stdenv.mkDerivation {
     pname = "wallpaper";
@@ -34,6 +34,9 @@ let
 
       # Resize for normal background
       ${pkgs.graphicsmagick}/bin/gm convert -crop 7680x2160+0+375 -resize 5120x1440 images/Lakeside/5.jpg $out/default.jpg
+
+      # Resize a darker variation for screen locker
+      ${pkgs.graphicsmagick}/bin/gm convert -crop 7680x2160+0+375 -resize 5120x1440 images/Lakeside/8.jpg $out/dark.jpg
 
       # Draw a 720p rectangle on top
       ${pkgs.graphicsmagick}/bin/gm convert -fill '#FFFFFFBB' -draw 'rectangle ${rect.xy0} ${rect.xy1}' $out/default.jpg 720pfigure.jpg
