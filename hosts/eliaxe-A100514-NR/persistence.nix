@@ -5,6 +5,7 @@
     directories = [
       "/etc/nixos"
       "/etc/NetworkManager/system-connections"
+      "/var/lib/bluetooth"
     ];
     files = [
       "/etc/machine-id"
