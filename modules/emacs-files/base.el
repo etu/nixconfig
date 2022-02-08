@@ -203,7 +203,6 @@
 (use-package es-mode :ensure t)
 (use-package fish-mode :ensure t)
 (use-package helm-rg :ensure t)
-(use-package helm-nixos-options :ensure t)
 (use-package markdown-mode :ensure t)
 (use-package vcl-mode :ensure t)
 (use-package yaml-mode :ensure t)
