@@ -209,12 +209,6 @@
 (use-package yaml-mode :ensure t)
 
 
-;; Rust
-(use-package rust-mode :ensure t)
-(use-package flycheck-rust :ensure t)
-(use-package racer :ensure t)
-
-
 ;;;
 ;;; Major modes
 ;;;
