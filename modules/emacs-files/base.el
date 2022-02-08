@@ -195,6 +195,27 @@
 
 
 ;;;
+;;; Install additional modes without much configuration
+;;;
+
+(use-package centimacro :ensure t)
+(use-package dockerfile-mode :ensure t)
+(use-package es-mode :ensure t)
+(use-package fish-mode :ensure t)
+(use-package helm-rg :ensure t)
+(use-package helm-nixos-options :ensure t)
+(use-package markdown-mode :ensure t)
+(use-package vcl-mode :ensure t)
+(use-package yaml-mode :ensure t)
+
+
+;; Rust
+(use-package rust-mode :ensure t)
+(use-package flycheck-rust :ensure t)
+(use-package racer :ensure t)
+
+
+;;;
 ;;; Major modes
 ;;;
 
@@ -202,7 +223,7 @@
 ;; Go mode
 (use-package go-mode
   :ensure t
-  :init (add-hook 'before-save-hook 'gofmt-before-save))
+  :hook (before-save . gofmt-before-save))
 
 
 ;; PHP mode
@@ -272,12 +293,16 @@
   ;; Make the tooltip behave well
   :init (setq company-tooltip-minimum-width 15
               company-idle-delay 0.1)
+  :hook (prog-mode . company-mode)
   :config
   (progn
-    (use-package company-flx :ensure t)
+    (use-package company-flx
+      :ensure t
+      :config (eval-after-load 'company (company-flx-mode)))
     (use-package company-statistics
       :ensure t
-      :init (setq company-statistics-file (concat user-emacs-data-directory "/company-statistics.dat")))
+      :init (setq company-statistics-file (concat user-emacs-data-directory "/company-statistics.dat"))
+      :config (eval-after-load 'company (company-flx-mode)))
 
 
     ;; Completions for restclient mode
@@ -302,13 +327,7 @@
     ;; Display details of entries automatically
     (use-package company-quickhelp
       :ensure t
-      :config (eval-after-load 'company (company-quickhelp-mode)))
-
-
-    (add-hook 'prog-mode-hook (lambda ()
-                                (company-mode t)
-                                (company-statistics-mode t)
-                                (company-flx-mode t)))))
+      :config (eval-after-load 'company (company-quickhelp-mode)))))
 
 
 ;;;
@@ -317,14 +336,7 @@
 (use-package eglot
   :ensure t
   :commands eglot-ensure
-  :hook ((css-mode . eglot-ensure)
-         (dockerfile-mode . eglot-ensure)
-         (go-mode . eglot-ensure)
-         (js-mode . eglot-ensure)
-         (nix-mode . eglot-ensure)
-         (php-mode . eglot-ensure)
-         (scss-mode . eglot-ensure)
-         (sh-mode . eglot-ensure))
+  :hook ((css-mode dockerfile-mode go-mode js-mode nix-mode php-mode scss-mode sh-mode) . eglot-ensure)
   :config (progn
             (add-to-list 'eglot-server-programs '(dockerfile-mode . ("docker-langserver" "--stdio")))
             (add-to-list 'eglot-server-programs '((php-mode phps-mode) . ("intelephense" "--stdio")))
@@ -354,9 +366,9 @@
 ;; Flycheck
 (use-package flycheck
   :ensure t
+  :hook flycheck-mode
   :init (setq flycheck-phpcs-standard "PSR2"
-              flycheck-php-phpcs-executable "phpcs")
-  :config (add-hook 'prog-mode-hook 'flycheck-mode))
+              flycheck-php-phpcs-executable "phpcs"))
 
 
 ;; Webpaste
@@ -374,10 +386,7 @@
 ;; Inline diff highlight
 (use-package diff-hl
   :ensure t
-  :config (progn
-            (add-hook 'prog-mode-hook 'diff-hl-mode)
-            (add-hook 'text-mode-hook 'diff-hl-mode)))
-
+  :hook ((prog-mode text-mode) . diff-hl-mode))
 
 ;; Remote debugger for PHP
 (use-package geben
@@ -410,8 +419,7 @@
   :ensure t
   :init (setq highlight-indent-guides-method 'character
               highlight-indent-guides-responsive 'top)
-  :config (add-hook 'yaml-mode-hook (lambda ()
-                                      (highlight-indent-guides-mode t))))
+  :hook (yaml-mode . highlight-indent-guides-mode))
 
 
 ;; Vterm
@@ -465,12 +473,6 @@
 ;;              helm-buffers-fuzzy-match t
 ;;              helm-recentf-fuzzy-match t)
 ;;  :config (helm-fuzzier-mode 1))
-
-
-;; Editorconfig to read per-project rules.
-(use-package editorconfig
-  :ensure t
-  :config (editorconfig-mode 1))
 
 
 ;;;
@@ -547,27 +549,6 @@
     (other-window -1)
 
     (message "Splitted to three-column-layout")))
-
-
-;;;
-;;; Install additional modes
-;;;
-
-(use-package centimacro :ensure t)
-(use-package dockerfile-mode :ensure t)
-(use-package es-mode :ensure t)
-(use-package fish-mode :ensure t)
-(use-package helm-rg :ensure t)
-(use-package helm-nixos-options :ensure t)
-(use-package markdown-mode :ensure t)
-(use-package vcl-mode :ensure t)
-(use-package yaml-mode :ensure t)
-
-
-;; Rust
-(use-package rust-mode :ensure t)
-(use-package flycheck-rust :ensure t)
-(use-package racer :ensure t)
 
 
 ;;;
