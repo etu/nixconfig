@@ -295,7 +295,7 @@
     (use-package company-statistics
       :ensure t
       :init (setq company-statistics-file (concat user-emacs-data-directory "/company-statistics.dat"))
-      :config (eval-after-load 'company (company-flx-mode)))
+      :config (eval-after-load 'company (company-statistics-mode)))
 
 
     ;; Completions for restclient mode
