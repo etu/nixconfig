@@ -202,7 +202,6 @@
 (use-package dockerfile-mode :ensure t)
 (use-package es-mode :ensure t)
 (use-package fish-mode :ensure t)
-(use-package helm-rg :ensure t)
 (use-package markdown-mode :ensure t)
 (use-package vcl-mode :ensure t)
 (use-package yaml-mode :ensure t)
@@ -450,6 +449,7 @@
   :init (setq helm-split-window-inside-p t)
   :config (helm-mode 1))
 
+(use-package helm-rg :ensure t)
 
 ;; Set up projectile for helm
 (use-package helm-projectile
@@ -462,15 +462,6 @@
          ("C-x , k" . projectile-kill-buffers))
   :init (setq projectile-enable-caching t)
   :config (projectile-mode))
-
-
-;; Helm fuzzier mode
-;;(use-package helm-fuzzier
-;;  :init (setq helm-mode-fuzzy-match t
-;;              helm-M-x-fuzzy-match t
-;;              helm-buffers-fuzzy-match t
-;;              helm-recentf-fuzzy-match t)
-;;  :config (helm-fuzzier-mode 1))
 
 
 ;;;
