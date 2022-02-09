@@ -286,41 +286,46 @@
   ;; Make the tooltip behave well
   :init (setq company-tooltip-minimum-width 15
               company-idle-delay 0.1)
-  :hook (prog-mode . company-mode)
-  :config
-  (progn
-    (use-package company-flx
-      :ensure t
-      :config (eval-after-load 'company (company-flx-mode)))
-    (use-package company-statistics
-      :ensure t
-      :init (setq company-statistics-file (concat user-emacs-data-directory "/company-statistics.dat"))
-      :config (eval-after-load 'company (company-statistics-mode)))
+  :hook (prog-mode . company-mode))
 
 
-    ;; Completions for restclient mode
-    (use-package company-restclient
-      :ensure t
-      :config (add-hook 'restclient-mode-hook
-                        (lambda ()
-                          (set (make-local-variable 'company-backends)
-                               '(company-restclient))
-
-                          (company-mode t))))
+;; Fuzzy matching in company
+;; (w-t-b => (with-temp-buffer
+(use-package company-flx
+  :ensure t
+  :hook (company-mode . company-flx-mode))
 
 
-    ;; Completions for nix options
-    (use-package company-nixos-options
-      :ensure t
-      :config (add-hook 'nix-mode-hook
-                        (lambda ()
-                          (set (make-local-variable 'company-backends) '(company-nixos-options)))))
+;; Statustics based ranking in company
+(use-package company-statistics
+  :ensure t
+  :init (setq company-statistics-file (concat user-emacs-data-directory "/company-statistics.dat"))
+  :hook (company-mode . company-statistics-mode))
 
 
-    ;; Display details of entries automatically
-    (use-package company-quickhelp
-      :ensure t
-      :config (eval-after-load 'company (company-quickhelp-mode)))))
+;; Display details of entries automatically
+(use-package company-quickhelp
+  :ensure t
+  :hook (company-mode . company-quickhelp-mode))
+
+
+;; Completions for restclient mode
+(use-package company-restclient
+  :ensure t
+  :config (add-hook 'restclient-mode-hook
+                    (lambda ()
+                      (set (make-local-variable 'company-backends)
+                           '(company-restclient))
+
+                      (company-mode t))))
+
+
+;; Completions for nix options
+(use-package company-nixos-options
+  :ensure t
+  :config (add-hook 'nix-mode-hook
+                    (lambda ()
+                      (set (make-local-variable 'company-backends) '(company-nixos-options)))))
 
 
 ;;;
