@@ -47,6 +47,7 @@ in
     environment.systemPackages = with pkgs; [
       bat
       bc # Dependency for some fish functions
+      comma # The "," command which allows to run non-installed things ", htop"
       curl
       duf
       fd
