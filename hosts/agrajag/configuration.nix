@@ -132,10 +132,10 @@ in {
   virtualisation.docker.storageDriver = "zfs";
 
   # Set up virt-manager
-  virtualisation.libvirtd.enable = true;
-  programs.dconf.enable = true;
-  environment.systemPackages = with pkgs; [ virt-manager ];
-  virtualisation.spiceUSBRedirection.enable = true;
+  #virtualisation.libvirtd.enable = true;
+  #programs.dconf.enable = true;
+  #environment.systemPackages = with pkgs; [ virt-manager ];
+  #virtualisation.spiceUSBRedirection.enable = true;
 
   # Override identity paths for agenix since the openssh default paths
   # relies on a symlink being created in /etc/ssh to point at the
