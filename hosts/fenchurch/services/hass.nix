@@ -19,7 +19,7 @@
     '';
   };
 
-  virtualisation.oci-containers.backend = "podman";
+  virtualisation.oci-containers.backend = "docker";
   virtualisation.oci-containers.containers = {
     home-assistant = {
       environment.TZ = config.time.timeZone;
