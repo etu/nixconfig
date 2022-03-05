@@ -18,7 +18,6 @@ in
     ./raid-target.nix
 
     # Import local services that are host specific
-    ./services/changedetection.nix
     ./services/freshrss.nix
     ./services/guest-users.nix
     ./services/hass.nix
