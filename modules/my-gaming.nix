@@ -28,17 +28,7 @@ in
     # $ nix-env -qaP | grep wget
     environment.systemPackages = with pkgs; [
       minecraft
-
-      # Add a patch to mumble to be able to use dbus for push to talk
-      (mumble.overrideAttrs (oa: {
-        patches = oa.patches ++ [
-          (pkgs.fetchpatch {
-            url = "https://github.com/mumble-voip/mumble/pull/3675.patch";
-            sha256 = "1zmqb8gl2cp0mcw85x9wn5rjw2mih7d2x96jxxqabjcx1kvgyhh3";
-          })
-        ];
-      }))
-
+      mumble
       sc-controller
       obs-studio
 

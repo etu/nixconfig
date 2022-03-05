@@ -24,7 +24,7 @@ in
 
       # Cantarell fonts seems to be used by GTK applications (was mostly
       # noticable in Firefox UI elements).
-      cantarell_fonts
+      cantarell-fonts
 
       # My own font
       (stdenv.mkDerivation rec {
