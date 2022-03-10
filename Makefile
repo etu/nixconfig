@@ -1,4 +1,4 @@
-update-all: update-nixpkgs update-niv update-hass update-zwavejs2mqtt update-mosquitto update-changedetection
+update-all: update-nixpkgs update-niv update-hass update-zwavejs2mqtt update-mosquitto
 
 update-nixpkgs:
 	cd nix/nixos-unstable/ && git pull origin nixos-unstable
@@ -17,7 +17,3 @@ update-zwavejs2mqtt:
 update-mosquitto:
 	@echo "Updating to latest mosquitto container"
 	sed -i -r 's#(eclipse-mosquitto):[1-9]+\.[0-9]+\.?[0-9]*#\1:'`git ls-remote --tags 'https://github.com/eclipse/mosquitto.git' | cut -d 'v' -f 2 | grep -v '\^{}' | sort -V | tail -n 1`'#' hosts/fenchurch/services/hass.nix
-
-update-changedetection:
-	@echo "Updating to latest changedetection.io container"
-	sed -i -r 's#(dgtlmoon/changedetection.io):[0-9]+\.[0-9]+\.[0-9]+#\1:'`git ls-remote --tags 'https://github.com/dgtlmoon/changedetection.io.git' | cut -d '/' -f 3 | sort -V | tail -n 1`'#' hosts/fenchurch/services/changedetection.nix
