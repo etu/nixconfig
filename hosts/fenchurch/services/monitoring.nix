@@ -8,7 +8,10 @@
     enableACME = true;
     locations."/".proxyWebsockets = true;
     locations."/".proxyPass = "http://127.0.0.1:3030/";
-    locations."/".extraConfig = "proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;";
+    locations."/".extraConfig = ''
+      proxy_set_header Host $host;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    '';
   };
 
 
