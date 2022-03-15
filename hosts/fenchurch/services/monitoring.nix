@@ -1,6 +1,23 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 
-{
+let
+  zfsExporterPkg = let
+    version = "2.2.5";
+  in pkgs.buildGoModule {
+    pname = "zfs-exporter";
+    inherit version;
+
+    src = pkgs.fetchFromGitHub {
+      owner = "pdf";
+      repo = "zfs_exporter";
+      rev = "v${version}";
+      sha256 = "sha256-FY3P2wmNWyr7mImc1PJs1G2Ae8rZvDzq0kRZfiRTzyc=";
+    };
+
+    vendorSha256 = "sha256-jQiw3HlqWcsjdadDdovCsDMBB3rnWtacfbtzDb5rc9c=";
+  };
+
+in {
   # Make sure to have nginx enabled
   services.nginx.enable = true;
   services.nginx.virtualHosts."grafana.elis.nu" = {
@@ -23,6 +40,19 @@
   services.prometheus.exporters.apcupsd.enable = true;
   services.prometheus.exporters.systemd.enable = true;
 
+  # Create a service for the ZFS exporter. It defaults to listen to :9134
+  systemd.services.zfs-exporter = {
+    description = "ZFS Prometheus exporter";
+    after = [ "network.target" "network-online.target" ];
+    before = [ "prometheus.service" ];
+    wantedBy = [ "multi-user.target" ];
+    path = [ config.boot.zfs.package ];
+    serviceConfig = {
+      ExecStart = "${zfsExporterPkg}/bin/zfs_exporter";
+      Restart = "always";
+    };
+  };
+
   # Configure prometheus to gather the data.
   services.prometheus.scrapeConfigs = [
     {
@@ -40,6 +70,10 @@
     {
       job_name = "systemd";
       static_configs = [{ targets = [ "127.0.0.1:${toString config.services.prometheus.exporters.systemd.port}" ]; }];
+    }
+    {
+      job_name = "zfs_exporter";
+      static_configs = [{ targets = [ "127.0.0.1:9134" ]; }];
     }
   ];
 
