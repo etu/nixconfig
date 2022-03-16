@@ -72,6 +72,11 @@ in {
       static_configs = [{ targets = [ "127.0.0.1:${toString config.services.prometheus.exporters.systemd.port}" ]; }];
     }
     {
+      job_name = "grafana";
+      scheme = "https";
+      static_configs = [{ targets = [ "grafana.elis.nu" ]; }];
+    }
+    {
       job_name = "zfs_exporter";
       static_configs = [{ targets = [ "127.0.0.1:9134" ]; }];
     }
