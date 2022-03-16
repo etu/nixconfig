@@ -48,7 +48,7 @@ in {
     wantedBy = [ "multi-user.target" ];
     path = [ config.boot.zfs.package ];
     serviceConfig = {
-      ExecStart = "${zfsExporterPkg}/bin/zfs_exporter";
+      ExecStart = "${zfsExporterPkg}/bin/zfs_exporter --properties.dataset-filesystem=available,compressratio,logicalused,quota,referenced,used,usedbydataset,written";
       Restart = "always";
     };
   };
