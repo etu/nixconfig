@@ -38,7 +38,7 @@
     "halsobrev": {
         "branch": "main",
         "repo": "git@github.com:etu/halsobrev-website.git",
-        "rev": "9670c6be611bd2fcbac91bebe9a7b75cb5717ea6",
+        "rev": "99a39f5117d6f66baf2cedddbebae325186e7732",
         "type": "git"
     },
     "home-manager": {
