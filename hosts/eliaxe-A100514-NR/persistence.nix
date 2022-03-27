@@ -17,7 +17,6 @@
     users.${config.my.user.username} = {
       files = [
         ".caffrc"
-        ".config/fish/fish_variables"
         ".msmtprc"
 
         # Spotify
@@ -31,6 +30,7 @@
         "bin/mydump"
       ];
       directories = [
+        ".config/fish"
         ".config/pipewire/media-session.d"
         ".config/syncthing"
         ".config/tvnu"

@@ -16,7 +16,6 @@
     users.${config.my.user.username} = {
       files = [
         ".caffrc"
-        ".config/fish/fish_variables"
         ".msmtprc"
 
         # Mumble files
@@ -25,6 +24,7 @@
       ];
       directories = [
         ".config/autorandr"
+        ".config/fish"
         ".config/obs-studio"
         ".config/pipewire/media-session.d"
         ".config/syncthing"

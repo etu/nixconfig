@@ -10,10 +10,9 @@
       "/etc/ssh/ssh_host_ed25519_key.pub"
     ];
     users.${config.my.user.username} = {
-      files = [
-        ".config/fish/fish_variables"
-      ];
+      files = [];
       directories = [
+        ".config/fish"
         ".dotfiles"
         ".ssh"
         ".weechat"
