@@ -315,6 +315,23 @@ in
         programs.mako.defaultTimeout = 6000;
         programs.mako.font = "${config.my.fonts.monospace} ${toString config.my.fonts.size}";
 
+        # Set up kanshi (which kinda is an autorandr for wayland)
+        services.kanshi.enable = isWayland;
+        services.kanshi.profiles = {
+          undocked.outputs = [
+            {
+              criteria = "eDP-1";
+              status = "enable";
+            }
+          ];
+          docked.outputs = [
+            { criteria = "Samsung Electric Company LC49G95T H4ZN900853 (DP-1)";
+              mode = "5120x1440"; }
+            { criteria = "eDP-1";
+              status = "disable"; }
+          ];
+        };
+
         # Set up autorandr service to trigger on saved configurations
         programs.autorandr.enable = isX11;
 
