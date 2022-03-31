@@ -199,7 +199,7 @@ in
         # GTK theme configs
         gtk.enable = isGraphical;
         gtk.font.name = config.my.fonts.normal;
-        gtk.font.size = config.my.fonts.size;
+        gtk.font.size = builtins.floor config.my.fonts.size;
         gtk.gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
 
         # Set up qt theme as well
@@ -209,7 +209,7 @@ in
         };
 
         # Set the rofi font
-        programs.rofi.font = "${config.my.fonts.monospace} ${toString config.my.fonts.size}";
+        programs.rofi.font = "${config.my.fonts.monospace} ${toString (builtins.floor config.my.fonts.size)}";
 
         # Enable syncthing.
         services.syncthing.enable = isGraphical;
@@ -313,7 +313,7 @@ in
         programs.mako.borderColor = "#3B7C87";
         programs.mako.borderSize = 3;
         programs.mako.defaultTimeout = 6000;
-        programs.mako.font = "${config.my.fonts.monospace} ${toString config.my.fonts.size}";
+        programs.mako.font = "${config.my.fonts.monospace} ${toString (builtins.floor config.my.fonts.size)}";
 
         # Set up kanshi (which kinda is an autorandr for wayland)
         services.kanshi.enable = isWayland;
@@ -518,8 +518,7 @@ in
           focus.forceWrapping = true;
           fonts = {
             names = [ config.my.fonts.monospace ];
-            # Convert my integer font size to a float
-            size = (config.my.fonts.size + 0.1 - 0.1);
+            inherit (config.my.fonts) size;
           };
           gaps.inner = 5;
 
@@ -605,7 +604,7 @@ in
         programs.waybar.systemd.target = "sway-session.target";
         programs.waybar.style = pkgs.runCommandNoCC "waybar-styles.css" { } ''
           sed -e 's/font-family: /font-family: ${config.my.fonts.normal}, /'              \
-              -e 's/font-size: 13px/font-size: ${toString config.my.fonts.biggerSize}px/' \
+              -e 's/font-size: 13px/font-size: ${toString (builtins.floor config.my.fonts.biggerSize)}px/' \
               ${pkgs.waybar}/etc/xdg/waybar/style.css > $out
         '';
         programs.waybar.settings = [{

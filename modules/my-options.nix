@@ -21,13 +21,13 @@
     };
     fonts = {
       size = lib.mkOption {
-        type = lib.types.int;
-        default = 10;
+        type = lib.types.float;
+        default = 10.0;
         description = "Default font size";
       };
       biggerSize = lib.mkOption {
-        type = lib.types.int;
-        default = 13;
+        type = lib.types.float;
+        default = 13.0;
         description = "Default font size";
       };
       monospace = lib.mkOption {

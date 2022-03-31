@@ -30,7 +30,7 @@ let
   # programs etc to have as my actual config file.
   myEmacsConfig = pkgs.runCommandNoCC "config.el" {
     fontname = config.my.fonts.monospace;
-    fontsize = config.my.fonts.size;
+    fontsize = builtins.floor config.my.fonts.size;
   } "substituteAll ${myEmacsConfigPlain} $out";
 
   # Run my exwm config through substituteAll to replace all paths with paths
