@@ -427,6 +427,70 @@ in
           };
         };
       }; # END alacritty
+
+      programs.browserpass.enable = swayCfg.enable;
+
+      xdg.mimeApps = {
+        enable = swayCfg.enable;
+        defaultApplications = {
+          "text/html" = [ "firefox.desktop" ];
+          "x-scheme-handler/http" = [ "firefox.desktop" ];
+          "x-scheme-handler/https" = [ "firefox.desktop" ];
+          "x-scheme-handler/about" = [ "firefox.desktop" ];
+          "x-scheme-handler/unknown" = [ "firefox.desktop" ];
+          "x-scheme-handler/mailto" = [ "org.gnome.Evolution.desktop" ];
+        };
+
+        associations.added = {
+          "x-scheme-handler/mailto" = [ "org.gnome.Evolution.desktop" ];
+        };
+      }; # END xdg.mimeApps
+
+      # GTK theme configs
+      gtk = {
+        enable = swayCfg.enable;
+        font.name = config.my.fonts.normal;
+        font.size = builtins.floor config.my.fonts.size;
+        gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
+      }; # END gtk
+
+      # Set up qt theme as well
+      qt = {
+        enable = swayCfg.enable;
+        platformTheme = "gtk";
+      }; # END qt
+
+      # Set the rofi font
+      programs.rofi.font = "${config.my.fonts.monospace} ${toString (builtins.floor config.my.fonts.size)}";
+
+      # Enable syncthing.
+      services.syncthing.enable = swayCfg.enable;
+
+      home.file = lib.mkIf swayCfg.enable {
+        # Mpv config file - Don't show images embedded in music files
+        ".config/mpv/mpv.conf".text = "no-audio-display";
+
+        # .XCompose
+        ".XCompose".text = ''
+          include "%L"
+
+          # Default already
+          # <Multi_key> <a> <a>: "å"
+          # <Multi_key> <A> <A>: "Å"
+
+          # Some nice binds
+          <Multi_key> <a> <e>: "ä"
+          <Multi_key> <A> <E>: "Ä"
+          <Multi_key> <o> <e>: "ö"
+          <Multi_key> <O> <E>: "Ö"
+
+          # Table flip multi key
+          <Multi_key> <t> <f>: "(ノಠ益ಠ)ノ彡┻━┻"
+
+          # Shruggie
+          <Multi_key> <s> <h>: "¯\\_(ツ)_/¯"
+        '';
+      }; # END home.file
     }; # END home-manager
   }; # END config
 }

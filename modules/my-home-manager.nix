@@ -68,30 +68,6 @@ in
             cp ${./dotfiles/bin/keep} $out
             substituteInPlace $out --replace /bin/zsh ${pkgs.zsh}/bin/zsh
           '';
-        } // lib.optionalAttrs swayEnabled {
-          # Mpv config file - Don't show images embedded in music files
-          ".config/mpv/mpv.conf".text = "no-audio-display";
-
-          # .XCompose
-          ".XCompose".text = ''
-            include "%L"
-
-            # Default already
-            # <Multi_key> <a> <a>: "å"
-            # <Multi_key> <A> <A>: "Å"
-
-            # Some nice binds
-            <Multi_key> <a> <e>: "ä"
-            <Multi_key> <A> <E>: "Ä"
-            <Multi_key> <o> <e>: "ö"
-            <Multi_key> <O> <E>: "Ö"
-
-            # Table flip multi key
-            <Multi_key> <t> <f>: "(ノಠ益ಠ)ノ彡┻━┻"
-
-            # Shruggie
-            <Multi_key> <s> <h>: "¯\\_(ツ)_/¯"
-          '';
         };
 
         programs.git = {
@@ -123,42 +99,6 @@ in
             };
           }];
         };
-
-        programs.browserpass.enable = swayEnabled;
-
-        xdg.mimeApps = {
-          enable = swayEnabled;
-          defaultApplications = {
-            "text/html" = [ "firefox.desktop" ];
-            "x-scheme-handler/http" = [ "firefox.desktop" ];
-            "x-scheme-handler/https" = [ "firefox.desktop" ];
-            "x-scheme-handler/about" = [ "firefox.desktop" ];
-            "x-scheme-handler/unknown" = [ "firefox.desktop" ];
-            "x-scheme-handler/mailto" = [ "org.gnome.Evolution.desktop" ];
-          };
-
-          associations.added = {
-            "x-scheme-handler/mailto" = [ "org.gnome.Evolution.desktop" ];
-          };
-        };
-
-        # GTK theme configs
-        gtk.enable = swayEnabled;
-        gtk.font.name = config.my.fonts.normal;
-        gtk.font.size = builtins.floor config.my.fonts.size;
-        gtk.gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
-
-        # Set up qt theme as well
-        qt = {
-          enable = swayEnabled;
-          platformTheme = "gtk";
-        };
-
-        # Set the rofi font
-        programs.rofi.font = "${config.my.fonts.monospace} ${toString (builtins.floor config.my.fonts.size)}";
-
-        # Enable syncthing.
-        services.syncthing.enable = swayEnabled;
 
         home.stateVersion = "20.09";
       };
