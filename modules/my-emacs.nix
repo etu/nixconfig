@@ -5,26 +5,10 @@ let
   # Load sources
   sources = import ../nix/sources.nix;
 
-  # Extract the path executed by the systemd-service, to get the flags used by
-  # the service. But replace the path with the security wrapper dir so we get
-  # the suid enabled path to the binary.
-  physlockCommand =
-    builtins.replaceStrings
-      [ (pkgs.physlock + "/bin") ]
-      [ config.security.wrapperDir ]
-      config.systemd.services.physlock.serviceConfig.ExecStart;
-
-
   # Create a file with my config without path substitutes in place.
   myEmacsConfigPlain =
     pkgs.writeText "config-unsubstituted.el"
       (builtins.readFile ./emacs-files/base.el);
-
-  # Create a file with my exwm config without path substitutes in place.
-  myExwmConfigPlain =
-    pkgs.writeText "exwm-config-unsubstituted.el"
-      (builtins.readFile ./emacs-files/exwm.el);
-
 
   # Run my config trough substituteAll to replace all paths with paths to
   # programs etc to have as my actual config file.
@@ -33,14 +17,6 @@ let
     fontsize = builtins.floor config.my.fonts.size;
   } "substituteAll ${myEmacsConfigPlain} $out";
 
-  # Run my exwm config through substituteAll to replace all paths with paths
-  # to programs etc to have as my actual config file.
-  myExwmConfig = pkgs.runCommandNoCC "exwm-config.el" {
-    inherit (pkgs) systemd alacritty flameshot;
-    lockCommand = physlockCommand;
-    xbacklight = pkgs.acpilight;
-    rofi = pkgs.rofi.override { plugins = [ pkgs.rofi-emoji ]; };
-  } "substituteAll ${myExwmConfigPlain} $out";
 
   myEmacsLispLoader = extraLisp: loadFile: pkgs.writeText "${loadFile.name}-init.el"
     ''
@@ -77,8 +53,6 @@ let
       ''
       myEmacsConfig;
 
-  myExwmInit = myEmacsLispLoader "" myExwmConfig;
-
   # Define language servers to include in the wrapper for Emacs
   extraBinPaths = [
     # Language Servers
@@ -112,10 +86,8 @@ let
     # the default behaviour, but this gets rid of the notice.
     alwaysEnsure = false;
 
-    # Config to parse, use my built config from above and optionally my exwm
     # config to be able to pull in use-package dependencies from there.
-    config = builtins.readFile myEmacsConfig +
-             lib.optionalString cfg.enableExwm (builtins.readFile myExwmConfig);
+    config = builtins.readFile myEmacsConfig;
 
     # Package overrides
     override = epkgs: epkgs // {
@@ -187,57 +159,8 @@ in
       pkgs.emacs-all-the-icons-fonts
     ];
 
-
-    # Libinput
-    services.xserver = lib.mkIf cfg.enableExwm {
-      libinput.enable = true;
-
-      # Loginmanager
-      displayManager.lightdm.enable = true;
-      displayManager.autoLogin.enable = true;
-      displayManager.autoLogin.user = config.my.user.username;
-
-      # Needed for autologin
-      displayManager.defaultSession = "none+exwm";
-
-      # Set up the login session
-      windowManager.session = lib.singleton {
-        name = "exwm";
-        start = ''
-          # Keybind:                           ScrollLock -> Compose,      <> -> Compose
-          ${pkgs.xorg.xmodmap}/bin/xmodmap -e 'keycode 78 = Multi_key' -e 'keycode 94 = Multi_key'
-          ${config.services.emacs.package}/bin/emacs -l ${myExwmInit}
-        '';
-      };
-
-      # Enable auto locking of the screen
-      xautolock.enable = true;
-      xautolock.locker = physlockCommand;
-      xautolock.enableNotifier = true;
-      xautolock.notify = 15;
-      xautolock.notifier = "${pkgs.libnotify}/bin/notify-send \"Locking in 15 seconds\"";
-      xautolock.time = 3;
-    };
-
-    # Enable physlock and make a suid wrapper for it
-    services.physlock.enable = lib.mkIf cfg.enableExwm true;
-    services.physlock.allowAnyUser = lib.mkIf cfg.enableExwm true;
-
-    # Enable autorandr for screen setups.
-    services.autorandr.enable = lib.mkIf cfg.enableExwm true;
-
-    # Set up services needed for gnome stuff for evolution
-    services.gnome.evolution-data-server.enable = lib.mkIf cfg.enableExwm true;
-    services.gnome.gnome-keyring.enable = lib.mkIf cfg.enableExwm true;
-
     # Install aditional packages
-    environment.systemPackages = (lib.optionals cfg.enableExwm [
-      pkgs.alacritty
-      pkgs.evince
-      pkgs.evolution
-      pkgs.gnome3.adwaita-icon-theme # Icons for gnome packages that sometimes use them but don't depend on them
-      pkgs.scrot
-    ]) ++ (lib.optionals (config.my.emacs.package == "wayland") ([
+    environment.systemPackages = (lib.optionals (config.my.emacs.package == "wayland") ([
       (wrapEmacsWithExtraBinPaths {
         emacs = (myEmacsPackage emacsPackages.default);
         binName = "emacs-x11";

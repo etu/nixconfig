@@ -2,9 +2,7 @@
 let
   cfg = config.my.home-manager;
 
-  isX11 = config.my.emacs.enableExwm;
-  isWayland = config.my.sway.enable;
-  isGraphical = isX11 || isWayland;
+  swayEnabled = config.my.sway.enable;
 
   # Load sources
   sources = import ../nix/sources.nix;
@@ -72,7 +70,7 @@ in
         } // lib.optionalAttrs config.my.emacs.enable {
           # Emacs inhibit startup screen
           ".emacs".text = "(custom-set-variables '(inhibit-startup-screen t))";
-        } // lib.optionalAttrs isGraphical {
+        } // lib.optionalAttrs swayEnabled {
           # Mpv config file - Don't show images embedded in music files
           ".config/mpv/mpv.conf".text = "no-audio-display";
 
@@ -98,7 +96,7 @@ in
           '';
         };
 
-        programs.alacritty.enable = isGraphical;
+        programs.alacritty.enable = swayEnabled;
         programs.alacritty.settings = {
           env.TERM = "xterm-256color";
           font.size = config.my.fonts.size;
@@ -138,7 +136,7 @@ in
 
           # Default configs
           extraConfig = {
-            commit.gpgSign = isGraphical;
+            commit.gpgSign = swayEnabled;
 
             user.name = config.my.user.realname;
             user.email = config.my.user.email;
@@ -163,10 +161,10 @@ in
           }];
         };
 
-        programs.browserpass.enable = isGraphical;
+        programs.browserpass.enable = swayEnabled;
 
         xdg.mimeApps = {
-          enable = isGraphical;
+          enable = swayEnabled;
           defaultApplications = {
             "text/html" = [ "firefox.desktop" ];
             "x-scheme-handler/http" = [ "firefox.desktop" ];
@@ -182,14 +180,14 @@ in
         };
 
         # GTK theme configs
-        gtk.enable = isGraphical;
+        gtk.enable = swayEnabled;
         gtk.font.name = config.my.fonts.normal;
         gtk.font.size = builtins.floor config.my.fonts.size;
         gtk.gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
 
         # Set up qt theme as well
         qt = {
-          enable = isGraphical;
+          enable = swayEnabled;
           platformTheme = "gtk";
         };
 
@@ -197,110 +195,7 @@ in
         programs.rofi.font = "${config.my.fonts.monospace} ${toString (builtins.floor config.my.fonts.size)}";
 
         # Enable syncthing.
-        services.syncthing.enable = isGraphical;
-
-        # Enable the dunst notification deamon
-        services.dunst.enable = isX11;
-        services.dunst.settings = {
-          global = {
-            # font = "";
-
-            # Allow a small subset of html markup
-            markup = "yes";
-            plain_text = "no";
-
-            # The format of the message
-            format = "<b>%s</b>\\n%b";
-
-            # Alignment of message text
-            alignment = "center";
-
-            # Split notifications into multiple lines
-            word_wrap = "yes";
-
-            # Ignore newlines '\n' in notifications.
-            ignore_newline = "no";
-
-            # Hide duplicate's count and stack them
-            stack_duplicates = "yes";
-            hide_duplicates_count = "yes";
-
-            # The geometry of the window
-            geometry = "420x50-15+49";
-
-            # Shrink window if it's smaller than the width
-            shrink = "no";
-
-            # Don't remove messages, if the user is idle
-            idle_threshold = 0;
-
-            # Which monitor should the notifications be displayed on.
-            monitor = 0;
-
-            # The height of a single line. If the notification is one line it will be
-            # filled out to be three lines.
-            line_height = 3;
-
-            # Draw a line of "separatpr_height" pixel height between two notifications
-            separator_height = 2;
-
-            # Padding between text and separator
-            padding = 6;
-            horizontal_padding = 6;
-
-            # Define a color for the separator
-            separator_color = "frame";
-
-            # dmenu path
-            dmenu = "${pkgs.rofi}/bin/rofi -dmenu -p dunst -theme glue_pro_blue";
-
-            # Browser for opening urls in context menu.
-            browser = "/run/current-system/sw/bin/firefox -new-tab";
-
-            # Align icons left/right/off
-            icon_position = "left";
-            max_icon_size = 80;
-
-            # Define frame size and color
-            frame_width = 3;
-            frame_color = "#8EC07C";
-          };
-
-          shortcuts = {
-            close = "ctrl+space";
-            close_all = "ctrl+shift+space";
-          };
-
-          urgency_low = {
-            frame_color = "#3B7C87";
-            foreground = "#3B7C87";
-            background = "#191311";
-            timeout = 4;
-          };
-          urgency_normal = {
-            frame_color = "#5B8234";
-            foreground = "#5B8234";
-            background = "#191311";
-            timeout = 6;
-          };
-
-          urgency_critical = {
-            frame_color = "#B7472A";
-            foreground = "#B7472A";
-            background = "#191311";
-            timeout = 8;
-          };
-        };
-
-        # Set up autorandr service to trigger on saved configurations
-        programs.autorandr.enable = isX11;
-
-        services.picom.enable = isX11;
-        services.picom.vSync = (config.networking.hostName == "agrajag");
-
-        services.flameshot.enable = isX11;
-        services.pasystray.enable = isX11;
-        services.network-manager-applet.enable = isX11;
+        services.syncthing.enable = swayEnabled;
 
         home.stateVersion = "20.09";
       };

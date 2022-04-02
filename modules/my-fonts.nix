@@ -1,12 +1,10 @@
 { config, lib, pkgs, ... }:
 let
-  isX11 = config.my.emacs.enableExwm;
-  isWayland = config.my.sway.enable;
-  isGraphical = isX11 || isWayland;
+  enableSway = config.my.sway.enable;
 
 in
 {
-  config = lib.mkIf isGraphical {
+  config = lib.mkIf enableSway {
     # Set up default fonts
     fonts.enableDefaultFonts = true;
     fonts.enableGhostscriptFonts = true;

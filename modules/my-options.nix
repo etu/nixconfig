@@ -10,7 +10,6 @@
     deploy-user.enable = lib.mkEnableOption "Enables my deploy user";
     emacs = {
       enable = lib.mkEnableOption "Enables emacs with the modules I want";
-      enableExwm = lib.mkEnableOption "Enables EXWM config and graphical environment";
       enableWork = lib.mkEnableOption "Enables install of work related modules";
       package = lib.mkOption {
         type = lib.types.str;
