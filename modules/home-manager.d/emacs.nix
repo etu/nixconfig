@@ -78,8 +78,19 @@ let
     # config to be able to pull in use-package dependencies from there.
     config = builtins.readFile emacsConfig;
 
+    # Package overrides
+    override = epkgs: epkgs // {
+      # Add my config initializer as an emacs package
+      myEmacsConfigInit = pkgs.runCommandNoCC "my-emacs-default-package" { } ''
+        mkdir -p $out/share/emacs/site-lisp
+        cp ${emacsConfigInit} $out/share/emacs/site-lisp/default.el
+      '';
+    };
+
     # Extra packages to install
     extraEmacsPackages = epkgs: (
+      [ epkgs.myEmacsConfigInit ] ++
+
       # Install work deps
       lib.optionals emacsCfg.enableWork [
         epkgs.es-mode
@@ -114,7 +125,7 @@ in
     };
 
     # Write emacs configs to the home directory
-    home-manager.users.${config.my.user.username}.home.file.".emacs.d/init.el".text = builtins.readFile (emacsLispLoader emacsConfig);
+    home-manager.users.${config.my.user.username}.home.file.".emacs".text = "(setq-default inhibit-startup-screen t)";
 
     # Install emacs icons symbols if we have any kind of graphical emacs
     fonts.fonts = lib.mkIf (emacsCfg.package != "nox") [
