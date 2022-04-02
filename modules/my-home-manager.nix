@@ -2,6 +2,10 @@
 let
   cfg = config.my.home-manager;
 
+  isX11 = config.my.emacs.enableExwm;
+  isWayland = config.my.sway.enable;
+  isGraphical = isX11 || isWayland;
+
   # Load sources
   sources = import ../nix/sources.nix;
 in
@@ -16,13 +20,7 @@ in
       wantedBy = [ "multi-user.target" ];
     };
 
-    home-manager.users.${config.my.user.username} = { pkgs, ... }:
-      let
-        isX11 = config.my.emacs.enableExwm;
-        isWayland = config.my.sway.enable;
-        isGraphical = isX11 || isWayland;
-      in
-      {
+    home-manager.users.${config.my.user.username} = {
         # Import a persistance module for home-manager.
         imports = [
           ./home-manager/weechat.nix
