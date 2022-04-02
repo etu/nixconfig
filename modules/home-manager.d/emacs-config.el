@@ -12,8 +12,13 @@
 (defvar user-emacs-cache-directory
   (concat (getenv "HOME") "/.cache/emacs"))
 
-;; Avoid creation of ~/.emacs.d/
-(setq-default user-emacs-directory user-emacs-data-directory)
+;; Set some variables.
+(setq-default
+ ;; Don't show the welcome splash screen.
+ inhibit-startup-screen t
+
+ ;; Avoid creation of ~/.emacs.d/
+ user-emacs-directory user-emacs-data-directory)
 
 
 ;;;

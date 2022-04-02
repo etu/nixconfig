@@ -13,6 +13,7 @@ in
     "${sources.home-manager}/nixos"
 
     # Import home-manager configurations
+    ./home-manager.d/emacs.nix
     ./home-manager.d/htop.nix
     ./home-manager.d/sway.nix
   ];
@@ -67,9 +68,6 @@ in
             cp ${./dotfiles/bin/keep} $out
             substituteInPlace $out --replace /bin/zsh ${pkgs.zsh}/bin/zsh
           '';
-        } // lib.optionalAttrs config.my.emacs.enable {
-          # Emacs inhibit startup screen
-          ".emacs".text = "(custom-set-variables '(inhibit-startup-screen t))";
         } // lib.optionalAttrs swayEnabled {
           # Mpv config file - Don't show images embedded in music files
           ".config/mpv/mpv.conf".text = "no-audio-display";
