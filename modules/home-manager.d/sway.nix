@@ -45,6 +45,12 @@ in
             { criteria = "eDP-1";
               status = "disable"; }
           ];
+          docked2.outputs = [
+            { criteria = "Samsung Electric Company LC49G95T H4ZN900853 (DP-2)";
+              mode = "5120x1440"; }
+            { criteria = "eDP-1";
+              status = "disable"; }
+          ];
         };
       }; # END kanshi
 
