@@ -9,13 +9,9 @@ let
 in
 {
   imports = [
-    # Import the home-manager module
-    "${sources.home-manager}/nixos"
-
     # Import home-manager configurations
     ./home-manager.d/emacs.nix
     ./home-manager.d/htop.nix
-    ./home-manager.d/sway.nix
   ];
 
   config = lib.mkIf cfg.enable {
