@@ -8,11 +8,6 @@ let
   sources = import ../nix/sources.nix;
 in
 {
-  imports = [
-    # Import home-manager configurations
-    ./home-manager.d/htop.nix
-  ];
-
   config = lib.mkIf cfg.enable {
     # Make sure to start the home-manager activation before I log it.
     systemd.services."home-manager-${config.my.user.username}" = {
@@ -63,6 +58,24 @@ in
             cp ${./dotfiles/bin/keep} $out
             substituteInPlace $out --replace /bin/zsh ${pkgs.zsh}/bin/zsh
           '';
+        };
+
+        programs.htop = {
+          enable = true;
+          settings = {
+            hide_userland_threads = true;
+            hide_kernel_threads = true;
+            highlight_base_name = true;
+            shadow_other_users = true;
+            show_program_path = true;
+            tree_view = true;
+
+            left_meters = [ "LeftCPUs" "Memory" "Swap" "ZFSARC" "ZFSCARC" ];
+            left_meter_modes = [ 1 1 1 2 2 ];
+
+            right_meters = [ "RightCPUs" "Tasks" "LoadAverage" "Uptime" "Battery" ];
+            right_meter_modes = [ 1 2 2 2 2 ];
+          };
         };
 
         programs.git = {
