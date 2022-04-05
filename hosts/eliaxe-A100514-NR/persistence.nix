@@ -25,9 +25,6 @@
         # Work
         ".docker/config.json"
         ".kube/config"
-        "bin/gh-md-toc"
-        "bin/git-tvlog"
-        "bin/mydump"
       ];
       directories = [
         ".config/fish"
