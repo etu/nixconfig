@@ -4,7 +4,7 @@ let
   emacsCfg = config.my.emacs;
 
   # Load sources
-  sources = import ../../nix/sources.nix;
+  sources = import ../nix/sources.nix;
 
   # Run my config trough substituteAll to replace all paths with paths to
   # programs etc to have as my actual config file.

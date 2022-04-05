@@ -10,7 +10,6 @@ in
 {
   imports = [
     # Import home-manager configurations
-    ./home-manager.d/emacs.nix
     ./home-manager.d/htop.nix
   ];
 
