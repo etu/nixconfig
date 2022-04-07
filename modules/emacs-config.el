@@ -66,7 +66,10 @@
  mouse-yank-at-point t
 
  ;; Weeks starts on Mondays
- calendar-week-start-day 1)
+ calendar-week-start-day 1
+
+ ;; Change all yes-or-no-p to y-or-n-p
+ use-short-answers t)
 
 
 ;; Forcibly set some variables
@@ -114,10 +117,6 @@
 ;; Make sure that there is one newline at the end of the file while saving,
 ;; also removes all spaces at the end of lines.
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
-
-
-;; Change all yes-or-no-p to y-or-n-p
-(defalias 'yes-or-no-p 'y-or-n-p)
 
 
 ;; Slow things to load after startup
