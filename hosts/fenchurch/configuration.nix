@@ -27,6 +27,7 @@ in
     ./services/monitoring.nix
     ./services/netdata.nix
     ./services/nfs.nix
+    ./services/svtplay.nix
     ./services/syncthing.nix
     ./services/usenet.nix
 
