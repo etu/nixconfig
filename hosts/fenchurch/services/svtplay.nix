@@ -17,7 +17,7 @@ let
   };
 in
 {
-  systemd.services.svtplay-faret-shaun = buildSvtPlayService "faret-shaun";
-  systemd.services.svtplay-mamma-mu = buildSvtPlayService "mamma-mu";
-  systemd.services.svtplay-pettson-och-findus = buildSvtPlayService "pettson-och-findus";
+  #systemd.services.svtplay-faret-shaun = buildSvtPlayService "faret-shaun";
+  #systemd.services.svtplay-mamma-mu = buildSvtPlayService "mamma-mu";
+  #systemd.services.svtplay-pettson-och-findus = buildSvtPlayService "pettson-och-findus";
 }
