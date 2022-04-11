@@ -332,9 +332,6 @@ in
 
             # Reload kanshi on reload of config
             { command = "${config.systemd.package}/bin/systemctl --user restart kanshi"; always = true; }
-
-            # Reload waybar on reload of config
-            { command = "${config.systemd.package}/bin/systemctl --user restart waybar"; always = true; }
           ];
 
           # Disable the default bar
