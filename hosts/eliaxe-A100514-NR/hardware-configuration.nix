@@ -24,11 +24,6 @@
     fsType = "zfs";
   };
 
-  fileSystems."/var/log" = {
-    device = "zroot/var-log";
-    fsType = "zfs";
-  };
-
   fileSystems."/persistent" = {
     device = "zroot/persistent";
     fsType = "zfs";
@@ -41,10 +36,15 @@
     neededForBoot = true;
   };
 
+  fileSystems."/var/log" = {
+    device = "zroot/var-log";
+    fsType = "zfs";
+  };
+
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/F8CB-7FB0";
     fsType = "vfat";
-    options = [ "noauto" "x-systemd.automount" ];
+    options = [ "defaults" "noauto" "x-systemd.automount" ];
   };
 
   swapDevices = [ ];
