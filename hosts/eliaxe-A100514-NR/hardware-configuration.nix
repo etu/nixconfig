@@ -28,23 +28,26 @@
     device = "zroot/persistent";
     fsType = "zfs";
     neededForBoot = true;
+    options = [ "defaults" "noexec" ];
   };
 
   fileSystems."/persistent/home" = {
     device = "zroot/home";
     fsType = "zfs";
     neededForBoot = true;
+    options = [ "defaults" "noexec" ];
   };
 
   fileSystems."/var/log" = {
     device = "zroot/var-log";
     fsType = "zfs";
+    options = [ "defaults" "noexec" ];
   };
 
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/F8CB-7FB0";
     fsType = "vfat";
-    options = [ "defaults" "noauto" "x-systemd.automount" ];
+    options = [ "defaults" "noexec" "noauto" "x-systemd.automount" ];
   };
 
   swapDevices = [ ];
