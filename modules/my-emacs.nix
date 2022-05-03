@@ -85,14 +85,6 @@ let
         mkdir -p $out/share/emacs/site-lisp
         cp ${emacsConfigInit} $out/share/emacs/site-lisp/default.el
       '';
-
-      # Pin jenkinsfile-mode source to a not-broken version
-      jenkinsfile-mode = epkgs.jenkinsfile-mode.overrideAttrs (oldAttrs: {
-        src = builtins.fetchTarball {
-          url = "https://github.com/john2x/jenkinsfile-mode/archive/65bf3925852c35c6bd499978f08f83c1193f4347.tar.gz";
-          sha256 = "0w38g88yykslg71xr99ff4vx1ffgy90b7xqvvdflr189gwk3avx1";
-        };
-      });
     };
 
     # Extra packages to install
