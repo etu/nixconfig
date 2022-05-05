@@ -46,6 +46,7 @@ let
   # Define language servers to include in the wrapper for Emacs
   extraBinPaths = [
     # Language Servers
+    pkgs.go                                             # Go language
     pkgs.gopls                                          # Go language server
     pkgs.nodePackages.bash-language-server              # Bash language server
     pkgs.nodePackages.dockerfile-language-server-nodejs # Docker language server
