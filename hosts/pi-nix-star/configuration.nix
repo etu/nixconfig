@@ -12,6 +12,9 @@
   imports = [
     # Import bootloader and related settings for aarch64
     (modulesPath + "/installer/sd-card/sd-image-aarch64.nix")
+
+    # Include the mmdvmhost service.
+    ./mmdvmhost/service.nix
   ];
 
   # Disable documentation to make the system smaller.
