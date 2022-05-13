@@ -24,15 +24,15 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "flummbot": {
-        "branch": "master",
+        "branch": "main",
         "description": "Small IRC-Bot in go for my channel",
         "homepage": "https://github.com/etu/flummbot",
         "owner": "etu",
         "repo": "flummbot",
-        "rev": "fbb33a770f8a210cdb64ce082cd1966ad72a4ff8",
-        "sha256": "0jqmj9nnhr5b82pq9im0y7qdjqjgk8xf8zih9w37g9xchrgac2lf",
+        "rev": "cba0d98a16c678d28ef46697a15300bde6e30af0",
+        "sha256": "1mzy3lh3xbak61b0alz9a007yvxhhys3j2lsh9imgvxwl6s4d996",
         "type": "tarball",
-        "url": "https://github.com/etu/flummbot/archive/fbb33a770f8a210cdb64ce082cd1966ad72a4ff8.tar.gz",
+        "url": "https://github.com/etu/flummbot/archive/cba0d98a16c678d28ef46697a15300bde6e30af0.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "halsobrev": {
