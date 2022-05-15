@@ -42,6 +42,12 @@ in
   # Enable snapshotting for some filesystems
   services.sanoid.datasets."zroot/persistent".use_template = [ "persistent" ];
 
+  # Disable documentation to make the system smaller.
+  documentation.enable = false;
+  documentation.doc.enable = false;
+  documentation.info.enable = false;
+  documentation.man.enable = false;
+
   # Install mosh
   programs.mosh.enable = true;
 
