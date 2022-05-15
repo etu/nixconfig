@@ -18,6 +18,9 @@
     autoStart = true;
     additionalCapabilities = [ "CAP_IPC_LOCK" ];
     config = { config, pkgs, ... }: {
+      # The NixOS release to be compatible with for stateful data such as databases.
+      system.stateVersion = "22.05";
+
       # Disable documentation to make the system smaller.
       documentation.enable = false;
       documentation.doc.enable = false;
