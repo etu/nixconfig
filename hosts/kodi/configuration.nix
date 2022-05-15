@@ -54,6 +54,12 @@ in
   # Build nix stuff with all the power
   nix.settings.cores = 6;
 
+  # Disable documentation to make the system smaller.
+  documentation.enable = false;
+  documentation.doc.enable = false;
+  documentation.info.enable = false;
+  documentation.man.enable = false;
+
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
