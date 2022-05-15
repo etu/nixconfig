@@ -44,6 +44,12 @@ in
   services.sanoid.datasets."zroot/home".use_template = [ "home" ];
   services.sanoid.datasets."zroot/persistent".use_template = [ "persistent" ];
 
+  # Disable documentation to make the system smaller.
+  documentation.enable = false;
+  documentation.doc.enable = false;
+  documentation.info.enable = false;
+  documentation.man.enable = false;
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = [
