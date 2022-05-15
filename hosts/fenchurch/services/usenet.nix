@@ -70,6 +70,12 @@
   containers.usenet = {
     autoStart = true;
     config = { config, lib, pkgs, ... }: {
+      # Disable documentation to make the system smaller.
+      documentation.enable = false;
+      documentation.doc.enable = false;
+      documentation.info.enable = false;
+      documentation.man.enable = false;
+
       # nzbget needs unrar
       nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "unrar" ];
 

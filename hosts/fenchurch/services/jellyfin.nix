@@ -18,6 +18,12 @@
     autoStart = true;
     additionalCapabilities = [ "CAP_IPC_LOCK" ];
     config = { config, pkgs, ... }: {
+      # Disable documentation to make the system smaller.
+      documentation.enable = false;
+      documentation.doc.enable = false;
+      documentation.info.enable = false;
+      documentation.man.enable = false;
+
       services.jellyfin = { enable = true; user = "downloads"; group = "downloads"; };
 
       users.users.downloads = { group = "downloads"; uid = 947; isSystemUser = true; };

@@ -144,6 +144,12 @@ in
     "/persistent/etc/ssh/ssh_host_rsa_key"
   ];
 
+  # Disable documentation to make the system smaller.
+  documentation.enable = false;
+  documentation.doc.enable = false;
+  documentation.info.enable = false;
+  documentation.man.enable = false;
+
   # Hardware settings
   hardware.cpu.intel.updateMicrocode = true;
 
