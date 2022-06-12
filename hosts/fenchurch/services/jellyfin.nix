@@ -49,28 +49,17 @@
       # Pull in patch for jellyfin-web that enables transcode of DTS
       # audio for modern LG TV's that doesn't support DTS (any
       # more). This patch is part of the next 10.8.0 release.
-      nixpkgs.overlays = let
-        # Pin jellyfin to older packages because sohehow
-        # https://github.com/NixOS/nixpkgs/commit/e6188b65767b0cbce493dc9724e55ca005284331
-        # from https://github.com/NixOS/nixpkgs/pull/175874 broke the
-        # jellyfin-web build.
-        oldpkgs = import (builtins.fetchTarball {
-          url = "https://github.com/NixOS/nixpkgs/archive/83658b28fe638a170a19b8933aa008b30640fbd1.tar.gz";
-          sha256 = "sha256:11knahk5j90aaxskh204dbg4px5mgrp7pbgm77g6ck2cbv8imyaj";
-        }) {};
-      in [
+      nixpkgs.overlays = [
         (self: super: {
-          jellyfin = oldpkgs.jellyfin.override {
-            jellyfin-web = oldpkgs.jellyfin-web.overrideAttrs (oa: {
-              patches = [
-                (pkgs.fetchpatch {
-                  name = "2971-webos-dts-support.patch";
-                  url = "https://github.com/jellyfin/jellyfin-web/pull/2971.patch";
-                  sha256 = "sha256-9P8qMm+IgV2W10ImF9UTzUy6sroxKqATG5MiroQSgY4=";
-                })
-              ];
-            });
-          };
+          jellyfin-web = super.jellyfin-web.overrideAttrs (oa: {
+            patches = [
+              (pkgs.fetchpatch {
+                name = "2971-webos-dts-support.patch";
+                url = "https://github.com/jellyfin/jellyfin-web/pull/2971.patch";
+                sha256 = "sha256-9P8qMm+IgV2W10ImF9UTzUy6sroxKqATG5MiroQSgY4=";
+              })
+            ];
+          });
         })
       ];
 
