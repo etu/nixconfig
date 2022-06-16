@@ -97,21 +97,25 @@ in
       programs.fish.loginShellInit = "set --erase fish_greeting";
       programs.fish.interactiveShellInit = ''
         # Put an ascii-fish as greeter if it's an interactive shell
-        set --global fish_greeting (set_color red)'                  ___
-           ___======____='(set_color yellow)'---='(set_color red)')
-          /T            \_'(set_color yellow)'--==='(set_color red)')
-          L \ '(set_color yellow)'(0)   '(set_color red)'\~    \_'(set_color yellow)'-=='(set_color red)')
-           \      / )J'(set_color yellow)'~~    '(set_color red)'\\'(set_color yellow)'-='(set_color red)')
-            \\\\___/  )JJ'(set_color yellow)'~~    '(set_color red)'\)
-             \_____/JJJ'(set_color yellow)'~~      '(set_color red)'\
-             / \  , \\'(set_color red)'J'(set_color yellow)'~~~~      \
-            (-\)'(set_color red)'\='(set_color yellow)'|  \~~~        L__
-            ('(set_color red)'\\'(set_color yellow)'\\)  ( -\)_            ==__
-             '(set_color red)'\V    '(set_color yellow)'\-'(set_color red)'\) =='(set_color yellow)'=_____  J\   \\\\
-                    '(set_color red)'\V)     \_)'(set_color yellow)' \   JJ J\)
-                                /J J'(set_color red)'T'(set_color yellow)'\JJJ'(set_color red)'J)
-                                (J'(set_color yellow)'JJ| '(set_color red)'\UUU)
+        begin
+          set -l PRIMARY (set_color red)
+          set -l SECONDARY (set_color yellow)
+          set --global fish_greeting $PRIMARY'                  ___
+           ___======____='$SECONDARY'---='$PRIMARY')
+          /T            \_'$SECONDARY'--==='$PRIMARY')
+          L \ '$SECONDARY'(0)   '$PRIMARY'\~    \_'$SECONDARY'-=='$PRIMARY')
+           \      / )J'$SECONDARY'~~    '$PRIMARY'\\'$SECONDARY'-='$PRIMARY')
+            \\\\___/  )JJ'$SECONDARY'~~    '$PRIMARY'\)
+             \_____/JJJ'$SECONDARY'~~      '$PRIMARY'\
+             / \  , \\'$PRIMARY'J'$SECONDARY'~~~~      \
+            (-\)'$PRIMARY'\='$SECONDARY'|  \~~~        L__
+            ('$PRIMARY'\\'$SECONDARY'\\)  ( -\)_            ==__
+             '$PRIMARY'\V    '$SECONDARY'\-'$PRIMARY'\) =='$SECONDARY'=_____  J\   \\\\
+                    '$PRIMARY'\V)     \_)'$SECONDARY' \   JJ J\)
+                                /J J'$PRIMARY'T'$SECONDARY'\JJJ'$PRIMARY'J)
+                                (J'$SECONDARY'JJ| '$PRIMARY'\UUU)
                                  (UU)'
+        end
       '';
       programs.fish.shellAbbrs = {
         "-" = "cd -";
