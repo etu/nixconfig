@@ -33,12 +33,6 @@ in
           # Tmux config
           ".tmux.conf".source = ./dotfiles/tmux.conf;
 
-          # Fish config
-          ".config/fish/config.fish".source = ./dotfiles/fish/config.fish;
-
-          # Fish functions
-          ".config/fish/functions".source = ./dotfiles/fish/functions;
-
           # Lorrirc
           ".direnvrc".text = ''
             use_nix() {
