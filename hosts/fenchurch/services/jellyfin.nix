@@ -46,23 +46,6 @@
 
       services.jellyfin = { enable = true; user = "downloads"; group = "downloads"; };
 
-      # Pull in patch for jellyfin-web that enables transcode of DTS
-      # audio for modern LG TV's that doesn't support DTS (any
-      # more). This patch is part of the next 10.8.0 release.
-      nixpkgs.overlays = [
-        (self: super: {
-          jellyfin-web = super.jellyfin-web.overrideAttrs (oa: {
-            patches = [
-              (pkgs.fetchpatch {
-                name = "2971-webos-dts-support.patch";
-                url = "https://github.com/jellyfin/jellyfin-web/pull/2971.patch";
-                sha256 = "sha256-9P8qMm+IgV2W10ImF9UTzUy6sroxKqATG5MiroQSgY4=";
-              })
-            ];
-          });
-        })
-      ];
-
       users.users.downloads = { group = "downloads"; uid = 947; isSystemUser = true; };
       users.groups.downloads.gid = 947;
     };
