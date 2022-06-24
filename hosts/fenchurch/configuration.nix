@@ -25,7 +25,6 @@ in
     ./services/jellyfin.nix
     ./services/murmur.nix
     ./services/monitoring.nix
-    ./services/netdata.nix
     ./services/nfs.nix
     ./services/svtplay.nix
     ./services/syncthing.nix
