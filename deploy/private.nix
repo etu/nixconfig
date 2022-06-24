@@ -9,14 +9,6 @@ nixus ({ config, ... }: {
     nixpkgs = ../nix/nixos-unstable;
   };
 
-  nodes.kodi = { lib, config, ... }: {
-    # How to reach this node
-    host = "root@192.168.0.105";
-
-    # What configuration it should have
-    configuration = ../hosts/kodi/configuration.nix;
-  };
-
   nodes.fenchurch = { lib, config, ... }: {
     # How to reach this node
     host = "deploy@home.elis.nu";

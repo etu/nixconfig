@@ -110,8 +110,6 @@ in
   services.sanoid.datasets."zroot/backups/agrajag/zroot/persistent" = { use_template = [ "persistent" ]; autosnap = false; };
   services.sanoid.datasets."zroot/backups/eliaxe-A100514-NR/zroot/home" = { use_template = [ "home" ]; autosnap = false; };
   services.sanoid.datasets."zroot/backups/eliaxe-A100514-NR/zroot/persistent" = { use_template = [ "persistent" ]; autosnap = false; };
-  services.sanoid.datasets."zroot/backups/kodi/zroot/home" = { use_template = [ "home" ]; autosnap = false; };
-  services.sanoid.datasets."zroot/backups/kodi/zroot/persistent" = { use_template = [ "persistent" ]; autosnap = false; };
   services.sanoid.datasets."zroot/backups/vps04/zroot/home" = { use_template = [ "home" ]; autosnap = false; };
   services.sanoid.datasets."zroot/backups/vps04/zroot/persistent" = { use_template = [ "persistent" ]; autosnap = false; };
   services.sanoid.datasets."zroot/backups/vps05/zroot/home" = { use_template = [ "home" ]; autosnap = false; };
@@ -129,8 +127,6 @@ in
     "root@vps04.elis.nu:zroot/home".target = "zroot/backups/vps04/zroot/home";
     "root@vps04.elis.nu:zroot/persistent".target = "zroot/backups/vps04/zroot/persistent";
     "root@vps05.elis.nu:zroot/persistent".target = "zroot/backups/vps05/zroot/persistent";
-    "root@192.168.0.105:zroot/home".target = "zroot/backups/kodi/zroot/home";
-    "root@192.168.0.105:zroot/persistent".target = "zroot/backups/kodi/zroot/persistent";
   };
 
   # Allow syncoid on other computers to sync here.
