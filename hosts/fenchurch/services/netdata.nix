@@ -6,7 +6,7 @@
   services.nginx.virtualHosts."netdata.lan".locations."/" = {
     proxyPass = "http://127.0.0.1:19999";
     extraConfig = ''
-      allow 192.168.0.0/24;
+      allow 192.168.1.0/24;
       deny all;
     '';
   };
