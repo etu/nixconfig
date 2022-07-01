@@ -30,41 +30,15 @@
     };
   };
 
-  # Enable Jellyfin
-  containers.jellyfin = {
-    autoStart = true;
-    additionalCapabilities = [ "CAP_IPC_LOCK" ];
-    config = { config, pkgs, ... }: {
-      # The NixOS release to be compatible with for stateful data such as databases.
-      system.stateVersion = "22.05";
-
-      # Disable documentation to make the system smaller.
-      documentation.enable = false;
-      documentation.doc.enable = false;
-      documentation.info.enable = false;
-      documentation.man.enable = false;
-
-      services.jellyfin = { enable = true; user = "downloads"; group = "downloads"; };
-
-      users.users.downloads = { group = "downloads"; uid = 947; isSystemUser = true; };
-      users.groups.downloads.gid = 947;
-    };
-    forwardPorts = [
-      { containerPort = 8096; hostPort = 8096; protocol = "tcp"; }
-    ];
-    bindMounts = {
-      "jellyfin" = {
-        mountPoint = "/var/lib/jellyfin";
-        hostPath = "/persistent/var/lib/jellyfin";
-        isReadOnly = false;
-      };
-      "media" = {
-        mountPoint = "/media";
-        hostPath = "/media/zstorage/files";
-        isReadOnly = true;
-      };
-    };
+  # Bind mount for persistent data for jellyfin
+  fileSystems."/var/lib/jellyfin" = {
+    device = "/persistent/var/lib/jellyfin";
+    options = [ "bind" "noauto" "x-systemd.automount" ];
+    noCheck = true;
   };
+
+  # Enable jellyfin itself
+  services.jellyfin.enable = true;
 
   # Open NGiNX port
   networking.firewall.allowedTCPPorts = [ 80 443 ];
