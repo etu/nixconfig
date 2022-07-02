@@ -88,14 +88,6 @@ in
         extraHostNames = [ "vps05.elis.nu" ];
         publicKey = keys.systems.vps05.rsa;
       };
-      kodi-ec = {
-        extraHostNames = [ "192.168.0.105" ];
-        publicKey = keys.systems.kodi.ec;
-      };
-      kodi-rsa = {
-        extraHostNames = [ "192.168.0.105" ];
-        publicKey = keys.systems.kodi.rsa;
-      };
     };
   };
 }

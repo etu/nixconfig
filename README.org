@@ -62,10 +62,6 @@ machines for the laptops. It's also my primary location to store ZFS
 snapshots that I backup from all of the other systems. It runs home assistant
 and some other things.
 
-**** ~hosts/kodi/~
-Computer that runs Kodi in fullscreen. Nothing special. ZFS snapshots are
-pulled from this system to fenchurch.
-
 **** ~hosts/vps04/~
 System for IRC clients and an IRC bot. Nothing else. ZFS snapshots are pulled
 from this system to fenchurch.
