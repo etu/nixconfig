@@ -27,14 +27,14 @@ It also contains public SSH keys for all the systems I have and care about,
 but also for trusted users that should have access to accounts on different
 systems. This becomes a central place to manage said keys for said users.
 
-*** ~deploy/private.nix~
+*** ~deploy.nix~
 This file uses [[https://github.com/Infinisil/nixus][nixus]] to generate a deployment script for all systems that
 aren't /hands on/ systems (such as laptops), so this includes all VPSes,
 servers, and other systems that aren't used as desktop systems.
 
 To build the deployment script for all these systems, it's as simple as:
 #+BEGIN_SRC bash
-  nix-build deploy/private.nix
+  nix-build deploy.nix
 #+END_SRC
 
 This will give a symbolic link named ~result~ which can be used to deploy all
