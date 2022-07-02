@@ -68,19 +68,19 @@ in
   # certificates so we can have an encrypted connection from
   # cloudflare to this server.
   age.secrets.xn--hlsobrev-0za-se-pem = {
-    file = ../../secrets/certs/xn--hlsobrev-0za.se.pem.age;
+    file = ../../secrets/vps05/xn--hlsobrev-0za.se.pem.age;
     owner = "nginx";
   };
   age.secrets.xn--hlsobrev-0za-se-key = {
-    file = ../../secrets/certs/xn--hlsobrev-0za.se.key.age;
+    file = ../../secrets/vps05/xn--hlsobrev-0za.se.key.age;
     owner = "nginx";
   };
   age.secrets.halsobrev-se-pem = {
-    file = ../../secrets/certs/halsobrev.se.pem.age;
+    file = ../../secrets/vps05/halsobrev.se.pem.age;
     owner = "nginx";
   };
   age.secrets.halsobrev-se-key = {
-    file = ../../secrets/certs/halsobrev.se.key.age;
+    file = ../../secrets/vps05/halsobrev.se.key.age;
     owner = "nginx";
   };
 

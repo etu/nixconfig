@@ -106,7 +106,7 @@ in {
 
   # Decrypt secret to expected location.
   age.secrets.grafana-admin-password = {
-    file = ../../../secrets/monitoring/grafana-admin-password.age;
+    file = ../../../secrets/fenchurch/grafana-admin-password.age;
     path = config.services.grafana.security.adminPasswordFile;
     owner = "grafana";
   };

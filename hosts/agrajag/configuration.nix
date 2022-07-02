@@ -147,7 +147,7 @@ in {
 
   # Include agenix encripted secret for secret password file
   age.secrets.nixos-data-secrets = {
-    file = ../../secrets/nixos-data-secrets.nix.age;
+    file = ../../secrets/workstations/nixos-data-secrets.nix.age;
     path = "/persistent/etc/nixos/data/secrets.nix";
     owner = "etu";
   };
@@ -156,14 +156,14 @@ in {
   programs.ssh.knownHosts."aarch64.nixos.community".publicKey = keys.systems."aarch64.nixos.community";
 
   age.secrets."etu@aarch64.nixos.community.age" = {
-    file = ../../secrets/sshkeys/etu_at_aarch64.nixos.community.age;
+    file = ../../secrets/agrajag/etu_at_aarch64.nixos.community.age;
     path = "/persistent/home/etu/.ssh/etu@aarch64.nixos.community";
     owner = "etu";
     mode = "400";
   };
 
   age.secrets."etu@aarch64.nixos.community.pub.age" = {
-    file = ../../secrets/sshkeys/etu_at_aarch64.nixos.community.pub.age;
+    file = ../../secrets/agrajag/etu_at_aarch64.nixos.community.pub.age;
     path = "/persistent/home/etu/.ssh/etu@aarch64.nixos.community.pub";
     owner = "etu";
     mode = "400";

@@ -88,7 +88,7 @@ Contains nix sources, like the checkout of ~nixpkgs~ that I'm building my
 systems on. Also contains the ~sources.json~ which is the state directory of
 [[https://github.com/nmattia/niv][niv]] that I use to easily pin external resources.
 
-*** ~secrets/~
+*** ~secrets.nix~ and ~secrets/~
 This is the directory with real secrets managed with [[https://github.com/ryantm/agenix][agenix]] which [[https://github.com/FiloSottile/age][age]] encrypt
 files using the public SSH keys for my users on my primary laptops and the
 public SSH-key on the host of intended use. This way I can see, edit and

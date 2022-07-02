@@ -162,7 +162,7 @@ in
 
   # Flummbot config file
   age.secrets.flummbot-toml = {
-    file = ../../secrets/flummbot.toml;
+    file = ../../secrets/vps04/flummbot.toml.age;
     owner = "bots";
     group = "bots";
     path = "${config.services.flummbot.stateDirectory}/flummbot.toml";
