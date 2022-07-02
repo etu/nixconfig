@@ -4,7 +4,7 @@ let
   cfg = config.my.backup;
 
   # Import my ssh public keys
-  keys = import ../data/pubkeys.nix;
+  keys = (import ../data.nix).pubkeys;
 in
 {
   config = lib.mkIf cfg.enable {

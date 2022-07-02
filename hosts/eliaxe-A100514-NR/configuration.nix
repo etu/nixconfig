@@ -5,7 +5,7 @@
 { config, pkgs, ... }:
 let
   # Load secrets
-  secrets = import ../../data/load-secrets.nix;
+  secrets = (import ../../data.nix).secrets;
 
   # Load sources
   sources = import ../../nix/sources.nix;
@@ -159,7 +159,7 @@ in
   # Include agenix encripted secret for secret password file
   age.secrets.nixos-data-secrets = {
     file = ../../secrets/workstations/nixos-data-secrets.nix.age;
-    path = "/persistent/etc/nixos/data/secrets.nix";
+    path = "/persistent/etc/nixos/data-secrets.nix";
     owner = "etu";
   };
 

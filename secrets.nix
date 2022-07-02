@@ -1,6 +1,6 @@
 let
   # Import my ssh public keys
-  keys = import ./data/pubkeys.nix;
+  keys = (import ./data.nix).pubkeys;
 
   # Assemble public keys for user-facing computers
   etu = keys.etu.agrajag ++ keys.etu.work;

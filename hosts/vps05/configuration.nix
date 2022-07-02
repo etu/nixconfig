@@ -5,7 +5,7 @@
 { config, pkgs, ... }:
 let
   # Import my ssh public keys
-  keys = import ../../data/pubkeys.nix;
+  keys = (import ../../data.nix).pubkeys;
 
   # Load nivSources
   nivSources = import ../../nix/sources.nix;

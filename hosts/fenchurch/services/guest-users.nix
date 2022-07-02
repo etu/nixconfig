@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 let
   # Import my ssh public keys
-  keys = import ../../../data/pubkeys.nix;
+  keys = (import ../../../data.nix).pubkeys;
 
   # home / chroot path
   path = "/home/guests";

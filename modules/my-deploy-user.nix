@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 let
   # Import my ssh public keys
-  keys = import ../data/pubkeys.nix;
+  keys = (import ../data.nix).pubkeys;
 
   cfg = config.my.deploy-user;
 

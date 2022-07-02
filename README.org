@@ -17,15 +17,13 @@ NIX_PATH=nixpkgs=/etc/nixos/nix/nixos-unstable:nixos-config=/etc/nixos/hosts/<HO
 #+END_SRC
 
 ** Files and Directories in this repository
-*** ~data/~
-**** ~data/load-secrets.nix~
+*** ~data.nix~
 This file isn't a good place to store real secrets, it's pretty much only
 reasonable to have dummy hashes and do the loading of a file named
-~data/secrets.nix~ which can contain real secrets and shouldn't be committed
+~data-secrets.nix~ which can contain real secrets and shouldn't be committed
 in the repository.
 
-**** ~data/pubkeys.nix~
-This file contains public SSH keys for all the systems I have and care about,
+It also contains public SSH keys for all the systems I have and care about,
 but also for trusted users that should have access to accounts on different
 systems. This becomes a central place to manage said keys for said users.
 
