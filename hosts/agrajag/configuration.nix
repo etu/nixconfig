@@ -10,6 +10,9 @@ let
   # Import my ssh public keys
   keys = (import ../../data.nix).pubkeys;
 
+  # Import age secrets paths and metadata.
+  ageModules = (import ../../data.nix).ageModules;
+
 in {
   imports = [
     # Include my hardware settings.
@@ -102,28 +105,11 @@ in {
     "/persistent/etc/ssh/ssh_host_rsa_key"
   ];
 
-  # Include agenix encripted secret for secret password file
-  age.secrets.nixos-data-secrets = {
-    file = ../../secrets/workstations/nixos-data-secrets.nix.age;
-    path = "/persistent/etc/nixos/.data-secrets.nix";
-    owner = "etu";
-  };
-
   # Add community server to known hosts
   programs.ssh.knownHosts."aarch64.nixos.community".publicKey = keys.systems."aarch64.nixos.community";
 
-  age.secrets."etu@aarch64.nixos.community.age" = {
-    file = ../../secrets/agrajag/etu_at_aarch64.nixos.community.age;
-    path = "/persistent/home/etu/.ssh/etu@aarch64.nixos.community";
-    owner = "etu";
-    mode = "400";
-  };
-
-  age.secrets."etu@aarch64.nixos.community.pub.age" = {
-    file = ../../secrets/agrajag/etu_at_aarch64.nixos.community.pub.age;
-    path = "/persistent/home/etu/.ssh/etu@aarch64.nixos.community.pub";
-    owner = "etu";
-    mode = "400";
+  age.secrets = {
+    inherit (ageModules) "etu@aarch64.nixos.community" "etu@aarch64.nixos.community.pub" nixos-data-secret;
   };
 
   # Set up remote builds
@@ -139,7 +125,7 @@ in {
     {
       hostName = "aarch64.nixos.community";
       maxJobs = 64;
-      sshKey = config.age.secrets."etu@aarch64.nixos.community.age".path;
+      sshKey = config.age.secrets."etu@aarch64.nixos.community".path;
       sshUser = "etu";
       system = "aarch64-linux";
       supportedFeatures = [ "big-parallel" ];

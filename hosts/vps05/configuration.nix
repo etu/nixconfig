@@ -7,6 +7,9 @@ let
   # Import my ssh public keys
   keys = (import ../../data.nix).pubkeys;
 
+  # Import age secrets paths and metadata.
+  ageModules = (import ../../data.nix).ageModules;
+
   # Load nivSources
   nivSources = import ../../nix/sources.nix;
 in
@@ -67,21 +70,8 @@ in
   # Include agenix encripted secrets for cloudflare origin server
   # certificates so we can have an encrypted connection from
   # cloudflare to this server.
-  age.secrets.xn--hlsobrev-0za-se-pem = {
-    file = ../../secrets/vps05/xn--hlsobrev-0za.se.pem.age;
-    owner = "nginx";
-  };
-  age.secrets.xn--hlsobrev-0za-se-key = {
-    file = ../../secrets/vps05/xn--hlsobrev-0za.se.key.age;
-    owner = "nginx";
-  };
-  age.secrets.halsobrev-se-pem = {
-    file = ../../secrets/vps05/halsobrev.se.pem.age;
-    owner = "nginx";
-  };
-  age.secrets.halsobrev-se-key = {
-    file = ../../secrets/vps05/halsobrev.se.key.age;
-    owner = "nginx";
+  age.secrets = {
+    inherit (ageModules) xn--hlsobrev-0za-se-key xn--hlsobrev-0za-se-pem halsobrev-se-key halsobrev-se-pem;
   };
 
   # Enable the OpenSSH daemon.

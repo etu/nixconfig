@@ -10,6 +10,9 @@ let
   # Import my ssh public keys
   keys = (import ../../data.nix).pubkeys;
 
+  # Import age secrets paths and metadata.
+  ageModules = (import ../../data.nix).ageModules;
+
 in
 {
   imports = [
@@ -161,10 +164,7 @@ in
   services.flummbot.stateDirectory = "/home/bots";
 
   # Flummbot config file
-  age.secrets.flummbot-toml = {
-    file = ../../secrets/vps04/flummbot.toml.age;
-    owner = "bots";
-    group = "bots";
+  age.secrets.flummbot-toml = ageModules.flummbot-toml // {
     path = "${config.services.flummbot.stateDirectory}/flummbot.toml";
   };
 }

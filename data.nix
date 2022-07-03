@@ -6,6 +6,55 @@
     then import ./.data-secrets.nix
     else throw "Couldn't read real secrets from /etc/nixos/.data-secrets.nix";
 
+  # Age module definitions that is to be used by hosts to get secrets.
+  ageModules = {
+    "etu@aarch64.nixos.community" = {
+      file = ./secrets/agrajag/etu_at_aarch64.nixos.community.age;
+      path = "/persistent/home/etu/.ssh/etu@aarch64.nixos.community";
+      owner = "etu";
+      mode = "400";
+    };
+    "etu@aarch64.nixos.community.pub" = {
+      file = ./secrets/agrajag/etu_at_aarch64.nixos.community.pub.age;
+      path = "/persistent/home/etu/.ssh/etu@aarch64.nixos.community.pub";
+      owner = "etu";
+      mode = "400";
+    };
+    flummbot-toml = {
+      file = ./secrets/vps04/flummbot.toml.age;
+      owner = "bots";
+      group = "bots";
+      # path is defined in usage location.
+    };
+    grafana-admin-password = {
+      file = ./secrets/fenchurch/grafana-admin-password.age;
+      owner = "grafana";
+      # path is defined in usage location.
+    };
+    xn--hlsobrev-0za-se-key = {
+      file = ./secrets/vps05/xn--hlsobrev-0za.se.key.age;
+      owner = "nginx";
+    };
+    xn--hlsobrev-0za-se-pem = {
+      file = ./secrets/vps05/xn--hlsobrev-0za.se.pem.age;
+      owner = "nginx";
+    };
+    halsobrev-se-key = {
+      file = ./secrets/vps05/halsobrev.se.key.age;
+      owner = "nginx";
+    };
+    halsobrev-se-pem = {
+      file = ./secrets/vps05/halsobrev.se.pem.age;
+      owner = "nginx";
+    };
+    nixos-data-secret = {
+      file = ./secrets/workstations/nixos-data-secrets.nix.age;
+      path = "/persistent/etc/nixos/.data-secrets.nix";
+      owner = "etu";
+      mode = "400";
+    };
+  };
+
   # Public keys for a bunch of devices, users and hosts.
   pubkeys = let
     etu = let

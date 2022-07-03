@@ -7,6 +7,9 @@ let
   # Load secrets
   secrets = (import ../../data.nix).secrets;
 
+  # Import age secrets paths and metadata.
+  ageModules = (import ../../data.nix).ageModules;
+
   # Load sources
   sources = import ../../nix/sources.nix;
 
@@ -157,10 +160,8 @@ in
   ];
 
   # Include agenix encripted secret for secret password file
-  age.secrets.nixos-data-secrets = {
-    file = ../../secrets/workstations/nixos-data-secrets.nix.age;
-    path = "/persistent/etc/nixos/.data-secrets.nix";
-    owner = "etu";
+  age.secrets = {
+    inherit (ageModules) nixos-data-secret;
   };
 
   # Enable ClamAV.

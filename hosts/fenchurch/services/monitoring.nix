@@ -1,6 +1,9 @@
 { config, pkgs, ... }:
 
 let
+  # Import age secrets paths and metadata.
+  ageModules = (import ../../../data.nix).ageModules;
+
   zfsExporterPkg = let
     version = "2.2.5";
   in pkgs.buildGoModule {
@@ -105,10 +108,8 @@ in {
   ];
 
   # Decrypt secret to expected location.
-  age.secrets.grafana-admin-password = {
-    file = ../../../secrets/fenchurch/grafana-admin-password.age;
+  age.secrets.grafana-admin-password = ageModules.grafana-admin-password // {
     path = config.services.grafana.security.adminPasswordFile;
-    owner = "grafana";
   };
 
   networking.firewall.allowedTCPPorts = [ 3030 ];
