@@ -159,7 +159,7 @@ in
   # Include agenix encripted secret for secret password file
   age.secrets.nixos-data-secrets = {
     file = ../../secrets/workstations/nixos-data-secrets.nix.age;
-    path = "/persistent/etc/nixos/data-secrets.nix";
+    path = "/persistent/etc/nixos/.data-secrets.nix";
     owner = "etu";
   };
 

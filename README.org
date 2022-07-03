@@ -18,10 +18,10 @@ NIX_PATH=nixpkgs=/etc/nixos/nix/nixos-unstable:nixos-config=/etc/nixos/hosts/<HO
 
 ** Files and Directories in this repository
 *** ~data.nix~
-This file isn't a good place to store real secrets, it's pretty much only
-reasonable to have dummy hashes and do the loading of a file named
-~data-secrets.nix~ which can contain real secrets and shouldn't be committed
-in the repository.
+This file doesn't contain any secrets, but it allows reading out secrets from
+~.data-secrets.nix~ in the same directory. That file is however encrypted
+using age encryption and only available on hosts actually needing access to
+these secrets.
 
 It also contains public SSH keys for all the systems I have and care about,
 but also for trusted users that should have access to accounts on different

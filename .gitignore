@@ -1,5 +1,5 @@
 # Ignore configurable file with secrets
-/data-secrets.nix
+.data-secrets.nix
 
 # Ignore build symlinks
 result*
