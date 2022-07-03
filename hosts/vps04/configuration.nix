@@ -16,9 +16,11 @@ let
 in
 {
   imports = [
-    ./hardware-configuration.nix
+    # Include my hardware settings.
+    ./hardware.nix
+
+    # Include static network settings.
     ./networking.nix
-    ./persistence.nix
 
     # Import local modules
     ../../modules
@@ -27,17 +29,11 @@ in
   # The NixOS release to be compatible with for stateful data such as databases.
   system.stateVersion = "20.09";
 
-  # Use the GRUB 2 boot loader.
-  boot.loader.grub.enable = true;
-  boot.loader.grub.version = 2;
-  boot.loader.grub.device = "/dev/sda";
-
+  # Set hostname
   networking.hostName = "vps04";
 
-  # Set up ZFS
-  boot.supportedFilesystems = [ "zfs" ];
+  # Settings needed for ZFS
   networking.hostId = "8425e390";
-  services.zfs.autoScrub.enable = true;
 
   # Set up Sanoid for snapshots
   my.backup.enable = true;
@@ -52,6 +48,12 @@ in
   documentation.doc.enable = false;
   documentation.info.enable = false;
   documentation.man.enable = false;
+
+  # Install mosh
+  programs.mosh.enable = true;
+
+  # Install fish
+  programs.fish.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -78,12 +80,6 @@ in
   # Install tmux
   programs.tmux.enable = true;
   programs.tmux.clock24 = true;
-
-  # Install mosh
-  programs.mosh.enable = true;
-
-  # Install fish
-  programs.fish.enable = true;
 
   # List services that you want to enable:
 
