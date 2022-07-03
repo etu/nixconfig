@@ -13,8 +13,10 @@ let
 in
 {
   imports = [
-    ./hardware-configuration.nix
-    ./persistence.nix
+    # Include my hardware settings.
+    ./hardware.nix
+
+    # Some networking wait tooks for certain services
     ./network-wait-hook.nix
 
     # Import local services that are host specific
@@ -40,60 +42,11 @@ in
   # Set hostname
   networking.hostName = "fenchurch";
 
-  # Boot loader settings
-  boot.loader.grub.enable = true;
-  boot.loader.grub.efiSupport = true;
-  boot.loader.grub.device = "nodev";
-  boot.loader.grub.extraInstallCommands = ''
-    mkdir -p /boot/EFI/Microsoft/Boot/ /boot-fallback/EFI/Microsoft/Boot/
-    cp /boot/EFI/grub/grubx64.efi /boot/EFI/Microsoft/Boot/bootmgfw.efi
-    cp /boot-fallback/EFI/grub/grubx64.efi /boot-fallback/EFI/Microsoft/Boot/bootmgfw.efi
-  '';
-
-  boot.loader.grub.mirroredBoots = [
-    { devices = [ "/dev/disk/by-uuid/6258-01A0" ]; path = "/boot-fallback"; }
-  ];
-
-  # Remote unlocking of encrypted ZFS
-  boot.initrd = {
-    kernelModules = [ "e1000e" ];
-    network.enable = true;
-    # Listen to ssh to let me decrypt zfs
-    network.ssh = {
-      enable = true;
-      port = 2222;
-      hostKeys = [
-        /persistent/etc/initrd-ssh/ssh_host_rsa_key
-        /persistent/etc/initrd-ssh/ssh_host_ed_25519_key
-      ];
-      authorizedKeys = config.users.users.etu.openssh.authorizedKeys.keys;
-    };
-    # Prompt me for password to decrypt zfs
-    #
-    # This was fun, the reason it looks like this is because of the
-    # initramfs that firsts imports a pool, then it stalls on running
-    # "zfs load-key -a" on the terminal, but we never input data there
-    # since it's on SSH. So I have to run that command when I log in,
-    # then it has to kill the other zfs command to continue the init
-    # script, that script will then import the second pool and the
-    # same dance starts over.
-    network.postCommands = ''
-      echo "zfs load-key -a; killall zfs; sleep 5; zfs load-key -a; killall zfs;" >> /root/.profile
-    '';
-  };
+  # Enable networking.
   networking.useDHCP = true;
 
-  # Roll back certain filesystems to empty state on boot
-  boot.initrd.postDeviceCommands = lib.mkAfter ''
-    zfs rollback -r zroot/var-lib-nzbget-dst@empty
-  '';
-
   # Settings needed for ZFS
-  boot.supportedFilesystems = [ "zfs" ];
   networking.hostId = "23916528";
-
-  # ZFS scrubbing and snapshotting
-  services.zfs.autoScrub.enable = true;
 
   # Set up Sanoid for snapshots
   my.backup.enable = true;

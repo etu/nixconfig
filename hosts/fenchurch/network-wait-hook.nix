@@ -14,6 +14,5 @@ in {
   config.systemd.services."docker-mqtt".preStart = preStart;
   config.systemd.services."docker-zwavejs2mqtt".preStart = preStart;
   config.systemd.services."container@freshrss".preStart = preStart;
-  config.systemd.services."container@jellyfin".preStart = preStart;
   config.systemd.services."container@usenet".preStart = preStart;
 }
