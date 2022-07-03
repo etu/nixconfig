@@ -10,16 +10,10 @@ let
   # Import my ssh public keys
   keys = (import ../../data.nix).pubkeys;
 
-  # Load inputs
-  sources = import ../../nix/sources.nix;
 in {
   imports = [
-    # Include hardware quirks
-    "${sources.nixos-hardware}/lenovo/thinkpad/t495"
-
-    # Include the results of the hardware scan.
-    ./hardware-configuration.nix
-    ./persistence.nix
+    # Include my hardware settings.
+    ./hardware.nix
 
     # Import local modules
     ../../modules
@@ -31,15 +25,8 @@ in {
   # Set hostname
   networking.hostName = "agrajag";
 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelPackages = pkgs.zfs.latestCompatibleLinuxPackages;
-
   # Settings needed for ZFS
-  boot.supportedFilesystems = [ "zfs" ];
   networking.hostId = "27416952";
-  services.zfs.autoScrub.enable = true;
 
   # Set up Sanoid for snapshots
   my.backup.enable = true;
@@ -55,37 +42,11 @@ in {
     "zroot/persistent".target = "root@home.elis.nu:zroot/backups/agrajag/zroot/persistent";
   };
 
-  # Install thinkpad modules for TLP
-  boot.extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
-
   # Set NIX_PATH for nixos config and nixpkgs
   nix.nixPath = [
     "nixpkgs=/etc/nixos/nix/nixos-unstable"
     "nixos-config=/etc/nixos/hosts/agrajag/configuration.nix"
   ];
-
-  # Hardware settings
-  hardware.enableRedistributableFirmware = true;
-
-  # Include udev rules to give permissions to the video group to change
-  # backlight using acpilight.
-  hardware.acpilight.enable = true;
-
-  # Set video driver
-  services.xserver.videoDrivers = [ "modesetting" ];
-
-  # Enable fwupd for firmware updates etc
-  services.fwupd.enable = true;
-
-  # Enable TLP
-  services.tlp.enable = true;
-  services.tlp.settings = {
-    START_CHARGE_THRESH_BAT0 = 40;
-    STOP_CHARGE_THRESH_BAT0 = 70;
-  };
-
-  # Enable bluetooth
-  hardware.bluetooth.enable = true;
 
   # Disable root login for ssh
   services.openssh.permitRootLogin = "no";
@@ -122,10 +83,6 @@ in {
 
   # Enable steam things
   my.gaming.enable = true;
-
-  # Allow user mounts to specify allow others, this is useful for sudo
-  # operations within fuse mounted directories.
-  programs.fuse.userAllowOther = true;
 
   # Set up docker
   virtualisation.docker.enable = true;
