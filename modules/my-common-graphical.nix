@@ -49,6 +49,6 @@ in
     networking.firewall.allowedTCPPorts = [ 8000 ];
 
     # Define extra groups for user.
-    my.user.extraGroups = [ "networkmanager" "dialout" ];
+    etu.user.extraGroups = [ "networkmanager" "dialout" ];
   };
 }

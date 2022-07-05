@@ -105,7 +105,7 @@ in {
       "/etc/ssh/ssh_host_ed25519_key"
       "/etc/ssh/ssh_host_ed25519_key.pub"
     ];
-    users.${config.my.user.username} = {
+    users.${config.etu.user.username} = {
       files = [
         ".caffrc"
         ".msmtprc"

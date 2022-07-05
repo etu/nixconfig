@@ -34,6 +34,10 @@ in
   # Settings needed for ZFS
   networking.hostId = "8425e349";
 
+  # My module settings
+  etu = {
+  };
+
   # Set up Sanoid for snapshots
   my.backup.enable = true;
   my.backup.enableSanoid = true;
@@ -74,7 +78,7 @@ in
   services.openssh.enable = true;
 
   # Set up Letsencrypt
-  security.acme.defaults.email = config.my.user.email;
+  security.acme.defaults.email = config.etu.user.email;
   security.acme.acceptTerms = true;
 
   # Set up NGiNX

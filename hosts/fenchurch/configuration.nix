@@ -48,6 +48,12 @@ in
   # Settings needed for ZFS
   networking.hostId = "23916528";
 
+  # My module settings
+  etu = {
+    user.enable = true;
+    user.extraGroups = [ "libvirtd" ];
+  };
+
   # Set up Sanoid for snapshots
   my.backup.enable = true;
   my.backup.enableSanoid = true;
@@ -117,10 +123,6 @@ in
   my.emacs.enable = true;
   my.emacs.package = "nox";
 
-  # Define a user account.
-  my.user.enable = true;
-  my.user.extraGroups = [ "libvirtd" ];
-
   # Enable a user to do deployments with
   my.deploy-user.enable = true;
 
@@ -138,7 +140,7 @@ in
   virtualisation.libvirtd.enable = true;
 
   # Set up Letsencrypt
-  security.acme.defaults.email = config.my.user.email;
+  security.acme.defaults.email = config.etu.user.email;
   security.acme.acceptTerms = true;
 
   users.users.downloads = { group = "downloads"; uid = 947; isSystemUser = true; };

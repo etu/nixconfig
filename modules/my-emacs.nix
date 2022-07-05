@@ -126,7 +126,7 @@ in
     };
 
     # Write emacs configs to the home directory
-    home-manager.users.${config.my.user.username}.home.file.".emacs".text = "(setq-default inhibit-startup-screen t)";
+    home-manager.users.${config.etu.user.username}.home.file.".emacs".text = "(setq-default inhibit-startup-screen t)";
 
     # Install emacs icons symbols if we have any kind of graphical emacs
     fonts.fonts = lib.mkIf (emacsCfg.package != "nox") [

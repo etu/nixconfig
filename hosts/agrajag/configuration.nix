@@ -34,6 +34,8 @@ in {
   # My module settings
   etu = {
     graphical.enable = true;
+    user.enable = true;
+    user.extraGroups = [ "video" "docker" "libvirtd" ];
   };
 
   # Set up Sanoid for snapshots
@@ -74,10 +76,6 @@ in {
 
   # Enable sway
   my.sway.enable = true;
-
-  # Define a user account.
-  my.user.enable = true;
-  my.user.extraGroups = [ "video" "docker" "libvirtd" ];
 
   # Immutable users due to tmpfs
   users.mutableUsers = false;

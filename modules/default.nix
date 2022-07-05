@@ -29,5 +29,6 @@ in {
 
     # New module organization
     ./graphical
+    ./user
   ];
 }

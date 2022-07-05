@@ -81,7 +81,7 @@ in
       '')
     ];
 
-    home-manager.users.${config.my.user.username} = lib.mkIf config.my.home-manager.enable {
+    home-manager.users.${config.etu.user.username} = lib.mkIf config.my.home-manager.enable {
       programs.fish.enable = true;
       programs.fish.shellInit = ''
         # Set editor

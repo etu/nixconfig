@@ -10,12 +10,12 @@ in
 {
   config = lib.mkIf cfg.enable {
     # Make sure to start the home-manager activation before I log it.
-    systemd.services."home-manager-${config.my.user.username}" = {
+    systemd.services."home-manager-${config.etu.user.username}" = {
       before = [ "display-manager.service" ];
       wantedBy = [ "multi-user.target" ];
     };
 
-    home-manager.users.${config.my.user.username} = {
+    home-manager.users.${config.etu.user.username} = {
         # Import a persistance module for home-manager.
         imports = [
           ./home-manager/weechat.nix
@@ -79,9 +79,9 @@ in
           extraConfig = {
             commit.gpgSign = swayEnabled;
 
-            user.name = config.my.user.realname;
-            user.email = config.my.user.email;
-            user.signingKey = config.my.user.signingKey;
+            user.name = config.etu.user.realname;
+            user.email = config.etu.user.email;
+            user.signingKey = config.etu.user.signingKey;
 
             # Set default "git pull" behaviour so it doesn't try to default to
             # either "git fetch; git merge" (default) or "git fetch; git rebase".
@@ -93,10 +93,10 @@ in
 
           # Conditonally included configs
           includes = [{
-            condition = "gitdir:/home/${config.my.user.username}/tvnu/";
+            condition = "gitdir:/home/${config.etu.user.username}/tvnu/";
             contents = {
               commit.gpgSign = false;
-              user.email = config.my.user.workEmail;
+              user.email = config.etu.user.workEmail;
               user.signingKey = "";
             };
           }];

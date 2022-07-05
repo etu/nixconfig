@@ -35,6 +35,12 @@ in
   # Settings needed for ZFS
   networking.hostId = "8425e390";
 
+  # My module settings
+  etu = {
+    user.enable = true;
+    user.extraAuthorizedKeys = keys.etu.weechat;
+  };
+
   # Set up Sanoid for snapshots
   my.backup.enable = true;
   my.backup.enableSanoid = true;
@@ -107,8 +113,6 @@ in
 
   # Enable my user and home-manager for my user
   my.home-manager.enable = true;
-  my.user.enable = true;
-  my.user.extraAuthorizedKeys = keys.etu.weechat;
 
   # Enable a user to do deployments with
   my.deploy-user.enable = true;

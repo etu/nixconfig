@@ -12,7 +12,7 @@ in
     # Loginmanager
     services.xserver.displayManager.lightdm.enable = true;
     services.xserver.displayManager.autoLogin.enable = true;
-    services.xserver.displayManager.autoLogin.user = config.my.user.username;
+    services.xserver.displayManager.autoLogin.user = config.etu.user.username;
 
     # Set up services needed for gnome stuff for evolution
     services.gnome.evolution-data-server.enable = true;
@@ -47,7 +47,7 @@ in
     services.xserver.displayManager.defaultSession = "sway";
 
     # Home manager settings for sway and programs related to sway
-    home-manager.users.${config.my.user.username} = lib.mkIf config.my.home-manager.enable {
+    home-manager.users.${config.etu.user.username} = lib.mkIf config.my.home-manager.enable {
       # Configure swayidle for automatic screen locking
       services.swayidle = {
         enable = cfg.enable;

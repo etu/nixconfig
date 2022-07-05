@@ -3,9 +3,9 @@
 {
   # Enable syncthing
   services.syncthing.enable = true;
-  services.syncthing.user = config.my.user.username;
+  services.syncthing.user = config.etu.user.username;
   services.syncthing.group = "users";
-  services.syncthing.dataDir = "/persistent/home/${config.my.user.username}";
+  services.syncthing.dataDir = "/persistent/home/${config.etu.user.username}";
   services.syncthing.devices = {
     "Elis Phone".id = "MDL3DI6-PZVLRSZ-ULYRM3X-AHLUBOA-T6QYYUW-U3Z6KV2-CFJDGWE-65WQFQ5";
     "Elis T495".id = "UPEWGIE-2OWALFY-REH7UKU-2Q6IZ5L-KJWCSUV-R7GNAYH-YPZAZ3C-CKNTIAU";

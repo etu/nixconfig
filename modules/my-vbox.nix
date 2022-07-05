@@ -9,6 +9,6 @@ in
     virtualisation.virtualbox.host.enable = true;
 
     # Add user to group
-    my.user.extraGroups = [ "vboxusers" ];
+    etu.user.extraGroups = [ "vboxusers" ];
   };
 }
