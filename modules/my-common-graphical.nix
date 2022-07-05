@@ -1,11 +1,7 @@
 { config, lib, pkgs, ... }:
-let
-  isWayland = config.my.sway.enable;
-  isGraphical = isWayland;
 
-in
 {
-  config = lib.mkIf isGraphical {
+  config = lib.mkIf config.etu.graphical.enable {
     # List packages installed in system profile. To search by name, run:
     # $ nix-env -qaP | grep wget
     environment.systemPackages = with pkgs; [

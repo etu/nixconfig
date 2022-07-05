@@ -74,9 +74,6 @@ in {
   my.emacs.enable = true;
   my.emacs.package = "wayland";
 
-  # Enable sway
-  my.sway.enable = true;
-
   # Immutable users due to tmpfs
   users.mutableUsers = false;
 

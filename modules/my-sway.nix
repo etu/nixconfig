@@ -1,6 +1,7 @@
 { config, lib, pkgs, ... }:
 let
-  cfg = config.my.sway;
+  cfg = config.etu.graphical.sway;
+
 in
 {
   config = lib.mkIf cfg.enable {

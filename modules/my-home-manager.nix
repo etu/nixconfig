@@ -2,8 +2,6 @@
 let
   cfg = config.my.home-manager;
 
-  swayEnabled = config.my.sway.enable;
-
   # Load sources
   sources = import ../nix/sources.nix;
 in
@@ -77,7 +75,7 @@ in
 
           # Default configs
           extraConfig = {
-            commit.gpgSign = swayEnabled;
+            commit.gpgSign = config.etu.graphical.enable;
 
             user.name = config.etu.user.realname;
             user.email = config.etu.user.email;
