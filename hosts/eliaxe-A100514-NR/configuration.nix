@@ -29,6 +29,11 @@ in
   # Settings needed for ZFS
   networking.hostId = "18582528";
 
+  # My module settings
+  etu = {
+    graphical.enable = true;
+  };
+
   # Set up Sanoid for snapshots
   my.backup.enable = true;
   my.backup.enableSanoid = true;

@@ -9,8 +9,8 @@ let
   # Run my config trough substituteAll to replace all paths with paths to
   # programs etc to have as my actual config file.
   emacsConfig = pkgs.runCommandNoCC "config.el" {
-    fontname = config.my.fonts.monospace;
-    fontsize = builtins.floor config.my.fonts.size;
+    fontname = config.etu.graphical.theme.fonts.monospace;
+    fontsize = builtins.floor config.etu.graphical.theme.fonts.size;
   } "substituteAll ${./emacs-config.el} $out";
 
   # Function to wrap loading of a different emacs lisp file with

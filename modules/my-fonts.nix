@@ -12,7 +12,7 @@ in
     # Configure fontconfig to actually use more of Noto Color Emoji in
     # alacritty.
     fonts.fontconfig.defaultFonts.monospace = [
-      config.my.fonts.monospace
+      config.etu.graphical.theme.fonts.monospace
       "Noto Color Emoji"
     ];
 

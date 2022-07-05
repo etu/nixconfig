@@ -68,7 +68,7 @@ in
         borderColor = "#3B7C87";
         borderSize = 3;
         defaultTimeout = 6000;
-        font = "${config.my.fonts.monospace} ${toString (builtins.floor config.my.fonts.size)}";
+        font = "${config.etu.graphical.theme.fonts.monospace} ${toString (builtins.floor config.etu.graphical.theme.fonts.size)}";
       }; # END mako
 
       # Set up kanshi (which kinda is an autorandr for wayland)
@@ -282,8 +282,8 @@ in
 
           focus.forceWrapping = true;
           fonts = {
-            names = [ config.my.fonts.monospace ];
-            inherit (config.my.fonts) size;
+            names = [ config.etu.graphical.theme.fonts.monospace ];
+            inherit (config.etu.graphical.theme.fonts) size;
           };
           gaps.inner = 5;
 
@@ -345,8 +345,8 @@ in
         systemd.enable = cfg.enable;
         systemd.target = "sway-session.target";
         style = pkgs.runCommandNoCC "waybar-styles.css" { } ''
-          sed -e 's/font-family: /font-family: ${config.my.fonts.normal}, /'              \
-              -e 's/font-size: 13px/font-size: ${toString (builtins.floor config.my.fonts.biggerSize)}px/' \
+          sed -e 's/font-family: /font-family: ${config.etu.graphical.theme.fonts.normal}, /'              \
+              -e 's/font-size: 13px/font-size: ${toString (builtins.floor config.etu.graphical.theme.fonts.biggerSize)}px/' \
               ${pkgs.waybar}/etc/xdg/waybar/style.css > $out
         '';
         settings = [{
@@ -446,8 +446,8 @@ in
         enable = cfg.enable;
         settings = {
           env.TERM = "xterm-256color";
-          font.size = config.my.fonts.size;
-          font.normal.family = config.my.fonts.monospace;
+          font.size = config.etu.graphical.theme.fonts.size;
+          font.normal.family = config.etu.graphical.theme.fonts.monospace;
           bell = {
             duration = 250;
             color = "#441111";
@@ -500,8 +500,8 @@ in
       # GTK theme configs
       gtk = {
         enable = cfg.enable;
-        font.name = config.my.fonts.normal;
-        font.size = builtins.floor config.my.fonts.size;
+        font.name = config.etu.graphical.theme.fonts.normal;
+        font.size = builtins.floor config.etu.graphical.theme.fonts.size;
         gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
       }; # END gtk
 
@@ -512,7 +512,7 @@ in
       }; # END qt
 
       # Set the rofi font
-      programs.rofi.font = "${config.my.fonts.monospace} ${toString (builtins.floor config.my.fonts.size)}";
+      programs.rofi.font = "${config.etu.graphical.theme.fonts.monospace} ${toString (builtins.floor config.etu.graphical.theme.fonts.size)}";
 
       # Enable syncthing.
       services.syncthing.enable = cfg.enable;
