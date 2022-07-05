@@ -26,5 +26,20 @@
   };
 
   config = lib.mkIf config.etu.graphical.enable {
+    home-manager.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
+      # GTK theme configs
+      gtk = {
+        enable = true;
+        font.name = config.etu.graphical.theme.fonts.normal;
+        font.size = builtins.floor config.etu.graphical.theme.fonts.size;
+        gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
+      }; # END gtk
+
+      # QT theme configs
+      qt = {
+        enable = true;
+        platformTheme = "gtk";
+      }; # END qt
+    };
   };
 }

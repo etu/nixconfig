@@ -497,20 +497,6 @@ in
         };
       }; # END xdg.mimeApps
 
-      # GTK theme configs
-      gtk = {
-        enable = cfg.enable;
-        font.name = config.etu.graphical.theme.fonts.normal;
-        font.size = builtins.floor config.etu.graphical.theme.fonts.size;
-        gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
-      }; # END gtk
-
-      # Set up qt theme as well
-      qt = {
-        enable = cfg.enable;
-        platformTheme = "gtk";
-      }; # END qt
-
       # Set the rofi font
       programs.rofi.font = "${config.etu.graphical.theme.fonts.monospace} ${toString (builtins.floor config.etu.graphical.theme.fonts.size)}";
 
