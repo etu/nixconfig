@@ -16,9 +16,6 @@ in
     networking.firewall.enable = true;
     networking.firewall.allowPing = true;
 
-    # Enable lorri on all systems.
-    services.lorri.enable = true;
-
     # Enable doas on all systems.
     security.doas.enable = true;
 

@@ -128,7 +128,6 @@ in {
         ".dotfiles"
         ".gnupg"
         ".local/share/dino"
-        ".local/share/direnv"
         ".mozilla/firefox"
         ".password-store"
         ".ssh"

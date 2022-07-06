@@ -20,15 +20,6 @@ in
         ];
 
         programs.home-manager.enable = true;
-
-        home.file = {
-          # Lorrirc
-          ".direnvrc".text = ''
-            use_nix() {
-              eval "$(lorri direnv)"
-            }
-          '';
-        };
       };
   };
 }

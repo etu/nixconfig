@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./direnv
     ./git
   ];
 
@@ -9,6 +10,7 @@
 
   config = lib.mkIf config.etu.development.enable {
     etu = {
+      development.direnv.enable = true;
       development.git.enable = true;
     };
   };
