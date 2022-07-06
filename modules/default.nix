@@ -28,6 +28,7 @@ in {
     ./base
     ./development
     ./graphical
+    ./services
     ./user
   ];
 }

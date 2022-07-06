@@ -51,6 +51,7 @@ in
     user.enable = true;
     user.extraGroups = [ "libvirtd" ];
     user.extraRootAuthorizedKeys = keys.etu.syncoid;
+    services.webos-devmode-keepalive.enable = true;
   };
 
   # Set up Sanoid for snapshots
