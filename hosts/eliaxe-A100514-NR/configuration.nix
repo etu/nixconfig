@@ -30,6 +30,7 @@ in
   etu = {
     stateVersion = "21.11";
 
+    development.enable = true;
     graphical.enable = true;
     user.enable = true;
     user.extraGroups = [ "video" "adbusers" "docker" ];

@@ -27,6 +27,7 @@ in {
 
     # New module organization
     ./base
+    ./development
     ./graphical
     ./user
   ];

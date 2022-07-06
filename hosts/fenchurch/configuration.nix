@@ -50,7 +50,7 @@ in
     stateVersion = "19.09";
 
     base.emacs.package = "nox";
-
+    development.git.enable = true;
     user.enable = true;
     user.extraGroups = [ "libvirtd" ];
   };

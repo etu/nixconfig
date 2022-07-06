@@ -33,7 +33,6 @@ in
       fd
       file
       fzf
-      git
       host
       ncdu
       nix-top

@@ -37,7 +37,7 @@ in
     stateVersion = "20.09";
 
     base.emacs.enable = lib.mkForce false;
-
+    development.git.enable = true;
     user.enable = true;
     user.extraAuthorizedKeys = keys.etu.weechat;
   };
