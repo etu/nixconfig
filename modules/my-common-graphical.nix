@@ -15,7 +15,6 @@
 
       mpv
       stupidterm
-      tdesktop
 
       pulseeffects-pw
     ];

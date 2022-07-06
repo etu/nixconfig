@@ -128,7 +128,6 @@ in {
         ".config/syncthing"
         ".dotfiles"
         ".gnupg"
-        ".local/share/TelegramDesktop/tdata"
         ".local/share/dino"
         ".local/share/direnv"
         ".local/share/fish"
