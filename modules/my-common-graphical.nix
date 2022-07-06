@@ -20,23 +20,6 @@
       pulseeffects-pw
     ];
 
-    # Set up Pipewire for audio
-    services.pipewire.enable = true;
-    services.pipewire.alsa.enable = true;
-    services.pipewire.pulse.enable = true;
-    services.pipewire.jack.enable = true;
-
-    # Enable the X11 windowing system.
-    services.xserver.enable = true;
-
-    # Don't have xterm as a session manager.
-    services.xserver.desktopManager.xterm.enable = false;
-
-    # Keyboard layout.
-    services.xserver.layout = "us";
-    services.xserver.xkbOptions = "eurosign:e,ctrl:nocaps,numpad:mac,kpdl:dot";
-    services.xserver.xkbVariant = "dvorak";
-
     # Enable networkmanager.
     networking.networkmanager.enable = true;
     networking.networkmanager.wifi.backend = "iwd";
