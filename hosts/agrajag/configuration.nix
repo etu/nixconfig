@@ -70,13 +70,6 @@ in {
   # Enable gpg related stuff
   my.gpg-utils.enable = true;
 
-  # Immutable users due to tmpfs
-  users.mutableUsers = false;
-
-  # Set passwords
-  users.users.root.initialHashedPassword = secrets.hashedRootPassword;
-  users.users.etu.initialHashedPassword = secrets.hashedEtuPassword;
-
   # Enable steam things
   my.gaming.enable = true;
 

@@ -4,9 +4,6 @@
 
 { config, pkgs, ... }:
 let
-  # Load secrets
-  secrets = (import ../../data.nix).secrets;
-
   # Import age secrets paths and metadata.
   ageModules = (import ../../data.nix).ageModules;
 
@@ -67,13 +64,6 @@ in
 
   # Enable gpg related stuff
   my.gpg-utils.enable = true;
-
-  # Immutable users due to tmpfs
-  users.mutableUsers = false;
-
-  # Set passwords
-  users.users.root.initialHashedPassword = secrets.hashedRootPassword;
-  users.users.etu.initialHashedPassword = secrets.hashedEtuPassword;
 
   # Enable nfsd with firewall rules.
   my.nfsd.enable = true;

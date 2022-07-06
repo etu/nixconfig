@@ -116,17 +116,7 @@ in
   my.deploy-user.enable = true;
 
   # Set up users accounts:
-
-  users.mutableUsers = false;
-
   users.users = {
-    etu.initialHashedPassword = secrets.hashedEtuPassword;
-
-    root = {
-      initialHashedPassword = secrets.hashedRootPassword;
-      openssh.authorizedKeys.keys = keys.etu.computers ++ keys.etu.syncoid;
-    };
-
     concate = {
       isNormalUser = true;
       home = "/home/concate";

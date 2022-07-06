@@ -1,6 +1,9 @@
 { config, lib, pkgs, ... }:
 
 let
+  # Load secrets
+  secrets = (import ../../data.nix).secrets;
+
   # Import my ssh public keys
   keys = (import ../../data.nix).pubkeys;
 
@@ -47,29 +50,38 @@ in
       default = [ ];
       description = "Additional authorized keys.";
     };
-    defaultShell = lib.mkOption {
-      type = lib.types.package;
-      default = pkgs.fish;
-      description = "Default shell to use.";
+    extraRootAuthorizedKeys = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [ ];
+      description = "Additional authorized keys for root user.";
     };
   };
 
-  config = lib.mkIf config.etu.user.enable {
-    # Let ~/bin/ be in $PATH
-    environment.homeBinInPath = true;
+  config = {
+    # Immutable users.
+    users.mutableUsers = false;
 
-    # Define my user account
-    users.users.${config.etu.user.username} = {
-      isNormalUser = true;
-      uid = config.etu.user.uid;
+    # Let ~/bin/ be in $PATH
+    environment.homeBinInPath = config.etu.user.enable;
+
+    # Define my user account.
+    users.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
       description = "${config.etu.user.realname},,,,";
       extraGroups = [ "wheel" ] ++ config.etu.user.extraGroups;
-      shell = config.etu.user.defaultShell;
+      initialHashedPassword = secrets.hashedEtuPassword;
+      isNormalUser = true;
       openssh.authorizedKeys.keys = keys.etu.computers ++ config.etu.user.extraAuthorizedKeys;
+      uid = config.etu.user.uid;
+    };
+
+    # Define password, authorized keys and shell for root user.
+    users.users.root = {
+      initialHashedPassword = secrets.hashedRootPassword;
+      openssh.authorizedKeys.keys = keys.etu.computers ++ config.etu.user.extraRootAuthorizedKeys;
     };
 
     # Configure some miscellaneous dotfiles for my user.
-    home-manager.users.${config.etu.user.username} = {
+    home-manager.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
       home.file = {
         # Tmux config
         ".tmux.conf".source = ../dotfiles/tmux.conf;

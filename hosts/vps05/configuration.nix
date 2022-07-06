@@ -36,6 +36,7 @@ in
     stateVersion = "19.03";
 
     base.emacs.enable = lib.mkForce false;
+    user.extraRootAuthorizedKeys = keys.etu.syncoid;
   };
 
   # Set up Sanoid for snapshots
@@ -167,11 +168,6 @@ in
   # Enable common cli settings for my systems
   my.common-cli.enable = true;
 
-  # Set up users accounts:
-  users.mutableUsers = false;
-
   # Enable a user to do deployments with
   my.deploy-user.enable = true;
-
-  users.users.root.openssh.authorizedKeys.keys = keys.etu.computers ++ keys.etu.syncoid;
 }

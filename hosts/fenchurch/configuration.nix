@@ -4,9 +4,6 @@
 
 { config, pkgs, lib, ... }:
 let
-  # Load secrets
-  secrets = (import ../../data.nix).secrets;
-
   # Import my ssh public keys
   keys = (import ../../data.nix).pubkeys;
 
@@ -53,6 +50,7 @@ in
     development.git.enable = true;
     user.enable = true;
     user.extraGroups = [ "libvirtd" ];
+    user.extraRootAuthorizedKeys = keys.etu.syncoid;
   };
 
   # Set up Sanoid for snapshots
@@ -88,9 +86,6 @@ in
     "root@vps05.elis.nu:zroot/persistent".target = "zroot/backups/vps05/zroot/persistent";
   };
 
-  # Allow syncoid on other computers to sync here.
-  users.users.root.openssh.authorizedKeys.keys = keys.etu.syncoid;
-
   # Override identity paths for agenix since the openssh default paths
   # relies on a symlink being created in /etc/ssh to point at the
   # right path to make it to work as it would be in the right place.
@@ -122,13 +117,6 @@ in
 
   # Enable a user to do deployments with
   my.deploy-user.enable = true;
-
-  # Immutable users due to tmpfs
-  users.mutableUsers = false;
-
-  # Set passwords
-  users.users.root.initialHashedPassword = secrets.hashedRootPassword;
-  users.users.etu.initialHashedPassword = secrets.hashedEtuPassword;
 
   # Enable kvm
   virtualisation.libvirtd.enable = true;

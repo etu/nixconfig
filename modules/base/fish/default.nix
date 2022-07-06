@@ -169,7 +169,12 @@ in
     # Enable fish.
     programs.fish.enable = true;
 
-    # Root shell
+    # My main users shell.
+    users.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
+      shell = pkgs.fish;
+    };
+
+    # Root shell.
     users.users.root.shell = pkgs.fish;
 
     # Configure fish for my users home-manager (if it's enabled).
