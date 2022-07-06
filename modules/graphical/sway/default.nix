@@ -167,7 +167,7 @@
 
           keybindings = {
             # Run terminal
-            "${modifier}+Return" = "exec ${pkgs.alacritty}/bin/alacritty";
+            "${modifier}+Return" = "exec ${config.etu.graphical.terminal.terminalPath}";
 
             # Run Launcher
             "${modifier}+e" = "exec ${rofi}/bin/rofi -show combi -theme glue_pro_blue | xargs swaymsg exec --";

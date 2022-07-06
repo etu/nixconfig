@@ -3,6 +3,7 @@
 {
   imports = [
     ./sway
+    ./terminal
     ./theme
   ];
 
@@ -11,6 +12,7 @@
   config = lib.mkIf config.etu.graphical.enable {
     etu = {
       graphical.sway.enable = true;
+      graphical.terminal.enable = true;
       graphical.theme.enable = true;
     };
   };
