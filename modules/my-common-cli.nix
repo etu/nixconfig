@@ -55,7 +55,6 @@ in
       fzf
       git
       host
-      htop
       ncdu
       nix-top
       pv

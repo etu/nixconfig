@@ -1,12 +1,21 @@
 { config, lib, ... }:
 
 {
+  imports = [
+    ./htop
+  ];
+
   options.etu.stateVersion = lib.mkOption {
     example = "22.05";
     description = "The NixOS state version to use for this system";
   };
 
   config = {
+    # Enable base services.
+    etu.base = {
+      htop.enable = true;
+    };
+
     # Set system state version.
     system.stateVersion = config.etu.stateVersion;
 
