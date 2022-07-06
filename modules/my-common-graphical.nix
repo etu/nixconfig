@@ -11,7 +11,6 @@
       pavucontrol
 
       chromium
-      firefox-bin
 
       mpv
       stupidterm

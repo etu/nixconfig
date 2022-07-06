@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./firefox
     ./sway
     ./telegram
     ./terminal
@@ -12,6 +13,7 @@
 
   config = lib.mkIf config.etu.graphical.enable {
     etu = {
+      graphical.firefox.enable = true;
       graphical.sway.enable = true;
       graphical.telegram.enable = true;
       graphical.terminal.enable = true;

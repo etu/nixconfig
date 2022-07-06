@@ -128,7 +128,6 @@ in {
         ".dotfiles"
         ".gnupg"
         ".local/share/dino"
-        ".mozilla/firefox"
         ".password-store"
         ".ssh"
         "Downloads"
