@@ -31,6 +31,12 @@
 
     programs.sway.enable = true;
 
+    # Make sure to start the home-manager activation before I log in.
+    systemd.services."home-manager-${config.etu.user.username}" = {
+      before = [ "display-manager.service" ];
+      wantedBy = [ "multi-user.target" ];
+    };
+
     # Install fonts needed for waybar
     fonts.fonts = [ pkgs.font-awesome ];
 

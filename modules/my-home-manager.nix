@@ -7,12 +7,6 @@ let
 in
 {
   config = lib.mkIf cfg.enable {
-    # Make sure to start the home-manager activation before I log it.
-    systemd.services."home-manager-${config.etu.user.username}" = {
-      before = [ "display-manager.service" ];
-      wantedBy = [ "multi-user.target" ];
-    };
-
     home-manager.users.${config.etu.user.username} = {
         # Import a persistance module for home-manager.
         imports = [
