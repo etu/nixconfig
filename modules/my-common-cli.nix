@@ -5,20 +5,6 @@ let
 in
 {
   config = lib.mkIf cfg.enable {
-    # Set your time zone.
-    time.timeZone = "Europe/Stockholm";
-
-    # Select internationalisation properties.
-    i18n = {
-      defaultLocale = "en_US.UTF-8";
-      supportedLocales = [
-        "all"
-      ];
-    };
-
-    console.font = "Lat2-Terminus16";
-    console.keyMap = "dvorak";
-
     # Enable the OpenSSH daemon.
     services.openssh.enable = true;
     services.openssh.passwordAuthentication = false;

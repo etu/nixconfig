@@ -18,6 +18,21 @@
       htop.enable = true;
     };
 
+    # Set your time zone.
+    time.timeZone = "Europe/Stockholm";
+
+    # Select internationalisation properties.
+    i18n = {
+      defaultLocale = "en_US.UTF-8";
+      supportedLocales = [
+        "all"
+      ];
+    };
+
+    # Set console font and keymap.
+    console.font = "Lat2-Terminus16";
+    console.keyMap = "dvorak";
+
     # Set system state version.
     system.stateVersion = config.etu.stateVersion;
 
