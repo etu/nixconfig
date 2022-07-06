@@ -20,9 +20,6 @@ in
     ../../modules
   ];
 
-  # The NixOS release to be compatible with for stateful data such as databases.
-  system.stateVersion = "21.11";
-
   # Set hostname
   networking.hostName = "eliaxe-A100514-NR";
 
@@ -31,6 +28,8 @@ in
 
   # My module settings
   etu = {
+    stateVersion = "21.11";
+
     graphical.enable = true;
     user.enable = true;
     user.extraGroups = [ "video" "adbusers" "docker" ];

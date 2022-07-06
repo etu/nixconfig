@@ -25,9 +25,6 @@ in
     ../../modules
   ];
 
-  # The NixOS release to be compatible with for stateful data such as databases.
-  system.stateVersion = "19.03";
-
   # Set hostname
   networking.hostName = "vps05";
 
@@ -36,6 +33,7 @@ in
 
   # My module settings
   etu = {
+    stateVersion = "19.03";
   };
 
   # Set up Sanoid for snapshots

@@ -36,9 +36,6 @@ in
     ../../modules
   ];
 
-  # The NixOS release to be compatible with for stateful data such as databases.
-  system.stateVersion = "19.09";
-
   # Set hostname
   networking.hostName = "fenchurch";
 
@@ -50,6 +47,8 @@ in
 
   # My module settings
   etu = {
+    stateVersion = "19.09";
+
     user.enable = true;
     user.extraGroups = [ "libvirtd" ];
   };

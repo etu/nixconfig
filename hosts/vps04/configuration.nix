@@ -26,9 +26,6 @@ in
     ../../modules
   ];
 
-  # The NixOS release to be compatible with for stateful data such as databases.
-  system.stateVersion = "20.09";
-
   # Set hostname
   networking.hostName = "vps04";
 
@@ -37,6 +34,8 @@ in
 
   # My module settings
   etu = {
+    stateVersion = "20.09";
+
     user.enable = true;
     user.extraAuthorizedKeys = keys.etu.weechat;
   };

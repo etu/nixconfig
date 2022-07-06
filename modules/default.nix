@@ -27,6 +27,7 @@ in {
     ./my-vbox.nix
 
     # New module organization
+    ./base
     ./graphical
     ./user
   ];

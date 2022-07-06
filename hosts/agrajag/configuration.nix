@@ -22,9 +22,6 @@ in {
     ../../modules
   ];
 
-  # The NixOS release to be compatible with for stateful data such as databases.
-  system.stateVersion = "21.03";
-
   # Set hostname
   networking.hostName = "agrajag";
 
@@ -33,6 +30,8 @@ in {
 
   # My module settings
   etu = {
+    stateVersion = "21.03";
+
     graphical.enable = true;
     user.enable = true;
     user.extraGroups = [ "video" "docker" "libvirtd" ];
