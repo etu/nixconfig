@@ -22,15 +22,6 @@ in
         programs.home-manager.enable = true;
 
         home.file = {
-          # Home nix config.
-          ".config/nixpkgs/config.nix".text = "{ allowUnfree = true; }";
-
-          # Nano config
-          ".nanorc".text = "set constantshow # Show linenumbers -c as default";
-
-          # Tmux config
-          ".tmux.conf".source = ./dotfiles/tmux.conf;
-
           # Lorrirc
           ".direnvrc".text = ''
             use_nix() {
@@ -43,13 +34,6 @@ in
           "bin/git-git".source = ./dotfiles/bin/git-git;
           "bin/git-lol".source = ./dotfiles/bin/git-lol;
           "bin/git-refetch-tags".source = ./dotfiles/bin/git-refetch-tags;
-          "bin/restow".source = ./dotfiles/bin/restow;
-          "bin/spacecolors".source = ./dotfiles/bin/spacecolors;
-
-          "bin/keep".source = pkgs.runCommandNoCC "keep" { } ''
-            cp ${./dotfiles/bin/keep} $out
-            substituteInPlace $out --replace /bin/zsh ${pkgs.zsh}/bin/zsh
-          '';
         };
 
         programs.git = {

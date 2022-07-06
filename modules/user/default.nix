@@ -67,5 +67,27 @@ in
       shell = config.etu.user.defaultShell;
       openssh.authorizedKeys.keys = keys.etu.computers ++ config.etu.user.extraAuthorizedKeys;
     };
+
+    # Configure some miscellaneous dotfiles for my user.
+    home-manager.users.${config.etu.user.username} = {
+      home.file = {
+        # Tmux config
+        ".tmux.conf".source = ../dotfiles/tmux.conf;
+
+        # Home nix config.
+        ".config/nixpkgs/config.nix".text = "{ allowUnfree = true; }";
+
+        # Nano config
+        ".nanorc".text = "set constantshow # Show linenumbers -c as default";
+
+        "bin/restow".source = ../dotfiles/bin/restow;
+        "bin/spacecolors".source = ../dotfiles/bin/spacecolors;
+
+        "bin/keep".source = pkgs.runCommandNoCC "keep" { } ''
+          cp ${../dotfiles/bin/keep} $out
+          substituteInPlace $out --replace /bin/zsh ${pkgs.zsh}/bin/zsh
+        '';
+      };
+    };
   };
 }
