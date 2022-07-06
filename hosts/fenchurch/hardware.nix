@@ -162,9 +162,7 @@
     users.${config.etu.user.username} = {
       files = [];
       directories = [
-        ".config/fish"
         ".dotfiles"
-        ".local/share/fish"
         ".ssh"
         "backups"
       ];

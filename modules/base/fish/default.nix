@@ -177,5 +177,15 @@ in
 
     # Configure fish for root users home-manager.
     home-manager.users.root = base;
+
+    # Enable persistence for fish files.
+    environment.persistence."/persistent" = {
+      users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
+        directories = [
+          ".config/fish"
+          ".local/share/fish"
+        ];
+      };
+    };
   };
 }

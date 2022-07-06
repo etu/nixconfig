@@ -118,7 +118,6 @@ in {
         ".kube/config"
       ];
       directories = [
-        ".config/fish"
         ".config/pipewire/media-session.d"
         ".config/syncthing"
         ".config/tvnu"
@@ -126,7 +125,6 @@ in {
         ".gnupg"
         ".local/share/dino"
         ".local/share/direnv"
-        ".local/share/fish"
         ".mozilla/firefox"
         ".password-store"
         ".ssh"

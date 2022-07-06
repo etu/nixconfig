@@ -122,7 +122,6 @@ in {
       ];
       directories = [
         ".config/autorandr"
-        ".config/fish"
         ".config/obs-studio"
         ".config/pipewire/media-session.d"
         ".config/syncthing"
@@ -130,7 +129,6 @@ in {
         ".gnupg"
         ".local/share/dino"
         ".local/share/direnv"
-        ".local/share/fish"
         ".mozilla/firefox"
         ".password-store"
         ".ssh"

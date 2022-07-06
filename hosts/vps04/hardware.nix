@@ -68,7 +68,6 @@
     users.${config.etu.user.username} = {
       files = [];
       directories = [
-        ".config/fish"
         ".dotfiles"
         ".ssh"
         ".weechat"
