@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./fish
     ./htop
   ];
 
@@ -13,6 +14,7 @@
   config = {
     # Enable base services.
     etu.base = {
+      fish.enable = true;
       htop.enable = true;
     };
 
