@@ -1,17 +1,14 @@
 { config, lib, pkgs, ... }:
 let
-  cfg = config.my.home-manager;
-  emacsCfg = config.my.emacs;
-
   # Load sources
-  sources = import ../nix/sources.nix;
+  sources = import ../../../nix/sources.nix;
 
-  # Run my config trough substituteAll to replace all paths with paths to
-  # programs etc to have as my actual config file.
+  # Run my config trough substituteAll to replace font names from my
+  # system font settings.
   emacsConfig = pkgs.runCommandNoCC "config.el" {
     fontname = config.etu.graphical.theme.fonts.monospace;
     fontsize = builtins.floor config.etu.graphical.theme.fonts.size;
-  } "substituteAll ${./emacs-config.el} $out";
+  } "substituteAll ${./config.el} $out";
 
   # Function to wrap loading of a different emacs lisp file with
   # different garbage collection settings.
@@ -93,7 +90,7 @@ let
       [ epkgs.myEmacsConfigInit ] ++
 
       # Install work deps
-      lib.optionals emacsCfg.enableWork [
+      lib.optionals config.etu.base.emacs.enableWork [
         epkgs.es-mode
         epkgs.jenkinsfile-mode
         epkgs.vcl-mode
@@ -107,9 +104,21 @@ let
     nox = pkgs.emacs-nox;
     wayland = (import sources.emacs-overlay pkgs (pkgs // { inherit lib; })).emacsPgtkNativeComp;
   };
+
 in
 {
-  config = lib.mkIf (cfg.enable && emacsCfg.enable) {
+  options.etu.base.emacs = {
+    enable = lib.mkEnableOption "Enable base emacs settings";
+    enableWork = lib.mkEnableOption "Enables install of work related modules";
+    package = lib.mkOption {
+      type = lib.types.str;
+      default = "default";
+      defaultText = "default";
+      description = "Which emacs package to use.";
+    };
+  };
+
+  config = lib.mkIf config.etu.base.emacs.enable {
     # Import the emacs overlay from nix community to get the latest
     # and greatest packages.
     nixpkgs.overlays = [
@@ -121,23 +130,38 @@ in
       enable = true;
       defaultEditor = true;
       package = (wrapEmacsWithExtraBinPaths {
-        emacs = buildEmacsPackage emacsPackages.${emacsCfg.package};
+        emacs = buildEmacsPackage emacsPackages.${config.etu.base.emacs.package};
       });
     };
 
-    # Write emacs configs to the home directory
-    home-manager.users.${config.etu.user.username}.home.file.".emacs".text = "(setq-default inhibit-startup-screen t)";
-
     # Install emacs icons symbols if we have any kind of graphical emacs
-    fonts.fonts = lib.mkIf (emacsCfg.package != "nox") [
+    fonts.fonts = lib.mkIf (config.etu.base.emacs.package != "nox") [
       pkgs.emacs-all-the-icons-fonts
     ];
 
-    environment.systemPackages = (lib.optionals (config.my.emacs.package == "wayland") ([
+    # If we have a wayland emacs installed, also install a X11 version as "emacs-x11"
+    environment.systemPackages = (lib.optionals (config.etu.base.emacs.package == "wayland") ([
       (wrapEmacsWithExtraBinPaths {
         emacs = buildEmacsPackage emacsPackages.default;
         binName = "emacs-x11";
       })
     ]));
-  }; # END config
+
+    # Configure emacs for my users home-manager (if it's enabled).
+    home-manager.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
+      home.file.".emacs".text = "(setq-default inhibit-startup-screen t)";
+    };
+
+    # Configure emacs for root users home-manager.
+    home-manager.users.root.home.file.".emacs".text = "(setq-default inhibit-startup-screen t)";
+
+    # Enable persistence for Emacs.
+    environment.persistence."/persistent" = {
+      users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
+        directories = [
+          ".local/share/emacs"
+        ];
+      };
+    };
+  };
 }

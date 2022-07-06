@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 let
   # Import my ssh public keys
   keys = (import ../../data.nix).pubkeys;
@@ -34,6 +34,8 @@ in
   # My module settings
   etu = {
     stateVersion = "19.03";
+
+    base.emacs.enable = lib.mkForce false;
   };
 
   # Set up Sanoid for snapshots

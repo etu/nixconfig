@@ -131,7 +131,6 @@ in {
         ".local/share/TelegramDesktop/tdata"
         ".local/share/dino"
         ".local/share/direnv"
-        ".local/share/emacs"
         ".local/share/fish"
         ".mozilla/firefox"
         ".password-store"

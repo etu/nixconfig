@@ -2,7 +2,7 @@
 
 let
   unfreePackages = (
-    (lib.optionals config.my.emacs.enable [
+    (lib.optionals config.etu.base.emacs.enable [
       "intelephense"
     ]) ++ (lib.optionals config.my.gaming.enable [
       "minecraft-launcher"

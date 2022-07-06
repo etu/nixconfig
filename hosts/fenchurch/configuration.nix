@@ -49,6 +49,8 @@ in
   etu = {
     stateVersion = "19.09";
 
+    base.emacs.package = "nox";
+
     user.enable = true;
     user.extraGroups = [ "libvirtd" ];
   };
@@ -117,10 +119,6 @@ in
 
   # Enable common cli settings for my systems
   my.common-cli.enable = true;
-
-  # Enable emacs deamon stuff
-  my.emacs.enable = true;
-  my.emacs.package = "nox";
 
   # Enable a user to do deployments with
   my.deploy-user.enable = true;

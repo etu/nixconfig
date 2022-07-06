@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./emacs
     ./fish
     ./htop
   ];
@@ -14,6 +15,7 @@
   config = {
     # Enable base services.
     etu.base = {
+      emacs.enable = true;
       fish.enable = true;
       htop.enable = true;
     };

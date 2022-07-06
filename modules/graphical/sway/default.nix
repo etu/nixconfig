@@ -26,6 +26,9 @@
   };
 
   config = lib.mkIf config.etu.graphical.sway.enable {
+    # Enable a wayland build of Emacs.
+    etu.base.emacs.package = "wayland";
+
     programs.sway.enable = true;
 
     # Install fonts needed for waybar

@@ -67,10 +67,6 @@ in
   # Enable gpg related stuff
   my.gpg-utils.enable = true;
 
-  # Enable emacs deamon stuff
-  my.emacs.enable = true;
-  my.emacs.package = "wayland";
-
   # Immutable users due to tmpfs
   users.mutableUsers = false;
 
