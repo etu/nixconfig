@@ -75,9 +75,6 @@ in
   users.users.root.initialHashedPassword = secrets.hashedRootPassword;
   users.users.etu.initialHashedPassword = secrets.hashedEtuPassword;
 
-  # Home-manager as nix module
-  my.home-manager.enable = true;
-
   # Enable nfsd with firewall rules.
   my.nfsd.enable = true;
 

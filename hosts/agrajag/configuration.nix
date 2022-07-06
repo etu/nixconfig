@@ -77,9 +77,6 @@ in {
   users.users.root.initialHashedPassword = secrets.hashedRootPassword;
   users.users.etu.initialHashedPassword = secrets.hashedEtuPassword;
 
-  # Home-manager as nix module
-  my.home-manager.enable = true;
-
   # Enable steam things
   my.gaming.enable = true;
 

@@ -17,7 +17,6 @@ in {
     ./my-deploy-user.nix
     ./my-gaming.nix
     ./my-gpg-utils.nix
-    ./my-home-manager.nix
     ./my-nfsd.nix
     ./my-options.nix
     ./my-spell.nix

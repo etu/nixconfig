@@ -112,9 +112,6 @@ in
   security.pam.services.sshd.unixAuth = lib.mkForce true;
   services.openssh.kbdInteractiveAuthentication = false;
 
-  # Enable my user and home-manager for my user
-  my.home-manager.enable = true;
-
   # Enable a user to do deployments with
   my.deploy-user.enable = true;
 
