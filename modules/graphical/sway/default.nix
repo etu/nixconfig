@@ -293,7 +293,7 @@
 
             # Exit Sway
             "${modifier}+Shift+e" = "exec ${config.etu.graphical.sway.package}/bin/swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' '${config.etu.graphical.sway.package}/bin/swaymsg exit'";
-          } // lib.optionalAttrs config.my.gaming.enable {
+          } // lib.optionalAttrs config.etu.games.mumble.enable {
             # Add PTT button for mumble in the gaming module:
             "--no-repeat Alt_R" = "exec ${pkgs.glib}/bin/gdbus call -e -d net.sourceforge.mumble.mumble -o / -m net.sourceforge.mumble.Mumble.startTalking";
             "--no-repeat --release Alt_R" = "exec ${pkgs.glib}/bin/gdbus call -e -d net.sourceforge.mumble.mumble -o / -m net.sourceforge.mumble.Mumble.stopTalking";

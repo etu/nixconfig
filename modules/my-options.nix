@@ -8,7 +8,6 @@
     };
     common-cli.enable = lib.mkEnableOption "Enables my common CLI thingys";
     deploy-user.enable = lib.mkEnableOption "Enables my deploy user";
-    gaming.enable = lib.mkEnableOption "Enables gaming related thingys";
     nfsd.enable = lib.mkEnableOption "Enables nfsd and configures ports and stuff";
     spell.enable = lib.mkEnableOption "Enable and install aspell and hunspell with swedish and english dictionary";
   };

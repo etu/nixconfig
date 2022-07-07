@@ -14,7 +14,6 @@ in {
     ./my-common-cli.nix
     ./my-common-graphical.nix
     ./my-deploy-user.nix
-    ./my-gaming.nix
     ./my-nfsd.nix
     ./my-options.nix
     ./my-spell.nix
@@ -24,6 +23,7 @@ in {
     # New module organization
     ./base
     ./development
+    ./games
     ./graphical
     ./services
     ./user

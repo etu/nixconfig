@@ -33,6 +33,7 @@ in {
     stateVersion = "21.03";
 
     development.enable = true;
+    games.enable = true;
     graphical.enable = true;
     user.enable = true;
     user.extraGroups = [ "video" "docker" "libvirtd" ];
@@ -66,9 +67,6 @@ in {
 
   # Enable aspell and hunspell with dictionaries.
   my.spell.enable = true;
-
-  # Enable steam things
-  my.gaming.enable = true;
 
   # Set up docker
   virtualisation.docker.enable = true;

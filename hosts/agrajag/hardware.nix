@@ -115,10 +115,6 @@ in {
       files = [
         ".caffrc"
         ".msmtprc"
-
-        # Mumble files
-        ".config/Mumble/Mumble.conf"
-        ".local/share/Mumble/Mumble/mumble.sqlite"
       ];
       directories = [
         ".config/autorandr"
@@ -132,13 +128,6 @@ in {
         "code"
         "documents"
         "org"
-
-        # Steam
-        ".steam"
-        ".local/share/Steam"
-
-        # Minecraft
-        ".minecraft"
 
         # Evolution
         ".config/evolution"
