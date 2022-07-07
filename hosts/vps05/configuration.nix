@@ -55,9 +55,6 @@ in
   # Install mosh
   programs.mosh.enable = true;
 
-  # Install fish
-  programs.fish.enable = true;
-
   # List services that you want to enable:
 
   # Override identity paths for agenix since the openssh default paths

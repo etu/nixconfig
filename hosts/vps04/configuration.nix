@@ -59,9 +59,6 @@ in
   # Install mosh
   programs.mosh.enable = true;
 
-  # Install fish
-  programs.fish.enable = true;
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = [
