@@ -83,9 +83,6 @@ in
     # Configure some miscellaneous dotfiles for my user.
     home-manager.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
       home.file = {
-        # Tmux config
-        ".tmux.conf".source = ../dotfiles/tmux.conf;
-
         # Home nix config.
         ".config/nixpkgs/config.nix".text = "{ allowUnfree = true; }";
 

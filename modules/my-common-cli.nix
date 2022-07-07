@@ -35,7 +35,6 @@ in
       nix-top
       pv
       ripgrep
-      tmux
       whois
 
       # Install prettyping

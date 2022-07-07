@@ -5,6 +5,7 @@
     ./emacs
     ./fish
     ./htop
+    ./tmux
   ];
 
   options.etu.stateVersion = lib.mkOption {
@@ -18,6 +19,7 @@
       emacs.enable = true;
       fish.enable = true;
       htop.enable = true;
+      tmux.enable = true;
     };
 
     # Set your time zone.

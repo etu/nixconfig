@@ -81,10 +81,6 @@ in
   # Enable aspell and hunspell with dictionaries.
   my.spell.enable = true;
 
-  # Install tmux
-  programs.tmux.enable = true;
-  programs.tmux.clock24 = true;
-
   # List services that you want to enable:
 
   # Override identity paths for agenix since the openssh default paths
