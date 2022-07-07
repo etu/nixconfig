@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   options.etu.development.direnv.enable = lib.mkEnableOption "Enable development direnv settings";
@@ -9,6 +9,10 @@
 
     # If my user exists, enable home-manager configurations
     home-manager.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
+      home.packages = [
+        pkgs.direnv
+      ];
+
       home.file = {
         # Configure lorri to be backed by direnv
         ".direnvrc".text = ''
