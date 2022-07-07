@@ -125,6 +125,9 @@ in
       (import sources.emacs-overlay)
     ];
 
+    # Allow to install intelephense which is an unfree package.
+    etu.base.nix.allowUnfree = [ "intelephense" ];
+
     # Install my emacs package system-wide.
     services.emacs = {
       enable = true;

@@ -11,6 +11,14 @@ in
       driSupport32Bit = true;
     };
 
+    # Allow to install some unfree packages.
+    etu.base.nix.allowUnfree = [
+      "minecraft-launcher"
+      "steam"
+      "steam-original"
+      "steam-runtime"
+    ];
+
     # Support 32bit audio things
     services.pipewire.alsa.support32Bit = true;
 

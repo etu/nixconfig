@@ -5,6 +5,7 @@
     ./emacs
     ./fish
     ./htop
+    ./nix
     ./tmux
   ];
 
@@ -20,6 +21,7 @@
       fish.enable = true;
       htop.enable = true;
       tmux.enable = true;
+      nix.enable = true;
     };
 
     # Set your time zone.
