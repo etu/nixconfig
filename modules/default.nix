@@ -16,7 +16,6 @@ in {
     ./my-common-graphical.nix
     ./my-deploy-user.nix
     ./my-gaming.nix
-    ./my-gpg-utils.nix
     ./my-nfsd.nix
     ./my-options.nix
     ./my-spell.nix

@@ -62,9 +62,6 @@ in
   # Enable aspell and hunspell with dictionaries.
   my.spell.enable = true;
 
-  # Enable gpg related stuff
-  my.gpg-utils.enable = true;
-
   # Enable nfsd with firewall rules.
   my.nfsd.enable = true;
 
