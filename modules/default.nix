@@ -21,7 +21,6 @@ in {
     ./my-spell.nix
     ./my-sway.nix
     ./my-user.nix
-    ./my-vbox.nix
 
     # New module organization
     ./base

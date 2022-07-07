@@ -29,6 +29,7 @@ in
 
     development.enable = true;
     graphical.enable = true;
+    graphical.virtualbox.enable = true;
     user.enable = true;
     user.extraGroups = [ "video" "adbusers" "docker" ];
   };
@@ -64,9 +65,6 @@ in
 
   # Enable nfsd with firewall rules.
   my.nfsd.enable = true;
-
-  # Enable vbox and friends.
-  my.vbox.enable = true;
 
   # Enable docker deamon
   virtualisation.docker.enable = true;

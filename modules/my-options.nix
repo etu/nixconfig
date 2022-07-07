@@ -11,6 +11,5 @@
     gaming.enable = lib.mkEnableOption "Enables gaming related thingys";
     nfsd.enable = lib.mkEnableOption "Enables nfsd and configures ports and stuff";
     spell.enable = lib.mkEnableOption "Enable and install aspell and hunspell with swedish and english dictionary";
-    vbox.enable = lib.mkEnableOption "Enables vbox and related things I use";
   };
 }

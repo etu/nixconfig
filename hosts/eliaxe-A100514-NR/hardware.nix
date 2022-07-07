@@ -136,9 +136,7 @@ in {
         ".chalet"
         ".chef"
         ".config/Slack"
-        ".config/VirtualBox"
         ".vagrant.d"
-        "VirtualBox VMs"
         "tvnu"
 
         # Evolution
