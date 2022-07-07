@@ -31,6 +31,10 @@ in
     graphical.enable = true;
     graphical.spotify.enable = true;
     graphical.virtualbox.enable = true;
+    services.nfs.enable = true;
+    services.nfs.exports = ''
+      /persistent/home/etu/tvnu/projects 192.168.5.102(rw,no_subtree_check,all_squash,anonuid=1000,anongid=100)
+    '';
     user.enable = true;
     user.extraGroups = [ "video" "adbusers" "docker" ];
   };
@@ -64,17 +68,9 @@ in
   # Enable aspell and hunspell with dictionaries.
   my.spell.enable = true;
 
-  # Enable nfsd with firewall rules.
-  my.nfsd.enable = true;
-
   # Enable docker deamon
   virtualisation.docker.enable = true;
   virtualisation.docker.storageDriver = "zfs";
-
-  # Enable nfs server exports.
-  services.nfs.server.exports = ''
-    /persistent/home/etu/tvnu/projects 192.168.5.102(rw,no_subtree_check,all_squash,anonuid=1000,anongid=100)
-  '';
 
   # Install ADB for occational android device things
   programs.adb.enable = true;

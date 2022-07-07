@@ -1,10 +1,16 @@
-{ config, lib, pkgs, ... }:
-let
-  cfg = config.my.nfsd;
+{ config, lib, ... }:
 
-in
 {
-  config = lib.mkIf cfg.enable {
+  options.etu.services.nfs = {
+    enable = lib.mkEnableOption "Enable services nfs settings";
+    exports = lib.mkOption {
+      type = lib.types.str;
+      default = "";
+      description = "Exports for nfs";
+    };
+  };
+
+  config = lib.mkIf config.etu.services.nfs.enable {
     # Enable nfs server.
     services.nfs.server.enable = true;
 
@@ -18,5 +24,7 @@ in
     # Open ports used by NFS
     networking.firewall.allowedTCPPorts = [ 2049 111 4000 4001 20048 ];
     networking.firewall.allowedUDPPorts = [ 2049 111 4000 4001 20048 ];
+
+    services.nfs.server.exports = config.etu.services.nfs.exports;
   };
 }

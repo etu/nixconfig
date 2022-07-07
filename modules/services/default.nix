@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./nfs
     ./webos-devmode-keepalive
   ];
 }
