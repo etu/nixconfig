@@ -4,6 +4,7 @@
   imports = [
     ./direnv
     ./git
+    ./php
   ];
 
   options.etu.development.enable = lib.mkEnableOption "Enable development settings";
@@ -12,6 +13,7 @@
     etu = {
       development.direnv.enable = true;
       development.git.enable = true;
+      development.php.enable = true;
     };
   };
 }

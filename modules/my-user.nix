@@ -18,12 +18,6 @@
       stow
       testssl
       youtube-dl
-
-      # PHP utils
-      php
-      php.packages.composer
-      php.packages.phpcbf
-      php.packages.phpcs
     ];
   };
 }
