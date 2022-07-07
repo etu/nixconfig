@@ -107,9 +107,6 @@ in {
     ];
     users.${config.etu.user.username} = {
       files = [
-        # Spotify
-        ".config/spotify/prefs"
-
         # Work
         ".docker/config.json"
         ".kube/config"
@@ -125,9 +122,6 @@ in {
         "code"
         "documents"
         "org"
-
-        # Spotify
-        ".config/spotify/Users"
 
         # Work
         ".chalet"

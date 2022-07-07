@@ -4,6 +4,7 @@
   imports = [
     ./firefox
     ./gnupg
+    ./spotify
     ./sway
     ./telegram
     ./terminal

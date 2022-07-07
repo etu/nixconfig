@@ -29,6 +29,7 @@ in
 
     development.enable = true;
     graphical.enable = true;
+    graphical.spotify.enable = true;
     graphical.virtualbox.enable = true;
     user.enable = true;
     user.extraGroups = [ "video" "adbusers" "docker" ];
@@ -97,9 +98,6 @@ in
   # Enable ClamAV.
   services.clamav.daemon.enable = true;
   services.clamav.updater.enable = true;
-
-  # Install Spotify.
-  environment.systemPackages = [ pkgs.spotify ];
 
   # Enable blueman.
   services.blueman.enable = true;
