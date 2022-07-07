@@ -7,8 +7,6 @@ in
   config = lib.mkIf cfg.enable {
     # Home manager settings for sway and programs related to sway
     home-manager.users.${config.etu.user.username} = lib.mkIf cfg.enable {
-      programs.browserpass.enable = cfg.enable;
-
       xdg.mimeApps = {
         enable = cfg.enable;
         defaultApplications = {
