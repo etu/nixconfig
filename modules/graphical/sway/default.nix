@@ -482,9 +482,6 @@
       programs.rofi.font = "${config.etu.graphical.theme.fonts.monospace} ${toString (builtins.floor config.etu.graphical.theme.fonts.size)}";
 
       home.file = {
-        # Mpv config file - Don't show images embedded in music files
-        ".config/mpv/mpv.conf".text = "no-audio-display";
-
         # .XCompose
         ".XCompose".text = ''
           include "%L"

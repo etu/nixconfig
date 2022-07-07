@@ -17,7 +17,6 @@ in {
     ./my-options.nix
     ./my-spell.nix
     ./my-sway.nix
-    ./my-user.nix
 
     # New module organization
     ./base

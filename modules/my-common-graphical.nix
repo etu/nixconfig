@@ -6,13 +6,9 @@
     # $ nix-env -qaP | grep wget
     environment.systemPackages = with pkgs; [
       dino
-      feh
-
-      pavucontrol
 
       chromium
 
-      mpv
       stupidterm
 
       pulseeffects-pw
