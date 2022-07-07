@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./evolution
     ./firefox
     ./gnupg
     ./spotify
@@ -16,6 +17,7 @@
 
   config = lib.mkIf config.etu.graphical.enable {
     etu = {
+      graphical.evolution.enable = true;
       graphical.firefox.enable = true;
       graphical.gnupg.enable = true;
       graphical.sway.enable = true;

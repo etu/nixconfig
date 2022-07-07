@@ -59,10 +59,6 @@
     services.xserver.xkbOptions = "eurosign:e,ctrl:nocaps,numpad:mac,kpdl:dot";
     services.xserver.xkbVariant = "dvorak";
 
-    # Set up services needed for gnome stuff for evolution
-    services.gnome.evolution-data-server.enable = true;
-    services.gnome.gnome-keyring.enable = true;
-
     # Set up Pipewire
     services.pipewire.enable = true;
     services.pipewire.alsa.enable = true;
@@ -76,7 +72,6 @@
     # Install aditional packages
     environment.systemPackages = [
       pkgs.evince
-      pkgs.evolution
       pkgs.gnome3.adwaita-icon-theme # Icons for gnome packages that sometimes use them but don't depend on them
       pkgs.pavucontrol
       pkgs.wdisplays

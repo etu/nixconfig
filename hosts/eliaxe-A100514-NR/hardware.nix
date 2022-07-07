@@ -129,12 +129,6 @@ in {
         ".config/Slack"
         ".vagrant.d"
         "tvnu"
-
-        # Evolution
-        ".config/evolution"
-        ".config/goa-1.0"
-        ".local/share/evolution"
-        ".local/share/keyrings"
       ];
     };
   };
