@@ -29,6 +29,10 @@
     # Enable persistence for gnupg and pass files.
     environment.persistence."/persistent" = {
       users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
+        files = [
+          ".caffrc"
+          ".msmtprc"
+        ];
         directories = [
           ".gnupg"
           ".password-store"

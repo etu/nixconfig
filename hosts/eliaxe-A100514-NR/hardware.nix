@@ -107,9 +107,6 @@ in {
     ];
     users.${config.etu.user.username} = {
       files = [
-        ".caffrc"
-        ".msmtprc"
-
         # Spotify
         ".config/spotify/prefs"
 
