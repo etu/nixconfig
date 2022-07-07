@@ -116,7 +116,6 @@ in {
         ".config/autorandr"
         ".config/obs-studio"
         ".config/pipewire/media-session.d"
-        ".config/syncthing"
         ".dotfiles"
         ".local/share/dino"
         ".ssh"

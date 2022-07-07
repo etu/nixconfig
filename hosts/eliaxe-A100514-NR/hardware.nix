@@ -113,7 +113,6 @@ in {
       ];
       directories = [
         ".config/pipewire/media-session.d"
-        ".config/syncthing"
         ".config/tvnu"
         ".dotfiles"
         ".local/share/dino"

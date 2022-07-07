@@ -35,6 +35,7 @@ in {
     development.enable = true;
     games.enable = true;
     graphical.enable = true;
+    services.syncthing.enable = true;
     user.enable = true;
     user.extraGroups = [ "video" "docker" "libvirtd" ];
   };

@@ -25,7 +25,6 @@ in
     ./services/murmur.nix
     ./services/monitoring.nix
     ./services/svtplay.nix
-    ./services/syncthing.nix
     ./services/usenet.nix
 
     # Import local modules
@@ -50,6 +49,7 @@ in
     user.enable = true;
     user.extraGroups = [ "libvirtd" ];
     user.extraRootAuthorizedKeys = keys.etu.syncoid;
+    services.syncthing.enable = true;
     services.webos-devmode-keepalive.enable = true;
   };
 

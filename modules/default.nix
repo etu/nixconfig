@@ -16,7 +16,6 @@ in {
     ./my-deploy-user.nix
     ./my-options.nix
     ./my-spell.nix
-    ./my-sway.nix
 
     # New module organization
     ./base
