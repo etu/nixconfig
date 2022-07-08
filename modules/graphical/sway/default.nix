@@ -69,25 +69,25 @@
     xdg.portal.enable = true;
     xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-wlr ];
 
-    # Install aditional packages
-    environment.systemPackages = [
-      pkgs.evince
-      pkgs.gnome3.adwaita-icon-theme # Icons for gnome packages that sometimes use them but don't depend on them
-      pkgs.pavucontrol
-      pkgs.wdisplays
-      pkgs.wlr-randr
-
-      # Scripts to switch between backgrounds
-      (pkgs.writeShellScriptBin "sway-defaultbg" ''
-        ${config.etu.graphical.sway.package}/bin/swaymsg "output * bg ${config.etu.graphical.sway.wallpaperPackage}/default.jpg fill"
-      '')
-      (pkgs.writeShellScriptBin "sway-720pfigure" ''
-        ${config.etu.graphical.sway.package}/bin/swaymsg "output * bg ${config.etu.graphical.sway.wallpaperPackage}/720pfigure.jpg fill"
-      '')
-    ];
-
     # If my user exists, enable home-manager configurations
     home-manager.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
+      # Install aditional packages
+      home.packages = [
+        pkgs.evince
+        pkgs.gnome3.adwaita-icon-theme # Icons for gnome packages that sometimes use them but don't depend on them
+        pkgs.pavucontrol
+        pkgs.wdisplays
+        pkgs.wlr-randr
+
+        # Scripts to switch between backgrounds
+        (pkgs.writeShellScriptBin "sway-defaultbg" ''
+          ${config.etu.graphical.sway.package}/bin/swaymsg "output * bg ${config.etu.graphical.sway.wallpaperPackage}/default.jpg fill"
+        '')
+        (pkgs.writeShellScriptBin "sway-720pfigure" ''
+          ${config.etu.graphical.sway.package}/bin/swaymsg "output * bg ${config.etu.graphical.sway.wallpaperPackage}/720pfigure.jpg fill"
+        '')
+      ];
+
       # Configure swayidle for automatic screen locking
       services.swayidle = {
         enable = true;

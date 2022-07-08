@@ -5,9 +5,11 @@
 
   config = lib.mkIf config.etu.graphical.telegram.enable {
     # Install the telegram chat client.
-    environment.systemPackages = [
-      pkgs.tdesktop
-    ];
+    home-manager.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
+      home.packages = [
+        pkgs.tdesktop
+      ];
+    };
 
     environment.persistence."/persistent" = {
       users.${config.etu.user.username} = {

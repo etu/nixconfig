@@ -14,17 +14,19 @@
       pinentryFlavor = "gnome3";
     };
 
-    environment.systemPackages = with pkgs; [
-      # Install gnupg
-      gnupg
+    home-manager.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
+      home.packages = [
+        # Install gnupg
+        pkgs.gnupg
 
-      # Install pass with expensions
-      (pass.withExtensions (ext: with ext; [ pass-otp pass-update pass-checkup ]))
+        # Install pass with expensions
+        (pkgs.pass.withExtensions (ext: with ext; [ pass-otp pass-update pass-checkup ]))
 
-      # Keysigning party
-      signing-party
-      msmtp
-    ];
+        # Keysigning party
+        pkgs.signing-party
+        pkgs.msmtp
+      ];
+    };
 
     # Enable persistence for gnupg and pass files.
     environment.persistence."/persistent" = {
