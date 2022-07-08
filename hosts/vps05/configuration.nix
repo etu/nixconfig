@@ -72,9 +72,6 @@ in
     inherit (ageModules) xn--hlsobrev-0za-se-key xn--hlsobrev-0za-se-pem halsobrev-se-key halsobrev-se-pem;
   };
 
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-
   # Set up Letsencrypt
   security.acme.defaults.email = config.etu.user.email;
   security.acme.acceptTerms = true;

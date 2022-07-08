@@ -60,9 +60,6 @@ in {
     "nixos-config=/etc/nixos/hosts/agrajag/configuration.nix"
   ];
 
-  # Disable root login for ssh
-  services.openssh.permitRootLogin = "no";
-
   # Enable common cli settings for my systems
   my.common-cli.enable = true;
 

@@ -60,9 +60,6 @@ in
     "nixos-config=/etc/nixos/hosts/eliaxe-A100514-NR/configuration.nix"
   ];
 
-  # Disable root login for ssh
-  services.openssh.permitRootLogin = "no";
-
   # Enable common cli settings for my systems
   my.common-cli.enable = true;
 

@@ -91,9 +91,6 @@ in
     "/persistent/etc/ssh/ssh_host_rsa_key"
   ];
 
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-
   # Enable my common cli utils
   my.common-cli.enable = true;
 

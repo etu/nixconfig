@@ -5,13 +5,6 @@ let
 in
 {
   config = lib.mkIf cfg.enable {
-    # Enable the OpenSSH daemon.
-    services.openssh.enable = true;
-    services.openssh.passwordAuthentication = false;
-
-    # Enable mosh.
-    programs.mosh.enable = true;
-
     # Enable firewall.
     networking.firewall.enable = true;
     networking.firewall.allowPing = true;
