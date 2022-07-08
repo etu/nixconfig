@@ -40,6 +40,7 @@ in
     development.git.enable = true;
     user.enable = true;
     user.extraAuthorizedKeys = keys.etu.weechat;
+    user.extraRootAuthorizedKeys = keys.etu.syncoid;
     base.sanoid.datasets = {
       # Enable snapshotting for some filesystems
       "zroot/home".use_template = [ "home" ];
