@@ -37,14 +37,11 @@ in
 
     base.emacs.enable = lib.mkForce false;
     user.extraRootAuthorizedKeys = keys.etu.syncoid;
+    base.sanoid.datasets = {
+      # Enable snapshotting for some filesystems
+      "zroot/persistent".use_template = [ "persistent" ];
+    };
   };
-
-  # Set up Sanoid for snapshots
-  my.backup.enable = true;
-  my.backup.enableSanoid = true;
-
-  # Enable snapshotting for some filesystems
-  services.sanoid.datasets."zroot/persistent".use_template = [ "persistent" ];
 
   # Disable documentation to make the system smaller.
   documentation.enable = false;

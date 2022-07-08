@@ -40,15 +40,12 @@ in
     development.git.enable = true;
     user.enable = true;
     user.extraAuthorizedKeys = keys.etu.weechat;
+    base.sanoid.datasets = {
+      # Enable snapshotting for some filesystems
+      "zroot/home".use_template = [ "home" ];
+      "zroot/persistent".use_template = [ "persistent" ];
+    };
   };
-
-  # Set up Sanoid for snapshots
-  my.backup.enable = true;
-  my.backup.enableSanoid = true;
-
-  # Enable snapshotting for some filesystems
-  services.sanoid.datasets."zroot/home".use_template = [ "home" ];
-  services.sanoid.datasets."zroot/persistent".use_template = [ "persistent" ];
 
   # Disable documentation to make the system smaller.
   documentation.enable = false;

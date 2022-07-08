@@ -8,6 +8,7 @@
     ./nix
     ./tmux
     ./sshd
+    ./sanoid
   ];
 
   options.etu.stateVersion = lib.mkOption {
@@ -24,6 +25,7 @@
       tmux.enable = true;
       nix.enable = true;
       sshd.enable = true;
+      sanoid.enable = true;
     };
 
     # Set your time zone.

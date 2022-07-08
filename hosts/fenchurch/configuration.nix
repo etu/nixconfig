@@ -51,34 +51,34 @@ in
     user.extraRootAuthorizedKeys = keys.etu.syncoid;
     services.syncthing.enable = true;
     services.webos-devmode-keepalive.enable = true;
+    base.sanoid.datasets = {
+      # Enable snapshotting for some filesystems
+      "zroot/home".use_template = [ "home" ];
+      "zroot/persistent".use_template = [ "persistent" ];
+
+      # Enable cleanup for synced backups
+      "zroot/backups/agrajag/zroot/home" = { use_template = [ "home" ]; autosnap = false; };
+      "zroot/backups/agrajag/zroot/persistent" = { use_template = [ "persistent" ]; autosnap = false; };
+      "zroot/backups/eliaxe-A100514-NR/zroot/home" = { use_template = [ "home" ]; autosnap = false; };
+      "zroot/backups/eliaxe-A100514-NR/zroot/persistent" = { use_template = [ "persistent" ]; autosnap = false; };
+      "zroot/backups/vps04/zroot/home" = { use_template = [ "home" ]; autosnap = false; };
+      "zroot/backups/vps04/zroot/persistent" = { use_template = [ "persistent" ]; autosnap = false; };
+      "zroot/backups/vps05/zroot/home" = { use_template = [ "home" ]; autosnap = false; };
+      "zroot/backups/vps05/zroot/persistent" = { use_template = [ "persistent" ]; autosnap = false; };
+
+      # Enable snapshotting for bulk storage
+      "zstorage/files".use_template = [ "storage" ];
+      "zstorage/files/audio".use_template = [ "storage" ];
+      "zstorage/files/ebooks".use_template = [ "storage" ];
+      "zstorage/files/software".use_template = [ "storage" ];
+      "zstorage/files/upload".use_template = [ "storage" ];
+      "zstorage/files/video".use_template = [ "storage" ];
+    };
   };
 
   # Set up Sanoid for snapshots
   my.backup.enable = true;
-  my.backup.enableSanoid = true;
   my.backup.enableSyncoid = true;
-
-  # Enable snapshotting for some filesystems
-  services.sanoid.datasets."zroot/home".use_template = [ "home" ];
-  services.sanoid.datasets."zroot/persistent".use_template = [ "persistent" ];
-
-  # Enable cleanup for synced backups
-  services.sanoid.datasets."zroot/backups/agrajag/zroot/home" = { use_template = [ "home" ]; autosnap = false; };
-  services.sanoid.datasets."zroot/backups/agrajag/zroot/persistent" = { use_template = [ "persistent" ]; autosnap = false; };
-  services.sanoid.datasets."zroot/backups/eliaxe-A100514-NR/zroot/home" = { use_template = [ "home" ]; autosnap = false; };
-  services.sanoid.datasets."zroot/backups/eliaxe-A100514-NR/zroot/persistent" = { use_template = [ "persistent" ]; autosnap = false; };
-  services.sanoid.datasets."zroot/backups/vps04/zroot/home" = { use_template = [ "home" ]; autosnap = false; };
-  services.sanoid.datasets."zroot/backups/vps04/zroot/persistent" = { use_template = [ "persistent" ]; autosnap = false; };
-  services.sanoid.datasets."zroot/backups/vps05/zroot/home" = { use_template = [ "home" ]; autosnap = false; };
-  services.sanoid.datasets."zroot/backups/vps05/zroot/persistent" = { use_template = [ "persistent" ]; autosnap = false; };
-
-  # Enable snapshotting for bulk storage
-  services.sanoid.datasets."zstorage/files".use_template = [ "storage" ];
-  services.sanoid.datasets."zstorage/files/audio".use_template = [ "storage" ];
-  services.sanoid.datasets."zstorage/files/ebooks".use_template = [ "storage" ];
-  services.sanoid.datasets."zstorage/files/software".use_template = [ "storage" ];
-  services.sanoid.datasets."zstorage/files/upload".use_template = [ "storage" ];
-  services.sanoid.datasets."zstorage/files/video".use_template = [ "storage" ];
 
   services.syncoid.commands = {
     "root@vps04.elis.nu:zroot/home".target = "zroot/backups/vps04/zroot/home";

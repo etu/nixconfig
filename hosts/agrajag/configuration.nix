@@ -38,16 +38,16 @@ in {
     services.syncthing.enable = true;
     user.enable = true;
     user.extraGroups = [ "video" "docker" "libvirtd" ];
+    base.sanoid.datasets = {
+      # Enable snapshotting for some filesystems
+      "zroot/home".use_template = [ "home" ];
+      "zroot/persistent".use_template = [ "persistent" ];
+    };
   };
 
   # Set up Sanoid for snapshots
   my.backup.enable = true;
-  my.backup.enableSanoid = true;
   my.backup.enableSyncoid = true;
-
-  # Enable snapshotting for some filesystems
-  services.sanoid.datasets."zroot/home".use_template = [ "home" ];
-  services.sanoid.datasets."zroot/persistent".use_template = [ "persistent" ];
 
   services.syncoid.commands = {
     "zroot/home".target = "root@home.elis.nu:zroot/backups/agrajag/zroot/home";
