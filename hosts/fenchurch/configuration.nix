@@ -104,9 +104,6 @@ in
   # Enable aspell and hunspell with dictionaries.
   my.spell.enable = true;
 
-  # Enable a user to do deployments with
-  my.deploy-user.enable = true;
-
   # Enable kvm
   virtualisation.libvirtd.enable = true;
 

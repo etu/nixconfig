@@ -150,7 +150,4 @@ in
 
   # Enable hockeypuck keyserver
   services.hockeypuck.enable = true;
-
-  # Enable a user to do deployments with
-  my.deploy-user.enable = true;
 }

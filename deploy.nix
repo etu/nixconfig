@@ -11,7 +11,7 @@ nixus ({ config, ... }: {
 
   nodes.fenchurch = { lib, config, ... }: {
     # How to reach this node
-    host = "deploy@home.elis.nu";
+    host = "root@home.elis.nu";
 
     # What configuration it should have
     configuration = ./hosts/fenchurch/configuration.nix;
@@ -19,7 +19,7 @@ nixus ({ config, ... }: {
 
   nodes.vps04 = { lib, config, ... }: {
     # How to reach this node
-    host = "deploy@vps04.elis.nu";
+    host = "root@vps04.elis.nu";
 
     # What configuration it should have
     configuration = ./hosts/vps04/configuration.nix;
@@ -27,7 +27,7 @@ nixus ({ config, ... }: {
 
   nodes.vps05 = { lib, config, ... }: {
     # How to reach this node
-    host = "deploy@vps05.elis.nu";
+    host = "root@vps05.elis.nu";
 
     # What configuration it should have
     configuration = ./hosts/vps05/configuration.nix;
