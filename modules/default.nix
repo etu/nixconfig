@@ -10,7 +10,6 @@ in {
     "${sources.home-manager}/nixos"
     "${sources.impermanence}/nixos.nix"
     "${sources.ip-failar-nu}/nixos.nix"
-    ./my-backup.nix
     ./my-options.nix
     ./my-spell.nix
 

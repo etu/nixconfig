@@ -9,6 +9,7 @@
     ./tmux
     ./sshd
     ./sanoid
+    ./syncoid
   ];
 
   options.etu.stateVersion = lib.mkOption {

@@ -43,15 +43,12 @@ in
       "zroot/home".use_template = [ "home" ];
       "zroot/persistent".use_template = [ "persistent" ];
     };
-  };
-
-  # Set up Sanoid for snapshots
-  my.backup.enable = true;
-  my.backup.enableSyncoid = true;
-
-  services.syncoid.commands = {
-    "zroot/home".target = "root@home.elis.nu:zroot/backups/eliaxe-A100514-NR/zroot/home";
-    "zroot/persistent".target = "root@home.elis.nu:zroot/backups/eliaxe-A100514-NR/zroot/persistent";
+    base.syncoid.enable = true;
+    # Enable syncing of some filesystems
+    base.syncoid.commands = {
+      "zroot/home".target = "root@home.elis.nu:zroot/backups/eliaxe-A100514-NR/zroot/home";
+      "zroot/persistent".target = "root@home.elis.nu:zroot/backups/eliaxe-A100514-NR/zroot/persistent";
+    };
   };
 
   # Set NIX_PATH for nixos config and nixpkgs
