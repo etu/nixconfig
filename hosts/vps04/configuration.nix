@@ -75,9 +75,6 @@ in
     pkgs.weechatScripts.weechat-matrix
   ];
 
-  # Enable aspell and hunspell with dictionaries.
-  my.spell.enable = true;
-
   # List services that you want to enable:
 
   # Allow password login for a user

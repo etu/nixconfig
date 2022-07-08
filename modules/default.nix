@@ -10,8 +10,6 @@ in {
     "${sources.home-manager}/nixos"
     "${sources.impermanence}/nixos.nix"
     "${sources.ip-failar-nu}/nixos.nix"
-    ./my-options.nix
-    ./my-spell.nix
 
     # New module organization
     ./base

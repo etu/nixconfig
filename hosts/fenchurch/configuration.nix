@@ -98,9 +98,6 @@ in
   # Enable apcupsd.
   services.apcupsd.enable = true;
 
-  # Enable aspell and hunspell with dictionaries.
-  my.spell.enable = true;
-
   # Enable kvm
   virtualisation.libvirtd.enable = true;
 

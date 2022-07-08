@@ -57,9 +57,6 @@ in {
     "nixos-config=/etc/nixos/hosts/agrajag/configuration.nix"
   ];
 
-  # Enable aspell and hunspell with dictionaries.
-  my.spell.enable = true;
-
   # Set up docker
   virtualisation.docker.enable = true;
   virtualisation.docker.storageDriver = "zfs";

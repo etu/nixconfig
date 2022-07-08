@@ -57,9 +57,6 @@ in
     "nixos-config=/etc/nixos/hosts/eliaxe-A100514-NR/configuration.nix"
   ];
 
-  # Enable aspell and hunspell with dictionaries.
-  my.spell.enable = true;
-
   # Enable docker deamon
   virtualisation.docker.enable = true;
   virtualisation.docker.storageDriver = "zfs";

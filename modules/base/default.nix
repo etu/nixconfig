@@ -10,6 +10,7 @@
     ./sshd
     ./sanoid
     ./syncoid
+    ./spell
   ];
 
   options.etu.stateVersion = lib.mkOption {
@@ -27,6 +28,7 @@
       nix.enable = true;
       sshd.enable = true;
       sanoid.enable = true;
+      spell.enable = true;
     };
 
     # Set your time zone.
