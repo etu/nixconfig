@@ -44,6 +44,9 @@
     # Set system state version.
     system.stateVersion = config.etu.stateVersion;
 
+    # Enable doas.
+    security.doas.enable = true;
+
     # Install some command line tools I commonly want available
     environment.systemPackages = [
       # Nice extra command line tools

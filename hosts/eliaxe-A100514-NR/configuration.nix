@@ -60,9 +60,6 @@ in
     "nixos-config=/etc/nixos/hosts/eliaxe-A100514-NR/configuration.nix"
   ];
 
-  # Enable common cli settings for my systems
-  my.common-cli.enable = true;
-
   # Enable aspell and hunspell with dictionaries.
   my.spell.enable = true;
 

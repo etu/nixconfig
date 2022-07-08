@@ -83,9 +83,6 @@ in
 
   # List services that you want to enable:
 
-  # Enable my common cli utils
-  my.common-cli.enable = true;
-
   # Allow password login for a user
   services.openssh.extraConfig = ''
     Match User ozeloten
