@@ -24,7 +24,17 @@
       graphical.telegram.enable = true;
       graphical.terminal.enable = true;
       graphical.theme.enable = true;
+
+      # Define extra groups for user.
+      user.extraGroups = [ "networkmanager" ];
     };
+
+    # Enable networkmanager.
+    networking.networkmanager.enable = true;
+    networking.networkmanager.wifi.backend = "iwd";
+
+    # 8000 is for random web sharing things.
+    networking.firewall.allowedTCPPorts = [ 8000 ];
 
     # Install some comand line tools I cummonly want available for my
     # home directory on graphical systems.
@@ -35,6 +45,8 @@
         pkgs.pavucontrol # Pulse audio volume control
         pkgs.sshfs-fuse  # SSHFS client
         pkgs.yt-dlp      # Youtube download client
+        pkgs.chromium    # Chromium browser
+        pkgs.stupidterm  # Another terminal emulator
       ];
 
       home.file = {
@@ -42,5 +54,11 @@
         ".config/mpv/mpv.conf".text = "no-audio-display";
       };
     };
+
+    # Persistence of certain hosts paths for graphical systems.
+    environment.persistence."/persistent".directories = [
+      "/etc/nixos"
+      "/etc/NetworkManager/system-connections"
+    ];
   };
 }

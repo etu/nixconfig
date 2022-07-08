@@ -100,10 +100,6 @@ in {
 
   # Persistence of certain hosts paths and home directory paths.
   environment.persistence."/persistent" = {
-    directories = [
-      "/etc/nixos"
-      "/etc/NetworkManager/system-connections"
-    ];
     files = [
       "/etc/machine-id"
     ];
@@ -113,7 +109,6 @@ in {
         ".config/obs-studio"
         ".config/pipewire/media-session.d"
         ".dotfiles"
-        ".local/share/dino"
         ".ssh"
         "Downloads"
         "code"

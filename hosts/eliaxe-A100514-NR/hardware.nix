@@ -94,8 +94,6 @@ in {
   # Persistence of certain hosts paths and home directory paths.
   environment.persistence."/persistent" = {
     directories = [
-      "/etc/nixos"
-      "/etc/NetworkManager/system-connections"
       "/var/lib/bluetooth"
     ];
     files = [
@@ -111,7 +109,6 @@ in {
         ".config/pipewire/media-session.d"
         ".config/tvnu"
         ".dotfiles"
-        ".local/share/dino"
         ".ssh"
         "Downloads"
         "code"

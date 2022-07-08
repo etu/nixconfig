@@ -12,7 +12,6 @@ in {
     "${sources.ip-failar-nu}/nixos.nix"
     ./my-backup.nix
     ./my-common-cli.nix
-    ./my-common-graphical.nix
     ./my-deploy-user.nix
     ./my-options.nix
     ./my-spell.nix
