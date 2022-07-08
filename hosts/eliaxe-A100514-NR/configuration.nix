@@ -76,14 +76,6 @@ in
   # Install netdata for system monitoring
   services.netdata.enable = true;
 
-  # Override identity paths for agenix since the openssh default paths
-  # relies on a symlink being created in /etc/ssh to point at the
-  # right path to make it to work as it would be in the right place.
-  age.identityPaths = [
-    "/persistent/etc/ssh/ssh_host_ed25519_key"
-    "/persistent/etc/ssh/ssh_host_rsa_key"
-  ];
-
   # Include agenix encripted secret for secret password file
   age.secrets = {
     inherit (ageModules) nixos-data-secret;
