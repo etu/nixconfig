@@ -1,5 +1,9 @@
 { config, lib, ... }:
+let
+  # Import my ssh public keys
+  keys = (import ../../../data.nix).pubkeys;
 
+in
 {
   options.etu.base.sshd.enable = lib.mkEnableOption "Enable base sshd settings";
 
@@ -31,5 +35,34 @@
       "/etc/ssh/ssh_host_ed25519_key"
       "/etc/ssh/ssh_host_ed25519_key.pub"
     ];
+
+    # Add known hosts for all of my systems that I access remotely to
+    # they always are trusted.
+    programs.ssh.knownHosts = {
+      fenchurch-ec = {
+        extraHostNames = [ "home.elis.nu" "local.elis.nu" "192.168.1.101" ];
+        publicKey = keys.systems.fenchurch.ec;
+      };
+      fenchurch-rsa = {
+        extraHostNames = [ "home.elis.nu" "local.elis.nu" "192.168.1.101" ];
+        publicKey = keys.systems.fenchurch.rsa;
+      };
+      vps04-ec = {
+        extraHostNames = [ "vps04.elis.nu" ];
+        publicKey = keys.systems.vps04.ec;
+      };
+      vps04-rsa = {
+        extraHostNames = [ "vps04.elis.nu" ];
+        publicKey = keys.systems.vps04.rsa;
+      };
+      vps05-ec = {
+        extraHostNames = [ "git.elis.nu" "vps05.elis.nu" ];
+        publicKey = keys.systems.vps05.ec;
+      };
+      vps05-rsa = {
+        extraHostNames = [ "git.elis.nu" "vps05.elis.nu" ];
+        publicKey = keys.systems.vps05.rsa;
+      };
+    };
   };
 }

@@ -3,8 +3,6 @@
 let
   cfg = config.my.backup;
 
-  # Import my ssh public keys
-  keys = (import ../data.nix).pubkeys;
 in
 {
   config = lib.mkIf cfg.enable {
@@ -60,34 +58,6 @@ in
       device = "/persistent/home/syncoid/.ssh";
       options = [ "bind" "noauto" "x-systemd.automount" ];
       noCheck = true;
-    };
-
-    # Add known hosts so syncoid don't bail out on unknown hosts
-    programs.ssh.knownHosts = {
-      fenchurch-ec = {
-        extraHostNames = [ "home.elis.nu" "local.elis.nu" "192.168.0.101" ];
-        publicKey = keys.systems.fenchurch.ec;
-      };
-      fenchurch-rsa = {
-        extraHostNames = [ "home.elis.nu" "local.elis.nu" "192.168.1.101" ];
-        publicKey = keys.systems.fenchurch.rsa;
-      };
-      vps04-ec = {
-        extraHostNames = [ "vps04.elis.nu" ];
-        publicKey = keys.systems.vps04.ec;
-      };
-      vps04-rsa = {
-        extraHostNames = [ "vps04.elis.nu" ];
-        publicKey = keys.systems.vps04.rsa;
-      };
-      vps05-ec = {
-        extraHostNames = [ "vps05.elis.nu" ];
-        publicKey = keys.systems.vps05.ec;
-      };
-      vps05-rsa = {
-        extraHostNames = [ "vps05.elis.nu" ];
-        publicKey = keys.systems.vps05.rsa;
-      };
     };
   };
 }
