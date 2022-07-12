@@ -1,10 +1,11 @@
 {
   # Read real secrets from the age encrypted file if it exists,
   # otherwise it should refuse to build.
-  secrets =
+  secrets = (
     if builtins.pathExists ./.data-secrets.nix
     then import ./.data-secrets.nix
-    else throw "Couldn't read real secrets from /etc/nixos/.data-secrets.nix";
+    else throw "Couldn't read real secrets from /etc/nixos/.data-secrets.nix"
+  );
 
   # Age module definitions that is to be used by hosts to get secrets.
   ageModules = {
