@@ -89,7 +89,12 @@ in
         # Nano config
         ".nanorc".text = "set constantshow # Show linenumbers -c as default";
 
-        "bin/restow".source = ../dotfiles/bin/restow;
+        "bin/restow".source = pkgs.runCommandNoCC "restow" {
+          dataPrefix = config.etu.dataPrefix;
+        } ''
+          substituteAll ${../dotfiles/bin/restow} $out
+          chmod +x $out
+        '';
         "bin/spacecolors".source = ../dotfiles/bin/spacecolors;
 
         "bin/keep".source = pkgs.runCommandNoCC "keep" { } ''

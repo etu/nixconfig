@@ -8,7 +8,7 @@
     services.syncthing.enable = config.etu.user.enable;
     services.syncthing.user = config.etu.user.username;
     services.syncthing.group = "users";
-    services.syncthing.dataDir = "/persistent/home/${config.etu.user.username}";
+    services.syncthing.dataDir = "${config.etu.dataPrefix}/home/${config.etu.user.username}";
 
     # Build sync devices depending on hostname.
     services.syncthing.devices = { } // (lib.optionalAttrs (config.networking.hostName == "fenchurch") {

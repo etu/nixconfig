@@ -15,8 +15,8 @@
       home.packages = [ pkgs.spotify ];
     };
 
-    # Enable persistence for gnupg and pass files.
-    environment.persistence."/persistent" = {
+    # Enable persistence for spotify files.
+    environment.persistence.${config.etu.dataPrefix} = {
       users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
         files = [
           ".config/spotify/prefs"

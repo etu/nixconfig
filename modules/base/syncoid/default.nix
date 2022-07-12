@@ -21,7 +21,7 @@
 
     # Bind mount syncoid ssh key
     fileSystems."/var/lib/syncoid/.ssh" = {
-      device = "/persistent/home/syncoid/.ssh";
+      device = "${config.etu.dataPrefix}/home/syncoid/.ssh";
       options = [ "bind" "noauto" "x-systemd.automount" ];
       noCheck = true;
     };

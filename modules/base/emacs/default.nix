@@ -6,6 +6,7 @@ let
   # Run my config trough substituteAll to replace font names from my
   # system font settings.
   emacsConfig = pkgs.runCommandNoCC "config.el" {
+    dataPrefix = config.etu.dataPrefix;
     fontname = config.etu.graphical.theme.fonts.monospace;
     fontsize = builtins.floor config.etu.graphical.theme.fonts.size;
   } "substituteAll ${./config.el} $out";
@@ -159,7 +160,7 @@ in
     home-manager.users.root.home.file.".emacs".text = "(setq-default inhibit-startup-screen t)";
 
     # Enable persistence for Emacs.
-    environment.persistence."/persistent" = {
+    environment.persistence.${config.etu.dataPrefix} = {
       users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
         directories = [
           ".local/share/emacs"

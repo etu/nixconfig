@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Enter directory
-cd /persistent$HOME/.dotfiles
+cd @dataPrefix@$HOME/.dotfiles
 
 # Update directory
 git pull

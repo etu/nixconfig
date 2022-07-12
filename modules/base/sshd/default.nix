@@ -24,12 +24,12 @@ in
     # relies on a symlink being created in /etc/ssh to point at the
     # right path to make it to work as it would be in the right place.
     age.identityPaths = [
-      "/persistent/etc/ssh/ssh_host_ed25519_key"
-      "/persistent/etc/ssh/ssh_host_rsa_key"
+      "${config.etu.dataPrefix}/etc/ssh/ssh_host_ed25519_key"
+      "${config.etu.dataPrefix}/etc/ssh/ssh_host_rsa_key"
     ];
 
     # Persistence of ssh key files
-    environment.persistence."/persistent".files = [
+    environment.persistence.${config.etu.dataPrefix}.files = [
       "/etc/ssh/ssh_host_rsa_key"
       "/etc/ssh/ssh_host_rsa_key.pub"
       "/etc/ssh/ssh_host_ed25519_key"

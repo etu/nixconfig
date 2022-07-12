@@ -480,8 +480,8 @@
     (setq org-src-fontify-natively t)
 
     ;; Set path for org agenda files
-    (if (file-directory-p "/persistent/home/etu/.dotfiles/skeleton/org")
-        (setq org-agenda-files '("/persistent/home/etu/.dotfiles/skeleton/org")))
+    (if (file-directory-p "@dataPrefix@/home/etu/.dotfiles/skeleton/org")
+        (setq org-agenda-files '("@dataPrefix@/home/etu/.dotfiles/skeleton/org")))
 
     ;; Disable indentation of text and content to be based on the headlines
     ;; amount of stars.

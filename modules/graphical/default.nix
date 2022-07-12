@@ -56,7 +56,7 @@
     };
 
     # Persistence of certain hosts paths for graphical systems.
-    environment.persistence."/persistent".directories = [
+    environment.persistence.${config.etu.dataPrefix}.directories = [
       "/etc/nixos"
       "/etc/NetworkManager/system-connections"
     ];

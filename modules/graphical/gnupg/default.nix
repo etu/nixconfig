@@ -29,7 +29,7 @@
     };
 
     # Enable persistence for gnupg and pass files.
-    environment.persistence."/persistent" = {
+    environment.persistence.${config.etu.dataPrefix} = {
       users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
         files = [
           ".caffrc"

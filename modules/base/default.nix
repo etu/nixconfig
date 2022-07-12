@@ -13,9 +13,17 @@
     ./spell
   ];
 
-  options.etu.stateVersion = lib.mkOption {
-    example = "22.05";
-    description = "The NixOS state version to use for this system";
+  options.etu = {
+    stateVersion = lib.mkOption {
+      type = lib.types.str;
+      example = "22.05";
+      description = "The NixOS state version to use for this system";
+    };
+    dataPrefix = lib.mkOption {
+      type = lib.types.str;
+      default = "/persistent";
+      description = "The path to where persistent storage happens";
+    };
   };
 
   config = {
