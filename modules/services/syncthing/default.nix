@@ -11,8 +11,7 @@
     services.syncthing.dataDir = "/persistent/home/${config.etu.user.username}";
 
     # Build sync devices depending on hostname.
-    services.syncthing.devices = {
-    } // (lib.optionalAttrs (config.networking.hostName == "fenchurch") {
+    services.syncthing.devices = { } // (lib.optionalAttrs (config.networking.hostName == "fenchurch") {
       "phone".id = "MDL3DI6-PZVLRSZ-ULYRM3X-AHLUBOA-T6QYYUW-U3Z6KV2-CFJDGWE-65WQFQ5";
       "agrajag".id = "UPEWGIE-2OWALFY-REH7UKU-2Q6IZ5L-KJWCSUV-R7GNAYH-YPZAZ3C-CKNTIAU";
       "eliaxe-A100514-NR".id = "KFDW47A-EYYMH33-EDW3JRN-DAKY3UT-7JJOYNK-PLHY3CG-5IMTEJE-OJXRTQK";

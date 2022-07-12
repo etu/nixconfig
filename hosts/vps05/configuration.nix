@@ -99,7 +99,7 @@ in
       sslCertificate = config.age.secrets.xn--hlsobrev-0za-se-pem.path;
       sslCertificateKey = config.age.secrets.xn--hlsobrev-0za-se-key.path;
       addSSL = true;
-      locations."/".root = pkgs.callPackage "${nivSources.halsobrev}/default.nix" {};
+      locations."/".root = pkgs.callPackage "${nivSources.halsobrev}/default.nix" { };
     };
     # Redirect from www to main domain.
     "www.xn--hlsobrev-0za.se" = {

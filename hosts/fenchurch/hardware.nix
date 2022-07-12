@@ -19,7 +19,7 @@
     { devices = [ "/dev/disk/by-uuid/6258-01A0" ]; path = "/boot-fallback"; }
   ];
 
-  boot.kernelModules = [  ];
+  boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
   # Remote unlocking of encrypted ZFS
@@ -156,7 +156,7 @@
       "/etc/machine-id"
     ];
     users.${config.etu.user.username} = {
-      files = [];
+      files = [ ];
       directories = [
         ".dotfiles"
         ".ssh"

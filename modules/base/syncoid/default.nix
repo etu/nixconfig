@@ -4,7 +4,7 @@
   options.etu.base.syncoid = {
     enable = lib.mkEnableOption "Enable base syncoid settings";
     commands = lib.mkOption {
-      default = {};
+      default = { };
       description = "services.syncoid.commands to sync";
     };
   };

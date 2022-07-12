@@ -8,7 +8,9 @@ let
       sleep 1;
     done
   '';
-in {
+
+in
+{
   # Add a pre start check for network to be up for certain services.
   config.systemd.services."docker-home-assistant".preStart = preStart;
   config.systemd.services."docker-mqtt".preStart = preStart;

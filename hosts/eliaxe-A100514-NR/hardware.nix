@@ -3,7 +3,9 @@
 let
   # Load sources
   sources = import ../../nix/sources.nix;
-in {
+
+in
+{
   imports = [
     <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
 

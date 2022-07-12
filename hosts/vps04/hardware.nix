@@ -62,7 +62,7 @@
       "/etc/machine-id"
     ];
     users.${config.etu.user.username} = {
-      files = [];
+      files = [ ];
       directories = [
         ".dotfiles"
         ".ssh"

@@ -15,7 +15,7 @@
     };
   };
 
-  config  = lib.mkIf config.etu.graphical.terminal.enable {
+  config = lib.mkIf config.etu.graphical.terminal.enable {
     # If my user exists, enable home-manager configurations
     home-manager.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
       # Configure alacritty

@@ -3,7 +3,9 @@
 let
   # Load sources
   sources = import ../nix/sources.nix;
-in {
+
+in
+{
   imports = [
     "${sources.agenix}/modules/age.nix"
     "${sources.flummbot}/nixos.nix"

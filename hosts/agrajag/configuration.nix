@@ -13,7 +13,8 @@ let
   # Import age secrets paths and metadata.
   ageModules = (import ../../data.nix).ageModules;
 
-in {
+in
+{
   imports = [
     # Include my hardware settings.
     ./hardware.nix

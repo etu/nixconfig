@@ -3,7 +3,7 @@
 {
   options.etu.base.nix.enable = lib.mkEnableOption "Enable base nix settings";
   options.etu.base.nix.allowUnfree = lib.mkOption {
-    default = [];
+    default = [ ];
     type = lib.types.listOf lib.types.str;
     description = "Enable base nix settings";
   };
