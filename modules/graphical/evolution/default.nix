@@ -26,15 +26,11 @@
     };
 
     # Enable persistence for evolution files.
-    environment.persistence.${config.etu.dataPrefix} = {
-      users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
-        directories = [
-          ".config/evolution"
-          ".config/goa-1.0"
-          ".local/share/evolution"
-          ".local/share/keyrings"
-        ];
-      };
-    };
+    etu.base.zfs.user.directories = [
+      ".config/evolution"
+      ".config/goa-1.0"
+      ".local/share/evolution"
+      ".local/share/keyrings"
+    ];
   };
 }

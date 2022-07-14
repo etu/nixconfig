@@ -12,12 +12,8 @@
     };
 
     # Enable persistence for telegram files.
-    environment.persistence.${config.etu.dataPrefix} = {
-      users.${config.etu.user.username} = {
-        directories = [
-          ".local/share/TelegramDesktop/tdata"
-        ];
-      };
-    };
+    etu.base.zfs.user.directories = [
+      ".local/share/TelegramDesktop/tdata"
+    ];
   };
 }

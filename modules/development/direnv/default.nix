@@ -23,13 +23,9 @@
       };
     };
 
-    # Enable persistence for fish files.
-    environment.persistence.${config.etu.dataPrefix} = {
-      users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
-        directories = [
-          ".local/share/direnv"
-        ];
-      };
-    };
+    # Enable persistence for direnv files.
+    etu.base.zfs.user.directories = [
+      ".local/share/direnv"
+    ];
   };
 }

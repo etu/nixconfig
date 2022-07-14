@@ -14,13 +14,9 @@
       home.packages = [ pkgs.minecraft ];
     };
 
-    # Enable persistence for mumble files.
-    environment.persistence.${config.etu.dataPrefix} = {
-      users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
-        directories = [
-          ".minecraft"
-        ];
-      };
-    };
+    # Enable persistence for minecraft files.
+    etu.base.zfs.user.directories = [
+      ".minecraft"
+    ];
   };
 }

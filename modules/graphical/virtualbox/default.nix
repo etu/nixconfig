@@ -11,13 +11,9 @@
     etu.user.extraGroups = [ "vboxusers" ];
 
     # Enable persistence for virtualbox files.
-    environment.persistence.${config.etu.dataPrefix} = {
-      users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
-        directories = [
-          ".config/VirtualBox"
-          "VirtualBox VMs"
-        ];
-      };
-    };
+    etu.base.zfs.user.directories = [
+      ".config/VirtualBox"
+      "VirtualBox VMs"
+    ];
   };
 }

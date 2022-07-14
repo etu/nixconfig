@@ -39,13 +39,9 @@
     };
 
     # Enable persistence for steam files.
-    environment.persistence.${config.etu.dataPrefix} = {
-      users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
-        directories = [
-          ".steam"
-          ".local/share/Steam"
-        ];
-      };
-    };
+    etu.base.zfs.user.directories = [
+      ".steam"
+      ".local/share/Steam"
+    ];
   };
 }

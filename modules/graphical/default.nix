@@ -56,7 +56,7 @@
     };
 
     # Persistence of certain hosts paths for graphical systems.
-    environment.persistence.${config.etu.dataPrefix}.directories = [
+    etu.base.zfs.system.directories = [
       "/etc/nixos"
       "/etc/NetworkManager/system-connections"
     ];

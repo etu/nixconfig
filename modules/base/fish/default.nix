@@ -184,13 +184,9 @@ in
     home-manager.users.root = base;
 
     # Enable persistence for fish files.
-    environment.persistence.${config.etu.dataPrefix} = {
-      users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
-        directories = [
-          ".config/fish"
-          ".local/share/fish"
-        ];
-      };
-    };
+    etu.base.zfs.user.directories = [
+      ".config/fish"
+      ".local/share/fish"
+    ];
   };
 }

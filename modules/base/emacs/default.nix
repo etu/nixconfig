@@ -160,12 +160,8 @@ in
     home-manager.users.root.home.file.".emacs".text = "(setq-default inhibit-startup-screen t)";
 
     # Enable persistence for Emacs.
-    environment.persistence.${config.etu.dataPrefix} = {
-      users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
-        directories = [
-          ".local/share/emacs"
-        ];
-      };
-    };
+    etu.base.zfs.user.directories = [
+      ".local/share/emacs"
+    ];
   };
 }

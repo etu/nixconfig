@@ -38,12 +38,8 @@
     };
 
     # Enable persistence for firefox files.
-    environment.persistence.${config.etu.dataPrefix} = {
-      users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
-        directories = [
-          ".mozilla/firefox"
-        ];
-      };
-    };
+    etu.base.zfs.user.directories = [
+      ".mozilla/firefox"
+    ];
   };
 }

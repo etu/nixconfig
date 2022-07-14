@@ -11,6 +11,7 @@
     ./sanoid
     ./syncoid
     ./spell
+    ./zfs
   ];
 
   options.etu = {
@@ -37,6 +38,7 @@
       sshd.enable = true;
       sanoid.enable = true;
       spell.enable = true;
+      zfs.enable = true;
     };
 
     # Set your time zone.

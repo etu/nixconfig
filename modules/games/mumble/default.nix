@@ -10,13 +10,9 @@
     };
 
     # Enable persistence for mumble files.
-    environment.persistence.${config.etu.dataPrefix} = {
-      users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
-        files = [
-          ".config/Mumble/Mumble.conf"
-          ".local/share/Mumble/Mumble/mumble.sqlite"
-        ];
-      };
-    };
+    etu.base.zfs.user.files = [
+      ".config/Mumble/Mumble.conf"
+      ".local/share/Mumble/Mumble/mumble.sqlite"
+    ];
   };
 }

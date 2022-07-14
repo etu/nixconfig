@@ -16,15 +16,11 @@
     };
 
     # Enable persistence for spotify files.
-    environment.persistence.${config.etu.dataPrefix} = {
-      users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
-        files = [
-          ".config/spotify/prefs"
-        ];
-        directories = [
-          ".config/spotify/Users"
-        ];
-      };
-    };
+    etu.base.zfs.user.files = [
+      ".config/spotify/prefs"
+    ];
+    etu.base.zfs.user.directories = [
+      ".config/spotify/Users"
+    ];
   };
 }
