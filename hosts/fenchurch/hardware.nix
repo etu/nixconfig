@@ -155,12 +155,10 @@
     "backups"
   ];
 
-  # Bind mount for persistent certificates for nginx
-  fileSystems."/var/lib/acme" = {
-    device = "/persistent/var/lib/acme";
-    options = [ "bind" "noauto" "x-systemd.automount" ];
-    noCheck = true;
-  };
+  # Persistence of certificates for nginx
+  etu.base.zfs.system.directories = [
+    "/var/lib/acme"
+  ];
 
   # Swap devices.
   swapDevices = [ ];

@@ -11,9 +11,7 @@
   networking.firewall.allowedUDPPorts = [ 64738 ];
 
   # Bind mount for persistent database for murmur
-  fileSystems."/var/lib/murmur" = {
-    device = "/persistent/var/lib/murmur";
-    options = [ "bind" "noauto" "x-systemd.automount" ];
-    noCheck = true;
-  };
+  etu.base.zfs.system.directories = [
+    "/var/lib/murmur"
+  ];
 }

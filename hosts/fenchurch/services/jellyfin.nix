@@ -31,11 +31,9 @@
   };
 
   # Bind mount for persistent data for jellyfin
-  fileSystems."/var/lib/jellyfin" = {
-    device = "/persistent/var/lib/jellyfin";
-    options = [ "bind" "noauto" "x-systemd.automount" ];
-    noCheck = true;
-  };
+  etu.base.zfs.system.directories = [
+    "/var/lib/jellyfin"
+  ];
 
   # Enable vaapi on OS-level
   nixpkgs.config.packageOverrides = pkgs: {

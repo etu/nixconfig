@@ -114,18 +114,10 @@ in {
 
   networking.firewall.allowedTCPPorts = [ 3030 ];
 
-
-  # Bind mount for persistent database for prometheus
-  fileSystems."/var/lib/prometheus2" = {
-    device = "/persistent/var/lib/prometheus";
-    options = [ "bind" "noauto" "x-systemd.automount" ];
-    noCheck = true;
-  };
-
-  # Bind mount for persistent database for grafana
-  fileSystems."/var/lib/grafana" = {
-    device = "/persistent/var/lib/grafana";
-    options = [ "bind" "noauto" "x-systemd.automount" ];
-    noCheck = true;
-  };
+  etu.base.zfs.system.directories = [
+    # Bind mount for persistent database for prometheus
+    "/var/lib/prometheus2"
+    # Bind mount for persistent database for grafana
+    "/var/lib/grafana"
+  ];
 }

@@ -94,11 +94,9 @@ in
   };
 
   # Bind mount for persistent libvirt state.
-  fileSystems."/var/lib/libvirt" = {
-    device = "/persistent/var/lib/libvirt";
-    options = [ "bind" "noauto" "x-systemd.automount" ];
-    noCheck = true;
-  };
+  etu.base.zfs.system.directories = [
+    "/var/lib/libvirt"
+  ];
 
   # Swap devices.
   swapDevices = [ ];
