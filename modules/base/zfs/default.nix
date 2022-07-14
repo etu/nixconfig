@@ -25,7 +25,9 @@
     environment.persistence.${config.etu.dataPrefix} = {
       # System persistence
       directories = config.etu.base.zfs.system.directories;
-      files = config.etu.base.zfs.system.files;
+      files = [
+        "/etc/machine-id"
+      ] ++ config.etu.base.zfs.system.files;
 
       # Root user persistence
       users.root = {

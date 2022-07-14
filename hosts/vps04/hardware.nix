@@ -57,19 +57,11 @@
   };
 
   # Persistence of certain hosts paths and home directory paths.
-  environment.persistence."/persistent" = {
-    files = [
-      "/etc/machine-id"
-    ];
-    users.${config.etu.user.username} = {
-      files = [ ];
-      directories = [
-        ".dotfiles"
-        ".ssh"
-        ".weechat"
-      ];
-    };
-  };
+  environment.persistence."/persistent".users.${config.etu.user.username}.directories = [
+    ".dotfiles"
+    ".ssh"
+    ".weechat"
+  ];
 
   # Persistence of all users dotfiles between boots
   fileSystems."/home/bots" = {

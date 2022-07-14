@@ -50,11 +50,6 @@
     fsType = "vfat";
   };
 
-  # Persistence of certain hosts paths and home directory paths.
-  environment.persistence."/persistent".files = [
-    "/etc/machine-id"
-  ];
-
   # Persistence of gitea and postgresql data files between boots
   fileSystems."/var/lib/gitea" = {
     device = "/persistent/var/lib/gitea";

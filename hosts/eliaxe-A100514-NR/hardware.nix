@@ -98,9 +98,6 @@ in
     directories = [
       "/var/lib/bluetooth"
     ];
-    files = [
-      "/etc/machine-id"
-    ];
     users.${config.etu.user.username} = {
       files = [
         # Work

@@ -151,19 +151,11 @@
   };
 
   # Persistence of certain hosts paths and home directory paths.
-  environment.persistence."/persistent" = {
-    files = [
-      "/etc/machine-id"
-    ];
-    users.${config.etu.user.username} = {
-      files = [ ];
-      directories = [
-        ".dotfiles"
-        ".ssh"
-        "backups"
-      ];
-    };
-  };
+  environment.persistence."/persistent".users.${config.etu.user.username}.directories = [
+    ".dotfiles"
+    ".ssh"
+    "backups"
+  ];
 
   # Bind mount for persistent certificates for nginx
   fileSystems."/var/lib/acme" = {
