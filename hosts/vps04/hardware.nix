@@ -57,9 +57,7 @@
   };
 
   # Persistence of certain hosts paths and home directory paths.
-  environment.persistence."/persistent".users.${config.etu.user.username}.directories = [
-    ".dotfiles"
-    ".ssh"
+  etu.base.zfs.user.directories = [
     ".weechat"
   ];
 

@@ -94,35 +94,22 @@ in
   };
 
   # Persistence of certain hosts paths and home directory paths.
-  environment.persistence."/persistent" = {
-    directories = [
-      "/var/lib/bluetooth"
-    ];
-    users.${config.etu.user.username} = {
-      files = [
-        # Work
-        ".docker/config.json"
-        ".kube/config"
-      ];
-      directories = [
-        ".config/pipewire/media-session.d"
-        ".config/tvnu"
-        ".dotfiles"
-        ".ssh"
-        "Downloads"
-        "code"
-        "documents"
-        "org"
-
-        # Work
-        ".chalet"
-        ".chef"
-        ".config/Slack"
-        ".vagrant.d"
-        "tvnu"
-      ];
-    };
-  };
+  base.zfs.system.directories = [
+    "/var/lib/bluetooth"
+  ];
+  # Additional work directories
+  base.zfs.user.files = [
+    ".docker/config.json"
+    ".kube/config"
+  ];
+  base.zfs.user.directories = [
+    ".chalet"
+    ".chef"
+    ".config/Slack"
+    ".config/tvnu"
+    ".vagrant.d"
+    "tvnu"
+  ];
 
   # Swap devices.
   swapDevices = [ ];

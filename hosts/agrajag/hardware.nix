@@ -100,19 +100,6 @@ in
     noCheck = true;
   };
 
-  # Persistence of certain hosts paths and home directory paths.
-  environment.persistence."/persistent".users.${config.etu.user.username}.directories = [
-    ".config/autorandr"
-    ".config/obs-studio"
-    ".config/pipewire/media-session.d"
-    ".dotfiles"
-    ".ssh"
-    "Downloads"
-    "code"
-    "documents"
-    "org"
-  ];
-
   # Swap devices.
   swapDevices = [ ];
 

@@ -27,6 +27,15 @@
 
       # Define extra groups for user.
       user.extraGroups = [ "networkmanager" ];
+
+      # Directories to mount persistent for my user on graphical sessions
+      base.zfs.user.directories = [
+        ".config/pipewire/media-session.d"
+        "Downloads"
+        "code"
+        "documents"
+        "org"
+      ];
     };
 
     # Enable networkmanager.

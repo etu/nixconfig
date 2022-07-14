@@ -103,5 +103,11 @@ in
         '';
       };
     };
+
+    # Directories to mount persistent for my user
+    etu.base.zfs.user.directories = [
+      ".dotfiles"
+      ".ssh"
+    ];
   };
 }
