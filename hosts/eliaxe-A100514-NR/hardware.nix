@@ -93,10 +93,6 @@ in
     options = [ "defaults" "noexec" ];
   };
 
-  # Persistence of certain hosts paths and home directory paths.
-  base.zfs.system.directories = [
-    "/var/lib/bluetooth"
-  ];
   # Additional work directories
   base.zfs.user.files = [
     ".docker/config.json"

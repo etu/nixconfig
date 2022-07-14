@@ -36,6 +36,13 @@
         "documents"
         "org"
       ];
+
+      # Persistence of certain hosts paths for graphical systems.
+      base.zfs.system.directories = [
+        "/etc/nixos"
+        "/etc/NetworkManager/system-connections"
+        "/var/lib/bluetooth"
+      ];
     };
 
     # Enable networkmanager.
@@ -63,11 +70,5 @@
         ".config/mpv/mpv.conf".text = "no-audio-display";
       };
     };
-
-    # Persistence of certain hosts paths for graphical systems.
-    etu.base.zfs.system.directories = [
-      "/etc/nixos"
-      "/etc/NetworkManager/system-connections"
-    ];
   };
 }
