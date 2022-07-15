@@ -21,7 +21,6 @@ in
     ./services/guest-users.nix
     ./services/hass.nix
     ./services/home-nginx.nix
-    ./services/jellyfin.nix
     ./services/murmur.nix
     ./services/monitoring.nix
     ./services/svtplay.nix
@@ -49,6 +48,7 @@ in
     user.enable = true;
     user.extraGroups = [ "libvirtd" ];
     user.extraRootAuthorizedKeys = keys.etu.syncoid;
+    services.jellyfin.enable = true;
     services.syncthing.enable = true;
     services.webos-devmode-keepalive.enable = true;
     base.sanoid.datasets = {
