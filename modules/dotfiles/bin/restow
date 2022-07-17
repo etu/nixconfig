@@ -8,11 +8,11 @@ git pull
 
 case $(hostname) in
     "agrajag")
-        stow --dotfiles caff pass skeleton
+        stow --dotfiles pass skeleton
         ;;
 
     "eliaxe-A100514-NR")
-        stow --dotfiles caff pass skeleton
+        stow --dotfiles pass skeleton
         ;;
 
     "fenchurch")
