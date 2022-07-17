@@ -10,7 +10,7 @@
       "spotify-unwrapped"
     ];
 
-    # Install mumble for my users home-manager (if it's enabled).
+    # Install spotify for my users home-manager (if it's enabled).
     home-manager.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
       home.packages = [ pkgs.spotify ];
     };
