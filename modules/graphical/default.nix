@@ -5,6 +5,7 @@
     ./evolution
     ./firefox
     ./gnupg
+    ./signal
     ./spotify
     ./sway
     ./telegram
