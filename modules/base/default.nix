@@ -102,12 +102,6 @@
     # Set state version for my users home-manager (if it's enabled).
     home-manager.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
       home.stateVersion = config.etu.stateVersion;
-
-      # Install some comand line tools I cummonly want available for
-      # my home directory.
-      home.packages = [
-        pkgs.stow
-      ];
     };
 
     # Set state version for root users home-manager.

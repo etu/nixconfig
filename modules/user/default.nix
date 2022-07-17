@@ -102,6 +102,12 @@ in
           substituteInPlace $out --replace /bin/zsh ${pkgs.zsh}/bin/zsh
         '';
       };
+
+      # Install some comand line tools I cummonly want available for
+      # my home directory.
+      home.packages = [
+        pkgs.stow
+      ];
     };
 
     # Directories to mount persistent for my user
