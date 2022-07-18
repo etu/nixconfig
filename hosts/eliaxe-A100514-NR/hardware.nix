@@ -26,7 +26,7 @@ in
   boot.extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
 
   # Set kernel.
-  boot.kernelPackages = pkgs.linuxPackages_5_15;
+  #boot.kernelPackages = pkgs.linuxPackages_5_15;
 
   # Enable ZFS.
   boot.supportedFilesystems = [ "zfs" ];
