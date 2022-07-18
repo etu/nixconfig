@@ -94,11 +94,11 @@ in
   };
 
   # Additional work directories
-  base.zfs.user.files = [
+  etu.base.zfs.user.files = [
     ".docker/config.json"
     ".kube/config"
   ];
-  base.zfs.user.directories = [
+  etu.base.zfs.user.directories = [
     ".chalet"
     ".chef"
     ".config/Slack"
