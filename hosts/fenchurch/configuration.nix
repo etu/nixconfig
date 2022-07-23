@@ -50,7 +50,6 @@ in
     user.extraRootAuthorizedKeys = keys.etu.syncoid;
     services.jellyfin.enable = true;
     services.syncthing.enable = true;
-    services.webos-devmode-keepalive.enable = true;
     base.sanoid.datasets = {
       # Enable snapshotting for some filesystems
       "zroot/home".use_template = [ "home" ];

@@ -32,12 +32,6 @@
       owner = "grafana";
       # path is defined in usage location.
     };
-    webos-devmode-keepalive = {
-      file = ./secrets/fenchurch/webos-devmode-keepalive.age;
-      path = "/persistent/home/etu/.ssh/webos-devmode-keepalive";
-      owner = "etu";
-      mode = "400";
-    };
     xn--hlsobrev-0za-se-key = {
       file = ./secrets/vps05/xn--hlsobrev-0za.se.key.age;
       owner = "nginx";

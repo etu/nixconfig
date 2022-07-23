@@ -5,6 +5,5 @@
     ./jellyfin
     ./nfs
     ./syncthing
-    ./webos-devmode-keepalive
   ];
 }
