@@ -1,5 +1,10 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
+let
+  # Import my secrets
+  secrets = (import ../../data.nix).secrets;
+
+in
 {
   imports = [
     <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
@@ -148,6 +153,14 @@
     fsType = "zfs";
     options = [ "noauto" "x-systemd.automount" ];
     #noCheck = true;
+  };
+
+  # Add mittens FTP mount.
+  fileSystems."/media/zstorage/files/mount/mittens" = {
+    device = "${pkgs.curlftpfs}/bin/curlftpfs#${secrets.mittensFtp.user}@${secrets.mittensFtp.hostname}";
+    fsType = "fuse";
+    options = [ "ro" "auto" "user" "uid=${toString config.users.users.downloads.uid}" "allow_other" "_netdev" ];
+    noCheck = true;
   };
 
   # Persistence of certain hosts paths and home directory paths.
