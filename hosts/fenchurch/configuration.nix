@@ -62,7 +62,6 @@ in
       "zroot/backups/eliaxe-A100514-NR/zroot/persistent" = { use_template = [ "persistent" ]; autosnap = false; };
       "zroot/backups/vps04/zroot/home" = { use_template = [ "home" ]; autosnap = false; };
       "zroot/backups/vps04/zroot/persistent" = { use_template = [ "persistent" ]; autosnap = false; };
-      "zroot/backups/vps05/zroot/home" = { use_template = [ "home" ]; autosnap = false; };
       "zroot/backups/vps05/zroot/persistent" = { use_template = [ "persistent" ]; autosnap = false; };
 
       # Enable snapshotting for bulk storage
