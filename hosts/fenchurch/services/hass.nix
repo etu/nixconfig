@@ -38,6 +38,9 @@
     mqtt = {
       image = "eclipse-mosquitto:2.0.14";
       ports = [ "1883:1883" ];
+      extraOptions = [
+        "--net=host"
+      ];
       volumes = [
         "/persistent/var/lib/mqtt/config:/mosquitto/config:ro"
         "/persistent/var/lib/mqtt/data:/mosquitto/data"
@@ -52,6 +55,7 @@
       ];
       extraOptions = [
         "--device=/dev/serial/by-id/usb-0658_0200-if00:/dev/zwave"
+        "--net=host"
       ];
       volumes = [
         "/persistent/var/lib/zwavejs2mqtt:/usr/src/app/store"
