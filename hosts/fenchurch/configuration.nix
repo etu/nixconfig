@@ -81,6 +81,14 @@ in
     };
   };
 
+  # Add a user for concate
+  users.users.concate = {
+    isNormalUser = true;
+    home = "/persistent/home/concate";
+    uid = 1001;
+    openssh.authorizedKeys.keys = keys.concate;
+  };
+
   # Disable documentation to make the system smaller.
   documentation.enable = false;
   documentation.doc.enable = false;
