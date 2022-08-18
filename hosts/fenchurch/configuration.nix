@@ -106,6 +106,7 @@ in
 
   # Enable kvm
   virtualisation.libvirtd.enable = true;
+  security.polkit.enable = true;
 
   # Set up Letsencrypt
   security.acme.defaults.email = config.etu.user.email;

@@ -124,12 +124,12 @@ in
   # Gitea
   services.gitea.enable = true;
   services.gitea.appName = "Elis Git Service";
-  services.gitea.cookieSecure = true;
   services.gitea.domain = "git.elis.nu";
   services.gitea.rootUrl = "https://git.elis.nu/";
   services.gitea.database.type = "postgres";
   services.gitea.database.passwordFile = "/persistent/var/lib/gitea-db-pass";
-  services.gitea.disableRegistration = true;
+  services.gitea.settings.session.COOKIE_SECURE = true;
+  services.gitea.settings.service.DISABLE_REGISTRATION = true;
 
   # Postgres
   services.postgresql.enable = true;
