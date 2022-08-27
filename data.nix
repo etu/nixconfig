@@ -11,13 +11,13 @@
   ageModules = {
     "etu@aarch64.nixos.community" = {
       file = ./secrets/agrajag/etu_at_aarch64.nixos.community.age;
-      path = "/persistent/home/etu/.ssh/etu@aarch64.nixos.community";
+      path = "/data/home/etu/.ssh/etu@aarch64.nixos.community";
       owner = "etu";
       mode = "400";
     };
     "etu@aarch64.nixos.community.pub" = {
       file = ./secrets/agrajag/etu_at_aarch64.nixos.community.pub.age;
-      path = "/persistent/home/etu/.ssh/etu@aarch64.nixos.community.pub";
+      path = "/data/home/etu/.ssh/etu@aarch64.nixos.community.pub";
       owner = "etu";
       mode = "400";
     };
@@ -50,7 +50,7 @@
     };
     nixos-data-secret = {
       file = ./secrets/workstations/nixos-data-secrets.nix.age;
-      path = "/persistent/etc/nixos/.data-secrets.nix";
+      path = "/data/etc/nixos/.data-secrets.nix";
       owner = "etu";
       mode = "400";
     };
