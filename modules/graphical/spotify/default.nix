@@ -10,10 +10,8 @@
       "spotify-unwrapped"
     ];
 
-    # Install spotify for my users home-manager (if it's enabled).
-    home-manager.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
-      home.packages = [ pkgs.spotify ];
-    };
+    # Install spotify using home manager.
+    etu.user.extraUserPackages = [ pkgs.spotify ];
 
     # Enable persistence for spotify files.
     etu.base.zfs.user.files = [

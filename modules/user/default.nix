@@ -55,6 +55,11 @@ in
       default = [ ];
       description = "Additional authorized keys for root user.";
     };
+    extraUserPackages = lib.mkOption {
+      type = lib.types.listOf lib.types.package;
+      default = [];
+      description = "Extra packages to install in my users profile.";
+    };
   };
 
   config = {
@@ -104,8 +109,9 @@ in
       };
 
       # Install some comand line tools I cummonly want available for
-      # my home directory.
-      home.packages = [
+      # my home directory, as well as extra packages defined by the
+      # system or other modules.
+      home.packages = config.etu.user.extraUserPackages ++ [
         pkgs.stow
       ];
     };

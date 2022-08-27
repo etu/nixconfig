@@ -9,10 +9,8 @@
       "minecraft-launcher"
     ];
 
-    # Install mumble for my users home-manager (if it's enabled).
-    home-manager.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
-      home.packages = [ pkgs.minecraft ];
-    };
+    # Install minecraft using home manager.
+    etu.user.extraUserPackages = [ pkgs.minecraft ];
 
     # Enable persistence for minecraft files.
     etu.base.zfs.user.directories = [

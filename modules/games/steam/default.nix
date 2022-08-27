@@ -30,13 +30,8 @@
     networking.firewall.allowedTCPPorts = [ 27036 27037 ];
     networking.firewall.allowedUDPPorts = [ 27031 27036 ];
 
-    # Install steam for my users home-manager (if it's enabled).
-    home-manager.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
-      home.packages = [
-        pkgs.steam
-        pkgs.sc-controller
-      ];
-    };
+    # Install steam using home manager.
+    etu.user.extraUserPackages = [ pkgs.steam pkgs.sc-controller ];
 
     # Enable persistence for steam files.
     etu.base.zfs.user.directories = [

@@ -10,10 +10,6 @@
 
     # Configure evolution for my users home-manager (if it's enabled).
     home-manager.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
-      home.packages = [
-        pkgs.evolution
-      ];
-
       xdg.mimeApps = {
         enable = true;
         defaultApplications = {
@@ -24,6 +20,9 @@
         };
       }; # END xdg.mimeApps
     };
+
+    # Install using home-manager.
+    etu.user.extraUserPackages = [ pkgs.evolution ];
 
     # Enable persistence for evolution files.
     etu.base.zfs.user.directories = [

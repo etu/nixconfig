@@ -15,17 +15,6 @@
     };
 
     home-manager.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
-      home.packages = [
-        # Install gnupg
-        pkgs.gnupg
-
-        # Install pass with expensions
-        (pkgs.pass.withExtensions (ext: with ext; [ pass-otp pass-update pass-checkup ]))
-
-        # Signing party for the tool caff
-        pkgs.signing-party
-      ];
-
       home.file = {
         ".caffrc".text = ''
           # .caffrc -- vim:ft=perl:
@@ -55,6 +44,18 @@
         '';
       };
     };
+
+    # Install tools using home manager.
+    etu.user.extraUserPackages = [
+      # Install gnupg
+      pkgs.gnupg
+
+      # Install pass with expensions
+      (pkgs.pass.withExtensions (ext: with ext; [ pass-otp pass-update pass-checkup ]))
+
+      # Signing party for the tool caff
+      pkgs.signing-party
+    ];
 
     # Enable persistence for gnupg and pass files.
     etu.base.zfs.user.directories = [

@@ -9,10 +9,6 @@
 
     # If my user exists, enable home-manager configurations
     home-manager.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
-      home.packages = [
-        pkgs.direnv
-      ];
-
       home.file = {
         # Configure lorri to be backed by direnv
         ".direnvrc".text = ''
@@ -22,6 +18,11 @@
         '';
       };
     };
+
+    # Install direnv using home manager.
+    etu.user.extraUserPackages = [
+      pkgs.direnv
+    ];
 
     # Enable persistence for direnv files.
     etu.base.zfs.user.directories = [
