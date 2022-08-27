@@ -3,6 +3,7 @@
 {
   imports = [
     ./direnv
+    ./flipper-zero
     ./git
     ./php
   ];

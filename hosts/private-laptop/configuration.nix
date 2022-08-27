@@ -35,6 +35,7 @@ in
     dataPrefix = "/data";
 
     development.enable = true;
+    development.flipper-zero.enable = true;
     games.enable = true;
     graphical.enable = true;
     graphical.signal.enable = true;
