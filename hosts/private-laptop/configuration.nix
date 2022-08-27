@@ -49,8 +49,8 @@ in
     # Enable syncing of some filesystems
     base.syncoid.enable = true;
     base.syncoid.commands = {
-      "zroot/safe/home".target = "root@home.elis.nu:zroot/backups/agrajag/zroot/home";
-      "zroot/safe/data".target = "root@home.elis.nu:zroot/backups/agrajag/zroot/persistent";
+      "zroot/safe/data".target = "root@home.elis.nu:zroot/backups/agrajag/data";
+      "zroot/safe/home".target = "root@home.elis.nu:zroot/backups/agrajag/home";
     };
   };
 

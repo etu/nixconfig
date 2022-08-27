@@ -56,13 +56,13 @@ in
       "zroot/safe/data".use_template = [ "persistent" ];
 
       # Enable cleanup for synced backups
-      "zroot/backups/agrajag/zroot/home" = { use_template = [ "home" ]; autosnap = false; };
-      "zroot/backups/agrajag/zroot/persistent" = { use_template = [ "persistent" ]; autosnap = false; };
-      "zroot/backups/eliaxe-A100514-NR/zroot/home" = { use_template = [ "home" ]; autosnap = false; };
-      "zroot/backups/eliaxe-A100514-NR/zroot/persistent" = { use_template = [ "persistent" ]; autosnap = false; };
-      "zroot/backups/vps04/zroot/home" = { use_template = [ "home" ]; autosnap = false; };
-      "zroot/backups/vps04/zroot/persistent" = { use_template = [ "persistent" ]; autosnap = false; };
-      "zroot/backups/vps05/zroot/persistent" = { use_template = [ "persistent" ]; autosnap = false; };
+      "zroot/backups/agrajag/data" = { use_template = [ "persistent" ]; autosnap = false; };
+      "zroot/backups/agrajag/home" = { use_template = [ "home" ]; autosnap = false; };
+      "zroot/backups/work/data" = { use_template = [ "persistent" ]; autosnap = false; };
+      "zroot/backups/work/home" = { use_template = [ "home" ]; autosnap = false; };
+      "zroot/backups/vps04/data" = { use_template = [ "persistent" ]; autosnap = false; };
+      "zroot/backups/vps04/home" = { use_template = [ "home" ]; autosnap = false; };
+      "zroot/backups/vps05/data" = { use_template = [ "persistent" ]; autosnap = false; };
 
       # Enable snapshotting for bulk storage
       "zstorage/files".use_template = [ "storage" ];
@@ -75,9 +75,9 @@ in
     base.syncoid.enable = true;
     # Enable syncing of some filesystems
     base.syncoid.commands = {
-      "root@vps04.elis.nu:zroot/safe/home".target = "zroot/backups/vps04/zroot/home";
-      "root@vps04.elis.nu:zroot/safe/data".target = "zroot/backups/vps04/zroot/persistent";
-      "root@vps05.elis.nu:zroot/safe/data".target = "zroot/backups/vps05/zroot/persistent";
+      "root@vps04.elis.nu:zroot/safe/data".target = "zroot/backups/vps04/data";
+      "root@vps04.elis.nu:zroot/safe/home".target = "zroot/backups/vps04/home";
+      "root@vps05.elis.nu:zroot/safe/data".target = "zroot/backups/vps05/data";
     };
   };
 
