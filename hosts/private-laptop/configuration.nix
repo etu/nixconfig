@@ -43,8 +43,8 @@ in
     user.extraGroups = [ "video" "docker" "libvirtd" ];
     base.sanoid.datasets = {
       # Enable snapshotting for some filesystems
+      "zroot/safe/data".use_template = [ "data" ];
       "zroot/safe/home".use_template = [ "home" ];
-      "zroot/safe/data".use_template = [ "persistent" ];
     };
     # Enable syncing of some filesystems
     base.syncoid.enable = true;

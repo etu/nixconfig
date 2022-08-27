@@ -28,8 +28,8 @@
         monthly = 2;
       };
 
-      # Persistent snapshotting rules
-      templates.persistent = {
+      # Data snapshotting rules
+      templates.data = {
         autosnap = true;
         autoprune = true;
         frequently = 0;

@@ -39,7 +39,7 @@ in
     user.extraRootAuthorizedKeys = keys.etu.syncoid;
     base.sanoid.datasets = {
       # Enable snapshotting for some filesystems
-      "zroot/safe/data".use_template = [ "persistent" ];
+      "zroot/safe/data".use_template = [ "data" ];
     };
   };
 

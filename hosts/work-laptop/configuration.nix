@@ -40,8 +40,8 @@ in
     user.extraGroups = [ "video" "adbusers" "docker" ];
     base.sanoid.datasets = {
       # Enable snapshotting for some filesystems
+      "zroot/safe/data".use_template = [ "data" ];
       "zroot/safe/home".use_template = [ "home" ];
-      "zroot/safe/data".use_template = [ "persistent" ];
     };
     base.syncoid.enable = true;
     # Enable syncing of some filesystems

@@ -52,17 +52,17 @@ in
     services.syncthing.enable = true;
     base.sanoid.datasets = {
       # Enable snapshotting for some filesystems
+      "zroot/safe/data".use_template = [ "data" ];
       "zroot/safe/home".use_template = [ "home" ];
-      "zroot/safe/data".use_template = [ "persistent" ];
 
       # Enable cleanup for synced backups
-      "zroot/backups/agrajag/data" = { use_template = [ "persistent" ]; autosnap = false; };
+      "zroot/backups/agrajag/data" = { use_template = [ "data" ]; autosnap = false; };
       "zroot/backups/agrajag/home" = { use_template = [ "home" ]; autosnap = false; };
-      "zroot/backups/work/data" = { use_template = [ "persistent" ]; autosnap = false; };
+      "zroot/backups/work/data" = { use_template = [ "data" ]; autosnap = false; };
       "zroot/backups/work/home" = { use_template = [ "home" ]; autosnap = false; };
-      "zroot/backups/vps04/data" = { use_template = [ "persistent" ]; autosnap = false; };
+      "zroot/backups/vps04/data" = { use_template = [ "data" ]; autosnap = false; };
       "zroot/backups/vps04/home" = { use_template = [ "home" ]; autosnap = false; };
-      "zroot/backups/vps05/data" = { use_template = [ "persistent" ]; autosnap = false; };
+      "zroot/backups/vps05/data" = { use_template = [ "data" ]; autosnap = false; };
 
       # Enable snapshotting for bulk storage
       "zstorage/files".use_template = [ "storage" ];
