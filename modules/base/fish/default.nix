@@ -9,8 +9,8 @@ let
       set --global --export EDITOR emacs
 
       # Fix highligting of search-matches of background in less when we have TERM=screen
-      set --global --export LESS_TERMCAP_se (echo -e '\e[0m')
-      set --global --export LESS_TERMCAP_so (echo -e '\e[38;5;16m\e[48;5;15m')
+      set --global --export LESS_TERMCAP_se (builtin echo -e '\e[0m')
+      set --global --export LESS_TERMCAP_so (builtin echo -e '\e[38;5;16m\e[48;5;15m')
 
       # Enable the direnv hook
       if command -v direnv > /dev/null
@@ -62,7 +62,7 @@ let
         end
       '';
       "bonk-dump" = ''
-        echo "{ pkgs ? import <nixpkgs> }:
+        builtin echo "{ pkgs ? import <nixpkgs> }:
         pkgs.mkShell {
           buildInputs = with pkgs; [ $__bonk_pkgs ];
         }
@@ -71,7 +71,7 @@ let
       # Case insensitive find wrapper
       "isfind" = ''find . -iname "*"$argv[1]"*"'';
       # Print command duration in seconds for last command
-      "ltime" = "echo (echo 'scale=3; ' $CMD_DURATION ' / 1000' | bc)'s'";
+      "ltime" = "builtin echo (builtin echo 'scale=3; ' $CMD_DURATION ' / 1000' | ${pkgs.bc}/bin/bc)'s'";
       # Adapted from https://github.com/rixx/dotfiles/blob/master/zsh/modules/colored-man.zsh
       # Which in turn was adatped from: https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/colored-man-pages/colored-man-pages.plugin.zsh
       "man" = ''
@@ -90,7 +90,7 @@ let
           set location $argv[1]
         end
 
-        curl "https://wttr.in/$location?lang=sv&M"
+        ${pkgs.curl}/bin/curl "https://wttr.in/$location?lang=sv&M"
       '';
       # Render prompt
       "fish_prompt" = ''
