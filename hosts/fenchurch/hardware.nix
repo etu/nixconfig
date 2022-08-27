@@ -4,6 +4,9 @@ let
   # Import my secrets
   secrets = (import ../../data.nix).secrets;
 
+  # Import age secrets paths and metadata.
+  ageModules = (import ../../data.nix).ageModules;
+
 in
 {
   imports = [
@@ -27,6 +30,10 @@ in
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
+  age.secrets = {
+    inherit (ageModules) fenchurch-initrd-sshd-ec fenchurch-initrd-sshd-rsa;
+  };
+
   # Remote unlocking of encrypted ZFS
   boot.initrd = {
     availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
@@ -37,8 +44,8 @@ in
       enable = true;
       port = 2222;
       hostKeys = [
-        /persistent/etc/initrd-ssh/ssh_host_rsa_key
-        /persistent/etc/initrd-ssh/ssh_host_ed_25519_key
+        ageModules.fenchurch-initrd-sshd-ec.path
+        ageModules.fenchurch-initrd-sshd-rsa.path
       ];
       authorizedKeys = config.users.users.etu.openssh.authorizedKeys.keys;
     };
@@ -58,7 +65,7 @@ in
 
   # Roll back certain filesystems to empty state on boot
   boot.initrd.postDeviceCommands = lib.mkAfter ''
-    zfs rollback -r zroot/var-lib-nzbget-dst@empty
+    zfs rollback -r zroot/local/var-lib-nzbget-dst@empty
   '';
 
   # Enable ZFS.
@@ -75,29 +82,29 @@ in
   };
 
   fileSystems."/nix" = {
-    device = "zroot/nix";
+    device = "zroot/local/nix";
     fsType = "zfs";
   };
 
   fileSystems.${config.etu.dataPrefix} = {
-    device = "zroot/persistent";
+    device = "zroot/safe/data";
     fsType = "zfs";
     neededForBoot = true;
   };
 
   fileSystems."${config.etu.dataPrefix}/home" = {
-    device = "zroot/home";
+    device = "zroot/safe/home";
     fsType = "zfs";
     neededForBoot = true;
   };
 
   fileSystems."/var/log" = {
-    device = "zroot/var-log";
+    device = "zroot/local/var-log";
     fsType = "zfs";
   };
 
   fileSystems."/var/lib/nzbget-dst" = {
-    device = "zroot/var-lib-nzbget-dst";
+    device = "zroot/local/var-lib-nzbget-dst";
     fsType = "zfs";
   };
 

@@ -42,6 +42,7 @@ in
   # My module settings
   etu = {
     stateVersion = "19.09";
+    dataPrefix = "/data";
 
     base.emacs.package = "nox";
     development.git.enable = true;
@@ -52,8 +53,8 @@ in
     services.syncthing.enable = true;
     base.sanoid.datasets = {
       # Enable snapshotting for some filesystems
-      "zroot/home".use_template = [ "home" ];
-      "zroot/persistent".use_template = [ "persistent" ];
+      "zroot/safe/home".use_template = [ "home" ];
+      "zroot/safe/data".use_template = [ "persistent" ];
 
       # Enable cleanup for synced backups
       "zroot/backups/agrajag/zroot/home" = { use_template = [ "home" ]; autosnap = false; };

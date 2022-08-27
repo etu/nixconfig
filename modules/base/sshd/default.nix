@@ -47,6 +47,14 @@ in
         extraHostNames = [ "home.elis.nu" "local.elis.nu" "192.168.1.101" ];
         publicKey = keys.systems.fenchurch.rsa;
       };
+      fenchurch-initrd-ec = {
+        extraHostNames = [ "home.elis.nu" "local.elis.nu" "192.168.1.101" ];
+        publicKey = keys.systems.fenchurch.initrd-ec;
+      };
+      fenchurch-initrd-rsa = {
+        extraHostNames = [ "home.elis.nu" "local.elis.nu" "192.168.1.101" ];
+        publicKey = keys.systems.fenchurch.initrd-rsa;
+      };
       vps04-ec = {
         extraHostNames = [ "vps04.elis.nu" ];
         publicKey = keys.systems.vps04.ec;
