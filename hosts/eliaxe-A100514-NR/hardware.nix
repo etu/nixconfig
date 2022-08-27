@@ -25,8 +25,8 @@ in
   # Install thinkpad modules for TLP.
   boot.extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
 
-  # Set kernel.
-  #boot.kernelPackages = pkgs.linuxPackages_5_15;
+  # Set kernel. Override it from nixos-hardware.
+  boot.kernelPackages = lib.mkForce pkgs.linuxPackages_5_18;
 
   # Enable ZFS.
   boot.supportedFilesystems = [ "zfs" ];
