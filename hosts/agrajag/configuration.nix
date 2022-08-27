@@ -82,7 +82,7 @@ in
     {
       hostName = "home.elis.nu";
       maxJobs = 8;
-      sshKey = "/persistent/home/syncoid/.ssh/id_ed25519";
+      sshKey = "${config.etu.dataPrefix}/home/syncoid/.ssh/id_ed25519";
       sshUser = "root";
       system = "x86_64-linux";
     }
