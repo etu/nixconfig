@@ -39,13 +39,13 @@
     fsType = "zfs";
   };
 
-  fileSystems."/persistent/home" = {
+  fileSystems."${config.etu.dataPrefix}/home" = {
     device = "zroot/home";
     fsType = "zfs";
     neededForBoot = true;
   };
 
-  fileSystems."/persistent" = {
+  fileSystems.${config.etu.dataPrefix} = {
     device = "zroot/persistent";
     fsType = "zfs";
     neededForBoot = true;
