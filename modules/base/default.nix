@@ -22,7 +22,7 @@
     };
     dataPrefix = lib.mkOption {
       type = lib.types.str;
-      default = "/persistent";
+      default = "/data";
       description = "The path to where persistent storage happens";
     };
   };

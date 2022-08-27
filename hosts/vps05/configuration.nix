@@ -34,7 +34,6 @@ in
   # My module settings
   etu = {
     stateVersion = "19.03";
-    dataPrefix = "/data";
 
     base.emacs.enable = lib.mkForce false;
     user.extraRootAuthorizedKeys = keys.etu.syncoid;

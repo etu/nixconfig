@@ -35,7 +35,6 @@ in
   # My module settings
   etu = {
     stateVersion = "20.09";
-    dataPrefix = "/data";
 
     base.emacs.enable = lib.mkForce false;
     development.git.enable = true;

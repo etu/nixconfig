@@ -42,7 +42,6 @@ in
   # My module settings
   etu = {
     stateVersion = "19.09";
-    dataPrefix = "/data";
 
     base.emacs.package = "nox";
     development.git.enable = true;
