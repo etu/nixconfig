@@ -69,26 +69,26 @@ in
   };
 
   fileSystems."/nix" = {
-    device = "zroot/nix";
+    device = "zroot/local/nix";
     fsType = "zfs";
   };
 
   fileSystems.${config.etu.dataPrefix} = {
-    device = "zroot/persistent";
+    device = "zroot/safe/data";
     fsType = "zfs";
     neededForBoot = true;
     options = [ "defaults" "noexec" ];
   };
 
   fileSystems."${config.etu.dataPrefix}/home" = {
-    device = "zroot/home";
+    device = "zroot/safe/home";
     fsType = "zfs";
     neededForBoot = true;
     options = [ "defaults" "noexec" ];
   };
 
   fileSystems."/var/log" = {
-    device = "zroot/var-log";
+    device = "zroot/local/var-log";
     fsType = "zfs";
     options = [ "defaults" "noexec" ];
   };

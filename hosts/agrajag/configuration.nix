@@ -32,6 +32,7 @@ in
   # My module settings
   etu = {
     stateVersion = "21.03";
+    dataPrefix = "/data";
 
     development.enable = true;
     games.enable = true;
@@ -42,14 +43,14 @@ in
     user.extraGroups = [ "video" "docker" "libvirtd" ];
     base.sanoid.datasets = {
       # Enable snapshotting for some filesystems
-      "zroot/home".use_template = [ "home" ];
-      "zroot/persistent".use_template = [ "persistent" ];
+      "zroot/safe/home".use_template = [ "home" ];
+      "zroot/safe/data".use_template = [ "persistent" ];
     };
     # Enable syncing of some filesystems
     base.syncoid.enable = true;
     base.syncoid.commands = {
-      "zroot/home".target = "root@home.elis.nu:zroot/backups/agrajag/zroot/home";
-      "zroot/persistent".target = "root@home.elis.nu:zroot/backups/agrajag/zroot/persistent";
+      "zroot/safe/home".target = "root@home.elis.nu:zroot/backups/agrajag/zroot/home";
+      "zroot/safe/data".target = "root@home.elis.nu:zroot/backups/agrajag/zroot/persistent";
     };
   };
 
