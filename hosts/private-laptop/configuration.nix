@@ -57,7 +57,7 @@ in
   # Set NIX_PATH for nixos config and nixpkgs
   nix.nixPath = [
     "nixpkgs=/etc/nixos/nix/nixos-unstable"
-    "nixos-config=/etc/nixos/hosts/agrajag/configuration.nix"
+    "nixos-config=/etc/nixos/hosts/private-laptop/configuration.nix"
   ];
 
   # Set up docker
