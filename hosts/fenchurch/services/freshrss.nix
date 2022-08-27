@@ -29,12 +29,12 @@
       bindMounts = {
         "freshrss-data" = {
           mountPoint = "${dataDir}/data";
-          hostPath = "/persistent/var/lib/freshrss/data";
+          hostPath = "${config.etu.dataPrefix}/var/lib/freshrss/data";
           isReadOnly = false;
         };
         "postgres-data" = {
           mountPoint = "/var/lib/postgresql/11";
-          hostPath = "/persistent/var/lib/freshrss/db";
+          hostPath = "${config.etu.dataPrefix}/var/lib/freshrss/db";
           isReadOnly = false;
         };
       };

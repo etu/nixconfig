@@ -102,27 +102,27 @@
     bindMounts = {
       "bazarr" = {
         mountPoint = "/var/lib/bazarr";
-        hostPath = "/persistent/var/lib/bazarr";
+        hostPath = "${config.etu.dataPrefix}/var/lib/bazarr";
         isReadOnly = false;
       };
       "sonarr" = {
         mountPoint = "/var/lib/sonarr/.config/NzbDrone";
-        hostPath = "/persistent/var/lib/sonarr";
+        hostPath = "${config.etu.dataPrefix}/var/lib/sonarr";
         isReadOnly = false;
       };
       "radarr" = {
         mountPoint = "/var/lib/radarr/.config/Radarr";
-        hostPath = "/persistent/var/lib/radarr";
+        hostPath = "${config.etu.dataPrefix}/var/lib/radarr";
         isReadOnly = false;
       };
       "lidarr" = {
         mountPoint = "/var/lib/lidarr/.config/Lidarr";
-        hostPath = "/persistent/var/lib/lidarr";
+        hostPath = "${config.etu.dataPrefix}/var/lib/lidarr";
         isReadOnly = false;
       };
       "nzbget" = {
         mountPoint = "/var/lib/nzbget";
-        hostPath = "/persistent/var/lib/nzbget";
+        hostPath = "${config.etu.dataPrefix}/var/lib/nzbget";
         isReadOnly = false;
       };
       "nzbget-dst" = {

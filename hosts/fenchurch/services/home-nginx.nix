@@ -9,7 +9,7 @@
       enableACME = true;
       default = true;
       locations."/" = {
-        root = "/persistent/var/www/home.elis.nu";
+        root = "${config.etu.dataPrefix}/var/www/home.elis.nu";
         extraConfig = "autoindex on;";
       };
     };

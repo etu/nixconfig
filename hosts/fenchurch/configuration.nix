@@ -84,7 +84,7 @@ in
   # Add a user for concate
   users.users.concate = {
     isNormalUser = true;
-    home = "/persistent/home/concate";
+    home = "${config.etu.dataPrefix}/home/concate";
     uid = 1001;
     openssh.authorizedKeys.keys = keys.concate;
   };

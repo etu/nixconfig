@@ -31,7 +31,7 @@
         "--device=/dev/serial/by-id/usb-dresden_elektronik_ingenieurtechnik_GmbH_ConBee_II_DE2124653-if00:/dev/ttyACM0"
       ];
       volumes = [
-        "/persistent/var/lib/hass:/config"
+        "${config.etu.dataPrefix}/var/lib/hass:/config"
       ];
       dependsOn = [ "mqtt" "zwavejs2mqtt" ];
     };
@@ -42,9 +42,9 @@
         "--net=host"
       ];
       volumes = [
-        "/persistent/var/lib/mqtt/config:/mosquitto/config:ro"
-        "/persistent/var/lib/mqtt/data:/mosquitto/data"
-        "/persistent/var/lib/mqtt/log:/mosquitto/log"
+        "${config.etu.dataPrefix}/var/lib/mqtt/config:/mosquitto/config:ro"
+        "${config.etu.dataPrefix}/var/lib/mqtt/data:/mosquitto/data"
+        "${config.etu.dataPrefix}/var/lib/mqtt/log:/mosquitto/log"
       ];
     };
     zwavejs2mqtt = {
@@ -58,7 +58,7 @@
         "--net=host"
       ];
       volumes = [
-        "/persistent/var/lib/zwavejs2mqtt:/usr/src/app/store"
+        "${config.etu.dataPrefix}/var/lib/zwavejs2mqtt:/usr/src/app/store"
       ];
     };
   };
