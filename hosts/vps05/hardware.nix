@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, config, ... }:
 
 {
   imports = [
@@ -39,7 +39,7 @@
     fsType = "zfs";
   };
 
-  fileSystems."/persistent" = {
+  fileSystems.${config.etu.dataPrefix} = {
     device = "zroot/persistent";
     fsType = "zfs";
     neededForBoot = true;

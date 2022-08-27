@@ -127,7 +127,7 @@ in
   services.gitea.domain = "git.elis.nu";
   services.gitea.rootUrl = "https://git.elis.nu/";
   services.gitea.database.type = "postgres";
-  services.gitea.database.passwordFile = "/persistent/var/lib/gitea-db-pass";
+  services.gitea.database.passwordFile = "${config.etu.dataPrefix}/var/lib/gitea-db-pass";
   services.gitea.settings.session.COOKIE_SECURE = true;
   services.gitea.settings.service.DISABLE_REGISTRATION = true;
 
