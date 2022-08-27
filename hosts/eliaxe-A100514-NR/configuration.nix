@@ -33,7 +33,7 @@ in
     graphical.virtualbox.enable = true;
     services.nfs.enable = true;
     services.nfs.exports = ''
-      /persistent/home/etu/tvnu/projects 192.168.5.102(rw,no_subtree_check,all_squash,anonuid=1000,anongid=100)
+      ${config.etu.dataPrefix}/home/etu/tvnu/projects 192.168.5.102(rw,no_subtree_check,all_squash,anonuid=1000,anongid=100)
     '';
     services.syncthing.enable = true;
     user.enable = true;
@@ -86,6 +86,6 @@ in
     system = "x86_64-linux";
     maxJobs = 5;
     sshUser = "root";
-    sshKey = "/persistent/home/syncoid/.ssh/id_ed25519";
+    sshKey = "${config.etu.dataPrefix}/home/syncoid/.ssh/id_ed25519";
   }];
 }
