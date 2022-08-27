@@ -26,6 +26,7 @@ in
   # My module settings
   etu = {
     stateVersion = "21.11";
+    dataPrefix = "/data";
 
     development.enable = true;
     graphical.enable = true;
@@ -40,14 +41,14 @@ in
     user.extraGroups = [ "video" "adbusers" "docker" ];
     base.sanoid.datasets = {
       # Enable snapshotting for some filesystems
-      "zroot/home".use_template = [ "home" ];
-      "zroot/persistent".use_template = [ "persistent" ];
+      "zroot/safe/home".use_template = [ "home" ];
+      "zroot/safe/data".use_template = [ "persistent" ];
     };
     base.syncoid.enable = true;
     # Enable syncing of some filesystems
     base.syncoid.commands = {
-      "zroot/home".target = "root@home.elis.nu:zroot/backups/eliaxe-A100514-NR/zroot/home";
-      "zroot/persistent".target = "root@home.elis.nu:zroot/backups/eliaxe-A100514-NR/zroot/persistent";
+      "zroot/safe/home".target = "root@home.elis.nu:zroot/backups/eliaxe-A100514-NR/zroot/home";
+      "zroot/safe/data".target = "root@home.elis.nu:zroot/backups/eliaxe-A100514-NR/zroot/persistent";
     };
   };
 
