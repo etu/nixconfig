@@ -30,17 +30,17 @@
   };
 
   fileSystems."/nix" = {
-    device = "zroot/nix";
+    device = "zroot/local/nix";
     fsType = "zfs";
   };
 
   fileSystems."/var/log" = {
-    device = "zroot/var-log";
+    device = "zroot/local/var-log";
     fsType = "zfs";
   };
 
   fileSystems.${config.etu.dataPrefix} = {
-    device = "zroot/persistent";
+    device = "zroot/safe/data";
     fsType = "zfs";
     neededForBoot = true;
   };

@@ -34,12 +34,13 @@ in
   # My module settings
   etu = {
     stateVersion = "19.03";
+    dataPrefix = "/data";
 
     base.emacs.enable = lib.mkForce false;
     user.extraRootAuthorizedKeys = keys.etu.syncoid;
     base.sanoid.datasets = {
       # Enable snapshotting for some filesystems
-      "zroot/persistent".use_template = [ "persistent" ];
+      "zroot/safe/data".use_template = [ "persistent" ];
     };
   };
 
