@@ -35,6 +35,7 @@ in
   # My module settings
   etu = {
     stateVersion = "20.09";
+    dataPrefix = "/data";
 
     base.emacs.enable = lib.mkForce false;
     development.git.enable = true;
@@ -43,8 +44,8 @@ in
     user.extraRootAuthorizedKeys = keys.etu.syncoid;
     base.sanoid.datasets = {
       # Enable snapshotting for some filesystems
-      "zroot/home".use_template = [ "home" ];
-      "zroot/persistent".use_template = [ "persistent" ];
+      "zroot/safe/home".use_template = [ "home" ];
+      "zroot/safe/data".use_template = [ "persistent" ];
     };
   };
 
