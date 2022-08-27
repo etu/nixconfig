@@ -21,10 +21,9 @@
     services.pipewire.alsa.support32Bit = true;
 
     # Enable udev rules for steam controller
-    services.udev.extraRules = ''
-      SUBSYSTEM=="usb", ATTRS{idVendor}=="28de", MODE="0666"
-      KERNEL=="uinput", MODE="0660", GROUP="users", OPTIONS+="static_node=uinput"
-    '';
+    services.udev.packages = [
+      pkgs.sc-controller
+    ];
 
     # Steam link ports
     networking.firewall.allowedTCPPorts = [ 27036 27037 ];
