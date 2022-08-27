@@ -55,7 +55,7 @@ in
   # Set NIX_PATH for nixos config and nixpkgs
   nix.nixPath = [
     "nixpkgs=/etc/nixos/nix/nixos-unstable"
-    "nixos-config=/etc/nixos/hosts/eliaxe-A100514-NR/configuration.nix"
+    "nixos-config=/etc/nixos/hosts/work-laptop/configuration.nix"
   ];
 
   # Enable docker deamon
