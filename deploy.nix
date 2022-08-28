@@ -14,7 +14,7 @@ nixus ({ config, ... }: {
     host = "root@home.elis.nu";
 
     # What configuration it should have
-    configuration = ./hosts/fenchurch/configuration.nix;
+    configuration = ./hosts/home-server/configuration.nix;
   };
 
   nodes.vps04 = { lib, config, ... }: {
