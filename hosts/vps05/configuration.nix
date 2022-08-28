@@ -36,7 +36,7 @@ in
     stateVersion = "19.03";
 
     base.emacs.enable = lib.mkForce false;
-    user.extraRootAuthorizedKeys = keys.etu.syncoid;
+    user.extraRootAuthorizedKeys = keys.etu.syncoid.fenchurch;
     base.sanoid.datasets = {
       # Enable snapshotting for some filesystems
       "zroot/safe/data".use_template = [ "data" ];

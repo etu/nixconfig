@@ -69,7 +69,7 @@ in
 
   # Include agenix encripted secret for secret password file
   age.secrets = {
-    inherit (ageModules) nixos-data-secret;
+    inherit (ageModules) nixos-data-secret syncoid-workstations-ssh-ec;
   };
 
   # Enable ClamAV.
@@ -83,9 +83,9 @@ in
   nix.distributedBuilds = true;
   nix.buildMachines = [{
     hostName = "home.elis.nu";
-    system = "x86_64-linux";
-    maxJobs = 5;
+    maxJobs = 8;
+    sshKey = config.age.secrets.syncoid-workstations-ssh-ec.path;
     sshUser = "root";
-    sshKey = "${config.etu.dataPrefix}/home/syncoid/.ssh/id_ed25519";
+    system = "x86_64-linux";
   }];
 }

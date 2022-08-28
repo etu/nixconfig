@@ -32,6 +32,7 @@ in
 
   age.secrets = {
     inherit (ageModules) fenchurch-initrd-sshd-ec fenchurch-initrd-sshd-rsa;
+    inherit (ageModules) syncoid-fenchurch-ssh-ec;
   };
 
   # Remote unlocking of encrypted ZFS

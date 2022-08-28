@@ -47,7 +47,7 @@ in
     development.git.enable = true;
     user.enable = true;
     user.extraGroups = [ "libvirtd" ];
-    user.extraRootAuthorizedKeys = keys.etu.syncoid;
+    user.extraRootAuthorizedKeys = keys.etu.syncoid.workstations;
     services.jellyfin.enable = true;
     services.syncthing.enable = true;
     base.sanoid.datasets = {

@@ -74,7 +74,8 @@ in
   programs.ssh.knownHosts."aarch64.nixos.community".publicKey = keys.systems."aarch64.nixos.community";
 
   age.secrets = {
-    inherit (ageModules) "etu@aarch64.nixos.community" "etu@aarch64.nixos.community.pub" nixos-data-secret;
+    inherit (ageModules) "etu@aarch64.nixos.community" "etu@aarch64.nixos.community.pub";
+    inherit (ageModules) nixos-data-secret syncoid-workstations-ssh-ec;
   };
 
   # Set up remote builds
@@ -83,7 +84,7 @@ in
     {
       hostName = "home.elis.nu";
       maxJobs = 8;
-      sshKey = "${config.etu.dataPrefix}/home/syncoid/.ssh/id_ed25519";
+      sshKey = config.age.secrets.syncoid-workstations-ssh-ec.path;
       sshUser = "root";
       system = "x86_64-linux";
     }
