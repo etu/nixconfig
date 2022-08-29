@@ -17,10 +17,10 @@
         "homepage": "",
         "owner": "nix-community",
         "repo": "emacs-overlay",
-        "rev": "021be83c7300166b6f984ac543edf9481f7e76fc",
-        "sha256": "0dgv6qc3n97jxppai0py5nch9anlwzv380q787bwvzzprfh0hm58",
+        "rev": "a5ec23280df5d9bf27ae266fdafcf375656487ba",
+        "sha256": "0gzwz9dhq5di4qsc32769brpv9mgmrw10f2rnpdi56rrq1y9b6zy",
         "type": "tarball",
-        "url": "https://github.com/nix-community/emacs-overlay/archive/021be83c7300166b6f984ac543edf9481f7e76fc.tar.gz",
+        "url": "https://github.com/nix-community/emacs-overlay/archive/a5ec23280df5d9bf27ae266fdafcf375656487ba.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "flummbot": {
@@ -47,10 +47,10 @@
         "homepage": "https://nix-community.github.io/home-manager/",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "1d81e6295ca530603478114f4977402d51299ad8",
-        "sha256": "1d4ijv3rsvyarqb5v90v4xqy8p2bnyq2zw7lf0wjmf9l1mqqchfm",
+        "rev": "d89bdff445eadff03fe414e9c30486bc8166b72b",
+        "sha256": "1vr42pd8qhsljj3ccjg43vdzw2rqcvcxjm0b93zhgl1l4vr204d4",
         "type": "tarball",
-        "url": "https://github.com/nix-community/home-manager/archive/1d81e6295ca530603478114f4977402d51299ad8.tar.gz",
+        "url": "https://github.com/nix-community/home-manager/archive/d89bdff445eadff03fe414e9c30486bc8166b72b.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "impermanence": {
@@ -59,10 +59,10 @@
         "homepage": "",
         "owner": "nix-community",
         "repo": "impermanence",
-        "rev": "e7c6fbbe9076109263175ef992ca6edc1050973c",
-        "sha256": "1axwj83pn0mm1cqwx5ngrg1lz9pna2ygq348vwqc457fl317iwp8",
+        "rev": "2237ad28093cb53ad2eb0fd1a9f870997287e0fa",
+        "sha256": "0w0n0mj3iyhd28mx1wib7ij0s886zgprkmj2wz9wjwbgqfwx50sy",
         "type": "tarball",
-        "url": "https://github.com/nix-community/impermanence/archive/e7c6fbbe9076109263175ef992ca6edc1050973c.tar.gz",
+        "url": "https://github.com/nix-community/impermanence/archive/2237ad28093cb53ad2eb0fd1a9f870997287e0fa.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "ip-failar-nu": {
@@ -95,10 +95,10 @@
         "homepage": "",
         "owner": "Infinisil",
         "repo": "nixus",
-        "rev": "bc40879a51c0739b83e3a0bd6381fe0bf51b0649",
-        "sha256": "0ky0dgrfpsgcgzk1jfzqzfa7f4pjrpqijjqbg97mpibwmxzj5qr4",
+        "rev": "aa276744ba7dcebeac40da37d7bf4d9d5409f17e",
+        "sha256": "1wfx055h1765zq7s1zzy06im8f715ydvp8qbhfcn6bpg44qr591b",
         "type": "tarball",
-        "url": "https://github.com/Infinisil/nixus/archive/bc40879a51c0739b83e3a0bd6381fe0bf51b0649.tar.gz",
+        "url": "https://github.com/Infinisil/nixus/archive/aa276744ba7dcebeac40da37d7bf4d9d5409f17e.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }
