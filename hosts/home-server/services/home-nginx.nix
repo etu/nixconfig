@@ -8,8 +8,9 @@
       forceSSL = true;
       enableACME = true;
       default = true;
+      root = "${config.etu.dataPrefix}/var/www/home.elis.nu";
+
       locations."/" = {
-        root = "${config.etu.dataPrefix}/var/www/home.elis.nu";
         extraConfig = "autoindex on;";
       };
     };
