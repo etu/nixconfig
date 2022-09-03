@@ -37,6 +37,7 @@ in
     development.flipper-zero.enable = true;
     games.enable = true;
     graphical.enable = true;
+    graphical.hamradio.enable = true;
     graphical.signal.enable = true;
     services.syncthing.enable = true;
     user.enable = true;
