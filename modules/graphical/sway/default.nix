@@ -348,6 +348,7 @@
             { app_id = "firefox"; title = "Firefox - Sharing Indicator"; }
             { app_id = "firefox"; title = "Firefox — Sharing Indicator"; }
             { app_id = "firefox"; title = "Picture-in-Picture"; }
+            { app_id = ".blueman-manager-wrapped"; title = "Bluetooth Devices"; }
             { title = "Welcome to Google Chrome"; }
           ];
 
