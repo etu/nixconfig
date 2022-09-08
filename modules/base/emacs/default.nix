@@ -88,16 +88,9 @@ let
     };
 
     # Extra packages to install
-    extraEmacsPackages = epkgs: (
-      [ epkgs.myEmacsConfigInit ] ++
-
-      # Install work deps
-      lib.optionals config.etu.base.emacs.enableWork [
-        epkgs.es-mode
-        epkgs.jenkinsfile-mode
-        epkgs.vcl-mode
-      ]
-    );
+    extraEmacsPackages = epkgs: ([
+      epkgs.myEmacsConfigInit
+    ]);
   };
 
   # Selection of emacs packages to choose from
@@ -111,7 +104,6 @@ in
 {
   options.etu.base.emacs = {
     enable = lib.mkEnableOption "Enable base emacs settings";
-    enableWork = lib.mkEnableOption "Enables install of work related modules";
     extraConfig = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       default = [];

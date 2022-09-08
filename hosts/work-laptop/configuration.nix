@@ -38,6 +38,21 @@ in
     services.syncthing.enable = true;
     user.enable = true;
     user.extraGroups = [ "video" "adbusers" "docker" ];
+
+    # Install extra modes for work.
+    base.emacs.extraConfig = [
+      ''
+        ;; Install Elasticsearch mode
+        (use-package es-mode :ensure t)
+
+        ;; Install Jenkinsfile mode
+        (use-package jenkinsfile-mode :ensure t)
+
+        ;; Install VCL mode
+        (use-package vcl-mode :ensure t)
+      ''
+    ];
+
     base.sanoid.datasets = {
       # Enable snapshotting for some filesystems
       "zroot/safe/data".use_template = [ "data" ];
