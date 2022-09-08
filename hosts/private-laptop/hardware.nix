@@ -28,6 +28,10 @@ in
   # Set kernel.
   boot.kernelPackages = pkgs.zfs.latestCompatibleLinuxPackages;
 
+  # Enable a nice boot splash screen.
+  boot.initrd.systemd.enable = true; # needed for ZFS password prompt with plymouth.
+  boot.plymouth.enable = true;
+
   # Enable ZFS.
   boot.supportedFilesystems = [ "zfs" ];
 
