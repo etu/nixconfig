@@ -42,6 +42,22 @@ in
     services.syncthing.enable = true;
     user.enable = true;
     user.extraGroups = [ "video" "docker" "libvirtd" ];
+
+    # Install tree-sitter mode in Emacs on this computer.
+    base.emacs.extraConfig = [
+      ''
+        ;; Install tree-sitter to get more consistent highlight of all
+        ;; sorts of different things.
+        (use-package tree-sitter
+          :ensure t
+          :config
+          (global-tree-sitter-mode)
+          (add-hook 'tree-sitter-mode-hook 'tree-sitter-hl-mode))
+
+        (use-package tree-sitter-langs :ensure t)
+      ''
+    ];
+
     base.sanoid.datasets = {
       # Enable snapshotting for some filesystems
       "zroot/safe/data".use_template = [ "data" ];
