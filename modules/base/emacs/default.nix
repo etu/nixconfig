@@ -7,6 +7,7 @@ let
   # system font settings.
   emacsConfig = pkgs.runCommandNoCC "config.el" {
     dataPrefix = config.etu.dataPrefix;
+    extraConfig = lib.concatStringsSep "\n\n" config.etu.base.emacs.extraConfig;
     fontname = config.etu.graphical.theme.fonts.monospace;
     fontsize = builtins.floor config.etu.graphical.theme.fonts.size;
   } "substituteAll ${./config.el} $out";
@@ -111,6 +112,11 @@ in
   options.etu.base.emacs = {
     enable = lib.mkEnableOption "Enable base emacs settings";
     enableWork = lib.mkEnableOption "Enables install of work related modules";
+    extraConfig = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [];
+      description = "This allows to add strings that gets added to the emacs config file.";
+    };
     package = lib.mkOption {
       type = lib.types.str;
       default = "default";

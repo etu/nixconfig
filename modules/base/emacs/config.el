@@ -525,6 +525,13 @@
   :ensure t
   :bind (("M-C-g" . org-plot/gnuplot)))
 
+;;;
+;;; Load extra config provided from other parts of the nixos
+;;; configuration rather than hard coded in the main config file.
+;;;
+@extraConfig@
+
+
 
 ;;;
 ;;; Custom functions
