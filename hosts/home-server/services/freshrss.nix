@@ -20,8 +20,8 @@
       freshrssSrc = pkgs.fetchFromGitHub {
         owner = "FreshRSS";
         repo = "FreshRSS";
-        rev = "1.19.2";
-        sha256 = "sha256-UUDMYgYPvIuL5Jw2fFhJGoJ4KLNUBpk2pPc2UNa+ZSE=";
+        rev = "1.20.0";
+        sha256 = "sha256-mzhEw2kFv77SmeuEx66n9ujWMscZO3+03tHimk1/vk4=";
       };
     in
     {
