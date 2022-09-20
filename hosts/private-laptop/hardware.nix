@@ -107,4 +107,7 @@ in
 
   # Set max jobs in nix.
   nix.settings.max-jobs = lib.mkDefault 8;
+
+  # Set CPU Frequency Governor.
+  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
 }
