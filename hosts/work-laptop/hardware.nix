@@ -28,6 +28,10 @@ in
   # Set kernel. Override it from nixos-hardware.
   boot.kernelPackages = lib.mkForce pkgs.linuxPackages_5_18;
 
+  # Enable a nice boot splash screen.
+  boot.initrd.systemd.enable = true; # needed for ZFS password prompt with plymouth.
+  boot.plymouth.enable = true;
+
   # Enable ZFS.
   boot.supportedFilesystems = [ "zfs" ];
 
