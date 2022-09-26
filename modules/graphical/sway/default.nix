@@ -32,7 +32,7 @@
     # Install packages using home manager.
     etu.user.extraUserPackages = [
       pkgs.evince
-      pkgs.gnome3.adwaita-icon-theme # Icons for gnome packages that sometimes use them but don't depend on them
+      pkgs.gnome.adwaita-icon-theme # Icons for gnome packages that sometimes use them but don't depend on them
       pkgs.pavucontrol
       pkgs.wdisplays
       pkgs.wlr-randr
@@ -382,7 +382,7 @@
         enable = true;
         systemd.enable = true;
         systemd.target = "sway-session.target";
-        style = pkgs.runCommandNoCC "waybar-styles.css" { } ''
+        style = pkgs.runCommand "waybar-styles.css" { } ''
           sed -e 's/font-family: /font-family: ${config.etu.graphical.theme.fonts.normal}, /'              \
               -e 's/font-size: 13px/font-size: ${toString (builtins.floor config.etu.graphical.theme.fonts.biggerSize)}px/' \
               ${pkgs.waybar}/etc/xdg/waybar/style.css > $out

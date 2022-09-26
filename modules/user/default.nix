@@ -94,7 +94,7 @@ in
         # Nano config
         ".nanorc".text = "set constantshow # Show linenumbers -c as default";
 
-        "bin/restow".source = pkgs.runCommandNoCC "restow" {
+        "bin/restow".source = pkgs.runCommand "restow" {
           dataPrefix = config.etu.dataPrefix;
         } ''
           substituteAll ${../dotfiles/bin/restow} $out
@@ -102,7 +102,7 @@ in
         '';
         "bin/spacecolors".source = ../dotfiles/bin/spacecolors;
 
-        "bin/keep".source = pkgs.runCommandNoCC "keep" { } ''
+        "bin/keep".source = pkgs.runCommand "keep" { } ''
           cp ${../dotfiles/bin/keep} $out
           substituteInPlace $out --replace /bin/zsh ${pkgs.zsh}/bin/zsh
         '';

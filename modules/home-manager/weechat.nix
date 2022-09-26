@@ -57,7 +57,7 @@ let
   # But override the init instead of using --run-command so scripts
   # loads before the commands runs. Otherwise you can't set settings
   # for scripts.
-  configs = pkgs.runCommandNoCC "weechat-config" { } ''
+  configs = pkgs.runCommand "weechat-config" { } ''
     ${cfg.package.override {
       configure = { ... }: {
         inherit (cfg) scripts;

@@ -85,13 +85,13 @@
       pkgs.host       # look up host info
       pkgs.whois      # whois duh
       pkgs.prettyping # pretty ping output
-      (pkgs.runCommandNoCC "prettyping-pp" { } ''
+      (pkgs.runCommand "prettyping-pp" { } ''
         mkdir -p $out/bin
         ln -s ${pkgs.prettyping}/bin/prettyping $out/bin/pp
       '')
 
       # Install some color test scripts from xterm
-      (pkgs.runCommandNoCC "xterm-color-scripts" { } ''
+      (pkgs.runCommand "xterm-color-scripts" { } ''
         tar -xf ${pkgs.xterm.src}
 
         install -Dm755 xterm-${pkgs.xterm.version}/vttests/256colors2.pl $out/bin/256colors2.pl

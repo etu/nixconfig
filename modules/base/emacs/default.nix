@@ -5,7 +5,7 @@ let
 
   # Run my config trough substituteAll to replace font names from my
   # system font settings.
-  emacsConfig = pkgs.runCommandNoCC "config.el" {
+  emacsConfig = pkgs.runCommand "config.el" {
     dataPrefix = config.etu.dataPrefix;
     extraConfig = lib.concatStringsSep "\n\n" config.etu.base.emacs.extraConfig;
     fontname = config.etu.graphical.theme.fonts.monospace;
@@ -61,7 +61,7 @@ let
 
   # Function to wrap emacs to contain the path for language servers
   wrapEmacsWithExtraBinPaths = (
-    { emacs, binName ? "emacs" }: pkgs.runCommandNoCC
+    { emacs, binName ? "emacs" }: pkgs.runCommand
     "${emacs.name}-with-extra-bin-paths" { nativeBuildInputs = [ pkgs.makeWrapper ]; }
     ''
       makeWrapper ${emacs}/bin/emacs $out/bin/${binName} --prefix PATH : ${lib.makeBinPath extraBinPaths}
@@ -81,7 +81,7 @@ let
     # Package overrides
     override = epkgs: epkgs // {
       # Add my config initializer as an emacs package
-      myEmacsConfigInit = pkgs.runCommandNoCC "my-emacs-default-package" { } ''
+      myEmacsConfigInit = pkgs.runCommand "my-emacs-default-package" { } ''
         mkdir -p $out/share/emacs/site-lisp
         cp ${emacsConfigInit} $out/share/emacs/site-lisp/default.el
       '';
