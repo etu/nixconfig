@@ -26,7 +26,7 @@ in
   boot.extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
 
   # Set kernel. Override it from nixos-hardware.
-  boot.kernelPackages = lib.mkForce pkgs.linuxPackages_5_18;
+  boot.kernelPackages = lib.mkForce pkgs.zfs.latestCompatibleLinuxPackages;
 
   # Enable a nice boot splash screen.
   boot.initrd.systemd.enable = true; # needed for ZFS password prompt with plymouth.
