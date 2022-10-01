@@ -31,10 +31,6 @@ in
   "secrets/fenchurch/initrd-sshd-rsa.age".publicKeys = etu ++ hosts.fenchurch;
   "secrets/fenchurch/syncoid-ssh-ec.age".publicKeys = etu ++ hosts.fenchurch;
   "secrets/vps04/flummbot.toml.age".publicKeys = etu ++ hosts.vps04;
-  "secrets/vps05/halsobrev.se.key.age".publicKeys = etu ++ hosts.vps05;
-  "secrets/vps05/halsobrev.se.pem.age".publicKeys = etu ++ hosts.vps05;
-  "secrets/vps05/xn--hlsobrev-0za.se.key.age".publicKeys = etu ++ hosts.vps05;
-  "secrets/vps05/xn--hlsobrev-0za.se.pem.age".publicKeys = etu ++ hosts.vps05;
   "secrets/workstations/nixos-data-secrets.nix.age".publicKeys = etu ++ hosts.agrajag ++ hosts.work;
   "secrets/workstations/syncoid-ssh-ec.age".publicKeys = etu ++ hosts.agrajag ++ hosts.work;
 }

@@ -6,12 +6,6 @@
 let
   # Import my ssh public keys
   keys = (import ../../data.nix).pubkeys;
-
-  # Import age secrets paths and metadata.
-  ageModules = (import ../../data.nix).ageModules;
-
-  # Load nivSources
-  nivSources = import ../../nix/sources.nix;
 in
 {
   imports = [
@@ -54,13 +48,6 @@ in
 
   # List services that you want to enable:
 
-  # Include agenix encripted secrets for cloudflare origin server
-  # certificates so we can have an encrypted connection from
-  # cloudflare to this server.
-  age.secrets = {
-    inherit (ageModules) xn--hlsobrev-0za-se-key xn--hlsobrev-0za-se-pem halsobrev-se-key halsobrev-se-pem;
-  };
-
   # Set up Letsencrypt
   security.acme.defaults.email = config.etu.user.email;
   security.acme.acceptTerms = true;
@@ -93,28 +80,6 @@ in
       forceSSL = true;
       enableACME = true;
       locations."/".proxyPass = "http://127.0.0.1:11371/";
-    };
-    # Serve main domain.
-    "xn--hlsobrev-0za.se" = {
-      sslCertificate = config.age.secrets.xn--hlsobrev-0za-se-pem.path;
-      sslCertificateKey = config.age.secrets.xn--hlsobrev-0za-se-key.path;
-      addSSL = true;
-      locations."/".root = pkgs.callPackage "${nivSources.halsobrev}/default.nix" { };
-    };
-    # Redirect from www to main domain.
-    "www.xn--hlsobrev-0za.se" = {
-      addSSL = true;
-      sslCertificate = config.age.secrets.xn--hlsobrev-0za-se-pem.path;
-      sslCertificateKey = config.age.secrets.xn--hlsobrev-0za-se-key.path;
-      globalRedirect = "xn--hlsobrev-0za.se";
-    };
-    # Redirect from alt domain to main domain.
-    "halsobrev.se" = {
-      addSSL = true;
-      sslCertificate = config.age.secrets.halsobrev-se-pem.path;
-      sslCertificateKey = config.age.secrets.halsobrev-se-key.path;
-      serverAliases = [ "www.halsobrev.se" ];
-      globalRedirect = "xn--hlsobrev-0za.se";
     };
   };
 

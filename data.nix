@@ -50,22 +50,6 @@
       owner = "grafana";
       # path is defined in usage location.
     };
-    xn--hlsobrev-0za-se-key = {
-      file = ./secrets/vps05/xn--hlsobrev-0za.se.key.age;
-      owner = "nginx";
-    };
-    xn--hlsobrev-0za-se-pem = {
-      file = ./secrets/vps05/xn--hlsobrev-0za.se.pem.age;
-      owner = "nginx";
-    };
-    halsobrev-se-key = {
-      file = ./secrets/vps05/halsobrev.se.key.age;
-      owner = "nginx";
-    };
-    halsobrev-se-pem = {
-      file = ./secrets/vps05/halsobrev.se.pem.age;
-      owner = "nginx";
-    };
     nixos-data-secret = {
       file = ./secrets/workstations/nixos-data-secrets.nix.age;
       path = "/data/etc/nixos/.data-secrets.nix";

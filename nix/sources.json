@@ -35,12 +35,6 @@
         "url": "https://github.com/etu/flummbot/archive/cba0d98a16c678d28ef46697a15300bde6e30af0.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
-    "halsobrev": {
-        "branch": "main",
-        "repo": "git@github.com:etu/halsobrev-website.git",
-        "rev": "99a39f5117d6f66baf2cedddbebae325186e7732",
-        "type": "git"
-    },
     "home-manager": {
         "branch": "master",
         "description": "Manage a user environment using Nix  [maintainer=@rycee] ",
