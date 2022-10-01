@@ -65,6 +65,11 @@ in
       enableACME = true;
       locations."/".proxyPass = "https://elis.nu/";
     };
+    "sa4b.se" = {
+      forceSSL = true;
+      enableACME = true;
+      locations."/".proxyPass = "https://elis.nu/";
+    };
     "ip.failar.nu" = {
       addSSL = true;
       enableACME = true;
