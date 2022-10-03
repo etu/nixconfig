@@ -65,15 +65,7 @@ in
     pkgs.irssi
     pkgs.screen
 
-    # Install weechat with weechat-matrix
-    (pkgs.weechat.override {
-      configure = { availablePlugins, ... }: {
-        scripts = [ pkgs.weechatScripts.weechat-matrix ];
-      };
-    })
-
-    # Install weechat-matrix helper scripts
-    pkgs.weechatScripts.weechat-matrix
+    pkgs.weechat
   ];
 
   # List services that you want to enable:
