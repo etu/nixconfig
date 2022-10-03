@@ -39,6 +39,11 @@
       mode = "400";
       symlink = false;
     };
+    freshrss-password-etu = {
+      file = ./secrets/fenchurch/etu-freshrss-password.age;
+      owner = "freshrss";
+      group = "freshrss";
+    };
     flummbot-toml = {
       file = ./secrets/vps04/flummbot.toml.age;
       owner = "bots";
