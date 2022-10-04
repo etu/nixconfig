@@ -4,22 +4,6 @@ let
   # Import age secrets paths and metadata.
   ageModules = (import ../../../data.nix).ageModules;
 
-  zfsExporterPkg = let
-    version = "2.2.5";
-  in pkgs.buildGoModule {
-    pname = "zfs-exporter";
-    inherit version;
-
-    src = pkgs.fetchFromGitHub {
-      owner = "pdf";
-      repo = "zfs_exporter";
-      rev = "v${version}";
-      sha256 = "sha256-FY3P2wmNWyr7mImc1PJs1G2Ae8rZvDzq0kRZfiRTzyc=";
-    };
-
-    vendorSha256 = "sha256-jQiw3HlqWcsjdadDdovCsDMBB3rnWtacfbtzDb5rc9c=";
-  };
-
 in {
   # Make sure to have nginx enabled
   services.nginx.enable = true;
@@ -51,7 +35,7 @@ in {
     wantedBy = [ "multi-user.target" ];
     path = [ config.boot.zfs.package ];
     serviceConfig = {
-      ExecStart = "${zfsExporterPkg}/bin/zfs_exporter --properties.dataset-filesystem=available,compressratio,logicalused,quota,referenced,used,usedbydataset,written";
+      ExecStart = "${pkgs.prometheus-zfs-exporter}/bin/zfs_exporter --properties.dataset-filesystem=available,compressratio,logicalused,quota,referenced,used,usedbydataset,written";
       Restart = "always";
     };
   };
