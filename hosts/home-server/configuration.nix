@@ -17,7 +17,6 @@ in
     ./network-wait-hook.nix
 
     # Import local services that are host specific
-    ./services/freshrss.nix
     ./services/guest-users.nix
     ./services/hass.nix
     ./services/home-nginx.nix
@@ -48,6 +47,7 @@ in
     user.enable = true;
     user.extraGroups = [ "libvirtd" ];
     user.extraRootAuthorizedKeys = keys.etu.syncoid.workstations;
+    services.freshrss.enable = true;
     services.jellyfin.enable = true;
     services.syncthing.enable = true;
     base.sanoid.datasets = {

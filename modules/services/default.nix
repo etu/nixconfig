@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./freshrss
     ./jellyfin
     ./nfs
     ./syncthing
