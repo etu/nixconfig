@@ -119,14 +119,9 @@
             { criteria = "eDP-1"; status = "enable"; }
           ];
           docked.outputs = [
-            { criteria = "Samsung Electric Company LC49G95T H4ZN900853 (DP-1)";
-              mode = "5120x1440"; }
-            { criteria = "eDP-1";
-              status = "disable"; }
-          ];
-          docked2.outputs = [
-            { criteria = "Samsung Electric Company LC49G95T H4ZN900853 (DP-2)";
-              mode = "5120x1440"; }
+            { criteria = "Samsung Electric Company LC49G95T H4ZN900853";
+              mode = "5120x1440";
+              position = "0,0"; }
             { criteria = "eDP-1";
               status = "disable"; }
           ];
