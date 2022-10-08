@@ -1,0 +1,51 @@
+name: Update
+
+on:
+  schedule:
+    - cron: "30 5 * * *"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+      - uses: cachix/install-nix-action@v17
+      - name: Cachix setup
+        uses: cachix/cachix-action@v10
+        with:
+          name: etu
+          extraPullNames: "nix-community,fossar"
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+          skipPush: true
+
+      # Populate a fake secrets file.
+      - name: Populate a fake secrets file
+        run: echo '{ hashedEtuPassword = ""; hashedOzelotenPassword = ""; hashedRootPassword = ""; mittensFtp.hostname = ""; mittensFtp.user = ""; }' > .data-secrets.nix
+
+      # Do updates of nixpkgs and other dependencies.
+      - name: Update all dependencies
+        run: nix-shell --run 'make update-all'
+        env:
+          NIX_PATH: nixpkgs=./nix/nixos-unstable
+
+      # Build systems.
+      - name: Build private-laptop system derivation
+        run: nix-build '<nixpkgs/nixos>' -I nixos-config=./hosts/private-laptop/configuration.nix -I nixpkgs=./nix/nixos-unstable -A system --no-out-link | cachix push etu
+
+      - name: Build work-laptop system derivation
+        run: nix-build '<nixpkgs/nixos>' -I nixos-config=./hosts/work-laptop/configuration.nix -I nixpkgs=./nix/nixos-unstable -A system --no-out-link | cachix push etu
+
+      - name: Build home-server system derivation
+        run: nix-build ./deploy.nix -A fenchurch -I nixpkgs=./nix/nixos-unstable --no-out-link | cachix push etu
+
+      - name: Build vps04 system derivation
+        run: nix-build ./deploy.nix -A vps04 -I nixpkgs=./nix/nixos-unstable --no-out-link | cachix push etu
+
+      - name: Build vps05 system derivation
+        run: nix-build ./deploy.nix -A vps05 -I nixpkgs=./nix/nixos-unstable --no-out-link | cachix push etu
+
+      - uses: stefanzweifel/git-auto-commit-action@v4.15.0
+        with:
+          commit_message: "cron(treewide): Upgrade systems"
