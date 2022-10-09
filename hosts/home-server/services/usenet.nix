@@ -68,9 +68,9 @@
   # Enable usenet related services in a container
   containers.usenet = {
     autoStart = true;
-    config = { config, lib, pkgs, ... }: {
+    config = { lib, pkgs, ... }: {
       # The NixOS release to be compatible with for stateful data such as databases.
-      system.stateVersion = "22.05";
+      system.stateVersion = config.etu.stateVersion;
 
       # Disable documentation to make the system smaller.
       documentation.enable = false;
