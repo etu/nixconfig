@@ -3,33 +3,22 @@ let
   sources = import ./nix/sources.nix;
   nixus = import "${sources.nixus}/default.nix" { };
 in
-nixus ({ config, ... }: {
+nixus {
   # Set a nixpkgs version for all nodes
-  defaults = { ... }: {
-    nixpkgs = ./nix/nixos-unstable;
-  };
+  defaults.nixpkgs = ./nix/nixos-unstable;
 
-  nodes.fenchurch = { lib, config, ... }: {
-    # How to reach this node
+  nodes.home-server = {
     host = "root@home.elis.nu";
-
-    # What configuration it should have
     configuration = ./hosts/home-server/configuration.nix;
   };
 
-  nodes.vps04 = { lib, config, ... }: {
-    # How to reach this node
+  nodes.vps04 = {
     host = "root@vps04.elis.nu";
-
-    # What configuration it should have
     configuration = ./hosts/vps04/configuration.nix;
   };
 
-  nodes.vps05 = { lib, config, ... }: {
-    # How to reach this node
+  nodes.vps05 = {
     host = "root@vps05.elis.nu";
-
-    # What configuration it should have
     configuration = ./hosts/vps05/configuration.nix;
   };
-})
+}

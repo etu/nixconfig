@@ -33,7 +33,7 @@ jobs:
         run: nix-build '<nixpkgs/nixos>' -I nixos-config=./hosts/work-laptop/configuration.nix -I nixpkgs=./nix/nixos-unstable -A system --no-out-link | cachix push etu
 
       - name: Build home-server system derivation
-        run: nix-build ./deploy.nix -A fenchurch -I nixpkgs=./nix/nixos-unstable --no-out-link | cachix push etu
+        run: nix-build ./deploy.nix -A home-server -I nixpkgs=./nix/nixos-unstable --no-out-link | cachix push etu
 
       - name: Build vps04 system derivation
         run: nix-build ./deploy.nix -A vps04 -I nixpkgs=./nix/nixos-unstable --no-out-link | cachix push etu
