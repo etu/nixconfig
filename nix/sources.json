@@ -17,10 +17,10 @@
         "homepage": "",
         "owner": "nix-community",
         "repo": "emacs-overlay",
-        "rev": "c3b3d88eb0fd75557fd5c91223233a6a2c6df8be",
-        "sha256": "1m6hqc378nngl4rhglbmly8q5s2r2klkwmkmcmdxwy9zqm9hcqg3",
+        "rev": "2cf9caa06c8fbe3f973afd597584f08e3d56fdd6",
+        "sha256": "17gsj6r2znfsn9kzqsr22sjmap6mpxq5pqrwqdvj497d7x19syik",
         "type": "tarball",
-        "url": "https://github.com/nix-community/emacs-overlay/archive/c3b3d88eb0fd75557fd5c91223233a6a2c6df8be.tar.gz",
+        "url": "https://github.com/nix-community/emacs-overlay/archive/2cf9caa06c8fbe3f973afd597584f08e3d56fdd6.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "flummbot": {
@@ -41,10 +41,10 @@
         "homepage": "https://nix-community.github.io/home-manager/",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "3b5a8d3dc79e05213d3c428a0b8777e21cb0c6b8",
-        "sha256": "0yl2s9h19zsch1cng6irlm9d8mvxx7x6ccrfd59fd4d580q3vq1z",
+        "rev": "e1f1160284198a68ea8c7fffbbb1436f99e46ef9",
+        "sha256": "0hl49ac76fddcs3381hk6fdz7k3kwjjcpksr5k0pcir8jr7z9ng0",
         "type": "tarball",
-        "url": "https://github.com/nix-community/home-manager/archive/3b5a8d3dc79e05213d3c428a0b8777e21cb0c6b8.tar.gz",
+        "url": "https://github.com/nix-community/home-manager/archive/e1f1160284198a68ea8c7fffbbb1436f99e46ef9.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "impermanence": {
