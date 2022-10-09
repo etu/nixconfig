@@ -31,7 +31,7 @@ in
 
   # My module settings
   etu = {
-    stateVersion = "21.03";
+    stateVersion = "22.11";
 
     development.enable = true;
     development.flipper-zero.enable = true;

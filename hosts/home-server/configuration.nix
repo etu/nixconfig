@@ -39,7 +39,7 @@ in
 
   # My module settings
   etu = {
-    stateVersion = "19.09";
+    stateVersion = "22.11";
 
     base.emacs.package = "nox";
     development.git.enable = true;

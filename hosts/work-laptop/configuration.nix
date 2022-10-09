@@ -25,7 +25,7 @@ in
 
   # My module settings
   etu = {
-    stateVersion = "21.11";
+    stateVersion = "22.11";
 
     development.enable = true;
     graphical.enable = true;
