@@ -49,17 +49,17 @@ Just run it:
 #+END_SRC
 
 *** ~hosts/~
-**** ~hosts/agrajag/~
+**** ~hosts/private-laptop/~
 Main private laptop, deployed like a normal NixOS system using
 ~nixos-rebuild~ to build new generations. ZFS snapshots are pushed from this
 system to fenchurch whenever this system is online.
 
-**** ~hosts/eliaxe-A100514-NR/~
+**** ~hosts/work-laptop/~
 Work laptop, deployed like a normal NixOS system using ~nixos-rebuild~ to
 build new generations. ZFS snapshots are pushed from this system to fenchurch
 whenever this system is online.
 
-**** ~hosts/fenchurch/~
+**** ~hosts/home-server/~
 Home file server, deployed using ~deploy/private.nix~. Also used as build
 machines for the laptops. It's also my primary location to store ZFS
 snapshots that I backup from all of the other systems. It runs home assistant
