@@ -13,8 +13,7 @@ jobs:
         with:
           submodules: recursive
       - uses: cachix/install-nix-action@v18
-      - name: Cachix setup
-        uses: cachix/cachix-action@v11
+      - uses: cachix/cachix-action@v11
         with:
           name: etu
           extraPullNames: "nix-community,fossar"
