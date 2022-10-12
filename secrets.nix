@@ -18,12 +18,15 @@ let
     all = [
       agrajag.rsa agrajag.ec
       fenchurch.rsa fenchurch.ec
+      vps04.rsa vps04.ec
       vps05.rsa vps05.ec
       work.rsa work.ec
     ];
   };
 in
 {
+  "secrets/any/hashed-etu-password-file.age".publicKeys = etu ++ hosts.agrajag ++ hosts.work ++ hosts.fenchurch ++ hosts.vps04;
+  "secrets/any/hashed-root-password-file.age".publicKeys = etu ++ hosts.all;
   "secrets/agrajag/etu_at_aarch64.nixos.community.age".publicKeys = etu ++ hosts.agrajag;
   "secrets/agrajag/etu_at_aarch64.nixos.community.pub.age".publicKeys = etu ++ hosts.agrajag;
   "secrets/fenchurch/etu-freshrss-password.age".publicKeys = etu ++ hosts.fenchurch;
@@ -32,6 +35,7 @@ in
   "secrets/fenchurch/initrd-sshd-rsa.age".publicKeys = etu ++ hosts.fenchurch;
   "secrets/fenchurch/syncoid-ssh-ec.age".publicKeys = etu ++ hosts.fenchurch;
   "secrets/vps04/flummbot.toml.age".publicKeys = etu ++ hosts.vps04;
+  "secrets/vps04/hashed-ozeloten-password-file.age".publicKeys = etu ++ hosts.vps04;
   "secrets/workstations/nixos-data-secrets.nix.age".publicKeys = etu ++ hosts.agrajag ++ hosts.work;
   "secrets/workstations/syncoid-ssh-ec.age".publicKeys = etu ++ hosts.agrajag ++ hosts.work;
 }

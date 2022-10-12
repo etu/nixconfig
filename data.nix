@@ -9,6 +9,21 @@
 
   # Age module definitions that is to be used by hosts to get secrets.
   ageModules = {
+    hashed-etu-password = {
+      file = ./secrets/any/hashed-etu-password-file.age;
+      owner = "etu";
+      mode = "400";
+    };
+    hashed-root-password = {
+      file = ./secrets/any/hashed-root-password-file.age;
+      owner = "root";
+      mode = "400";
+    };
+    hashed-ozeloten-password = {
+      file = ./secrets/vps04/hashed-ozeloten-password-file.age;
+      owner = "ozeloten";
+      mode = "400";
+    };
     "etu@aarch64.nixos.community" = {
       file = ./secrets/agrajag/etu_at_aarch64.nixos.community.age;
       path = "/data/home/etu/.ssh/etu@aarch64.nixos.community";

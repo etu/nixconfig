@@ -2,7 +2,7 @@
 
 let
   # Load secrets
-  secrets = (import ../../data.nix).secrets;
+  ageModules = (import ../../data.nix).ageModules;
 
   # Import my ssh public keys
   keys = (import ../../data.nix).pubkeys;
@@ -69,11 +69,15 @@ in
     # Let ~/bin/ be in $PATH
     environment.homeBinInPath = config.etu.user.enable;
 
+    # Load password files.
+    age.secrets.hashed-etu-password = lib.mkIf config.etu.user.enable ageModules.hashed-etu-password;
+    age.secrets.hashed-root-password = ageModules.hashed-root-password;
+
     # Define my user account.
     users.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
       description = "${config.etu.user.realname},,,,";
       extraGroups = [ "wheel" ] ++ config.etu.user.extraGroups;
-      initialHashedPassword = secrets.hashedEtuPassword;
+      passwordFile = config.age.secrets.hashed-etu-password.path;
       isNormalUser = true;
       openssh.authorizedKeys.keys = keys.etu.computers ++ config.etu.user.extraAuthorizedKeys;
       uid = config.etu.user.uid;
@@ -81,7 +85,7 @@ in
 
     # Define password, authorized keys and shell for root user.
     users.users.root = {
-      initialHashedPassword = secrets.hashedRootPassword;
+      passwordFile = config.age.secrets.hashed-root-password.path;
       openssh.authorizedKeys.keys = keys.etu.computers ++ config.etu.user.extraRootAuthorizedKeys;
     };
 

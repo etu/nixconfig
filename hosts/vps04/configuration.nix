@@ -4,9 +4,6 @@
 
 { config, lib, pkgs, ... }:
 let
-  # Load secrets
-  secrets = (import ../../data.nix).secrets;
-
   # Import my ssh public keys
   keys = (import ../../data.nix).pubkeys;
 
@@ -98,7 +95,7 @@ in
     ozeloten = {
       isNormalUser = true;
       home = "/home/ozeloten";
-      initialHashedPassword = secrets.hashedOzelotenPassword;
+      passwordFile = config.age.secrets.hashed-ozeloten-password.path;
       uid = 1003;
     };
 
@@ -118,4 +115,5 @@ in
   age.secrets.flummbot-toml = ageModules.flummbot-toml // {
     path = "${config.services.flummbot.stateDirectory}/flummbot.toml";
   };
+  age.secrets.hashed-ozeloten-password = ageModules.hashed-ozeloten-password;
 }

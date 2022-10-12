@@ -23,7 +23,7 @@ jobs:
 
       # Populate a fake secrets file.
       - name: Populate a fake secrets file
-        run: echo '{ hashedEtuPassword = ""; hashedOzelotenPassword = ""; hashedRootPassword = ""; mittensFtp.hostname = ""; mittensFtp.user = ""; }' > .data-secrets.nix
+        run: echo '{ mittensFtp.hostname = ""; mittensFtp.user = ""; }' > .data-secrets.nix
 
       # Build systems.
       - name: Build private-laptop system derivation
