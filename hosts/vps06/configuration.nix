@@ -17,6 +17,9 @@ in
 
     # Import local modules
     ../../modules
+
+    # Import matrix settings
+    ./services/matrix.nix
   ];
 
   # Set hostname
