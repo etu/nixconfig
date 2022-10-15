@@ -21,4 +21,9 @@ nixus {
     host = "root@vps05.elis.nu";
     configuration = ./hosts/vps05/configuration.nix;
   };
+
+  nodes.vps06 = {
+    host = "root@vps06.elis.nu";
+    configuration = ./hosts/vps06/configuration.nix;
+  };
 }

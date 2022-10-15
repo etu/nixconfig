@@ -71,6 +71,14 @@ in
         extraHostNames = [ "git.elis.nu" "vps05.elis.nu" ];
         publicKey = keys.systems.vps05.rsa;
       };
+      vps06-ec = {
+        extraHostNames = [ "vps06.elis.nu" ];
+        publicKey = keys.systems.vps06.ec;
+      };
+      vps06-rsa = {
+        extraHostNames = [ "vps06.elis.nu" ];
+        publicKey = keys.systems.vps06.rsa;
+      };
     };
   };
 }

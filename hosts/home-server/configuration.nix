@@ -77,6 +77,7 @@ in
       "root@vps04.elis.nu:zroot/safe/data".target = "zroot/backups/vps04/data";
       "root@vps04.elis.nu:zroot/safe/home".target = "zroot/backups/vps04/home";
       "root@vps05.elis.nu:zroot/safe/data".target = "zroot/backups/vps05/data";
+      "root@vps06.elis.nu:zroot/safe/data".target = "zroot/backups/vps06/data";
     };
   };
 

@@ -39,3 +39,6 @@ jobs:
 
       - name: Build vps05 system derivation
         run: nix-build ./deploy.nix -A vps05 -I nixpkgs=./nix/nixos-unstable --no-out-link | cachix push etu
+
+      - name: Build vps06 system derivation
+        run: nix-build ./deploy.nix -A vps06 -I nixpkgs=./nix/nixos-unstable --no-out-link | cachix push etu
