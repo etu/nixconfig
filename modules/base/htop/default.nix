@@ -9,7 +9,7 @@ let
         hide_kernel_threads = true;
         highlight_base_name = true;
         shadow_other_users = true;
-        show_program_path = true;
+        show_program_path = false;
         tree_view = true;
 
         left_meters = [ "LeftCPUs" "Memory" "Swap" "ZFSARC" "ZFSCARC" ];
