@@ -31,22 +31,34 @@ jobs:
 
       # Build systems.
       - name: Build private-laptop system derivation
-        run: nix-build '<nixpkgs/nixos>' -I nixos-config=./hosts/private-laptop/configuration.nix -I nixpkgs=./nix/nixos-unstable -A system --no-out-link | cachix push etu
+        run: nix-build '<nixpkgs/nixos>' -I nixos-config=./hosts/private-laptop/configuration.nix -I nixpkgs=./nix/nixos-unstable -A system
+      - name: Cache private-laptop system derivation
+        run: realpath result | cachix push etu
 
       - name: Build work-laptop system derivation
-        run: nix-build '<nixpkgs/nixos>' -I nixos-config=./hosts/work-laptop/configuration.nix -I nixpkgs=./nix/nixos-unstable -A system --no-out-link | cachix push etu
+        run: nix-build '<nixpkgs/nixos>' -I nixos-config=./hosts/work-laptop/configuration.nix -I nixpkgs=./nix/nixos-unstable -A system
+      - name: Cache work-laptop system derivation
+        run: realpath result | cachix push etu
 
       - name: Build home-server system derivation
-        run: nix-build ./deploy.nix -A home-server -I nixpkgs=./nix/nixos-unstable --no-out-link | cachix push etu
+        run: nix-build ./deploy.nix -A home-server -I nixpkgs=./nix/nixos-unstable
+      - name: Cache home-server system derivation
+        run: realpath result | cachix push etu
 
       - name: Build vps04 system derivation
-        run: nix-build ./deploy.nix -A vps04 -I nixpkgs=./nix/nixos-unstable --no-out-link | cachix push etu
+        run: nix-build ./deploy.nix -A vps04 -I nixpkgs=./nix/nixos-unstable
+      - name: Cache vps04 system derivation
+        run: realpath result | cachix push etu
 
       - name: Build vps05 system derivation
-        run: nix-build ./deploy.nix -A vps05 -I nixpkgs=./nix/nixos-unstable --no-out-link | cachix push etu
+        run: nix-build ./deploy.nix -A vps05 -I nixpkgs=./nix/nixos-unstable
+      - name: Cache vps05 system derivation
+        run: realpath result | cachix push etu
 
       - name: Build vps06 system derivation
-        run: nix-build ./deploy.nix -A vps06 -I nixpkgs=./nix/nixos-unstable --no-out-link | cachix push etu
+        run: nix-build ./deploy.nix -A vps06 -I nixpkgs=./nix/nixos-unstable
+      - name: Cache vps06 system derivation
+        run: realpath result | cachix push etu
 
       - uses: stefanzweifel/git-auto-commit-action@v4.15.1
         with:
