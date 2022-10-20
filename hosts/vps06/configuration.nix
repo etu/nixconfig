@@ -20,6 +20,7 @@ in
 
     # Import matrix settings
     ./services/matrix.nix
+    ./services/misc.nix
   ];
 
   # Set hostname

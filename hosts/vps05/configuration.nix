@@ -60,27 +60,6 @@ in
       enableACME = true;
       locations."/".proxyPass = "http://127.0.0.1:3000/";
     };
-    "sa.0b.se" = {
-      forceSSL = true;
-      enableACME = true;
-      locations."/".proxyPass = "https://elis.nu/";
-    };
-    "sa4b.se" = {
-      forceSSL = true;
-      enableACME = true;
-      locations."/".proxyPass = "https://elis.nu/";
-    };
-    "ip.failar.nu" = {
-      addSSL = true;
-      enableACME = true;
-      locations."/".proxyPass = "http://127.0.0.1:8123/";
-      locations."/".extraConfig = "proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;";
-    };
-    "keys.ix.ufs.se" = {
-      forceSSL = true;
-      enableACME = true;
-      globalRedirect = "keys.proxxi.org";
-    };
     "keys.proxxi.org" = {
       forceSSL = true;
       enableACME = true;
@@ -111,9 +90,6 @@ in
     name = "hockeypuck";
     ensurePermissions."DATABASE hockeypuck" = "ALL PRIVILEGES";
   }];
-
-  # Enable the ip-failar-nu service
-  services.ip-failar-nu.enable = true;
 
   # Enable hockeypuck keyserver
   services.hockeypuck.enable = true;
