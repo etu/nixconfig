@@ -55,11 +55,6 @@ in
   # Set up NGiNX
   services.nginx.enable = true;
   services.nginx.virtualHosts = {
-    "git.elis.nu" = {
-      forceSSL = true;
-      enableACME = true;
-      locations."/".proxyPass = "http://127.0.0.1:3000/";
-    };
     "keys.proxxi.org" = {
       forceSSL = true;
       enableACME = true;
@@ -69,16 +64,6 @@ in
 
   # Open Firewall for HTTP, HTTPS and hkp (keyserver)
   networking.firewall.allowedTCPPorts = [ 80 443 11371 ];
-
-  # Gitea
-  services.gitea.enable = true;
-  services.gitea.appName = "Elis Git Service";
-  services.gitea.domain = "git.elis.nu";
-  services.gitea.rootUrl = "https://git.elis.nu/";
-  services.gitea.database.type = "postgres";
-  services.gitea.database.passwordFile = "${config.etu.dataPrefix}/var/lib/gitea-db-pass";
-  services.gitea.settings.session.COOKIE_SECURE = true;
-  services.gitea.settings.service.DISABLE_REGISTRATION = true;
 
   # Postgres
   services.postgresql.enable = true;

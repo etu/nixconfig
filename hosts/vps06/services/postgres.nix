@@ -15,6 +15,12 @@
         TEMPLATE template0
         LC_COLLATE = "C"
         LC_CTYPE = "C";
+
+      CREATE USER "gitea";
+      CREATE DATABASE "gitea" WITH OWNER "gitea"
+        TEMPLATE template0
+        LC_COLLATE = "C"
+        LC_CTYPE = "C";
     '';
     # From http://pgconfigurator.cybertec.at/; https://git.darmstadt.ccc.de/maralorn/nixos-config/-/blob/master/nixos/roles/matrix-synapse/postgres-tuning.nix
     settings = {
