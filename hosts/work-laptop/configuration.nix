@@ -37,7 +37,7 @@ in
     '';
     services.syncthing.enable = true;
     user.enable = true;
-    user.extraGroups = [ "video" "adbusers" "docker" ];
+    user.extraGroups = [ "video" "docker" ];
 
     # Install extra modes for work.
     base.emacs.extraConfig = [
@@ -75,9 +75,6 @@ in
   # Enable docker deamon
   virtualisation.docker.enable = true;
   virtualisation.docker.storageDriver = "zfs";
-
-  # Install ADB for occational android device things
-  programs.adb.enable = true;
 
   # Include agenix encripted secret for secret password file
   age.secrets = {
