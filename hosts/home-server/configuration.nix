@@ -61,7 +61,6 @@ in
       "zroot/backups/work/home" = { use_template = [ "home" ]; autosnap = false; };
       "zroot/backups/vps04/data" = { use_template = [ "data" ]; autosnap = false; };
       "zroot/backups/vps04/home" = { use_template = [ "home" ]; autosnap = false; };
-      "zroot/backups/vps05/data" = { use_template = [ "data" ]; autosnap = false; };
 
       # Enable snapshotting for bulk storage
       "zstorage/files".use_template = [ "storage" ];
@@ -76,7 +75,6 @@ in
     base.syncoid.commands = {
       "root@vps04.elis.nu:zroot/safe/data".target = "zroot/backups/vps04/data";
       "root@vps04.elis.nu:zroot/safe/home".target = "zroot/backups/vps04/home";
-      "root@vps05.elis.nu:zroot/safe/data".target = "zroot/backups/vps05/data";
       "root@vps06.elis.nu:zroot/safe/data".target = "zroot/backups/vps06/data";
     };
   };

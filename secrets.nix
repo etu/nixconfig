@@ -7,12 +7,11 @@ let
 
   # Computers host keys
   hosts = let
-    inherit (keys.systems) agrajag fenchurch vps04 vps05 vps06 work;
+    inherit (keys.systems) agrajag fenchurch vps04 vps06 work;
   in {
     agrajag = [ agrajag.rsa agrajag.ec ];
     fenchurch = [ fenchurch.rsa fenchurch.ec ];
     vps04 = [ vps04.rsa vps04.ec ];
-    vps05 = [ vps05.rsa vps05.ec ];
     vps06 = [ vps06.rsa vps06.ec ];
     work = [ work.rsa work.ec ];
 
@@ -20,7 +19,6 @@ let
       agrajag.rsa agrajag.ec
       fenchurch.rsa fenchurch.ec
       vps04.rsa vps04.ec
-      vps05.rsa vps05.ec
       vps06.rsa vps06.ec
       work.rsa work.ec
     ];

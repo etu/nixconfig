@@ -69,9 +69,9 @@ and some other things.
 System for IRC clients and an IRC bot. Nothing else. ZFS snapshots are pulled
 from this system to fenchurch.
 
-**** ~hosts/vps05/~
-System that runs Gitea, a Hockeypuck GPG keyserver, [[https://ip.failar.nu/][ip.failar.nu]] among some
-other things.
+**** ~hosts/vps06/~
+System that runs Gitea, a Hockeypuck GPG keyserver, [[https://ip.failar.nu/][ip.failar.nu]], and a
+Matrix home server among some other things.
 
 *** ~modules/~
 This directory contains a whole bunch of modules that I've come up with to

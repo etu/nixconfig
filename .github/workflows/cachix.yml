@@ -45,11 +45,6 @@ jobs:
       - name: Cache vps04 system derivation
         run: realpath result | cachix push etu
 
-      - name: Build vps05 system derivation
-        run: nix-build ./deploy.nix -A vps05 -I nixpkgs=./nix/nixos-unstable
-      - name: Cache vps05 system derivation
-        run: realpath result | cachix push etu
-
       - name: Build vps06 system derivation
         run: nix-build ./deploy.nix -A vps06 -I nixpkgs=./nix/nixos-unstable
       - name: Cache vps06 system derivation
