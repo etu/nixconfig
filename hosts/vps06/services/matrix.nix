@@ -9,7 +9,13 @@ in
     "/var/lib/matrix-synapse"
   ];
 
-  networking.firewall.allowedTCPPorts = [ 80 443 ];
+  services.postgresql = {
+    ensureDatabases = [ "matrix-synapse" ];
+    ensureUsers = [{
+      name = "matrix-synapse";
+      ensurePermissions."DATABASE \"matrix-synapse\"" = "ALL PRIVILEGES";
+    }];
+  };
 
   services.nginx.virtualHosts = {
     ${domain} = {

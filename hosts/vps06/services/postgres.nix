@@ -9,19 +9,7 @@
   services.postgresql = {
     enable = true;
     package = pkgs.postgresql_14;
-    initialScript = pkgs.writeText "init.sql" ''
-      CREATE USER "matrix-synapse";
-      CREATE DATABASE "matrix-synapse" WITH OWNER "matrix-synapse"
-        TEMPLATE template0
-        LC_COLLATE = "C"
-        LC_CTYPE = "C";
 
-      CREATE USER "gitea";
-      CREATE DATABASE "gitea" WITH OWNER "gitea"
-        TEMPLATE template0
-        LC_COLLATE = "C"
-        LC_CTYPE = "C";
-    '';
     # From http://pgconfigurator.cybertec.at/; https://git.darmstadt.ccc.de/maralorn/nixos-config/-/blob/master/nixos/roles/matrix-synapse/postgres-tuning.nix
     settings = {
       # Connectivity;

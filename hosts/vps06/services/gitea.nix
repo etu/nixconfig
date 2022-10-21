@@ -12,6 +12,14 @@
     locations."/".proxyPass = "http://127.0.0.1:3000/";
   };
 
+  services.postgresql = {
+    ensureDatabases = [ "gitea" ];
+    ensureUsers = [{
+      name = "gitea";
+      ensurePermissions."DATABASE gitea" = "ALL PRIVILEGES";
+    }];
+  };
+
   services.gitea.enable = true;
   services.gitea.appName = "Elis Git Service";
   services.gitea.domain = "git.elis.nu";
