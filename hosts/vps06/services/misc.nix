@@ -4,8 +4,6 @@
   # Enable the ip-failar-nu service
   services.ip-failar-nu.enable = true;
 
-  # Set up NGiNX
-  services.nginx.enable = true;
   services.nginx.virtualHosts = {
     "ip.failar.nu" = {
       addSSL = true;

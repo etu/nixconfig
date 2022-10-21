@@ -21,6 +21,7 @@ in
     # Import matrix settings
     ./services/matrix.nix
     ./services/misc.nix
+    ./services/postgres.nix
   ];
 
   # Set hostname
@@ -49,4 +50,15 @@ in
 
   # Install mosh
   programs.mosh.enable = true;
+
+  # Set up Letsencrypt
+  security.acme.defaults.email = config.etu.user.email;
+  security.acme.acceptTerms = true;
+
+  etu.base.zfs.system.directories = [
+    # Persistence of certificates for nginx
+    "/var/lib/acme"
+  ];
+
+  services.nginx.enable = true;
 }
