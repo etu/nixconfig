@@ -79,9 +79,6 @@ in
   # Install ADB for occational android device things
   programs.adb.enable = true;
 
-  # Install netdata for system monitoring
-  services.netdata.enable = true;
-
   # Include agenix encripted secret for secret password file
   age.secrets = {
     inherit (ageModules) nixos-data-secret syncoid-workstations-ssh-ec;
