@@ -46,36 +46,6 @@ in
   # Install mosh
   programs.mosh.enable = true;
 
-  # List services that you want to enable:
-
-  # Set up Letsencrypt
-  security.acme.defaults.email = config.etu.user.email;
-  security.acme.acceptTerms = true;
-
   # Set up NGiNX
   services.nginx.enable = true;
-  services.nginx.virtualHosts = {
-    "keys.proxxi.org" = {
-      forceSSL = true;
-      enableACME = true;
-      locations."/".proxyPass = "http://127.0.0.1:11371/";
-    };
-  };
-
-  # Open Firewall for HTTP, HTTPS and hkp (keyserver)
-  networking.firewall.allowedTCPPorts = [ 80 443 11371 ];
-
-  # Postgres
-  services.postgresql.enable = true;
-  services.postgresql.package = pkgs.postgresql_11;
-  services.postgresql.ensureDatabases = [
-    "hockeypuck"
-  ];
-  services.postgresql.ensureUsers = [{
-    name = "hockeypuck";
-    ensurePermissions."DATABASE hockeypuck" = "ALL PRIVILEGES";
-  }];
-
-  # Enable hockeypuck keyserver
-  services.hockeypuck.enable = true;
 }

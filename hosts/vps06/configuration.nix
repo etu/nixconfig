@@ -20,6 +20,7 @@ in
 
     # Import matrix settings
     ./services/gitea.nix
+    ./services/hockeypuck.nix
     ./services/matrix.nix
     ./services/misc.nix
     ./services/postgres.nix
