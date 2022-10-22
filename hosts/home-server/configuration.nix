@@ -17,6 +17,7 @@ in
     ./network-wait-hook.nix
 
     # Import local services that are host specific
+    ./services/cfdyndns.nix
     ./services/guest-users.nix
     ./services/hass.nix
     ./services/home-nginx.nix

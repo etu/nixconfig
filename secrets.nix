@@ -29,6 +29,7 @@ in
   "secrets/any/hashed-root-password-file.age".publicKeys = etu ++ hosts.all;
   "secrets/agrajag/etu_at_aarch64.nixos.community.age".publicKeys = etu ++ hosts.agrajag;
   "secrets/agrajag/etu_at_aarch64.nixos.community.pub.age".publicKeys = etu ++ hosts.agrajag;
+  "secrets/fenchurch/cloudflare-api-env.age".publicKeys = etu ++ hosts.fenchurch;
   "secrets/fenchurch/etu-freshrss-password.age".publicKeys = etu ++ hosts.fenchurch;
   "secrets/fenchurch/grafana-admin-password.age".publicKeys = etu ++ hosts.fenchurch;
   "secrets/fenchurch/initrd-sshd-ec.age".publicKeys = etu ++ hosts.fenchurch;

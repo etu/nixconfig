@@ -9,6 +9,11 @@
 
   # Age module definitions that is to be used by hosts to get secrets.
   ageModules = {
+    cloudflare-api-env = {
+      file = ./secrets/fenchurch/cloudflare-api-env.age;
+      owner = "root";
+      mode = "400";
+    };
     hashed-etu-password = {
       file = ./secrets/any/hashed-etu-password-file.age;
       owner = "etu";
