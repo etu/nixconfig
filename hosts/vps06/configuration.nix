@@ -32,6 +32,12 @@ in
   # Settings needed for ZFS
   networking.hostId = "77a4b2cc";
 
+  # Enable weekly garbage-collection and daily store optimization.
+  nix.gc.automatic = true;
+  nix.gc.dates = "weekly";
+  nix.optimise.automatic = true;
+  nix.optimise.dates = [ "daily" ];
+
   # My module settings
   etu = {
     stateVersion = "22.11";
