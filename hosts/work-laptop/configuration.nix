@@ -61,8 +61,8 @@ in
     base.syncoid.enable = true;
     # Enable syncing of some filesystems
     base.syncoid.commands = {
-      "zroot/safe/data".target = "root@home.elis.nu:zroot/backups/work/data";
-      "zroot/safe/home".target = "root@home.elis.nu:zroot/backups/work/home";
+      "zroot/safe/data".target = "root@home.elis.nu:zroot/backups/current/work/data";
+      "zroot/safe/home".target = "root@home.elis.nu:zroot/backups/current/work/home";
     };
   };
 

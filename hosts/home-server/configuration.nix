@@ -73,9 +73,9 @@ in
     base.syncoid.enable = true;
     # Enable syncing of some filesystems
     base.syncoid.commands = {
-      "root@vps04.elis.nu:zroot/safe/data".target = "zroot/backups/vps04/data";
-      "root@vps04.elis.nu:zroot/safe/home".target = "zroot/backups/vps04/home";
-      "root@vps06.elis.nu:zroot/safe/data".target = "zroot/backups/vps06/data";
+      "root@vps04.elis.nu:zroot/safe/data".target = "zroot/backups/current/vps04/data";
+      "root@vps04.elis.nu:zroot/safe/home".target = "zroot/backups/current/vps04/home";
+      "root@vps06.elis.nu:zroot/safe/data".target = "zroot/backups/current/vps06/data";
     };
   };
 
