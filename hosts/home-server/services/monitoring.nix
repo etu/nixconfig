@@ -40,6 +40,19 @@ in {
     };
   };
 
+  virtualisation.oci-containers.containers = {
+    nzbget-exporter = {
+      image = "frebib/nzbget-exporter:0.2.2";
+      environment = {
+        NZBGET_HOST = "http://local.elis.nu/nzbget";
+        NZBGET_USERNAME = "";
+        NZBGET_PASSWORD = "";
+      };
+      extraOptions = [ "--network=host" ];
+      ports = [ "9452" ];
+    };
+  };
+
   # Configure prometheus to gather the data.
   services.prometheus.scrapeConfigs = [
     {
@@ -66,6 +79,10 @@ in {
     {
       job_name = "zfs_exporter";
       static_configs = [{ targets = [ "127.0.0.1:9134" ]; }];
+    }
+    {
+      job_name = "nzbget";
+      static_configs = [{ targets = [ "127.0.0.1:9452" ]; }];
     }
   ];
 

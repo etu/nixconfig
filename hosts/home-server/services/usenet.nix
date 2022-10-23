@@ -7,6 +7,7 @@
     let
       onlyLan = ''
         allow 192.168.1.0/24;
+        allow 127.0.0.1/24;
         deny all;
       '';
     in
