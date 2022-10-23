@@ -1,4 +1,4 @@
-update-all: update-nixpkgs update-niv update-hass update-zwavejs2mqtt update-mosquitto update-nzbget-exporter
+update-all: update-nixpkgs update-niv update-firefox-extensions update-hass update-zwavejs2mqtt update-mosquitto update-nzbget-exporter
 
 update-nixpkgs:
 	@echo "Updating nixpkgs to latest nixos-unstable"
@@ -7,6 +7,10 @@ update-nixpkgs:
 update-niv:
 	@echo "Updating niv dependencies"
 	@niv update
+
+update-firefox-extensions:
+	@echo "Updating firefox extensions"
+	@nix-shell modules/graphical/firefox/generate.py
 
 update-hass:
 	@echo "Updating to latest home assistant container"

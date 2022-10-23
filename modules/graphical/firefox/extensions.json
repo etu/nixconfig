@@ -1,0 +1,58 @@
+{
+  "browserpass-ce": {
+    "pname": "browserpass-ce",
+    "version": "3.7.2",
+    "addonId": "browserpass@maximbaz.com",
+    "url": "https://addons.mozilla.org/firefox/downloads/file/3711209/browserpass_ce-3.7.2.xpi",
+    "sha256": "sha256:b1781405b46f3274697885b53139264dca2ab56ffc4435c093102ad5ebc59297"
+  },
+  "elasticvue": {
+    "pname": "elasticvue",
+    "version": "0.42.0",
+    "addonId": "{2879bc11-6e9e-4d73-82c9-1ed8b78df296}",
+    "url": "https://addons.mozilla.org/firefox/downloads/file/3979473/elasticvue-0.42.0.xpi",
+    "sha256": "sha256:b8afa571dc137dd88ca6b700c7c3451f37958b6668194b98f3081f29d81f0bb5"
+  },
+  "https-everywhere": {
+    "pname": "https-everywhere",
+    "version": "2021.7.13",
+    "addonId": "https-everywhere@eff.org",
+    "url": "https://addons.mozilla.org/firefox/downloads/file/3809748/https_everywhere-2021.7.13.xpi",
+    "sha256": "sha256:e261461b5d4d3621285fce70773558184d691c614b330744dab672f032db731c"
+  },
+  "multi-account-containers": {
+    "pname": "multi-account-containers",
+    "version": "8.0.7",
+    "addonId": "@testpilot-containers",
+    "url": "https://addons.mozilla.org/firefox/downloads/file/3932862/multi_account_containers-8.0.7.xpi",
+    "sha256": "sha256:0e60e00c13dcc372b43ddb2e5428c2e3c1e79d2b23d7166df82d45245edc4f10"
+  },
+  "privacy-badger17": {
+    "pname": "privacy-badger17",
+    "version": "2022.9.27",
+    "addonId": "jid1-MnnxcxisBPnSXQ@jetpack",
+    "url": "https://addons.mozilla.org/firefox/downloads/file/4008174/privacy_badger17-2022.9.27.xpi",
+    "sha256": "sha256:8a0e456dfac801ea437164192f0a0659ee7227a519db97aceeb221f48f74d44a"
+  },
+  "sidebery": {
+    "pname": "sidebery",
+    "version": "4.10.2",
+    "addonId": "{3c078156-979c-498b-8990-85f7987dd929}",
+    "url": "https://addons.mozilla.org/firefox/downloads/file/3994928/sidebery-4.10.2.xpi",
+    "sha256": "sha256:60e35f2bfac88e5b2b4e044722dde49b4ed0eca9e9216f3d67dafdd9948273ac"
+  },
+  "terms-of-service-didnt-read": {
+    "pname": "terms-of-service-didnt-read",
+    "version": "4.1.2",
+    "addonId": "jid0-3GUEt1r69sQNSrca5p8kx9Ezc3U@jetpack",
+    "url": "https://addons.mozilla.org/firefox/downloads/file/3827536/terms_of_service_didnt_read-4.1.2.xpi",
+    "sha256": "sha256:886263dd428e08cc857275b771f7d28ec0e89a7663c1512607d61dd233f83fa8"
+  },
+  "ublock-origin": {
+    "pname": "ublock-origin",
+    "version": "1.44.4",
+    "addonId": "uBlock0@raymondhill.net",
+    "url": "https://addons.mozilla.org/firefox/downloads/file/4003969/ublock_origin-1.44.4.xpi",
+    "sha256": "sha256:0be550c9a27c040d04ad71954dd9e9a4967a27d48ffa2cdfe91171752e152685"
+  }
+}
