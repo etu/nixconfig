@@ -8,6 +8,10 @@ pkgs.mkShell {
   buildInputs = [
     agenix
 
+    pkgs.cacert # Install certs for curl to work in pure shells
+    pkgs.curl
+    pkgs.jq     # For parsing json downloaded with curl
+
     pkgs.niv
     pkgs.nixpkgs-fmt
   ];
