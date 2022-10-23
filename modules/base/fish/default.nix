@@ -96,25 +96,39 @@ let
       "fish_prompt" = ''
         set last_ret $status
 
-        if not set -q __fish_prompt_hostname
-          set -g __fish_prompt_hostname (hostname|cut -d . -f 1)
-        end
-
         set PROMPT ""
 
-        # Add User
-        set PROMPT $PROMPT(set_color -b 585858)(set_color bbbbbb)' '$USER' '
+        # Add user depending on if you're admin or not
+        switch $USER
+          case '${config.etu.user.username}'
+            set PROMPT $PROMPT(set_color -b 585858)(set_color bbbbbb)' 👤 '
 
-        # Add hostname
-        set PROMPT $PROMPT(set_color -b 444444)' '$__fish_prompt_hostname' '
+          case 'root' # Make a red background on root user to make it stand out.
+            set PROMPT $PROMPT(set_color -b d7005f)(set_color faf5e3)' 👤 '
+
+          case '*'
+            set PROMPT $PROMPT(set_color -b 585858)(set_color bbbbbb)' 👤 '$USER' '
+        end
+
+        # Set a variable to remember "who am i" output length to reduce the amount of subshells during usage.
+        if not set -q __fish_prompt_who_am_i_count
+          set -g __fish_prompt_who_am_i_count (who am i | wc -l)
+        end
+
+        # Add hostname if it's a remote connection
+        if test $__fish_prompt_who_am_i_count = 0
+          set PROMPT $PROMPT(set_color -b 444444)' 💻 '
+        else
+          set PROMPT $PROMPT(set_color -b 444444)' 🔗 '$hostname' '
+        end
 
         # Add CWD (home|root) with colors
         switch (prompt_pwd)
           case '~*' # If in home, add a nice colored ~
-            set PROMPT $PROMPT(set_color -b 0087af)(set_color faf5e3)' ~ '
+            set PROMPT $PROMPT(set_color -b 0087af)(set_color faf5e3)' 🏠 '
 
           case '*' # If not in home, probably in or somewhere below /, add a nice colored /
-            set PROMPT $PROMPT(set_color -b afa700)(set_color faf5e3)' / '
+            set PROMPT $PROMPT(set_color -b f1c40f)(set_color 000000)' 📁 '
         end
 
         # Add the rest of the CWD
@@ -122,40 +136,33 @@ let
           set PROMPT $PROMPT(set_color -b 3a3a3a)(set_color bbbbbb)(prompt_pwd | sed -e 's/^~//' -e 's:/: :g')' '
         end
 
-        # Add colors depending on if previous command was successful or not
+        # Add colors and symbols depending on if previous command was successful or not
         if test $last_ret = 0
-          set PROMPT $PROMPT(set_color -b 5faf00)(set_color faf5e3)
+          set PROMPT $PROMPT(set_color -b 5faf00)(set_color faf5e3)' 👍 '
         else
-          set PROMPT $PROMPT(set_color -b d7005f)(set_color faf5e3)
-        end
-
-        # Add sign at end of prompt depending on user
-        if test (id -u) -eq 0
-          set PROMPT $PROMPT' # '
-        else
-          set PROMPT $PROMPT' $ '
+          set PROMPT $PROMPT(set_color -b d7005f)(set_color faf5e3)' 👎 '
         end
 
         # Print prompt, also reset color and put an extra space there
-        builtin echo -ns $PROMPT (set_color normal) " "
+        builtin echo -ns $PROMPT (set_color normal)' '
       '';
       # Render right prompt
       "fish_right_prompt" = ''
-        set PROMPT (set_color -b 585858)(set_color bbbbbb)" "(date +%H:%M:%S)" "
+        set PROMPT ""
 
-        set git_prompt (__fish_git_prompt ' %s ')
-
-        if test $status = 0
-          set PROMPT (set_color -b 444444)(set_color bbbbbb)$git_prompt$PROMPT
-        end
-
+        # Add nix shell indicatior
         if test -n "$IN_NIX_SHELL"
-          if test "$IN_NIX_SHELL" = "pure"
-            set PROMPT (set_color -b 0087af)(set_color faf5e3)" ❄ ️"$PROMPT
-          else
-            set PROMPT (set_color -b 897e01)(set_color faf5e3)" ❄ ️"$PROMPT
-          end
+          set PROMPT $PROMPT(set_color -b 0087af)(set_color faf5e3)' ❄ '
         end
+
+        # Add git branch
+        set git_prompt (__fish_git_prompt '%s ')
+        if test $status = 0
+          set PROMPT $PROMPT(set_color -b 444444)(set_color bbbbbb)' 🔀 '$git_prompt
+        end
+
+        # Add time
+        set PROMPT $PROMPT(set_color -b 585858)(set_color bbbbbb)' '(date +%H:%M:%S)' '
 
         builtin echo -ns $PROMPT(set_color normal)
       '';
