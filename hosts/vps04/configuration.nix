@@ -32,6 +32,7 @@ in
   # Enable weekly garbage-collection and daily store optimization.
   nix.gc.automatic = true;
   nix.gc.dates = "weekly";
+  nix.gc.options = "--delete-older-than 7d";
   nix.optimise.automatic = true;
   nix.optimise.dates = [ "daily" ];
 
