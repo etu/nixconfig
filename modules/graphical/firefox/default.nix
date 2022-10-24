@@ -91,7 +91,17 @@ in {
             # Do Not Track header
             "privacy.donottrackheader.enabled" = true;
             "privacy.donottrackheader.value" = 1;
+
+            # Enable userChrome customisations
+            "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
           };
+          userChrome = ''
+            /* Completely hide tabs */
+            #TabsToolbar { visibility: collapse; }
+
+            /* Hide sidebar header (from Sidebery / Tree-Style-Tabs) */
+            #sidebar-header { display: none; }
+          '';
         };
       };
     };
