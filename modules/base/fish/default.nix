@@ -117,9 +117,9 @@ let
 
         # Add hostname if it's a remote connection
         if test $__fish_prompt_who_am_i_count = 0
-          set PROMPT $PROMPT(set_color -b 444444)' 💻 '
+          set PROMPT $PROMPT(set_color -b 444444)(set_color bbbbbb)' 💻 '
         else
-          set PROMPT $PROMPT(set_color -b 444444)' 🔗 '$hostname' '
+          set PROMPT $PROMPT(set_color -b 444444)(set_color bbbbbb)' 🔗 '$hostname' '
         end
 
         # Add CWD (home|root) with colors
