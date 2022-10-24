@@ -98,7 +98,7 @@ in {
 
     # Enable persistence for firefox files.
     etu.base.zfs.user.directories = [
-      ".mozilla/firefox"
+      ".mozilla/firefox/default"
     ];
   };
 }
