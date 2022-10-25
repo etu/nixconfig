@@ -63,12 +63,13 @@ in
       "zroot/safe/home".use_template = [ "home" ];
 
       # Enable cleanup for synced backups
-      "zroot/backups/agrajag/data" = { use_template = [ "data" ]; autosnap = false; };
-      "zroot/backups/agrajag/home" = { use_template = [ "home" ]; autosnap = false; };
-      "zroot/backups/work/data" = { use_template = [ "data" ]; autosnap = false; };
-      "zroot/backups/work/home" = { use_template = [ "home" ]; autosnap = false; };
-      "zroot/backups/vps04/data" = { use_template = [ "data" ]; autosnap = false; };
-      "zroot/backups/vps04/home" = { use_template = [ "home" ]; autosnap = false; };
+      "zroot/backups/current/private/data" = { use_template = [ "data" ]; autosnap = false; };
+      "zroot/backups/current/private/home" = { use_template = [ "home" ]; autosnap = false; };
+      "zroot/backups/current/vps04/data" = { use_template = [ "data" ]; autosnap = false; };
+      "zroot/backups/current/vps04/home" = { use_template = [ "home" ]; autosnap = false; };
+      "zroot/backups/current/vps06/data" = { use_template = [ "data" ]; autosnap = false; };
+      "zroot/backups/current/work/data" = { use_template = [ "data" ]; autosnap = false; };
+      "zroot/backups/current/work/home" = { use_template = [ "home" ]; autosnap = false; };
 
       # Enable snapshotting for bulk storage
       "zstorage/files".use_template = [ "storage" ];
