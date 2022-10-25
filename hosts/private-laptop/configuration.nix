@@ -92,7 +92,7 @@ in
 
   age.secrets = {
     inherit (ageModules) "etu@aarch64.nixos.community" "etu@aarch64.nixos.community.pub";
-    inherit (ageModules) nixos-data-secret syncoid-workstations-ssh-ec;
+    inherit (ageModules) syncoid-workstations-ssh-ec;
   };
 
   # Set up remote builds

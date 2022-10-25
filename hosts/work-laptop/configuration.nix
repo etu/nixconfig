@@ -81,7 +81,7 @@ in
 
   # Include agenix encripted secret for secret password file
   age.secrets = {
-    inherit (ageModules) nixos-data-secret syncoid-workstations-ssh-ec;
+    inherit (ageModules) syncoid-workstations-ssh-ec;
   };
 
   # Enable ClamAV.

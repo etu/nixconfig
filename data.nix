@@ -1,12 +1,4 @@
 {
-  # Read real secrets from the age encrypted file if it exists,
-  # otherwise it should refuse to build.
-  secrets = (
-    if builtins.pathExists ./.data-secrets.nix
-    then import ./.data-secrets.nix
-    else throw "Couldn't read real secrets from /etc/nixos/.data-secrets.nix"
-  );
-
   # Age module definitions that is to be used by hosts to get secrets.
   ageModules = {
     cloudflare-api-env = {
@@ -74,12 +66,6 @@
       file = ./secrets/fenchurch/grafana-admin-password.age;
       owner = "grafana";
       path = "/var/lib/grafana/admin-password";
-    };
-    nixos-data-secret = {
-      file = ./secrets/workstations/nixos-data-secrets.nix.age;
-      path = "/data/etc/nixos/.data-secrets.nix";
-      owner = "etu";
-      mode = "400";
     };
     syncoid-fenchurch-ssh-ec = {
       file = ./secrets/fenchurch/syncoid-ssh-ec.age;

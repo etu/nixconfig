@@ -20,10 +20,6 @@ jobs:
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
           skipPush: true
 
-      # Populate a fake secrets file.
-      - name: Populate a fake secrets file
-        run: echo '{ mittensFtp.hostname = ""; mittensFtp.user = ""; }' > .data-secrets.nix
-
       # Build systems.
       - name: Build private-laptop system derivation
         run: nix-build '<nixpkgs/nixos>' -I nixos-config=./hosts/private-laptop/configuration.nix -I nixpkgs=./nix/nixos-unstable -A system

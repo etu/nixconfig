@@ -37,6 +37,5 @@ in
   "secrets/fenchurch/syncoid-ssh-ec.age".publicKeys = etu ++ hosts.fenchurch;
   "secrets/vps04/flummbot.toml.age".publicKeys = etu ++ hosts.vps04;
   "secrets/vps04/hashed-ozeloten-password-file.age".publicKeys = etu ++ hosts.vps04;
-  "secrets/workstations/nixos-data-secrets.nix.age".publicKeys = etu ++ hosts.agrajag ++ hosts.work;
   "secrets/workstations/syncoid-ssh-ec.age".publicKeys = etu ++ hosts.agrajag ++ hosts.work;
 }

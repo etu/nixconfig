@@ -19,10 +19,6 @@ jobs:
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
           skipPush: true
 
-      # Populate a fake secrets file.
-      - name: Populate a fake secrets file
-        run: echo '{ mittensFtp.hostname = ""; mittensFtp.user = ""; }' > .data-secrets.nix
-
       # Do updates of nixpkgs and other dependencies.
       - name: Update all dependencies
         run: nix-shell --run 'make update-all'

@@ -1,9 +1,6 @@
 { config, lib, pkgs, ... }:
 
 let
-  # Import my secrets
-  secrets = (import ../../data.nix).secrets;
-
   # Import age secrets paths and metadata.
   ageModules = (import ../../data.nix).ageModules;
 
@@ -161,14 +158,6 @@ in
     fsType = "zfs";
     options = [ "noauto" "x-systemd.automount" ];
     #noCheck = true;
-  };
-
-  # Add mittens FTP mount.
-  fileSystems."/media/zstorage/files/mount/mittens" = {
-    device = "${pkgs.curlftpfs}/bin/curlftpfs#${secrets.mittensFtp.user}@${secrets.mittensFtp.hostname}";
-    fsType = "fuse";
-    options = [ "ro" "auto" "user" "uid=${toString config.users.users.downloads.uid}" "allow_other" "_netdev" ];
-    noCheck = true;
   };
 
   # Persistence of certain hosts paths and home directory paths.
