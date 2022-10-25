@@ -20,5 +20,6 @@ in
     ./graphical
     ./services
     ./user
+    ./work
   ];
 }

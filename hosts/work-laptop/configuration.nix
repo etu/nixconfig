@@ -64,6 +64,9 @@ in
       "zroot/safe/data".target = "root@home.elis.nu:zroot/backups/current/work/data";
       "zroot/safe/home".target = "root@home.elis.nu:zroot/backups/current/work/home";
     };
+
+    # Enable work modules
+    work.enable = true;
   };
 
   # Set NIX_PATH for nixos config and nixpkgs

@@ -1,4 +1,4 @@
-update-all: update-nixpkgs update-niv update-firefox-extensions update-hass update-zwavejs2mqtt update-mosquitto update-nzbget-exporter
+update-all: update-nixpkgs update-niv update-firefox-extensions update-hass update-zwavejs2mqtt update-mosquitto update-nzbget-exporter update-chalet
 
 update-nixpkgs:
 	@echo "Updating nixpkgs to latest nixos-unstable"
@@ -27,3 +27,7 @@ update-mosquitto:
 update-nzbget-exporter:
 	@echo "Updating to latest nzbget-exporter container"
 	@sed -i -r 's#(frebib/nzbget-exporter):[0-9]+\.[0-9]+\.[0-9]+#\1:'`curl 'https://hub.docker.com/v2/namespaces/frebib/repositories/nzbget-exporter/tags' | jq '.results[1].name' | sed 's/"//g'`'#' hosts/home-server/services/monitoring.nix
+
+update-chalet:
+	@echo "Update chalet dependencies"
+	@nix-shell modules/work/packages/chalet/update.sh
