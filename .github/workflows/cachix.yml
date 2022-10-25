@@ -16,7 +16,7 @@ jobs:
       - uses: cachix/cachix-action@v11
         with:
           name: etu
-          extraPullNames: "nix-community,fossar"
+          extraPullNames: "nix-community"
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
           skipPush: true
 

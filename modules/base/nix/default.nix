@@ -16,12 +16,10 @@
 
     # Extra binary caches
     nix.settings.substituters = [
-      "https://fossar.cachix.org"
       "https://nix-community.cachix.org"
       "https://etu.cachix.org"
     ];
     nix.settings.trusted-public-keys = [
-      "fossar.cachix.org-1:Zv6FuqIboeHPWQS7ysLCJ7UT7xExb4OE8c4LyGb5AsE="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "etu.cachix.org-1:CeyfbMJZHZ95TScp8+I8+EeyzbncqPSj1xfCK9vOAFE="
     ];
