@@ -6,6 +6,15 @@ in {
   options.etu.work.enable = lib.mkEnableOption "Enables work module";
 
   config = lib.mkIf config.etu.work.enable {
+    # Configure PHP to be the correct version with the right extensions
+    nixpkgs.overlays = [
+      (self: super: {
+        php = pkgs.php81.withExtensions ({ all, enabled }:
+          enabled ++ (with all; [ imagick memcached redis pcov ])
+        );
+      })
+    ];
+
     etu.user.extraUserPackages = [
       # Install chalet to manage running of containers
       myPkgs.chalet
