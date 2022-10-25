@@ -73,7 +73,7 @@
     grafana-admin-password = {
       file = ./secrets/fenchurch/grafana-admin-password.age;
       owner = "grafana";
-      # path is defined in usage location.
+      path = "/var/lib/grafana/admin-password";
     };
     nixos-data-secret = {
       file = ./secrets/workstations/nixos-data-secrets.nix.age;

@@ -89,28 +89,31 @@ in {
 
   # Enable grafana.
   services.grafana.enable = true;
-  services.grafana.addr = "0.0.0.0";
-  services.grafana.port = 3030;
-  services.grafana.domain = "grafana.elis.nu";
+  services.grafana.settings.server.http_addr = "0.0.0.0";
+  services.grafana.settings.server.http_port = 3030;
+  services.grafana.settings.server.domain = "grafana.elis.nu";
 
   # Set an admin password.
-  services.grafana.security.adminUser = "admin";
-  services.grafana.security.adminPasswordFile = "/var/lib/grafana/admin-password";
+  services.grafana.settings.security.admin_user = "admin";
+  services.grafana.settings.security.admin_password = "$__file{${config.age.secrets.grafana-admin-password.path}}";
 
   # Provision datasources for me.
   services.grafana.provision.enable = true;
-  services.grafana.provision.datasources = [
-    {
-      isDefault = true;
-      name = "Prometheus";
-      type = "prometheus";
-      url = "http://127.0.0.1:${toString config.services.prometheus.port}";
-    }
-  ];
+  services.grafana.provision.datasources.settings = {
+    apiVersion = 1;
+    datasources = [
+      {
+        isDefault = true;
+        name = "Prometheus";
+        type = "prometheus";
+        url = "http://127.0.0.1:${toString config.services.prometheus.port}";
+      }
+    ];
+  };
 
   # Decrypt secret to expected location.
-  age.secrets.grafana-admin-password = ageModules.grafana-admin-password // {
-    path = config.services.grafana.security.adminPasswordFile;
+  age.secrets = {
+    inherit (ageModules) grafana-admin-password;
   };
 
   networking.firewall.allowedTCPPorts = [ 3030 ];
