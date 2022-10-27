@@ -15,6 +15,11 @@ in {
       })
     ];
 
+    # Allow certain unfree packages.
+    etu.base.nix.allowUnfree = [
+      "appgate-sdp"
+    ];
+
     etu.user.extraUserPackages = [
       # Install chalet to manage running of containers
       myPkgs.chalet
@@ -22,5 +27,8 @@ in {
       # Install make
       pkgs.gnumake
     ];
+
+    # Enable appgate
+    programs.appgate-sdp.enable = true;
   };
 }
