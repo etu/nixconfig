@@ -5,9 +5,6 @@ let
     # Enable fish in home-manager
     programs.fish.enable = true;
     programs.fish.shellInit = ''
-      # Set editor
-      set --global --export EDITOR emacs
-
       # Fix highligting of search-matches of background in less when we have TERM=screen
       set --global --export LESS_TERMCAP_se (builtin echo -e '\e[0m')
       set --global --export LESS_TERMCAP_so (builtin echo -e '\e[38;5;16m\e[48;5;15m')

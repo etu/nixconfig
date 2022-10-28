@@ -118,6 +118,9 @@ in
       home.packages = config.etu.user.extraUserPackages ++ [
         pkgs.stow
       ];
+
+      # Set the environment variables.
+      home.sessionVariables.EDITOR = if config.etu.base.emacs.enable then "emacs" else "nano";
     };
 
     # Directories to mount persistent for my user
