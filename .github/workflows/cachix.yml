@@ -13,7 +13,7 @@ jobs:
         with:
           submodules: recursive
       - uses: cachix/install-nix-action@v18
-      - uses: cachix/cachix-action@v11
+      - uses: cachix/cachix-action@v12
         with:
           name: etu
           extraPullNames: "nix-community"
