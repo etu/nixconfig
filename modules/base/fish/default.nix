@@ -106,7 +106,7 @@ let
           case 'root' # Make a red background on root user to make it stand out.
             set PROMPT $PROMPT(set_color -b d7005f)(set_color faf5e3)' 👤 '
 
-          case '*'
+          case '*' # Also print username if not my own user or root.
             set PROMPT $PROMPT(set_color -b 585858)(set_color bbbbbb)' 👤 '$USER' '
         end
 
@@ -124,10 +124,10 @@ let
 
         # Add CWD (home|root) with colors
         switch (prompt_pwd)
-          case '~*' # If in home, add a nice colored ~
+          case '~*' # If in home, add a background block and a house
             set PROMPT $PROMPT(set_color -b 0087af)(set_color faf5e3)' 🏠 '
 
-          case '*' # If not in home, probably in or somewhere below /, add a nice colored /
+          case '*' # If not in home, probably in or somewhere below /, add a different colored block and a folder icon
             set PROMPT $PROMPT(set_color -b f1c40f)(set_color 000000)' 📁 '
         end
 
