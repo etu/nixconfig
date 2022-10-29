@@ -65,7 +65,6 @@
     grafana-admin-password = {
       file = ./secrets/fenchurch/grafana-admin-password.age;
       owner = "grafana";
-      path = "/var/lib/grafana/admin-password";
     };
     syncoid-fenchurch-ssh-ec = {
       file = ./secrets/fenchurch/syncoid-ssh-ec.age;
