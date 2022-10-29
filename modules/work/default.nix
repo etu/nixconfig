@@ -45,7 +45,7 @@ in {
 
       # Misc
       pkgs.google-chrome
-      pkgs.mysql57
+      pkgs.mariadb
       pkgs.slack
     ];
 
