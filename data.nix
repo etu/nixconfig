@@ -1,37 +1,19 @@
 {
   # Age module definitions that is to be used by hosts to get secrets.
   ageModules = {
-    cloudflare-api-env = {
-      file = ./secrets/fenchurch/cloudflare-api-env.age;
-      owner = "root";
-      mode = "400";
-    };
-    hashed-etu-password = {
-      file = ./secrets/any/hashed-etu-password-file.age;
-      owner = "etu";
-      mode = "400";
-    };
-    hashed-root-password = {
-      file = ./secrets/any/hashed-root-password-file.age;
-      owner = "root";
-      mode = "400";
-    };
-    hashed-ozeloten-password = {
-      file = ./secrets/vps04/hashed-ozeloten-password-file.age;
-      owner = "ozeloten";
-      mode = "400";
-    };
+    cloudflare-api-env.file = ./secrets/fenchurch/cloudflare-api-env.age;
+    hashed-etu-password.file = ./secrets/any/hashed-etu-password-file.age;
+    hashed-root-password.file = ./secrets/any/hashed-root-password-file.age;
+    hashed-ozeloten-password.file = ./secrets/vps04/hashed-ozeloten-password-file.age;
     "etu@aarch64.nixos.community" = {
       file = ./secrets/agrajag/etu_at_aarch64.nixos.community.age;
       path = "/data/home/etu/.ssh/etu@aarch64.nixos.community";
       owner = "etu";
-      mode = "400";
     };
     "etu@aarch64.nixos.community.pub" = {
       file = ./secrets/agrajag/etu_at_aarch64.nixos.community.pub.age;
       path = "/data/home/etu/.ssh/etu@aarch64.nixos.community.pub";
       owner = "etu";
-      mode = "400";
     };
     fenchurch-initrd-sshd-ec = {
       file = ./secrets/fenchurch/initrd-sshd-ec.age;
@@ -39,7 +21,6 @@
       # doesn't get read on boot or when needed because... somewhow
       # it's hardcoded to it's old location.
       path = "/persistent/etc/initrd-ssh/ssh_host_ed_25519_key";
-      mode = "400";
       symlink = false;
     };
     fenchurch-initrd-sshd-rsa = {
@@ -48,19 +29,15 @@
       # doesn't get read on boot or when needed because... somewhow
       # it's hardcoded to it's old location.
       path = "/persistent/etc/initrd-ssh/ssh_host_rsa_key";
-      mode = "400";
       symlink = false;
     };
     freshrss-password-etu = {
       file = ./secrets/fenchurch/etu-freshrss-password.age;
       owner = "freshrss";
-      group = "freshrss";
     };
     flummbot-toml = {
       file = ./secrets/vps04/flummbot.toml.age;
       owner = "bots";
-      group = "bots";
-      # path is defined in usage location.
     };
     grafana-admin-password = {
       file = ./secrets/fenchurch/grafana-admin-password.age;
@@ -70,14 +47,12 @@
       file = ./secrets/fenchurch/syncoid-ssh-ec.age;
       path = "/var/lib/syncoid/.ssh/id_ed25519";
       owner = "syncoid";
-      mode = "400";
       symlink = false;
     };
     syncoid-workstations-ssh-ec = {
       file = ./secrets/workstations/syncoid-ssh-ec.age;
       path = "/var/lib/syncoid/.ssh/id_ed25519";
       owner = "syncoid";
-      mode = "400";
       symlink = false;
     };
   };
