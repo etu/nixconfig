@@ -4,9 +4,6 @@
 
 { config, pkgs, ... }:
 let
-  # Load secrets
-  secrets = (import ../../data.nix).secrets;
-
   # Import my ssh public keys
   keys = (import ../../data.nix).pubkeys;
 
