@@ -38,9 +38,6 @@ in
       passwordFile = config.age.secrets.freshrss-password-etu.path;
     };
 
-    # Fix updater for now
-    systemd.services.freshrss-updater.serviceConfig.ExecStart = lib.mkForce "${config.services.freshrss.package}/app/actualize_script.php";
-
     etu.base.zfs.system.directories = [
       # Bind mount for persistent data for freshrss
       "/var/lib/freshrss"
