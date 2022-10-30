@@ -7,7 +7,7 @@ let
 in
 {
   imports = [
-    <nixpkgs/nixos/modules/installer/scan/not-detected.nix>
+    ../../nix/nixos-unstable/nixos/modules/installer/scan/not-detected.nix
   ];
 
   # Configure boot loader.

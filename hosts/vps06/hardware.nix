@@ -2,7 +2,7 @@
 
 {
   imports = [
-    <nixpkgs/nixos/modules/profiles/qemu-guest.nix>
+    ../../nix/nixos-unstable/nixos/modules/profiles/qemu-guest.nix
   ];
 
   # Configure boot loader.

@@ -1,4 +1,4 @@
-{ pkgs ? import <nixpkgs> { }, ... }:
+{ pkgs ? import ../../../nix/nixos-unstable { }, ... }:
 
 let
   chaletPkg = (pkgs.callPackage ./chalet { }).package;
