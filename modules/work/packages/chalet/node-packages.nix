@@ -553,13 +553,13 @@ let
         sha512 = "L28STB170nwWS63UjtlEOE3dldQApaJXZkOI1uMFfzf3rRuPegHaHesyee+YxQ+W6SvRDQV6UrdOdRiR153wJg==";
       };
     };
-    "caniuse-lite-1.0.30001426" = {
+    "caniuse-lite-1.0.30001427" = {
       name = "caniuse-lite";
       packageName = "caniuse-lite";
-      version = "1.0.30001426";
+      version = "1.0.30001427";
       src = fetchurl {
-        url = "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001426.tgz";
-        sha512 = "n7cosrHLl8AWt0wwZw/PJZgUg3lV0gk9LMI7ikGJwhyhgsd2Nb65vKvmSexCqq/J7rbH3mFG6yZZiPR5dLPW5A==";
+        url = "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001427.tgz";
+        sha512 = "lfXQ73oB9c8DP5Suxaszm+Ta2sr/4tf8+381GkIm1MLj/YdLf+rEDyDSRCzeltuyTVGm+/s18gdZ0q+Wmp8VsQ==";
       };
     };
     "center-align-0.1.3" = {
@@ -3178,7 +3178,7 @@ let
       })
       sources."call-bind-1.0.2"
       sources."camelcase-5.3.1"
-      sources."caniuse-lite-1.0.30001426"
+      sources."caniuse-lite-1.0.30001427"
       sources."center-align-0.1.3"
       sources."chalet-0.10.2"
       sources."chalk-3.0.0"
