@@ -26,7 +26,7 @@ in {
         export CURRENT_IP_ADDRESS="$(${pkgs.curl}/bin/curl -s4 ip.failar.nu)"
         ${pkgs.coreutils}/bin/echo "Current IP is: $CURRENT_IP_ADDRESS"
 
-        export CURRENT_DNS_VALUE=$(${pkgs.curl}/bin/curl -s -X GET "https://api.cloudflare.com/client/v4/zones/$DNS_ZONE/dns_records/$DNS_RECORD" -H "Authorization: Bearer $AUTH_KEY" -H "Content-Type:application/json" | ${pkgs.jq}/bin/jq '.result["content"]' | ${pkgs.gnused}/bin/sed 's/"//g')
+        export CURRENT_DNS_VALUE=$(${pkgs.curl}/bin/curl -s -X GET "https://api.cloudflare.com/client/v4/zones/$DNS_ZONE/dns_records/$DNS_RECORD" -H "Authorization: Bearer $AUTH_KEY" -H "Content-Type:application/json" | ${pkgs.jq}/bin/jq -r '.result["content"]')
         ${pkgs.coreutils}/bin/echo "Current DNS value is: $CURRENT_DNS_VALUE"
 
         if test "$CURRENT_DNS_VALUE" != "$CURRENT_IP_ADDRESS"; then
