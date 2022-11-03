@@ -84,6 +84,9 @@ in
   environment.systemPackages = with pkgs; [ virt-manager ];
   virtualisation.spiceUSBRedirection.enable = true;
 
+  # Enable blueman.
+  services.blueman.enable = true;
+
   # Add community server to known hosts
   programs.ssh.knownHosts."aarch64.nixos.community".publicKey = keys.systems."aarch64.nixos.community";
 
