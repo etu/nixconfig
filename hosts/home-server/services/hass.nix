@@ -19,15 +19,13 @@
     '';
   };
 
-  virtualisation.oci-containers.backend = "docker";
   virtualisation.oci-containers.containers = {
     home-assistant = {
       environment.TZ = config.time.timeZone;
       image = "ghcr.io/home-assistant/home-assistant:2022.11.1";
       ports = [ "8123" ];
       extraOptions = [
-        "--privileged"
-        "--net=host"
+        "--network=host"
         "--device=/dev/serial/by-id/usb-dresden_elektronik_ingenieurtechnik_GmbH_ConBee_II_DE2124653-if00:/dev/ttyACM0"
       ];
       volumes = [
@@ -39,7 +37,7 @@
       image = "eclipse-mosquitto:2.0.15";
       ports = [ "1883:1883" ];
       extraOptions = [
-        "--net=host"
+        "--network=host"
       ];
       volumes = [
         "${config.etu.dataPrefix}/var/lib/mqtt/config:/mosquitto/config:ro"
@@ -55,7 +53,7 @@
       ];
       extraOptions = [
         "--device=/dev/serial/by-id/usb-0658_0200-if00:/dev/zwave"
-        "--net=host"
+        "--network=host"
       ];
       volumes = [
         "${config.etu.dataPrefix}/var/lib/zwavejs2mqtt:/usr/src/app/store"
