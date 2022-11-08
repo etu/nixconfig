@@ -53,6 +53,6 @@ jobs:
       - name: Cache vps06 system derivation
         run: realpath result | cachix push etu
 
-      - uses: stefanzweifel/git-auto-commit-action@v4.15.3
+      - uses: stefanzweifel/git-auto-commit-action@v4.15.4
         with:
           commit_message: "cron(treewide): Upgrade systems"
