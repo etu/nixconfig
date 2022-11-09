@@ -12,10 +12,9 @@ let
     fontsize = builtins.floor config.etu.graphical.theme.fonts.size;
   } "substituteAll ${./config.el} $out";
 
-  # Function to wrap loading of a different emacs lisp file with
-  # different garbage collection settings.
-  emacsLispLoader = loadFile: pkgs.writeText "${loadFile.name}-init.el" ''
-    ;;; ${loadFile.name}-init.el -- starts here
+  # Config to wrap loading of the emacs config file.
+  emacsConfigInit = pkgs.writeText "${emacsConfig.name}-init.el" ''
+    ;;; ${emacsConfig.name}-init.el -- starts here
     ;;; Commentary:
     ;;; Code:
 
@@ -35,12 +34,10 @@ let
           (file-name-handler-alist nil))
 
       ;; Load config
-      (load-file "${loadFile}"))
+      (load-file "${emacsConfig}"))
 
-    ;;; ${loadFile.name}-init.el ends here
+    ;;; ${emacsConfig.name}-init.el ends here
   '';
-
-  emacsConfigInit = emacsLispLoader emacsConfig;
 
   # Define language servers to include in the wrapper for Emacs
   extraBinPaths = [
@@ -60,16 +57,15 @@ let
   ];
 
   # Function to wrap emacs to contain the path for language servers
-  wrapEmacsWithExtraBinPaths = (
-    { emacs ? (buildEmacsPackage emacsPackages.${config.etu.base.emacs.package})
-    , binName ? "emacs"
-    , extraWrapperArgs ? "" }: pkgs.runCommand
-    "${emacs.name}-with-extra-bin-paths" { nativeBuildInputs = [ pkgs.makeWrapper ]; }
-    ''
-      makeWrapper ${emacs}/bin/emacs $out/bin/${binName} \
-        --prefix PATH : ${lib.makeBinPath extraBinPaths} ${extraWrapperArgs}
-    ''
-  );
+  wrapEmacsWithExtraBinPaths = {
+    emacs ? emacsPackages.${config.etu.base.emacs.package},
+    binName ? "emacs",
+    extraWrapperArgs ? ""
+  }: pkgs.runCommand "${emacs.name}-with-extra-bin-paths" { nativeBuildInputs = [ pkgs.makeWrapper ]; }
+  ''
+    makeWrapper ${buildEmacsPackage emacs}/bin/emacs $out/bin/${binName} \
+      --prefix PATH : ${lib.makeBinPath extraBinPaths} ${extraWrapperArgs}
+  '';
 
   buildEmacsPackage = emacsPackage: pkgs.emacsWithPackagesFromUsePackage {
     package = emacsPackage;
