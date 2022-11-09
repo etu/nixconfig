@@ -61,10 +61,13 @@ let
 
   # Function to wrap emacs to contain the path for language servers
   wrapEmacsWithExtraBinPaths = (
-    { emacs, binName ? "emacs" }: pkgs.runCommand
+    { emacs ? (buildEmacsPackage emacsPackages.${config.etu.base.emacs.package})
+    , binName ? "emacs"
+    , extraWrapperArgs ? "" }: pkgs.runCommand
     "${emacs.name}-with-extra-bin-paths" { nativeBuildInputs = [ pkgs.makeWrapper ]; }
     ''
-      makeWrapper ${emacs}/bin/emacs $out/bin/${binName} --prefix PATH : ${lib.makeBinPath extraBinPaths}
+      makeWrapper ${emacs}/bin/emacs $out/bin/${binName} \
+        --prefix PATH : ${lib.makeBinPath extraBinPaths} ${extraWrapperArgs}
     ''
   );
 
@@ -131,9 +134,7 @@ in
     services.emacs = {
       enable = true;
       defaultEditor = true;
-      package = (wrapEmacsWithExtraBinPaths {
-        emacs = buildEmacsPackage emacsPackages.${config.etu.base.emacs.package};
-      });
+      package = wrapEmacsWithExtraBinPaths { };
     };
 
     # Install emacs icons symbols if we have any kind of graphical emacs
@@ -144,8 +145,8 @@ in
     # If we have a wayland emacs installed, also install a X11 version as "emacs-x11"
     environment.systemPackages = (lib.optionals (config.etu.base.emacs.package == "wayland") ([
       (wrapEmacsWithExtraBinPaths {
-        emacs = buildEmacsPackage emacsPackages.default;
         binName = "emacs-x11";
+        extraWrapperArgs = "--unset WAYLAND_DISPLAY";
       })
     ]));
 
