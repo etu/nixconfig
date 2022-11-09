@@ -119,10 +119,6 @@ in
   security.acme.defaults.email = config.etu.user.email;
   security.acme.acceptTerms = true;
 
-  # Enable docker deamon
-  virtualisation.docker.enable = true;
-  virtualisation.docker.storageDriver = "zfs";
-
   users.users.downloads = { group = "downloads"; uid = 947; isSystemUser = true; };
   users.groups.downloads.gid = 947;
 }
