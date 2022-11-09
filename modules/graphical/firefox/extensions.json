@@ -8,10 +8,10 @@
   },
   "elasticvue": {
     "pname": "elasticvue",
-    "version": "0.42.0",
+    "version": "0.43.0",
     "addonId": "{2879bc11-6e9e-4d73-82c9-1ed8b78df296}",
-    "url": "https://addons.mozilla.org/firefox/downloads/file/3979473/elasticvue-0.42.0.xpi",
-    "sha256": "sha256:b8afa571dc137dd88ca6b700c7c3451f37958b6668194b98f3081f29d81f0bb5"
+    "url": "https://addons.mozilla.org/firefox/downloads/file/4026667/elasticvue-0.43.0.xpi",
+    "sha256": "sha256:ae1de83ee43135594fc43ee6086e84b0461ed072de9e8f84a2b93e3e63994919"
   },
   "https-everywhere": {
     "pname": "https-everywhere",
@@ -50,9 +50,9 @@
   },
   "ublock-origin": {
     "pname": "ublock-origin",
-    "version": "1.44.4",
+    "version": "1.45.0",
     "addonId": "uBlock0@raymondhill.net",
-    "url": "https://addons.mozilla.org/firefox/downloads/file/4003969/ublock_origin-1.44.4.xpi",
-    "sha256": "sha256:0be550c9a27c040d04ad71954dd9e9a4967a27d48ffa2cdfe91171752e152685"
+    "url": "https://addons.mozilla.org/firefox/downloads/file/4027736/ublock_origin-1.45.0.xpi",
+    "sha256": "sha256:dd7e1147e19d4091a598de8da3d2f426d1b1c8b036120f91760aff013ac0ced7"
   }
 }
