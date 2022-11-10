@@ -108,7 +108,7 @@
         borderColor = "#3B7C87";
         borderSize = 3;
         defaultTimeout = 6000;
-        font = "${config.etu.graphical.theme.fonts.monospace} ${toString (builtins.floor config.etu.graphical.theme.fonts.size)}";
+        font = "${config.etu.graphical.theme.fonts.monospace} ${toString config.etu.graphical.theme.fonts.size}";
       }; # END mako
 
       # Set up kanshi (which kinda is an autorandr for wayland)
@@ -315,7 +315,7 @@
           focus.forceWrapping = true;
           fonts = {
             names = [ config.etu.graphical.theme.fonts.monospace ];
-            inherit (config.etu.graphical.theme.fonts) size;
+            size = config.etu.graphical.theme.fonts.size + 0.0;
           };
           gaps.inner = 5;
 
@@ -379,7 +379,7 @@
         systemd.target = "sway-session.target";
         style = pkgs.runCommand "waybar-styles.css" { } ''
           sed -e 's/font-family: /font-family: ${config.etu.graphical.theme.fonts.normal}, /'              \
-              -e 's/font-size: 13px/font-size: ${toString (builtins.floor config.etu.graphical.theme.fonts.biggerSize)}px/' \
+              -e 's/font-size: 13px/font-size: ${toString config.etu.graphical.theme.fonts.biggerSize}px/' \
               ${pkgs.waybar}/etc/xdg/waybar/style.css > $out
         '';
         settings = [{
@@ -475,7 +475,7 @@
       }; # END waybar
 
       # Set the rofi font
-      programs.rofi.font = "${config.etu.graphical.theme.fonts.monospace} ${toString (builtins.floor config.etu.graphical.theme.fonts.size)}";
+      programs.rofi.font = "${config.etu.graphical.theme.fonts.monospace} ${toString config.etu.graphical.theme.fonts.size}";
 
       home.file = {
         # .XCompose

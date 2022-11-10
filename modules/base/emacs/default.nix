@@ -9,7 +9,7 @@ let
     dataPrefix = config.etu.dataPrefix;
     extraConfig = lib.concatStringsSep "\n\n" config.etu.base.emacs.extraConfig;
     fontname = config.etu.graphical.theme.fonts.monospace;
-    fontsize = builtins.floor config.etu.graphical.theme.fonts.size;
+    fontsize = config.etu.graphical.theme.fonts.size;
   } "substituteAll ${./config.el} $out";
 
   # Config to wrap loading of the emacs config file.

@@ -4,13 +4,13 @@
   options.etu.graphical.theme.enable = lib.mkEnableOption "Enable graphical theme settings";
   options.etu.graphical.theme.fonts = {
     size = lib.mkOption {
-      type = lib.types.float;
-      default = 10.0;
+      type = lib.types.int;
+      default = 10;
       description = "Default font size";
     };
     biggerSize = lib.mkOption {
-      type = lib.types.float;
-      default = 13.0;
+      type = lib.types.int;
+      default = 13;
       description = "Bigger font size";
     };
     monospace = lib.mkOption {
@@ -82,7 +82,7 @@
       gtk = {
         enable = true;
         font.name = config.etu.graphical.theme.fonts.normal;
-        font.size = builtins.floor config.etu.graphical.theme.fonts.size;
+        font.size = config.etu.graphical.theme.fonts.size;
         gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
       }; # END gtk
 
