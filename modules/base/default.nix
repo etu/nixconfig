@@ -82,6 +82,7 @@
       pkgs.pv         # pipe viewer for progressbars in pipes
       pkgs.ripgrep    # quick file searcher
       pkgs.testssl    # print TLS certificate info
+      pkgs.speedtest-cli # Speedtest command line util
 
       # Networking tools
       pkgs.dnsutils   # dig etc
