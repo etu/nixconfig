@@ -50,9 +50,9 @@
   },
   "ublock-origin": {
     "pname": "ublock-origin",
-    "version": "1.45.0",
+    "version": "1.45.2",
     "addonId": "uBlock0@raymondhill.net",
-    "url": "https://addons.mozilla.org/firefox/downloads/file/4027736/ublock_origin-1.45.0.xpi",
-    "sha256": "sha256:dd7e1147e19d4091a598de8da3d2f426d1b1c8b036120f91760aff013ac0ced7"
+    "url": "https://addons.mozilla.org/firefox/downloads/file/4028976/ublock_origin-1.45.2.xpi",
+    "sha256": "sha256:fb173895c76c3b05f132caf87a716c75e3db21be861ead1b14ba6abc7e715e8b"
   }
 }
