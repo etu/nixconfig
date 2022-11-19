@@ -31,7 +31,7 @@ in {
 
         if test "$CURRENT_DNS_VALUE" != "$CURRENT_IP_ADDRESS"; then
           ${pkgs.coreutils}/bin/echo "Updating DNS record"
-          ${pkgs.curl}/bin/curl -s -X PUT "https://api.cloudflare.com/client/v4/zones/$DNS_ZONE/dns_records/$DNS_RECORD" -H "Authorization: Bearer $AUTH_KEY" -H "Content-Type:application/json" --data '{"type":"A","name":"$DNS_RECORD_NAME","content":"$CURRENT_IP_ADDRESS"}'
+          ${pkgs.curl}/bin/curl -s -X PUT "https://api.cloudflare.com/client/v4/zones/$DNS_ZONE/dns_records/$DNS_RECORD" -H "Authorization: Bearer $AUTH_KEY" -H "Content-Type:application/json" --data '{"type":"A","name":"'$DNS_RECORD_NAME'","content":"'$CURRENT_IP_ADDRESS'"}'
         else
           ${pkgs.coreutils}/bin/echo "No update needed"
         fi
