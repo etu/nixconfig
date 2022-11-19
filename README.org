@@ -73,6 +73,9 @@ from this system to fenchurch.
 System that runs Gitea, a Hockeypuck GPG keyserver, [[https://ip.failar.nu/][ip.failar.nu]], and a
 Matrix home server among some other things.
 
+*** ~live-iso.nix~
+File used to build a live-iso based on my configurations.
+
 *** ~modules/~
 This directory contains a whole bunch of modules that I've come up with to
 make it easier for me to quickly configure multiple systems to do similar
