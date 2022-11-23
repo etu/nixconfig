@@ -400,13 +400,13 @@ let
         sha512 = "28ijx2aHJGdzbs+O5SNQF65r6rrKYnkuwTYm8lZlChuoJ9P1vVzIpWO20sQTqTPDXYp6NFwk326vApTtLVFXpQ==";
       };
     };
-    "anymatch-3.1.2" = {
+    "anymatch-3.1.3" = {
       name = "anymatch";
       packageName = "anymatch";
-      version = "3.1.2";
+      version = "3.1.3";
       src = fetchurl {
-        url = "https://registry.npmjs.org/anymatch/-/anymatch-3.1.2.tgz";
-        sha512 = "P43ePfOAIupkguHUycrc4qJ9kz8ZiuOUijaETwX7THt0Y/GNK7v0aa8rY816xWjZ7rJdA5XdMcpVFTKMq+RvWg==";
+        url = "https://registry.npmjs.org/anymatch/-/anymatch-3.1.3.tgz";
+        sha512 = "KMReFUr0B4t+D+OBkjR3KYqvocp2XaSzO55UcB6mgQMd3KbcE+mWTyvVV7D/zsdEbNnV6acZUutkiHQXvTr1Rw==";
       };
     };
     "array-flatten-1.1.1" = {
@@ -553,13 +553,13 @@ let
         sha512 = "L28STB170nwWS63UjtlEOE3dldQApaJXZkOI1uMFfzf3rRuPegHaHesyee+YxQ+W6SvRDQV6UrdOdRiR153wJg==";
       };
     };
-    "caniuse-lite-1.0.30001431" = {
+    "caniuse-lite-1.0.30001434" = {
       name = "caniuse-lite";
       packageName = "caniuse-lite";
-      version = "1.0.30001431";
+      version = "1.0.30001434";
       src = fetchurl {
-        url = "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001431.tgz";
-        sha512 = "zBUoFU0ZcxpvSt9IU66dXVT/3ctO1cy4y9cscs1szkPlcWb6pasYM144GqrUygUbT+k7cmUCW61cvskjcv0enQ==";
+        url = "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001434.tgz";
+        sha512 = "aOBHrLmTQw//WFa2rcF1If9fa3ypkC1wzqqiKHgfdrXTWcU8C4gKVZT77eQAPWN1APys3+uQ0Df07rKauXGEYA==";
       };
     };
     "center-align-0.1.3" = {
@@ -3148,7 +3148,7 @@ let
       sources."ansi-regex-5.0.1"
       sources."ansi-styles-4.3.0"
       sources."ansi-to-html-0.6.15"
-      sources."anymatch-3.1.2"
+      sources."anymatch-3.1.3"
       sources."array-flatten-1.1.1"
       sources."asap-2.0.6"
       sources."babel-runtime-6.26.0"
@@ -3178,7 +3178,7 @@ let
       })
       sources."call-bind-1.0.2"
       sources."camelcase-5.3.1"
-      sources."caniuse-lite-1.0.30001431"
+      sources."caniuse-lite-1.0.30001434"
       sources."center-align-0.1.3"
       sources."chalet-0.10.2"
       sources."chalk-3.0.0"
