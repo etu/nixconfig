@@ -87,6 +87,42 @@
         inherit system;
         config.allowUnfree = true;
       };
+
+      emacsTreeSitter = inputs.emacs-overlay.packages.${system}.emacsGitTreeSitter.override {
+        nativeComp = true;
+        withSQLite3 = true;
+        withGTK3 = true;
+        withXwidgets = true;
+        withXinput2 = true;
+        withImageMagick = true;
+        withWebP = true;
+        withTreeSitterPlugins = plugins:
+          with plugins; [
+            tree-sitter-bash
+            tree-sitter-comment
+            tree-sitter-css
+            tree-sitter-elisp
+            tree-sitter-fish
+            tree-sitter-go
+            tree-sitter-html
+            tree-sitter-http
+            tree-sitter-javascript
+            tree-sitter-json
+            tree-sitter-json5
+            tree-sitter-latex
+            tree-sitter-make
+            tree-sitter-markdown
+            tree-sitter-nix
+            tree-sitter-php
+            tree-sitter-python
+            tree-sitter-regex
+            tree-sitter-scss
+            tree-sitter-sql
+            tree-sitter-toml
+            tree-sitter-vue
+            tree-sitter-yaml
+          ];
+      };
     in
       nixpkgs.lib.nixosSystem {
         inherit system;
@@ -122,7 +158,7 @@
             });
 
             emacs-overlay = inputs.emacs-overlay.overlay;
-            emacsWayland = nixpkgs.legacyPackages.${system}.emacs29-pgtk;
+            emacsWayland = emacsTreeSitter;
             via-elis-nu = inputs.via-elis-nu.packages.${system}.website;
           }
           // extraArgs;
