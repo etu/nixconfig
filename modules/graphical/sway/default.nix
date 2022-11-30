@@ -345,6 +345,7 @@
             { app_id = "firefox"; title = "Picture-in-Picture"; }
             { app_id = ".blueman-manager-wrapped"; title = "Bluetooth Devices"; }
             { title = "Welcome to Google Chrome"; }
+            { class = "Google-chrome"; title = "Share your new meeting - Google Chrome"; }
           ];
 
           # Set a custom keymap
