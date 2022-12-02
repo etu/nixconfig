@@ -121,4 +121,10 @@ in
 
   users.users.downloads = { group = "downloads"; uid = 947; isSystemUser = true; };
   users.groups.downloads.gid = 947;
+
+  # Install some additonal tools on this system.
+  environment.systemPackages = [
+    pkgs.mkvtoolnix-cli  # mkvinfo and mkvmerge
+    pkgs.ffmpeg          # ffmpeg
+  ];
 }
