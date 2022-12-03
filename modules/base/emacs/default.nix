@@ -96,7 +96,7 @@ let
   emacsPackages = {
     default = pkgs.emacs;
     nox = pkgs.emacs-nox;
-    wayland = (import sources.emacs-overlay pkgs (pkgs // { inherit lib; })).emacsPgtkNativeComp;
+    wayland = (import sources.emacs-overlay pkgs (pkgs // { inherit lib; })).emacsPgtk;
   };
 
 in
