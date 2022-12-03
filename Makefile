@@ -9,7 +9,7 @@ update-niv:
 	@niv update agenix
 	@niv update emacs-overlay
 	@niv update flummbot
-	#@niv update home-manager
+	@niv update home-manager
 	@niv update impermanence
 	@niv update ip-failar-nu
 	@niv update nixos-hardware
