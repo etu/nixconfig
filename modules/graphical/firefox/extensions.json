@@ -13,6 +13,13 @@
     "url": "https://addons.mozilla.org/firefox/downloads/file/4036001/elasticvue-0.44.0.xpi",
     "sha256": "sha256:2805fb9b89669f30a644aa555fd6090300792668df38cd33540e65ccc5249c6d"
   },
+  "g\u00f6rans-hemmasnickrade-ordli": {
+    "pname": "g\u00f6rans-hemmasnickrade-ordli",
+    "version": "1.21",
+    "addonId": "swedish@dictionaries.addons.mozilla.org",
+    "url": "https://addons.mozilla.org/firefox/downloads/file/3539390/gorans_hemmasnickrade_ordli-1.21.xpi",
+    "sha256": "sha256:7d2ce7f7bfb65cfb5dd4138686acd977cf589c6ce91fc342ae5e2e26a09d1dbe"
+  },
   "https-everywhere": {
     "pname": "https-everywhere",
     "version": "2021.7.13",

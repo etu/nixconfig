@@ -9,6 +9,7 @@ EXTENSIONS = sorted([
     "browserpass-ce",
     "elasticvue",
     "multi-account-containers",
+    "görans-hemmasnickrade-ordli",
     "https-everywhere",
     "privacy-badger17",
     "sidebery",
