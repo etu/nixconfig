@@ -8,9 +8,9 @@ import requests
 EXTENSIONS = sorted([
     "browserpass-ce",
     "elasticvue",
-    "multi-account-containers",
     "görans-hemmasnickrade-ordli",
     "https-everywhere",
+    "multi-account-containers",
     "privacy-badger17",
     "sidebery",
     "terms-of-service-didnt-read",
