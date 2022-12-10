@@ -7,11 +7,12 @@
 # Then dd the resulting image:
 # $ sudo dd if=result/iso/<tab> of=/dev/<device> status=progress bs=16M
 #
-{ lib, ... }:
+{ config, lib, ... }:
 
 {
   imports = [
-    <nixpkgs/nixos/modules/installer/cd-dvd/installation-cd-base.nix>
+    # Import base settings for live isos
+    ./nix/nixos-unstable/nixos/modules/installer/cd-dvd/installation-cd-base.nix
 
     # Import my local modules
     ./modules
@@ -20,8 +21,35 @@
   # My module settings
   etu = {
     stateVersion = "22.11";
-    graphical.enable = true;
+
+    # This is to make the openssh identity files to be located in a
+    # reasonable place.
+    dataPrefix = "/";
+
+    # Enable my user account.
     user.enable = true;
+
+    # Enable a graphical system.
+    graphical.enable = true;
+
+    # Force disable persistence modules since this system doesn't
+    # use ZFS.
+    base.zfs.enable = lib.mkForce false;
+
+    # Force disable sanoid modules since this system doesn't use ZFS.
+    base.sanoid.enable = lib.mkForce false;
+  };
+
+  # Force override root users password to empty string.
+  users.users.root = {
+    passwordFile = lib.mkForce null;
+    initialPassword = "";
+  };
+
+  # Force override my users password to empty string.
+  users.users.${config.etu.user.username} = {
+    passwordFile = lib.mkForce null;
+    initialPassword = "";
   };
 
   networking.wireless.enable = false;
