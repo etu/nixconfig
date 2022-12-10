@@ -85,14 +85,6 @@
       users.groups.downloads.gid = 947;
     };
 
-    forwardPorts = [
-      { containerPort = 6767; hostPort = 6767; protocol = "tcp"; } # Bazarr
-      { containerPort = 8989; hostPort = 8989; protocol = "tcp"; } # Sonarr
-      { containerPort = 7878; hostPort = 7878; protocol = "tcp"; } # Radarr
-      { containerPort = 8686; hostPort = 8686; protocol = "tcp"; } # Lidarr
-      { containerPort = 6789; hostPort = 6789; protocol = "tcp"; } # NzbGet
-    ];
-
     bindMounts = {
       "bazarr" = {
         mountPoint = "/var/lib/bazarr";
