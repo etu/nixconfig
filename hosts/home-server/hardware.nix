@@ -101,11 +101,6 @@ in
     fsType = "zfs";
   };
 
-  fileSystems."/var/lib/containers/storage" = {
-    device = "zroot/local/var-lib-containers-storage";
-    fsType = "zfs";
-  };
-
   fileSystems."/var/lib/nzbget-dst" = {
     device = "zroot/local/var-lib-nzbget-dst";
     fsType = "zfs";
