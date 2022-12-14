@@ -1921,13 +1921,13 @@ let
         sha512 = "PPmu8eEeG9saEUvI97fm4OYxXVB6bFvyNTyiUOBichBpFG8A1Ljw3bY62+5oOjDEMHRnd0Y7HQ+x7uzxOzC6JA==";
       };
     };
-    "node-releases-2.0.6" = {
+    "node-releases-2.0.7" = {
       name = "node-releases";
       packageName = "node-releases";
-      version = "2.0.6";
+      version = "2.0.7";
       src = fetchurl {
-        url = "https://registry.npmjs.org/node-releases/-/node-releases-2.0.6.tgz";
-        sha512 = "PiVXnNuFm5+iYkLBNeq5211hvO38y63T0i2KKh2KnUs3RpzJ+JtODFjkD8yjLwnDkTYF1eKXheUwdssR+NRZdg==";
+        url = "https://registry.npmjs.org/node-releases/-/node-releases-2.0.7.tgz";
+        sha512 = "EJ3rzxL9pTWPjk5arA0s0dgXpnyiAbJDE6wHT62g7VsgrgQgmmZ+Ru++M1BFofncWja+Pnn3rEr3fieRySAdKQ==";
       };
     };
     "normalize-path-3.0.0" = {
@@ -3332,7 +3332,7 @@ let
       sources."ms-2.1.2"
       sources."negotiator-0.6.3"
       sources."node-forge-0.10.0"
-      sources."node-releases-2.0.6"
+      sources."node-releases-2.0.7"
       sources."normalize-path-3.0.0"
       sources."normalize-url-4.5.1"
       sources."object-assign-4.1.1"
