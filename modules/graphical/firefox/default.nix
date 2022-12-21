@@ -52,6 +52,7 @@ in {
 
         profiles.default = {
           isDefault = true;
+          search.default = "DuckDuckGo";
           settings = {
             # Extensions are managed with Nix, so don't update.
             "extensions.update.autoUpdateDefault" = false;
