@@ -86,37 +86,37 @@
     };
 
     bindMounts = {
-      "bazarr" = {
+      bazarr = {
         mountPoint = "/var/lib/bazarr";
         hostPath = "${config.etu.dataPrefix}/var/lib/bazarr";
         isReadOnly = false;
       };
-      "sonarr" = {
+      sonarr = {
         mountPoint = "/var/lib/sonarr/.config/NzbDrone";
         hostPath = "${config.etu.dataPrefix}/var/lib/sonarr";
         isReadOnly = false;
       };
-      "radarr" = {
+      radarr = {
         mountPoint = "/var/lib/radarr/.config/Radarr";
         hostPath = "${config.etu.dataPrefix}/var/lib/radarr";
         isReadOnly = false;
       };
-      "lidarr" = {
+      lidarr = {
         mountPoint = "/var/lib/lidarr/.config/Lidarr";
         hostPath = "${config.etu.dataPrefix}/var/lib/lidarr";
         isReadOnly = false;
       };
-      "nzbget" = {
+      nzbget = {
         mountPoint = "/var/lib/nzbget";
         hostPath = "${config.etu.dataPrefix}/var/lib/nzbget";
         isReadOnly = false;
       };
-      "nzbget-dst" = {
+      nzbget-dst = {
         mountPoint = "/var/lib/nzbget-dst";
         hostPath = "/var/lib/nzbget-dst";
         isReadOnly = false;
       };
-      "media" = {
+      media = {
         mountPoint = "/media";
         hostPath = "/media/zstorage/files";
         isReadOnly = false;
