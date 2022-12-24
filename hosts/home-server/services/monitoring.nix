@@ -42,7 +42,7 @@ in {
 
   virtualisation.oci-containers.containers = {
     nzbget-exporter = {
-      image = "frebib/nzbget-exporter:0.2.2";
+      image = "frebib/nzbget-exporter:3.17";
       environment = {
         NZBGET_HOST = "http://local.elis.nu/nzbget";
         NZBGET_USERNAME = "";
