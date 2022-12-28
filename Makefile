@@ -12,6 +12,7 @@ update-niv:
 	@niv update home-manager
 	@niv update impermanence
 	@niv update ip-failar-nu
+	@niv update llr
 	@niv update nixos-hardware
 	@niv update nixus
 

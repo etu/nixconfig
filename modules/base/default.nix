@@ -1,5 +1,11 @@
 { config, lib, pkgs, ... }:
 
+let
+  # Load sources
+  sources = import ../../nix/sources.nix;
+  llr = pkgs.callPackage "${sources.llr}/default.nix" { };
+
+in
 {
   imports = [
     ./emacs
@@ -77,6 +83,7 @@
       pkgs.fzf        # fuzzy finder
       pkgs.jc         # parse different formats and command outputs to json
       pkgs.jq         # parse, format and query json documents
+      llr             # Install llr, my own tool to cut long lines
       pkgs.ncdu       # disk usage navigator
       pkgs.nix-top    # nix-top is a top for what nix is doing
       pkgs.pv         # pipe viewer for progressbars in pipes

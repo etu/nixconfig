@@ -71,6 +71,18 @@
         "url": "https://github.com/etu/ip.failar.nu/archive/a4c7463748cf4c782747848f6de73bb0733cb91f.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "llr": {
+        "branch": "main",
+        "description": "llr - Line-length Limiter",
+        "homepage": "https://github.com/etu/llr",
+        "owner": "etu",
+        "repo": "llr",
+        "rev": "4d6aa2bd1bb3b4ec3c2a10a71580389634b11322",
+        "sha256": "04j7sggppywvnzbzqp7a5dvsfg23s2dwgcmasqzh7hx5krjll99p",
+        "type": "tarball",
+        "url": "https://github.com/etu/llr/archive/4d6aa2bd1bb3b4ec3c2a10a71580389634b11322.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "nixos-hardware": {
         "branch": "master",
         "description": "A collection of NixOS modules covering hardware quirks.",
