@@ -83,6 +83,18 @@
         "url": "https://github.com/etu/llr/archive/4d6aa2bd1bb3b4ec3c2a10a71580389634b11322.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "mkvcleaner": {
+        "branch": "main",
+        "description": null,
+        "homepage": null,
+        "owner": "etu",
+        "repo": "mkvcleaner",
+        "rev": "d90519bb8eea77ee5c2314ce73169e35a3d1b99f",
+        "sha256": "0m8lavnjax8iybmmxp9a0n5x4lp5b49wznxgkixygc7dkzh90lmk",
+        "type": "tarball",
+        "url": "https://github.com/etu/mkvcleaner/archive/d90519bb8eea77ee5c2314ce73169e35a3d1b99f.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "nixos-hardware": {
         "branch": "master",
         "description": "A collection of NixOS modules covering hardware quirks.",
