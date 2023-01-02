@@ -26,6 +26,8 @@ jobs:
       # Do updates of nixpkgs and other dependencies.
       - name: Update all dependencies
         run: nix-shell --run 'make update-all'
+        env:
+          github_token: '${{ secrets.GITHUB_TOKEN }}'
 
       # Build systems.
       - name: Build private-laptop system derivation
