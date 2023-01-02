@@ -28,7 +28,7 @@
       graphical.theme.enable = true;
 
       # Define extra groups for user.
-      user.extraGroups = [ "networkmanager" ];
+      user.extraGroups = [ "networkmanager" "adbusers" ];
 
       # Install using home-manager.
       user.extraUserPackages = [
@@ -57,6 +57,9 @@
         "/var/lib/bluetooth"
       ];
     };
+
+    # Install adb and fastboot.
+    programs.adb.enable = true;
 
     # Enable networkmanager.
     networking.networkmanager.enable = true;
