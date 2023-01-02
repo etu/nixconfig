@@ -48,6 +48,9 @@
         "code"
         "documents"
         "org"
+
+        # Persist chromium config directory
+        ".config/chromium"
       ];
 
       # Persistence of certain hosts paths for graphical systems.
