@@ -15,6 +15,11 @@ in {
       })
     ];
 
+    # Persist google chrome config directory
+    etu.base.zfs.user.directories = [
+      ".config/google-chrome"
+    ];
+
     # Allow certain unfree packages.
     etu.base.nix.allowUnfree = [
       "appgate-sdp"
