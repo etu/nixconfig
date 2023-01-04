@@ -20,13 +20,6 @@
     "url": "https://addons.mozilla.org/firefox/downloads/file/3539390/gorans_hemmasnickrade_ordli-1.21.xpi",
     "sha256": "sha256:7d2ce7f7bfb65cfb5dd4138686acd977cf589c6ce91fc342ae5e2e26a09d1dbe"
   },
-  "https-everywhere": {
-    "pname": "https-everywhere",
-    "version": "2021.7.13",
-    "addonId": "https-everywhere@eff.org",
-    "url": "https://addons.mozilla.org/firefox/downloads/file/3809748/https_everywhere-2021.7.13.xpi",
-    "sha256": "sha256:e261461b5d4d3621285fce70773558184d691c614b330744dab672f032db731c"
-  },
   "multi-account-containers": {
     "pname": "multi-account-containers",
     "version": "8.0.9",
