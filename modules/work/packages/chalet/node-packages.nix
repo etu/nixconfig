@@ -553,13 +553,13 @@ let
         sha512 = "L28STB170nwWS63UjtlEOE3dldQApaJXZkOI1uMFfzf3rRuPegHaHesyee+YxQ+W6SvRDQV6UrdOdRiR153wJg==";
       };
     };
-    "caniuse-lite-1.0.30001442" = {
+    "caniuse-lite-1.0.30001444" = {
       name = "caniuse-lite";
       packageName = "caniuse-lite";
-      version = "1.0.30001442";
+      version = "1.0.30001444";
       src = fetchurl {
-        url = "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001442.tgz";
-        sha512 = "239m03Pqy0hwxYPYR5JwOIxRJfLTWtle9FV8zosfV5pHg+/51uD4nxcUlM8+mWWGfwKtt8lJNHnD3cWw9VZ6ow==";
+        url = "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001444.tgz";
+        sha512 = "ecER9xgJQVMqcrxThKptsW0pPxSae8R2RB87LNa+ivW9ppNWRHEplXcDzkCOP4LYWGj8hunXLqaiC41iBATNyg==";
       };
     };
     "center-align-0.1.3" = {
@@ -1966,13 +1966,13 @@ let
         sha512 = "rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==";
       };
     };
-    "object-inspect-1.12.2" = {
+    "object-inspect-1.12.3" = {
       name = "object-inspect";
       packageName = "object-inspect";
-      version = "1.12.2";
+      version = "1.12.3";
       src = fetchurl {
-        url = "https://registry.npmjs.org/object-inspect/-/object-inspect-1.12.2.tgz";
-        sha512 = "z+cPxW0QGUp0mcqcsgQyLVRDoXFQbXOwBaqyF7VIgI4TWNQsDHrBpUQslRmIfAoYWdYzs6UlKJtB2XJpTaNSpQ==";
+        url = "https://registry.npmjs.org/object-inspect/-/object-inspect-1.12.3.tgz";
+        sha512 = "geUvdk7c+eizMNUDkRpW1wJwgfOiOeHbxBR/hLXK1aT6zmVSO0jsQcs7fj6MGw89jC/cjGfLcNOrtMYtGqm81g==";
       };
     };
     "on-finished-2.4.1" = {
@@ -3196,7 +3196,7 @@ let
       })
       sources."call-bind-1.0.2"
       sources."camelcase-5.3.1"
-      sources."caniuse-lite-1.0.30001442"
+      sources."caniuse-lite-1.0.30001444"
       sources."center-align-0.1.3"
       sources."chalet-0.10.2"
       sources."chalk-3.0.0"
@@ -3355,7 +3355,7 @@ let
       sources."normalize-path-3.0.0"
       sources."normalize-url-4.5.1"
       sources."object-assign-4.1.1"
-      sources."object-inspect-1.12.2"
+      sources."object-inspect-1.12.3"
       sources."on-finished-2.4.1"
       sources."once-1.4.0"
       sources."os-homedir-1.0.2"
