@@ -312,7 +312,7 @@
             "${modifier}+Shift+r" = "mode default";
           };
 
-          focus.forceWrapping = true;
+          focus.wrapping = "force";
           fonts = {
             names = [ config.etu.graphical.theme.fonts.monospace ];
             size = config.etu.graphical.theme.fonts.size + 0.0;
