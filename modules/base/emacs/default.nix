@@ -46,7 +46,7 @@ let
     pkgs.gopls                                          # Go language server
     pkgs.nodePackages.bash-language-server              # Bash language server
     pkgs.nodePackages.dockerfile-language-server-nodejs # Docker language server
-    pkgs.nodePackages.intelephense                      # PHP language server
+    pkgs.nodejs-14_x.pkgs.intelephense                  # PHP language server
     pkgs.nodePackages.typescript-language-server        # JS/TS language server
     pkgs.nodePackages.vscode-css-languageserver-bin     # CSS/LESS/SASS language server
     pkgs.rnix-lsp                                       # Nix language server
