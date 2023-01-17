@@ -89,6 +89,11 @@ let
     # Extra packages to install
     extraEmacsPackages = epkgs: ([
       epkgs.myEmacsConfigInit
+
+      # Hack to get nix-mode to work until
+      # https://github.com/NixOS/nix-mode/pull/177 has trickeled down
+      # through melpa and emacs overlay.
+      epkgs.reformatter
     ]);
   };
 
