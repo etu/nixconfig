@@ -25,11 +25,6 @@
           env.TERM = "xterm-256color";
           font.size = config.etu.graphical.theme.fonts.size;
           font.normal.family = config.etu.graphical.theme.fonts.monospace;
-          bell = {
-            duration = 250;
-            color = "#441111";
-            animation = "EaseOut";
-          };
           colors = {
             primary = { background = "#000000"; foreground = "#dddddd"; };
             normal = {
