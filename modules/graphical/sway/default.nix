@@ -313,6 +313,7 @@
           };
 
           focus.wrapping = "workspace";
+          focus.newWindow = "urgent";
           fonts = {
             names = [ config.etu.graphical.theme.fonts.monospace ];
             size = config.etu.graphical.theme.fonts.size + 0.0;
