@@ -16,6 +16,7 @@ update-niv:
 	@niv update mkvcleaner
 	@niv update nixos-hardware
 	@niv update nixus
+	@niv update via-elis-nu
 
 update-firefox-extensions:
 	@echo "Updating firefox extensions"

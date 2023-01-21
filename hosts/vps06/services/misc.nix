@@ -1,5 +1,11 @@
-{ ... }:
+{ pkgs, ... }:
 
+let
+  # Import my ssh public keys
+  sources = import ../../../nix/sources.nix;
+  via-elis-nu = pkgs.callPackage "${sources.via-elis-nu}/default.nix" { };
+
+in
 {
   # Enable the ip-failar-nu service
   services.ip-failar-nu.enable = true;
@@ -30,6 +36,11 @@
       forceSSL = true;
       enableACME = true;
       globalRedirect = "keys.proxxi.org";
+    };
+    "via.elis.nu" = {
+      forceSSL = true;
+      enableACME = true;
+      locations."/".root = via-elis-nu;
     };
   };
 }

@@ -118,5 +118,17 @@
         "type": "tarball",
         "url": "https://github.com/Infinisil/nixus/archive/16be55591873689dd9422143d3cc456b4bb97dfc.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "via-elis-nu": {
+        "branch": "main",
+        "description": null,
+        "homepage": null,
+        "owner": "etu",
+        "repo": "via.elis.nu",
+        "rev": "f42554bd478eafe572638aa7f304fef684f2a82b",
+        "sha256": "0r1a77nkysxxkkz7695pxinv38fcb556r5c0qwz3igmah313ggpp",
+        "type": "tarball",
+        "url": "https://github.com/etu/via.elis.nu/archive/f42554bd478eafe572638aa7f304fef684f2a82b.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }
