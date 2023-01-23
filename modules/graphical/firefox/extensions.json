@@ -22,10 +22,10 @@
   },
   "multi-account-containers": {
     "pname": "multi-account-containers",
-    "version": "8.0.9",
+    "version": "8.1.2",
     "addonId": "@testpilot-containers",
-    "url": "https://addons.mozilla.org/firefox/downloads/file/4038684/multi_account_containers-8.0.9.xpi",
-    "sha256": "sha256:1e68ef3bf65d6c309a7d5666da2295987beb7832a211117d41a3ebeb71d16f95"
+    "url": "https://addons.mozilla.org/firefox/downloads/file/4058426/multi_account_containers-8.1.2.xpi",
+    "sha256": "sha256:0ab8f0222853fb68bc05fcf96401110910dfeb507aaea2cf88c5cd7084d167fc"
   },
   "privacy-badger17": {
     "pname": "privacy-badger17",

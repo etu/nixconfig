@@ -88,7 +88,7 @@ in
       PasswordAuthentication yes
   '';
   security.pam.services.sshd.unixAuth = lib.mkForce true;
-  services.openssh.kbdInteractiveAuthentication = false;
+  services.openssh.settings.KbdInteractiveAuthentication = false;
 
   # Set up users accounts:
   users.users = {

@@ -12,10 +12,10 @@ in
     services.openssh.enable = true;
 
     # Default is true, let's disable password auth by default.
-    services.openssh.passwordAuthentication = false;
+    services.openssh.settings.PasswordAuthentication = false;
 
     # This is default, but nice to make it clear in here.
-    services.openssh.permitRootLogin = "prohibit-password";
+    services.openssh.settings.PermitRootLogin = "prohibit-password";
 
     # Enable mosh.
     programs.mosh.enable = true;

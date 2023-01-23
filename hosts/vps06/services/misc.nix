@@ -10,11 +10,6 @@ in
   # Enable the ip-failar-nu service
   services.ip-failar-nu.enable = true;
 
-  # Disable validation because it breaks when doing proxyPass to a
-  # remote host like with elis.nu proxing below for hosts sa.0b.se and
-  # sa4b.se that are just... replicas of my website.
-  services.nginx.validateConfig = false;
-
   services.nginx.virtualHosts = {
     "ip.failar.nu" = {
       addSSL = true;

@@ -53,5 +53,5 @@
   };
 
   networking.wireless.enable = false;
-  services.openssh.permitRootLogin = lib.mkForce "prohibit-password";
+  services.openssh.settings.PermitRootLogin = lib.mkForce "prohibit-password";
 }
