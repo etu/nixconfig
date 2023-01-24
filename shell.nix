@@ -1,18 +1,14 @@
-{ pkgs ? (import <nixpkgs> { }) }:
+{ pkgs ? (import <nixpkgs> { }), inputs, system }:
 
-let
-  # Load sources
-  agenix = pkgs.callPackage "${(import ./nix/sources.nix).agenix}/pkgs/agenix.nix" { };
-in
 pkgs.mkShell {
   buildInputs = [
-    agenix
-
     pkgs.cacert # Install certs for curl to work in pure shells
     pkgs.curl
     pkgs.jq     # For parsing json downloaded with curl
 
-    pkgs.niv
     pkgs.nixpkgs-fmt
+
+    inputs.agenix.packages.${system}.agenix
+    inputs.deploy-rs.packages.${system}.deploy-rs
   ];
 }

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, system, ... }:
 
 let
   # Load sources
@@ -7,11 +7,11 @@ let
 in
 {
   imports = [
-    "${sources.agenix}/modules/age.nix"
-    "${sources.flummbot}/nixos.nix"
-    "${sources.home-manager}/nixos"
-    "${sources.impermanence}/nixos.nix"
-    "${sources.ip-failar-nu}/nixos.nix"
+    inputs.agenix.nixosModules.age
+    inputs.home-manager.nixosModules.home-manager
+    inputs.impermanence.nixosModules.impermanence
+    inputs.flummbot.nixosModules.${system}.default
+    inputs.ip-failar-nu.nixosModules.${system}.default
 
     # New module organization
     ./base

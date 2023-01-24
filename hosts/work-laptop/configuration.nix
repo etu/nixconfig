@@ -69,12 +69,6 @@ in
     work.enable = true;
   };
 
-  # Set NIX_PATH for nixos config and nixpkgs
-  nix.nixPath = [
-    "nixpkgs=/etc/nixos/nix/nixos-unstable"
-    "nixos-config=/etc/nixos/hosts/work-laptop/configuration.nix"
-  ];
-
   # Enable docker deamon
   virtualisation.docker.enable = true;
   virtualisation.docker.storageDriver = "zfs";

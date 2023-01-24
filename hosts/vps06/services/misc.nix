@@ -1,11 +1,5 @@
-{ pkgs, ... }:
+{ pkgs, inputs, system, ... }:
 
-let
-  # Import my ssh public keys
-  sources = import ../../../nix/sources.nix;
-  via-elis-nu = pkgs.callPackage "${sources.via-elis-nu}/default.nix" { };
-
-in
 {
   # Enable the ip-failar-nu service
   services.ip-failar-nu.enable = true;
@@ -35,7 +29,7 @@ in
     "via.elis.nu" = {
       forceSSL = true;
       enableACME = true;
-      locations."/".root = via-elis-nu;
+      locations."/".root = inputs.via-elis-nu.packages.${system}.default;
     };
   };
 }

@@ -2,20 +2,20 @@
 # This definition is used to build a live-iso using my graphical environment.
 #
 # Build by running the following command:
-# $ nix-build ./nix/nixos-unstable/nixos/ -I nixos-config=./live-iso.nix -A config.system.build.isoImage
+# $ nix build .#nixosConfigurations.live-iso.config.system.build.isoImage
 #
 # Then dd the resulting image:
 # $ sudo dd if=result/iso/<tab> of=/dev/<device> status=progress bs=16M
 #
-{ config, lib, ... }:
+{ config, modulesPath, lib, ... }:
 
 {
   imports = [
     # Import base settings for live isos
-    ./nix/nixos-unstable/nixos/modules/installer/cd-dvd/installation-cd-base.nix
+    (modulesPath + "/installer/cd-dvd/installation-cd-base.nix")
 
     # Import my local modules
-    ./modules
+    ../../modules
   ];
 
   # My module settings

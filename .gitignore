@@ -4,3 +4,6 @@
 # Ignore build symlinks
 result*
 .tmp
+
+# Ignore direnv cache
+.direnv/

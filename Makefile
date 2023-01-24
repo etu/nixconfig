@@ -1,22 +1,8 @@
-update-all: update-nixpkgs update-niv update-firefox-extensions update-hass update-zwavejs2mqtt update-mosquitto update-nzbget-exporter update-chalet
+update-all: update-flake update-firefox-extensions update-hass update-zwavejs2mqtt update-mosquitto update-nzbget-exporter update-chalet
 
-update-nixpkgs:
-	@echo "Updating nixpkgs to latest nixos-unstable"
-	@cd nix/nixos-unstable/ && git pull origin nixos-unstable
-
-update-niv:
-	@echo "Updating niv dependencies"
-	@niv update agenix
-	@niv update emacs-overlay
-	@niv update flummbot
-	@niv update home-manager
-	@niv update impermanence
-	@niv update ip-failar-nu
-	@niv update llr
-	@niv update mkvcleaner
-	@niv update nixos-hardware
-	@niv update nixus
-	@niv update via-elis-nu
+update-flake:
+	@echo "Updating flake dependencies"
+	@nix flake update
 
 update-firefox-extensions:
 	@echo "Updating firefox extensions"

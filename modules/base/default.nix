@@ -1,12 +1,5 @@
-{ config, lib, pkgs, ... }:
+{ config, inputs, system, lib, pkgs, ... }:
 
-let
-  # Load sources
-  sources = import ../../nix/sources.nix;
-  llr = pkgs.callPackage "${sources.llr}/default.nix" { };
-  mkvcleaner = pkgs.callPackage "${sources.mkvcleaner}/default.nix" { };
-
-in
 {
   imports = [
     ./emacs
@@ -85,8 +78,13 @@ in
       pkgs.fzf        # fuzzy finder
       pkgs.jc         # parse different formats and command outputs to json
       pkgs.jq         # parse, format and query json documents
-      llr             # Install llr, my own tool to cut long lines
-      mkvcleaner      # Install mkvcleaner, my own tool to clean video files from unwanted tracks
+
+      # Install llr, my own tool to cut long lines
+      inputs.llr.packages.${system}.default
+
+      # Install mkvcleaner, my own tool to clean video files from unwanted tracks
+      inputs.mkvcleaner.packages.${system}.default
+
       pkgs.ncdu       # disk usage navigator
       pkgs.nix-top    # nix-top is a top for what nix is doing
       pkgs.pv         # pipe viewer for progressbars in pipes

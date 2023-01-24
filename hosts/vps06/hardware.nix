@@ -1,8 +1,8 @@
-{ lib, config, ... }:
+{ lib, modulesPath, config, ... }:
 
 {
   imports = [
-    ../../nix/nixos-unstable/nixos/modules/profiles/qemu-guest.nix
+    (modulesPath + "/profiles/qemu-guest.nix")
   ];
 
   # Configure boot loader.

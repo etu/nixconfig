@@ -2,51 +2,14 @@
 [[https://github.com/etu/nixconfig/actions/workflows/update.yml][https://github.com/etu/nixconfig/actions/workflows/update.yml/badge.svg]]
 
 * My NixOS configs
-This is my personal NixOS configuration repository. It's not a flake
-compatible NixOS configuration repository. It was for a while until I rolled
-it back.
-
-I have this repository cloned to ~/etc/nixos/~. This repository is pretty
-much self contained and should be fairly pure.
-
-The repository doesn't require symbolic linking of the used host system
-configuration to the root of this directory since I make sure to set the
-~NIX_PATH~ environment variable to point directly at the real file location.
-
-This makes the initial rebuild requiring a ~NIX_PATH~ that looks something
-like the following to build correctly:
-#+BEGIN_SRC
-NIX_PATH=nixpkgs=/etc/nixos/nix/nixos-unstable:nixos-config=/etc/nixos/hosts/<HOSTNAME>/configuration.nix
-#+END_SRC
-
 ** Files and Directories in this repository
 *** ~data.nix~
-This file doesn't contain any secrets, but it allows reading out secrets from
-~.data-secrets.nix~ in the same directory. That file is however encrypted
-using age encryption and only available on hosts actually needing access to
-these secrets.
+This file doesn't contain any secrets at all, it's just miscellaneous public
+data that I need to be able to access from many places.
 
 It also contains public SSH keys for all the systems I have and care about,
 but also for trusted users that should have access to accounts on different
 systems. This becomes a central place to manage said keys for said users.
-
-*** ~deploy.nix~
-This file uses [[https://github.com/Infinisil/nixus][nixus]] to generate a deployment script for all systems that
-aren't /hands on/ systems (such as laptops), so this includes all VPSes,
-servers, and other systems that aren't used as desktop systems.
-
-To build the deployment script for all these systems, it's as simple as:
-#+BEGIN_SRC bash
-  nix-build deploy.nix
-#+END_SRC
-
-This will give a symbolic link named ~result~ which can be used to deploy all
-of the systems at once.
-
-Just run it:
-#+BEGIN_SRC bash
-  ./result
-#+END_SRC
 
 *** ~hosts/~
 **** ~hosts/private-laptop/~
@@ -60,21 +23,25 @@ build new generations. ZFS snapshots are pushed from this system to fenchurch
 whenever this system is online.
 
 **** ~hosts/home-server/~
-Home file server, deployed using ~deploy/private.nix~. Also used as build
+Home file server, deployed using ~deploy .#fenchurch~. Also used as build
 machines for the laptops. It's also my primary location to store ZFS
 snapshots that I backup from all of the other systems. It runs home assistant
 and some other things.
 
 **** ~hosts/vps04/~
 System for IRC clients and an IRC bot. Nothing else. ZFS snapshots are pulled
-from this system to fenchurch.
+from this system to fenchurch. Deployed using ~deploy .#vps04~.
 
 **** ~hosts/vps06/~
 System that runs Gitea, a Hockeypuck GPG keyserver, [[https://ip.failar.nu/][ip.failar.nu]], and a
-Matrix home server among some other things.
+Matrix home server among some other things. Deployed using ~deploy .#vps06~.
 
-*** ~live-iso.nix~
-File used to build a live-iso based on my configurations.
+**** ~hosts/live-iso/~
+If you're adventurous and want to run a clone of my configuration from a
+live-iso, it can be built locally:
+#+BEGIN_SRC sh
+  nix build .#nixosConfigurations.live-iso.config.system.build.isoImage
+#+END_SRC
 
 *** ~modules/~
 This directory contains a whole bunch of modules that I've come up with to
@@ -82,11 +49,6 @@ make it easier for me to quickly configure multiple systems to do similar
 things. So I've made my own modules with my own options.
 
 Here's things like Emacs, [[https://github.com/nix-community/home-manager][home-manager]], sway configuration, the list goes on.
-
-*** ~nix/~
-Contains nix sources, like the checkout of ~nixpkgs~ that I'm building my
-systems on. Also contains the ~sources.json~ which is the state directory of
-[[https://github.com/nmattia/niv][niv]] that I use to easily pin external resources.
 
 *** ~secrets.nix~ and ~secrets/~
 This is the directory with real secrets managed with [[https://github.com/ryantm/agenix][agenix]] which [[https://github.com/FiloSottile/age][age]] encrypt

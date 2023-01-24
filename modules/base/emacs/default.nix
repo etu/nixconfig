@@ -1,12 +1,6 @@
-{ config, lib, pkgs, ... }:
+{ config, inputs, system, lib, pkgs, ... }:
 let
-  # Load sources
-  sources = import ../../../nix/sources.nix;
-
-  intelephensePkgs = import (builtins.fetchTarball {
-    url = "https://github.com/NixOS/nixpkgs/archive/befc83905c965adfd33e5cae49acb0351f6e0404.tar.gz";
-    sha256 = "0m0ik7z06q3rshhhrg2p0vsrkf2jnqcq5gq1q6wb9g291rhyk6h2";
-  }) { config.allowUnfree = true; };
+  pkgs-intelephense = import inputs.nixpkgs-intelephense { inherit system; config.allowUnfree = true; };
 
   # Run my config trough substituteAll to replace font names from my
   # system font settings.
@@ -51,7 +45,7 @@ let
     pkgs.gopls                                          # Go language server
     pkgs.nodePackages.bash-language-server              # Bash language server
     pkgs.nodePackages.dockerfile-language-server-nodejs # Docker language server
-    intelephensePkgs.nodejs-14_x.pkgs.intelephense      # PHP language server
+    pkgs-intelephense.nodejs-14_x.pkgs.intelephense     # PHP language server
     pkgs.nodePackages.typescript-language-server        # JS/TS language server
     pkgs.nodePackages.vscode-css-languageserver-bin     # CSS/LESS/SASS language server
     pkgs.rnix-lsp                                       # Nix language server
@@ -101,7 +95,7 @@ let
   emacsPackages = {
     default = pkgs.emacs;
     nox = pkgs.emacs-nox;
-    wayland = (import sources.emacs-overlay pkgs (pkgs // { inherit lib; })).emacsPgtk;
+    wayland = inputs.emacs-overlay.packages.${system}.emacsPgtk;
   };
 
 in
@@ -125,7 +119,7 @@ in
     # Import the emacs overlay from nix community to get the latest
     # and greatest packages.
     nixpkgs.overlays = [
-      (import sources.emacs-overlay)
+      inputs.emacs-overlay.overlay
     ];
 
     # Allow to install intelephense which is an unfree package.

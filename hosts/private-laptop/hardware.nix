@@ -1,16 +1,11 @@
-{ config, lib, pkgs, ... }:
+{ config, inputs, modulesPath, lib, pkgs, ... }:
 
-let
-  # Load inputs
-  sources = import ../../nix/sources.nix;
-
-in
 {
   imports = [
-    ../../nix/nixos-unstable/nixos/modules/installer/scan/not-detected.nix
+    (modulesPath + "/installer/scan/not-detected.nix")
 
     # Include hardware quirks
-    "${sources.nixos-hardware}/lenovo/thinkpad/t495"
+    inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t495
   ];
 
   # Configure boot loader.

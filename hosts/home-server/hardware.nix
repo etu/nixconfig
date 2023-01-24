@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, modulesPath, lib, pkgs, ... }:
 
 let
   # Import age secrets paths and metadata.
@@ -7,7 +7,7 @@ let
 in
 {
   imports = [
-    ../../nix/nixos-unstable/nixos/modules/installer/scan/not-detected.nix
+    (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
   # Configure boot loader.

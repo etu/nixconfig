@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, inputs, modulesPath, lib, pkgs, ... }:
 
 let
   # Load sources
@@ -7,10 +7,10 @@ let
 in
 {
   imports = [
-    ../../nix/nixos-unstable/nixos/modules/installer/scan/not-detected.nix
+    (modulesPath + "/installer/scan/not-detected.nix")
 
     # Include hardware quirks
-    "${sources.nixos-hardware}/lenovo/thinkpad/t14s/amd/gen1"
+    inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14s-amd-gen1
   ];
 
   # Configure boot loader.
