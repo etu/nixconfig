@@ -63,6 +63,10 @@ in
     console.font = "Lat2-Terminus16";
     console.keyMap = "dvorak";
 
+    # Enable experimental features in the nix command to make nix
+    # search work.
+    nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
     # Set system state version.
     system.stateVersion = config.etu.stateVersion;
 
