@@ -16,9 +16,11 @@
 
     # Extra binary caches
     nix.settings.substituters = [
+      "https://nix-community.cachix.org"
       "https://etu.cachix.org"
     ];
     nix.settings.trusted-public-keys = [
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "etu.cachix.org-1:CeyfbMJZHZ95TScp8+I8+EeyzbncqPSj1xfCK9vOAFE="
     ];
   };
