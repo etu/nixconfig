@@ -63,9 +63,6 @@ in
     console.font = "Lat2-Terminus16";
     console.keyMap = "dvorak";
 
-    # Install nix 2.3 instead of latest to have a more stable nix.
-    nix.package = pkgs.nix_2_3;
-
     # Set system state version.
     system.stateVersion = config.etu.stateVersion;
 
