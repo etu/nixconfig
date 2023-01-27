@@ -20,18 +20,18 @@ jobs:
           skipPush: true
 
       # Build systems.
-      - name: Build private-laptop system derivation
-        run: 'nix build .#nixosConfigurations.agrajag.config.system.build.toplevel'
+      - name: Build laptop-private-elis system derivation
+        run: 'nix build .#nixosConfigurations.laptop-private-elis.config.system.build.toplevel'
       - name: Cache private-laptop system derivation
         run: realpath result | cachix push etu
 
-      - name: Build work-laptop system derivation
-        run: 'nix build .#nixosConfigurations.eliaxe-A100514-NR.config.system.build.toplevel'
+      - name: Build laptop-work-elis system derivation
+        run: 'nix build .#nixosConfigurations.laptop-work-elis.config.system.build.toplevel'
       - name: Cache work-laptop system derivation
         run: realpath result | cachix push etu
 
-      - name: Build home-server system derivation
-        run: 'nix build .#nixosConfigurations.fenchurch.config.system.build.toplevel'
+      - name: Build server-main-elis system derivation
+        run: 'nix build .#nixosConfigurations.server-main-elis.config.system.build.toplevel'
       - name: Cache home-server system derivation
         run: realpath result | cachix push etu
 

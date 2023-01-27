@@ -7,15 +7,15 @@ cd @dataPrefix@$HOME/.dotfiles
 git pull
 
 case $(hostname) in
-    "agrajag")
+    "laptop-private-elis")
         stow --dotfiles pass skeleton
         ;;
 
-    "eliaxe-A100514-NR")
+    "laptop-work-elis")
         stow --dotfiles pass skeleton
         ;;
 
-    "fenchurch")
+    "server-main-elis")
         stow --dotfiles skeleton
         ;;
 

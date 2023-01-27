@@ -21,7 +21,7 @@ in
   ];
 
   # Set hostname
-  networking.hostName = "agrajag";
+  networking.hostName = "laptop-private-elis";
 
   # Settings needed for ZFS
   networking.hostId = "27416952";
@@ -63,8 +63,8 @@ in
     # Enable syncing of some filesystems
     base.syncoid.enable = true;
     base.syncoid.commands = {
-      "zroot/safe/data".target = "root@home.elis.nu:zroot/backups/current/private/data";
-      "zroot/safe/home".target = "root@home.elis.nu:zroot/backups/current/private/home";
+      "zroot/safe/data".target = "root@home.elis.nu:zroot/backups/current/laptop-private-elis/data";
+      "zroot/safe/home".target = "root@home.elis.nu:zroot/backups/current/laptop-private-elis/home";
     };
   };
 

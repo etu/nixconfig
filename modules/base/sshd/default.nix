@@ -39,21 +39,21 @@ in
     # Add known hosts for all of my systems that I access remotely to
     # they always are trusted.
     programs.ssh.knownHosts = {
-      fenchurch-ec = {
+      server-main-elis-ec = {
         extraHostNames = [ "home.elis.nu" "local.elis.nu" "192.168.1.101" ];
-        publicKey = keys.systems.fenchurch.ec;
+        publicKey = keys.systems.server-main-elis.ec;
       };
-      fenchurch-rsa = {
+      server-main-elis-rsa = {
         extraHostNames = [ "home.elis.nu" "local.elis.nu" "192.168.1.101" ];
-        publicKey = keys.systems.fenchurch.rsa;
+        publicKey = keys.systems.server-main-elis.rsa;
       };
-      fenchurch-initrd-ec = {
+      server-main-elis-initrd-ec = {
         extraHostNames = [ "home.elis.nu" "local.elis.nu" "192.168.1.101" ];
-        publicKey = keys.systems.fenchurch.initrd-ec;
+        publicKey = keys.systems.server-main-elis.initrd-ec;
       };
-      fenchurch-initrd-rsa = {
+      server-main-elis-initrd-rsa = {
         extraHostNames = [ "home.elis.nu" "local.elis.nu" "192.168.1.101" ];
-        publicKey = keys.systems.fenchurch.initrd-rsa;
+        publicKey = keys.systems.server-main-elis.initrd-rsa;
       };
       vps04-ec = {
         extraHostNames = [ "vps04.elis.nu" ];

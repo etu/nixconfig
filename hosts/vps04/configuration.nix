@@ -44,7 +44,7 @@ in
     development.git.enable = true;
     user.enable = true;
     user.extraAuthorizedKeys = keys.etu.weechat;
-    user.extraRootAuthorizedKeys = keys.etu.syncoid.fenchurch;
+    user.extraRootAuthorizedKeys = keys.etu.syncoid.server-main-elis;
     base.sanoid.datasets = {
       # Enable snapshotting for some filesystems
       "zroot/safe/data".use_template = [ "data" ];

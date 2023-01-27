@@ -28,8 +28,8 @@ in
   boot.extraModulePackages = [ ];
 
   age.secrets = {
-    inherit (ageModules) fenchurch-initrd-sshd-ec fenchurch-initrd-sshd-rsa;
-    inherit (ageModules) syncoid-fenchurch-ssh-ec;
+    inherit (ageModules) server-main-elis-initrd-sshd-ec server-main-elis-initrd-sshd-rsa;
+    inherit (ageModules) syncoid-server-main-elis-ssh-ec;
   };
 
   # Remote unlocking of encrypted ZFS
@@ -42,8 +42,8 @@ in
       enable = true;
       port = 2222;
       hostKeys = [
-        ageModules.fenchurch-initrd-sshd-ec.path
-        ageModules.fenchurch-initrd-sshd-rsa.path
+        ageModules.server-main-elis-initrd-sshd-ec.path
+        ageModules.server-main-elis-initrd-sshd-rsa.path
       ];
       authorizedKeys = config.users.users.etu.openssh.authorizedKeys.keys;
     };

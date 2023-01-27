@@ -18,7 +18,7 @@ in
   ];
 
   # Set hostname
-  networking.hostName = "eliaxe-A100514-NR";
+  networking.hostName = "laptop-work-elis";
 
   # Settings needed for ZFS
   networking.hostId = "18582528";
@@ -61,8 +61,8 @@ in
     base.syncoid.enable = true;
     # Enable syncing of some filesystems
     base.syncoid.commands = {
-      "zroot/safe/data".target = "root@home.elis.nu:zroot/backups/current/work/data";
-      "zroot/safe/home".target = "root@home.elis.nu:zroot/backups/current/work/home";
+      "zroot/safe/data".target = "root@home.elis.nu:zroot/backups/current/laptop-work-elis/data";
+      "zroot/safe/home".target = "root@home.elis.nu:zroot/backups/current/laptop-work-elis/home";
     };
 
     # Enable work modules

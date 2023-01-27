@@ -30,7 +30,7 @@ in
   ];
 
   # Set hostname
-  networking.hostName = "fenchurch";
+  networking.hostName = "server-main-elis";
 
   # Enable networking.
   networking.useDHCP = true;

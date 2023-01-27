@@ -65,21 +65,21 @@
   outputs = { self, nixpkgs, deploy-rs, ... }@inputs: {
     # Declare systems
     nixosConfigurations = {
-      agrajag = nixpkgs.lib.nixosSystem {
+      laptop-private-elis = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [ ./hosts/private-laptop/configuration.nix ];
+        modules = [ ./hosts/laptop-private-elis/configuration.nix ];
         specialArgs = { inherit inputs; system = "x86_64-linux"; };
       };
 
-      eliaxe-A100514-NR = nixpkgs.lib.nixosSystem {
+      laptop-work-elis = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [ ./hosts/work-laptop/configuration.nix ];
+        modules = [ ./hosts/laptop-work-elis/configuration.nix ];
         specialArgs = { inherit inputs; system = "x86_64-linux"; };
       };
 
-      fenchurch = nixpkgs.lib.nixosSystem {
+      server-main-elis = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [ ./hosts/home-server/configuration.nix ];
+        modules = [ ./hosts/server-main-elis/configuration.nix ];
         specialArgs = { inherit inputs; system = "x86_64-linux"; };
       };
 
@@ -109,10 +109,10 @@
 
     # Specify deploy-rs deployments
     deploy.nodes = {
-      fenchurch = {
+      server-main-elis = {
         hostname = "home.elis.nu";
         sshUser = "root";
-        profiles.system.path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.fenchurch;
+        profiles.system.path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.server-main-elis;
       };
 
       vps04 = {
