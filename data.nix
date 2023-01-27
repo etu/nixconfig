@@ -77,7 +77,7 @@
 
       # Work laptop
       laptop-work-elis = [
-        "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC30zMfq5/ZBnLPXiz4qtTsg3SU6voKQMumADNhTpVSKo3erANR5zTb1WPfjM4IWLCcWfksWDNOOeMaKM0hGgdnGbfrXpIOJwKNHaSp11cvQ6wTMAGV3B3ItJHOV+Czw4kEeUB+Tic8m+U2jnTPLXC4x3B7bdXHhdhmQbTpEq9pabe8eRQM54/9SuG6M9y8G3g35s3edsXrEnh/OI62a66F5aOugQH4fX5ehfGg3zk7LLu7U8bX9FGOeOVCCEBsfm5ysczNAO3v1iA4G9N8vgfAHJNZfKglYSQIi9nyURxcqT511OFTGK1cyWHGjqCNK286Plx90u0SVQvvG+9hkq2l/kbgmNpEYlTmAs22y+6j7R+gpSCMxJSfjXfJeyVcCTKo2CT9+SQRDz+pz+wyv/NgnaqXuP65RlwS0OIhdT6YheaFfbhkuMzFD78VDWOacLamWVQz/yTe5o+GhTavWVZyZ4Y9Wf+LB4sQtM9S5AqWpSCHDfA9nF6E9oWPbAZ4l+VD4vNQdrmByh+3uk+XP9/ytJVyJDd88MmxnC1yiN3xT7rQaUoUCmYy0Z7BLBYvBb2fU+JrJ8Eew6uf23SGYUtZuxanNANslBdvD0t68xCEHIxsVecpqRtbG8699bZEoWWbAFS1WO5EBAcYRfKV/4SQxLTO0J+HGQSRkgL7Ex1ioQ== etu@phouchg-4096-2016-04-18"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINwl7wWkYdxmUutxr2vzPPm7hiM5TuIwhV+YoCjrY0Qn etu@laptop-work-elis-2023-01-27"
       ];
 
       # Public keys used for syncoid.
@@ -142,10 +142,7 @@
       };
 
       # Work laptop
-      laptop-work-elis = {
-        ec = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMQFSZBEijplTEV9Vag79O0rrYhkpmy6++w2yb2RG4qP";
-        rsa = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC+xpKeyuBmO2KEtn+cIb2VsPyPXSIkCuCuPbNoeA9ReUgWIJDYd65dYJYCbBVZz56XXhAXVD182l5uri2eE7n6lV53PJohsgm/7al5A/CZt1ewLeFqBMoobwNvR9YzIAmMwql/aaXiDFTpbD6I5pObBaMdmJdksmovcxvPigyk9r7+JMuxhs4H4sWEP8CYmYc8cXLLIl7DT0EXa+Z7U7BFwsJwRmaFZSt6Hx78E0750/Ih5UvOALiz0KPsnD7v8B5BbAOV4Nx9DpmzV7BeK1wcF4HQ8KrayRfapP3gNcjQCCspYcJKC+XGFXFZmD0ACJk3+DxxpHJwbUpXcrPCtIRefe1rvoNLz/ovOaF/V7wzcILXPbAjfWjoHVf8b5OPvSvuf+4KySYzbA0APgQ4fjFvCEg4kbI1uNGLh9WtjkElMwt2A7mY/x0uGHQE9EfKIpfPEv43iIpIcsR8JR5i3NJHN2ZhQsNIoaRfPgJ7bHtW+wAQvh+efHgV2ued5TJidMqQVNXDwWsbNlFUQjIoaXGym3R/Sb2NCekm9XombVPuiIlDMYNdVc3+3d7TiBYtBwayDEMVl70p58Yiqk+PTrfRP3Z4k+ay1zx+3XU7Q3j/lecNsWs7mSsjeS4/BNEq7gVK1RtWW7wdoUx5T0k6gHiISOHe+zKnC25GTG7+1HfTiQ==";
-      };
+      laptop-work-elis = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMQFSZBEijplTEV9Vag79O0rrYhkpmy6++w2yb2RG4qP";
     };
 
     # Guest user
