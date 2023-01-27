@@ -15,12 +15,9 @@
       path = "/data/home/etu/.ssh/etu@aarch64.nixos.community.pub";
       owner = "etu";
     };
-    server-main-elis-initrd-sshd-ec = {
+    server-main-elis-initrd-sshd = {
       file = ./secrets/server-main-elis/initrd-sshd-ec.age;
-      # This is weird, if I change this path to be in /data, it
-      # doesn't get read on boot or when needed because... somewhow
-      # it's hardcoded to it's old location.
-      path = "/persistent/etc/initrd-ssh/ssh_host_ed_25519_key";
+      path = "/data/etc/initrd-ssh/ssh_host_ed_25519_key";
       symlink = false;
     };
     freshrss-password-etu = {

@@ -28,7 +28,7 @@ in
   boot.extraModulePackages = [ ];
 
   age.secrets = {
-    inherit (ageModules) server-main-elis-initrd-sshd-ec;
+    inherit (ageModules) server-main-elis-initrd-sshd;
     inherit (ageModules) syncoid-server-main-elis-ssh-ec;
   };
 
@@ -42,7 +42,7 @@ in
       enable = true;
       port = 2222;
       hostKeys = [
-        ageModules.server-main-elis-initrd-sshd-ec.path
+        ageModules.server-main-elis-initrd-sshd.path
       ];
       authorizedKeys = config.users.users.etu.openssh.authorizedKeys.keys;
     };
