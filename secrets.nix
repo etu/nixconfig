@@ -9,14 +9,14 @@ let
   hosts = let
     inherit (keys.systems) laptop-private-elis laptop-work-elis server-main-elis vps04 vps06;
   in {
-    laptop-private-elis = [ laptop-private-elis.rsa laptop-private-elis.ec ];
+    laptop-private-elis = [ laptop-private-elis ];
     laptop-work-elis = [ laptop-work-elis.rsa laptop-work-elis.ec ];
     server-main-elis = [ server-main-elis.rsa server-main-elis.ec ];
     vps04 = [ vps04.rsa vps04.ec ];
     vps06 = [ vps06.rsa vps06.ec ];
 
     all = [
-      laptop-private-elis.rsa laptop-private-elis.ec
+      laptop-private-elis
       laptop-work-elis.rsa laptop-work-elis.ec
       server-main-elis.rsa server-main-elis.ec
       vps04.rsa vps04.ec
