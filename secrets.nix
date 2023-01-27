@@ -11,16 +11,16 @@ let
   in {
     laptop-private-elis = [ laptop-private-elis ];
     laptop-work-elis = [ laptop-work-elis ];
-    server-main-elis = [ server-main-elis.rsa server-main-elis.ec ];
-    vps04 = [ vps04.rsa vps04.ec ];
-    vps06 = [ vps06.rsa vps06.ec ];
+    server-main-elis = [ server-main-elis ];
+    vps04 = [ vps04 ];
+    vps06 = [ vps06 ];
 
     all = [
       laptop-private-elis
       laptop-work-elis
-      server-main-elis.rsa server-main-elis.ec
-      vps04.rsa vps04.ec
-      vps06.rsa vps06.ec
+      server-main-elis
+      vps04
+      vps06
     ];
   };
 in
@@ -33,7 +33,6 @@ in
   "secrets/server-main-elis/etu-freshrss-password.age".publicKeys = etu ++ hosts.server-main-elis;
   "secrets/server-main-elis/grafana-admin-password.age".publicKeys = etu ++ hosts.server-main-elis;
   "secrets/server-main-elis/initrd-sshd-ec.age".publicKeys = etu ++ hosts.server-main-elis;
-  "secrets/server-main-elis/initrd-sshd-rsa.age".publicKeys = etu ++ hosts.server-main-elis;
   "secrets/server-main-elis/syncoid-ssh-ec.age".publicKeys = etu ++ hosts.server-main-elis;
   "secrets/vps04/flummbot.toml.age".publicKeys = etu ++ hosts.vps04;
   "secrets/vps04/hashed-ozeloten-password-file.age".publicKeys = etu ++ hosts.vps04;

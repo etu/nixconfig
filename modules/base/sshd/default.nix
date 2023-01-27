@@ -39,37 +39,21 @@ in
     # Add known hosts for all of my systems that I access remotely to
     # they always are trusted.
     programs.ssh.knownHosts = {
-      server-main-elis-ec = {
+      server-main-elis = {
         extraHostNames = [ "home.elis.nu" "local.elis.nu" "192.168.1.101" ];
-        publicKey = keys.systems.server-main-elis.ec;
+        publicKey = keys.systems.server-main-elis;
       };
-      server-main-elis-rsa = {
+      server-main-elis-initrd = {
         extraHostNames = [ "home.elis.nu" "local.elis.nu" "192.168.1.101" ];
-        publicKey = keys.systems.server-main-elis.rsa;
+        publicKey = keys.systems.server-main-elis-initrd;
       };
-      server-main-elis-initrd-ec = {
-        extraHostNames = [ "home.elis.nu" "local.elis.nu" "192.168.1.101" ];
-        publicKey = keys.systems.server-main-elis.initrd-ec;
-      };
-      server-main-elis-initrd-rsa = {
-        extraHostNames = [ "home.elis.nu" "local.elis.nu" "192.168.1.101" ];
-        publicKey = keys.systems.server-main-elis.initrd-rsa;
-      };
-      vps04-ec = {
+      vps04 = {
         extraHostNames = [ "vps04.elis.nu" ];
-        publicKey = keys.systems.vps04.ec;
+        publicKey = keys.systems.vps04;
       };
-      vps04-rsa = {
-        extraHostNames = [ "vps04.elis.nu" ];
-        publicKey = keys.systems.vps04.rsa;
-      };
-      vps06-ec = {
+      vps06 = {
         extraHostNames = [ "git.elis.nu" "vps06.elis.nu" ];
-        publicKey = keys.systems.vps06.ec;
-      };
-      vps06-rsa = {
-        extraHostNames = [ "git.elis.nu" "vps06.elis.nu" ];
-        publicKey = keys.systems.vps06.rsa;
+        publicKey = keys.systems.vps06;
       };
     };
   };

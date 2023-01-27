@@ -23,14 +23,6 @@
       path = "/persistent/etc/initrd-ssh/ssh_host_ed_25519_key";
       symlink = false;
     };
-    server-main-elis-initrd-sshd-rsa = {
-      file = ./secrets/server-main-elis/initrd-sshd-rsa.age;
-      # This is weird, if I change this path to be in /data, it
-      # doesn't get read on boot or when needed because... somewhow
-      # it's hardcoded to it's old location.
-      path = "/persistent/etc/initrd-ssh/ssh_host_rsa_key";
-      symlink = false;
-    };
     freshrss-password-etu = {
       file = ./secrets/server-main-elis/etu-freshrss-password.age;
       owner = "freshrss";
@@ -122,24 +114,14 @@
       laptop-private-elis = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOr9fpRag0ZQq3eMOPHygrt60GZl0NW32rzvvvgsm5HC";
 
       # home.elis.nu
-      server-main-elis = {
-        ec = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJRZYWjxAqloB5MZtxBHkckZhKi+3M1OObzBdyi7La98";
-        rsa = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDXPQN5sjBXNKPMT7SzGIywlS5zupc2p/6uYiUxSzDzN39hhZDt5iKVbKTvmtSvHU3b/bOLA1U3DKvVZPbSyuaddmN7Oo0dh4EaN8dkpSkH5xuWb7bwrrZ9ZI4Ggp0NgnYBcPp5xWs8jrJbhnFQDS/Ev71UAXeRRhcNu6QtHKJrcLPh+FTw4HkoWDD7E9n0kFovBzpkm9bm9tRiuuUzKu8d1ue+h3e3L7Wku6jhsM4xDKflv1I8O3HH6zgA+cdy3SJ1QDMBizTHzkW7tuWTjayspSrNAYnm3Yn4u5KBIPLtB1F6xe+bC8FAp59ZzflGHzwtz2psj4OlnWjmiqUde+cxsk4012neNf2UN2+q5w8mGN9BzETfxmwykCrKxc5nWk7yeaNx3A3SIJvT6hI+5tC+PZdY4FGFQm/StDeYXumFn0bjy+vW/1uLkF1AmsxbDmUO/Dj4cbx7Dh3m+5mCGQ6UyShD56lxKsdZBUTnawaK7WZhSiY72KS7EU9Li4Uk/hqJG/qcS+zmSo32ZpbwtIEOtRNm8ebTHjpvpv1vMY6n76R/xLJEWKwvE0K6EdGjD5RzrYWSIUVnsk+nf2/BNN6pGDesZhL6eltfKEyfJvBVwm3cPRLaE/kxehmcPFmLH4i1bijbDn4JpH7PWIQMyX+UF4+SpEhXtQ2UxdfUllZSow==";
-        initrd-ec = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGii+3fHNc3to81E0kY+W1yvPCnjFoMZxUr+SbH2nx1e root@fenchurch";
-        initrd-rsa = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC7j9fXobEI/rhCA9pQQQdOTQpTc4VL8gD/LzyhlwXXP9uaL26N6ZdZpQHd/Z/Cx9Hn6oezLCHdm9k8D+uY4rwJxUj8UMHg3YgSTRT4jXxpn7C7MbY/QbvqRa4exSzSYcGRHmLlG0aBMn3D5xlP6yN2gGIfHTglPGa2uHmj9K+1FFD5d+BuQMBZwMDbmR73ABZGh34WKHrEpc2UjRsflhURcWVAHyxZThPIawEKEjkC+THuGa6EE1UI5gnR4ll1g4Xtu2Vu/XGXYqoYOYjHap0L7XPcz9bEbqs6hjcPKWI8tLI5/h5kvTcM3D7F6TELcMDqT9LBrj51/VHmWulSij/XCNvum9cZUCDMmX1l6PT33Kl9qiBUpwTMYAeuB1NEsogbuUCip27uu/ZFmKLE+gAxCBPE33uRKT7mHdp7UdspPkZ78JtYr7R73h2l0B9Vd2R8R4tMMrTXrgj+r+pZ0KgKPIdWknkiMMYXyjmN55kkHe5BsEEgVaMfOLjNNUZNK10= root@fenchurch";
-      };
+      server-main-elis = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJRZYWjxAqloB5MZtxBHkckZhKi+3M1OObzBdyi7La98";
+      server-main-elis-initrd = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGii+3fHNc3to81E0kY+W1yvPCnjFoMZxUr+SbH2nx1e root@fenchurch";
 
       # vps04.elis.nu
-      vps04 = {
-        ec = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC/UewM3gYrEFZdaD6zDdP9Vkq1W9gOIXJoBG/ram+Fo";
-        rsa = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDUf9GAcV8GIaIv7WyIok2qM12VcfpbDVpLr421YJsNkosrEkxmLau6RreP05O0QRHwIaI9XQNYOQ5Mt+XDIWg/SrprH5QZRmemxcHKzzcHf0PQXDcDXOZO7jqEv9B6bk36/heej/p3Yj8z2jQzlVrym5vuO37ShGoMRMDxeecrfzXCL5tT610JOxNMBoPy+ibSh4rWGONeCNfoH3V+Sfp7JGhhmVSyHHdVdRafQzxlrNWZVmhrXfxhxK7wyACjSXSQKGyYCZTWOtxAe3OAd6xqIBMTbYBXA9TsAf/3E7xusSJuvXZv4exym/9rB8FhkpEv3sUSx2zwQ9/ZUZm8bRgnn68U0VCDSYG/PzvYBZ0DaUDPa+Ueqn5gYh4O3eNEqk+1lLTi4iaGsLdDVMmqHBDj6UY2kmgkn8MiU4KutD5U3/vXPEuuo4IklKl5ELxYmvHhn4ZWKvluzCutc8AAAoMS1oga1fYJQxeAY1l8HUVprDtoly/PWAP+OjVuU82BsC3573OJd2bvHWd0TUffu40m93eO0aOhknloL6rL+we61TXqZn18OwU7W2QLpsKJk38k5OB5RYljQ53FqgxznJZ3uRJA/g5gt7TP2Rm4X/2y49a5PN+kvUe8FuPiC66UFakPWU/l1D9uKvnZZl6fB1fndRXFQkq2LKHmaRBwRzdFjQ==";
-      };
+      vps04 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC/UewM3gYrEFZdaD6zDdP9Vkq1W9gOIXJoBG/ram+Fo";
 
       # vps06.elis.nu
-      vps06 = {
-        ec = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINB1+Am7Ai9DfKjDv7JDmPA711FW9wrOXRGZZf0rmjTP";
-        rsa = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDC0qo1eOOIjLTj38M0bKD14BiyfpBMcqfr7kdHeqdGMkmCm5Fp9jy6Cfc6MvxXt6LwIQOpJq+N/DV0A5cG0Lbh8IxPLW+5J8MUbofAHxE90vBRy9kM5lNwssVFnPE/pEgq2bwdmMHUMRRzIiNmxyBni94IXslVafd3K3SlbVgRaqfxeA3ze5ijjK9Af8VehA4HMQz5EhAV8NJrmGMEEQyO0Pc7aY1261CCZLOMJ3/HB3ybsIzo8KryRWr75ETW4WNcQx1RvXI8CdcdJCFEvCp26z3bj2gFmFv587rP0i/a4VT5KUXWu5Uj+wTkd48w3mngSeOaGE6BLRN7P4qRkN4VuLRJJxLdblHEWtmaY+XADfuzZqXoaE8lMWSSYrT0xfQLp6LlDgwD8WrFE4Fz5rZ/VtID+u5vDWjz3Y/ZSM4qpnjEUCb81A41DSwczVDkZ4BJT+gKjNLndoydWfjVc0EExfBrtjy3bUGr/Uy3v5yqZAsemLwI/kfGt77SZxQSsZCBsW79q1+N04UH6nWHGFmR5uNw25oHlonazVQIfPzRTobOqM+DTuTDWmTQaIOjyHZ6uEWdE7uNNrVQ9/AehAbdsuRXd9xr+CCqQ9sN/In28NRv8BBdrHzyQ422HKA9brZF/w9J8iF0gNUKNGiXuAOCbH8QUK0fpTUUtodsGYIDPQ==";
-      };
+      vps06 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINB1+Am7Ai9DfKjDv7JDmPA711FW9wrOXRGZZf0rmjTP";
 
       # Work laptop
       laptop-work-elis = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMQFSZBEijplTEV9Vag79O0rrYhkpmy6++w2yb2RG4qP";
