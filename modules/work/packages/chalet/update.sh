@@ -1,5 +1,4 @@
-#!/usr/bin/env nix-shell
-#!nix-shell -i bash -p nodejs nodePackages.node2nix
+#!/usr/bin/env sh
 
 # Switch to scripts directory
 cd $(dirname $0)

@@ -6,7 +6,7 @@ update-flake:
 
 update-firefox-extensions:
 	@echo "Updating firefox extensions"
-	@nix-shell modules/graphical/firefox/generate.py
+	@python modules/graphical/firefox/generate.py
 
 update-hass:
 	@echo "Updating to latest home assistant container"
@@ -26,4 +26,4 @@ update-nzbget-exporter:
 
 update-chalet:
 	@echo "Update chalet dependencies"
-	@nix-shell modules/work/packages/chalet/update.sh
+	@sh modules/work/packages/chalet/update.sh
