@@ -70,7 +70,6 @@
     environment.systemPackages = [
       # Nice extra command line tools
       pkgs.bat        # "bat - cat with wings", cat|less with language highlight
-      pkgs.comma      # the "," command which allows to run non-installed things ", htop"
       pkgs.curl       # curl duh
       pkgs.duf        # nice disk usage output
       pkgs.fd         # find util
