@@ -22,13 +22,13 @@ let
         sha512 = "TDCmlK5eOvH+eH7cdAFlNXeVJqWIQ7gW9tY1GJIpUtFb6CmjVyq2VM3u71bOyR8CRihcCgMUYoDNyLXao3+70Q==";
       };
     };
-    "@babel/compat-data-7.20.10" = {
+    "@babel/compat-data-7.20.14" = {
       name = "_at_babel_slash_compat-data";
       packageName = "@babel/compat-data";
-      version = "7.20.10";
+      version = "7.20.14";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@babel/compat-data/-/compat-data-7.20.10.tgz";
-        sha512 = "sEnuDPpOJR/fcafHMjpcpGN5M2jbUGUHwmuWKM/YdPzeEDJg8bgmbcWQFUfE32MQjti1koACvoPVsDe8Uq+idg==";
+        url = "https://registry.npmjs.org/@babel/compat-data/-/compat-data-7.20.14.tgz";
+        sha512 = "0YpKHD6ImkWMEINCyDAD0HLLUH/lPCefG8ld9it8DJB2wnApraKuhgYTvTY1z7UFIfBTGy5LwncZ+5HWWGbhFw==";
       };
     };
     "@babel/core-7.20.12" = {
@@ -40,13 +40,13 @@ let
         sha512 = "XsMfHovsUYHFMdrIHkZphTN/2Hzzi78R08NuHfDBehym2VsPDL6Zn/JAD/JQdnRvbSsbQc4mVaU1m6JgtTEElg==";
       };
     };
-    "@babel/generator-7.20.7" = {
+    "@babel/generator-7.20.14" = {
       name = "_at_babel_slash_generator";
       packageName = "@babel/generator";
-      version = "7.20.7";
+      version = "7.20.14";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@babel/generator/-/generator-7.20.7.tgz";
-        sha512 = "7wqMOJq8doJMZmP4ApXTzLxSr7+oO2jroJURrVEp6XShrQUObV8Tq/D0NCcoYg2uHqUrjzO0zwBjoYzelxK+sw==";
+        url = "https://registry.npmjs.org/@babel/generator/-/generator-7.20.14.tgz";
+        sha512 = "AEmuXHdcD3A52HHXxaTmYlb8q/xMEhoRP67B3T4Oq7lbmSoqroMZzjnGj3+i1io3pdnF8iBYVu4Ilj+c4hBxYg==";
       };
     };
     "@babel/helper-compilation-targets-7.20.7" = {
@@ -553,13 +553,13 @@ let
         sha512 = "L28STB170nwWS63UjtlEOE3dldQApaJXZkOI1uMFfzf3rRuPegHaHesyee+YxQ+W6SvRDQV6UrdOdRiR153wJg==";
       };
     };
-    "caniuse-lite-1.0.30001447" = {
+    "caniuse-lite-1.0.30001449" = {
       name = "caniuse-lite";
       packageName = "caniuse-lite";
-      version = "1.0.30001447";
+      version = "1.0.30001449";
       src = fetchurl {
-        url = "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001447.tgz";
-        sha512 = "bdKU1BQDPeEXe9A39xJnGtY0uRq/z5osrnXUw0TcK+EYno45Y+U7QU9HhHEyzvMDffpYadFXi3idnSNkcwLkTw==";
+        url = "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001449.tgz";
+        sha512 = "CPB+UL9XMT/Av+pJxCKGhdx+yg1hzplvFJQlJ2n68PyQGMz9L/E2zCyLdOL8uasbouTUgnPl+y0tccI/se+BEw==";
       };
     };
     "center-align-0.1.3" = {
@@ -1327,13 +1327,13 @@ let
         sha512 = "UqBRqi4ju7T+TqGNdqAO0PaSVGsDGJUBQvk9eUWNGRY1CFGDzYhLWoM7JQEemnlvVcv/YEmc2wNW8BC24EnUsw==";
       };
     };
-    "http-cache-semantics-4.1.0" = {
+    "http-cache-semantics-4.1.1" = {
       name = "http-cache-semantics";
       packageName = "http-cache-semantics";
-      version = "4.1.0";
+      version = "4.1.1";
       src = fetchurl {
-        url = "https://registry.npmjs.org/http-cache-semantics/-/http-cache-semantics-4.1.0.tgz";
-        sha512 = "carPklcUh7ROWRK7Cv27RPtdhYhUsela/ue5/jKzjegVvXDqM2ILE9Q2BGn9JZJh1g87cp56su/FgQSzcWS8cQ==";
+        url = "https://registry.npmjs.org/http-cache-semantics/-/http-cache-semantics-4.1.1.tgz";
+        sha512 = "er295DKPVsV82j5kw1Gjt+ADA/XYHsajl82cGNQG2eyoPkvgUhX+nDIyelzhIWbbsXP39EHcI6l5tYs2FYqYXQ==";
       };
     };
     "http-errors-2.0.0" = {
@@ -3109,9 +3109,9 @@ let
     dependencies = [
       sources."@ampproject/remapping-2.2.0"
       sources."@babel/code-frame-7.18.6"
-      sources."@babel/compat-data-7.20.10"
+      sources."@babel/compat-data-7.20.14"
       sources."@babel/core-7.20.12"
-      (sources."@babel/generator-7.20.7" // {
+      (sources."@babel/generator-7.20.14" // {
         dependencies = [
           sources."@jridgewell/gen-mapping-0.3.2"
         ];
@@ -3196,7 +3196,7 @@ let
       })
       sources."call-bind-1.0.2"
       sources."camelcase-5.3.1"
-      sources."caniuse-lite-1.0.30001447"
+      sources."caniuse-lite-1.0.30001449"
       sources."center-align-0.1.3"
       sources."chalet-0.10.2"
       sources."chalk-3.0.0"
@@ -3287,7 +3287,7 @@ let
       sources."has-symbols-1.0.3"
       sources."has-tostringtag-1.0.0"
       sources."has-yarn-2.1.0"
-      sources."http-cache-semantics-4.1.0"
+      sources."http-cache-semantics-4.1.1"
       sources."http-errors-2.0.0"
       sources."http-proxy-1.18.1"
       sources."iconv-lite-0.4.24"
