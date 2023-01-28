@@ -50,21 +50,6 @@ let
 
         builtin echo
       '';
-      "bonk" = ''
-        for arg in $argv
-          set -l store_path (string unescape (nix-instantiate --eval --expr "with (import <nixpkgs> {}); builtins.toString (lib.getBin $arg)"))
-          nix-store --quiet -r $store_path
-          set PATH "$store_path/bin" $PATH
-          set -g -a __bonk_pkgs $arg
-        end
-      '';
-      "bonk-dump" = ''
-        builtin echo "{ pkgs ? import <nixpkgs> }:
-        pkgs.mkShell {
-          buildInputs = with pkgs; [ $__bonk_pkgs ];
-        }
-        " > shell.nix
-      '';
       # Case insensitive find wrapper
       "isfind" = ''find . -iname "*"$argv[1]"*"'';
       # Print command duration in seconds for last command
