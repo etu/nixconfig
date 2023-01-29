@@ -47,12 +47,9 @@ in
         extraHostNames = [ "home.elis.nu" "local.elis.nu" "192.168.1.101" ];
         publicKey = keys.systems.server-main-elis-initrd;
       };
-      vps04 = {
-        extraHostNames = [ "vps04.elis.nu" ];
-        publicKey = keys.systems.vps04;
-      };
-      vps06 = {
-        extraHostNames = [ "git.elis.nu" "vps06.elis.nu" ];
+      "vps04.elis.nu".publicKey = keys.systems.vps04;
+      "vps06.elis.nu" = {
+        extraHostNames = [ "git.elis.nu" ];
         publicKey = keys.systems.vps06;
       };
     };
