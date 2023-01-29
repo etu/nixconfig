@@ -58,6 +58,7 @@
         "/etc/nixos"
         "/etc/NetworkManager/system-connections"
         "/var/lib/bluetooth"
+        "/var/lib/iwd"
       ];
     };
 
@@ -67,6 +68,7 @@
     # Enable networkmanager.
     networking.networkmanager.enable = true;
     networking.networkmanager.wifi.backend = "iwd";
+    networking.wireless.iwd.settings.Settings.AutoConnect = true;
 
     # 8000 is for random web sharing things.
     networking.firewall.allowedTCPPorts = [ 8000 ];
