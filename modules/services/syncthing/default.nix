@@ -12,7 +12,7 @@
 
     # Build sync devices depending on hostname.
     services.syncthing.devices = { } // (lib.optionalAttrs (config.networking.hostName == "server-main-elis") {
-      "phone".id = "MDL3DI6-PZVLRSZ-ULYRM3X-AHLUBOA-T6QYYUW-U3Z6KV2-CFJDGWE-65WQFQ5";
+      "phone".id = "SLIPWI2-MNRK56H-IPDJX4Z-WVFXVP7-M7RJEA2-KXMBQ4T-NSMXLMS-PO5YTQI";
       "laptop-private-elis".id = "UPEWGIE-2OWALFY-REH7UKU-2Q6IZ5L-KJWCSUV-R7GNAYH-YPZAZ3C-CKNTIAU";
       "laptop-work-elis".id = "KFDW47A-EYYMH33-EDW3JRN-DAKY3UT-7JJOYNK-PLHY3CG-5IMTEJE-OJXRTQK";
     }) // (lib.optionalAttrs (config.networking.hostName == "laptop-private-elis" || config.networking.hostName == "laptop-work-elis") {
