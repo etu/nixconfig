@@ -15,9 +15,6 @@ in
   imports = [
     # Include my hardware settings.
     ./hardware.nix
-
-    # Import local modules
-    ../../modules
   ];
 
   # Set hostname

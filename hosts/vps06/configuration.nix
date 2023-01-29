@@ -15,9 +15,6 @@ in
     # Include static network settings.
     ./networking.nix
 
-    # Import local modules
-    ../../modules
-
     # Import matrix settings
     ./services/gitea.nix
     ./services/hockeypuck.nix

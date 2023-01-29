@@ -24,9 +24,6 @@ in
     ./services/monitoring.nix
     ./services/svtplay.nix
     ./services/usenet.nix
-
-    # Import local modules
-    ../../modules
   ];
 
   # Set hostname

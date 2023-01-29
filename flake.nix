@@ -67,37 +67,37 @@
     nixosConfigurations = {
       laptop-private-elis = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [ ./hosts/laptop-private-elis/configuration.nix ];
+        modules = [ ./hosts/laptop-private-elis/configuration.nix ./modules ];
         specialArgs = { inherit inputs; system = "x86_64-linux"; };
       };
 
       laptop-work-elis = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [ ./hosts/laptop-work-elis/configuration.nix ];
+        modules = [ ./hosts/laptop-work-elis/configuration.nix ./modules ];
         specialArgs = { inherit inputs; system = "x86_64-linux"; };
       };
 
       server-main-elis = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [ ./hosts/server-main-elis/configuration.nix ];
+        modules = [ ./hosts/server-main-elis/configuration.nix ./modules ];
         specialArgs = { inherit inputs; system = "x86_64-linux"; };
       };
 
       vps04 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [ ./hosts/vps04/configuration.nix ];
+        modules = [ ./hosts/vps04/configuration.nix ./modules ];
         specialArgs = { inherit inputs; system = "x86_64-linux"; };
       };
 
       vps06 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [ ./hosts/vps06/configuration.nix ];
+        modules = [ ./hosts/vps06/configuration.nix ./modules ];
         specialArgs = { inherit inputs; system = "x86_64-linux"; };
       };
 
       live-iso = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [ ./hosts/live-iso/configuration.nix ];
+        modules = [ ./hosts/live-iso/configuration.nix ./modules ];
         specialArgs = { inherit inputs; system = "x86_64-linux"; };
       };
     };

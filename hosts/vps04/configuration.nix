@@ -18,9 +18,6 @@ in
 
     # Include static network settings.
     ./networking.nix
-
-    # Import local modules
-    ../../modules
   ];
 
   # Set hostname

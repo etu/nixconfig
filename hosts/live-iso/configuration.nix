@@ -13,9 +13,6 @@
   imports = [
     # Import base settings for live isos
     (modulesPath + "/installer/cd-dvd/installation-cd-base.nix")
-
-    # Import my local modules
-    ../../modules
   ];
 
   # My module settings
