@@ -1,13 +1,9 @@
-{ config, pkgs, ... }:
+{ config, pkgs, myData, ... }:
 
-let
-  # Import age secrets paths and metadata.
-  ageModules = (import ../../../data.nix).ageModules;
-in {
-
+{
   # Decrypt secret to expected location.
   age.secrets = {
-    inherit (ageModules) cloudflare-api-env;
+    inherit (myData.ageModules) cloudflare-api-env;
   };
 
   systemd.services.cloudflare-dyndns = {

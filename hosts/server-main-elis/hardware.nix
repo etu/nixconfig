@@ -1,10 +1,5 @@
-{ config, modulesPath, lib, pkgs, ... }:
+{ config, modulesPath, lib, pkgs, myData, ... }:
 
-let
-  # Import age secrets paths and metadata.
-  ageModules = (import ../../data.nix).ageModules;
-
-in
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
@@ -28,8 +23,8 @@ in
   boot.extraModulePackages = [ ];
 
   age.secrets = {
-    inherit (ageModules) server-main-elis-initrd-sshd;
-    inherit (ageModules) syncoid-server-main-elis-ssh-ec;
+    inherit (myData.ageModules) server-main-elis-initrd-sshd;
+    inherit (myData.ageModules) syncoid-server-main-elis-ssh-ec;
   };
 
   # Remote unlocking of encrypted ZFS
@@ -42,7 +37,7 @@ in
       enable = true;
       port = 2222;
       hostKeys = [
-        ageModules.server-main-elis-initrd-sshd.path
+        myData.ageModules.server-main-elis-initrd-sshd.path
       ];
       authorizedKeys = config.users.users.etu.openssh.authorizedKeys.keys;
     };

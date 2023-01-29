@@ -1,10 +1,6 @@
-{ config, pkgs, ... }:
+{ config, pkgs, myData, ... }:
 
-let
-  # Import age secrets paths and metadata.
-  ageModules = (import ../../../data.nix).ageModules;
-
-in {
+{
   # Make sure to have nginx enabled
   services.nginx.enable = true;
   services.nginx.virtualHosts."grafana.elis.nu" = {
@@ -113,7 +109,7 @@ in {
 
   # Decrypt secret to expected location.
   age.secrets = {
-    inherit (ageModules) grafana-admin-password;
+    inherit (myData.ageModules) grafana-admin-password;
   };
 
   networking.firewall.allowedTCPPorts = [ 3030 ];

@@ -1,10 +1,8 @@
-{ config, pkgs, ... }:
+{ config, pkgs, myData, ... }:
 let
-  # Import my ssh public keys
-  keys = (import ../../../data.nix).pubkeys;
-
   # home / chroot path
   path = "/home/guests";
+
 in
 {
   users.users.guests = {
@@ -12,7 +10,7 @@ in
     createHome = false;
     uid = 1002;
     home = path;
-    openssh.authorizedKeys.keys = keys.guests;
+    openssh.authorizedKeys.keys = myData.pubkeys.guests;
   };
 
   services.openssh.extraConfig = ''

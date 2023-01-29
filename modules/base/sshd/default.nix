@@ -1,9 +1,5 @@
-{ config, lib, ... }:
-let
-  # Import my ssh public keys
-  keys = (import ../../../data.nix).pubkeys;
+{ config, lib, myData, ... }:
 
-in
 {
   options.etu.base.sshd.enable = lib.mkEnableOption "Enable base sshd settings";
 
@@ -41,16 +37,16 @@ in
     programs.ssh.knownHosts = {
       server-main-elis = {
         extraHostNames = [ "home.elis.nu" "local.elis.nu" "192.168.1.101" ];
-        publicKey = keys.systems.server-main-elis;
+        publicKey = myData.pubkeys.systems.server-main-elis;
       };
       server-main-elis-initrd = {
         extraHostNames = [ "home.elis.nu" "local.elis.nu" "192.168.1.101" ];
-        publicKey = keys.systems.server-main-elis-initrd;
+        publicKey = myData.pubkeys.systems.server-main-elis-initrd;
       };
-      "vps04.elis.nu".publicKey = keys.systems.vps04;
+      "vps04.elis.nu".publicKey = myData.pubkeys.systems.vps04;
       "vps06.elis.nu" = {
         extraHostNames = [ "git.elis.nu" ];
-        publicKey = keys.systems.vps06;
+        publicKey = myData.pubkeys.systems.vps06;
       };
     };
   };

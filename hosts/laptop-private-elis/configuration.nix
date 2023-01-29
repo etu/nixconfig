@@ -2,15 +2,8 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
-let
-  # Import my ssh public keys
-  keys = (import ../../data.nix).pubkeys;
+{ config, pkgs, myData, ... }:
 
-  # Import age secrets paths and metadata.
-  ageModules = (import ../../data.nix).ageModules;
-
-in
 {
   imports = [
     # Include my hardware settings.
@@ -79,11 +72,11 @@ in
   services.blueman.enable = true;
 
   # Add community server to known hosts
-  programs.ssh.knownHosts."aarch64.nixos.community".publicKey = keys.systems."aarch64.nixos.community";
+  programs.ssh.knownHosts."aarch64.nixos.community".publicKey = myData.pubkeys.systems."aarch64.nixos.community";
 
   age.secrets = {
-    inherit (ageModules) "etu@aarch64.nixos.community" "etu@aarch64.nixos.community.pub";
-    inherit (ageModules) syncoid-workstations-ssh-ec;
+    inherit (myData.ageModules) "etu@aarch64.nixos.community" "etu@aarch64.nixos.community.pub";
+    inherit (myData.ageModules) syncoid-workstations-ssh-ec;
   };
 
   # Set up remote builds

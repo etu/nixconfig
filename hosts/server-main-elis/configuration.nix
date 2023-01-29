@@ -2,12 +2,8 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
-let
-  # Import my ssh public keys
-  keys = (import ../../data.nix).pubkeys;
+{ config, pkgs, lib, myData, ... }:
 
-in
 {
   imports = [
     # Include my hardware settings.
@@ -50,7 +46,7 @@ in
     development.git.enable = true;
     user.enable = true;
     user.extraGroups = [ "libvirtd" ];
-    user.extraRootAuthorizedKeys = keys.etu.syncoid.workstations;
+    user.extraRootAuthorizedKeys = myData.pubkeys.etu.syncoid.workstations;
     services.freshrss.enable = true;
     services.jellyfin.enable = true;
     services.syncthing.enable = true;
@@ -90,7 +86,7 @@ in
     isNormalUser = true;
     home = "${config.etu.dataPrefix}/home/concate";
     uid = 1001;
-    openssh.authorizedKeys.keys = keys.concate;
+    openssh.authorizedKeys.keys = myData.pubkeys.concate;
   };
 
   # Disable documentation to make the system smaller.

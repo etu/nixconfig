@@ -1,10 +1,5 @@
-{ config, lib, ... }:
+{ config, lib, myData, ... }:
 
-let
-  # Import age secrets paths and metadata.
-  ageModules = (import ../../../data.nix).ageModules;
-
-in
 {
   options.etu.services.freshrss = {
     enable = lib.mkEnableOption "Enable services freshrss service";
@@ -24,7 +19,7 @@ in
     };
 
     age.secrets = {
-      inherit (ageModules) freshrss-password-etu;
+      inherit (myData.ageModules) freshrss-password-etu;
     };
 
     # Set up freshrss.

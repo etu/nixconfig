@@ -2,11 +2,8 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, lib, pkgs, ... }:
-let
-  # Import my ssh public keys
-  keys = (import ../../data.nix).pubkeys;
-in
+{ config, lib, pkgs, myData, ... }:
+
 {
   imports = [
     # Include my hardware settings.
@@ -41,7 +38,7 @@ in
     stateVersion = "22.11";
 
     base.emacs.enable = lib.mkForce false;
-    user.extraRootAuthorizedKeys = keys.etu.syncoid.server-main-elis;
+    user.extraRootAuthorizedKeys = myData.pubkeys.etu.syncoid.server-main-elis;
     base.sanoid.datasets = {
       # Enable snapshotting for some filesystems
       "zroot/safe/data".use_template = [ "data" ];

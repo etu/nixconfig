@@ -1,13 +1,5 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, myData, ... }:
 
-let
-  # Load secrets
-  ageModules = (import ../../data.nix).ageModules;
-
-  # Import my ssh public keys
-  keys = (import ../../data.nix).pubkeys;
-
-in
 {
   options.etu.user = {
     enable = lib.mkEnableOption "Enables my user";
@@ -70,8 +62,8 @@ in
     environment.homeBinInPath = config.etu.user.enable;
 
     # Load password files.
-    age.secrets.hashed-etu-password = lib.mkIf config.etu.user.enable ageModules.hashed-etu-password;
-    age.secrets.hashed-root-password = ageModules.hashed-root-password;
+    age.secrets.hashed-etu-password = lib.mkIf config.etu.user.enable myData.ageModules.hashed-etu-password;
+    age.secrets.hashed-root-password = myData.ageModules.hashed-root-password;
 
     # Define my user account.
     users.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
@@ -79,14 +71,14 @@ in
       extraGroups = [ "wheel" ] ++ config.etu.user.extraGroups;
       passwordFile = config.age.secrets.hashed-etu-password.path;
       isNormalUser = true;
-      openssh.authorizedKeys.keys = keys.etu.computers ++ config.etu.user.extraAuthorizedKeys;
+      openssh.authorizedKeys.keys = myData.pubkeys.etu.computers ++ config.etu.user.extraAuthorizedKeys;
       uid = config.etu.user.uid;
     };
 
     # Define password, authorized keys and shell for root user.
     users.users.root = {
       passwordFile = config.age.secrets.hashed-root-password.path;
-      openssh.authorizedKeys.keys = keys.etu.computers ++ config.etu.user.extraRootAuthorizedKeys;
+      openssh.authorizedKeys.keys = myData.pubkeys.etu.computers ++ config.etu.user.extraRootAuthorizedKeys;
     };
 
     # Configure some miscellaneous dotfiles for my user.

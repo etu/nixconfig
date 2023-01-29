@@ -2,12 +2,8 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
-let
-  # Import age secrets paths and metadata.
-  ageModules = (import ../../data.nix).ageModules;
+{ config, pkgs, myData, ... }:
 
-in
 {
   imports = [
     # Include my hardware settings.
@@ -72,7 +68,7 @@ in
 
   # Include agenix encripted secret for secret password file
   age.secrets = {
-    inherit (ageModules) syncoid-workstations-ssh-ec;
+    inherit (myData.ageModules) syncoid-workstations-ssh-ec;
   };
 
   # Enable ClamAV.

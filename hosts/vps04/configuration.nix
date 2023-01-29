@@ -2,15 +2,8 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, lib, pkgs, ... }:
-let
-  # Import my ssh public keys
-  keys = (import ../../data.nix).pubkeys;
+{ config, lib, pkgs, myData, ... }:
 
-  # Import age secrets paths and metadata.
-  ageModules = (import ../../data.nix).ageModules;
-
-in
 {
   imports = [
     # Include my hardware settings.
@@ -40,8 +33,8 @@ in
     base.emacs.enable = lib.mkForce false;
     development.git.enable = true;
     user.enable = true;
-    user.extraAuthorizedKeys = keys.etu.weechat;
-    user.extraRootAuthorizedKeys = keys.etu.syncoid.server-main-elis;
+    user.extraAuthorizedKeys = myData.pubkeys.etu.weechat;
+    user.extraRootAuthorizedKeys = myData.pubkeys.etu.syncoid.server-main-elis;
     base.sanoid.datasets = {
       # Enable snapshotting for some filesystems
       "zroot/safe/data".use_template = [ "data" ];
@@ -93,7 +86,7 @@ in
       isNormalUser = true;
       home = "/home/concate";
       uid = 1001;
-      openssh.authorizedKeys.keys = keys.concate;
+      openssh.authorizedKeys.keys = myData.pubkeys.concate;
     };
 
     talyz = {
@@ -101,7 +94,7 @@ in
       shell = pkgs.fish;
       home = "/home/talyz";
       uid = 1002;
-      openssh.authorizedKeys.keys = keys.talyz;
+      openssh.authorizedKeys.keys = myData.pubkeys.talyz;
     };
 
     ozeloten = {
@@ -124,8 +117,8 @@ in
   services.flummbot.stateDirectory = "/home/bots";
 
   # Flummbot config file
-  age.secrets.flummbot-toml = ageModules.flummbot-toml // {
+  age.secrets.flummbot-toml = myData.ageModules.flummbot-toml // {
     path = "${config.services.flummbot.stateDirectory}/flummbot.toml";
   };
-  age.secrets.hashed-ozeloten-password = ageModules.hashed-ozeloten-password;
+  age.secrets.hashed-ozeloten-password = myData.ageModules.hashed-ozeloten-password;
 }
