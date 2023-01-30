@@ -27,3 +27,7 @@ update-nzbget-exporter:
 update-chalet:
 	@echo "Update chalet dependencies"
 	@sh modules/work/packages/chalet/update.sh
+
+nix-fmt:
+	@echo "Format nix files"
+	nix fmt . -- --exclude ./modules/work/packages/chalet/
