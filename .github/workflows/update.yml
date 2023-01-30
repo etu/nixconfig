@@ -50,6 +50,9 @@ jobs:
       - name: Cache vps06 system derivation
         run: realpath result | cachix push etu
 
+      - name: Check the flake
+        run: 'nix flake check'
+
       - uses: stefanzweifel/git-auto-commit-action@v4.16.0
         with:
           commit_message: "cron(treewide): Upgrade systems"

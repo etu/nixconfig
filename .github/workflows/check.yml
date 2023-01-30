@@ -21,6 +21,3 @@ jobs:
 
       - name: Check yaml file formatting
         run: 'nix run nixpkgs#yamllint -- --strict --format github .github/ --config-file ./.github/yamllint.yml'
-
-      - name: Check the flake
-        run: 'nix flake check'

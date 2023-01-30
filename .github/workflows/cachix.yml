@@ -45,3 +45,6 @@ jobs:
         run: 'nix build .#nixosConfigurations.vps06.config.system.build.toplevel'
       - name: Cache vps06 system derivation
         run: realpath result | cachix push etu
+
+      - name: Check the flake
+        run: 'nix flake check'
