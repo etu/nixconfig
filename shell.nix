@@ -6,8 +6,6 @@ pkgs.mkShell {
     pkgs.curl
     pkgs.jq     # For parsing json downloaded with curl
 
-    pkgs.nixpkgs-fmt
-
     inputs.agenix.packages.${system}.agenix
     inputs.deploy-rs.packages.${system}.deploy-rs
 
