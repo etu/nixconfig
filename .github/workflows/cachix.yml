@@ -1,6 +1,7 @@
+---
 name: Cachix
 
-on:
+'on':
   push:
     branches:
       - main

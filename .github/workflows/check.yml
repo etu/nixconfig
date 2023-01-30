@@ -1,6 +1,7 @@
+---
 name: Check
 
-on: [ push, pull_request ]
+'on': [push, pull_request]
 
 jobs:
   format:
@@ -17,6 +18,9 @@ jobs:
 
       - name: Check nix file formatting
         run: 'nix fmt . -- --exclude ./modules/work/packages/chalet/ --check'
+
+      - name: Check yaml file formatting
+        run: 'nix run nixpkgs#yamllint -- --strict --format github .github/ --config-file ./.github/yamllint.yml'
 
       - name: Check the flake
         run: 'nix flake check'

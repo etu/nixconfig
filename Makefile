@@ -31,3 +31,7 @@ update-chalet:
 nix-fmt:
 	@echo "Format nix files"
 	nix fmt . -- --exclude ./modules/work/packages/chalet/
+
+yaml-fmt:
+	@echo "Format yaml files"
+	nix run nixpkgs#yamllint -- --strict --format github .github/ --config-file ./.github/yamllint.yml
