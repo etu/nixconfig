@@ -1,0 +1,12 @@
+name: Check
+
+on: [ push, pull_request ]
+
+jobs:
+  format:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: cachix/install-nix-action@v18
+      - name: Check nix file formatting
+        run: 'nix fmt . -- --exclude ./modules/work/packages/chalet/ --check'
