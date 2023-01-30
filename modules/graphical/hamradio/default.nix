@@ -1,6 +1,9 @@
-{ config, lib, pkgs, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   options.etu.graphical.hamradio.enable = lib.mkEnableOption "Enable graphical hamradio settings";
 
   config = lib.mkIf config.etu.graphical.hamradio.enable {

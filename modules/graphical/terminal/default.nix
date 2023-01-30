@@ -1,6 +1,9 @@
-{ config, lib, pkgs, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   options.etu.graphical.terminal = {
     enable = lib.mkEnableOption "Enable graphical terminal settings";
     terminalPackage = lib.mkOption {
@@ -26,7 +29,10 @@
           font.size = config.etu.graphical.theme.fonts.size;
           font.normal.family = config.etu.graphical.theme.fonts.monospace;
           colors = {
-            primary = { background = "#000000"; foreground = "#dddddd"; };
+            primary = {
+              background = "#000000";
+              foreground = "#dddddd";
+            };
             normal = {
               black = "#000000";
               red = "#cc0403";

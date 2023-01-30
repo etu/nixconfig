@@ -1,5 +1,8 @@
-{ stdenv, fetchFromGitHub, graphicsmagick }:
-
+{
+  stdenv,
+  fetchFromGitHub,
+  graphicsmagick,
+}:
 stdenv.mkDerivation {
   pname = "wallpaper";
   version = "2021-04-01";
@@ -13,7 +16,10 @@ stdenv.mkDerivation {
 
   installPhase = let
     # upper left corner of rectangle.
-    base = { x = 3835; y = 35; };
+    base = {
+      x = 3835;
+      y = 35;
+    };
     rect = {
       xy0 = "${toString base.x},${toString base.y}";
       # Add 720p to the coordinates to find the lower right corner.

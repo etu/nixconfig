@@ -1,6 +1,8 @@
-{ config, lib, ... }:
-
 {
+  config,
+  lib,
+  ...
+}: {
   imports = [
     ./direnv
     ./flipper-zero
@@ -17,7 +19,7 @@
       development.php.enable = true;
 
       # Define extra groups for user.
-      user.extraGroups = [ "dialout" ];
+      user.extraGroups = ["dialout"];
     };
   };
 }

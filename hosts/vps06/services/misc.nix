@@ -1,6 +1,9 @@
-{ pkgs, inputs, system, ... }:
-
 {
+  pkgs,
+  inputs,
+  system,
+  ...
+}: {
   # Enable the ip-failar-nu service
   services.ip-failar-nu.enable = true;
 

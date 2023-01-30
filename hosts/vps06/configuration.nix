@@ -1,10 +1,13 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, lib, pkgs, myData, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  myData,
+  ...
+}: {
   imports = [
     # Include my hardware settings.
     ./hardware.nix
@@ -31,7 +34,7 @@
   nix.gc.dates = "weekly";
   nix.gc.options = "--delete-older-than 7d";
   nix.optimise.automatic = true;
-  nix.optimise.dates = [ "daily" ];
+  nix.optimise.dates = ["daily"];
 
   # My module settings
   etu = {
@@ -41,7 +44,7 @@
     user.extraRootAuthorizedKeys = myData.pubkeys.etu.syncoid.server-main-elis;
     base.sanoid.datasets = {
       # Enable snapshotting for some filesystems
-      "zroot/safe/data".use_template = [ "data" ];
+      "zroot/safe/data".use_template = ["data"];
     };
   };
 
@@ -63,7 +66,7 @@
     "/var/lib/acme"
   ];
 
-  networking.firewall.allowedTCPPorts = [ 80 443 ];
+  networking.firewall.allowedTCPPorts = [80 443];
 
   services.nginx.enable = true;
 }

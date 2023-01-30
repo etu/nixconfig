@@ -1,6 +1,9 @@
-{ config, lib, pkgs, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   options.etu.games.steam.enable = lib.mkEnableOption "Enable games steam settings";
 
   config = lib.mkIf config.etu.games.steam.enable {
@@ -26,11 +29,11 @@
     ];
 
     # Steam link ports
-    networking.firewall.allowedTCPPorts = [ 27036 27037 ];
-    networking.firewall.allowedUDPPorts = [ 27031 27036 ];
+    networking.firewall.allowedTCPPorts = [27036 27037];
+    networking.firewall.allowedUDPPorts = [27031 27036];
 
     # Install steam using home manager.
-    etu.user.extraUserPackages = [ pkgs.steam pkgs.sc-controller ];
+    etu.user.extraUserPackages = [pkgs.steam pkgs.sc-controller];
 
     # Enable persistence for steam files.
     etu.base.zfs.user.directories = [

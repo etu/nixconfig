@@ -1,6 +1,4 @@
-{ ... }:
-
-{
+{...}: {
   etu.base.zfs.system.directories = [
     # Persistence of gitea data.
     "/var/lib/gitea"
@@ -13,11 +11,13 @@
   };
 
   services.postgresql = {
-    ensureDatabases = [ "gitea" ];
-    ensureUsers = [{
-      name = "gitea";
-      ensurePermissions."DATABASE gitea" = "ALL PRIVILEGES";
-    }];
+    ensureDatabases = ["gitea"];
+    ensureUsers = [
+      {
+        name = "gitea";
+        ensurePermissions."DATABASE gitea" = "ALL PRIVILEGES";
+      }
+    ];
   };
 
   services.gitea.enable = true;

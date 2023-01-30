@@ -1,6 +1,9 @@
-{ config, lib, myData, ... }:
-
 {
+  config,
+  lib,
+  myData,
+  ...
+}: {
   options.etu.base.sshd.enable = lib.mkEnableOption "Enable base sshd settings";
 
   config = lib.mkIf config.etu.base.sshd.enable {
@@ -36,16 +39,16 @@
     # they always are trusted.
     programs.ssh.knownHosts = {
       server-main-elis = {
-        extraHostNames = [ "home.elis.nu" "local.elis.nu" "192.168.1.101" ];
+        extraHostNames = ["home.elis.nu" "local.elis.nu" "192.168.1.101"];
         publicKey = myData.pubkeys.systems.server-main-elis;
       };
       server-main-elis-initrd = {
-        extraHostNames = [ "home.elis.nu" "local.elis.nu" "192.168.1.101" ];
+        extraHostNames = ["home.elis.nu" "local.elis.nu" "192.168.1.101"];
         publicKey = myData.pubkeys.systems.server-main-elis-initrd;
       };
       "vps04.elis.nu".publicKey = myData.pubkeys.systems.vps04;
       "vps06.elis.nu" = {
-        extraHostNames = [ "git.elis.nu" ];
+        extraHostNames = ["git.elis.nu"];
         publicKey = myData.pubkeys.systems.vps06;
       };
     };

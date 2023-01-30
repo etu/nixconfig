@@ -1,10 +1,13 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, lib, myData, ... }:
-
 {
+  config,
+  pkgs,
+  lib,
+  myData,
+  ...
+}: {
   imports = [
     # Include my hardware settings.
     ./hardware.nix
@@ -36,7 +39,7 @@
   nix.gc.dates = "weekly";
   nix.gc.options = "--delete-older-than 7d";
   nix.optimise.automatic = true;
-  nix.optimise.dates = [ "daily" ];
+  nix.optimise.dates = ["daily"];
 
   # My module settings
   etu = {
@@ -45,32 +48,53 @@
     base.emacs.package = "nox";
     development.git.enable = true;
     user.enable = true;
-    user.extraGroups = [ "libvirtd" ];
+    user.extraGroups = ["libvirtd"];
     user.extraRootAuthorizedKeys = myData.pubkeys.etu.syncoid.workstations;
     services.freshrss.enable = true;
     services.jellyfin.enable = true;
     services.syncthing.enable = true;
     base.sanoid.datasets = {
       # Enable snapshotting for some filesystems
-      "zroot/safe/data".use_template = [ "data" ];
-      "zroot/safe/home".use_template = [ "home" ];
+      "zroot/safe/data".use_template = ["data"];
+      "zroot/safe/home".use_template = ["home"];
 
       # Enable cleanup for synced backups
-      "zroot/backups/current/laptop-private-elis/data" = { use_template = [ "data" ]; autosnap = false; };
-      "zroot/backups/current/laptop-private-elis/home" = { use_template = [ "home" ]; autosnap = false; };
-      "zroot/backups/current/laptop-work-elis/data" = { use_template = [ "data" ]; autosnap = false; };
-      "zroot/backups/current/laptop-work-elis/home" = { use_template = [ "home" ]; autosnap = false; };
-      "zroot/backups/current/vps04/data" = { use_template = [ "data" ]; autosnap = false; };
-      "zroot/backups/current/vps04/home" = { use_template = [ "home" ]; autosnap = false; };
-      "zroot/backups/current/vps06/data" = { use_template = [ "data" ]; autosnap = false; };
+      "zroot/backups/current/laptop-private-elis/data" = {
+        use_template = ["data"];
+        autosnap = false;
+      };
+      "zroot/backups/current/laptop-private-elis/home" = {
+        use_template = ["home"];
+        autosnap = false;
+      };
+      "zroot/backups/current/laptop-work-elis/data" = {
+        use_template = ["data"];
+        autosnap = false;
+      };
+      "zroot/backups/current/laptop-work-elis/home" = {
+        use_template = ["home"];
+        autosnap = false;
+      };
+      "zroot/backups/current/vps04/data" = {
+        use_template = ["data"];
+        autosnap = false;
+      };
+      "zroot/backups/current/vps04/home" = {
+        use_template = ["home"];
+        autosnap = false;
+      };
+      "zroot/backups/current/vps06/data" = {
+        use_template = ["data"];
+        autosnap = false;
+      };
 
       # Enable snapshotting for bulk storage
-      "zstorage/files".use_template = [ "storage" ];
-      "zstorage/files/audio".use_template = [ "storage" ];
-      "zstorage/files/ebooks".use_template = [ "storage" ];
-      "zstorage/files/software".use_template = [ "storage" ];
-      "zstorage/files/upload".use_template = [ "storage" ];
-      "zstorage/files/video".use_template = [ "storage" ];
+      "zstorage/files".use_template = ["storage"];
+      "zstorage/files/audio".use_template = ["storage"];
+      "zstorage/files/ebooks".use_template = ["storage"];
+      "zstorage/files/software".use_template = ["storage"];
+      "zstorage/files/upload".use_template = ["storage"];
+      "zstorage/files/video".use_template = ["storage"];
     };
     base.syncoid.enable = true;
     # Enable syncing of some filesystems
@@ -112,12 +136,16 @@
   security.acme.defaults.email = config.etu.user.email;
   security.acme.acceptTerms = true;
 
-  users.users.downloads = { group = "downloads"; uid = 947; isSystemUser = true; };
+  users.users.downloads = {
+    group = "downloads";
+    uid = 947;
+    isSystemUser = true;
+  };
   users.groups.downloads.gid = 947;
 
   # Install some additonal tools on this system.
   environment.systemPackages = [
-    pkgs.mkvtoolnix-cli  # mkvinfo and mkvmerge
-    pkgs.ffmpeg          # ffmpeg
+    pkgs.mkvtoolnix-cli # mkvinfo and mkvmerge
+    pkgs.ffmpeg # ffmpeg
   ];
 }

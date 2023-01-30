@@ -1,11 +1,12 @@
-{ pkgs, inputs, system, ... }:
-
-let
+{
+  pkgs,
+  inputs,
+  system,
+  ...
+}: let
   # Load sources
   sources = import ../nix/sources.nix;
-
-in
-{
+in {
   imports = [
     inputs.agenix.nixosModules.age
     inputs.home-manager.nixosModules.home-manager

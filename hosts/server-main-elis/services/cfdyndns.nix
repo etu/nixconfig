@@ -1,6 +1,9 @@
-{ config, pkgs, myData, ... }:
-
 {
+  config,
+  pkgs,
+  myData,
+  ...
+}: {
   # Decrypt secret to expected location.
   age.secrets = {
     inherit (myData.ageModules) cloudflare-api-env;
@@ -8,8 +11,8 @@
 
   systemd.services.cloudflare-dyndns = {
     description = "Cloudflare dyndns updater";
-    after = [ "network-online.target" ];
-    wantedBy = [ "multi-user.target" ];
+    after = ["network-online.target"];
+    wantedBy = ["multi-user.target"];
     startAt = "hourly";
     serviceConfig = {
       Type = "oneshot";

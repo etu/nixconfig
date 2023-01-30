@@ -1,6 +1,8 @@
-{ config, lib, ... }:
-
 {
+  config,
+  lib,
+  ...
+}: {
   options.etu.services.nfs = {
     enable = lib.mkEnableOption "Enable services nfs settings";
     exports = lib.mkOption {
@@ -22,8 +24,8 @@
     services.nfs.server.extraNfsdConfig = "udp=y";
 
     # Open ports used by NFS
-    networking.firewall.allowedTCPPorts = [ 2049 111 4000 4001 20048 ];
-    networking.firewall.allowedUDPPorts = [ 2049 111 4000 4001 20048 ];
+    networking.firewall.allowedTCPPorts = [2049 111 4000 4001 20048];
+    networking.firewall.allowedUDPPorts = [2049 111 4000 4001 20048];
 
     services.nfs.server.exports = config.etu.services.nfs.exports;
   };

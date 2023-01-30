@@ -1,6 +1,10 @@
-{ config, lib, pkgs, myData, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  myData,
+  ...
+}: {
   options.etu.user = {
     enable = lib.mkEnableOption "Enables my user";
     uid = lib.mkOption {
@@ -35,16 +39,16 @@
     };
     extraGroups = lib.mkOption {
       type = lib.types.listOf lib.types.str;
-      default = [ ];
+      default = [];
     };
     extraAuthorizedKeys = lib.mkOption {
       type = lib.types.listOf lib.types.str;
-      default = [ ];
+      default = [];
       description = "Additional authorized keys.";
     };
     extraRootAuthorizedKeys = lib.mkOption {
       type = lib.types.listOf lib.types.str;
-      default = [ ];
+      default = [];
       description = "Additional authorized keys for root user.";
     };
     extraUserPackages = lib.mkOption {
@@ -68,7 +72,7 @@
     # Define my user account.
     users.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
       description = "${config.etu.user.realname},,,,";
-      extraGroups = [ "wheel" ] ++ config.etu.user.extraGroups;
+      extraGroups = ["wheel"] ++ config.etu.user.extraGroups;
       passwordFile = config.age.secrets.hashed-etu-password.path;
       isNormalUser = true;
       openssh.authorizedKeys.keys = myData.pubkeys.etu.computers ++ config.etu.user.extraAuthorizedKeys;
@@ -90,15 +94,16 @@
         # Nano config
         ".nanorc".text = "set constantshow # Show linenumbers -c as default";
 
-        "bin/restow".source = pkgs.runCommand "restow" {
-          dataPrefix = config.etu.dataPrefix;
-        } ''
-          substituteAll ${../dotfiles/bin/restow} $out
-          chmod +x $out
-        '';
+        "bin/restow".source =
+          pkgs.runCommand "restow" {
+            dataPrefix = config.etu.dataPrefix;
+          } ''
+            substituteAll ${../dotfiles/bin/restow} $out
+            chmod +x $out
+          '';
         "bin/spacecolors".source = ../dotfiles/bin/spacecolors;
 
-        "bin/keep".source = pkgs.runCommand "keep" { } ''
+        "bin/keep".source = pkgs.runCommand "keep" {} ''
           cp ${../dotfiles/bin/keep} $out
           substituteInPlace $out --replace /bin/zsh ${pkgs.zsh}/bin/zsh
         '';
@@ -107,12 +112,17 @@
       # Install some comand line tools I cummonly want available for
       # my home directory, as well as extra packages defined by the
       # system or other modules.
-      home.packages = config.etu.user.extraUserPackages ++ [
-        pkgs.stow
-      ];
+      home.packages =
+        config.etu.user.extraUserPackages
+        ++ [
+          pkgs.stow
+        ];
 
       # Set the environment variables.
-      home.sessionVariables.EDITOR = if config.etu.base.emacs.enable then "emacs" else "nano";
+      home.sessionVariables.EDITOR =
+        if config.etu.base.emacs.enable
+        then "emacs"
+        else "nano";
     };
 
     # Directories to mount persistent for my user

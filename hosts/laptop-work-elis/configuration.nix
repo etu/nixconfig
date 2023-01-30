@@ -1,10 +1,12 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, myData, ... }:
-
 {
+  config,
+  pkgs,
+  myData,
+  ...
+}: {
   imports = [
     # Include my hardware settings.
     ./hardware.nix
@@ -30,7 +32,7 @@
     '';
     services.syncthing.enable = true;
     user.enable = true;
-    user.extraGroups = [ "video" "docker" ];
+    user.extraGroups = ["video" "docker"];
 
     # Install extra modes for work.
     base.emacs.extraConfig = [
@@ -48,8 +50,8 @@
 
     base.sanoid.datasets = {
       # Enable snapshotting for some filesystems
-      "zroot/safe/data".use_template = [ "data" ];
-      "zroot/safe/home".use_template = [ "home" ];
+      "zroot/safe/data".use_template = ["data"];
+      "zroot/safe/home".use_template = ["home"];
     };
     base.syncoid.enable = true;
     # Enable syncing of some filesystems
@@ -80,11 +82,13 @@
 
   # Set up remote builds
   nix.distributedBuilds = true;
-  nix.buildMachines = [{
-    hostName = "home.elis.nu";
-    maxJobs = 8;
-    sshKey = config.age.secrets.syncoid-workstations-ssh-ec.path;
-    sshUser = "root";
-    system = "x86_64-linux";
-  }];
+  nix.buildMachines = [
+    {
+      hostName = "home.elis.nu";
+      maxJobs = 8;
+      sshKey = config.age.secrets.syncoid-workstations-ssh-ec.path;
+      sshUser = "root";
+      system = "x86_64-linux";
+    }
+  ];
 }

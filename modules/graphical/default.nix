@@ -1,6 +1,9 @@
-{ config, lib, pkgs, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   imports = [
     ./evolution
     ./firefox
@@ -28,17 +31,17 @@
       graphical.theme.enable = true;
 
       # Define extra groups for user.
-      user.extraGroups = [ "networkmanager" "adbusers" ];
+      user.extraGroups = ["networkmanager" "adbusers"];
 
       # Install using home-manager.
       user.extraUserPackages = [
-        pkgs.feh         # Image display tool
-        pkgs.mpv         # Media player
+        pkgs.feh # Image display tool
+        pkgs.mpv # Media player
         pkgs.pavucontrol # Pulse audio volume control
-        pkgs.sshfs-fuse  # SSHFS client
-        pkgs.yt-dlp      # Youtube download client
-        pkgs.chromium    # Chromium browser
-        pkgs.stupidterm  # Another terminal emulator
+        pkgs.sshfs-fuse # SSHFS client
+        pkgs.yt-dlp # Youtube download client
+        pkgs.chromium # Chromium browser
+        pkgs.stupidterm # Another terminal emulator
       ];
 
       # Directories to mount persistent for my user on graphical sessions
@@ -71,7 +74,7 @@
     networking.wireless.iwd.settings.Settings.AutoConnect = true;
 
     # 8000 is for random web sharing things.
-    networking.firewall.allowedTCPPorts = [ 8000 ];
+    networking.firewall.allowedTCPPorts = [8000];
 
     # Install some comand line tools I cummonly want available for my
     # home directory on graphical systems.

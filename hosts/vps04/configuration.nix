@@ -1,10 +1,13 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, lib, pkgs, myData, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  myData,
+  ...
+}: {
   imports = [
     # Include my hardware settings.
     ./hardware.nix
@@ -24,7 +27,7 @@
   nix.gc.dates = "weekly";
   nix.gc.options = "--delete-older-than 7d";
   nix.optimise.automatic = true;
-  nix.optimise.dates = [ "daily" ];
+  nix.optimise.dates = ["daily"];
 
   # My module settings
   etu = {
@@ -37,8 +40,8 @@
     user.extraRootAuthorizedKeys = myData.pubkeys.etu.syncoid.server-main-elis;
     base.sanoid.datasets = {
       # Enable snapshotting for some filesystems
-      "zroot/safe/data".use_template = [ "data" ];
-      "zroot/safe/home".use_template = [ "home" ];
+      "zroot/safe/data".use_template = ["data"];
+      "zroot/safe/home".use_template = ["home"];
     };
   };
 
@@ -61,8 +64,8 @@
 
     # Install weechat with weechat-matrix
     (pkgs.weechat.override {
-      configure = { availablePlugins, ... }: {
-        scripts = [ pkgs.weechatScripts.weechat-matrix ];
+      configure = {availablePlugins, ...}: {
+        scripts = [pkgs.weechatScripts.weechat-matrix];
       };
     })
 
@@ -117,8 +120,10 @@
   services.flummbot.stateDirectory = "/home/bots";
 
   # Flummbot config file
-  age.secrets.flummbot-toml = myData.ageModules.flummbot-toml // {
-    path = "${config.services.flummbot.stateDirectory}/flummbot.toml";
-  };
+  age.secrets.flummbot-toml =
+    myData.ageModules.flummbot-toml
+    // {
+      path = "${config.services.flummbot.stateDirectory}/flummbot.toml";
+    };
   age.secrets.hashed-ozeloten-password = myData.ageModules.hashed-ozeloten-password;
 }

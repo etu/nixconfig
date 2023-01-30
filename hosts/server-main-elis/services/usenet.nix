@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   # Make sure to have nginx enabled
   services.nginx.enable = true;
   services.nginx.virtualHosts."local.elis.nu".locations = let
@@ -50,19 +52,25 @@
     };
     "~ ^/nzbget($|./*)" = {
       proxyPass = "http://127.0.0.1:6789";
-      extraConfig = onlyLan + ''
-        rewrite /nzbget/(.*) /$1 break;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-      '';
+      extraConfig =
+        onlyLan
+        + ''
+          rewrite /nzbget/(.*) /$1 break;
+          proxy_set_header Host $host;
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        '';
     };
   };
 
   # Enable usenet related services in a container
   containers.usenet = {
     autoStart = true;
-    config = { lib, pkgs, ... }: {
+    config = {
+      lib,
+      pkgs,
+      ...
+    }: {
       # The NixOS release to be compatible with for stateful data such as databases.
       system.stateVersion = config.etu.stateVersion;
 
@@ -73,15 +81,39 @@
       documentation.man.enable = false;
 
       # nzbget needs unrar
-      nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "unrar" ];
+      nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) ["unrar"];
 
-      services.bazarr = { enable = true; user = "downloads"; group = "downloads"; };
-      services.sonarr = { enable = true; user = "downloads"; group = "downloads"; };
-      services.radarr = { enable = true; user = "downloads"; group = "downloads"; };
-      services.lidarr = { enable = true; user = "downloads"; group = "downloads"; };
-      services.nzbget = { enable = true; user = "downloads"; group = "downloads"; };
+      services.bazarr = {
+        enable = true;
+        user = "downloads";
+        group = "downloads";
+      };
+      services.sonarr = {
+        enable = true;
+        user = "downloads";
+        group = "downloads";
+      };
+      services.radarr = {
+        enable = true;
+        user = "downloads";
+        group = "downloads";
+      };
+      services.lidarr = {
+        enable = true;
+        user = "downloads";
+        group = "downloads";
+      };
+      services.nzbget = {
+        enable = true;
+        user = "downloads";
+        group = "downloads";
+      };
 
-      users.users.downloads = { group = "downloads"; uid = 947; isSystemUser = true; };
+      users.users.downloads = {
+        group = "downloads";
+        uid = 947;
+        isSystemUser = true;
+      };
       users.groups.downloads.gid = 947;
     };
 

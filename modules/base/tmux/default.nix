@@ -1,6 +1,8 @@
-{ config, lib, ... }:
-
 {
+  config,
+  lib,
+  ...
+}: {
   options.etu.base.tmux.enable = lib.mkEnableOption "Enable base tmux settings";
 
   config = lib.mkIf config.etu.base.htop.enable {

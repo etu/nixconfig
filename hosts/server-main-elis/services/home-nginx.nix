@@ -1,6 +1,4 @@
-{ config, ... }:
-
-{
+{config, ...}: {
   # Make sure to have nginx enabled
   services.nginx.enable = true;
   services.nginx.virtualHosts = {

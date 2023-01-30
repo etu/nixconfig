@@ -1,6 +1,9 @@
-{ config, lib, pkgs, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   options.etu.graphical.gnupg.enable = lib.mkEnableOption "Enable graphical gnupg settings";
 
   config = lib.mkIf config.etu.graphical.gnupg.enable {
@@ -51,7 +54,7 @@
       pkgs.gnupg
 
       # Install pass with expensions
-      (pkgs.pass.withExtensions (ext: with ext; [ pass-otp pass-update pass-checkup ]))
+      (pkgs.pass.withExtensions (ext: with ext; [pass-otp pass-update pass-checkup]))
 
       # Signing party for the tool caff
       pkgs.signing-party

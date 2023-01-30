@@ -1,6 +1,9 @@
-{ config, pkgs, myData, ... }:
-
 {
+  config,
+  pkgs,
+  myData,
+  ...
+}: {
   # Make sure to have nginx enabled
   services.nginx.enable = true;
   services.nginx.virtualHosts."grafana.elis.nu" = {
@@ -14,7 +17,6 @@
     '';
   };
 
-
   # Enable prometheus to gather metrics.
   services.prometheus.enable = true;
 
@@ -26,10 +28,10 @@
   # Create a service for the ZFS exporter. It defaults to listen to :9134
   systemd.services.zfs-exporter = {
     description = "ZFS Prometheus exporter";
-    after = [ "network.target" "network-online.target" ];
-    before = [ "prometheus.service" ];
-    wantedBy = [ "multi-user.target" ];
-    path = [ config.boot.zfs.package ];
+    after = ["network.target" "network-online.target"];
+    before = ["prometheus.service"];
+    wantedBy = ["multi-user.target"];
+    path = [config.boot.zfs.package];
     serviceConfig = {
       ExecStart = "${pkgs.prometheus-zfs-exporter}/bin/zfs_exporter --properties.dataset-filesystem=available,compressratio,logicalused,quota,referenced,used,usedbydataset,written";
       Restart = "always";
@@ -44,8 +46,8 @@
         NZBGET_USERNAME = "";
         NZBGET_PASSWORD = "";
       };
-      extraOptions = [ "--network=host" ];
-      ports = [ "9452" ];
+      extraOptions = ["--network=host"];
+      ports = ["9452"];
     };
   };
 
@@ -53,35 +55,34 @@
   services.prometheus.scrapeConfigs = [
     {
       job_name = "prometheus";
-      static_configs = [{ targets = [ "127.0.0.1:${toString config.services.prometheus.port}" ]; }];
+      static_configs = [{targets = ["127.0.0.1:${toString config.services.prometheus.port}"];}];
     }
     {
       job_name = "node";
-      static_configs = [{ targets = [ "127.0.0.1:${toString config.services.prometheus.exporters.node.port}" ]; }];
+      static_configs = [{targets = ["127.0.0.1:${toString config.services.prometheus.exporters.node.port}"];}];
     }
     {
       job_name = "apcupsd";
-      static_configs = [{ targets = [ "127.0.0.1:${toString config.services.prometheus.exporters.apcupsd.port}" ]; }];
+      static_configs = [{targets = ["127.0.0.1:${toString config.services.prometheus.exporters.apcupsd.port}"];}];
     }
     {
       job_name = "systemd";
-      static_configs = [{ targets = [ "127.0.0.1:${toString config.services.prometheus.exporters.systemd.port}" ]; }];
+      static_configs = [{targets = ["127.0.0.1:${toString config.services.prometheus.exporters.systemd.port}"];}];
     }
     {
       job_name = "grafana";
       scheme = "https";
-      static_configs = [{ targets = [ "grafana.elis.nu" ]; }];
+      static_configs = [{targets = ["grafana.elis.nu"];}];
     }
     {
       job_name = "zfs_exporter";
-      static_configs = [{ targets = [ "127.0.0.1:9134" ]; }];
+      static_configs = [{targets = ["127.0.0.1:9134"];}];
     }
     {
       job_name = "nzbget";
-      static_configs = [{ targets = [ "127.0.0.1:9452" ]; }];
+      static_configs = [{targets = ["127.0.0.1:9452"];}];
     }
   ];
-
 
   # Enable grafana.
   services.grafana.enable = true;
@@ -112,7 +113,7 @@
     inherit (myData.ageModules) grafana-admin-password;
   };
 
-  networking.firewall.allowedTCPPorts = [ 3030 ];
+  networking.firewall.allowedTCPPorts = [3030];
 
   etu.base.zfs.system.directories = [
     # Bind mount for persistent database for prometheus

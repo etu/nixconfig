@@ -1,7 +1,10 @@
-{ config, lib, pkgs, ... }:
-let
-  myPkgs = pkgs.callPackage ./packages { };
-
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
+  myPkgs = pkgs.callPackage ./packages {};
 in {
   options.etu.work.enable = lib.mkEnableOption "Enables work module";
 
@@ -9,8 +12,12 @@ in {
     # Configure PHP to be the correct version with the right extensions
     nixpkgs.overlays = [
       (self: super: {
-        php = pkgs.php81.withExtensions ({ all, enabled }:
-          enabled ++ (with all; [ imagick memcached redis pcov ])
+        php = pkgs.php81.withExtensions (
+          {
+            all,
+            enabled,
+          }:
+            enabled ++ (with all; [imagick memcached redis pcov])
         );
       })
     ];

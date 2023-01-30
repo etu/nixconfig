@@ -1,10 +1,12 @@
-{ config, lib, ... }:
-
 {
+  config,
+  lib,
+  ...
+}: {
   options.etu.base.syncoid = {
     enable = lib.mkEnableOption "Enable base syncoid settings";
     commands = lib.mkOption {
-      default = { };
+      default = {};
       description = "services.syncoid.commands to sync";
     };
   };
@@ -14,7 +16,7 @@
     services.syncoid = {
       enable = true;
       interval = "*-*-* *:15:00";
-      commonArgs = [ "--no-sync-snap" ];
+      commonArgs = ["--no-sync-snap"];
       sshKey = "/var/lib/syncoid/.ssh/id_ed25519";
       commands = config.etu.base.syncoid.commands;
     };

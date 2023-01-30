@@ -1,6 +1,9 @@
-{ lib, modulesPath, config, ... }:
-
 {
+  lib,
+  modulesPath,
+  config,
+  ...
+}: {
   imports = [
     (modulesPath + "/profiles/qemu-guest.nix")
   ];
@@ -10,14 +13,14 @@
   boot.loader.grub.version = 2;
   boot.loader.grub.device = "/dev/sda";
 
-  boot.initrd.availableKernelModules = [ "ahci" "xhci_pci" "virtio_pci" "sd_mod" "sr_mod" ];
-  boot.initrd.kernelModules = [ ];
+  boot.initrd.availableKernelModules = ["ahci" "xhci_pci" "virtio_pci" "sd_mod" "sr_mod"];
+  boot.initrd.kernelModules = [];
 
-  boot.kernelModules = [ ];
-  boot.extraModulePackages = [ ];
+  boot.kernelModules = [];
+  boot.extraModulePackages = [];
 
   # Enable ZFS.
-  boot.supportedFilesystems = [ "zfs" ];
+  boot.supportedFilesystems = ["zfs"];
 
   # Enable ZFS scrubbing.
   services.zfs.autoScrub.enable = true;
@@ -26,7 +29,7 @@
   fileSystems."/" = {
     device = "none";
     fsType = "tmpfs";
-    options = [ "defaults" "size=1G" "mode=755" ];
+    options = ["defaults" "size=1G" "mode=755"];
   };
 
   fileSystems."/nix" = {
@@ -56,7 +59,7 @@
   ];
 
   # Swap devices.
-  swapDevices = [ ];
+  swapDevices = [];
 
   # Set max jobs in nix.
   nix.settings.max-jobs = lib.mkDefault 1;

@@ -62,52 +62,80 @@
     via-elis-nu.inputs.flake-utils.follows = "flake-utils";
   };
 
-  outputs = { self, nixpkgs, deploy-rs, ... }@inputs: let
+  outputs = {
+    self,
+    nixpkgs,
+    deploy-rs,
+    ...
+  } @ inputs: let
     myData = import ./data.nix;
   in {
     # Declare systems
     nixosConfigurations = {
       laptop-private-elis = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [ ./hosts/laptop-private-elis/configuration.nix ./modules ];
-        specialArgs = { inherit inputs myData; system = "x86_64-linux"; };
+        modules = [./hosts/laptop-private-elis/configuration.nix ./modules];
+        specialArgs = {
+          inherit inputs myData;
+          system = "x86_64-linux";
+        };
       };
 
       laptop-work-elis = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [ ./hosts/laptop-work-elis/configuration.nix ./modules ];
-        specialArgs = { inherit inputs myData; system = "x86_64-linux"; };
+        modules = [./hosts/laptop-work-elis/configuration.nix ./modules];
+        specialArgs = {
+          inherit inputs myData;
+          system = "x86_64-linux";
+        };
       };
 
       server-main-elis = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [ ./hosts/server-main-elis/configuration.nix ./modules ];
-        specialArgs = { inherit inputs myData; system = "x86_64-linux"; };
+        modules = [./hosts/server-main-elis/configuration.nix ./modules];
+        specialArgs = {
+          inherit inputs myData;
+          system = "x86_64-linux";
+        };
       };
 
       vps04 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [ ./hosts/vps04/configuration.nix ./modules ];
-        specialArgs = { inherit inputs myData; system = "x86_64-linux"; };
+        modules = [./hosts/vps04/configuration.nix ./modules];
+        specialArgs = {
+          inherit inputs myData;
+          system = "x86_64-linux";
+        };
       };
 
       vps06 = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [ ./hosts/vps06/configuration.nix ./modules ];
-        specialArgs = { inherit inputs myData; system = "x86_64-linux"; };
+        modules = [./hosts/vps06/configuration.nix ./modules];
+        specialArgs = {
+          inherit inputs myData;
+          system = "x86_64-linux";
+        };
       };
 
       live-iso = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [ ./hosts/live-iso/configuration.nix ./modules ];
-        specialArgs = { inherit inputs myData; system = "x86_64-linux"; };
+        modules = [./hosts/live-iso/configuration.nix ./modules];
+        specialArgs = {
+          inherit inputs myData;
+          system = "x86_64-linux";
+        };
       };
     };
 
     # Set up nix develop shell environment
     devShells.x86_64-linux.default = let
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
-    in import ./shell.nix { inherit pkgs; inherit (self) inputs; system = "x86_64-linux"; };
+    in
+      import ./shell.nix {
+        inherit pkgs;
+        inherit (self) inputs;
+        system = "x86_64-linux";
+      };
 
     # Specify deploy-rs deployments
     deploy.nodes = {

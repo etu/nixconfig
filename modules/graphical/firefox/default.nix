@@ -1,9 +1,21 @@
-{ config, lib, pkgs, ... }:
-let
-  buildFirefoxXpiAddon = { pname, version, addonId, url, sha256, meta ? { }, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
+  buildFirefoxXpiAddon = {
+    pname,
+    version,
+    addonId,
+    url,
+    sha256,
+    meta ? {},
+    ...
+  }:
     pkgs.stdenv.mkDerivation {
       inherit meta pname version;
-      src = pkgs.fetchurl { inherit url sha256; };
+      src = pkgs.fetchurl {inherit url sha256;};
 
       buildCommand = ''
         dst="$out/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
@@ -11,7 +23,6 @@ let
         install -v -m644 "$src" "$dst/${addonId}.xpi"
       '';
     };
-
 in {
   options.etu.graphical.firefox = {
     enable = lib.mkEnableOption "Enable graphical firefox settings";
@@ -28,17 +39,17 @@ in {
     home-manager.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
       # Enable browserpass integration
       programs.browserpass.enable = true;
-      programs.browserpass.browsers = [ "firefox" ];
+      programs.browserpass.browsers = ["firefox"];
 
       # Make firefox the default browser
       xdg.mimeApps = {
         enable = true;
         defaultApplications = {
-          "text/html" = [ "firefox.desktop" ];
-          "x-scheme-handler/http" = [ "firefox.desktop" ];
-          "x-scheme-handler/https" = [ "firefox.desktop" ];
-          "x-scheme-handler/about" = [ "firefox.desktop" ];
-          "x-scheme-handler/unknown" = [ "firefox.desktop" ];
+          "text/html" = ["firefox.desktop"];
+          "x-scheme-handler/http" = ["firefox.desktop"];
+          "x-scheme-handler/https" = ["firefox.desktop"];
+          "x-scheme-handler/about" = ["firefox.desktop"];
+          "x-scheme-handler/unknown" = ["firefox.desktop"];
         };
       }; # END xdg.mimeApps
 

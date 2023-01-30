@@ -7,9 +7,12 @@
 # Then dd the resulting image:
 # $ sudo dd if=result/iso/<tab> of=/dev/<device> status=progress bs=16M
 #
-{ config, modulesPath, lib, ... }:
-
 {
+  config,
+  modulesPath,
+  lib,
+  ...
+}: {
   imports = [
     # Import base settings for live isos
     (modulesPath + "/installer/cd-dvd/installation-cd-base.nix")

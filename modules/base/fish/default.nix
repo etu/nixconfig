@@ -1,6 +1,9 @@
-{ config, lib, pkgs, ... }:
-
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   base = {
     # Enable fish in home-manager
     programs.fish.enable = true;
@@ -150,8 +153,7 @@ let
       '';
     }; # END programs.fish.functions
   };
-in
-{
+in {
   options.etu.base.fish.enable = lib.mkEnableOption "Enable base fish settings";
 
   config = lib.mkIf config.etu.base.fish.enable {

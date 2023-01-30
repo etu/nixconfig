@@ -1,6 +1,9 @@
-{ config, lib, pkgs, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   options.etu.graphical.evolution.enable = lib.mkEnableOption "Enable graphical evolution settings";
 
   config = lib.mkIf config.etu.graphical.evolution.enable {
@@ -13,16 +16,16 @@
       xdg.mimeApps = {
         enable = true;
         defaultApplications = {
-          "x-scheme-handler/mailto" = [ "org.gnome.Evolution.desktop" ];
+          "x-scheme-handler/mailto" = ["org.gnome.Evolution.desktop"];
         };
         associations.added = {
-          "x-scheme-handler/mailto" = [ "org.gnome.Evolution.desktop" ];
+          "x-scheme-handler/mailto" = ["org.gnome.Evolution.desktop"];
         };
       }; # END xdg.mimeApps
     };
 
     # Install using home-manager.
-    etu.user.extraUserPackages = [ pkgs.evolution ];
+    etu.user.extraUserPackages = [pkgs.evolution];
 
     # Enable persistence for evolution files.
     etu.base.zfs.user.directories = [

@@ -1,16 +1,18 @@
-{ config, lib, ... }:
-
 {
+  config,
+  lib,
+  ...
+}: {
   options.etu.base.zfs = let
     options = param: {
       directories = lib.mkOption {
         type = lib.types.listOf lib.types.str;
-        default = [ ];
+        default = [];
         description = "Directories to pass to environment.persistence attribute for ${param} under ${config.etu.dataPrefix}";
       };
       files = lib.mkOption {
         type = lib.types.listOf lib.types.str;
-        default = [ ];
+        default = [];
         description = "Files to pass to environment.persistence attribute for ${param} under ${config.etu.dataPrefix}";
       };
     };
@@ -25,9 +27,11 @@
     environment.persistence.${config.etu.dataPrefix} = {
       # System persistence
       directories = config.etu.base.zfs.system.directories;
-      files = [
-        "/etc/machine-id"
-      ] ++ config.etu.base.zfs.system.files;
+      files =
+        [
+          "/etc/machine-id"
+        ]
+        ++ config.etu.base.zfs.system.files;
 
       # Root user persistence
       users.root = {

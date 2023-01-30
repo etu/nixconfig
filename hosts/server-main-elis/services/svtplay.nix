@@ -1,11 +1,15 @@
-{ config, pkgs, lib, ... }:
-let
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
   buildSvtPlayService = svtSlug: {
     description = "${svtSlug} updater";
-    after = [ "network-online.target" ];
-    wantedBy = [ "multi-user.target" ];
+    after = ["network-online.target"];
+    wantedBy = ["multi-user.target"];
     startAt = "04:00";
-    path = [ pkgs.ffmpeg ];
+    path = [pkgs.ffmpeg];
     preStart = "mkdir -p ${svtSlug}";
     serviceConfig = {
       Type = "oneshot";
@@ -15,8 +19,7 @@ let
       ExecStart = "${pkgs.svtplay-dl}/bin/svtplay-dl --nfo --all-episodes --output ${svtSlug} https://www.svtplay.se/${svtSlug}";
     };
   };
-in
-{
+in {
   #systemd.services.svtplay-faret-shaun = buildSvtPlayService "faret-shaun";
   #systemd.services.svtplay-mamma-mu = buildSvtPlayService "mamma-mu";
   #systemd.services.svtplay-pettson-och-findus = buildSvtPlayService "pettson-och-findus";

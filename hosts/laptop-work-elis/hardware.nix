@@ -1,11 +1,14 @@
-{ config, inputs, modulesPath, lib, pkgs, ... }:
-
-let
+{
+  config,
+  inputs,
+  modulesPath,
+  lib,
+  pkgs,
+  ...
+}: let
   # Load sources
   sources = import ../../nix/sources.nix;
-
-in
-{
+in {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
 
@@ -17,13 +20,13 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  boot.initrd.availableKernelModules = [ "nvme" "ehci_pci" "xhci_pci" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
-  boot.initrd.kernelModules = [ ];
+  boot.initrd.availableKernelModules = ["nvme" "ehci_pci" "xhci_pci" "usb_storage" "sd_mod" "rtsx_pci_sdmmc"];
+  boot.initrd.kernelModules = [];
 
-  boot.kernelModules = [ "kvm-amd" ];
+  boot.kernelModules = ["kvm-amd"];
 
   # Install thinkpad modules for TLP.
-  boot.extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
+  boot.extraModulePackages = with config.boot.kernelPackages; [acpi_call];
 
   # Set kernel. Override it from nixos-hardware.
   boot.kernelPackages = lib.mkForce pkgs.zfs.latestCompatibleLinuxPackages;
@@ -33,7 +36,7 @@ in
   boot.plymouth.enable = true;
 
   # Enable ZFS.
-  boot.supportedFilesystems = [ "zfs" ];
+  boot.supportedFilesystems = ["zfs"];
 
   # Add hack to make wifi work at the office.
   boot.extraModprobeConfig = "options iwlwifi disable_11ax=Y";
@@ -52,7 +55,7 @@ in
   hardware.acpilight.enable = true;
 
   # Set video driver
-  services.xserver.videoDrivers = [ "modesetting" ];
+  services.xserver.videoDrivers = ["modesetting"];
 
   # Enable fwupd for firmware updates etc.
   services.fwupd.enable = true;
@@ -66,13 +69,13 @@ in
   fileSystems."/" = {
     device = "none";
     fsType = "tmpfs";
-    options = [ "defaults" "size=3G" "mode=755" ];
+    options = ["defaults" "size=3G" "mode=755"];
   };
 
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/F8CB-7FB0";
     fsType = "vfat";
-    options = [ "defaults" "noexec" "noauto" "x-systemd.automount" ];
+    options = ["defaults" "noexec" "noauto" "x-systemd.automount"];
   };
 
   fileSystems."/nix" = {
@@ -84,20 +87,20 @@ in
     device = "zroot/safe/data";
     fsType = "zfs";
     neededForBoot = true;
-    options = [ "defaults" "noexec" ];
+    options = ["defaults" "noexec"];
   };
 
   fileSystems."${config.etu.dataPrefix}/home" = {
     device = "zroot/safe/home";
     fsType = "zfs";
     neededForBoot = true;
-    options = [ "defaults" "noexec" ];
+    options = ["defaults" "noexec"];
   };
 
   fileSystems."/var/log" = {
     device = "zroot/local/var-log";
     fsType = "zfs";
-    options = [ "defaults" "noexec" ];
+    options = ["defaults" "noexec"];
   };
 
   # Additional work directories
@@ -115,7 +118,7 @@ in
   ];
 
   # Swap devices.
-  swapDevices = [ ];
+  swapDevices = [];
 
   # Set max jobs in nix.
   nix.settings.max-jobs = lib.mkDefault 8;

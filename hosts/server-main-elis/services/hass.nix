@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   # Make sure to have NGiNX enabled
   services.nginx.enable = true;
   services.nginx.virtualHosts."hass.elis.nu" = {
@@ -23,7 +25,7 @@
     home-assistant = {
       environment.TZ = config.time.timeZone;
       image = "ghcr.io/home-assistant/home-assistant:2023.1.7";
-      ports = [ "8123" ];
+      ports = ["8123"];
       extraOptions = [
         "--network=host"
         "--device=/dev/serial/by-id/usb-dresden_elektronik_ingenieurtechnik_GmbH_ConBee_II_DE2124653-if00:/dev/ttyACM0"
@@ -31,11 +33,11 @@
       volumes = [
         "${config.etu.dataPrefix}/var/lib/hass:/config"
       ];
-      dependsOn = [ "mqtt" "zwavejs2mqtt" ];
+      dependsOn = ["mqtt" "zwavejs2mqtt"];
     };
     mqtt = {
       image = "eclipse-mosquitto:2.0.15";
-      ports = [ "1883:1883" ];
+      ports = ["1883:1883"];
       extraOptions = [
         "--network=host"
       ];

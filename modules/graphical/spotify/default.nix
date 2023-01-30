@@ -1,6 +1,9 @@
-{ config, lib, pkgs, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   options.etu.graphical.spotify.enable = lib.mkEnableOption "Enable graphical spotify settings";
 
   config = lib.mkIf config.etu.graphical.spotify.enable {
@@ -11,7 +14,7 @@
     ];
 
     # Install spotify using home manager.
-    etu.user.extraUserPackages = [ pkgs.spotify ];
+    etu.user.extraUserPackages = [pkgs.spotify];
 
     # Enable persistence for spotify files.
     etu.base.zfs.user.files = [

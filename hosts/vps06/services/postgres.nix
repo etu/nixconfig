@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   etu.base.zfs.system.directories = [
     # Persistence of postgres database between boots.
     "/var/lib/postgresql"
@@ -38,13 +36,11 @@
       max_wal_size = "1024 MB";
       min_wal_size = "512 MB";
 
-
       # WAL writing;
       wal_compression = "on";
       wal_buffers = -1; # auto-tuned by Postgres till maximum of segment size (16MB by default);
       wal_writer_delay = "200ms";
       wal_writer_flush_after = "1MB";
-
 
       # Background writer;
       bgwriter_delay = "200ms";

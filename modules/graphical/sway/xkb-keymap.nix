@@ -1,5 +1,7 @@
-{ writeText, xorg }:
-
+{
+  writeText,
+  xorg,
+}:
 writeText "us-dvorak-compose" ''
   // This file defines my own custom keymap. More information about which
   // parts that gets included are available in the different subfolders in:

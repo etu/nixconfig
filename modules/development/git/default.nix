@@ -1,6 +1,9 @@
-{ config, lib, pkgs, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   options.etu.development.git.enable = lib.mkEnableOption "Enable development git settings";
 
   config = lib.mkIf config.etu.development.git.enable {
@@ -35,17 +38,19 @@
         };
 
         # Global ignores
-        ignores = [ ".ac-php-conf.json" ];
+        ignores = [".ac-php-conf.json"];
 
         # Conditonally included configs
-        includes = [{
-          condition = "gitdir:/home/${config.etu.user.username}/tvnu/";
-          contents = {
-            commit.gpgSign = false;
-            user.email = config.etu.user.workEmail;
-            user.signingKey = "";
-          };
-        }];
+        includes = [
+          {
+            condition = "gitdir:/home/${config.etu.user.username}/tvnu/";
+            contents = {
+              commit.gpgSign = false;
+              user.email = config.etu.user.workEmail;
+              user.signingKey = "";
+            };
+          }
+        ];
       };
     };
   };

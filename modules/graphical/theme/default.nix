@@ -1,6 +1,9 @@
-{ config, lib, pkgs, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   options.etu.graphical.theme.enable = lib.mkEnableOption "Enable graphical theme settings";
   options.etu.graphical.theme.fonts = {
     size = lib.mkOption {

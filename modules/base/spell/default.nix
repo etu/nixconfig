@@ -1,6 +1,9 @@
-{ config, lib, pkgs, ... }:
-
 {
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
   options.etu.base.spell.enable = lib.mkEnableOption "Enable base spell settings";
 
   config = lib.mkIf config.etu.base.spell.enable {

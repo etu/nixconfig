@@ -1,10 +1,12 @@
-{ config, lib, ... }:
-
 {
+  config,
+  lib,
+  ...
+}: {
   options.etu.base.sanoid = {
     enable = lib.mkEnableOption "Enable base sanoid settings";
     datasets = lib.mkOption {
-      default = { };
+      default = {};
       description = "services.sanoid.datasets to snapshot";
     };
   };

@@ -1,10 +1,12 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, myData, ... }:
-
 {
+  config,
+  pkgs,
+  myData,
+  ...
+}: {
   imports = [
     # Include my hardware settings.
     ./hardware.nix
@@ -28,7 +30,7 @@
     graphical.signal.enable = true;
     services.syncthing.enable = true;
     user.enable = true;
-    user.extraGroups = [ "video" "docker" "libvirtd" ];
+    user.extraGroups = ["video" "docker" "libvirtd"];
 
     # Install tree-sitter mode in Emacs on this computer.
     base.emacs.extraConfig = [
@@ -47,8 +49,8 @@
 
     base.sanoid.datasets = {
       # Enable snapshotting for some filesystems
-      "zroot/safe/data".use_template = [ "data" ];
-      "zroot/safe/home".use_template = [ "home" ];
+      "zroot/safe/data".use_template = ["data"];
+      "zroot/safe/home".use_template = ["home"];
     };
     # Enable syncing of some filesystems
     base.syncoid.enable = true;
@@ -65,7 +67,7 @@
   # Set up virt-manager
   virtualisation.libvirtd.enable = true;
   programs.dconf.enable = true;
-  environment.systemPackages = with pkgs; [ virt-manager ];
+  environment.systemPackages = with pkgs; [virt-manager];
   virtualisation.spiceUSBRedirection.enable = true;
 
   # Enable blueman.
@@ -95,7 +97,7 @@
       sshKey = config.age.secrets."etu@aarch64.nixos.community".path;
       sshUser = "etu";
       system = "aarch64-linux";
-      supportedFeatures = [ "big-parallel" ];
+      supportedFeatures = ["big-parallel"];
     }
   ];
 }

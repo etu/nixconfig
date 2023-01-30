@@ -1,6 +1,11 @@
-{ config, inputs, modulesPath, lib, pkgs, ... }:
-
 {
+  config,
+  inputs,
+  modulesPath,
+  lib,
+  pkgs,
+  ...
+}: {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
 
@@ -12,13 +17,13 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  boot.initrd.availableKernelModules = [ "nvme" "ehci_pci" "xhci_pci" "usb_storage" "sd_mod" ];
-  boot.initrd.kernelModules = [ ];
+  boot.initrd.availableKernelModules = ["nvme" "ehci_pci" "xhci_pci" "usb_storage" "sd_mod"];
+  boot.initrd.kernelModules = [];
 
-  boot.kernelModules = [ "kvm-amd" ];
+  boot.kernelModules = ["kvm-amd"];
 
   # Install thinkpad modules for TLP.
-  boot.extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
+  boot.extraModulePackages = with config.boot.kernelPackages; [acpi_call];
 
   # Set kernel.
   boot.kernelPackages = pkgs.zfs.latestCompatibleLinuxPackages;
@@ -28,7 +33,7 @@
   boot.plymouth.enable = true;
 
   # Enable ZFS.
-  boot.supportedFilesystems = [ "zfs" ];
+  boot.supportedFilesystems = ["zfs"];
 
   # Enable ZFS scrubbing.
   services.zfs.autoScrub.enable = true;
@@ -44,7 +49,7 @@
   hardware.acpilight.enable = true;
 
   # Set video driver.
-  services.xserver.videoDrivers = [ "modesetting" ];
+  services.xserver.videoDrivers = ["modesetting"];
 
   # Enable fwupd for firmware updates etc.
   services.fwupd.enable = true;
@@ -58,13 +63,13 @@
   fileSystems."/" = {
     device = "none";
     fsType = "tmpfs";
-    options = [ "defaults" "size=3G" "mode=755" ];
+    options = ["defaults" "size=3G" "mode=755"];
   };
 
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/D646-84B5";
     fsType = "vfat";
-    options = [ "defaults" "noexec" "noauto" "x-systemd.automount" ];
+    options = ["defaults" "noexec" "noauto" "x-systemd.automount"];
   };
 
   fileSystems."/nix" = {
@@ -76,20 +81,20 @@
     device = "zroot/safe/data";
     fsType = "zfs";
     neededForBoot = true;
-    options = [ "defaults" "noexec" ];
+    options = ["defaults" "noexec"];
   };
 
   fileSystems."${config.etu.dataPrefix}/home" = {
     device = "zroot/safe/home";
     fsType = "zfs";
     neededForBoot = true;
-    options = [ "defaults" "noexec" ];
+    options = ["defaults" "noexec"];
   };
 
   fileSystems."/var/log" = {
     device = "zroot/local/var-log";
     fsType = "zfs";
-    options = [ "defaults" "noexec" ];
+    options = ["defaults" "noexec"];
   };
 
   # Bind mount for persistent libvirt state.
@@ -98,7 +103,7 @@
   ];
 
   # Swap devices.
-  swapDevices = [ ];
+  swapDevices = [];
 
   # Set max jobs in nix.
   nix.settings.max-jobs = lib.mkDefault 8;

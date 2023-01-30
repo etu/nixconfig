@@ -1,6 +1,15 @@
-{ config, inputs, system, lib, pkgs, ... }:
-let
-  pkgs-intelephense = import inputs.nixpkgs-intelephense { inherit system; config.allowUnfree = true; };
+{
+  config,
+  inputs,
+  system,
+  lib,
+  pkgs,
+  ...
+}: let
+  pkgs-intelephense = import inputs.nixpkgs-intelephense {
+    inherit system;
+    config.allowUnfree = true;
+  };
 
   # Run my config trough substituteAll to replace font names from my
   # system font settings.
@@ -41,55 +50,59 @@ let
   # Define language servers to include in the wrapper for Emacs
   extraBinPaths = [
     # Language Servers
-    pkgs.go                                             # Go language
-    pkgs.gopls                                          # Go language server
-    pkgs.nodePackages.bash-language-server              # Bash language server
+    pkgs.go # Go language
+    pkgs.gopls # Go language server
+    pkgs.nodePackages.bash-language-server # Bash language server
     pkgs.nodePackages.dockerfile-language-server-nodejs # Docker language server
-    pkgs-intelephense.nodejs-14_x.pkgs.intelephense     # PHP language server
-    pkgs.nodePackages.typescript-language-server        # JS/TS language server
-    pkgs.nodePackages.vscode-css-languageserver-bin     # CSS/LESS/SASS language server
-    pkgs.rnix-lsp                                       # Nix language server
+    pkgs-intelephense.nodejs-14_x.pkgs.intelephense # PHP language server
+    pkgs.nodePackages.typescript-language-server # JS/TS language server
+    pkgs.nodePackages.vscode-css-languageserver-bin # CSS/LESS/SASS language server
+    pkgs.rnix-lsp # Nix language server
 
     # Other programs
-    pkgs.gnuplot                                        # For use with org mode
-    pkgs.phpPackages.phpcs                              # PHP codestyle checker
+    pkgs.gnuplot # For use with org mode
+    pkgs.phpPackages.phpcs # PHP codestyle checker
   ];
 
   # Function to wrap emacs to contain the path for language servers
   wrapEmacsWithExtraBinPaths = {
     emacs ? emacsPackages.${config.etu.base.emacs.package},
     binName ? "emacs",
-    extraWrapperArgs ? ""
-  }: pkgs.runCommand "${emacs.name}-with-extra-bin-paths" { nativeBuildInputs = [ pkgs.makeWrapper ]; }
-  ''
-    makeWrapper ${buildEmacsPackage emacs}/bin/emacs $out/bin/${binName} \
-      --prefix PATH : ${lib.makeBinPath extraBinPaths} ${extraWrapperArgs}
-  '';
+    extraWrapperArgs ? "",
+  }:
+    pkgs.runCommand "${emacs.name}-with-extra-bin-paths" {nativeBuildInputs = [pkgs.makeWrapper];}
+    ''
+      makeWrapper ${buildEmacsPackage emacs}/bin/emacs $out/bin/${binName} \
+        --prefix PATH : ${lib.makeBinPath extraBinPaths} ${extraWrapperArgs}
+    '';
 
-  buildEmacsPackage = emacsPackage: pkgs.emacsWithPackagesFromUsePackage {
-    package = emacsPackage;
+  buildEmacsPackage = emacsPackage:
+    pkgs.emacsWithPackagesFromUsePackage {
+      package = emacsPackage;
 
-    # Don't assume ensuring of all use-package declarations, this is
-    # the default behaviour, but this gets rid of the notice.
-    alwaysEnsure = false;
+      # Don't assume ensuring of all use-package declarations, this is
+      # the default behaviour, but this gets rid of the notice.
+      alwaysEnsure = false;
 
-    # config to be able to pull in use-package dependencies from there.
-    config = builtins.readFile emacsConfig;
+      # config to be able to pull in use-package dependencies from there.
+      config = builtins.readFile emacsConfig;
 
-    # Package overrides
-    override = epkgs: epkgs // {
-      # Add my config initializer as an emacs package
-      myEmacsConfigInit = pkgs.runCommand "my-emacs-default-package" { } ''
-        mkdir -p $out/share/emacs/site-lisp
-        cp ${emacsConfigInit} $out/share/emacs/site-lisp/default.el
-      '';
+      # Package overrides
+      override = epkgs:
+        epkgs
+        // {
+          # Add my config initializer as an emacs package
+          myEmacsConfigInit = pkgs.runCommand "my-emacs-default-package" {} ''
+            mkdir -p $out/share/emacs/site-lisp
+            cp ${emacsConfigInit} $out/share/emacs/site-lisp/default.el
+          '';
+        };
+
+      # Extra packages to install
+      extraEmacsPackages = epkgs: [
+        epkgs.myEmacsConfigInit
+      ];
     };
-
-    # Extra packages to install
-    extraEmacsPackages = epkgs: ([
-      epkgs.myEmacsConfigInit
-    ]);
-  };
 
   # Selection of emacs packages to choose from
   emacsPackages = {
@@ -97,9 +110,7 @@ let
     nox = pkgs.emacs-nox;
     wayland = inputs.emacs-overlay.packages.${system}.emacsPgtk;
   };
-
-in
-{
+in {
   options.etu.base.emacs = {
     enable = lib.mkEnableOption "Enable base emacs settings";
     extraConfig = lib.mkOption {
@@ -123,13 +134,13 @@ in
     ];
 
     # Allow to install intelephense which is an unfree package.
-    etu.base.nix.allowUnfree = [ "intelephense" ];
+    etu.base.nix.allowUnfree = ["intelephense"];
 
     # Install my emacs package system-wide.
     services.emacs = {
       enable = true;
       defaultEditor = true;
-      package = wrapEmacsWithExtraBinPaths { };
+      package = wrapEmacsWithExtraBinPaths {};
     };
 
     # Install emacs icons symbols if we have any kind of graphical emacs
@@ -138,12 +149,12 @@ in
     ];
 
     # If we have a wayland emacs installed, also install a X11 version as "emacs-x11"
-    environment.systemPackages = (lib.optionals (config.etu.base.emacs.package == "wayland") ([
+    environment.systemPackages = lib.optionals (config.etu.base.emacs.package == "wayland") [
       (wrapEmacsWithExtraBinPaths {
         binName = "emacs-x11";
         extraWrapperArgs = "--unset WAYLAND_DISPLAY";
       })
-    ]));
+    ];
 
     # Configure emacs for my users home-manager (if it's enabled).
     home-manager.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {

@@ -1,20 +1,23 @@
-{ config, pkgs, ... }:
-let
-  domain = "failar.nu";
-
-in
 {
+  config,
+  pkgs,
+  ...
+}: let
+  domain = "failar.nu";
+in {
   etu.base.zfs.system.directories = [
     # Persistence of synapse data between boots.
     "/var/lib/matrix-synapse"
   ];
 
   services.postgresql = {
-    ensureDatabases = [ "matrix-synapse" ];
-    ensureUsers = [{
-      name = "matrix-synapse";
-      ensurePermissions."DATABASE \"matrix-synapse\"" = "ALL PRIVILEGES";
-    }];
+    ensureDatabases = ["matrix-synapse"];
+    ensureUsers = [
+      {
+        name = "matrix-synapse";
+        ensurePermissions."DATABASE \"matrix-synapse\"" = "ALL PRIVILEGES";
+      }
+    ];
   };
 
   services.nginx.virtualHosts = {
@@ -50,7 +53,7 @@ in
             };
             integrations_ui_url = "";
             integgrations_rest_url = "";
-            integrations_widgets_urls = [ ];
+            integrations_widgets_urls = [];
             disable_guests = true;
             roomDirectory.servers = [
               domain
@@ -107,16 +110,22 @@ in
         {
           type = "metrics";
           port = 9148;
-          bind_addresses = [ "127.0.0.1" ];
-          resources = [ ];
+          bind_addresses = ["127.0.0.1"];
+          resources = [];
           tls = false;
         }
         {
-          bind_addresses = [ "::1" ];
+          bind_addresses = ["::1"];
           port = 8448;
           resources = [
-            { compress = false; names = [ "client" ]; }
-            { compress = false; names = [ "federation" ]; }
+            {
+              compress = false;
+              names = ["client"];
+            }
+            {
+              compress = false;
+              names = ["federation"];
+            }
           ];
           tls = false;
           type = "http";
@@ -166,11 +175,11 @@ in
           handlers: [journal]
       '';
       extraConfigFiles = [
-        (pkgs.writeText "misc.yml" (builtins.toJSON ({
+        (pkgs.writeText "misc.yml" (builtins.toJSON {
           #session_lifetime = "24h"; # disabled to allow guest accounts
-          experimental_features = { spaces_enabled = true; };
-        })))
-        (pkgs.writeText "retention.yml" (builtins.toJSON ({
+          experimental_features = {spaces_enabled = true;};
+        }))
+        (pkgs.writeText "retention.yml" (builtins.toJSON {
           retention = {
             enabled = true;
             default_policy = {
@@ -192,8 +201,8 @@ in
             #  }
             #];
           };
-        })))
-        (pkgs.writeText "url-preview.yml" (builtins.toJSON ({
+        }))
+        (pkgs.writeText "url-preview.yml" (builtins.toJSON {
           url_preview_enabled = true;
           url_preview_ip_range_blacklist = [
             "127.0.0.0/8"
@@ -207,16 +216,16 @@ in
             "fc00::/7"
           ];
           url_preview_url_blacklist = [
-            { username = "*"; }
-            { netloc = "google.com"; }
-            { netloc = "*.google.com"; }
-            { netloc = "^[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$"; }
+            {username = "*";}
+            {netloc = "google.com";}
+            {netloc = "*.google.com";}
+            {netloc = "^[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$";}
           ];
           max_spider_size = "10M";
-        })))
-        (pkgs.writeText "push.yml" (builtins.toJSON ({
+        }))
+        (pkgs.writeText "push.yml" (builtins.toJSON {
           push.include_content = false;
-        })))
+        }))
       ];
     };
   };
