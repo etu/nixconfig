@@ -34,4 +34,4 @@ nix-fmt:
 
 yaml-fmt:
 	@echo "Format yaml files"
-	nix run nixpkgs#yamllint -- --strict --format github .github/ --config-file ./.github/yamllint.yml
+	nix run nixpkgs#yamllint -- --strict --format github .

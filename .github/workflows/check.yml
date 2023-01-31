@@ -20,4 +20,4 @@ jobs:
         run: 'nix fmt . -- --exclude ./modules/work/packages/chalet/ --check'
 
       - name: Check yaml file formatting
-        run: 'nix run nixpkgs#yamllint -- --strict --format github .github/ --config-file ./.github/yamllint.yml'
+        run: 'nix run nixpkgs#yamllint -- --strict --format github .'
