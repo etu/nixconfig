@@ -1,6 +1,5 @@
 [[https://github.com/etu/nixconfig/actions/workflows/cachix.yml][https://github.com/etu/nixconfig/actions/workflows/cachix.yml/badge.svg]]
 [[https://github.com/etu/nixconfig/actions/workflows/update.yml][https://github.com/etu/nixconfig/actions/workflows/update.yml/badge.svg]]
-[[https://github.com/etu/nixconfig/actions/workflows/check.yml][https://github.com/etu/nixconfig/actions/workflows/check.yml/badge.svg]]
 
 * My NixOS configs
 ** Files and Directories in this repository
