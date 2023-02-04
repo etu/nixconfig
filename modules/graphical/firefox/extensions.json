@@ -29,10 +29,10 @@
   },
   "privacy-badger17": {
     "pname": "privacy-badger17",
-    "version": "2022.9.27",
+    "version": "2023.1.31",
     "addonId": "jid1-MnnxcxisBPnSXQ@jetpack",
-    "url": "https://addons.mozilla.org/firefox/downloads/file/4008174/privacy_badger17-2022.9.27.xpi",
-    "sha256": "sha256:8a0e456dfac801ea437164192f0a0659ee7227a519db97aceeb221f48f74d44a"
+    "url": "https://addons.mozilla.org/firefox/downloads/file/4064595/privacy_badger17-2023.1.31.xpi",
+    "sha256": "sha256:0082d8ffe7b25f370a313d9b899b0c1ba1669b21b3a11791fe5ecf031aeb6a6c"
   },
   "sidebery": {
     "pname": "sidebery",
