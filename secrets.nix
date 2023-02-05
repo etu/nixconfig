@@ -26,6 +26,7 @@ let
 in {
   "secrets/any/hashed-etu-password-file.age".publicKeys = etu ++ hosts.laptop-private-elis ++ hosts.laptop-work-elis ++ hosts.server-main-elis ++ hosts.vps04;
   "secrets/any/hashed-root-password-file.age".publicKeys = etu ++ hosts.all;
+  "secrets/any/telegraf-env.age".publicKeys = etu ++ hosts.server-main-elis ++ hosts.vps04 ++ hosts.vps06;
   "secrets/laptop-private-elis/etu_at_aarch64.nixos.community.age".publicKeys = etu ++ hosts.laptop-private-elis;
   "secrets/laptop-private-elis/etu_at_aarch64.nixos.community.pub.age".publicKeys = etu ++ hosts.laptop-private-elis;
   "secrets/server-main-elis/cloudflare-api-env.age".publicKeys = etu ++ hosts.server-main-elis;

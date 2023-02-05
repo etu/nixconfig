@@ -46,6 +46,7 @@
     stateVersion = "22.11";
 
     base.emacs.package = "nox";
+    base.telegraf.enable = true;
     development.git.enable = true;
     user.enable = true;
     user.extraGroups = ["libvirtd"];

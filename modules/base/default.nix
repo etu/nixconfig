@@ -16,6 +16,7 @@
     ./sanoid
     ./syncoid
     ./spell
+    ./telegraf
     ./zfs
   ];
 

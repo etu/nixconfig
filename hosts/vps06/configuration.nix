@@ -41,6 +41,7 @@
     stateVersion = "22.11";
 
     base.emacs.enable = lib.mkForce false;
+    base.telegraf.enable = true;
     user.extraRootAuthorizedKeys = myData.pubkeys.etu.syncoid.server-main-elis;
     base.sanoid.datasets = {
       # Enable snapshotting for some filesystems

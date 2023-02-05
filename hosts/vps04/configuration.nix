@@ -34,6 +34,7 @@
     stateVersion = "22.11";
 
     base.emacs.enable = lib.mkForce false;
+    base.telegraf.enable = true;
     development.git.enable = true;
     user.enable = true;
     user.extraAuthorizedKeys = myData.pubkeys.etu.weechat;
