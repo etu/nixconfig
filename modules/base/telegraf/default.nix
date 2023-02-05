@@ -29,6 +29,18 @@
           bucket = "default";
         };
         inputs = {
+          cpu = {};
+          disk = {};
+          diskio = {};
+          kernel = {};
+          mem = {};
+          net = {};
+          netstat = {};
+          processes = {};
+          swap = {};
+          system = {};
+          systemd_units = {};
+
           # Collect ZFS metrics
           exec = {
             commands = ["${pkgs.zfs}/libexec/zfs/zpool_influxdb"];
