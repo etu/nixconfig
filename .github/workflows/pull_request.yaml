@@ -1,0 +1,63 @@
+---
+name: Pull Request
+
+'on':
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  format:
+    name: File formatting
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: cachix/install-nix-action@v19
+      - name: Check nix file formatting
+        run: 'nix fmt . -- --exclude ./modules/work/packages/chalet/ --check'
+      - name: Check yaml file formatting
+        run: 'nix run nixpkgs#yamllint -- --strict --format github .'
+
+  build:
+    name: Build systems
+    runs-on: ubuntu-20.04
+    needs: format
+    strategy:
+      matrix:
+        hostname:
+          - laptop-private-elis
+          - laptop-work-elis
+          - server-main-elis
+          - vps04
+          - vps06
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: cachix/install-nix-action@v19
+      - uses: cachix/cachix-action@v12
+        with:
+          name: etu
+          extraPullNames: "nix-community"
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+          skipPush: true
+
+      # Build systems.
+      - name: Build system derivation
+        run: 'nix build .#nixosConfigurations.${{ matrix.hostname }}.config.system.build.toplevel'
+
+  check:
+    name: Check flake
+    runs-on: ubuntu-20.04
+    needs: cache
+    steps:
+      - uses: actions/checkout@v3
+      - uses: cachix/install-nix-action@v19
+      - uses: cachix/cachix-action@v12
+        with:
+          name: etu
+          extraPullNames: "nix-community"
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+          skipPush: true
+
+      - name: Check the flake
+        run: 'nix flake check'
