@@ -1,4 +1,4 @@
-[[https://github.com/etu/nixconfig/actions/workflows/cachix.yml][https://github.com/etu/nixconfig/actions/workflows/cachix.yml/badge.svg]]
+[[https://github.com/etu/nixconfig/actions/workflows/cache.yml][https://github.com/etu/nixconfig/actions/workflows/cache.yml/badge.svg]]
 [[https://github.com/etu/nixconfig/actions/workflows/update.yml][https://github.com/etu/nixconfig/actions/workflows/update.yml/badge.svg]]
 
 * My NixOS configs
