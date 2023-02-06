@@ -12,6 +12,7 @@ EXTENSIONS = sorted([
     "multi-account-containers",
     "privacy-badger17",
     "sidebery",
+    "streetpass-for-mastodon",
     "terms-of-service-didnt-read",
     "ublock-origin",
 ])
