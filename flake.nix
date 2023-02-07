@@ -126,16 +126,6 @@
       };
     };
 
-    # Set up nix develop shell environment
-    devShells.x86_64-linux.default = let
-      pkgs = nixpkgs.legacyPackages.x86_64-linux;
-    in
-      import ./shell.nix {
-        inherit pkgs;
-        inherit (self) inputs;
-        system = "x86_64-linux";
-      };
-
     # Specify deploy-rs deployments
     deploy.nodes = {
       server-main-elis = {
@@ -159,6 +149,30 @@
 
     # This is highly advised, and will prevent many possible mistakes
     checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) inputs.deploy-rs.lib;
+
+    # Set up nix develop shell environment
+    devShells.x86_64-linux.default = let
+      pkgs = nixpkgs.legacyPackages.x86_64-linux;
+      system = "x86_64-linux";
+    in pkgs.mkShell {
+      buildInputs = [
+        pkgs.cacert # Install certs for curl to work in pure shells
+        pkgs.curl
+        pkgs.jq # For parsing json downloaded with curl
+
+        inputs.agenix.packages.${system}.agenix
+        inputs.deploy-rs.packages.${system}.deploy-rs
+
+        # Used for package updates of chalet
+        pkgs.nodejs
+        pkgs.nodePackages.node2nix
+
+        # Used for firefox packages updates
+        (pkgs.python3.withPackages (ps: [
+          ps.requests
+        ]))
+      ];
+    };
 
     # Specify formatter package for "nix fmt ." and "nix fmt . -- --check"
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
