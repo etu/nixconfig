@@ -65,7 +65,6 @@
   outputs = {
     self,
     nixpkgs,
-    deploy-rs,
     ...
   } @ inputs: let
     myData = import ./data.nix;
@@ -142,24 +141,24 @@
       server-main-elis = {
         hostname = "home.elis.nu";
         sshUser = "root";
-        profiles.system.path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.server-main-elis;
+        profiles.system.path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.server-main-elis;
       };
 
       vps04 = {
         hostname = "vps04.elis.nu";
         sshUser = "root";
-        profiles.system.path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.vps04;
+        profiles.system.path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.vps04;
       };
 
       vps06 = {
         hostname = "vps06.elis.nu";
         sshUser = "root";
-        profiles.system.path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.vps06;
+        profiles.system.path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.vps06;
       };
     };
 
     # This is highly advised, and will prevent many possible mistakes
-    checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
+    checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) inputs.deploy-rs.lib;
 
     # Specify formatter package for "nix fmt ." and "nix fmt . -- --check"
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
