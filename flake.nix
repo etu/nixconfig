@@ -63,118 +63,115 @@
   };
 
   outputs = {
+    flake-utils,
     self,
     nixpkgs,
     ...
   } @ inputs: let
+    system = "x86_64-linux";
     myData = import ./data.nix;
-  in {
-    # Declare systems
-    nixosConfigurations = {
-      laptop-private-elis = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [./hosts/laptop-private-elis/configuration.nix ./modules];
-        specialArgs = {
-          inherit inputs myData;
-          system = "x86_64-linux";
+  in
+    {
+      # Declare systems
+      nixosConfigurations = {
+        laptop-private-elis = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [./hosts/laptop-private-elis/configuration.nix ./modules];
+          specialArgs = {
+            inherit inputs myData system;
+          };
+        };
+
+        laptop-work-elis = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [./hosts/laptop-work-elis/configuration.nix ./modules];
+          specialArgs = {
+            inherit inputs myData system;
+          };
+        };
+
+        server-main-elis = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [./hosts/server-main-elis/configuration.nix ./modules];
+          specialArgs = {
+            inherit inputs myData system;
+          };
+        };
+
+        vps04 = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [./hosts/vps04/configuration.nix ./modules];
+          specialArgs = {
+            inherit inputs myData system;
+          };
+        };
+
+        vps06 = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [./hosts/vps06/configuration.nix ./modules];
+          specialArgs = {
+            inherit inputs myData system;
+          };
+        };
+
+        live-iso = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [./hosts/live-iso/configuration.nix ./modules];
+          specialArgs = {
+            inherit inputs myData system;
+          };
         };
       };
 
-      laptop-work-elis = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [./hosts/laptop-work-elis/configuration.nix ./modules];
-        specialArgs = {
-          inherit inputs myData;
-          system = "x86_64-linux";
+      # Specify deploy-rs deployments
+      deploy.nodes = {
+        server-main-elis = {
+          hostname = "home.elis.nu";
+          sshUser = "root";
+          profiles.system.path = inputs.deploy-rs.lib.${system}.activate.nixos self.nixosConfigurations.server-main-elis;
+        };
+
+        vps04 = {
+          hostname = "vps04.elis.nu";
+          sshUser = "root";
+          profiles.system.path = inputs.deploy-rs.lib.${system}.activate.nixos self.nixosConfigurations.vps04;
+        };
+
+        vps06 = {
+          hostname = "vps06.elis.nu";
+          sshUser = "root";
+          profiles.system.path = inputs.deploy-rs.lib.${system}.activate.nixos self.nixosConfigurations.vps06;
         };
       };
 
-      server-main-elis = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [./hosts/server-main-elis/configuration.nix ./modules];
-        specialArgs = {
-          inherit inputs myData;
-          system = "x86_64-linux";
-        };
+      # This is highly advised, and will prevent many possible mistakes
+      checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) inputs.deploy-rs.lib;
+    }
+    // flake-utils.lib.eachDefaultSystem (system: let
+      pkgs = nixpkgs.legacyPackages.${system};
+    in {
+      # Specify formatter package for "nix fmt ." and "nix fmt . -- --check"
+      formatter = pkgs.alejandra;
+
+      # Set up nix develop shell environment
+      devShells.default = pkgs.mkShell {
+        buildInputs = [
+          pkgs.cacert # Install certs for curl to work in pure shells
+          pkgs.curl
+          pkgs.jq # For parsing json downloaded with curl
+
+          inputs.agenix.packages.${system}.agenix
+          inputs.deploy-rs.packages.${system}.deploy-rs
+
+          # Used for package updates of chalet
+          pkgs.nodejs
+          pkgs.nodePackages.node2nix
+
+          # Used for firefox packages updates
+          (pkgs.python3.withPackages (ps: [
+            ps.requests
+          ]))
+        ];
       };
-
-      vps04 = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [./hosts/vps04/configuration.nix ./modules];
-        specialArgs = {
-          inherit inputs myData;
-          system = "x86_64-linux";
-        };
-      };
-
-      vps06 = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [./hosts/vps06/configuration.nix ./modules];
-        specialArgs = {
-          inherit inputs myData;
-          system = "x86_64-linux";
-        };
-      };
-
-      live-iso = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [./hosts/live-iso/configuration.nix ./modules];
-        specialArgs = {
-          inherit inputs myData;
-          system = "x86_64-linux";
-        };
-      };
-    };
-
-    # Specify deploy-rs deployments
-    deploy.nodes = {
-      server-main-elis = {
-        hostname = "home.elis.nu";
-        sshUser = "root";
-        profiles.system.path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.server-main-elis;
-      };
-
-      vps04 = {
-        hostname = "vps04.elis.nu";
-        sshUser = "root";
-        profiles.system.path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.vps04;
-      };
-
-      vps06 = {
-        hostname = "vps06.elis.nu";
-        sshUser = "root";
-        profiles.system.path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.vps06;
-      };
-    };
-
-    # This is highly advised, and will prevent many possible mistakes
-    checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) inputs.deploy-rs.lib;
-
-    # Set up nix develop shell environment
-    devShells.x86_64-linux.default = let
-      pkgs = nixpkgs.legacyPackages.x86_64-linux;
-      system = "x86_64-linux";
-    in pkgs.mkShell {
-      buildInputs = [
-        pkgs.cacert # Install certs for curl to work in pure shells
-        pkgs.curl
-        pkgs.jq # For parsing json downloaded with curl
-
-        inputs.agenix.packages.${system}.agenix
-        inputs.deploy-rs.packages.${system}.deploy-rs
-
-        # Used for package updates of chalet
-        pkgs.nodejs
-        pkgs.nodePackages.node2nix
-
-        # Used for firefox packages updates
-        (pkgs.python3.withPackages (ps: [
-          ps.requests
-        ]))
-      ];
-    };
-
-    # Specify formatter package for "nix fmt ." and "nix fmt . -- --check"
-    formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
-  };
+    });
 }
