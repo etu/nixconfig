@@ -58,10 +58,10 @@ in {
         enable = true;
         package = config.etu.graphical.firefox.package;
 
-        # Install extensions.
-        extensions = map buildFirefoxXpiAddon (lib.attrValues (lib.importJSON ./extensions.json));
-
         profiles.default = {
+          # Install extensions.
+          extensions = map buildFirefoxXpiAddon (lib.attrValues (lib.importJSON ./extensions.json));
+
           isDefault = true;
           search.default = "DuckDuckGo";
           search.force = true;

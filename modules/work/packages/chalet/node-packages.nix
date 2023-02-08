@@ -553,13 +553,13 @@ let
         sha512 = "L28STB170nwWS63UjtlEOE3dldQApaJXZkOI1uMFfzf3rRuPegHaHesyee+YxQ+W6SvRDQV6UrdOdRiR153wJg==";
       };
     };
-    "caniuse-lite-1.0.30001450" = {
+    "caniuse-lite-1.0.30001451" = {
       name = "caniuse-lite";
       packageName = "caniuse-lite";
-      version = "1.0.30001450";
+      version = "1.0.30001451";
       src = fetchurl {
-        url = "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001450.tgz";
-        sha512 = "qMBmvmQmFXaSxexkjjfMvD5rnDL0+m+dUMZKoDYsGG8iZN29RuYh9eRoMvKsT6uMAWlyUUGDEQGJJYjzCIO9ew==";
+        url = "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001451.tgz";
+        sha512 = "XY7UbUpGRatZzoRft//5xOa69/1iGJRBlrieH6QYrkKLIFn3m7OVEJ81dSrKoy2BnKsdbX5cLrOispZNYo9v2w==";
       };
     };
     "center-align-0.1.3" = {
@@ -931,13 +931,13 @@ let
         sha512 = "WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==";
       };
     };
-    "electron-to-chromium-1.4.286" = {
+    "electron-to-chromium-1.4.289" = {
       name = "electron-to-chromium";
       packageName = "electron-to-chromium";
-      version = "1.4.286";
+      version = "1.4.289";
       src = fetchurl {
-        url = "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.286.tgz";
-        sha512 = "Vp3CVhmYpgf4iXNKAucoQUDcCrBQX3XLBtwgFqP9BUXuucgvAV9zWp1kYU7LL9j4++s9O+12cb3wMtN4SJy6UQ==";
+        url = "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.289.tgz";
+        sha512 = "relLdMfPBxqGCxy7Gyfm1HcbRPcFUJdlgnCPVgQ23sr1TvUrRJz0/QPoGP0+x41wOVSTN/Wi3w6YDgHiHJGOzg==";
       };
     };
     "emoji-regex-8.0.0" = {
@@ -1930,13 +1930,13 @@ let
         sha512 = "PPmu8eEeG9saEUvI97fm4OYxXVB6bFvyNTyiUOBichBpFG8A1Ljw3bY62+5oOjDEMHRnd0Y7HQ+x7uzxOzC6JA==";
       };
     };
-    "node-releases-2.0.9" = {
+    "node-releases-2.0.10" = {
       name = "node-releases";
       packageName = "node-releases";
-      version = "2.0.9";
+      version = "2.0.10";
       src = fetchurl {
-        url = "https://registry.npmjs.org/node-releases/-/node-releases-2.0.9.tgz";
-        sha512 = "2xfmOrRkGogbTK9R6Leda0DGiXeY3p2NJpy4+gNCffdUvV6mdEJnaDEic1i3Ec2djAo8jWYoJMR5PB0MSMpxUA==";
+        url = "https://registry.npmjs.org/node-releases/-/node-releases-2.0.10.tgz";
+        sha512 = "5GFldHPXVG/YZmFzJvKK2zDSzPKhEp0+ZR5SVaoSag9fsL5YgHbUHDfnG5494ISANDcK4KwPXAx2xqVEydmd7w==";
       };
     };
     "normalize-path-3.0.0" = {
@@ -3196,7 +3196,7 @@ let
       })
       sources."call-bind-1.0.2"
       sources."camelcase-5.3.1"
-      sources."caniuse-lite-1.0.30001450"
+      sources."caniuse-lite-1.0.30001451"
       sources."center-align-0.1.3"
       sources."chalet-0.10.2"
       sources."chalk-3.0.0"
@@ -3237,7 +3237,7 @@ let
       sources."duplexer-0.1.2"
       sources."duplexer3-0.1.5"
       sources."ee-first-1.1.1"
-      sources."electron-to-chromium-1.4.286"
+      sources."electron-to-chromium-1.4.289"
       sources."emoji-regex-8.0.0"
       sources."encodeurl-1.0.2"
       sources."end-of-stream-1.4.4"
@@ -3351,7 +3351,7 @@ let
       sources."ms-2.1.2"
       sources."negotiator-0.6.3"
       sources."node-forge-0.10.0"
-      sources."node-releases-2.0.9"
+      sources."node-releases-2.0.10"
       sources."normalize-path-3.0.0"
       sources."normalize-url-4.5.1"
       sources."object-assign-4.1.1"
