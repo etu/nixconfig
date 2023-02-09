@@ -34,6 +34,9 @@
   };
 
   config = {
+    # Set the nixpkgs inputs path as channel in the NIX_PATH variable.
+    nix.nixPath = ["nixpkgs=${pkgs.path}"];
+
     # Enable base services.
     etu.base = {
       emacs.enable = true;
