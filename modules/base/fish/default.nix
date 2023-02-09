@@ -42,8 +42,9 @@
     '';
     programs.fish.shellAbbrs = {
       "-" = "cd -";
-      "nrun" = "nix run nixpkgs#";
       "ipython" = "nix run nixpkgs#python3Packages.ipython";
+      "nrun" = "nix run nixpkgs#";
+      "nsh" = "nix-shell --run fish -p";
     };
     programs.fish.functions = {
       "256colors" = ''
