@@ -91,7 +91,7 @@
           specialArgs = {
             inherit myData;
             inherit (intelephense.nodejs-14_x.pkgs) intelephense;
-            inherit (inputs.emacs-overlay.packages.${system}) emacsPgtk;
+            emacsWayland = inputs.emacs-overlay.packages.${system}.emacsPgtk;
             llr = inputs.llr.packages.${system}.default;
             mkvcleaner = inputs.mkvcleaner.packages.${system}.default;
             emacs-overlay = inputs.emacs-overlay.overlay;
@@ -111,7 +111,7 @@
           specialArgs = {
             inherit myData;
             inherit (intelephense.nodejs-14_x.pkgs) intelephense;
-            inherit (inputs.emacs-overlay.packages.${system}) emacsPgtk;
+            emacsWayland = inputs.emacs-overlay.packages.${system}.emacsPgtk;
             llr = inputs.llr.packages.${system}.default;
             mkvcleaner = inputs.mkvcleaner.packages.${system}.default;
             emacs-overlay = inputs.emacs-overlay.overlay;
@@ -183,7 +183,7 @@
           specialArgs = {
             inherit myData;
             inherit (intelephense.nodejs-14_x.pkgs) intelephense;
-            inherit (inputs.emacs-overlay.packages.${system}) emacsPgtk;
+            emacsWayland = inputs.emacs-overlay.packages.${system}.emacsPgtk;
             llr = inputs.llr.packages.${system}.default;
             mkvcleaner = inputs.mkvcleaner.packages.${system}.default;
             emacs-overlay = inputs.emacs-overlay.overlay;

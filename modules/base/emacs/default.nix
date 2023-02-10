@@ -1,7 +1,7 @@
 {
   config,
   emacs-overlay,
-  emacsPgtk,
+  emacsWayland,
   intelephense,
   lib,
   pkgs,
@@ -104,7 +104,7 @@
   emacsPackages = {
     default = pkgs.emacs;
     nox = pkgs.emacs-nox;
-    wayland = emacsPgtk;
+    wayland = emacsWayland;
   };
 in {
   options.etu.base.emacs = {
