@@ -1,7 +1,7 @@
 {
   config,
-  pkgs,
   myData,
+  pkgs,
   ...
 }: {
   # Decrypt secret to expected location.

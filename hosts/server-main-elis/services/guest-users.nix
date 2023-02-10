@@ -1,7 +1,7 @@
 {
   config,
-  pkgs,
   myData,
+  pkgs,
   ...
 }: let
   # home / chroot path

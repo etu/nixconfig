@@ -4,8 +4,8 @@
 {
   config,
   lib,
-  pkgs,
   myData,
+  pkgs,
   ...
 }: {
   imports = [

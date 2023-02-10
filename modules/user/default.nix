@@ -1,8 +1,8 @@
 {
   config,
   lib,
-  pkgs,
   myData,
+  pkgs,
   ...
 }: {
   options.etu.user = {

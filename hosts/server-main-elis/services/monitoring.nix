@@ -1,7 +1,7 @@
 {
   config,
-  pkgs,
   myData,
+  pkgs,
   ...
 }: {
   # Make sure to have nginx enabled

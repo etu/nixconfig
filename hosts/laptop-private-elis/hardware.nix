@@ -1,16 +1,12 @@
 {
   config,
-  inputs,
-  modulesPath,
   lib,
+  modulesPath,
   pkgs,
   ...
 }: {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
-
-    # Include hardware quirks
-    inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t495
   ];
 
   # Configure boot loader.

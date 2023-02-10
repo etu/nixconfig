@@ -70,55 +70,123 @@
   } @ inputs: let
     system = "x86_64-linux";
     myData = import ./data.nix;
+    intelephense = import inputs.nixpkgs-intelephense {
+      inherit system;
+      config.allowUnfree = true;
+    };
   in
     {
       # Declare systems
       nixosConfigurations = {
         laptop-private-elis = nixpkgs.lib.nixosSystem {
           inherit system;
-          modules = [./hosts/laptop-private-elis/configuration.nix ./modules];
+          modules = [
+            ./hosts/laptop-private-elis/configuration.nix
+            ./modules
+            inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t495
+            inputs.agenix.nixosModules.age
+            inputs.home-manager.nixosModules.home-manager
+            inputs.impermanence.nixosModules.impermanence
+          ];
           specialArgs = {
-            inherit inputs myData system;
+            inherit myData;
+            inherit (intelephense.nodejs-14_x.pkgs) intelephense;
+            inherit (inputs.emacs-overlay.packages.${system}) emacsPgtk;
+            llr = inputs.llr.packages.${system}.default;
+            mkvcleaner = inputs.mkvcleaner.packages.${system}.default;
+            emacs-overlay = inputs.emacs-overlay.overlay;
           };
         };
 
         laptop-work-elis = nixpkgs.lib.nixosSystem {
           inherit system;
-          modules = [./hosts/laptop-work-elis/configuration.nix ./modules];
+          modules = [
+            ./hosts/laptop-work-elis/configuration.nix
+            ./modules
+            inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14s-amd-gen1
+            inputs.agenix.nixosModules.age
+            inputs.home-manager.nixosModules.home-manager
+            inputs.impermanence.nixosModules.impermanence
+          ];
           specialArgs = {
-            inherit inputs myData system;
+            inherit myData;
+            inherit (intelephense.nodejs-14_x.pkgs) intelephense;
+            inherit (inputs.emacs-overlay.packages.${system}) emacsPgtk;
+            llr = inputs.llr.packages.${system}.default;
+            mkvcleaner = inputs.mkvcleaner.packages.${system}.default;
+            emacs-overlay = inputs.emacs-overlay.overlay;
           };
         };
 
         server-main-elis = nixpkgs.lib.nixosSystem {
           inherit system;
-          modules = [./hosts/server-main-elis/configuration.nix ./modules];
+          modules = [
+            ./hosts/server-main-elis/configuration.nix
+            ./modules
+            inputs.agenix.nixosModules.age
+            inputs.home-manager.nixosModules.home-manager
+            inputs.impermanence.nixosModules.impermanence
+          ];
           specialArgs = {
-            inherit inputs myData system;
+            inherit myData;
+            inherit (intelephense.nodejs-14_x.pkgs) intelephense;
+            llr = inputs.llr.packages.${system}.default;
+            mkvcleaner = inputs.mkvcleaner.packages.${system}.default;
+            emacs-overlay = inputs.emacs-overlay.overlay;
           };
         };
 
         vps04 = nixpkgs.lib.nixosSystem {
           inherit system;
-          modules = [./hosts/vps04/configuration.nix ./modules];
+          modules = [
+            ./hosts/vps04/configuration.nix
+            ./modules
+            inputs.agenix.nixosModules.age
+            inputs.home-manager.nixosModules.home-manager
+            inputs.impermanence.nixosModules.impermanence
+            inputs.flummbot.nixosModules.${system}.default
+          ];
           specialArgs = {
-            inherit inputs myData system;
+            inherit myData;
+            llr = inputs.llr.packages.${system}.default;
+            mkvcleaner = inputs.mkvcleaner.packages.${system}.default;
           };
         };
 
         vps06 = nixpkgs.lib.nixosSystem {
           inherit system;
-          modules = [./hosts/vps06/configuration.nix ./modules];
+          modules = [
+            ./hosts/vps06/configuration.nix
+            ./modules
+            inputs.agenix.nixosModules.age
+            inputs.home-manager.nixosModules.home-manager
+            inputs.impermanence.nixosModules.impermanence
+            inputs.ip-failar-nu.nixosModules.${system}.default
+          ];
           specialArgs = {
-            inherit inputs myData system;
+            inherit myData;
+            llr = inputs.llr.packages.${system}.default;
+            mkvcleaner = inputs.mkvcleaner.packages.${system}.default;
+            via-elis-nu = inputs.via-elis-nu.packages.${system}.default;
           };
         };
 
         live-iso = nixpkgs.lib.nixosSystem {
           inherit system;
-          modules = [./hosts/live-iso/configuration.nix ./modules];
+          modules = [
+            ./hosts/live-iso/configuration.nix
+            ./modules
+            inputs.agenix.nixosModules.age
+            inputs.home-manager.nixosModules.home-manager
+            inputs.impermanence.nixosModules.impermanence
+          ];
           specialArgs = {
-            inherit inputs myData system;
+            inherit myData;
+            inherit (intelephense.nodejs-14_x.pkgs) intelephense;
+            inherit (inputs.emacs-overlay.packages.${system}) emacsPgtk;
+            llr = inputs.llr.packages.${system}.default;
+            mkvcleaner = inputs.mkvcleaner.packages.${system}.default;
+            emacs-overlay = inputs.emacs-overlay.overlay;
           };
         };
       };

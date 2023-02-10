@@ -9,8 +9,8 @@
 #
 {
   config,
-  modulesPath,
   lib,
+  modulesPath,
   ...
 }: {
   imports = [

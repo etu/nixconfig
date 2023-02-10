@@ -1,9 +1,9 @@
 {
   config,
-  modulesPath,
   lib,
-  pkgs,
+  modulesPath,
   myData,
+  pkgs,
   ...
 }: {
   imports = [

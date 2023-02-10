@@ -1,16 +1,12 @@
 {
   config,
-  inputs,
-  system,
+  emacs-overlay,
+  emacsPgtk,
+  intelephense,
   lib,
   pkgs,
   ...
 }: let
-  pkgs-intelephense = import inputs.nixpkgs-intelephense {
-    inherit system;
-    config.allowUnfree = true;
-  };
-
   # Run my config trough substituteAll to replace font names from my
   # system font settings.
   emacsConfig = pkgs.runCommand "config.el" {
@@ -54,7 +50,7 @@
     pkgs.gopls # Go language server
     pkgs.nodePackages.bash-language-server # Bash language server
     pkgs.nodePackages.dockerfile-language-server-nodejs # Docker language server
-    pkgs-intelephense.nodejs-14_x.pkgs.intelephense # PHP language server
+    intelephense # PHP language server
     pkgs.nodePackages.typescript-language-server # JS/TS language server
     pkgs.nodePackages.vscode-css-languageserver-bin # CSS/LESS/SASS language server
     pkgs.rnix-lsp # Nix language server
@@ -108,7 +104,7 @@
   emacsPackages = {
     default = pkgs.emacs;
     nox = pkgs.emacs-nox;
-    wayland = inputs.emacs-overlay.packages.${system}.emacsPgtk;
+    wayland = emacsPgtk;
   };
 in {
   options.etu.base.emacs = {
@@ -130,7 +126,7 @@ in {
     # Import the emacs overlay from nix community to get the latest
     # and greatest packages.
     nixpkgs.overlays = [
-      inputs.emacs-overlay.overlay
+      emacs-overlay
     ];
 
     # Allow to install intelephense which is an unfree package.

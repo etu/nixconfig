@@ -1,8 +1,8 @@
 {
   config,
-  inputs,
-  system,
   lib,
+  llr,
+  mkvcleaner,
   pkgs,
   ...
 }: {
@@ -86,19 +86,16 @@
       pkgs.fzf # fuzzy finder
       pkgs.jc # parse different formats and command outputs to json
       pkgs.jq # parse, format and query json documents
-
-      # Install llr, my own tool to cut long lines
-      inputs.llr.packages.${system}.default
-
-      # Install mkvcleaner, my own tool to clean video files from unwanted tracks
-      inputs.mkvcleaner.packages.${system}.default
-
       pkgs.ncdu # disk usage navigator
       pkgs.nix-top # nix-top is a top for what nix is doing
       pkgs.pv # pipe viewer for progressbars in pipes
       pkgs.ripgrep # quick file searcher
       pkgs.testssl # print TLS certificate info
       pkgs.speedtest-cli # Speedtest command line util
+
+      # Own tools:
+      llr # llr, tool to cut long lines
+      mkvcleaner # mkvcleaner, clean video files from unwanted tracks
 
       # Networking tools
       pkgs.dnsutils # dig etc

@@ -1,7 +1,7 @@
 {
+  config,
   lib,
   modulesPath,
-  config,
   ...
 }: {
   imports = [

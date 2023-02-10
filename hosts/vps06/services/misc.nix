@@ -1,7 +1,6 @@
 {
   pkgs,
-  inputs,
-  system,
+  via-elis-nu,
   ...
 }: {
   # Enable the ip-failar-nu service
@@ -32,7 +31,7 @@
     "via.elis.nu" = {
       forceSSL = true;
       enableACME = true;
-      locations."/".root = inputs.via-elis-nu.packages.${system}.default;
+      locations."/".root = via-elis-nu;
     };
   };
 }
