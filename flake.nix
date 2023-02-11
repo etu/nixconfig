@@ -95,6 +95,7 @@
             llr = inputs.llr.packages.${system}.default;
             mkvcleaner = inputs.mkvcleaner.packages.${system}.default;
             emacs-overlay = inputs.emacs-overlay.overlay;
+            g90updatefw = self.packages.${system}.g90updatefw;
           };
         };
 
@@ -240,6 +241,11 @@
             ps.requests
           ]))
         ];
+      };
+
+      # Build packages
+      packages = {
+        g90updatefw = pkgs.callPackage ./packages/g90updatefw {};
       };
     });
 }
