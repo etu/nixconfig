@@ -2,6 +2,7 @@
   fetchFromGitHub,
   graphicsmagick,
   stdenv,
+  ...
 }:
 stdenv.mkDerivation {
   pname = "wallpaper";

@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  swayWallpaper,
   ...
 }: {
   options.etu.graphical.sway = {
@@ -23,7 +24,7 @@
     };
     wallpaperPackage = lib.mkOption {
       type = lib.types.package;
-      default = pkgs.callPackage ./wallpaper.nix {};
+      default = swayWallpaper;
       description = "Which wallpaper package to use";
     };
   };
