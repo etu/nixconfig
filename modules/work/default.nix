@@ -1,11 +1,10 @@
 {
   config,
+  chalet,
   lib,
   pkgs,
   ...
-}: let
-  myPkgs = pkgs.callPackage ./packages {};
-in {
+}: {
   options.etu.work.enable = lib.mkEnableOption "Enables work module";
 
   config = lib.mkIf config.etu.work.enable {
@@ -36,7 +35,7 @@ in {
 
     etu.user.extraUserPackages = [
       # Install chalet to manage running of containers
-      myPkgs.chalet
+      chalet
 
       # Install make
       pkgs.gnumake
