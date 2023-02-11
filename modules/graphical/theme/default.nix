@@ -1,5 +1,6 @@
 {
   config,
+  etuvetica,
   lib,
   pkgs,
   ...
@@ -48,20 +49,7 @@
       # noticable in Firefox UI elements).
       pkgs.cantarell-fonts
 
-      # My own font
-      (pkgs.stdenv.mkDerivation {
-        pname = "font-etuvetica";
-        version = "1";
-
-        src = pkgs.fetchurl {
-          url = "https://elis.nu/etuvetica/css/fonts/etuvetica.ttf";
-          sha256 = "0z1wf1q7wx8ny54w6fcz91r5xx9m2496jqfybciricmwhgdkz25j";
-        };
-
-        dontUnpack = true;
-
-        installPhase = "install --mode=644 -D $src $out/share/fonts/truetype/etuvetica.ttf";
-      })
+      etuvetica # My own font
 
       # Install talyz's font
       (pkgs.stdenv.mkDerivation {

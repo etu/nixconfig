@@ -249,6 +249,7 @@
       packages = {
         g90updatefw = pkgs.callPackage ./packages/g90updatefw {};
         swayWallpaper = pkgs.callPackage ./packages/wallpaper {};
+        etuvetica = pkgs.callPackage ./packages/etuvetica {};
       };
     });
 }
