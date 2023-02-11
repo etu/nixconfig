@@ -91,7 +91,7 @@
           specialArgs = {
             inherit myData;
             inherit (intelephense.nodejs-14_x.pkgs) intelephense;
-            inherit (self.packages.${system}) swayWallpaper g90updatefw;
+            inherit (self.packages.${system}) swayWallpaper g90updatefw etuvetica talyznewroman;
             emacsWayland = inputs.emacs-overlay.packages.${system}.emacsPgtk;
             llr = inputs.llr.packages.${system}.default;
             mkvcleaner = inputs.mkvcleaner.packages.${system}.default;
@@ -112,7 +112,7 @@
           specialArgs = {
             inherit myData;
             inherit (intelephense.nodejs-14_x.pkgs) intelephense;
-            inherit (self.packages.${system}) swayWallpaper;
+            inherit (self.packages.${system}) swayWallpaper etuvetica talyznewroman;
             emacsWayland = inputs.emacs-overlay.packages.${system}.emacsPgtk;
             llr = inputs.llr.packages.${system}.default;
             mkvcleaner = inputs.mkvcleaner.packages.${system}.default;
@@ -185,7 +185,7 @@
           specialArgs = {
             inherit myData;
             inherit (intelephense.nodejs-14_x.pkgs) intelephense;
-            inherit (self.packages.${system}) swayWallpaper;
+            inherit (self.packages.${system}) swayWallpaper etuvetica talyznewroman;
             emacsWayland = inputs.emacs-overlay.packages.${system}.emacsPgtk;
             llr = inputs.llr.packages.${system}.default;
             mkvcleaner = inputs.mkvcleaner.packages.${system}.default;
@@ -250,6 +250,7 @@
         g90updatefw = pkgs.callPackage ./packages/g90updatefw {};
         swayWallpaper = pkgs.callPackage ./packages/wallpaper {};
         etuvetica = pkgs.callPackage ./packages/etuvetica {};
+        talyznewroman = pkgs.callPackage ./packages/talyznewroman {};
       };
     });
 }

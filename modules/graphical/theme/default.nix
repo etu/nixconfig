@@ -3,6 +3,7 @@
   etuvetica,
   lib,
   pkgs,
+  talyznewroman,
   ...
 }: {
   options.etu.graphical.theme.enable = lib.mkEnableOption "Enable graphical theme settings";
@@ -50,21 +51,7 @@
       pkgs.cantarell-fonts
 
       etuvetica # My own font
-
-      # Install talyz's font
-      (pkgs.stdenv.mkDerivation {
-        pname = "font-talyz-new-roman";
-        version = "1";
-
-        src = pkgs.fetchurl {
-          url = "https://talyz.github.io/talyz-new-roman/font/TalyzNewRoman.ttf";
-          sha256 = "00pi45pwmm1mialb643ifvp2qf6rhgwkmbk9malmyac815abpb0g";
-        };
-
-        dontUnpack = true;
-
-        installPhase = "install --mode=644 -D $src $out/share/fonts/truetype/talyz-new-roman.ttf";
-      })
+      talyznewroman # Install talyz's font
     ];
 
     # If my user exists, enable home-manager configurations
