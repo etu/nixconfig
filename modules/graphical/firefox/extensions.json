@@ -1,11 +1,4 @@
 {
-  "browserpass-ce": {
-    "pname": "browserpass-ce",
-    "version": "3.7.2",
-    "addonId": "browserpass@maximbaz.com",
-    "url": "https://addons.mozilla.org/firefox/downloads/file/3711209/browserpass_ce-3.7.2.xpi",
-    "sha256": "sha256:b1781405b46f3274697885b53139264dca2ab56ffc4435c093102ad5ebc59297"
-  },
   "elasticvue": {
     "pname": "elasticvue",
     "version": "0.44.0",
@@ -13,53 +6,11 @@
     "url": "https://addons.mozilla.org/firefox/downloads/file/4036001/elasticvue-0.44.0.xpi",
     "sha256": "sha256:2805fb9b89669f30a644aa555fd6090300792668df38cd33540e65ccc5249c6d"
   },
-  "g\u00f6rans-hemmasnickrade-ordli": {
-    "pname": "g\u00f6rans-hemmasnickrade-ordli",
-    "version": "1.21",
-    "addonId": "swedish@dictionaries.addons.mozilla.org",
-    "url": "https://addons.mozilla.org/firefox/downloads/file/3539390/gorans_hemmasnickrade_ordli-1.21.xpi",
-    "sha256": "sha256:7d2ce7f7bfb65cfb5dd4138686acd977cf589c6ce91fc342ae5e2e26a09d1dbe"
-  },
-  "multi-account-containers": {
-    "pname": "multi-account-containers",
-    "version": "8.1.2",
-    "addonId": "@testpilot-containers",
-    "url": "https://addons.mozilla.org/firefox/downloads/file/4058426/multi_account_containers-8.1.2.xpi",
-    "sha256": "sha256:0ab8f0222853fb68bc05fcf96401110910dfeb507aaea2cf88c5cd7084d167fc"
-  },
-  "privacy-badger17": {
-    "pname": "privacy-badger17",
-    "version": "2023.1.31",
-    "addonId": "jid1-MnnxcxisBPnSXQ@jetpack",
-    "url": "https://addons.mozilla.org/firefox/downloads/file/4064595/privacy_badger17-2023.1.31.xpi",
-    "sha256": "sha256:0082d8ffe7b25f370a313d9b899b0c1ba1669b21b3a11791fe5ecf031aeb6a6c"
-  },
-  "sidebery": {
-    "pname": "sidebery",
-    "version": "4.10.2",
-    "addonId": "{3c078156-979c-498b-8990-85f7987dd929}",
-    "url": "https://addons.mozilla.org/firefox/downloads/file/3994928/sidebery-4.10.2.xpi",
-    "sha256": "sha256:60e35f2bfac88e5b2b4e044722dde49b4ed0eca9e9216f3d67dafdd9948273ac"
-  },
   "streetpass-for-mastodon": {
     "pname": "streetpass-for-mastodon",
     "version": "2023.5",
     "addonId": "streetpass@streetpass.social",
     "url": "https://addons.mozilla.org/firefox/downloads/file/4064972/streetpass_for_mastodon-2023.5.xpi",
     "sha256": "sha256:196f842de4fa10865a5624c0f8d68d17997f105f82eed79909f2fa632731a212"
-  },
-  "terms-of-service-didnt-read": {
-    "pname": "terms-of-service-didnt-read",
-    "version": "4.1.2",
-    "addonId": "jid0-3GUEt1r69sQNSrca5p8kx9Ezc3U@jetpack",
-    "url": "https://addons.mozilla.org/firefox/downloads/file/3827536/terms_of_service_didnt_read-4.1.2.xpi",
-    "sha256": "sha256:886263dd428e08cc857275b771f7d28ec0e89a7663c1512607d61dd233f83fa8"
-  },
-  "ublock-origin": {
-    "pname": "ublock-origin",
-    "version": "1.46.0",
-    "addonId": "uBlock0@raymondhill.net",
-    "url": "https://addons.mozilla.org/firefox/downloads/file/4047353/ublock_origin-1.46.0.xpi",
-    "sha256": "sha256:6bf8af5266353fab5eabdc7476de026e01edfb7901b0430c5e539f6791f1edc8"
   }
 }

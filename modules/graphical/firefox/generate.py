@@ -6,15 +6,8 @@ import os
 import requests
 
 EXTENSIONS = sorted([
-    "browserpass-ce",
     "elasticvue",
-    "görans-hemmasnickrade-ordli",
-    "multi-account-containers",
-    "privacy-badger17",
-    "sidebery",
     "streetpass-for-mastodon",
-    "terms-of-service-didnt-read",
-    "ublock-origin",
 ])
 
 def index_ext(ext: str):

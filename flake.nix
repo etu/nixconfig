@@ -60,6 +60,9 @@
     # unwanted changes and breakage.
     via-elis-nu.url = "github:etu/via.elis.nu";
     via-elis-nu.inputs.flake-utils.follows = "flake-utils";
+
+    # Import NUR
+    nur.url = "github:nix-community/NUR";
   };
 
   outputs = {
@@ -87,6 +90,7 @@
             inputs.agenix.nixosModules.age
             inputs.home-manager.nixosModules.home-manager
             inputs.impermanence.nixosModules.impermanence
+            inputs.nur.nixosModules.nur
           ];
           specialArgs = {
             inherit myData;
@@ -108,6 +112,7 @@
             inputs.agenix.nixosModules.age
             inputs.home-manager.nixosModules.home-manager
             inputs.impermanence.nixosModules.impermanence
+            inputs.nur.nixosModules.nur
           ];
           specialArgs = {
             inherit myData;
@@ -181,6 +186,7 @@
             inputs.agenix.nixosModules.age
             inputs.home-manager.nixosModules.home-manager
             inputs.impermanence.nixosModules.impermanence
+            inputs.nur.nixosModules.nur
           ];
           specialArgs = {
             inherit myData;

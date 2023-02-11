@@ -60,7 +60,17 @@ in {
 
         profiles.default = {
           # Install extensions.
-          extensions = map buildFirefoxXpiAddon (lib.attrValues (lib.importJSON ./extensions.json));
+          extensions =
+            (map buildFirefoxXpiAddon (lib.attrValues (lib.importJSON ./extensions.json)))
+            ++ [
+              config.nur.repos.rycee.firefox-addons.browserpass
+              config.nur.repos.rycee.firefox-addons.sidebery
+              config.nur.repos.rycee.firefox-addons.swedish-dictionary
+              config.nur.repos.rycee.firefox-addons.multi-account-containers
+              config.nur.repos.rycee.firefox-addons.privacy-badger
+              config.nur.repos.rycee.firefox-addons.terms-of-service-didnt-read
+              config.nur.repos.rycee.firefox-addons.ublock-origin
+            ];
 
           isDefault = true;
           search.default = "DuckDuckGo";
