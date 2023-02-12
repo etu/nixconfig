@@ -1,9 +1,9 @@
 {
   config,
   font-etuvetica,
+  font-talyznewroman,
   lib,
   pkgs,
-  talyznewroman,
   ...
 }: {
   options.etu.graphical.theme.enable = lib.mkEnableOption "Enable graphical theme settings";
@@ -51,7 +51,7 @@
       pkgs.cantarell-fonts
 
       font-etuvetica # My own font
-      talyznewroman # Install talyz's font
+      font-talyznewroman # Install talyz's font
     ];
 
     # If my user exists, enable home-manager configurations

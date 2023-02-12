@@ -97,11 +97,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1676192870,
-        "narHash": "sha256-a9sX1DG+kr9FaXiiABkmrtuLUIHiq0RoxQ5hlUf4W+w=",
+        "lastModified": 1676193186,
+        "narHash": "sha256-bKl6eO/DVETpy8KU9og+aO1OxLEwG5AWA5gxI/xgUD4=",
         "owner": "etu",
         "repo": "nur-packages",
-        "rev": "5d8206fd5b0663596c675e4156dde510626499bf",
+        "rev": "21ac016ad2f0129c5c635bb594a5a609c322e65e",
         "type": "github"
       },
       "original": {
