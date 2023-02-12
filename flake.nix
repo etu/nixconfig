@@ -90,7 +90,7 @@
             inherit myData;
             inherit (intelephense.nodejs-14_x.pkgs) intelephense;
             inherit (self.packages.${system}) swayWallpaper;
-            inherit (inputs.etu-nur.packages.${system}) llr mkvcleaner g90updatefw font-etuvetica font-talyznewroman;
+            inherit (inputs.etu-nur.packages.${system}) llr mkvcleaner g90updatefw font-etuvetica font-talyznewroman firefox-extension-elasticvue firefox-extension-streetpass-for-mastodon;
             emacsWayland = inputs.emacs-overlay.packages.${system}.emacsPgtk;
             emacs-overlay = inputs.emacs-overlay.overlay;
           };
@@ -111,7 +111,7 @@
             inherit myData;
             inherit (intelephense.nodejs-14_x.pkgs) intelephense;
             inherit (self.packages.${system}) swayWallpaper;
-            inherit (inputs.etu-nur.packages.${system}) chalet llr mkvcleaner font-etuvetica font-talyznewroman;
+            inherit (inputs.etu-nur.packages.${system}) chalet llr mkvcleaner font-etuvetica font-talyznewroman firefox-extension-elasticvue firefox-extension-streetpass-for-mastodon;
             emacsWayland = inputs.emacs-overlay.packages.${system}.emacsPgtk;
             emacs-overlay = inputs.emacs-overlay.overlay;
           };
@@ -181,7 +181,7 @@
             inherit myData;
             inherit (intelephense.nodejs-14_x.pkgs) intelephense;
             inherit (self.packages.${system}) swayWallpaper;
-            inherit (inputs.etu-nur.packages.${system}) llr mkvcleaner font-etuvetica font-talyznewroman;
+            inherit (inputs.etu-nur.packages.${system}) llr mkvcleaner font-etuvetica font-talyznewroman firefox-extension-elasticvue firefox-extension-streetpass-for-mastodon;
             emacsWayland = inputs.emacs-overlay.packages.${system}.emacsPgtk;
             emacs-overlay = inputs.emacs-overlay.overlay;
           };

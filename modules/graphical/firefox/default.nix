@@ -1,29 +1,11 @@
 {
   config,
+  firefox-extension-elasticvue,
+  firefox-extension-streetpass-for-mastodon,
   lib,
   pkgs,
   ...
-}: let
-  buildFirefoxXpiAddon = {
-    pname,
-    version,
-    addonId,
-    url,
-    sha256,
-    meta ? {},
-    ...
-  }:
-    pkgs.stdenv.mkDerivation {
-      inherit meta pname version;
-      src = pkgs.fetchurl {inherit url sha256;};
-
-      buildCommand = ''
-        dst="$out/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
-        mkdir -p "$dst"
-        install -v -m644 "$src" "$dst/${addonId}.xpi"
-      '';
-    };
-in {
+}: {
   options.etu.graphical.firefox = {
     enable = lib.mkEnableOption "Enable graphical firefox settings";
     package = lib.mkOption {
@@ -60,17 +42,17 @@ in {
 
         profiles.default = {
           # Install extensions.
-          extensions =
-            (map buildFirefoxXpiAddon (lib.attrValues (lib.importJSON ./extensions.json)))
-            ++ [
-              config.nur.repos.rycee.firefox-addons.browserpass
-              config.nur.repos.rycee.firefox-addons.sidebery
-              config.nur.repos.rycee.firefox-addons.swedish-dictionary
-              config.nur.repos.rycee.firefox-addons.multi-account-containers
-              config.nur.repos.rycee.firefox-addons.privacy-badger
-              config.nur.repos.rycee.firefox-addons.terms-of-service-didnt-read
-              config.nur.repos.rycee.firefox-addons.ublock-origin
-            ];
+          extensions = [
+            config.nur.repos.rycee.firefox-addons.browserpass
+            config.nur.repos.rycee.firefox-addons.sidebery
+            config.nur.repos.rycee.firefox-addons.swedish-dictionary
+            config.nur.repos.rycee.firefox-addons.multi-account-containers
+            config.nur.repos.rycee.firefox-addons.privacy-badger
+            config.nur.repos.rycee.firefox-addons.terms-of-service-didnt-read
+            config.nur.repos.rycee.firefox-addons.ublock-origin
+            firefox-extension-elasticvue
+            firefox-extension-streetpass-for-mastodon
+          ];
 
           isDefault = true;
           search.default = "DuckDuckGo";
