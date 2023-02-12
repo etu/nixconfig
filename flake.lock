@@ -90,6 +90,26 @@
         "type": "github"
       }
     },
+    "etu-nur": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1676188744,
+        "narHash": "sha256-tOUzTEC2rTXPahLvOmZUZy1I9G9sWnajqBq4+NANfbE=",
+        "owner": "etu",
+        "repo": "nur-packages",
+        "rev": "4204bbc6c3a8c0dbc684db1d125ce6f2e9d10281",
+        "type": "github"
+      },
+      "original": {
+        "owner": "etu",
+        "repo": "nur-packages",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -205,52 +225,6 @@
         "type": "github"
       }
     },
-    "llr": {
-      "inputs": {
-        "flake-utils": [
-          "flake-utils"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1674681018,
-        "narHash": "sha256-zubi3c9Wd8NnPJVp8aB1hAtwfLrwDl574vsTpwWfbNQ=",
-        "owner": "etu",
-        "repo": "llr",
-        "rev": "a2b797da2bb6688c30b62d6c683364652ba05600",
-        "type": "github"
-      },
-      "original": {
-        "owner": "etu",
-        "repo": "llr",
-        "type": "github"
-      }
-    },
-    "mkvcleaner": {
-      "inputs": {
-        "flake-utils": [
-          "flake-utils"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1674680600,
-        "narHash": "sha256-OuODJSKX+ukTjnfhW4bicwlvBI5mUedrNlBwRY3GC3o=",
-        "owner": "etu",
-        "repo": "mkvcleaner",
-        "rev": "022723e835f528c6eac604be27b9230c4ab0e170",
-        "type": "github"
-      },
-      "original": {
-        "owner": "etu",
-        "repo": "mkvcleaner",
-        "type": "github"
-      }
-    },
     "nixos-hardware": {
       "locked": {
         "lastModified": 1675933606,
@@ -334,13 +308,12 @@
         "agenix": "agenix",
         "deploy-rs": "deploy-rs",
         "emacs-overlay": "emacs-overlay",
+        "etu-nur": "etu-nur",
         "flake-utils": "flake-utils",
         "flummbot": "flummbot",
         "home-manager": "home-manager",
         "impermanence": "impermanence",
         "ip-failar-nu": "ip-failar-nu",
-        "llr": "llr",
-        "mkvcleaner": "mkvcleaner",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
         "nixpkgs-intelephense": "nixpkgs-intelephense",

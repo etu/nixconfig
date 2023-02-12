@@ -46,20 +46,14 @@
     ip-failar-nu.inputs.nixpkgs.follows = "nixpkgs";
     ip-failar-nu.inputs.flake-utils.follows = "flake-utils";
 
-    # Import mkvcleaner
-    mkvcleaner.url = "github:etu/mkvcleaner";
-    mkvcleaner.inputs.nixpkgs.follows = "nixpkgs";
-    mkvcleaner.inputs.flake-utils.follows = "flake-utils";
-
-    # Import llr
-    llr.url = "github:etu/llr";
-    llr.inputs.nixpkgs.follows = "nixpkgs";
-    llr.inputs.flake-utils.follows = "flake-utils";
-
     # Import via-elis-nu, don't follow upstream nixpkgs to avoid
     # unwanted changes and breakage.
     via-elis-nu.url = "github:etu/via.elis.nu";
     via-elis-nu.inputs.flake-utils.follows = "flake-utils";
+
+    # Import my NUR packages that aren't part of NUR yet
+    etu-nur.url = "github:etu/nur-packages";
+    etu-nur.inputs.nixpkgs.follows = "nixpkgs";
 
     # Import NUR
     nur.url = "github:nix-community/NUR";
@@ -96,9 +90,8 @@
             inherit myData;
             inherit (intelephense.nodejs-14_x.pkgs) intelephense;
             inherit (self.packages.${system}) swayWallpaper g90updatefw etuvetica talyznewroman;
+            inherit (inputs.etu-nur.packages.${system}) llr mkvcleaner;
             emacsWayland = inputs.emacs-overlay.packages.${system}.emacsPgtk;
-            llr = inputs.llr.packages.${system}.default;
-            mkvcleaner = inputs.mkvcleaner.packages.${system}.default;
             emacs-overlay = inputs.emacs-overlay.overlay;
           };
         };
@@ -118,9 +111,8 @@
             inherit myData;
             inherit (intelephense.nodejs-14_x.pkgs) intelephense;
             inherit (self.packages.${system}) swayWallpaper etuvetica talyznewroman chalet;
+            inherit (inputs.etu-nur.packages.${system}) llr mkvcleaner;
             emacsWayland = inputs.emacs-overlay.packages.${system}.emacsPgtk;
-            llr = inputs.llr.packages.${system}.default;
-            mkvcleaner = inputs.mkvcleaner.packages.${system}.default;
             emacs-overlay = inputs.emacs-overlay.overlay;
           };
         };
@@ -137,8 +129,7 @@
           specialArgs = {
             inherit myData;
             inherit (intelephense.nodejs-14_x.pkgs) intelephense;
-            llr = inputs.llr.packages.${system}.default;
-            mkvcleaner = inputs.mkvcleaner.packages.${system}.default;
+            inherit (inputs.etu-nur.packages.${system}) llr mkvcleaner;
             emacs-overlay = inputs.emacs-overlay.overlay;
           };
         };
@@ -155,8 +146,7 @@
           ];
           specialArgs = {
             inherit myData;
-            llr = inputs.llr.packages.${system}.default;
-            mkvcleaner = inputs.mkvcleaner.packages.${system}.default;
+            inherit (inputs.etu-nur.packages.${system}) llr mkvcleaner;
           };
         };
 
@@ -172,8 +162,7 @@
           ];
           specialArgs = {
             inherit myData;
-            llr = inputs.llr.packages.${system}.default;
-            mkvcleaner = inputs.mkvcleaner.packages.${system}.default;
+            inherit (inputs.etu-nur.packages.${system}) llr mkvcleaner;
             via-elis-nu = inputs.via-elis-nu.packages.${system}.default;
           };
         };
@@ -192,9 +181,8 @@
             inherit myData;
             inherit (intelephense.nodejs-14_x.pkgs) intelephense;
             inherit (self.packages.${system}) swayWallpaper etuvetica talyznewroman;
+            inherit (inputs.etu-nur.packages.${system}) llr mkvcleaner;
             emacsWayland = inputs.emacs-overlay.packages.${system}.emacsPgtk;
-            llr = inputs.llr.packages.${system}.default;
-            mkvcleaner = inputs.mkvcleaner.packages.${system}.default;
             emacs-overlay = inputs.emacs-overlay.overlay;
           };
         };
