@@ -110,8 +110,8 @@
           specialArgs = {
             inherit myData;
             inherit (intelephense.nodejs-14_x.pkgs) intelephense;
-            inherit (self.packages.${system}) swayWallpaper chalet;
-            inherit (inputs.etu-nur.packages.${system}) llr mkvcleaner font-etuvetica font-talyznewroman;
+            inherit (self.packages.${system}) swayWallpaper;
+            inherit (inputs.etu-nur.packages.${system}) chalet llr mkvcleaner font-etuvetica font-talyznewroman;
             emacsWayland = inputs.emacs-overlay.packages.${system}.emacsPgtk;
             emacs-overlay = inputs.emacs-overlay.overlay;
           };
@@ -228,10 +228,6 @@
           inputs.agenix.packages.${system}.agenix
           inputs.deploy-rs.packages.${system}.deploy-rs
 
-          # Used for package updates of chalet
-          pkgs.nodejs
-          pkgs.nodePackages.node2nix
-
           # Used for firefox packages updates
           (pkgs.python3.withPackages (ps: [
             ps.requests
@@ -240,9 +236,6 @@
       };
 
       # Build packages
-      packages = {
-        chalet = pkgs.callPackage ./packages/chalet-init {};
-        swayWallpaper = pkgs.callPackage ./packages/wallpaper {};
-      };
+      packages.swayWallpaper = pkgs.callPackage ./packages/wallpaper {};
     });
 }
