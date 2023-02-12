@@ -89,8 +89,8 @@
           specialArgs = {
             inherit myData;
             inherit (intelephense.nodejs-14_x.pkgs) intelephense;
-            inherit (self.packages.${system}) swayWallpaper g90updatefw etuvetica talyznewroman;
-            inherit (inputs.etu-nur.packages.${system}) llr mkvcleaner;
+            inherit (self.packages.${system}) swayWallpaper etuvetica talyznewroman;
+            inherit (inputs.etu-nur.packages.${system}) llr mkvcleaner g90updatefw;
             emacsWayland = inputs.emacs-overlay.packages.${system}.emacsPgtk;
             emacs-overlay = inputs.emacs-overlay.overlay;
           };
@@ -242,7 +242,6 @@
       # Build packages
       packages = {
         chalet = pkgs.callPackage ./packages/chalet-init {};
-        g90updatefw = pkgs.callPackage ./packages/g90updatefw {};
         swayWallpaper = pkgs.callPackage ./packages/wallpaper {};
         etuvetica = pkgs.callPackage ./packages/etuvetica {};
         talyznewroman = pkgs.callPackage ./packages/talyznewroman {};
