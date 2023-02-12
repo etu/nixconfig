@@ -1,6 +1,6 @@
 {
   config,
-  etuvetica,
+  font-etuvetica,
   lib,
   pkgs,
   talyznewroman,
@@ -50,7 +50,7 @@
       # noticable in Firefox UI elements).
       pkgs.cantarell-fonts
 
-      etuvetica # My own font
+      font-etuvetica # My own font
       talyznewroman # Install talyz's font
     ];
 

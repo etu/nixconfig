@@ -89,8 +89,8 @@
           specialArgs = {
             inherit myData;
             inherit (intelephense.nodejs-14_x.pkgs) intelephense;
-            inherit (self.packages.${system}) swayWallpaper etuvetica talyznewroman;
-            inherit (inputs.etu-nur.packages.${system}) llr mkvcleaner g90updatefw;
+            inherit (self.packages.${system}) swayWallpaper talyznewroman;
+            inherit (inputs.etu-nur.packages.${system}) llr mkvcleaner g90updatefw font-etuvetica;
             emacsWayland = inputs.emacs-overlay.packages.${system}.emacsPgtk;
             emacs-overlay = inputs.emacs-overlay.overlay;
           };
@@ -110,8 +110,8 @@
           specialArgs = {
             inherit myData;
             inherit (intelephense.nodejs-14_x.pkgs) intelephense;
-            inherit (self.packages.${system}) swayWallpaper etuvetica talyznewroman chalet;
-            inherit (inputs.etu-nur.packages.${system}) llr mkvcleaner;
+            inherit (self.packages.${system}) swayWallpaper talyznewroman chalet;
+            inherit (inputs.etu-nur.packages.${system}) llr mkvcleaner font-etuvetica;
             emacsWayland = inputs.emacs-overlay.packages.${system}.emacsPgtk;
             emacs-overlay = inputs.emacs-overlay.overlay;
           };
@@ -180,8 +180,8 @@
           specialArgs = {
             inherit myData;
             inherit (intelephense.nodejs-14_x.pkgs) intelephense;
-            inherit (self.packages.${system}) swayWallpaper etuvetica talyznewroman;
-            inherit (inputs.etu-nur.packages.${system}) llr mkvcleaner;
+            inherit (self.packages.${system}) swayWallpaper talyznewroman;
+            inherit (inputs.etu-nur.packages.${system}) llr mkvcleaner font-etuvetica;
             emacsWayland = inputs.emacs-overlay.packages.${system}.emacsPgtk;
             emacs-overlay = inputs.emacs-overlay.overlay;
           };
@@ -243,7 +243,6 @@
       packages = {
         chalet = pkgs.callPackage ./packages/chalet-init {};
         swayWallpaper = pkgs.callPackage ./packages/wallpaper {};
-        etuvetica = pkgs.callPackage ./packages/etuvetica {};
         talyznewroman = pkgs.callPackage ./packages/talyznewroman {};
       };
     });
