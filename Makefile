@@ -1,12 +1,8 @@
-update-all: update-flake update-firefox-extensions update-hass update-zwavejs2mqtt update-mosquitto update-nzbget-exporter update-chalet
+update-all: update-flake update-hass update-zwavejs2mqtt update-mosquitto update-nzbget-exporter update-chalet
 
 update-flake:
 	@echo "Updating flake dependencies"
 	@nix flake update
-
-update-firefox-extensions:
-	@echo "Updating firefox extensions"
-	@python modules/graphical/firefox/generate.py
 
 update-hass:
 	@echo "Updating to latest home assistant container"

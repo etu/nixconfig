@@ -227,11 +227,6 @@
 
           inputs.agenix.packages.${system}.agenix
           inputs.deploy-rs.packages.${system}.deploy-rs
-
-          # Used for firefox packages updates
-          (pkgs.python3.withPackages (ps: [
-            ps.requests
-          ]))
         ];
       };
 
