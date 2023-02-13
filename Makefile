@@ -1,4 +1,4 @@
-update-all: update-flake update-hass update-zwavejs2mqtt update-mosquitto update-nzbget-exporter update-chalet
+update-all: update-flake update-hass update-zwavejs2mqtt update-mosquitto update-nzbget-exporter
 
 update-flake:
 	@echo "Updating flake dependencies"
@@ -20,13 +20,9 @@ update-nzbget-exporter:
 	@echo "Updating to latest nzbget-exporter container"
 	@sed -i -r 's#(frebib/nzbget-exporter):[0-9]+\.[0-9]+\.[0-9]+#\1:'`curl 'https://hub.docker.com/v2/namespaces/frebib/repositories/nzbget-exporter/tags' | jq '.results[1].name' | sed 's/"//g'`'#' hosts/server-main-elis/services/monitoring.nix
 
-update-chalet:
-	@echo "Update chalet dependencies"
-	#@sh packages/chalet-init/chalet/update.sh
-
 nix-fmt:
 	@echo "Format nix files"
-	nix fmt . -- --exclude ./packages/chalet-init/chalet
+	nix fmt .
 
 yaml-fmt:
 	@echo "Format yaml files"
