@@ -8,6 +8,7 @@ in {
   etu.base.zfs.system.directories = [
     # Persistence of synapse data between boots.
     "/var/lib/matrix-synapse"
+    "/var/lib/matrix-appservice-irc"
   ];
 
   services.postgresql = {
@@ -227,6 +228,32 @@ in {
           push.include_content = false;
         }))
       ];
+      app_service_config_files = [
+        "/var/lib/matrix-appservice-irc/registration.yml"
+      ];
+    };
+  };
+
+  services.matrix-appservice-irc = {
+    enable = true;
+    registrationUrl = "http://localhost:8009";
+
+    settings = {
+      homeserver.url = "https://matrix.${domain}";
+      homeserver.domain = domain;
+
+      ircService.servers."irc.beanjuice.me" = {
+        name = "beanjuice";
+        port = 6697;
+        ssl = true;
+        sslselfsign = true;
+        allowExpiredCerts = true;
+        botConfig.enabled = false; # Don't send in a bridge bot
+        dynamicChannels.enabled = true; # Allow dynamic joining of channels
+        dynamicChannels.aliasTemplate = "#irc_$CHANNEL";
+        ircClients.nickTemplate = "$DISPLAY"; # Nick display name: $DISPLAY[m]
+        ircClients.allowNickChanges = true;
+      };
     };
   };
 
