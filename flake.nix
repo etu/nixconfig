@@ -231,6 +231,14 @@
       };
 
       # Build packages
-      packages.swayWallpaper = pkgs.callPackage ./packages/wallpaper {};
+      packages.swayWallpaper = let
+        # Re-import nixpkgs with allowUnfree set for sunpaper that I
+        # use as source for my background images.
+        pkgs = import inputs.nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+        };
+      in
+        pkgs.callPackage ./packages/wallpaper {};
     });
 }
