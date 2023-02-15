@@ -9,6 +9,7 @@
     ./firefox
     ./gnupg
     ./hamradio
+    ./matrix
     ./signal
     ./spotify
     ./sway
@@ -25,6 +26,7 @@
       graphical.evolution.enable = true;
       graphical.firefox.enable = true;
       graphical.gnupg.enable = true;
+      graphical.matrix.enable = true;
       graphical.sway.enable = true;
       graphical.telegram.enable = true;
       graphical.terminal.enable = true;
