@@ -34,8 +34,8 @@
       templates.data = {
         autosnap = true;
         autoprune = true;
-        frequently = 0;
-        hourly = 0;
+        frequently = 3;
+        hourly = 12;
         daily = 6;
         weekly = 3;
         monthly = 2;
