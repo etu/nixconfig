@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  matrix-hookshot,
   ...
 }: let
   domain = "failar.nu";
@@ -9,6 +10,7 @@ in {
     # Persistence of synapse data between boots.
     "/var/lib/matrix-synapse"
     "/var/lib/matrix-appservice-irc"
+    "/var/lib/matrix-hookshot"
   ];
 
   services.postgresql = {
@@ -84,6 +86,10 @@ in {
             proxy_set_header X-Forwarded-Proto $scheme;
             proxy_read_timeout 900s;
           '';
+        };
+        "~ ^/_hookshot/(.*)" = {
+          proxyPass = "http://127.0.0.1:9000/$1";
+          extraConfig = "proxy_set_header X-Forwarded-Ssl on;";
         };
       };
     };
@@ -230,6 +236,7 @@ in {
       ];
       app_service_config_files = [
         "/var/lib/matrix-appservice-irc/registration.yml"
+        "/var/lib/matrix-hookshot/registration.yaml"
       ];
     };
   };
@@ -256,6 +263,125 @@ in {
       };
     };
   };
+
+  systemd.services.matrix-hookshot = let
+    registrationFilePath = "/var/lib/matrix-hookshot/registration.yaml";
+    configFilePath = "/var/lib/matrix-hookshot/config.yaml";
+    passKeyFilePath = "/var/lib/matrix-hookshot/passkey.pem";
+  in {
+    description = "Matrix-hookshot bridge";
+    before = ["matrix-synapse.service"]; # So the registration can be used by Synapse
+    wantedBy = ["multi-user.target"];
+    after = ["network.target"];
+
+    preStart = let
+      configJson = {
+        bridge.domain = domain;
+        bridge.url = "http://localhost:8448";
+        bridge.mediaUrl = "https://matrix.${domain}";
+        bridge.port = 9993;
+        bridge.bindAddress = "127.0.0.1";
+
+        generic.enabled = true;
+        generic.urlPrefix = "https://matrix.${domain}/_hookshot/webhook";
+        generic.allowJsTransformationFunctions = false;
+        generic.waitForComplete = false;
+        generic.enableHttpGet = false;
+        generic.userIdPrefix = "webhook_";
+
+        passFile = passKeyFilePath;
+        metrics.enabled = false;
+
+        logging.level = "info";
+        logging.colorize = true;
+        logging.json = false;
+        logging.timestampFormat = "HH:mm:ss:SSS";
+
+        permissions = [
+          {
+            actor = "@etu:${domain}";
+            services = [
+              {
+                service = "*";
+                level = "admin";
+              }
+            ];
+          }
+        ];
+
+        listeners = [
+          {
+            port = 9000;
+            bindAddress = "127.0.0.1";
+            resources = ["webhooks"];
+          }
+        ];
+      };
+
+      registrationJson = {
+        id = "matrix-hookshot";
+        url = "http://127.0.0.1:9993";
+        as_token = "'$(${pkgs.pwgen}/bin/pwgen -s 64 -c 1)'";
+        hs_token = "'$(${pkgs.pwgen}/bin/pwgen -s 64 -c 1)'";
+        sender_localpart = "_hookshot_";
+        namespaces.users = [
+          {
+            exclusive = true;
+            regex = "^@webhook_.*:${domain}";
+          }
+        ];
+      };
+    in ''
+      if ! [ -f "${passKeyFilePath}" ]; then
+        ${pkgs.openssl}/bin/openssl genpkey \
+          -out "${passKeyFilePath}" \
+          -outform PEM \
+          -algorithm RSA \
+          -pkeyopt rsa_keygen_bits:4096
+      fi
+
+      if ! [ -f "${registrationFilePath}" ]; then
+        # Generate config file if it doesn't exist
+        echo '${builtins.toJSON registrationJson}' | ${pkgs.yq}/bin/yq -y > ${registrationFilePath}
+      else
+        # Backup id, hs_token and as_token.
+        id=$(grep "^id:.*$" ${registrationFilePath})
+        hs_token=$(grep "^hs_token:.*$" ${registrationFilePath})
+        as_token=$(grep "^as_token:.*$" ${registrationFilePath})
+
+        # Regenerate config file
+        echo '${builtins.toJSON registrationJson}' | ${pkgs.yq}/bin/yq -y > ${registrationFilePath}
+
+        # Restore config file
+        ${pkgs.gnused}/bin/sed -i "s/^id:.*$/$id/g" ${registrationFilePath}
+        ${pkgs.gnused}/bin/sed -i "s/^hs_token:.*$/$hs_token/g" ${registrationFilePath}
+        ${pkgs.gnused}/bin/sed -i "s/^as_token:.*$/$as_token/g" ${registrationFilePath}
+      fi
+
+      chown matrix-hookshot:matrix-synapse ${registrationFilePath}
+      chmod 640 ${registrationFilePath}
+
+      echo '${builtins.toJSON configJson}' | ${pkgs.yq}/bin/yq -y > ${configFilePath}
+    '';
+
+    script = "${matrix-hookshot}/bin/matrix-hookshot ${configFilePath} ${registrationFilePath}";
+    serviceConfig = {
+      User = "matrix-hookshot";
+      Group = "matrix-hookshot";
+      WorkingDirectory = "/var/lib/matrix-hookshot";
+
+      # Add permissions to chown the registration file
+      CapabilityBoundingSet = ["CAP_CHOWN"];
+      AmbientCapabilities = ["CAP_CHOWN"];
+    };
+  };
+  users.users.matrix-hookshot = {
+    uid = 979;
+    group = "matrix-hookshot";
+    home = "/var/lib/matrix-hookshot";
+    isSystemUser = true;
+  };
+  users.groups.matrix-hookshot.gid = 979;
 
   # use mimalloc to improve the memory situation with synapse
   systemd.services.matrix-synapse.environment = {

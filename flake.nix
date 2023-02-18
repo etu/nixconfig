@@ -162,7 +162,7 @@
           ];
           specialArgs = {
             inherit myData;
-            inherit (inputs.etu-nur.packages.${system}) llr mkvcleaner;
+            inherit (inputs.etu-nur.packages.${system}) llr mkvcleaner matrix-hookshot;
             via-elis-nu = inputs.via-elis-nu.packages.${system}.default;
           };
         };
