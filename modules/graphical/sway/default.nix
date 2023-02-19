@@ -321,10 +321,10 @@
             "${down}" = "resize grow height 10px"; # Pressing down will grow the window’s height.
 
             # You can also use the arrow keys:
-            Left = "resize shrink width 10 px";
-            Down = "resize grow height 10 px";
-            Up = "resize shrink height 10 px";
-            Right = "resize grow width 10 px";
+            Left = "resize shrink width 10px";
+            Down = "resize grow height 10px";
+            Up = "resize shrink height 10px";
+            Right = "resize grow width 10px";
 
             # Exit mode
             Return = "mode default";
