@@ -6,7 +6,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     # Main flake-utils
-    flake-utils.url = "github:numtide/flake-utils";
+    flake-utils.url = "flake-utils";
 
     # A nixpkgs for intelephense.
     nixpkgs-intelephense.url = "github:NixOS/nixpkgs/befc83905c965adfd33e5cae49acb0351f6e0404";
@@ -17,13 +17,13 @@
     deploy-rs.inputs.utils.follows = "flake-utils";
 
     # Import nixos hardware quirks settings
-    nixos-hardware.url = "github:NixOS/nixos-hardware";
+    nixos-hardware.url = "nixos-hardware";
 
     # Import impermanence modules for peristence
     impermanence.url = "github:nix-community/impermanence";
 
     # Import home-manager modules
-    home-manager.url = "github:nix-community/home-manager";
+    home-manager.url = "home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.inputs.utils.follows = "flake-utils";
 
@@ -32,7 +32,7 @@
     agenix.inputs.nixpkgs.follows = "nixpkgs";
 
     # Import emacs-overlay
-    emacs-overlay.url = "github:nix-community/emacs-overlay";
+    emacs-overlay.url = "emacs-overlay";
     emacs-overlay.inputs.nixpkgs.follows = "nixpkgs";
     emacs-overlay.inputs.flake-utils.follows = "flake-utils";
 
@@ -56,7 +56,7 @@
     etu-nur.inputs.nixpkgs.follows = "nixpkgs";
 
     # Import NUR
-    nur.url = "github:nix-community/NUR";
+    nur.url = "nur";
   };
 
   outputs = {
