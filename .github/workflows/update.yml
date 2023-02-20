@@ -18,6 +18,12 @@ jobs:
           extraPullNames: 'nix-community'
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
 
+      # Update flake
+      - name: Update flake inputs
+        run: 'nix flake update'
+        env:
+          github_token: '${{ secrets.GITHUB_TOKEN }}'
+
       # Pre-fetch deps
       - name: Pre-fetch deps
         run: 'nix develop --command true'

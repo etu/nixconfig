@@ -1,8 +1,4 @@
-update-all: update-flake update-hass update-zwavejs2mqtt update-mosquitto update-nzbget-exporter
-
-update-flake:
-	@echo "Updating flake dependencies"
-	@nix flake update
+update-all: update-hass update-zwavejs2mqtt update-mosquitto update-nzbget-exporter
 
 update-hass:
 	@echo "Updating to latest home assistant container"
