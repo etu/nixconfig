@@ -71,141 +71,85 @@
       inherit system;
       config.allowUnfree = true;
     };
+
+    mkSystem = {
+      name,
+      system ? "x86_64-linux",
+      extraArgs ? {},
+      extraModules ? [],
+    }:
+      nixpkgs.lib.nixosSystem {
+        inherit system;
+
+        modules =
+          [
+            ./hosts/${name}/configuration.nix
+            ./modules
+            inputs.agenix.nixosModules.age
+            inputs.flummbot.nixosModules.${system}.default
+            inputs.home-manager.nixosModules.home-manager
+            inputs.impermanence.nixosModules.impermanence
+            inputs.ip-failar-nu.nixosModules.${system}.default
+            inputs.nur.nixosModules.nur
+          ]
+          ++ extraModules;
+
+        specialArgs =
+          {
+            inherit (inputs.etu-nur.packages.${system}) chalet firefox-extension-elasticvue firefox-extension-streetpass-for-mastodon font-etuvetica font-talyznewroman g90updatefw llr matrix-hookshot mkvcleaner;
+            inherit (intelephense.nodejs-14_x.pkgs) intelephense;
+            inherit (self.packages.${system}) swayWallpaper;
+            inherit myData;
+            emacs-overlay = inputs.emacs-overlay.overlay;
+            emacsWayland = inputs.emacs-overlay.packages.${system}.emacsPgtk;
+            via-elis-nu = inputs.via-elis-nu.packages.${system}.default;
+          }
+          // extraArgs;
+      };
+
+    mkDeploy = {
+      name,
+      hostname,
+      sshUser ? "root",
+    }: {
+      inherit sshUser hostname;
+      profiles.system.path = inputs.deploy-rs.lib.${system}.activate.nixos self.nixosConfigurations.${name};
+    };
   in
     {
       # Declare systems
       nixosConfigurations = {
-        laptop-private-elis = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [
-            ./hosts/laptop-private-elis/configuration.nix
-            ./modules
+        laptop-private-elis = mkSystem {
+          name = "laptop-private-elis";
+          extraModules = [
             inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t495
-            inputs.agenix.nixosModules.age
-            inputs.home-manager.nixosModules.home-manager
-            inputs.impermanence.nixosModules.impermanence
-            inputs.nur.nixosModules.nur
           ];
-          specialArgs = {
-            inherit myData;
-            inherit (intelephense.nodejs-14_x.pkgs) intelephense;
-            inherit (self.packages.${system}) swayWallpaper;
-            inherit (inputs.etu-nur.packages.${system}) llr mkvcleaner g90updatefw font-etuvetica font-talyznewroman firefox-extension-elasticvue firefox-extension-streetpass-for-mastodon;
-            emacsWayland = inputs.emacs-overlay.packages.${system}.emacsPgtk;
-            emacs-overlay = inputs.emacs-overlay.overlay;
-          };
         };
-
-        laptop-work-elis = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [
-            ./hosts/laptop-work-elis/configuration.nix
-            ./modules
+        laptop-work-elis = mkSystem {
+          name = "laptop-work-elis";
+          extraModules = [
             inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14s-amd-gen1
-            inputs.agenix.nixosModules.age
-            inputs.home-manager.nixosModules.home-manager
-            inputs.impermanence.nixosModules.impermanence
-            inputs.nur.nixosModules.nur
           ];
-          specialArgs = {
-            inherit myData;
-            inherit (intelephense.nodejs-14_x.pkgs) intelephense;
-            inherit (self.packages.${system}) swayWallpaper;
-            inherit (inputs.etu-nur.packages.${system}) chalet llr mkvcleaner font-etuvetica font-talyznewroman firefox-extension-elasticvue firefox-extension-streetpass-for-mastodon;
-            emacsWayland = inputs.emacs-overlay.packages.${system}.emacsPgtk;
-            emacs-overlay = inputs.emacs-overlay.overlay;
-          };
         };
-
-        server-main-elis = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [
-            ./hosts/server-main-elis/configuration.nix
-            ./modules
-            inputs.agenix.nixosModules.age
-            inputs.home-manager.nixosModules.home-manager
-            inputs.impermanence.nixosModules.impermanence
-          ];
-          specialArgs = {
-            inherit myData;
-            inherit (intelephense.nodejs-14_x.pkgs) intelephense;
-            inherit (inputs.etu-nur.packages.${system}) llr mkvcleaner;
-            emacs-overlay = inputs.emacs-overlay.overlay;
-          };
-        };
-
-        vps04 = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [
-            ./hosts/vps04/configuration.nix
-            ./modules
-            inputs.agenix.nixosModules.age
-            inputs.home-manager.nixosModules.home-manager
-            inputs.impermanence.nixosModules.impermanence
-            inputs.flummbot.nixosModules.${system}.default
-          ];
-          specialArgs = {
-            inherit myData;
-            inherit (inputs.etu-nur.packages.${system}) llr mkvcleaner;
-          };
-        };
-
-        vps06 = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [
-            ./hosts/vps06/configuration.nix
-            ./modules
-            inputs.agenix.nixosModules.age
-            inputs.home-manager.nixosModules.home-manager
-            inputs.impermanence.nixosModules.impermanence
-            inputs.ip-failar-nu.nixosModules.${system}.default
-          ];
-          specialArgs = {
-            inherit myData;
-            inherit (inputs.etu-nur.packages.${system}) llr mkvcleaner matrix-hookshot;
-            via-elis-nu = inputs.via-elis-nu.packages.${system}.default;
-          };
-        };
-
-        live-iso = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [
-            ./hosts/live-iso/configuration.nix
-            ./modules
-            inputs.agenix.nixosModules.age
-            inputs.home-manager.nixosModules.home-manager
-            inputs.impermanence.nixosModules.impermanence
-            inputs.nur.nixosModules.nur
-          ];
-          specialArgs = {
-            inherit myData;
-            inherit (intelephense.nodejs-14_x.pkgs) intelephense;
-            inherit (self.packages.${system}) swayWallpaper;
-            inherit (inputs.etu-nur.packages.${system}) llr mkvcleaner font-etuvetica font-talyznewroman firefox-extension-elasticvue firefox-extension-streetpass-for-mastodon;
-            emacsWayland = inputs.emacs-overlay.packages.${system}.emacsPgtk;
-            emacs-overlay = inputs.emacs-overlay.overlay;
-          };
-        };
+        server-main-elis = mkSystem {name = "server-main-elis";};
+        vps04 = mkSystem {name = "vps04";};
+        vps06 = mkSystem {name = "vps06";};
+        live-iso = mkSystem {name = "live-iso";};
       };
 
       # Specify deploy-rs deployments
       deploy.nodes = {
-        server-main-elis = {
+        server-main-elis = mkDeploy {
+          name = "server-main-elis";
           hostname = "home.elis.nu";
-          sshUser = "root";
-          profiles.system.path = inputs.deploy-rs.lib.${system}.activate.nixos self.nixosConfigurations.server-main-elis;
         };
-
-        vps04 = {
+        vps04 = mkDeploy {
+          name = "vps04";
           hostname = "vps04.elis.nu";
-          sshUser = "root";
-          profiles.system.path = inputs.deploy-rs.lib.${system}.activate.nixos self.nixosConfigurations.vps04;
         };
-
-        vps06 = {
+        vps06 = mkDeploy {
+          name = "vps06";
           hostname = "vps06.elis.nu";
-          sshUser = "root";
-          profiles.system.path = inputs.deploy-rs.lib.${system}.activate.nixos self.nixosConfigurations.vps06;
         };
       };
 
