@@ -8,11 +8,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1676785837,
-        "narHash": "sha256-Uit2UXSwc27Gs+4Hrmpwh9YHRQhFrrf8OoEBBL8y+7g=",
+        "lastModified": 1677126346,
+        "narHash": "sha256-4s+PPGC1M07QsPyeye5drc2JLa1lhDnCV3XAsG8+pH4=",
         "owner": "ryantm",
         "repo": "agenix",
-        "rev": "2c56a93426107da97751a752da94ee55b5f6efe5",
+        "rev": "c2a71c83c70844c5e31db69347e86af080bcdad0",
         "type": "github"
       },
       "original": {
@@ -77,11 +77,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1676862356,
-        "narHash": "sha256-L2Bsq5zzwyeBJMdBZ/MxtsG7SUVdATIofOALLrXS+7Q=",
+        "lastModified": 1677176370,
+        "narHash": "sha256-NK0X/HFOhjT9SKp4WqKj+n9qCiSpzo6EJtXfB47gHGw=",
         "owner": "nix-community",
         "repo": "emacs-overlay",
-        "rev": "15de155944355203f78a9acec39644242731c3a1",
+        "rev": "3fc771708d511a1e43dda28202c00c1bc6310e17",
         "type": "github"
       },
       "original": {
@@ -172,11 +172,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1676846899,
-        "narHash": "sha256-hR8O1OxHi3XxcvnBXhiw8So54sXkQMxcJFu/KwK+EHU=",
+        "lastModified": 1677104801,
+        "narHash": "sha256-2V5nKOYVFMYlseYdDKiEaww2xqcE0GtS1ax3SoUX99I=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "6ea501044b52fb98f9e37a5b4f79dc5de74c6c5c",
+        "rev": "4295fdfa6b0005c32f2e1f0b732faf5810c1bc7f",
         "type": "github"
       },
       "original": {
@@ -224,25 +224,27 @@
     },
     "nixos-hardware": {
       "locked": {
-        "lastModified": 1676775543,
-        "narHash": "sha256-VI0e60l94RY9Sc90OwDZpOf/nyLy41n2ULK6I6YkoP8=",
-        "owner": "NixOS",
+        "lastModified": 1677184244,
+        "narHash": "sha256-4wSB38x3c+q1Ag6iCmlPe6x+TND01cC1QkJAJRR6du8=",
+        "owner": "etu",
         "repo": "nixos-hardware",
-        "rev": "525177a78023e1363bee482f520d4f2471ada03a",
+        "rev": "3ece55965e7d9ed0740eb12e9ff4dee55cfc7153",
         "type": "github"
       },
       "original": {
-        "id": "nixos-hardware",
-        "type": "indirect"
+        "owner": "etu",
+        "ref": "remove-rtw89-firmware",
+        "repo": "nixos-hardware",
+        "type": "github"
       }
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1676721149,
-        "narHash": "sha256-mN2EpTGxxVNnFZLoLWRwh6f7UWhXy4qE+wO2CZyrXps=",
+        "lastModified": 1677063315,
+        "narHash": "sha256-qiB4ajTeAOVnVSAwCNEEkoybrAlA+cpeiBxLobHndE8=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "5f4e07deb7c44f27d498f8df9c5f34750acf52d2",
+        "rev": "988cc958c57ce4350ec248d2d53087777f9e1949",
         "type": "github"
       },
       "original": {
@@ -286,11 +288,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1676862947,
-        "narHash": "sha256-FGSQpwKtaxswsTryGTVGwj6/kkaW2m6+pYrq0ks3qew=",
+        "lastModified": 1677181577,
+        "narHash": "sha256-kQvPYxIfE3GRTxTbi6z7r8cu+c2iXGhfSZc9dYNO8fg=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "d7055f8f674d6daef6e26d770dfd825e4b30e754",
+        "rev": "5285ace79c1f9f2ec9dec57626fcaf87267cfedf",
         "type": "github"
       },
       "original": {
