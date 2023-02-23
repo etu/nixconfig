@@ -1,7 +1,6 @@
 {
   config,
   pkgs,
-  matrix-hookshot,
   ...
 }: let
   domain = "failar.nu";
@@ -364,7 +363,7 @@ in {
       echo '${builtins.toJSON configJson}' | ${pkgs.yq}/bin/yq -y > ${configFilePath}
     '';
 
-    script = "${matrix-hookshot}/bin/matrix-hookshot ${configFilePath} ${registrationFilePath}";
+    script = "${pkgs.matrix-hookshot}/bin/matrix-hookshot ${configFilePath} ${registrationFilePath}";
     serviceConfig = {
       User = "matrix-hookshot";
       Group = "matrix-hookshot";

@@ -96,7 +96,7 @@
 
         specialArgs =
           {
-            inherit (inputs.etu-nur.packages.${system}) chalet firefox-extension-elasticvue firefox-extension-streetpass-for-mastodon font-etuvetica font-talyznewroman g90updatefw llr matrix-hookshot mkvcleaner;
+            inherit (inputs.etu-nur.packages.${system}) chalet firefox-extension-elasticvue firefox-extension-streetpass-for-mastodon font-etuvetica font-talyznewroman g90updatefw llr mkvcleaner;
             inherit (intelephense.nodejs-14_x.pkgs) intelephense;
             inherit (self.packages.${system}) swayWallpaper;
             inherit myData;
