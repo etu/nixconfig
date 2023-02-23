@@ -169,6 +169,9 @@
           pkgs.curl
           pkgs.jq # For parsing json downloaded with curl
 
+          # Install nix-output-monitor for nice build commands
+          pkgs.nix-output-monitor
+
           inputs.agenix.packages.${system}.agenix
           inputs.deploy-rs.packages.${system}.deploy-rs
         ];
