@@ -224,16 +224,16 @@
     },
     "nixos-hardware": {
       "locked": {
-        "lastModified": 1677184244,
-        "narHash": "sha256-4wSB38x3c+q1Ag6iCmlPe6x+TND01cC1QkJAJRR6du8=",
-        "owner": "etu",
+        "lastModified": 1677070927,
+        "narHash": "sha256-rAk2/80kLvA3yIMmSV86T1B4kNvwCFMSQ1FxXndaUB0=",
+        "owner": "ncfavier",
         "repo": "nixos-hardware",
-        "rev": "3ece55965e7d9ed0740eb12e9ff4dee55cfc7153",
+        "rev": "fb4ff6250eaff6e82eb13ad7fe705a45c24390dd",
         "type": "github"
       },
       "original": {
-        "owner": "etu",
-        "ref": "remove-rtw89-firmware",
+        "owner": "ncfavier",
+        "ref": "remove-rtw89",
         "repo": "nixos-hardware",
         "type": "github"
       }

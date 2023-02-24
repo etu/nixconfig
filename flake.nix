@@ -17,7 +17,7 @@
     deploy-rs.inputs.utils.follows = "flake-utils";
 
     # Import nixos hardware quirks settings
-    nixos-hardware.url = "github:etu/nixos-hardware/remove-rtw89-firmware";
+    nixos-hardware.url = "github:ncfavier/nixos-hardware/remove-rtw89";
 
     # Import impermanence modules for peristence
     impermanence.url = "github:nix-community/impermanence";
