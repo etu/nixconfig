@@ -48,7 +48,7 @@
       ];
     };
     zwavejs2mqtt = {
-      image = "zwavejs/zwavejs2mqtt:8.8.6";
+      image = "zwavejs/zwavejs2mqtt:8.9.0";
       ports = [
         "3000:3000"
         # "8091:8091" # Admin interface port
