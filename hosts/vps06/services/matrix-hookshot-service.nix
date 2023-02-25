@@ -225,6 +225,7 @@ in {
       serviceConfig = {
         User = "matrix-hookshot";
         Group = "matrix-hookshot";
+        StateDirectory = "matrix-hookshot";
         WorkingDirectory = "/var/lib/matrix-hookshot";
 
         # Add permissions to chown the registration file
@@ -233,11 +234,10 @@ in {
       };
     };
     users.users.matrix-hookshot = {
-      uid = 979;
       group = "matrix-hookshot";
       home = "/var/lib/matrix-hookshot";
       isSystemUser = true;
     };
-    users.groups.matrix-hookshot.gid = 979;
+    users.groups.matrix-hookshot = {};
   };
 }
