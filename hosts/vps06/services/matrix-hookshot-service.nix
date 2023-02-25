@@ -5,6 +5,53 @@
   ...
 }: let
   cfg = config.services.matrix-hookshot;
+
+  # Config file paths
+  registrationFilePath = "/var/lib/matrix-hookshot/registration.yaml";
+  configFilePath = "/var/lib/matrix-hookshot/config.yaml";
+  passKeyFilePath = "/var/lib/matrix-hookshot/passkey.pem";
+
+  # registration.yml file contents
+  registrationJson = {
+    url = cfg.registration.registrationUrl;
+    # This is a trick to shell out to pwgen in the shell script
+    # to generate these three identifiers. Then we have shell
+    # script safeguards to restore the previously set values on
+    # updates.
+    id = "'$(${pkgs.pwgen}/bin/pwgen -s 64 -c 1)'";
+    as_token = "'$(${pkgs.pwgen}/bin/pwgen -s 64 -c 1)'";
+    hs_token = "'$(${pkgs.pwgen}/bin/pwgen -s 64 -c 1)'";
+    sender_localpart = cfg.registration.localpart;
+    namespaces = cfg.registration.namespaces;
+  };
+
+  # config.yml file contents
+  configJson = {
+    # Basic homeserver configuration.
+    bridge =
+      {
+        port = cfg.registration.port;
+      }
+      // cfg.config.bridge;
+
+    # Path to a passkey used to encrypt tokens stored inside the bridge.
+    passFile = passKeyFilePath;
+
+    # Support for generic webhook events.
+    generic = cfg.config.generic;
+
+    # Logging settings.
+    logging = cfg.config.logging;
+
+    # Prometheus metrics support.
+    metrics = cfg.config.metrics;
+
+    # Permissions for using the bridge.
+    permissions = cfg.config.permissions;
+
+    # HTTP Listener configuration
+    listeners = cfg.config.listeners;
+  };
 in {
   options.services.matrix-hookshot = {
     enable = lib.mkEnableOption (lib.mdDoc "the Matrix webhook integration");
@@ -128,57 +175,13 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    systemd.services.matrix-hookshot = let
-      registrationFilePath = "/var/lib/matrix-hookshot/registration.yaml";
-      configFilePath = "/var/lib/matrix-hookshot/config.yaml";
-      passKeyFilePath = "/var/lib/matrix-hookshot/passkey.pem";
-    in {
+    systemd.services.matrix-hookshot = {
       description = "Matrix-hookshot bridge";
       before = ["matrix-synapse.service"]; # So the registration can be used by Synapse
       wantedBy = ["multi-user.target"];
       after = ["network.target"];
 
-      preStart = let
-        registrationJson = {
-          url = cfg.registration.registrationUrl;
-          # This is a trick to shell out to pwgen in the shell script
-          # to generate these three identifiers. Then we have shell
-          # script safeguards to restore the previously set values on
-          # updates.
-          id = "'$(${pkgs.pwgen}/bin/pwgen -s 64 -c 1)'";
-          as_token = "'$(${pkgs.pwgen}/bin/pwgen -s 64 -c 1)'";
-          hs_token = "'$(${pkgs.pwgen}/bin/pwgen -s 64 -c 1)'";
-          sender_localpart = cfg.registration.localpart;
-          namespaces = cfg.registration.namespaces;
-        };
-
-        configJson = {
-          # Basic homeserver configuration.
-          bridge =
-            {
-              port = cfg.registration.port;
-            }
-            // cfg.config.bridge;
-
-          # Path to a passkey used to encrypt tokens stored inside the bridge.
-          passFile = passKeyFilePath;
-
-          # Support for generic webhook events.
-          generic = cfg.config.generic;
-
-          # Logging settings.
-          logging = cfg.config.logging;
-
-          # Prometheus metrics support.
-          metrics = cfg.config.metrics;
-
-          # Permissions for using the bridge.
-          permissions = cfg.config.permissions;
-
-          # HTTP Listener configuration
-          listeners = cfg.config.listeners;
-        };
-      in ''
+      preStart = ''
         umask 077
 
         # Generate key for encrypting things
@@ -233,11 +236,12 @@ in {
         AmbientCapabilities = ["CAP_CHOWN"];
       };
     };
+
+    users.groups.matrix-hookshot = {};
     users.users.matrix-hookshot = {
       group = "matrix-hookshot";
       home = "/var/lib/matrix-hookshot";
       isSystemUser = true;
     };
-    users.groups.matrix-hookshot = {};
   };
 }
