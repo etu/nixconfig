@@ -51,10 +51,6 @@
     via-elis-nu.url = "github:etu/via.elis.nu";
     via-elis-nu.inputs.flake-utils.follows = "flake-utils";
 
-    # Import my NUR packages that aren't part of NUR yet
-    etu-nur.url = "github:etu/nur-packages";
-    etu-nur.inputs.nixpkgs.follows = "nixpkgs";
-
     # Import NUR
     nur.url = "nur";
   };
@@ -96,7 +92,6 @@
 
         specialArgs =
           {
-            inherit (inputs.etu-nur.packages.${system}) chalet firefox-extension-elasticvue firefox-extension-streetpass-for-mastodon font-etuvetica font-talyznewroman g90updatefw llr mkvcleaner;
             inherit (intelephense.nodejs-14_x.pkgs) intelephense;
             inherit (self.packages.${system}) swayWallpaper;
             inherit myData;

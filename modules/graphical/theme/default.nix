@@ -1,7 +1,5 @@
 {
   config,
-  font-etuvetica,
-  font-talyznewroman,
   lib,
   pkgs,
   ...
@@ -50,8 +48,8 @@
       # noticable in Firefox UI elements).
       pkgs.cantarell-fonts
 
-      font-etuvetica # My own font
-      font-talyznewroman # Install talyz's font
+      config.nur.repos.etu.font-etuvetica # My own font
+      config.nur.repos.etu.font-talyznewroman # Install talyz's font
     ];
 
     # If my user exists, enable home-manager configurations

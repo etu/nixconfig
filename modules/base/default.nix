@@ -1,8 +1,6 @@
 {
   config,
   lib,
-  llr,
-  mkvcleaner,
   pkgs,
   ...
 }: {
@@ -94,8 +92,8 @@
       pkgs.speedtest-cli # Speedtest command line util
 
       # Own tools:
-      llr # llr, tool to cut long lines
-      mkvcleaner # mkvcleaner, clean video files from unwanted tracks
+      config.nur.repos.etu.llr # llr, tool to cut long lines
+      config.nur.repos.etu.mkvcleaner # mkvcleaner, clean video files from unwanted tracks
 
       # Networking tools
       pkgs.dnsutils # dig etc

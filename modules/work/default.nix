@@ -1,6 +1,5 @@
 {
   config,
-  chalet,
   lib,
   pkgs,
   ...
@@ -35,7 +34,7 @@
 
     etu.user.extraUserPackages = [
       # Install chalet to manage running of containers
-      chalet
+      config.nur.repos.etu.chalet
 
       # Install make
       pkgs.gnumake

@@ -89,26 +89,6 @@
         "type": "indirect"
       }
     },
-    "etu-nur": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1677186952,
-        "narHash": "sha256-GfozD/spoJPLkHQC37N/kD0ysAf+zD7hcBredSkg+9I=",
-        "owner": "etu",
-        "repo": "nur-packages",
-        "rev": "87912a1d36349662a8ddc633a6864f9a4e4647fd",
-        "type": "github"
-      },
-      "original": {
-        "owner": "etu",
-        "repo": "nur-packages",
-        "type": "github"
-      }
-    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -286,11 +266,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1677308535,
-        "narHash": "sha256-66BgZxZ+MnxouwGRd0K9ue1G70r8jyR6l2neuMMiYjs=",
+        "lastModified": 1677424397,
+        "narHash": "sha256-+MK5ELi7j+9Fj/pgkaHcboWf6gZxPpbA75THy3rh34I=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "ab8cd578fc38e3e797eaa98cd392b2f625a0f265",
+        "rev": "ca7607240445b215f079d7d8b59b67bf648b50d6",
         "type": "github"
       },
       "original": {
@@ -303,7 +283,6 @@
         "agenix": "agenix",
         "deploy-rs": "deploy-rs",
         "emacs-overlay": "emacs-overlay",
-        "etu-nur": "etu-nur",
         "flake-utils": "flake-utils",
         "flummbot": "flummbot",
         "home-manager": "home-manager",
