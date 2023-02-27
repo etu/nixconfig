@@ -23,6 +23,7 @@
     # Persist google chrome config directory
     etu.base.zfs.user.directories = [
       ".config/google-chrome"
+      ".config/helm"
     ];
 
     # Allow certain unfree packages.
