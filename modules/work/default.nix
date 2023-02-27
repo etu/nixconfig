@@ -20,10 +20,20 @@
       })
     ];
 
-    # Persist google chrome config directory
+    # Persist directories and files
     etu.base.zfs.user.directories = [
+      ".chalet"
+      ".chef"
+      ".config/Slack"
       ".config/google-chrome"
       ".config/helm"
+      ".config/tvnu"
+      ".vagrant.d"
+    ];
+
+    etu.base.zfs.user.files = [
+      ".docker/config.json"
+      ".kube/config"
     ];
 
     # Allow certain unfree packages.

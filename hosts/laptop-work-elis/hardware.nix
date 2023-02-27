@@ -100,16 +100,7 @@ in {
   };
 
   # Additional work directories
-  etu.base.zfs.user.files = [
-    ".docker/config.json"
-    ".kube/config"
-  ];
   etu.base.zfs.user.directories = [
-    ".chalet"
-    ".chef"
-    ".config/Slack"
-    ".config/tvnu"
-    ".vagrant.d"
     "tvnu"
   ];
 
