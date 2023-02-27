@@ -36,6 +36,9 @@
       # Install chalet to manage running of containers
       config.nur.repos.etu.chalet
 
+      # Install github-markdown-toc to format README TOC's
+      config.nur.repos.etu.github-markdown-toc
+
       # Install make
       pkgs.gnumake
 
