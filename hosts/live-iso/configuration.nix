@@ -35,7 +35,6 @@
     # Fore disable some graphical components unused on the live iso.
     graphical.evolution.enable = lib.mkForce false;
     graphical.gnupg.enable = lib.mkForce false;
-    graphical.matrix.enable = lib.mkForce false;
     graphical.telegram.enable = lib.mkForce false;
 
     # Force disable persistence modules since this system doesn't
