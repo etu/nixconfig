@@ -1,3 +1,17 @@
+#
+# Helpers to format the code
+#
+nix-fmt:
+	@echo "Format nix files"
+	nix fmt .
+
+yaml-fmt:
+	@echo "Format yaml files"
+	nix run nixpkgs#yamllint -- --strict --format github .
+
+#
+# Helpers to update containers
+#
 update-all: update-hass update-zwavejs2mqtt update-mosquitto update-nzbget-exporter
 
 update-hass:
@@ -15,11 +29,3 @@ update-mosquitto:
 update-nzbget-exporter:
 	@echo "Updating to latest nzbget-exporter container"
 	@sed -i -r 's#(frebib/nzbget-exporter):[0-9]+\.[0-9]+\.[0-9]+#\1:'`curl 'https://hub.docker.com/v2/namespaces/frebib/repositories/nzbget-exporter/tags' | jq '.results[1].name' | sed 's/"//g'`'#' hosts/server-main-elis/services/monitoring.nix
-
-nix-fmt:
-	@echo "Format nix files"
-	nix fmt .
-
-yaml-fmt:
-	@echo "Format yaml files"
-	nix run nixpkgs#yamllint -- --strict --format github .
