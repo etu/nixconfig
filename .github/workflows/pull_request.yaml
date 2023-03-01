@@ -48,7 +48,7 @@ jobs:
   check:
     name: Check flake
     runs-on: ubuntu-20.04
-    needs: cache
+    needs: build
     steps:
       - uses: actions/checkout@v3
       - uses: cachix/install-nix-action@v20
