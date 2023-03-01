@@ -1,4 +1,25 @@
 #
+# Helpers to build things
+#
+laptop-private-elis:
+	nom build .#nixosConfigurations.laptop-private-elis.config.system.build.toplevel
+
+laptop-work-elis:
+	nom build .#nixosConfigurations.laptop-work-elis.config.system.build.toplevel
+
+live-iso:
+	nom build .#nixosConfigurations.live-iso.config.system.build.isoImage
+
+server-main-elis:
+	nom build .#nixosConfigurations.server-main-elis.config.system.build.toplevel
+
+vps04:
+	nom build .#nixosConfigurations.vps04.config.system.build.toplevel
+
+vps06:
+	nom build .#nixosConfigurations.vps06.config.system.build.toplevel
+
+#
 # Helpers to format the code
 #
 nix-fmt:
