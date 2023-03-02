@@ -129,6 +129,7 @@
         server-main-elis = mkSystem {name = "server-main-elis";};
         vps04 = mkSystem {name = "vps04";};
         vps06 = mkSystem {name = "vps06";};
+        server-sparv = mkSystem {name = "server-sparv";};
         live-iso = mkSystem {name = "live-iso";};
       };
 
@@ -137,6 +138,10 @@
         server-main-elis = mkDeploy {
           name = "server-main-elis";
           hostname = "home.elis.nu";
+        };
+        server-sparv = mkDeploy {
+          name = "server-sparv";
+          hostname = "sparv.failar.nu";
         };
         vps04 = mkDeploy {
           name = "vps04";

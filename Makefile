@@ -13,6 +13,9 @@ live-iso:
 server-main-elis:
 	nom build .#nixosConfigurations.server-main-elis.config.system.build.toplevel
 
+server-sparv:
+	nom build .#nixosConfigurations.server-sparv.config.system.build.toplevel
+
 vps04:
 	nom build .#nixosConfigurations.vps04.config.system.build.toplevel
 

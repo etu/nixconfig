@@ -118,6 +118,9 @@
       server-main-elis = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJRZYWjxAqloB5MZtxBHkckZhKi+3M1OObzBdyi7La98";
       server-main-elis-initrd = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGii+3fHNc3to81E0kY+W1yvPCnjFoMZxUr+SbH2nx1e root@fenchurch";
 
+      # Sparv server
+      server-sparv = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICHgZaEnCWXVULHjWqgsvf3mQDX20WmWzAagAtHsBEMZ";
+
       # vps04.elis.nu
       vps04 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC/UewM3gYrEFZdaD6zDdP9Vkq1W9gOIXJoBG/ram+Fo";
 

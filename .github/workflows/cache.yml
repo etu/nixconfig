@@ -27,6 +27,7 @@ jobs:
           - laptop-private-elis
           - laptop-work-elis
           - server-main-elis
+          - server-sparv
           - vps04
           - vps06
 

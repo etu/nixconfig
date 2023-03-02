@@ -29,6 +29,10 @@ build machines for the laptops. It's also my primary location to store ZFS
 snapshots that I backup from all of the other systems. It runs home assistant
 and some other things.
 
+**** ~hosts/server-sparv/~
+On location server for [[http://speliarvika.se]], will be used for LAN cache
+among other things.
+
 **** ~hosts/vps04/~
 System for IRC clients and an IRC bot. Nothing else. ZFS snapshots are pulled
 from this system to ~server-main-elis~. Deployed using ~deploy .#vps04~.
