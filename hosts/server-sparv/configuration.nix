@@ -51,4 +51,27 @@
   documentation.doc.enable = false;
   documentation.info.enable = false;
   documentation.man.enable = false;
+
+  # Allow inbound traffic to lancache ports.
+  networking.firewall.allowedTCPPorts = [80 443];
+
+  # Set up docker.
+  virtualisation.docker.enable = true;
+  virtualisation.docker.storageDriver = "zfs";
+
+  # Set up lancache docker container.
+  virtualisation.oci-containers.backend = "docker";
+  virtualisation.oci-containers.containers = {
+    lancache = {
+      image = "lancachenet/monolithic:latest";
+      ports = [
+        "80:80/tcp"
+        "443:443/tcp"
+      ];
+      volumes = [
+        "/media/zstorage/lancache/data:/data/cache"
+        "/media/zstorage/lancache/logs:/data/logs"
+      ];
+    };
+  };
 }
