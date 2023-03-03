@@ -29,6 +29,9 @@
   # Enable ZFS.
   boot.supportedFilesystems = ["zfs"];
 
+  # Enable ZFS scrubbing.
+  services.zfs.autoScrub.enable = true;
+
   fileSystems."/" = {
     device = "zroot/safe/root";
     fsType = "zfs";
