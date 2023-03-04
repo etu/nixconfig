@@ -118,7 +118,7 @@
       }; # END swayidle
 
       # Set up mako, a notification deamon for wayland
-      programs.mako = {
+      services.mako = {
         enable = true;
         backgroundColor = "#191311";
         borderColor = "#3B7C87";
