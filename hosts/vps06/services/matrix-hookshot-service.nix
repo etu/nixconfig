@@ -12,18 +12,8 @@
   passKeyFilePath = "/var/lib/matrix-hookshot/passkey.pem";
 
   # registration.yml file contents
-  registrationJson = {
-    url = cfg.registration.registrationUrl;
-    # This is a trick to shell out to pwgen in the shell script
-    # to generate these three identifiers. Then we have shell
-    # script safeguards to restore the previously set values on
-    # updates.
-    id = "'$(${pkgs.pwgen}/bin/pwgen -s 64 -c 1)'";
-    as_token = "'$(${pkgs.pwgen}/bin/pwgen -s 64 -c 1)'";
-    hs_token = "'$(${pkgs.pwgen}/bin/pwgen -s 64 -c 1)'";
-    sender_localpart = cfg.registration.localpart;
-    namespaces = cfg.registration.namespaces;
-  };
+  registrationFormat = pkgs.formats.yaml {};
+  registrationFile = registrationFormat.generate "matrix-hookshot-registration.yaml" cfg.registration;
 
   # config.yml file contents
   configFormat = pkgs.formats.yaml {};
@@ -32,41 +22,72 @@ in {
   options.services.matrix-hookshot = {
     enable = lib.mkEnableOption (lib.mdDoc "the Matrix webhook integration");
 
-    registration = {
-      port = lib.mkOption {
-        type = lib.types.port;
-        description = lib.mdDoc "The port to listen on";
-        default = 9993;
-      };
-
-      registrationUrl = lib.mkOption {
-        type = lib.types.str;
-        description = lib.mdDoc ''
-          The URL where the application service is listening for homeserver requests,
-          from the Matrix homeserver perspective.
-        '';
-        default = "http://localhost:${toString cfg.registration.port}";
-      };
-
-      localpart = lib.mkOption {
-        type = lib.types.str;
-        description = lib.mdDoc "The user_id localpart to assign to the appservice";
-        default = "hookshot";
-      };
-
-      namespaces = lib.mkOption {
-        type = lib.types.attrs;
-        description = lib.mdDoc "namespaces settings for registration.yml";
-        example = {
-          users = [
-            {
-              exclusive = true;
-              regex = "^@webhook_.*:example.org";
-            }
-          ];
-        };
-      };
+    port = lib.mkOption {
+      type = lib.types.port;
+      description = lib.mdDoc "The port to listen on";
+      default = 9993;
     };
+
+    registration = let
+      default = {
+        id = "GENERATED-ID";
+        as_token = "GENERATED-AS-TOKEN";
+        hs_token = "GENERATED-HS-TOKEN";
+
+        url = "http://localhost:${toString cfg.port}";
+        sender_localpart = "hookshot";
+      };
+    in
+      lib.mkOption {
+        inherit default;
+        inherit (registrationFormat) type;
+        apply = lib.recursiveUpdate default;
+        example = lib.literalExpression ''
+          {
+            namespaces = {
+              rooms = [];
+              users = [
+                {
+                  regex = "@_github_.*:example.org";
+                  exclusive = true;
+                }
+                {
+                  regex = "@_gitlab_.*:example.org";
+                  exclusive = true;
+                }
+                {
+                  regex = "@_jira_.*:example.org";
+                  exclusive = true;
+                }
+                { # Where _webhooks_ is defined as generic.userIdPrefix in config.
+                  regex = "@_webhooks_.*:example.org";
+                  exclusive = true;
+                }
+                { # Where feeds is defined as localpart in servicebots in config.
+                  regex = "@feeds:example.org";
+                  exclusive = true;
+                }
+              ];
+              aliases = [
+                {
+                  regex = "#github_.+:example.org";
+                  exclusive = true;
+                }
+              ];
+            };
+
+            rate_limited = false;
+
+            # If enabling encryption
+            "de.sorunome.msc2409.push_ephemeral" = true;
+            push_ephemeral = true;
+            "org.matrix.msc3202" = true;
+          }
+        '';
+        description =
+          lib.mdDoc ''
+          '';
+      };
 
     config = let
       default = {
@@ -75,7 +96,7 @@ in {
           domain = "example.com";
           url = "http://localhost:8008";
           mediaUrl = "https://example.com";
-          port = cfg.registration.port;
+          port = cfg.port;
           bindAddress = "127.0.0.1";
         };
 
@@ -347,8 +368,13 @@ in {
 
         # Generate registration config file
         if ! [ -f "${registrationFilePath}" ]; then
-          # The easy case: Just write the file.
-          echo '${builtins.toJSON registrationJson}' | ${pkgs.yq}/bin/yq -y > ${registrationFilePath}
+          # Clone the configuration file
+          cat ${registrationFile} > ${registrationFilePath}
+
+          # Generate the secrets in place
+          sed -i 's/GENERATED-ID/'$(${pkgs.pwgen}/bin/pwgen -s 64 -c 1)'/' ${registrationFilePath}
+          sed -i 's/GENERATED-AS-TOKEN/'$(${pkgs.pwgen}/bin/pwgen -s 64 -c 1)'/' ${registrationFilePath}
+          sed -i 's/GENERATED-HS-TOKEN/'$(${pkgs.pwgen}/bin/pwgen -s 64 -c 1)'/' ${registrationFilePath}
         else
           # The tricky case: The file has already been generated.
 
@@ -357,8 +383,8 @@ in {
           hs_token=$(grep "^hs_token:.*$" ${registrationFilePath})
           as_token=$(grep "^as_token:.*$" ${registrationFilePath})
 
-          # Write out registration file.
-          echo '${builtins.toJSON registrationJson}' | ${pkgs.yq}/bin/yq -y > ${registrationFilePath}
+          # Clone the configuration file
+          cat ${registrationFile} > ${registrationFilePath}
 
           # Restore registration config file values.
           ${pkgs.gnused}/bin/sed -i "s/^id:.*$/$id/g" ${registrationFilePath}

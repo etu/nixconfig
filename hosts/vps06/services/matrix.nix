@@ -270,7 +270,7 @@ in {
   services.matrix-hookshot = {
     enable = true;
     registration = {
-      localpart = "_hookshot_";
+      sender_localpart = "_hookshot_";
       namespaces = {
         users = [
           {
