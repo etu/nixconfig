@@ -284,7 +284,6 @@ in {
       bridge.domain = domain;
       bridge.url = "http://localhost:8448";
       bridge.mediaUrl = "https://matrix.${domain}";
-      bridge.bindAddress = "127.0.0.1";
 
       generic.enabled = true;
       generic.urlPrefix = "https://matrix.${domain}/_hookshot/webhook";
@@ -292,8 +291,6 @@ in {
       generic.waitForComplete = false;
       generic.enableHttpGet = false;
       generic.userIdPrefix = "webhook_";
-
-      metrics.enabled = false;
 
       permissions = [
         {
