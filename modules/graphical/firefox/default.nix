@@ -41,12 +41,12 @@
         profiles.default = {
           # Install extensions.
           extensions = [
-            config.nur.repos.etu.firefox-extension-elasticvue
-            config.nur.repos.etu.firefox-extension-streetpass-for-mastodon
             config.nur.repos.rycee.firefox-addons.browserpass
+            config.nur.repos.rycee.firefox-addons.elasticvue
             config.nur.repos.rycee.firefox-addons.multi-account-containers
             config.nur.repos.rycee.firefox-addons.privacy-badger
             config.nur.repos.rycee.firefox-addons.sidebery
+            config.nur.repos.rycee.firefox-addons.streetpass-for-mastodon
             config.nur.repos.rycee.firefox-addons.swedish-dictionary
             config.nur.repos.rycee.firefox-addons.terms-of-service-didnt-read
             config.nur.repos.rycee.firefox-addons.ublock-origin
