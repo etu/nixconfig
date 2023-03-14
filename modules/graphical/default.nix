@@ -5,6 +5,7 @@
   ...
 }: {
   imports = [
+    ./cura
     ./evolution
     ./firefox
     ./gnupg
