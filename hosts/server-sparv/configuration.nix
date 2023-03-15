@@ -54,6 +54,7 @@
 
   # Allow inbound traffic to lancache ports.
   networking.firewall.allowedTCPPorts = [80 443];
+  networking.firewall.allowedUDPPorts = [53];
 
   # Set up docker.
   virtualisation.docker.enable = true;
@@ -72,6 +73,16 @@
         "/media/zstorage/lancache/data:/data/cache"
         "/media/zstorage/lancache/logs:/data/logs"
       ];
+    };
+    lancache-dns = {
+      image = "lancachenet/lancache-dns:latest";
+      ports = [
+        "53:53/udp"
+      ];
+      environment = {
+        LANCACHE_IP = "10.69.0.2";
+        USE_GENERIC_CACHE = "true";
+      };
     };
   };
 }
