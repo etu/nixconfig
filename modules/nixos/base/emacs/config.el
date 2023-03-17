@@ -439,6 +439,26 @@
   :ensure t
   :init (setq geben-temporary-file-directory (concat user-emacs-cache-directory "/geben")))
 
+;; Debugger for PHP
+(use-package dap-mode
+  :ensure t
+  :init (setq dap-php-debug-path "@phpDapExtension@"
+              dap-php-debug-program '("@node@/bin/node" "@phpDapExtension@/extension/phpDebug.js" "--server=9000"))
+  :config (require 'dap-php))
+
+;; I think lsp is needed for dap-mode
+(use-package lsp-mode
+  :ensure t
+  :commands (lsp lsp-deferred)
+  :hook (php-mode . lsp)
+  :init (setq lsp-keymap-prefix "M-l"))
+
+(use-package lsp-ui
+  :ensure t
+  :commands lsp-ui-mode)
+
+(use-package helm-lsp
+  :ensure t)
 
 ;; Direnv
 (use-package direnv
