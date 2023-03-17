@@ -15,6 +15,8 @@
     extraConfig = lib.concatStringsSep "\n\n" config.etu.base.emacs.extraConfig;
     fontname = config.etu.graphical.theme.fonts.monospace;
     fontsize = config.etu.graphical.theme.fonts.size;
+    node = pkgs.nodejs;
+    phpDapExtension = config.nur.repos.etu.vscode-php-debug;
   } "substituteAll ${./config.el} $out";
 
   # Config to wrap loading of the emacs config file.
