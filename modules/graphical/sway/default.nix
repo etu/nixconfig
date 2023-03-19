@@ -48,6 +48,14 @@
       (pkgs.writeShellScriptBin "sway-720pfigure" ''
         ${config.etu.graphical.sway.package}/bin/swaymsg "output * bg ${config.etu.graphical.sway.wallpaperPackage}/720pfigure.jpg fill"
       '')
+
+      # Script to reload environment variables (if used nested sway
+      # session and want chrome screen sharing to read the inner sway)
+      (pkgs.writeShellScriptBin "sway-reload-env" ''
+        ${pkgs.dbus}/bin/dbus-update-activation-environment --systemd WAYLAND_DISPLAY SWAYSOCK
+        ${pkgs.systemd}/bin/systemctl --user restart xdg-desktop-portal.service
+        ${pkgs.systemd}/bin/systemctl --user restart xdg-desktop-portal-wlr.service
+      '')
     ];
 
     programs.sway.enable = true;
