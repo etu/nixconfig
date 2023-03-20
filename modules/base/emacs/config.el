@@ -28,6 +28,7 @@
 (package-initialize)
 
 (require 'use-package)
+(setq use-package-always-defer t)
 
 
 ;;;
@@ -182,11 +183,13 @@
 
 (use-package dracula-theme
   :ensure t
+  :demand t
   :config (load-theme 'dracula t))
 
 
 (use-package telephone-line
   :ensure t
+  :demand t
   :config (telephone-line-mode t))
 
 
