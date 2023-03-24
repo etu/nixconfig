@@ -244,4 +244,161 @@
       "M1TTEN5" = "75e6ab27-5fb1-4fc3-aafb-c6f00c0d98e7";
     };
   };
+
+  # Hacks from the last LAN.
+  systemd.services =
+    let
+      buildVlcChromecast = streamUrl: chromecastIp: port: {
+        description = "Service to start a streaming ${streamUrl} to chromecast ${chromecastIp}";
+        after = [ "network-online.target" ];
+        environment = {
+          DISPLAY = ":0";
+        };
+        preStart = ''
+          echo "Checking for nameservers to appear in /etc/resolv.conf";
+          while ! grep nameserver /etc/resolv.conf > /dev/null; do
+            echo "Waiting for nameservers to appear in /etc/resolv.conf";
+            sleep 1;
+          done
+        '';
+        serviceConfig = {
+          User = "etu";
+          ExecStart = pkgs.writeScript "play.sh" ''
+            #!${pkgs.bash}/bin/sh
+            ${pkgs.vlc}/bin/cvlc ${streamUrl} --sout='#chromecast{ip=${chromecastIp}}' --demux-filter=demux_chromecast --sout-chromecast-http-port ${port}
+          '';
+          TimeoutStopSec = "1";
+        };
+      };
+
+      announce = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"; # Currently rickroll
+      cameraLower = "rtsp://sparv.failar.nu:7447/pbin9NlvEBnzmUGv";
+      cameraUpper = "rtsp://sparv.failar.nu:7447/xiCcyx7QhrlA9xFQ";
+      rickroll = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+      twitchSparv = "$(${pkgs.yt-dlp}/bin/yt-dlp https://www.twitch.tv/speliarvika --get-url)";
+      twitchSpiinken = "$(${pkgs.yt-dlp}/bin/yt-dlp https://www.twitch.tv/spiinken --get-url)";
+    in
+    {
+      # Chromecast the cameras
+      vlc-chromecast-upper = (buildVlcChromecast cameraLower "10.69.0.31" "8010") // {
+        wantedBy = [ "multi-user.target" ];
+      };
+      vlc-chromecast-lower = (buildVlcChromecast cameraUpper "10.69.0.110" "8011") // {
+        wantedBy = [ "multi-user.target" ];
+      };
+
+      # Rickroll
+      vlc-chromecast-rickroll-upper = buildVlcChromecast rickroll "10.69.0.31" "8012";
+      vlc-chromecast-rickroll-lower = buildVlcChromecast rickroll "10.69.0.110" "8013";
+
+      # Announcement
+      vlc-chromecast-announce-upper = buildVlcChromecast announce "10.69.0.31" "8014";
+      vlc-chromecast-announce-lower = buildVlcChromecast announce "10.69.0.110" "8015";
+
+      # Twitch Spiinken
+      vlc-chromecast-twitch-spiinken-upper = buildVlcChromecast twitchSpiinken "10.69.0.31" "8016";
+      vlc-chromecast-twitch-spiinken-lower = buildVlcChromecast twitchSpiinken "10.69.0.110" "8017";
+
+      # Twitch Spiinken
+      vlc-chromecast-twitch-sparv-upper = buildVlcChromecast twitchSparv "10.69.0.31" "8018";
+      vlc-chromecast-twitch-sparv-lower = buildVlcChromecast twitchSparv "10.69.0.110" "8019";
+    };
+
+  # Set up admin interface
+  services.phpfpm.pools."foobar" = {
+    user = "nginx";
+    phpPackage = pkgs.php;
+    settings = {
+      "listen.group" = "nginx";
+      "listen.mode" = "0600";
+      "listen.owner" = "nginx";
+      "pm" = "dynamic";
+      "pm.max_children" = 5;
+      "pm.max_requests" = 500;
+      "pm.max_spare_servers" = 3;
+      "pm.min_spare_servers" = 1;
+      "pm.start_servers" = 2;
+    };
+  };
+
+  security.sudo.extraConfig = "nginx ALL=(ALL) NOPASSWD:ALL";
+
+  # Using nginx for rtmp pushing / proxying may be interesting in the future.
+  # https://github.com/nixcon/nixcon-video-infra/blob/e47f0ecc0a685bad42532241d7d045a75bb20c6f/modules/rtmp-push.nix
+  services.nginx = {
+    enable = true;
+
+    virtualHosts."phpfpm" =
+      let
+        testdir = pkgs.writeTextDir "web/index.php" ''
+          <?php
+          $validServicePrefixes = [
+            'vlc-chromecast' => 'Cameras',
+            'vlc-chromecast-announce' => 'Announces',
+            'vlc-chromecast-rickroll' => 'Rickrolls',
+            'vlc-chromecast-twitch-sparv' => 'Twitch Sparv',
+            'vlc-chromecast-twitch-spiinken' => 'Twitch Spiinken',
+          ];
+          foreach (array_keys($validServicePrefixes) as $validServicePrefix) {
+            if (isset($_GET['play']) && $_GET['play'] === $validServicePrefix) {
+              system("/run/wrappers/bin/sudo ${pkgs.systemd}/bin/systemctl restart ".$validServicePrefix."-upper");
+              system("/run/wrappers/bin/sudo ${pkgs.systemd}/bin/systemctl restart ".$validServicePrefix."-lower");
+              foreach (array_keys($validServicePrefixes) as $validPrefix) {
+                if ($_GET['play'] !== $validPrefix) {
+                  system("/run/wrappers/bin/sudo ${pkgs.systemd}/bin/systemctl stop ".$validPrefix."-upper");
+                  system("/run/wrappers/bin/sudo ${pkgs.systemd}/bin/systemctl stop ".$validPrefix."-lower");
+                }
+              }
+              header('Location: http://sparvar.failar.nu');
+              exit;
+            }
+          }
+          ?>
+          <!DOCTYPE HTML>
+          <html>
+            <head>
+              <title>Sparvar player</title>
+              <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+              <meta charset="UTF-8" />
+              <style>
+                body, html {
+                  background: black;
+                  color: white;
+                }
+                a {
+                  color: lightblue;
+                  font-weight: bold;
+                  padding: 10px;
+                  background: darkblue;
+                  text-decoration: none;
+                  border-radius: 8px;
+                  line-height: 50px;
+                }
+              </style>
+            </head>
+            <body>
+              <h1>Sparv player</h1>
+            <?php
+              foreach ($validServicePrefixes as $service => $name) {
+                echo "<a href='/?play=$service'>Play $name ▶️</a><br/>".PHP_EOL;
+              }
+              ?>
+            </body>
+          </html>
+        '';
+      in
+      {
+        root = "${testdir}/web";
+        locations."~ \\.php$".extraConfig = ''
+          fastcgi_pass unix:${config.services.phpfpm.pools.foobar.socket};
+          fastcgi_index index.php;
+          include ${config.services.nginx.package}/conf/fastcgi_params;
+          include ${pkgs.nginx}/conf/fastcgi.conf;
+        '';
+        locations."/" = {
+          tryFiles = "$uri $uri/ index.php";
+          index = "index.php index.html index.htm";
+        };
+      };
+  };
 }
