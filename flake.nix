@@ -9,7 +9,7 @@
     flake-utils.url = "flake-utils";
 
     # A nixpkgs for intelephense.
-    nixpkgs-intelephense.url = "github:NixOS/nixpkgs/60c1d71f2ba4c80178ec84523c2ca0801522e0a6";
+    nixpkgs-intelephense.url = "github:NixOS/nixpkgs/befc83905c965adfd33e5cae49acb0351f6e0404";
 
     # Import deploy-rs for deployments
     deploy-rs.url = "github:serokell/deploy-rs";
@@ -92,7 +92,7 @@
 
         specialArgs =
           {
-            inherit (intelephense.nodePackages) intelephense;
+            inherit (intelephense.nodejs-14_x.pkgs) intelephense;
             inherit (self.packages.${system}) swayWallpaper;
             inherit myData;
             emacs-overlay = inputs.emacs-overlay.overlay;
