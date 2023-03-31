@@ -10,6 +10,13 @@ laptop-work-elis:
 live-iso:
 	nom build .#nixosConfigurations.live-iso.config.system.build.isoImage
 
+pi-octonix:
+	nom build .#nixosConfigurations.pi-octonix.config.system.build.toplevel
+
+pi-octonix-sd-image:
+	nom build .#nixosConfigurations.pi-octonix.config.system.build.sdImage
+	@echo "sudo dd if=result/sd-image/*.img of=/dev/mmcblk0 bs=16M status=progress; sync"
+
 server-main-elis:
 	nom build .#nixosConfigurations.server-main-elis.config.system.build.toplevel
 

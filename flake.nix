@@ -68,6 +68,16 @@
       config.allowUnfree = true;
     };
 
+    mkArmSystem = {
+      name,
+      extraArgs ? {},
+      extraModules ? [],
+    }:
+      mkSystem {
+        inherit name extraArgs extraModules;
+        system = "aarch64-linux";
+      };
+
     mkSystem = {
       name,
       system ? "x86_64-linux",
@@ -102,10 +112,21 @@
           // extraArgs;
       };
 
+    mkArmDeploy = {
+      name,
+      hostname,
+      sshUser ? "root",
+    }:
+      mkDeploy {
+        inherit name hostname sshUser;
+        system = "aarch64-linux";
+      };
+
     mkDeploy = {
       name,
       hostname,
       sshUser ? "root",
+      system ? "x86_64-linux",
     }: {
       inherit sshUser hostname;
       profiles.system.path = inputs.deploy-rs.lib.${system}.activate.nixos self.nixosConfigurations.${name};
@@ -131,6 +152,7 @@
         vps06 = mkSystem {name = "vps06";};
         server-sparv = mkSystem {name = "server-sparv";};
         live-iso = mkSystem {name = "live-iso";};
+        pi-octonix = mkArmSystem {name = "pi-octonix";};
       };
 
       # Specify deploy-rs deployments
@@ -143,6 +165,10 @@
           name = "server-sparv";
           hostname = "sparv.failar.nu";
         };
+        #pi-octonix = mkArmDeploy {
+        #  name = "pi-octonix";
+        #  hostname = "192.168.1.105";
+        #};
         vps04 = mkDeploy {
           name = "vps04";
           hostname = "vps04.elis.nu";

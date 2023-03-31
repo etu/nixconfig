@@ -48,6 +48,9 @@ live-iso, it can be built locally:
   nix build github:etu/nixconfig#nixosConfigurations.live-iso.config.system.build.isoImage
 #+END_SRC
 
+**** ~hosts/pi-octonix/~
+My Rasperry pi with Octoprint running on NixOS.
+
 *** ~modules/~
 This directory contains a whole bunch of modules that I've come up with to
 make it easier for me to quickly configure multiple systems to do similar
