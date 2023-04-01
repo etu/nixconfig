@@ -68,7 +68,7 @@
 
     # Load password files.
     age.secrets.hashed-etu-password = lib.mkIf config.etu.user.enable myData.ageModules.hashed-etu-password;
-    age.secrets.hashed-root-password = myData.ageModules.hashed-root-password;
+    age.secrets.hashed-root-password = lib.mkIf (!config.etu.user.allowEmptyRootPassword) myData.ageModules.hashed-root-password;
 
     # Define my user account.
     users.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
