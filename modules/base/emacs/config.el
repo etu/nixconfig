@@ -280,6 +280,16 @@
                                      vue-html-extra-indent 2)))))
 
 
+;; SCAD Mode
+(use-package scad-mode
+  :ensure t)
+
+(use-package scad-preview
+  :ensure t
+  :init
+  (setq image-use-external-converter t
+        scad-preview-colorscheme "BeforeDawn"))
+
 ;;;
 ;;; Company mode and backends
 ;;;
