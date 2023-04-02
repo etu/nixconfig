@@ -26,7 +26,7 @@
     development.flipper-zero.enable = true;
     games.enable = false;
     graphical.enable = true;
-    graphical.cura.enable = true;
+    graphical.fdm-printing.enable = true;
     graphical.hamradio.enable = true;
     graphical.signal.enable = true;
     services.syncthing.enable = true;

@@ -5,7 +5,7 @@
   ...
 }: {
   imports = [
-    ./cura
+    ./fdm-printing
     ./evolution
     ./firefox
     ./gnupg
