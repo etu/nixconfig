@@ -29,6 +29,9 @@
   # Enable ZFS.
   boot.supportedFilesystems = ["zfs"];
 
+  # Enable a bigger ARC.
+  boot.kernelParams = ["zfs.zfs_arc_max=32212254720"];
+
   # Enable ZFS scrubbing.
   services.zfs.autoScrub.enable = true;
 
