@@ -80,7 +80,7 @@
         "53:53/udp"
       ];
       environment = {
-        LANCACHE_IP = "10.69.0.2";
+        LANCACHE_IP = "10.69.0.3";
         USE_GENERIC_CACHE = "true";
       };
     };
