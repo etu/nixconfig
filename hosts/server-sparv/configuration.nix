@@ -82,6 +82,7 @@
       environment = {
         LANCACHE_IP = "10.69.0.3";
         USE_GENERIC_CACHE = "true";
+        UPSTREAM_DNS = "1.1.1.2";
       };
     };
   };
