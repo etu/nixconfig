@@ -103,6 +103,7 @@
         specialArgs =
           {
             inherit (intelephense.nodejs-14_x.pkgs) intelephense;
+            inherit (intelephense) chefdk;
             inherit (self.packages.${system}) swayWallpaper;
             inherit myData;
             emacs-overlay = inputs.emacs-overlay.overlay;

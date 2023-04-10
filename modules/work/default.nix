@@ -1,5 +1,6 @@
 {
   config,
+  chefdk,
   lib,
   pkgs,
   ...
@@ -54,7 +55,7 @@
       pkgs.gnumake
 
       # Install chef and vagrant for some legacy systems reasons
-      pkgs.chefdk
+      chefdk
       pkgs.vagrant
 
       # Kubernetes and Docker utils
