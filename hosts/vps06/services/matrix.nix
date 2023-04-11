@@ -263,6 +263,12 @@ in {
         dynamicChannels.aliasTemplate = "#irc_$CHANNEL";
         ircClients.nickTemplate = "$DISPLAY"; # Nick display name: $DISPLAY[m]
         ircClients.allowNickChanges = true;
+
+        # Connect all matrix users in the matrix room to the IRC channel on startup.
+        membershipLists.enabled = true;
+        membershipLists.global.matrixToIrc.initial = true;
+        membershipLists.global.ircToMatrix.initial = true;
+        membershipLists.global.ircToMatrix.requireMatrixJoined = true;
       };
     };
   };
