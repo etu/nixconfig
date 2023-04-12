@@ -40,6 +40,7 @@
           swap = {};
           system = {};
           systemd_units = {};
+          temp = {};
 
           # Collect ZFS metrics
           exec = {
