@@ -25,7 +25,6 @@
     # Import home-manager modules
     home-manager.url = "home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    home-manager.inputs.utils.follows = "flake-utils";
 
     # Import agenix modules
     agenix.url = "github:ryantm/agenix";
