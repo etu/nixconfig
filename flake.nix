@@ -167,7 +167,7 @@
         };
         #pi-octonix = mkArmDeploy {
         #  name = "pi-octonix";
-        #  hostname = "192.168.1.105";
+        #  hostname = "octonix.lan";
         #};
         vps04 = mkDeploy {
           name = "vps04";

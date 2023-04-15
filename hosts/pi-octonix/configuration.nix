@@ -24,7 +24,7 @@
   documentation.man.enable = false;
 
   # Set hostname for system.
-  networking.hostName = "pi-octonix";
+  networking.hostName = "octonix";
 
   # My module settings
   etu = {
@@ -64,7 +64,9 @@
   services.octoprint.enable = true;
   services.octoprint.plugins = plugins:
     with plugins; [
+      bedlevelvisualizer # bed level visualizer
       ender3v2tempfix # should contain fixes for temperature reporting from Creality printers
+      themeify # theme plugin
     ];
 
   # Enable mjpg streamer.
@@ -74,6 +76,17 @@
     inputPlugin = "input_uvc.so -d /dev/video0 -r 640x480";
   };
 
-  # Open port for mjpg streamer.
-  networking.firewall.allowedTCPPorts = [5000 5050];
+  # Set up a proxy in front of octoprint.
+  services.nginx = {
+    enable = true;
+    recommendedProxySettings = true;
+    virtualHosts."octonix.lan" = {
+      default = true;
+      locations."/".proxyPass = "http://127.0.0.1:5000";
+      locations."/".proxyWebsockets = true;
+    };
+  };
+
+  # Open port for nginx.
+  networking.firewall.allowedTCPPorts = [80 5050];
 }
