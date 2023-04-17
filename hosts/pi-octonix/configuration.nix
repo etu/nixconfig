@@ -247,6 +247,12 @@
           "::1/128"
         ];
       };
+
+      # Static configuration of the camera to display in the UI.
+      "webcam camera1" = {
+        stream_url = "/webcam/?action=stream";
+        snapshot_url = "/webcam/?action=snapshot";
+      };
     };
   };
 
