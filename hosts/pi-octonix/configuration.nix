@@ -184,14 +184,15 @@
       # These are aproximate locations for my bed screws to assist in
       # manual bedlevling.
       screws_tilt_adjust = {
-        screw1 = "35, 227";
-        screw1_name = "back left";
-        screw2 = "225, 227";
-        screw2_name = "back right";
-        screw3 = "35, 35";
-        screw3_name = "front left";
-        screw4 = "225, 35";
-        screw4_name = "front right";
+        # Possibly exact screw positions, offsetted by tool position.
+        screw1 = "54.7, 43"; # Position for printer head: X: 34, Y: 36
+        screw1_name = "front left";
+        screw2 = "244.7, 43"; # Position for printer head: X: 224, Y: 36
+        screw2_name = "front right";
+        screw3 = "54.7, 235"; # Position for printer head: X: 34, Y: 228
+        screw3_name = "back left";
+        screw4 = "244.7, 235"; # Position for printer head: X: 224, Y: 228
+        screw4_name = "back right";
       };
 
       # Required settings for fluidd to work properly:
