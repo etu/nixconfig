@@ -261,7 +261,7 @@
 
   # Enable Fluidd as a Web interface for Klipper via moonraker.
   services.fluidd.enable = true;
-  # services.nginx.clientMaxBodySize = "1000m";
+  services.nginx.clientMaxBodySize = "50m"; # Increase max file upload size from 10m
 
   # Expose the ustreamer stream through nginx.
   services.fluidd.nginx.locations."/webcam".extraConfig = ''
