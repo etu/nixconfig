@@ -120,7 +120,9 @@
         control_pin = "PB0";
         x_offset = "-20.7";
         y_offset = "-7";
-        z_offset = "2.4";
+        # 2.4 was suggested preset for bltouch, but I have a crtouch
+        # so it may differ I guess. This works well for me. ¯\_(ツ)_/¯
+        z_offset = "1.67";
         speed = "3.0";
       };
 
