@@ -250,11 +250,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1675942811,
-        "narHash": "sha256-/v4Z9mJmADTpXrdIlAjFa1e+gkpIIROR670UVDQFwIw=",
+        "lastModified": 1681828457,
+        "narHash": "sha256-o4Zvs309HOhrNeVloPKqangcKHobsggVt6GFbnEPZlQ=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "724bfc0892363087709bd3a5a1666296759154b1",
+        "rev": "555daa9d339b3df75e58ee558a4fec98ea92521e",
         "type": "github"
       },
       "original": {
@@ -318,11 +318,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1677701555,
-        "narHash": "sha256-dtHYgdSte8bmrZk9okROq6plEUmwRx1GIp6yoBsSi5I=",
+        "lastModified": 1682008746,
+        "narHash": "sha256-Cac9Wg3JO6BZy1cKy/F3bbofoBjqw/aafAn3+K/oDx8=",
         "owner": "etu",
         "repo": "via.elis.nu",
-        "rev": "b44fced5d722cd27e848438a1da4390e699380ed",
+        "rev": "7a9abd1b9f7b5c438bf8230068a3620ecb1a642a",
         "type": "github"
       },
       "original": {
