@@ -223,12 +223,16 @@
     };
   };
 
+  # Polkit to make moonraker happy.
+  security.polkit.enable = true;
+
   # Expose Klipper API's so they can be used.
   services.moonraker = {
     enable = true;
     # user moonraker doesn't have access to the socket owned by
     # klipper:klipper. There's got to be a better way.
     user = "root";
+    allowSystemControl = true; # Adds polkit rules to manage the system.
     settings = {
       octoprint_compat = {};
       history = {};
