@@ -45,7 +45,7 @@
   etu = {
     stateVersion = "22.11";
 
-    base.emacs.package = "nox";
+    base.emacs.enable = lib.mkForce false;
     base.telegraf.enable = true;
     development.git.enable = true;
     user.enable = true;
