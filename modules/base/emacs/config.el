@@ -538,6 +538,17 @@
   :ensure t
   :bind (("M-C-g" . org-plot/gnuplot)))
 
+
+;; GPTel
+(use-package gptel
+  :ensure t
+  :config
+  (setq gptel-default-mode 'org-mode)
+  (setq-default gptel-api-key
+        (lambda ()
+          (string-trim-right (shell-command-to-string "pass API/openai.com")))))
+
+
 ;;;
 ;;; Load extra config provided from other parts of the nixos
 ;;; configuration rather than hard coded in the main config file.
