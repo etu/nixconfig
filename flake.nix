@@ -5,11 +5,11 @@
     # Main nixpkgs channel
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    # Older nixpkgs for certain things.
+    nixpkgs-22-11.url = "github:NixOS/nixpkgs/nixos-22.11";
+
     # Main flake-utils
     flake-utils.url = "flake-utils";
-
-    # A nixpkgs for intelephense.
-    nixpkgs-intelephense.url = "github:NixOS/nixpkgs/befc83905c965adfd33e5cae49acb0351f6e0404";
 
     # Import deploy-rs for deployments
     deploy-rs.url = "github:serokell/deploy-rs";
@@ -60,12 +60,7 @@
     nixpkgs,
     ...
   } @ inputs: let
-    system = "x86_64-linux";
     myData = import ./data.nix;
-    intelephense = import inputs.nixpkgs-intelephense {
-      inherit system;
-      config.allowUnfree = true;
-    };
 
     mkArmSystem = {
       name,
@@ -82,7 +77,12 @@
       system ? "x86_64-linux",
       extraArgs ? {},
       extraModules ? [],
-    }:
+    }: let
+      pkgs-22-11 = import inputs.nixpkgs-22-11 {
+        inherit system;
+        config.allowUnfree = true;
+      };
+    in
       nixpkgs.lib.nixosSystem {
         inherit system;
 
@@ -101,8 +101,8 @@
 
         specialArgs =
           {
-            inherit (intelephense.nodejs-14_x.pkgs) intelephense;
-            inherit (intelephense) chefdk;
+            inherit (pkgs-22-11.nodejs-14_x.pkgs) intelephense;
+            inherit (pkgs-22-11) chefdk vagrant;
             inherit (self.packages.${system}) swayWallpaper;
             inherit myData;
             emacs-overlay = inputs.emacs-overlay.overlay;
