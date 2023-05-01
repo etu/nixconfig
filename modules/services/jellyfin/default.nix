@@ -70,6 +70,20 @@
     # Enable jellyfin itself
     services.jellyfin.enable = true;
 
+    # Override jellyfin-web used by jellyfin to use an older version
+    # of jellyfin-web to work on my LG TV.
+    services.jellyfin.package = pkgs.jellyfin.override {
+      jellyfin-web = pkgs.jellyfin-web.overrideAttrs (oa: rec {
+        version = "10.8.9";
+        src = pkgs.fetchFromGitHub {
+          owner = "jellyfin";
+          repo = "jellyfin-web";
+          rev = "v${version}";
+          sha256 = "hHZ8HVf8fidd5VPs06kB3/BHBHFxoV3fVObBesqfRJo=";
+        };
+      });
+    };
+
     # Open NGiNX port
     networking.firewall.allowedTCPPorts = [80 443];
   };
