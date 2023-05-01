@@ -22,9 +22,9 @@
 
   services.gitea.enable = true;
   services.gitea.appName = "Elis Git Service";
-  services.gitea.domain = "git.elis.nu";
-  services.gitea.rootUrl = "https://git.elis.nu/";
   services.gitea.database.type = "postgres";
-  services.gitea.settings.session.COOKIE_SECURE = true;
+  services.gitea.settings.server.DOMAIN = "git.elis.nu";
+  services.gitea.settings.server.ROOT_URL = "https://git.elis.nu/";
   services.gitea.settings.service.DISABLE_REGISTRATION = true;
+  services.gitea.settings.session.COOKIE_SECURE = true;
 }
