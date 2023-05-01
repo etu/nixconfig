@@ -54,6 +54,9 @@
       # Install make
       pkgs.gnumake
 
+      # Install git crypt
+      pkgs.git-crypt
+
       # Install chef and vagrant for some legacy systems reasons
       chefdk
       pkgs.vagrant
