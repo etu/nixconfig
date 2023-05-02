@@ -55,8 +55,12 @@
       # Install make
       pkgs.gnumake
 
+      # Install ansible
+      pkgs.ansible_2_12
+
       # Install git crypt
       pkgs.git-crypt
+      pkgs.git-lfs
 
       # Install chef and vagrant for some legacy systems reasons
       chefdk
