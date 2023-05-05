@@ -64,7 +64,7 @@
 
       # Install chef and vagrant for some legacy systems reasons
       chefdk
-      vagrant
+      pkgs.vagrant
 
       # Kubernetes and Docker utils
       pkgs.docker-compose
