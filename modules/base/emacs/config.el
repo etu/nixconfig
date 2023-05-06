@@ -549,6 +549,20 @@
           (string-trim-right (shell-command-to-string "pass API/openai.com")))))
 
 
+;; Copilot.el
+(use-package copilot
+  :commands (copilot-mode)
+  :hook ((nix-mode go-mode lisp-mode) . copilot-mode)
+  :bind (("C-c M-f" . copilot-complete)
+         :map copilot-completion-map
+         ("C-g" . 'copilot-clear-overlay)
+         ("M-p" . 'copilot-previous-completion)
+         ("M-n" . 'copilot-next-completion)
+         ("<tab>" . 'copilot-accept-completion)
+         ("M-f" . 'copilot-accept-completion-by-word)
+         ("M-<return>" . 'copilot-accept-completion-by-line)))
+
+
 ;;;
 ;;; Load extra config provided from other parts of the nixos
 ;;; configuration rather than hard coded in the main config file.

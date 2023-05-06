@@ -54,6 +54,7 @@
     pkgs.nodePackages.typescript-language-server # JS/TS language server
     pkgs.nodePackages.vscode-css-languageserver-bin # CSS/LESS/SASS language server
     pkgs.rnix-lsp # Nix language server
+    pkgs.nodejs # For copilot.el
 
     # Other programs
     pkgs.gnuplot # For use with org mode
@@ -92,11 +93,32 @@
             mkdir -p $out/share/emacs/site-lisp
             cp ${emacsConfigInit} $out/share/emacs/site-lisp/default.el
           '';
+
+          # Install copilot.el
+          copilot = epkgs.trivialBuild {
+            pname = "copilot";
+            version = "2023-04-27";
+
+            packageRequires = with epkgs; [dash editorconfig s];
+
+            preInstall = ''
+              mkdir -p $out/share/emacs/site-lisp
+              cp -vr $src/dist $out/share/emacs/site-lisp
+            '';
+
+            src = pkgs.fetchFromGitHub {
+              owner = "zerolfx";
+              repo = "copilot.el";
+              rev = "7cb7beda89145ccb86a4324860584545ec016552";
+              sha256 = "sha256-57ACMikRzHSwRkFdEn9tx87NlJsWDYEfmg2n2JH8Ig0=";
+            };
+          };
         };
 
       # Extra packages to install
       extraEmacsPackages = epkgs: [
         epkgs.myEmacsConfigInit
+        epkgs.copilot
       ];
     };
 
@@ -154,6 +176,7 @@ in {
 
     # Enable persistence for Emacs.
     etu.base.zfs.user.directories = [
+      ".config/github-copilot"
       ".local/share/emacs"
     ];
   };
