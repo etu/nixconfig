@@ -112,6 +112,9 @@
       # to connect.
       white-list = false;
 
+      # Disable spawn protection.
+      spawn-protection = 0;
+
       # Enable password to allow to connect.
       # enable-rcon = true;
       # "rcon.password" = "hunter2";
