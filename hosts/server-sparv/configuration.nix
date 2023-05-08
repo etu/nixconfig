@@ -37,12 +37,15 @@
     # and just keep the files on /
     base.zfs.enable = lib.mkForce false;
 
+    base.nix.allowUnfree = ["minecraft-server"];
+
     base.emacs.enable = lib.mkForce false;
     base.telegraf.enable = true;
     base.sanoid.datasets = {
       # Enable snapshotting for some filesystems
       "zroot/safe/root".use_template = ["data"];
       "zroot/safe/home".use_template = ["data"];
+      "zroot/local/minecraft".use_template = ["data"]; # Minecraft server
     };
   };
 
@@ -85,5 +88,38 @@
         UPSTREAM_DNS = "1.1.1.2";
       };
     };
+  };
+
+  # Set up a minecraft server
+  services.minecraft-server = {
+    enable = true;
+    eula = true;
+    openFirewall = true;
+    declarative = true;
+
+    serverProperties = {
+      server-port = 25565;
+      motd = "Välkommen till Sparv's Minecraft server!";
+      difficulty = "normal";
+      gamemode = "survival";
+      max-players = 10;
+      snooper-enabled = false;
+
+      enable-command-block = true;
+      online-mode = true;
+
+      # Enable to enable white list "username" = "uuid" to allow users
+      # to connect.
+      white-list = false;
+
+      # Enable password to allow to connect.
+      # enable-rcon = true;
+      # "rcon.password" = "hunter2";
+    };
+
+    # Enable to allow users to connect.
+    # Example:
+    # - "username" = "uuid"
+    # whitelist = {};
   };
 }
