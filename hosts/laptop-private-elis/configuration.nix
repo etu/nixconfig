@@ -25,6 +25,7 @@
     development.enable = true;
     development.flipper-zero.enable = true;
     games.enable = false;
+    games.minecraft.enable = true;
     graphical.enable = true;
     graphical.fdm-printing.enable = true;
     graphical.hamradio.enable = true;
