@@ -29,6 +29,7 @@
     # Import agenix modules
     agenix.url = "github:ryantm/agenix";
     agenix.inputs.nixpkgs.follows = "nixpkgs";
+    agenix.inputs.home-manager.follows = "home-manager";
 
     # Import emacs-overlay
     emacs-overlay.url = "emacs-overlay";
