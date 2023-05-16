@@ -33,16 +33,16 @@
     graphical.enable = true;
 
     # Fore disable some graphical components unused on the live iso.
-    graphical.evolution.enable = lib.mkForce false;
-    graphical.gnupg.enable = lib.mkForce false;
-    graphical.telegram.enable = lib.mkForce false;
+    graphical.evolution.enable = false;
+    graphical.gnupg.enable = false;
+    graphical.telegram.enable = false;
 
     # Force disable persistence modules since this system doesn't
     # use ZFS.
-    base.zfs.enable = lib.mkForce false;
+    base.zfs.enable = false;
 
     # Force disable sanoid modules since this system doesn't use ZFS.
-    base.sanoid.enable = lib.mkForce false;
+    base.sanoid.enable = false;
   };
 
   # Force override root users password to empty string.

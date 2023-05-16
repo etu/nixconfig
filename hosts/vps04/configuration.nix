@@ -33,7 +33,7 @@
   etu = {
     stateVersion = "22.11";
 
-    base.emacs.enable = lib.mkForce false;
+    base.emacs.enable = false; # Disable emacs that is enabled by default.
     base.telegraf.enable = true;
     development.git.enable = true;
     user.enable = true;

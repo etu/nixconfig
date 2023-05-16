@@ -35,11 +35,11 @@
     # We do have a persistent root on this system, I know, it's
     # weird. So here I disable the persstence settings for this system
     # and just keep the files on /
-    base.zfs.enable = lib.mkForce false;
+    base.zfs.enable = false; # Disable emacs that is enabled by default.
 
     base.nix.allowUnfree = ["minecraft-server"];
 
-    base.emacs.enable = lib.mkForce false;
+    base.emacs.enable = false; # Disable emacs that is enabled by default.
     base.telegraf.enable = true;
     base.sanoid.datasets = {
       # Enable snapshotting for some filesystems

@@ -14,9 +14,9 @@
 
   config = lib.mkIf config.etu.development.enable {
     etu = {
-      development.direnv.enable = true;
-      development.git.enable = true;
-      development.php.enable = true;
+      development.direnv.enable = lib.mkDefault true;
+      development.git.enable = lib.mkDefault true;
+      development.php.enable = lib.mkDefault true;
 
       # Define extra groups for user.
       user.extraGroups = ["dialout"];

@@ -34,10 +34,10 @@
     dataPrefix = "/";
 
     # Disable ZFS helpers to avoid persistence weirdness.
-    base.zfs.enable = lib.mkForce false;
+    base.zfs.enable = false;
 
     # Disable Emacs to save some space, won't be used anyways.
-    base.emacs.enable = lib.mkForce false;
+    base.emacs.enable = false;
 
     # Don't set a password for root depending on agenix.
     user.allowEmptyRootPassword = true;

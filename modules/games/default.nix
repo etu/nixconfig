@@ -13,9 +13,9 @@
 
   config = lib.mkIf config.etu.games.enable {
     etu.games = {
-      minecraft.enable = true;
-      mumble.enable = true;
-      steam.enable = true;
+      minecraft.enable = lib.mkDefault true;
+      mumble.enable = lib.mkDefault true;
+      steam.enable = lib.mkDefault true;
     };
   };
 }

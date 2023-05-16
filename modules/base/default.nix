@@ -37,15 +37,15 @@
 
     # Enable base services.
     etu.base = {
-      emacs.enable = true;
-      fish.enable = true;
-      htop.enable = true;
-      tmux.enable = true;
-      nix.enable = true;
-      sshd.enable = true;
-      sanoid.enable = true;
-      spell.enable = true;
-      zfs.enable = true;
+      emacs.enable = lib.mkDefault true;
+      fish.enable = lib.mkDefault true;
+      htop.enable = lib.mkDefault true;
+      tmux.enable = lib.mkDefault true;
+      nix.enable = lib.mkDefault true;
+      sshd.enable = lib.mkDefault true;
+      sanoid.enable = lib.mkDefault true;
+      spell.enable = lib.mkDefault true;
+      zfs.enable = lib.mkDefault true;
     };
 
     # Set your time zone.

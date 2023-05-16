@@ -23,13 +23,13 @@
 
   config = lib.mkIf config.etu.graphical.enable {
     etu = {
-      graphical.evolution.enable = true;
-      graphical.firefox.enable = true;
-      graphical.gnupg.enable = true;
-      graphical.sway.enable = true;
-      graphical.telegram.enable = true;
-      graphical.terminal.enable = true;
-      graphical.theme.enable = true;
+      graphical.evolution.enable = lib.mkDefault true;
+      graphical.firefox.enable = lib.mkDefault true;
+      graphical.gnupg.enable = lib.mkDefault true;
+      graphical.sway.enable = lib.mkDefault true;
+      graphical.telegram.enable = lib.mkDefault true;
+      graphical.terminal.enable = lib.mkDefault true;
+      graphical.theme.enable = lib.mkDefault true;
 
       # Define extra groups for user.
       user.extraGroups = ["networkmanager" "adbusers"];
