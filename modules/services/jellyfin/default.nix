@@ -3,7 +3,13 @@
   lib,
   pkgs,
   ...
-}: {
+}: let
+  # Fetch a specific version of nixpkgs to pin the jellyfin version.
+  jellyfinPkgs = import (builtins.fetchTarball {
+    url = "https://github.com/NixOS/nixpkgs/archive/6ad93a05a3daf6d49a3fda36ac0b9d76d17e683e.tar.gz";
+    sha256 = "1dsmb30v10v63sjn0y76150zw2vflc33mvhn3f82n54i8zx2hzkw";
+  }) {system = "x86_64-linux";};
+in {
   options.etu.services.jellyfin = {
     enable = lib.mkEnableOption "Enable services jellyfin service";
     hostname = lib.mkOption {
@@ -72,17 +78,7 @@
 
     # Override jellyfin-web used by jellyfin to use an older version
     # of jellyfin-web to work on my LG TV.
-    services.jellyfin.package = pkgs.jellyfin.override {
-      jellyfin-web = pkgs.jellyfin-web.overrideAttrs (oa: rec {
-        version = "10.8.9";
-        src = pkgs.fetchFromGitHub {
-          owner = "jellyfin";
-          repo = "jellyfin-web";
-          rev = "v${version}";
-          sha256 = "hHZ8HVf8fidd5VPs06kB3/BHBHFxoV3fVObBesqfRJo=";
-        };
-      });
-    };
+    services.jellyfin.package = jellyfinPkgs.jellyfin;
 
     # Open NGiNX port
     networking.firewall.allowedTCPPorts = [80 443];
