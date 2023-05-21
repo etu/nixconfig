@@ -18,6 +18,13 @@
   # Settings needed for ZFS
   networking.hostId = "27416952";
 
+  # Experimental: Enable a specialisation to test hyprland in.
+  specialisation.hyprland.configuration = {
+    system.nixos.tags = ["hyprland"];
+    etu.graphical.sway.enable = false; # Disable sway
+    etu.graphical.hyprland.enable = true; # Enable hyprland
+  };
+
   # My module settings
   etu = {
     stateVersion = "22.11";
