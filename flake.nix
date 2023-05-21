@@ -30,6 +30,14 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    # Import hyprland module
+    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Import hyprland plugin to make it more like sway
+    hy3.url = "github:outfoxxed/hy3";
+    hy3.inputs.hyprland.follows = "hyprland";
+
     # Import nixos-needtoreboot
     nixos-needtoreboot.url = "github:thefossguy/nixos-needsreboot";
     nixos-needtoreboot.inputs.nixpkgs.follows = "nixpkgs";
@@ -102,6 +110,7 @@
           {
             inherit (pkgs-22-11.nodejs-14_x.pkgs) intelephense;
             inherit (pkgs-22-11) chefdk;
+            inherit (inputs.hy3.packages.${system}) hy3;
             inherit (self.packages.${system}) swayWallpaper;
             inherit myData;
 
