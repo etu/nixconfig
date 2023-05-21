@@ -13,7 +13,7 @@
     services.syncthing.dataDir = "${config.etu.dataPrefix}/home/${config.etu.user.username}";
 
     # Build sync devices depending on hostname.
-    services.syncthing.devices =
+    services.syncthing.settings.devices =
       {}
       // (lib.optionalAttrs (config.networking.hostName == "server-main-elis") {
         "phone".id = "SLIPWI2-MNRK56H-IPDJX4Z-WVFXVP7-M7RJEA2-KXMBQ4T-NSMXLMS-PO5YTQI";
@@ -24,7 +24,7 @@
         "server-main-elis".id = "7B35F77-T3Z5G4M-NB7BNZD-2RFYRLX-7ICVUYT-6CCPW3S-OUKXW4W-UCJQ2QZ";
       });
 
-    services.syncthing.folders = {
+    services.syncthing.settings.folders = {
       "${config.services.syncthing.dataDir}/.dotfiles/skeleton/org/" = {
         # Build devices for this folder depending on hostname.
         devices =
