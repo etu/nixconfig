@@ -103,7 +103,7 @@
         specialArgs =
           {
             inherit (pkgs-22-11.nodejs-14_x.pkgs) intelephense;
-            inherit (pkgs-22-11) chefdk;
+            inherit (pkgs-22-11) chefdk ansible_2_12;
             inherit (self.packages.${system}) swayWallpaper;
             inherit myData;
             emacs-overlay = inputs.emacs-overlay.overlay;
