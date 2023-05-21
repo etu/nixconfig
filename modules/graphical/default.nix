@@ -17,6 +17,7 @@
     ./terminal
     ./theme
     ./virtualbox
+    ./xkb-keymap
   ];
 
   options.etu.graphical.enable = lib.mkEnableOption "Enable graphical settings";

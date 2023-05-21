@@ -18,10 +18,6 @@
       default = "${pkgs.swaylock}/bin/swaylock -f -k -i ${config.etu.graphical.sway.wallpaperPackage}/dark.jpg";
       description = "Lock screen command";
     };
-    xkbKeymap = lib.mkOption {
-      type = lib.types.package;
-      default = pkgs.callPackage ./xkb-keymap.nix {};
-    };
     wallpaperPackage = lib.mkOption {
       type = lib.types.package;
       default = swayWallpaper;
@@ -431,7 +427,7 @@
           ];
 
           # Set a custom keymap
-          input."type:keyboard".xkb_file = toString config.etu.graphical.sway.xkbKeymap;
+          input."type:keyboard".xkb_file = toString config.etu.graphical.xkb-keymap;
 
           # Set wallpaper for all outputs
           output."*".bg = "${config.etu.graphical.sway.wallpaperPackage}/default.jpg fill";
