@@ -10,6 +10,7 @@
     ./flatpak
     ./gnupg
     ./hamradio
+    ./hyprland
     ./signal
     ./spotify
     ./sway
