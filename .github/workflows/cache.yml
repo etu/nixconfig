@@ -9,7 +9,7 @@ name: Cache
 jobs:
   format:
     name: File formatting
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
       - uses: cachix/install-nix-action@v21
@@ -20,7 +20,7 @@ jobs:
 
   cache:
     name: Cache system
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     strategy:
       matrix:
         hostname:
@@ -46,7 +46,7 @@ jobs:
 
   check:
     name: Check flake
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     needs: cache
     steps:
       - uses: actions/checkout@v3

@@ -8,7 +8,7 @@ name: Update
 jobs:
   update:
     name: Update dependencies
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
       - uses: cachix/install-nix-action@v21
@@ -46,7 +46,7 @@ jobs:
 
   cache:
     name: Cache system
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     needs: update
     strategy:
       matrix:
@@ -76,7 +76,7 @@ jobs:
 
   check:
     name: Check flake
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     needs: cache
     steps:
       # Clone the code from the temporary branch
@@ -95,7 +95,7 @@ jobs:
 
   promote:
     name: Promote to main branch
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     needs: check
     steps:
       - uses: actions/checkout@v3
