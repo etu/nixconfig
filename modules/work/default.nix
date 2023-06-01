@@ -18,7 +18,7 @@
             all,
             enabled,
           }:
-            enabled ++ (with all; [imagick memcached redis pcov])
+            enabled ++ (with all; [imagick memcached redis pcov protobuf])
         );
       })
     ];
