@@ -103,9 +103,19 @@
         specialArgs =
           {
             inherit (pkgs-22-11.nodejs-14_x.pkgs) intelephense;
-            inherit (pkgs-22-11) chefdk ansible_2_12;
+            inherit (pkgs-22-11) chefdk;
             inherit (self.packages.${system}) swayWallpaper;
             inherit myData;
+
+            # Customize ansible to add dependencies needed by kubespray.
+            ansible_2_12 = pkgs-22-11.ansible_2_12.overrideAttrs (oa: {
+              propagatedBuildInputs =
+                oa.propagatedBuildInputs
+                ++ [
+                  pkgs-22-11.python310Packages.jmespath
+                ];
+            });
+
             emacs-overlay = inputs.emacs-overlay.overlay;
             emacsWayland = inputs.emacs-overlay.packages.${system}.emacs-pgtk;
             via-elis-nu = inputs.via-elis-nu.packages.${system}.default;
