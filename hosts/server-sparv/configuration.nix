@@ -116,10 +116,7 @@
 
       enable-command-block = true;
       online-mode = true;
-
-      # Enable to enable white list "username" = "uuid" to allow users
-      # to connect.
-      white-list = false;
+      white-list = true;
 
       # Disable spawn protection.
       spawn-protection = 0;
@@ -132,6 +129,16 @@
     # Enable to allow users to connect.
     # Example:
     # - "username" = "uuid"
-    # whitelist = {};
+    whitelist = {
+      "etuetuetu" = "e5520c26-81b6-4683-9ed0-53dc8b5f4d3f";
+      "Angrontyr" = "5a88e4f6-56c1-4f16-93d7-34bd6aea3d74";
+      "PikabooSuprise" = "3357057f-77ee-45b5-a0c5-5f5b303b0e02";
+      "Eiydra" = "47fa8f5f-f7d3-441a-8c12-4306372ee81b";
+      "LightCatcher0_0" = "b1a5906a-2f2e-4a51-b273-2b0e164eafde";
+      "Steelwolf16" = "e0000732-519e-46ac-9d1c-b4b2f460534f";
+      "concate" = "776ddc3d-f182-4b8c-a07e-ae4b355994d8";
+      "ScarletHunter22" = "1cf53c7c-75c3-480a-b91a-8a64fe84a3cc";
+      "Pralin" = "72343c63-2442-4333-8e97-72c98d691905";
+    };
   };
 }
