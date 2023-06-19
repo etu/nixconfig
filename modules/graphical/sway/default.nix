@@ -31,6 +31,7 @@
 
     # Install packages using home manager.
     etu.user.extraUserPackages = [
+      pkgs.bluetuith
       pkgs.evince
       pkgs.gnome.adwaita-icon-theme # Icons for gnome packages that sometimes use them but don't depend on them
       pkgs.pavucontrol
