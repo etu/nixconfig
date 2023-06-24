@@ -23,11 +23,6 @@
       enableACME = true;
       locations."/".proxyPass = "https://elis.nu/";
     };
-    "keys.ix.ufs.se" = {
-      forceSSL = true;
-      enableACME = true;
-      globalRedirect = "keys.proxxi.org";
-    };
     "via.elis.nu" = {
       forceSSL = true;
       enableACME = true;
