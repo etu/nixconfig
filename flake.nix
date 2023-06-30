@@ -8,6 +8,9 @@
     # Older nixpkgs for certain things.
     nixpkgs-22-11.url = "github:NixOS/nixpkgs/nixos-22.11";
 
+    # Pinned nixpkgs for matrix-appservice-irc
+    nixpkgs-matrix-irc.url = "github:NixOS/nixpkgs/aeb69538a6acb8332aa133f1a09515b64bff2fc5";
+
     # Main flake-utils
     flake-utils.url = "flake-utils";
 
@@ -97,6 +100,14 @@
             inputs.impermanence.nixosModules.impermanence
             inputs.ip-failar-nu.nixosModules.${system}.default
             inputs.nur.nixosModules.nur
+
+            ({...}: {
+              nixpkgs.overlays = [
+                (self: super: {
+                  matrix-appservice-irc = (import inputs.nixpkgs-matrix-irc {inherit system;}).matrix-appservice-irc;
+                })
+              ];
+            })
           ]
           ++ extraModules;
 
