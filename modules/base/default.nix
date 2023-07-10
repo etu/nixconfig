@@ -70,6 +70,14 @@
     # Set system state version.
     system.stateVersion = config.etu.stateVersion;
 
+    # Display a diff of installed packages on system activation.
+    system.activationScripts.diff = {
+      supportsDryActivation = true;
+      text = ''
+        ${pkgs.nvd}/bin/nvd --nix-bin-dir=${config.nix.package}/bin diff /run/current-system "$systemConfig"
+      '';
+    };
+
     # Enable doas.
     security.doas.enable = true;
 
