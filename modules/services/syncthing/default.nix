@@ -16,7 +16,7 @@
     services.syncthing.devices =
       {}
       // (lib.optionalAttrs (config.networking.hostName == "server-main-elis") {
-        "phone".id = "SLIPWI2-MNRK56H-IPDJX4Z-WVFXVP7-M7RJEA2-KXMBQ4T-NSMXLMS-PO5YTQI";
+        "phone".id = "6LAUOGD-LGAXEGF-NY56V6I-UYK5TSD-JBF736P-LUGZ32K-AFUAUOT-PRXPTAL";
         "laptop-private-elis".id = "UPEWGIE-2OWALFY-REH7UKU-2Q6IZ5L-KJWCSUV-R7GNAYH-YPZAZ3C-CKNTIAU";
         "laptop-work-elis".id = "KFDW47A-EYYMH33-EDW3JRN-DAKY3UT-7JJOYNK-PLHY3CG-5IMTEJE-OJXRTQK";
       })
