@@ -65,7 +65,7 @@
 
   # Roll back certain filesystems to empty state on boot
   boot.initrd.postDeviceCommands = lib.mkAfter ''
-    zfs rollback -r zroot/local/var-lib-nzbget-dst@empty
+    zfs rollback -r zroot/local/var-lib-sabnzbd-dst@empty
   '';
 
   # Enable ZFS.
@@ -103,8 +103,8 @@
     fsType = "zfs";
   };
 
-  fileSystems."/var/lib/nzbget-dst" = {
-    device = "zroot/local/var-lib-nzbget-dst";
+  fileSystems."${config.etu.dataPrefix}/var/lib/sabnzbd/Downloads" = {
+    device = "zroot/local/var-lib-sabnzbd-dst";
     fsType = "zfs";
   };
 
