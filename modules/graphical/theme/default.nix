@@ -30,7 +30,7 @@
 
   config = lib.mkIf config.etu.graphical.enable {
     # Set up default fonts
-    fonts.enableDefaultFonts = true;
+    fonts.enableDefaultPackages = true;
     fonts.enableGhostscriptFonts = true;
 
     # Configure fontconfig to actually use more of Noto Color Emoji in
@@ -41,7 +41,7 @@
     ];
 
     # Install some extra fonts.
-    fonts.fonts = [
+    fonts.packages = [
       pkgs.jetbrains-mono
 
       # Cantarell fonts seems to be used by GTK applications (was mostly

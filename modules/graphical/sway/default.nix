@@ -64,7 +64,7 @@
     };
 
     # Install fonts needed for waybar
-    fonts.fonts = [pkgs.font-awesome];
+    fonts.packages = [pkgs.font-awesome];
 
     # Enable the X11 windowing system (for the loginmanager).
     services.xserver.enable = true;

@@ -162,7 +162,7 @@ in {
     };
 
     # Install emacs icons symbols if we have any kind of graphical emacs
-    fonts.fonts = lib.mkIf (config.etu.base.emacs.package != "nox") [
+    fonts.packages = lib.mkIf (config.etu.base.emacs.package != "nox") [
       pkgs.emacs-all-the-icons-fonts
     ];
 
