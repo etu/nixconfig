@@ -166,10 +166,7 @@
         laptop-work-elis = mkSystem {
           name = "laptop-work-elis";
           extraModules = [
-            # TODO: Restore this before starting work after vacation
-            # Temporary to ignore this error:
-            # error: rtw89-firmware has been removed because linux-firmware now contains it.
-            # inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14s-amd-gen1
+            inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14s-amd-gen1
           ];
         };
         server-main-elis = mkSystem {name = "server-main-elis";};
