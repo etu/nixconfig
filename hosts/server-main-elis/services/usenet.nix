@@ -27,6 +27,7 @@
               <li><a href="/sonarr">Sonarr (Series)</a></li>
               <li><a href="/radarr">Radarr (Movies)</a></li>
               <li><a href="/lidarr">Lidarr (Music)</a></li>
+              <li><a href="/nzbget">NzbGet</a></li>
               <li><a href="/sabnzbd">Sabnzbd</a></li>
             </ul>
           </body>
@@ -49,6 +50,17 @@
     "/lidarr" = {
       proxyPass = "http://127.0.0.1:8686/lidarr";
       extraConfig = onlyLan;
+    };
+    "~ ^/nzbget($|./*)" = {
+      proxyPass = "http://127.0.0.1:6789";
+      extraConfig =
+        onlyLan
+        + ''
+          rewrite /nzbget/(.*) /$1 break;
+          proxy_set_header Host $host;
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        '';
     };
     "/sabnzbd" = {
       proxyPass = "http://127.0.0.1:8080/sabnzbd";
@@ -96,6 +108,11 @@
         user = "downloads";
         group = "downloads";
       };
+      services.nzbget = {
+        enable = true;
+        user = "downloads";
+        group = "downloads";
+      };
       services.sabnzbd = {
         enable = true;
         user = "downloads";
@@ -129,6 +146,16 @@
       lidarr = {
         mountPoint = "/var/lib/lidarr/.config/Lidarr";
         hostPath = "${config.etu.dataPrefix}/var/lib/lidarr";
+        isReadOnly = false;
+      };
+      nzbget = {
+        mountPoint = "/var/lib/nzbget";
+        hostPath = "${config.etu.dataPrefix}/var/lib/nzbget";
+        isReadOnly = false;
+      };
+      nzbget-dst = {
+        mountPoint = "/var/lib/nzbget-dst";
+        hostPath = "/var/lib/nzbget-dst";
         isReadOnly = false;
       };
       sabnzbd = {
