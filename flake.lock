@@ -252,22 +252,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-matrix-irc": {
-      "locked": {
-        "lastModified": 1685466732,
-        "narHash": "sha256-8vb/Z3c7eQ6PxLVDcS4Kb3yc7mihiTA6aDwBiy8UkrY=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "aeb69538a6acb8332aa133f1a09515b64bff2fc5",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "aeb69538a6acb8332aa133f1a09515b64bff2fc5",
-        "type": "github"
-      }
-    },
     "nixpkgs-stable": {
       "locked": {
         "lastModified": 1690630041,
@@ -327,7 +311,6 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
         "nixpkgs-22-11": "nixpkgs-22-11",
-        "nixpkgs-matrix-irc": "nixpkgs-matrix-irc",
         "nur": "nur",
         "via-elis-nu": "via-elis-nu"
       }

@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }: let
   domain = "failar.nu";
@@ -243,6 +244,10 @@ in {
       ];
     };
   };
+
+  # Hack to make the pre-start script not fail due to calling system
+  # calls it's not allowed to call.
+  systemd.services.matrix-appservice-irc.serviceConfig.SystemCallFilter = lib.mkForce "";
 
   services.matrix-appservice-irc = {
     enable = true;
