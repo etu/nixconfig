@@ -14,6 +14,7 @@
     ./sanoid
     ./syncoid
     ./spell
+    ./tailscale
     ./telegraf
     ./zfs
   ];
@@ -45,6 +46,7 @@
       sshd.enable = lib.mkDefault true;
       sanoid.enable = lib.mkDefault true;
       spell.enable = lib.mkDefault true;
+      tailscale.enable = lib.mkDefault true;
       zfs.enable = lib.mkDefault true;
     };
 
