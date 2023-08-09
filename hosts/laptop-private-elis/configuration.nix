@@ -31,6 +31,7 @@
     graphical.hamradio.enable = true;
     graphical.signal.enable = true;
     services.syncthing.enable = true;
+    services.netdata.enable = true;
     user.enable = true;
     user.extraGroups = ["video" "docker" "libvirtd"];
 

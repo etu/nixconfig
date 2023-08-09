@@ -47,6 +47,7 @@
       # Enable snapshotting for some filesystems
       "zroot/safe/data".use_template = ["data"];
     };
+    services.netdata.enable = true;
   };
 
   # Disable documentation to make the system smaller.

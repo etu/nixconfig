@@ -44,6 +44,7 @@
       "zroot/safe/data".use_template = ["data"];
       "zroot/safe/home".use_template = ["home"];
     };
+    services.netdata.enable = true;
   };
 
   # Disable documentation to make the system smaller.

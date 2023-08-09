@@ -47,6 +47,7 @@
       "zroot/safe/home".use_template = ["data"];
       "zroot/local/minecraft".use_template = ["data"]; # Minecraft server
     };
+    services.netdata.enable = true;
   };
 
   # Disable documentation to make the system smaller.

@@ -4,6 +4,10 @@
     cloudflare-api-env.file = ./secrets/server-main-elis/cloudflare-api-env.age;
     hashed-etu-password.file = ./secrets/any/hashed-etu-password-file.age;
     hashed-root-password.file = ./secrets/any/hashed-root-password-file.age;
+    netdata-claim-token-file = {
+      file = ./secrets/any/netdata-claim-token-file.age;
+      owner = "netdata";
+    };
     hashed-ozeloten-password.file = ./secrets/vps04/hashed-ozeloten-password-file.age;
     telegraf-env = {
       file = ./secrets/any/telegraf-env.age;
