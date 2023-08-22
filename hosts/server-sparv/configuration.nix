@@ -98,15 +98,6 @@
     openFirewall = true;
     declarative = true;
 
-    # Override with the new version.
-    package = pkgs.minecraft-server.overrideAttrs (oa: {
-      version = "1.20.1";
-      src = pkgs.fetchurl {
-        url = "https://piston-data.mojang.com/v1/objects/84194a2f286ef7c14ed7ce0090dba59902951553/server.jar";
-        sha1 = "84194a2f286ef7c14ed7ce0090dba59902951553";
-      };
-    });
-
     serverProperties = {
       server-port = 25565;
       motd = "Välkommen till Sparv's Minecraft server!";
