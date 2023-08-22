@@ -209,6 +209,12 @@
           # Install nix-output-monitor for nice build commands
           pkgs.nix-output-monitor
 
+          # Linters
+          pkgs.deadnix
+          pkgs.statix
+          pkgs.yamllint
+
+          # Secrets managing
           inputs.agenix.packages.${system}.agenix
           inputs.deploy-rs.packages.${system}.deploy-rs
         ];
