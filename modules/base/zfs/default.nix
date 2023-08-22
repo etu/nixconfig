@@ -26,7 +26,7 @@
   config = lib.mkIf config.etu.base.zfs.enable {
     environment.persistence.${config.etu.dataPrefix} = {
       # System persistence
-      directories = config.etu.base.zfs.system.directories;
+      inherit (config.etu.base.zfs.system) directories;
       files =
         [
           "/etc/machine-id"
@@ -35,15 +35,15 @@
 
       # Root user persistence
       users.root = {
-        home = config.users.users.root.home;
-        directories = config.etu.base.zfs.root.directories;
-        files = config.etu.base.zfs.root.files;
+        inherit (config.users.users.root) home;
+        inherit (config.etu.base.zfs.root) directories;
+        inherit (config.etu.base.zfs.root) files;
       };
 
       # My user persistence
       users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
-        directories = config.etu.base.zfs.user.directories;
-        files = config.etu.base.zfs.user.files;
+        inherit (config.etu.base.zfs.user) directories;
+        inherit (config.etu.base.zfs.user) files;
       };
     };
   };

@@ -36,7 +36,7 @@
       # Install my defined firefox package
       programs.firefox = {
         enable = true;
-        package = config.etu.graphical.firefox.package;
+        inherit (config.etu.graphical.firefox) package;
 
         profiles.default = {
           # Install extensions.

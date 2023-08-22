@@ -17,7 +17,7 @@
       enable = true;
       interval = "*-*-* *:00,15,30,45:00";
 
-      datasets = config.etu.base.sanoid.datasets;
+      inherit (config.etu.base.sanoid) datasets;
 
       # Home snapshotting rules
       templates.home = {

@@ -1,4 +1,4 @@
-{...}: {
+_: {
   etu.base.zfs.system.directories = [
     # Persistence of gitea data.
     "/var/lib/gitea"

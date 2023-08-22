@@ -96,7 +96,7 @@ in {
           domain = "example.com";
           url = "http://localhost:8008";
           mediaUrl = "https://example.com";
-          port = cfg.port;
+          inherit (cfg) port;
           bindAddress = "127.0.0.1";
         };
 

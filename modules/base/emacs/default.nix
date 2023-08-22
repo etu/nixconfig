@@ -10,7 +10,7 @@
   # Run my config trough substituteAll to replace font names from my
   # system font settings.
   emacsConfig = pkgs.runCommand "config.el" {
-    dataPrefix = config.etu.dataPrefix;
+    inherit (config.etu) dataPrefix;
     extraConfig = lib.concatStringsSep "\n\n" config.etu.base.emacs.extraConfig;
     fontname = config.etu.graphical.theme.fonts.monospace;
     fontsize = config.etu.graphical.theme.fonts.size;

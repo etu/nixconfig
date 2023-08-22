@@ -18,7 +18,7 @@
       interval = "*-*-* *:15:00";
       commonArgs = ["--no-sync-snap"];
       sshKey = "/var/lib/syncoid/.ssh/id_ed25519";
-      commands = config.etu.base.syncoid.commands;
+      inherit (config.etu.base.syncoid) commands;
     };
   };
 }

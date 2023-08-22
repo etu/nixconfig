@@ -1,4 +1,4 @@
-{...}: {
+_: {
   #buildSvtPlayService = svtSlug: {
   #  description = "${svtSlug} updater";
   #  after = ["network-online.target"];

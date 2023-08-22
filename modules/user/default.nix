@@ -77,7 +77,7 @@
       passwordFile = config.age.secrets.hashed-etu-password.path;
       isNormalUser = true;
       openssh.authorizedKeys.keys = myData.pubkeys.etu.computers ++ config.etu.user.extraAuthorizedKeys;
-      uid = config.etu.user.uid;
+      inherit (config.etu.user) uid;
     };
 
     # Define password, authorized keys and shell for root user.
@@ -97,7 +97,7 @@
 
         "bin/restow".source =
           pkgs.runCommand "restow" {
-            dataPrefix = config.etu.dataPrefix;
+            inherit (config.etu) dataPrefix;
           } ''
             substituteAll ${../dotfiles/bin/restow} $out
             chmod +x $out
