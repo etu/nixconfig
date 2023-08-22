@@ -75,6 +75,25 @@ jobs:
       - name: Build system derivation
         run: 'nix build .#nixosConfigurations.${{ matrix.hostname }}.config.system.build.toplevel'
 
+  cache-shell:
+    name: Cache nix shell
+    runs-on: ubuntu-22.04
+    needs: update
+    steps:
+      # Clone the code from the temporary branch
+      - uses: actions/checkout@v3
+        with:
+          ref: tmp-updater-branch
+      - uses: cachix/install-nix-action@v22
+      - uses: cachix/cachix-action@v12
+        with:
+          name: etu
+          extraPullNames: 'nix-community'
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+
+      - name: Check the flake
+        run: 'nix build .#devShells.x86_64-linux.default'
+
   check:
     name: Check flake
     runs-on: ubuntu-22.04
