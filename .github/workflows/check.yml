@@ -14,9 +14,13 @@ jobs:
       - uses: actions/checkout@v3
       - uses: cachix/install-nix-action@v22
       - name: Check nix file formatting
-        run: 'nix fmt . -- --exclude ./packages/chalet-init/chalet --check'
+        run: 'nix fmt . -- --check'
       - name: Check yaml file formatting
         run: 'nix run nixpkgs#yamllint -- --strict --format github .'
+      - name: Check deadnix file formatting
+        run: 'nix run nixpkgs#deadnix -- hosts/ modules/ packages/'
+      - name: Check statix file formatting
+        run: 'nix run nixpkgs#statix -- check'
 
   check:
     name: Check flake
