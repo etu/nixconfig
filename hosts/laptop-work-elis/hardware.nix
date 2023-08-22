@@ -4,10 +4,7 @@
   modulesPath,
   pkgs,
   ...
-}: let
-  # Load sources
-  sources = import ../../nix/sources.nix;
-in {
+}: {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];

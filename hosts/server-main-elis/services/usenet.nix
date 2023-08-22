@@ -71,11 +71,7 @@
   # Enable usenet related services in a container
   containers.usenet = {
     autoStart = true;
-    config = {
-      lib,
-      pkgs,
-      ...
-    }: {
+    config = {lib, ...}: {
       # The NixOS release to be compatible with for stateful data such as databases.
       system.stateVersion = config.etu.stateVersion;
 

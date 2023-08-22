@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{config, ...}: {
   # Make sure to have NGiNX enabled
   services.nginx.enable = true;
   services.nginx.virtualHosts."hass.elis.nu" = {

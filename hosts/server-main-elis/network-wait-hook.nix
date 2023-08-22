@@ -1,8 +1,4 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{config, ...}: let
   preStart = ''
     echo "Checking for nameservers to appear in /etc/resolv.conf";
     while ! grep nameserver /etc/resolv.conf > /dev/null; do

@@ -4,7 +4,6 @@
 {
   config,
   myData,
-  pkgs,
   ...
 }: {
   imports = [

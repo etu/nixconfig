@@ -1,8 +1,4 @@
-{
-  pkgs,
-  via-elis-nu,
-  ...
-}: {
+{via-elis-nu, ...}: {
   # Enable the ip-failar-nu service
   services.ip-failar-nu.enable = true;
 

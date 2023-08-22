@@ -1,7 +1,6 @@
 {
   stdenv,
   graphicsmagick,
-  runCommand,
   sunpaper,
 }: let
   # Upper left corner of rectangle.

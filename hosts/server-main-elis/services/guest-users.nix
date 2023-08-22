@@ -1,9 +1,4 @@
-{
-  config,
-  myData,
-  pkgs,
-  ...
-}: let
+{myData, ...}: let
   # home / chroot path
   path = "/home/guests";
 in {

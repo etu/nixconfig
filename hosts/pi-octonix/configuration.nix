@@ -1,14 +1,7 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{
-  config,
-  lib,
-  pkgs,
-  myData,
-  modulesPath,
-  ...
-}: {
+{modulesPath, ...}: {
   imports = [
     # Import bootloader and related settings for aarch64
     (modulesPath + "/installer/sd-card/sd-image-aarch64.nix")

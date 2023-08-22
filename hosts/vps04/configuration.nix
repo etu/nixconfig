@@ -66,7 +66,7 @@
 
     # Install weechat with weechat-matrix
     (pkgs.weechat.override {
-      configure = {availablePlugins, ...}: {
+      configure = {...}: {
         scripts = [pkgs.weechatScripts.weechat-matrix];
       };
     })

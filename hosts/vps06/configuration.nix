@@ -5,7 +5,6 @@
   config,
   lib,
   myData,
-  pkgs,
   ...
 }: {
   imports = [
