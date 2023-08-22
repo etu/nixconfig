@@ -118,7 +118,7 @@
 
             emacs-overlay = inputs.emacs-overlay.overlay;
             emacsWayland = inputs.emacs-overlay.packages.${system}.emacs-pgtk;
-            via-elis-nu = inputs.via-elis-nu.packages.${system}.default;
+            via-elis-nu = inputs.via-elis-nu.packages.${system}.website;
           }
           // extraArgs;
       };
