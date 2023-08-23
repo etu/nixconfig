@@ -32,7 +32,7 @@
       dependsOn = ["mqtt" "zwavejs2mqtt"];
     };
     mqtt = {
-      image = "eclipse-mosquitto:2.0.16";
+      image = "eclipse-mosquitto:2.0.17";
       ports = ["1883:1883"];
       extraOptions = [
         "--network=host"
@@ -44,7 +44,7 @@
       ];
     };
     zwavejs2mqtt = {
-      image = "zwavejs/zwavejs2mqtt:8.23.0";
+      image = "zwavejs/zwavejs2mqtt:8.23.1";
       ports = [
         "3000:3000"
         # "8091:8091" # Admin interface port
