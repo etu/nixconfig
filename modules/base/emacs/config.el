@@ -552,7 +552,7 @@
 ;; Copilot.el
 (use-package copilot
   :commands (copilot-mode)
-  :hook ((nix-mode go-mode lisp-mode) . copilot-mode)
+  :hook ((dockerfile-mode php-mode nix-mode go-mode lisp-mode yaml-mode markdown-mode) . copilot-mode)
   :bind (("C-c M-f" . copilot-complete)
          :map copilot-completion-map
          ("C-g" . 'copilot-clear-overlay)

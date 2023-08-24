@@ -97,7 +97,7 @@
           # Install copilot.el
           copilot = epkgs.trivialBuild {
             pname = "copilot";
-            version = "2023-04-27";
+            version = "2023-08-22";
 
             packageRequires = with epkgs; [dash editorconfig s];
 
@@ -109,8 +109,8 @@
             src = pkgs.fetchFromGitHub {
               owner = "zerolfx";
               repo = "copilot.el";
-              rev = "7cb7beda89145ccb86a4324860584545ec016552";
-              sha256 = "sha256-57ACMikRzHSwRkFdEn9tx87NlJsWDYEfmg2n2JH8Ig0=";
+              rev = "c942a5290f6e3b3ba831a924960abab50ceb0f6e";
+              sha256 = "sha256-sVwfg+/NfBTdoRHZG+bTXjQIqpej8dS03fpWoBkuj7o=";
             };
           };
         };
