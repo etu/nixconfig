@@ -32,10 +32,6 @@
       file = ./secrets/vps04/flummbot.toml.age;
       owner = "bots";
     };
-    grafana-admin-password = {
-      file = ./secrets/server-main-elis/grafana-admin-password.age;
-      owner = "grafana";
-    };
     syncoid-server-main-elis-ssh-ec = {
       file = ./secrets/server-main-elis/syncoid-ssh-ec.age;
       path = "/var/lib/syncoid/.ssh/id_ed25519";
