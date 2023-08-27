@@ -17,20 +17,8 @@
     '';
   };
 
-  # Proxy influxdb to give it TLS, this is to make it possible to get
-  # metrics from other places.
-  services.nginx.virtualHosts."influx.elis.nu" = {
-    forceSSL = true;
-    enableACME = true;
-    locations."/".proxyPass = "http://127.0.0.1:8086/";
-  };
-
   # Enable prometheus to gather metrics.
   services.prometheus.enable = true;
-
-  # Enable influxdb to store metrics in.
-  services.influxdb2.enable = true;
-  services.influxdb2.settings.reporting-disabled = true;
 
   # Enable some exporters to gather metrics from.
   services.prometheus.exporters.node.enable = true;
@@ -128,8 +116,6 @@
   networking.firewall.allowedTCPPorts = [3030];
 
   etu.base.zfs.system.directories = [
-    # Bind mount for persistent database for influxdb2
-    "/var/lib/influxdb2"
     # Bind mount for persistent database for prometheus
     "/var/lib/prometheus2"
     # Bind mount for persistent database for grafana
