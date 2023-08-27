@@ -51,6 +51,7 @@
     user.extraGroups = ["libvirtd"];
     user.extraRootAuthorizedKeys = myData.pubkeys.etu.syncoid.workstations;
     services.freshrss.enable = true;
+    services.wallabag.enable = true;
     services.jellyfin.enable = true;
     services.syncthing.enable = true;
     services.netdata.enable = true;

@@ -5,5 +5,6 @@
     ./netdata
     ./nfs
     ./syncthing
+    ./wallabag
   ];
 }

@@ -37,6 +37,7 @@ in {
   "secrets/server-main-elis/grafana-admin-password.age".publicKeys = etu ++ hosts.server-main-elis;
   "secrets/server-main-elis/initrd-sshd-ec.age".publicKeys = etu ++ hosts.server-main-elis;
   "secrets/server-main-elis/syncoid-ssh-ec.age".publicKeys = etu ++ hosts.server-main-elis;
+  "secrets/server-main-elis/wallabag-secret.age".publicKeys = etu ++ hosts.server-main-elis;
   "secrets/vps04/flummbot.toml.age".publicKeys = etu ++ hosts.vps04;
   "secrets/vps04/hashed-ozeloten-password-file.age".publicKeys = etu ++ hosts.vps04;
   "secrets/workstations/syncoid-ssh-ec.age".publicKeys = etu ++ hosts.laptop-private-elis ++ hosts.laptop-work-elis;
