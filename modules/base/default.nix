@@ -15,7 +15,6 @@
     ./syncoid
     ./spell
     ./tailscale
-    ./telegraf
     ./zfs
   ];
 

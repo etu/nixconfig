@@ -35,7 +35,6 @@
     base.nix.allowUnfree = ["minecraft-server"];
 
     base.emacs.enable = false; # Disable emacs that is enabled by default.
-    base.telegraf.enable = true;
     base.sanoid.datasets = {
       # Enable snapshotting for some filesystems
       "zroot/safe/root".use_template = ["data"];
