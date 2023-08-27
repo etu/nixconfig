@@ -14,6 +14,5 @@ in {
   config.systemd.services."freshrss-updater".preStart = preStart;
   config.systemd.services."podman-home-assistant".preStart = preStart;
   config.systemd.services."podman-mqtt".preStart = preStart;
-  config.systemd.services."podman-nzbget-exporter".preStart = preStart;
   config.systemd.services."podman-zwavejs2mqtt".preStart = preStart;
 }
