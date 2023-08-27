@@ -28,7 +28,6 @@
               <li><a href="/radarr">Radarr (Movies)</a></li>
               <li><a href="/lidarr">Lidarr (Music)</a></li>
               <li><a href="/nzbget">NzbGet</a></li>
-              <li><a href="/sabnzbd">Sabnzbd</a></li>
             </ul>
           </body>
         </html>
@@ -61,10 +60,6 @@
           proxy_set_header X-Real-IP $remote_addr;
           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         '';
-    };
-    "/sabnzbd" = {
-      proxyPass = "http://127.0.0.1:8080/sabnzbd";
-      extraConfig = onlyLan;
     };
   };
 
@@ -109,11 +104,6 @@
         user = "downloads";
         group = "downloads";
       };
-      services.sabnzbd = {
-        enable = true;
-        user = "downloads";
-        group = "downloads";
-      };
 
       users.users.downloads = {
         group = "downloads";
@@ -152,11 +142,6 @@
       nzbget-dst = {
         mountPoint = "/var/lib/nzbget-dst";
         hostPath = "/var/lib/nzbget-dst";
-        isReadOnly = false;
-      };
-      sabnzbd = {
-        mountPoint = "/var/lib/sabnzbd";
-        hostPath = "${config.etu.dataPrefix}/var/lib/sabnzbd";
         isReadOnly = false;
       };
       media = {
