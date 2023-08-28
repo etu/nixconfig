@@ -33,7 +33,6 @@
     graphical.enable = true;
 
     # Fore disable some graphical components unused on the live iso.
-    graphical.evolution.enable = false;
     graphical.gnupg.enable = false;
     graphical.telegram.enable = false;
 

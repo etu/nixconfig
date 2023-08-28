@@ -6,7 +6,6 @@
 }: {
   imports = [
     ./fdm-printing
-    ./evolution
     ./firefox
     ./gnupg
     ./hamradio
@@ -24,7 +23,6 @@
 
   config = lib.mkIf config.etu.graphical.enable {
     etu = {
-      graphical.evolution.enable = lib.mkDefault true;
       graphical.firefox.enable = lib.mkDefault true;
       graphical.gnupg.enable = lib.mkDefault true;
       graphical.sway.enable = lib.mkDefault true;
@@ -56,6 +54,10 @@
 
         # Persist chromium config directory
         ".config/chromium"
+
+        # Persist gnome online accounts and gnome keyrings directories.
+        ".config/goa-1.0"
+        ".local/share/keyrings"
       ];
 
       # Persistence of certain hosts paths for graphical systems.
@@ -69,6 +71,9 @@
 
     # Install adb and fastboot.
     programs.adb.enable = true;
+
+    # Enable gnome keyring (related to ~/.config/goa-1.0 and ~/.local/share/keyrings).
+    services.gnome.gnome-keyring.enable = true;
 
     # Enable networkmanager.
     networking.networkmanager.enable = true;
