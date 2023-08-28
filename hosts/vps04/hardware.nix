@@ -66,7 +66,6 @@
   # Persistence of all users dotfiles between boots
   etu.base.zfs.system.directories = [
     "/home/bots"
-    "/home/concate"
     "/home/ozeloten"
     "/home/talyz"
     "/root"

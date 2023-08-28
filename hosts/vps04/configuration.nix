@@ -83,13 +83,6 @@
 
   # Set up users accounts:
   users.users = {
-    concate = {
-      isNormalUser = true;
-      home = "/home/concate";
-      uid = 1001;
-      openssh.authorizedKeys.keys = myData.pubkeys.concate;
-    };
-
     talyz = {
       isNormalUser = true;
       shell = pkgs.fish;
