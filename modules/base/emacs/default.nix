@@ -84,41 +84,33 @@
       # config to be able to pull in use-package dependencies from there.
       config = builtins.readFile emacsConfig;
 
-      # Package overrides
-      override = epkgs:
-        epkgs
-        // {
-          # Add my config initializer as an emacs package
-          myEmacsConfigInit = pkgs.runCommand "my-emacs-default-package" {} ''
-            mkdir -p $out/share/emacs/site-lisp
-            cp ${emacsConfigInit} $out/share/emacs/site-lisp/default.el
-          '';
-
-          # Install copilot.el
-          copilot = epkgs.trivialBuild {
-            pname = "copilot";
-            version = "2023-08-22";
-
-            packageRequires = with epkgs; [dash editorconfig s];
-
-            preInstall = ''
-              mkdir -p $out/share/emacs/site-lisp
-              cp -vr $src/dist $out/share/emacs/site-lisp
-            '';
-
-            src = pkgs.fetchFromGitHub {
-              owner = "zerolfx";
-              repo = "copilot.el";
-              rev = "c942a5290f6e3b3ba831a924960abab50ceb0f6e";
-              sha256 = "sha256-sVwfg+/NfBTdoRHZG+bTXjQIqpej8dS03fpWoBkuj7o=";
-            };
-          };
-        };
-
       # Extra packages to install
       extraEmacsPackages = epkgs: [
-        epkgs.myEmacsConfigInit
-        epkgs.copilot
+        # Add my config initializer as an emacs package
+        (pkgs.runCommand "my-emacs-default-package" {} ''
+          mkdir -p $out/share/emacs/site-lisp
+          cp ${emacsConfigInit} $out/share/emacs/site-lisp/default.el
+        '')
+
+        # Install copilot.el
+        (epkgs.trivialBuild {
+          pname = "copilot";
+          version = "2023-08-22";
+
+          packageRequires = with epkgs; [dash editorconfig s];
+
+          preInstall = ''
+            mkdir -p $out/share/emacs/site-lisp
+            cp -vr $src/dist $out/share/emacs/site-lisp
+          '';
+
+          src = pkgs.fetchFromGitHub {
+            owner = "zerolfx";
+            repo = "copilot.el";
+            rev = "c942a5290f6e3b3ba831a924960abab50ceb0f6e";
+            sha256 = "sha256-sVwfg+/NfBTdoRHZG+bTXjQIqpej8dS03fpWoBkuj7o=";
+          };
+        })
       ];
     };
 
