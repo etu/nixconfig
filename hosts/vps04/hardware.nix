@@ -58,11 +58,6 @@
     fsType = "zfs";
   };
 
-  # Persistence of certain hosts paths and home directory paths.
-  etu.base.zfs.user.directories = [
-    ".weechat"
-  ];
-
   # Persistence of all users dotfiles between boots
   etu.base.zfs.system.directories = [
     "/home/bots"

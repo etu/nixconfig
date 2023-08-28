@@ -53,11 +53,6 @@
   # Public keys for a bunch of devices, users and hosts.
   pubkeys = let
     etu = let
-      # Android relay client
-      weechat = [
-        "no-agent-forwarding,no-X11-forwarding,permitopen=\"127.0.0.1:8001\",command=\"echo 'This account can only be used for weechat relays'\" ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC5veqjY/i/5k6QTyluIBSsYGwgKxUsdsVWgcLbvzWb/GnTx1Ia1SXYvExGrdbfEGyeZEdbsK+PAJlMVJegt/jgE8015Ga0jRwlW6y4G19FB0UrCJU/vVCnyfuH7DgswtVQ98795VET4tfWVZTziaTyrPFi+lAw7afsI5orL5FzzH6+k33M3KSDuSoIgdGgcl+KjVyil4EbO+1k0TqtE7hnD3Lu23G2gyHOSSSB9B6cFrYWWVdxNttUCkNWqwpO6IDZ6ZzBgLZSxxDqgLBjjDYlbtGw4dWk5+39x72K1Rjsj+IiCxgwpk6lCg/QFe0QGIQN9QAe07Frm5hYPx4hXltamePbWti/K7nq4HEsG389R4RjWc6CXjY9SXt0kWLlrdN+cdCncgvQxlKlm/d15BNpnXE7P2aRyGmCeyQBuMCaJ1L5EShC/QXudl/b348dZN3z+51BYVLOQb5J7p2dWUTndN2W4lKf5k2vNeM2vtiZKSMy755GIbwEGv2PX2KYsBH8jcCHEW9sw4IMZxNQW/85dsjW6FPu6EyTlMAJC7H9BO1PJGb7hCTpLic5U3Y/q0Yrj/z/r04z5OX+8BnR+qug56fYMzGJ7oCYAG+JwP80Uw0wIThxiZX0eB7dhuo4DrIlMo30WJXMNw5d5z/WrYYLkifMIirZ/Dal/gfu7QuF9Q== etu@android-2020-08-14"
-      ];
-
       # New fileserver
       server-main-elis = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDvsU9DbT9Buk0FcEA6cuq8UdE1wG+bD0UpyGoxJc93x etu@fenchurch-2019-12-22"
@@ -80,7 +75,7 @@
       };
     in {
       # Include all separate units
-      inherit weechat server-main-elis syncoid laptop-private-elis laptop-work-elis;
+      inherit server-main-elis syncoid laptop-private-elis laptop-work-elis;
 
       # Include a meta name of all computers
       computers = server-main-elis ++ laptop-private-elis ++ laptop-work-elis;

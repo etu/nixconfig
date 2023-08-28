@@ -34,9 +34,6 @@
     stateVersion = "22.11";
 
     base.emacs.enable = false; # Disable emacs that is enabled by default.
-    development.git.enable = true;
-    user.enable = true;
-    user.extraAuthorizedKeys = myData.pubkeys.etu.weechat;
     user.extraRootAuthorizedKeys = myData.pubkeys.etu.syncoid.server-main-elis;
     base.sanoid.datasets = {
       # Enable snapshotting for some filesystems
