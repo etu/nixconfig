@@ -90,7 +90,7 @@
         modules =
           [
             ./hosts/${name}/configuration.nix
-            ./modules
+            self.nixosModules.default
             inputs.agenix.nixosModules.age
             inputs.flummbot.nixosModules.${system}.default
             inputs.home-manager.nixosModules.home-manager
@@ -189,6 +189,9 @@
           hostname = "vps06.elis.nu";
         };
       };
+
+      # Expose my modules as a nixos module
+      nixosModules.default = ./modules;
 
       # This is highly advised, and will prevent many possible mistakes
       checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) inputs.deploy-rs.lib;
