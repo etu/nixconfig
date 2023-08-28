@@ -54,9 +54,6 @@
   documentation.info.enable = false;
   documentation.man.enable = false;
 
-  # Install mosh
-  programs.mosh.enable = true;
-
   # Set up Letsencrypt
   security.acme.defaults.email = config.etu.user.email;
   security.acme.acceptTerms = true;

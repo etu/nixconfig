@@ -52,9 +52,6 @@
   documentation.info.enable = false;
   documentation.man.enable = false;
 
-  # Install mosh
-  programs.mosh.enable = true;
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = [
