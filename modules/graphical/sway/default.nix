@@ -38,14 +38,6 @@
       pkgs.wdisplays
       pkgs.wlr-randr
 
-      # Scripts to switch between backgrounds
-      (pkgs.writeShellScriptBin "sway-defaultbg" ''
-        ${config.etu.graphical.sway.package}/bin/swaymsg "output * bg ${config.etu.graphical.sway.wallpaperPackage}/default.jpg fill"
-      '')
-      (pkgs.writeShellScriptBin "sway-720pfigure" ''
-        ${config.etu.graphical.sway.package}/bin/swaymsg "output * bg ${config.etu.graphical.sway.wallpaperPackage}/720pfigure.jpg fill"
-      '')
-
       # Script to reload environment variables (if used nested sway
       # session and want chrome screen sharing to read the inner sway)
       (pkgs.writeShellScriptBin "sway-reload-env" ''
