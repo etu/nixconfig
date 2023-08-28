@@ -10,7 +10,7 @@
     # Install using home-manager.
     etu.user.extraUserPackages = [pkgs.cura pkgs.openscad];
 
-    # Enable persistence for evolution files.
+    # Enable persistence for fdm-printing related files.
     etu.base.zfs.user.directories = [
       ".cache/cura"
       ".config/cura"
