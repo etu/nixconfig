@@ -38,8 +38,8 @@ System for IRC clients and an IRC bot. Nothing else. ZFS snapshots are pulled
 from this system to ~server-main-elis~. Deployed using ~deploy .#vps04~.
 
 **** ~hosts/vps06/~
-System that runs Gitea, a Hockeypuck GPG keyserver, [[https://ip.failar.nu/][ip.failar.nu]], and a
-Matrix home server among some other things. Deployed using ~deploy .#vps06~.
+System that runs Gitea, [[https://ip.failar.nu/][ip.failar.nu]], and a Matrix home server among some
+other things. Deployed using ~deploy .#vps06~.
 
 **** ~hosts/live-iso/~
 If you're adventurous and want to run a clone of my configuration from a
