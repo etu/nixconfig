@@ -47,7 +47,14 @@
     development.git.enable = true;
     user.enable = true;
     user.extraGroups = ["libvirtd"];
-    user.extraRootAuthorizedKeys = myData.pubkeys.etu.syncoid.workstations;
+
+    user.extraRootAuthorizedKeys =
+      # Allow workstations to push snapshots
+      myData.pubkeys.etu.syncoid.workstations
+      ++
+      # Allow github to deploy system
+      myData.pubkeys.etu.github-actions;
+
     services.freshrss.enable = true;
     services.wallabag.enable = true;
     services.jellyfin.enable = true;

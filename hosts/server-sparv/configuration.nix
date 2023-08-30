@@ -1,7 +1,7 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{...}: {
+{myData, ...}: {
   imports = [
     # Include my hardware settings.
     ./hardware.nix
@@ -41,6 +41,10 @@
       "zroot/safe/home".use_template = ["data"];
       "zroot/local/minecraft".use_template = ["data"]; # Minecraft server
     };
+
+    # Allow github to deploy system
+    user.extraRootAuthorizedKeys = myData.pubkeys.etu.github-actions;
+
     services.netdata.enable = true;
   };
 

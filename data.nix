@@ -73,9 +73,12 @@
         server-main-elis = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMGc+oDfq+OCsApi1qsMDx1wlDwfu7oIHOeV0laVdq6W syncoid@fenchurch-2020-07-11"];
         workstations = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICdtbbrBHT1i29nFdaf54zsJ4Yrt2tOLnNotaRIneazp syncoid@workstations-2021-07-11"];
       };
+
+      # Github actions deployment key.
+      github-actions = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBsVq+lSP7EuU0KUurWYjlLWm1PJWKtYUXVayi1jD6lU github-actions-deployment-2023-08-30"];
     in {
       # Include all separate units
-      inherit server-main-elis syncoid laptop-private-elis laptop-work-elis;
+      inherit server-main-elis syncoid laptop-private-elis laptop-work-elis github-actions;
 
       # Include a meta name of all computers
       computers = server-main-elis ++ laptop-private-elis ++ laptop-work-elis;

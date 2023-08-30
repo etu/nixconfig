@@ -34,7 +34,14 @@
     stateVersion = "22.11";
 
     base.emacs.enable = false; # Disable emacs that is enabled by default.
-    user.extraRootAuthorizedKeys = myData.pubkeys.etu.syncoid.server-main-elis;
+
+    user.extraRootAuthorizedKeys =
+      # Allow home server to pull backups
+      myData.pubkeys.etu.syncoid.server-main-elis
+      ++
+      # Allow github to deploy system
+      myData.pubkeys.etu.github-actions;
+
     base.sanoid.datasets = {
       # Enable snapshotting for some filesystems
       "zroot/safe/data".use_template = ["data"];
