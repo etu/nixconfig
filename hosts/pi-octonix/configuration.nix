@@ -33,7 +33,7 @@
     base.emacs.enable = false;
 
     # Don't set a password for root depending on agenix.
-    user.allowEmptyRootPassword = true;
+    user.setEmptyRootPassword = true;
   };
 
   # Allow root to log in without password.
