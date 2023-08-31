@@ -8,7 +8,6 @@
 # $ sudo dd if=result/iso/<tab> of=/dev/<device> status=progress bs=16M
 #
 {
-  config,
   lib,
   modulesPath,
   ...
@@ -46,6 +45,9 @@
 
     # Force disable sanoid modules since this system doesn't use ZFS.
     base.sanoid.enable = false;
+
+    # There's no need to run tailscale on the live-iso.
+    base.tailscale.enable = false;
   };
 
   networking.wireless.enable = false;
