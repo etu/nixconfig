@@ -8,7 +8,7 @@ laptop-work-elis:
 	nom build .#nixosConfigurations.laptop-work-elis.config.system.build.toplevel
 
 live-iso:
-	nom build .#nixosConfigurations.live-iso.config.system.build.isoImage
+	nom build .#iso
 
 pi-octonix:
 	nom build .#nixosConfigurations.pi-octonix.config.system.build.toplevel

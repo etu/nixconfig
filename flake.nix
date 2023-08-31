@@ -225,5 +225,6 @@
 
       # Build packages
       packages.swayWallpaper = pkgs.callPackage ./packages/wallpaper {};
+      packages.iso = self.nixosConfigurations.live-iso.config.system.build.isoImage;
     });
 }

@@ -45,7 +45,7 @@ other things. Deployed using ~deploy .#vps06~.
 If you're adventurous and want to run a clone of my configuration from a
 live-iso, it can be built locally:
 #+BEGIN_SRC sh
-  nix build github:etu/nixconfig#nixosConfigurations.live-iso.config.system.build.isoImage
+  nix build github:etu/nixconfig#iso
 #+END_SRC
 
 **** ~hosts/pi-octonix/~
