@@ -15,13 +15,18 @@
     };
     lockCommand = lib.mkOption {
       type = lib.types.str;
-      default = "${pkgs.swaylock}/bin/swaylock -f -k -i ${config.etu.graphical.sway.wallpaperPackage}/dark.jpg";
+      default = "${pkgs.swaylock}/bin/swaylock -f -k -i ${config.etu.graphical.sway.lockWallpaper}";
       description = "Lock screen command";
     };
-    wallpaperPackage = lib.mkOption {
-      type = lib.types.package;
-      default = swayWallpaper;
-      description = "Which wallpaper package to use";
+    wallpaper = lib.mkOption {
+      type = lib.types.str;
+      default = "${swayWallpaper}/default.jpg";
+      description = "Wallpaper to use for sway";
+    };
+    lockWallpaper = lib.mkOption {
+      type = lib.types.str;
+      default = "${swayWallpaper}/lock.jpg";
+      description = "Wallpaper to use for lockscreen";
     };
   };
 
@@ -423,7 +428,7 @@
           input."type:keyboard".xkb_file = toString config.etu.graphical.xkb-keymap;
 
           # Set wallpaper for all outputs
-          output."*".bg = "${config.etu.graphical.sway.wallpaperPackage}/default.jpg fill";
+          output."*".bg = "${config.etu.graphical.sway.wallpaper} fill";
 
           # Enable titlebars
           window.titlebar = true;
