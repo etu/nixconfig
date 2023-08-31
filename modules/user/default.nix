@@ -56,6 +56,7 @@
       default = [];
       description = "Extra packages to install in my users profile.";
     };
+    setEmptyPassword = lib.mkEnableOption "If disabled, it will set a user password which requires agenix set up.";
     setEmptyRootPassword = lib.mkEnableOption "If disabled, it will set a root password which requires agenix set up.";
   };
 
@@ -67,14 +68,14 @@
     environment.homeBinInPath = config.etu.user.enable;
 
     # Load password files.
-    age.secrets.hashed-etu-password = lib.mkIf config.etu.user.enable myData.ageModules.hashed-etu-password;
+    age.secrets.hashed-etu-password = lib.mkIf (!config.etu.user.setEmptyPassword && config.etu.user.enable) myData.ageModules.hashed-etu-password;
     age.secrets.hashed-root-password = lib.mkIf (!config.etu.user.setEmptyRootPassword) myData.ageModules.hashed-root-password;
 
     # Define my user account.
     users.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
       description = "${config.etu.user.realname},,,,";
       extraGroups = ["wheel"] ++ config.etu.user.extraGroups;
-      passwordFile = config.age.secrets.hashed-etu-password.path;
+      passwordFile = lib.mkIf (!config.etu.user.setEmptyPassword) config.age.secrets.hashed-etu-password.path;
       isNormalUser = true;
       openssh.authorizedKeys.keys = myData.pubkeys.etu.computers ++ config.etu.user.extraAuthorizedKeys;
       inherit (config.etu.user) uid;

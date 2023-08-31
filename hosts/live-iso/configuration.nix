@@ -29,7 +29,8 @@
     # Enable my user account.
     user.enable = true;
 
-    # Don't set a password for root depending on agenix.
+    # Don't set a password for root / user depending on agenix.
+    user.setEmptyPassword = true;
     user.setEmptyRootPassword = true;
 
     # Enable a graphical system.
@@ -45,12 +46,6 @@
 
     # Force disable sanoid modules since this system doesn't use ZFS.
     base.sanoid.enable = false;
-  };
-
-  # Force override my users password to empty string.
-  users.users.${config.etu.user.username} = {
-    passwordFile = lib.mkForce null;
-    initialPassword = "";
   };
 
   networking.wireless.enable = false;
