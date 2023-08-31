@@ -29,6 +29,9 @@
     # Enable my user account.
     user.enable = true;
 
+    # Don't set a password for root depending on agenix.
+    user.setEmptyRootPassword = true;
+
     # Enable a graphical system.
     graphical.enable = true;
 
@@ -42,12 +45,6 @@
 
     # Force disable sanoid modules since this system doesn't use ZFS.
     base.sanoid.enable = false;
-  };
-
-  # Force override root users password to empty string.
-  users.users.root = {
-    passwordFile = lib.mkForce null;
-    initialPassword = "";
   };
 
   # Force override my users password to empty string.
