@@ -11,7 +11,7 @@ jobs:
     name: File formatting
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v3.6.0
+      - uses: actions/checkout@v4.0.0
       - uses: cachix/install-nix-action@v23
       - name: Check nix file formatting
         run: 'nix fmt . -- --check'
@@ -37,7 +37,7 @@ jobs:
           - vps06
 
     steps:
-      - uses: actions/checkout@v3.6.0
+      - uses: actions/checkout@v4.0.0
       - uses: cachix/install-nix-action@v23
       - uses: cachix/cachix-action@v12
         with:
@@ -54,7 +54,7 @@ jobs:
     runs-on: ubuntu-22.04
     needs: format
     steps:
-      - uses: actions/checkout@v3.6.0
+      - uses: actions/checkout@v4.0.0
       - uses: cachix/install-nix-action@v23
       - uses: cachix/cachix-action@v12
         with:
@@ -69,7 +69,7 @@ jobs:
     runs-on: ubuntu-22.04
     needs: build
     steps:
-      - uses: actions/checkout@v3.6.0
+      - uses: actions/checkout@v4.0.0
       - uses: cachix/install-nix-action@v23
       - uses: cachix/cachix-action@v12
         with:
