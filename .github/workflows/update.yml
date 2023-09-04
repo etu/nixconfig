@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3.6.0
-      - uses: cachix/install-nix-action@v22
+      - uses: cachix/install-nix-action@v23
       - uses: cachix/cachix-action@v12
         with:
           name: etu
@@ -64,7 +64,7 @@ jobs:
       - uses: actions/checkout@v3.6.0
         with:
           ref: tmp-updater-branch
-      - uses: cachix/install-nix-action@v22
+      - uses: cachix/install-nix-action@v23
       - uses: cachix/cachix-action@v12
         with:
           name: etu
@@ -84,7 +84,7 @@ jobs:
       - uses: actions/checkout@v3.6.0
         with:
           ref: tmp-updater-branch
-      - uses: cachix/install-nix-action@v22
+      - uses: cachix/install-nix-action@v23
       - uses: cachix/cachix-action@v12
         with:
           name: etu
@@ -103,7 +103,7 @@ jobs:
       - uses: actions/checkout@v3.6.0
         with:
           ref: tmp-updater-branch
-      - uses: cachix/install-nix-action@v22
+      - uses: cachix/install-nix-action@v23
       - uses: cachix/cachix-action@v12
         with:
           name: etu
@@ -152,7 +152,7 @@ jobs:
       - uses: actions/checkout@v3.6.0
       - run: |
           git pull
-      - uses: cachix/install-nix-action@v22
+      - uses: cachix/install-nix-action@v23
       - uses: cachix/cachix-action@v12
         with:
           name: etu
