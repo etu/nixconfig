@@ -55,10 +55,7 @@ jobs:
     runs-on: ubuntu-22.04
     needs: format
     steps:
-      # Clone the code from the temporary branch
       - uses: actions/checkout@v3.6.0
-        with:
-          ref: tmp-updater-branch
       - uses: cachix/install-nix-action@v22
       - uses: cachix/cachix-action@v12
         with:
