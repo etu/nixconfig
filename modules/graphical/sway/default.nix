@@ -119,30 +119,6 @@
         ];
       }; # END swayidle
 
-      # Set up kanshi (which kinda is an autorandr for wayland)
-      services.kanshi = {
-        enable = true;
-        profiles = {
-          undocked.outputs = [
-            {
-              criteria = "eDP-1";
-              status = "enable";
-            }
-          ];
-          docked.outputs = [
-            {
-              criteria = "Samsung Electric Company LC49G95T H4ZN900853";
-              mode = "5120x1440";
-              position = "0,0";
-            }
-            {
-              criteria = "eDP-1";
-              status = "disable";
-            }
-          ];
-        };
-      }; # END kanshi
-
       # Sway user configs
       wayland.windowManager.sway = {
         enable = true;
