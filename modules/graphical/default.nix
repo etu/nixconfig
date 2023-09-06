@@ -16,6 +16,7 @@
     ./terminal
     ./theme
     ./virtualbox
+    ./window-managers
     ./xkb-keymap
   ];
 

@@ -119,16 +119,6 @@
         ];
       }; # END swayidle
 
-      # Set up mako, a notification deamon for wayland
-      services.mako = {
-        enable = true;
-        backgroundColor = "#191311";
-        borderColor = "#3B7C87";
-        borderSize = 3;
-        defaultTimeout = 6000;
-        font = "${config.etu.graphical.theme.fonts.monospace} ${toString config.etu.graphical.theme.fonts.size}";
-      }; # END mako
-
       # Set up kanshi (which kinda is an autorandr for wayland)
       services.kanshi = {
         enable = true;
