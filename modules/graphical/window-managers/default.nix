@@ -6,6 +6,7 @@
   imports = [
     ./kanshi
     ./mako
+    ./waybar
   ];
 
   config = lib.mkIf config.etu.graphical.sway.enable {
@@ -14,5 +15,8 @@
 
     # Set up mako, a notification deamon for wayland
     etu.graphical.window-managers.mako.enable = true;
+
+    # Set up waybar, a bar for wayland
+    etu.graphical.window-managers.waybar.enable = true;
   };
 }
