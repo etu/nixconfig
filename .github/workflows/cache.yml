@@ -46,7 +46,11 @@ jobs:
 
       # Build systems.
       - name: Build system derivation
-        run: 'nix build .#nixosConfigurations.${{ matrix.hostname }}.config.system.build.toplevel'
+        uses: nick-fields/retry@v2.8.3
+        with:
+          max_attempts: 3
+          timeout_minutes: 20
+          command: 'nix build .#nixosConfigurations.${{ matrix.hostname }}.config.system.build.toplevel'
 
   cache-shell:
     name: Cache nix shell

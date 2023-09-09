@@ -67,6 +67,18 @@ jobs:
           name: id_ed25519
           known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
 
+      # Build systems.
+      - name: Build system derivation
+        uses: nick-fields/retry@v2.8.3
+        with:
+          max_attempts: 2
+          timeout_minutes: 10
+          command: 'nix build .#nixosConfigurations.${{ matrix.hostname }}.config.system.build.toplevel'
+
       # Deploy systems
       - name: Deploy system
-        run: 'nix develop -c deploy .#${{ matrix.hostname }}'
+        uses: nick-fields/retry@v2.8.3
+        with:
+          max_attempts: 2
+          timeout_minutes: 10
+          command: 'nix develop -c deploy .#${{ matrix.hostname }}'
