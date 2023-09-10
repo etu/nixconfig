@@ -1,4 +1,8 @@
-{config, ...}: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   # Make sure to have NGiNX enabled
   services.nginx.enable = true;
   services.nginx.virtualHosts."hass.elis.nu" = {
@@ -15,6 +19,20 @@
       proxy_connect_timeout 300;
       proxy_send_timeout 300;
     '';
+  };
+
+  # Garbage collect podman images
+  systemd.services.podman-system-prune = {
+    description = "Garbage collect podman";
+    after = ["podman.service"];
+    wantedBy = ["multi-user.target"];
+    startAt = "05:30";
+    serviceConfig = {
+      Type = "oneshot";
+      User = "root";
+      Group = "root";
+      ExecStart = "${pkgs.podman}/bin/podman system prune -a -f";
+    };
   };
 
   virtualisation.oci-containers.containers = {
