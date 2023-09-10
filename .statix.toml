@@ -1,0 +1,4 @@
+# Ignore repeated keys validation by statix check
+disabled = [
+  "repeated_keys"
+]

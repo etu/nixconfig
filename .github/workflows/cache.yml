@@ -20,7 +20,7 @@ jobs:
       - name: Check deadnix file formatting
         run: 'nix run nixpkgs#deadnix -- hosts/ modules/ packages/'
       - name: Check statix file formatting
-        run: 'nix run nixpkgs#statix -- check'
+        run: 'nix run nixpkgs#statix -- check --config .statix.toml'
 
   cache:
     name: Cache system

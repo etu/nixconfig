@@ -28,9 +28,7 @@
       "${config.services.syncthing.dataDir}/.dotfiles/skeleton/org/" = {
         # Build devices for this folder depending on hostname.
         devices =
-          [
-          ]
-          ++ (lib.optionals (config.networking.hostName == "server-main-elis") [
+          (lib.optionals (config.networking.hostName == "server-main-elis") [
             "phone"
             "laptop-private-elis"
             "laptop-work-elis"
