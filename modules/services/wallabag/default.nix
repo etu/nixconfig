@@ -111,17 +111,6 @@ in {
       uid = 912;
     };
 
-    # Create database and make sure the user exists
-    services.postgresql = {
-      ensureDatabases = ["wallabag"];
-      ensureUsers = [
-        {
-          name = "wallabag";
-          ensurePermissions."DATABASE wallabag" = "ALL PRIVILEGES";
-        }
-      ];
-    };
-
     # Set up nginx
     services.nginx.enable = true;
     services.nginx.virtualHosts.${config.etu.services.wallabag.hostname} = {
