@@ -48,6 +48,7 @@
       # Directories to mount persistent for my user on graphical sessions
       base.zfs.user.directories = [
         ".config/pipewire/media-session.d"
+        ".local/state/wireplumber"
         "Downloads"
         "code"
         "documents"
