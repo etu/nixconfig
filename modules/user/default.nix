@@ -75,7 +75,7 @@
     users.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
       description = "${config.etu.user.realname},,,,";
       extraGroups = ["wheel"] ++ config.etu.user.extraGroups;
-      passwordFile = lib.mkIf (!config.etu.user.setEmptyPassword) config.age.secrets.hashed-etu-password.path;
+      hashedPasswordFile = lib.mkIf (!config.etu.user.setEmptyPassword) config.age.secrets.hashed-etu-password.path;
       isNormalUser = true;
       openssh.authorizedKeys.keys = myData.pubkeys.etu.computers ++ config.etu.user.extraAuthorizedKeys;
       inherit (config.etu.user) uid;
@@ -83,7 +83,7 @@
 
     # Define password, authorized keys and shell for root user.
     users.users.root = {
-      passwordFile = lib.mkIf (!config.etu.user.setEmptyRootPassword) config.age.secrets.hashed-root-password.path;
+      hashedPasswordFile = lib.mkIf (!config.etu.user.setEmptyRootPassword) config.age.secrets.hashed-root-password.path;
       openssh.authorizedKeys.keys = myData.pubkeys.etu.computers ++ config.etu.user.extraRootAuthorizedKeys;
     };
 
