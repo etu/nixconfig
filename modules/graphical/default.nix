@@ -7,6 +7,7 @@
   imports = [
     ./fdm-printing
     ./firefox
+    ./flatpak
     ./gnupg
     ./hamradio
     ./signal
@@ -25,6 +26,7 @@
   config = lib.mkIf config.etu.graphical.enable {
     etu = {
       graphical.firefox.enable = lib.mkDefault true;
+      graphical.flatpak.enable = lib.mkDefault true;
       graphical.gnupg.enable = lib.mkDefault true;
       graphical.sway.enable = lib.mkDefault true;
       graphical.telegram.enable = lib.mkDefault true;
