@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  myData,
   ...
 }: let
   domain = "failar.nu";
@@ -40,6 +41,8 @@ in {
         '';
         "/.well-known/matrix/client".extraConfig = let
           client."m.homeserver".base_url = "https://matrix.${domain}";
+          # Advertise sliding-sync support
+          client."org.matrix.msc3575.proxy".url = "https://matrix.${domain}";
         in ''
           add_header Content-Type application/json;
           add_header Access-Control-Allow-Origin *;
@@ -95,12 +98,32 @@ in {
           proxyPass = "http://127.0.0.1:9000/$1";
           extraConfig = "proxy_set_header X-Forwarded-Ssl on;";
         };
+        # Support sliding sync endpoints
+        "~ ^/(client/|_matrix/client/unstable/org.matrix.msc3575/sync)" = {
+          proxyPass = "http://${config.services.matrix-synapse.sliding-sync.settings.SYNCV3_BINDADDR}";
+          extraConfig = ''
+            proxy_set_header Host $host;
+            proxy_set_header X-Forwarded-For $remote_addr;
+            proxy_set_header X-Forwarded-Proto $scheme;
+          '';
+        };
       };
     };
   };
 
+  # Include secrets needed
+  age.secrets = {
+    inherit (myData.ageModules) matrix-sliding-sync-secret;
+  };
+
   services.matrix-synapse = {
     enable = true;
+    sliding-sync = {
+      enable = true;
+      environmentFile = config.age.secrets.matrix-sliding-sync-secret.path;
+      settings.SYNCV3_SERVER = config.services.matrix-synapse.settings.public_baseurl;
+      settings.SYNCV3_BINDADDR = "127.0.0.1:8010";
+    };
     settings = {
       # registration_shared_secret = ""; # Set this value to be able
       # to use ${pkgs.matrix-synapse}/bin/register_new_matrix_user

@@ -38,5 +38,6 @@ in {
   "secrets/server-main-elis/wallabag-secret.age".publicKeys = etu ++ hosts.server-main-elis;
   "secrets/vps04/flummbot.toml.age".publicKeys = etu ++ hosts.vps04;
   "secrets/vps04/hashed-ozeloten-password-file.age".publicKeys = etu ++ hosts.vps04;
+  "secrets/vps06/matrix-sliding-sync-secret.age".publicKeys = etu ++ hosts.vps06;
   "secrets/workstations/syncoid-ssh-ec.age".publicKeys = etu ++ hosts.laptop-private-elis ++ hosts.laptop-work-elis;
 }
