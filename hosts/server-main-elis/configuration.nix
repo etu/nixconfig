@@ -56,7 +56,7 @@
       myData.pubkeys.etu.github-actions;
 
     services.freshrss.enable = true;
-    services.wallabag.enable = true;
+    #services.wallabag.enable = true;
     services.jellyfin.enable = true;
     services.syncthing.enable = true;
     services.netdata.enable = true;
