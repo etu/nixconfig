@@ -50,7 +50,7 @@
       dependsOn = ["mqtt" "zwavejs2mqtt"];
     };
     mqtt = {
-      image = "eclipse-mosquitto:2.0.17";
+      image = "eclipse-mosquitto:2.0.18";
       ports = ["1883:1883"];
       extraOptions = [
         "--network=host"
