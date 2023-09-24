@@ -66,6 +66,14 @@
       "zroot/safe/home".use_template = ["home"];
 
       # Enable cleanup for synced backups
+      "zroot/backups/current/laptop-private-caroline/data" = {
+        use_template = ["data"];
+        autosnap = false;
+      };
+      "zroot/backups/current/laptop-private-caroline/home" = {
+        use_template = ["home"];
+        autosnap = false;
+      };
       "zroot/backups/current/laptop-private-elis/data" = {
         use_template = ["data"];
         autosnap = false;
@@ -108,7 +116,11 @@
     base.syncoid.commands = {
       "root@vps04.elis.nu:zroot/safe/data".target = "zroot/backups/current/vps04/data";
       "root@vps04.elis.nu:zroot/safe/home".target = "zroot/backups/current/vps04/home";
+
       "root@vps06.elis.nu:zroot/safe/data".target = "zroot/backups/current/vps06/data";
+
+      "root@laptop-private-caroline:zroot/safe/data".target = "zroot/backups/current/laptop-private-caroline/data";
+      "root@laptop-private-caroline:zroot/safe/home".target = "zroot/backups/current/laptop-private-caroline/home";
     };
   };
 

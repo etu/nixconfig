@@ -38,6 +38,7 @@
     # Add known hosts for all of my systems that I access remotely to
     # they always are trusted.
     programs.ssh.knownHosts = {
+      laptop-private-caroline.publicKey = myData.pubkeys.systems.laptop-private-caroline;
       server-main-elis = {
         extraHostNames = ["home.elis.nu" "local.elis.nu" "192.168.1.101"];
         publicKey = myData.pubkeys.systems.server-main-elis;

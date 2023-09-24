@@ -16,6 +16,10 @@
     deploy-rs.inputs.nixpkgs.follows = "nixpkgs";
     deploy-rs.inputs.utils.follows = "flake-utils";
 
+    # Import disko for disk partitioning
+    disko.url = "github:nix-community/disko";
+    disko.inputs.nixpkgs.follows = "nixpkgs";
+
     # Import nixos hardware quirks settings
     nixos-hardware.url = "nixos-hardware";
 
@@ -92,6 +96,7 @@
             ./hosts/${name}/configuration.nix
             self.nixosModules.default
             inputs.agenix.nixosModules.age
+            inputs.disko.nixosModules.disko
             inputs.flummbot.nixosModules.${system}.default
             inputs.home-manager.nixosModules.home-manager
             inputs.impermanence.nixosModules.impermanence
@@ -146,6 +151,7 @@
     {
       # Declare systems
       nixosConfigurations = {
+        laptop-private-caroline = mkSystem {name = "laptop-private-caroline";};
         laptop-private-elis = mkSystem {
           name = "laptop-private-elis";
           extraModules = [
