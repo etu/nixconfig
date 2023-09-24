@@ -22,7 +22,7 @@
   boot.extraModulePackages = with config.boot.kernelPackages; [acpi_call];
 
   # Set kernel.
-  boot.kernelPackages = pkgs.zfs.latestCompatibleLinuxPackages;
+  boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
 
   # Enable a nice boot splash screen.
   boot.initrd.systemd.enable = true; # needed for ZFS password prompt with plymouth.
