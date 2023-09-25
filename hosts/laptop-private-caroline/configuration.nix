@@ -44,8 +44,8 @@
     user.email = "caroline@hirwing.se";
 
     # Don't set a password for root / user depending on agenix.
-    user.setEmptyPassword = true;
-    user.setEmptyRootPassword = true;
+    user.userPasswordAgeModule = myData.ageModules.hashed-caroline-laptop-concate-password;
+    user.rootPasswordAgeModule = myData.ageModules.hashed-caroline-laptop-root-password;
 
     # Enable a graphical system.
     graphical.enable = true;

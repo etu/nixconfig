@@ -56,6 +56,14 @@
       default = [];
       description = "Extra packages to install in my users profile.";
     };
+    userPasswordAgeModule = lib.mkOption {
+      default = myData.ageModules.hashed-etu-password;
+      description = "Age file to include to use as user password";
+    };
+    rootPasswordAgeModule = lib.mkOption {
+      default = myData.ageModules.hashed-root-password;
+      description = "Age file to include to use as root password";
+    };
     setEmptyPassword = lib.mkEnableOption "If disabled, it will set a user password which requires agenix set up.";
     setEmptyRootPassword = lib.mkEnableOption "If disabled, it will set a root password which requires agenix set up.";
   };
@@ -68,8 +76,8 @@
     environment.homeBinInPath = config.etu.user.enable;
 
     # Load password files.
-    age.secrets.hashed-etu-password = lib.mkIf (!config.etu.user.setEmptyPassword && config.etu.user.enable) myData.ageModules.hashed-etu-password;
-    age.secrets.hashed-root-password = lib.mkIf (!config.etu.user.setEmptyRootPassword) myData.ageModules.hashed-root-password;
+    age.secrets.hashed-etu-password = lib.mkIf (!config.etu.user.setEmptyPassword && config.etu.user.enable) config.etu.user.userPasswordAgeModule;
+    age.secrets.hashed-root-password = lib.mkIf (!config.etu.user.setEmptyRootPassword) config.etu.user.rootPasswordAgeModule;
 
     # Define my user account.
     users.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {

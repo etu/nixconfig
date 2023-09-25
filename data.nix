@@ -4,6 +4,8 @@
     cloudflare-api-env.file = ./secrets/server-main-elis/cloudflare-api-env.age;
     hashed-etu-password.file = ./secrets/any/hashed-etu-password-file.age;
     hashed-root-password.file = ./secrets/any/hashed-root-password-file.age;
+    hashed-caroline-laptop-concate-password.file = ./secrets/laptop-private-caroline/hashed-concate-password-file.age;
+    hashed-caroline-laptop-root-password.file = ./secrets/laptop-private-caroline/hashed-root-password-file.age;
     netdata-claim-token-file = {
       file = ./secrets/any/netdata-claim-token-file.age;
       owner = "netdata";
