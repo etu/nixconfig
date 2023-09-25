@@ -11,7 +11,7 @@ jobs:
     name: Update dependencies
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v4.0.0
+      - uses: actions/checkout@v4.1.0
       - uses: cachix/install-nix-action@v23
       - uses: cachix/cachix-action@v12
         with:
@@ -61,7 +61,7 @@ jobs:
 
     steps:
       # Clone the code from the temporary branch
-      - uses: actions/checkout@v4.0.0
+      - uses: actions/checkout@v4.1.0
         with:
           ref: tmp-updater-branch
       - uses: cachix/install-nix-action@v23
@@ -85,7 +85,7 @@ jobs:
     needs: update
     steps:
       # Clone the code from the temporary branch
-      - uses: actions/checkout@v4.0.0
+      - uses: actions/checkout@v4.1.0
         with:
           ref: tmp-updater-branch
       - uses: cachix/install-nix-action@v23
@@ -104,7 +104,7 @@ jobs:
     needs: cache
     steps:
       # Clone the code from the temporary branch
-      - uses: actions/checkout@v4.0.0
+      - uses: actions/checkout@v4.1.0
         with:
           ref: tmp-updater-branch
       - uses: cachix/install-nix-action@v23
@@ -122,7 +122,7 @@ jobs:
     runs-on: ubuntu-22.04
     needs: check
     steps:
-      - uses: actions/checkout@v4.0.0
+      - uses: actions/checkout@v4.1.0
         with:
           ref: main
 
@@ -153,7 +153,7 @@ jobs:
           - vps06
 
     steps:
-      - uses: actions/checkout@v4.0.0
+      - uses: actions/checkout@v4.1.0
       - run: |
           git pull
       - uses: cachix/install-nix-action@v23
