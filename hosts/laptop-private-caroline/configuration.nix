@@ -74,9 +74,6 @@
     };
   };
 
-  users.users.concate.initialPassword = "a";
-  users.users.root.initialPassword = "a";
-
   # Enable blueman.
   services.blueman.enable = true;
 }
