@@ -10,6 +10,7 @@
   # Run my config trough substituteAll to replace font names from my
   # system font settings.
   emacsConfig = pkgs.runCommand "config.el" {
+    inherit treesitGrammars;
     inherit (config.etu) dataPrefix;
     extraConfig = lib.concatStringsSep "\n\n" config.etu.base.emacs.extraConfig;
     fontname = config.etu.graphical.theme.fonts.monospace;
@@ -61,6 +62,14 @@
     pkgs.phpPackages.phpcs # PHP codestyle checker
     pkgs.openscad # For use with scad and scad preview mode
   ];
+
+  # List custom treesitter grammars
+  treesitGrammars = emacsPackages.${config.etu.base.emacs.package}.pkgs.treesit-grammars.with-grammars (g:
+    with g; [
+      tree-sitter-bash
+      tree-sitter-css
+      tree-sitter-dockerfile
+    ]);
 
   # Function to wrap emacs to contain the path for language servers
   wrapEmacsWithExtraBinPaths = {

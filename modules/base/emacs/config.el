@@ -350,11 +350,23 @@
 (use-package eglot
   :ensure t
   :commands eglot-ensure
-  :hook ((css-mode dockerfile-mode go-mode js-mode nix-mode php-mode scss-mode sh-mode) . eglot-ensure)
+  :hook ((css-mode
+          dockerfile-mode
+          go-mode
+          js-mode
+          nix-mode
+          php-mode
+          scss-mode
+          sh-mode
+          ;; Treesit modes
+          bash-ts-mode
+          css-ts-mode
+          dockerfile-ts-mode
+          ) . eglot-ensure)
   :config (progn
-            (add-to-list 'eglot-server-programs '(dockerfile-mode . ("docker-langserver" "--stdio")))
+            (add-to-list 'eglot-server-programs '((dockerfile-mode dockerfile-ts-mode) . ("docker-langserver" "--stdio")))
             (add-to-list 'eglot-server-programs '((php-mode phps-mode) . ("intelephense" "--stdio")))
-            (add-to-list 'eglot-server-programs '((scss-mode css-mode) . ("css-languageserver" "--stdio")))))
+            (add-to-list 'eglot-server-programs '((scss-mode css-mode css-ts-mode) . ("css-languageserver" "--stdio")))))
 
 
 ;;;
@@ -548,6 +560,18 @@
         (lambda ()
           (string-trim-right (shell-command-to-string "pass API/openai.com")))))
 
+;;;
+;;; Tree sitter
+;;;
+(use-package nix-ts-mode :ensure t)
+
+(add-to-list 'treesit-extra-load-path "@treesitGrammars@/lib")
+
+(setq major-mode-remap-alist
+      '((sh-mode . bash-ts-mode)
+        (css-mode . css-ts-mode)
+        (dockerfile-mode . dockerfile-ts-mode)
+        ))
 
 ;;;
 ;;; Load extra config provided from other parts of the nixos
