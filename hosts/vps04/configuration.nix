@@ -98,7 +98,7 @@
     ozeloten = {
       isNormalUser = true;
       home = "/home/ozeloten";
-      passwordFile = config.age.secrets.hashed-ozeloten-password.path;
+      hashedPasswordFile = config.age.secrets.hashed-ozeloten-password.path;
       uid = 1003;
     };
 
