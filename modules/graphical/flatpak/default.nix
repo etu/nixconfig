@@ -8,10 +8,15 @@
   options.etu.graphical.flatpak.enablePersistence = lib.mkEnableOption "Enable graphical flatpak persistence settings";
 
   config = lib.mkIf config.etu.graphical.flatpak.enable {
+    # Install appcenter
     etu.user.extraUserPackages = [
       pkgs.pantheon.appcenter
     ];
 
+    # Required for link opening to browsers to work in apps when on Sway
+    xdg.portal.extraPortals = with pkgs; [xdg-desktop-portal-gtk];
+
+    # Global state for flatpak
     etu.base.zfs.system.directories = lib.mkIf config.etu.graphical.flatpak.enablePersistence [
       "/var/lib/flatpak"
     ];
@@ -23,14 +28,17 @@
       "/var/lib/flatpak".options = ["exec"];
     };
 
+    # User state for flatpak and appcenter
     etu.base.zfs.user.directories = lib.mkIf config.etu.graphical.flatpak.enablePersistence [
       ".cache/io.elementary.appcenter/"
       ".local/share/flatpak/"
       ".var/app/"
     ];
 
+    # Enable flatpak
     services.flatpak.enable = true;
 
+    # Configure flathub
     systemd.services.flatpak-setup-flathub = {
       wantedBy = ["multi-user.target"];
       path = [pkgs.flatpak];

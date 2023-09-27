@@ -30,6 +30,7 @@
     graphical.fdm-printing.enable = true;
     graphical.hamradio.enable = true;
     graphical.signal.enable = true;
+    graphical.flatpak.enablePersistence = true;
     services.syncthing.enable = true;
     services.netdata.enable = true;
     user.enable = true;
