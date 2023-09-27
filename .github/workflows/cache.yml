@@ -46,7 +46,7 @@ jobs:
 
       # Build systems.
       - name: Build system derivation
-        uses: nick-fields/retry@v2.8.3
+        uses: nick-fields/retry@v2.9.0
         with:
           max_attempts: 3
           timeout_minutes: 60
