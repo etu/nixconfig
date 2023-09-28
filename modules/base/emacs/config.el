@@ -563,14 +563,13 @@
 ;;;
 ;;; Tree sitter
 ;;;
-(use-package nix-ts-mode :ensure t)
-
 (add-to-list 'treesit-extra-load-path "@treesitGrammars@/lib")
 
 (setq major-mode-remap-alist
       '((sh-mode . bash-ts-mode)
         (css-mode . css-ts-mode)
         (dockerfile-mode . dockerfile-ts-mode)
+        (conf-toml-mode . toml-ts-mode)
         ))
 
 ;;;

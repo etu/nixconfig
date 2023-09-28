@@ -67,8 +67,26 @@
   treesitGrammars = emacsPackages.${config.etu.base.emacs.package}.pkgs.treesit-grammars.with-grammars (g:
     with g; [
       tree-sitter-bash
+      tree-sitter-c
+      tree-sitter-cmake
+      tree-sitter-cpp
       tree-sitter-css
       tree-sitter-dockerfile
+      tree-sitter-go
+      tree-sitter-gomod
+      tree-sitter-hcl
+      tree-sitter-html
+      tree-sitter-java
+      tree-sitter-json
+      tree-sitter-latex
+      tree-sitter-make
+      tree-sitter-nix
+      tree-sitter-php
+      tree-sitter-python
+      tree-sitter-rust
+      tree-sitter-sql
+      tree-sitter-toml
+      tree-sitter-yaml
     ]);
 
   # Function to wrap emacs to contain the path for language servers
