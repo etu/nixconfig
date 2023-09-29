@@ -392,9 +392,8 @@
 ;; Flycheck
 (use-package flycheck
   :ensure t
-  :hook flycheck-mode
-  :init (setq flycheck-phpcs-standard "PSR12"
-              flycheck-php-phpcs-executable "phpcs"))
+  :init (setq flycheck-phpcs-standard "PSR12")
+  :hook (prog-mode . flycheck-mode))
 
 
 ;; Webpaste
