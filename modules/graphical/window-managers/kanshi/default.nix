@@ -18,11 +18,27 @@
               status = "enable";
             }
           ];
-          docked.outputs = [
+          elis-docked.outputs = [
             {
               criteria = "Samsung Electric Company LC49G95T H4ZN900853";
               mode = "5120x1440";
               position = "0,0";
+            }
+            {
+              criteria = "eDP-1";
+              status = "disable";
+            }
+          ];
+          caroline-docked.outputs = [
+            {
+              criteria = "Ancor Communications Inc ASUS PB278 C9LMTF095084";
+              mode = "2560x1440";
+              position = "0,0";
+            }
+            {
+              criteria = "Ancor Communications Inc ASUS PB278 CALMTF116261";
+              mode = "2560x1440";
+              position = "2560,0";
             }
             {
               criteria = "eDP-1";
