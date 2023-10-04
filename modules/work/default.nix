@@ -75,7 +75,7 @@
       pkgs.kubent
       pkgs.kubernetes-helm
       pkgs.minikube
-      pkgs.octant
+      # pkgs.octant
 
       # Misc
       pkgs.google-chrome
