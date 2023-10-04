@@ -28,7 +28,6 @@
       ".chalet"
       ".chef"
       ".config/Slack"
-      ".config/google-chrome"
       ".config/helm"
       ".config/tvnu"
       ".vagrant.d"
@@ -42,7 +41,6 @@
     # Allow certain unfree packages.
     etu.base.nix.allowUnfree = [
       "appgate-sdp"
-      "google-chrome"
       "slack"
     ];
 
@@ -78,7 +76,6 @@
       # pkgs.octant
 
       # Misc
-      pkgs.google-chrome
       pkgs.mariadb
       pkgs.slack
     ];
