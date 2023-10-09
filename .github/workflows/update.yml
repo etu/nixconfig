@@ -38,7 +38,7 @@ jobs:
           github_token: '${{ secrets.GITHUB_TOKEN }}'
 
       # Commit the updated dependencies to temporary branch
-      - uses: stefanzweifel/git-auto-commit-action@v4.16.0
+      - uses: stefanzweifel/git-auto-commit-action@v5.0.0
         with:
           commit_message: 'cron(treewide): Upgrade systems'
           branch: tmp-updater-branch
