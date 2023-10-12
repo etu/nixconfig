@@ -121,6 +121,7 @@
 
       "root@laptop-private-caroline:zroot/safe/data".target = "zroot/backups/current/laptop-private-caroline/data";
       "root@laptop-private-caroline:zroot/safe/home".target = "zroot/backups/current/laptop-private-caroline/home";
+      "root@laptop-private-caroline:zroot/zvol/win10".target = "zroot/backups/current/laptop-private-caroline/win10";
     };
   };
 

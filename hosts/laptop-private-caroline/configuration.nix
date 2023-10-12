@@ -42,6 +42,7 @@
     user.username = "concate";
     user.realname = "Caroline Hirwing";
     user.email = "caroline@hirwing.se";
+    user.extraGroups = ["video" "libvirtd"];
 
     # Don't set a password for root / user depending on agenix.
     user.userPasswordAgeModule = myData.ageModules.hashed-caroline-laptop-concate-password;
@@ -61,6 +62,10 @@
     user.extraUserPackages = [
       pkgs.firefox
       pkgs.git
+      pkgs.virt-manager
+      pkgs.freecad
+      pkgs.evince
+      pkgs.unzip
     ];
 
     # Allow home fileserver to connect to fetch snapshots.
@@ -71,9 +76,15 @@
       # Enable snapshotting for some filesystems
       "zroot/safe/data".use_template = ["data"];
       "zroot/safe/home".use_template = ["home"];
+      "zroot/zvol/win10".use_template = ["data"];
     };
   };
 
   # Enable blueman.
   services.blueman.enable = true;
+
+  # Set up virt-managar
+  virtualisation.libvirtd.enable = true;
+  programs.dconf.enable = true;
+  virtualisation.spiceUSBRedirection.enable = true;
 }
