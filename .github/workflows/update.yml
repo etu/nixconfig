@@ -164,7 +164,7 @@ jobs:
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
 
       # Configure SSH key
-      - uses: shimataro/ssh-key-action@v2.5.1
+      - uses: shimataro/ssh-key-action@v2.6.0
         with:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           name: id_ed25519
