@@ -123,6 +123,12 @@
       "root@laptop-private-caroline:zroot/safe/data".target = "zroot/backups/current/laptop-private-caroline/data";
       "root@laptop-private-caroline:zroot/safe/home".target = "zroot/backups/current/laptop-private-caroline/home";
       "root@laptop-private-caroline:zroot/zvol/win10".target = "zroot/backups/current/laptop-private-caroline/win10";
+
+      "root@laptop-private-elis:zroot/safe/data".target = "zroot/backups/current/laptop-private-elis/data";
+      "root@laptop-private-elis:zroot/safe/home".target = "zroot/backups/current/laptop-private-elis/home";
+
+      "root@laptop-work-elis:zroot/safe/data".target = "zroot/backups/current/laptop-work-elis/data";
+      "root@laptop-work-elis:zroot/safe/home".target = "zroot/backups/current/laptop-work-elis/home";
     };
   };
 
