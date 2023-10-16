@@ -36,16 +36,13 @@
     user.enable = true;
     user.extraGroups = ["video" "docker" "libvirtd"];
 
+    # Allow home fileserver to connect to fetch snapshots.
+    user.extraRootAuthorizedKeys = myData.pubkeys.etu.syncoid.server-main-elis;
+
     base.sanoid.datasets = {
       # Enable snapshotting for some filesystems
       "zroot/safe/data".use_template = ["data"];
       "zroot/safe/home".use_template = ["home"];
-    };
-    # Enable syncing of some filesystems
-    base.syncoid.enable = true;
-    base.syncoid.commands = {
-      "zroot/safe/data".target = "root@home.elis.nu:zroot/backups/current/laptop-private-elis/data";
-      "zroot/safe/home".target = "root@home.elis.nu:zroot/backups/current/laptop-private-elis/home";
     };
   };
 
