@@ -18,7 +18,7 @@
       Type = "oneshot";
       ExecStart = pkgs.writeScript "cloudflare-dyndns" ''
         #!${pkgs.bash}/bin/bash
-        set -eu
+        set -euo pipefail
 
         source ${config.age.secrets.cloudflare-api-env.path}
 

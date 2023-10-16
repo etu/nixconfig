@@ -16,6 +16,7 @@
 
     # Import local services that are host specific
     ./services/cfdyndns.nix
+    ./services/empty-dirs-cleaner.nix
     ./services/guest-users.nix
     ./services/hass.nix
     ./services/home-nginx.nix
