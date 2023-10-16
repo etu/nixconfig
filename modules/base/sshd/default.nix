@@ -39,6 +39,8 @@
     # they always are trusted.
     programs.ssh.knownHosts = {
       laptop-private-caroline.publicKey = myData.pubkeys.systems.laptop-private-caroline;
+      laptop-private-elis.publicKey = myData.pubkeys.systems.laptop-private-elis;
+      laptop-work-elis.publicKey = myData.pubkeys.systems.laptop-work-elis;
       server-main-elis = {
         extraHostNames = ["home.elis.nu" "local.elis.nu" "192.168.1.101"];
         publicKey = myData.pubkeys.systems.server-main-elis;
