@@ -35,6 +35,9 @@
     user.enable = true;
     user.extraGroups = ["video" "docker"];
 
+    # Allow home fileserver to connect to fetch snapshots.
+    user.extraRootAuthorizedKeys = myData.pubkeys.etu.syncoid.server-main-elis;
+
     # Install extra modes for work.
     base.emacs.extraConfig = [
       ''
@@ -68,12 +71,6 @@
       # Enable snapshotting for some filesystems
       "zroot/safe/data".use_template = ["data"];
       "zroot/safe/home".use_template = ["home"];
-    };
-    base.syncoid.enable = true;
-    # Enable syncing of some filesystems
-    base.syncoid.commands = {
-      "zroot/safe/data".target = "root@home.elis.nu:zroot/backups/current/laptop-work-elis/data";
-      "zroot/safe/home".target = "root@home.elis.nu:zroot/backups/current/laptop-work-elis/home";
     };
 
     # Enable work modules
