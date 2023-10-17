@@ -11,7 +11,7 @@ jobs:
     name: Update dependencies
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v4.1.0
+      - uses: actions/checkout@v4.1.1
 
       - uses: DeterminateSystems/nix-installer-action@v6
       - uses: DeterminateSystems/magic-nix-cache-action@v2
@@ -63,7 +63,7 @@ jobs:
 
     steps:
       # Clone the code from the temporary branch
-      - uses: actions/checkout@v4.1.0
+      - uses: actions/checkout@v4.1.1
         with:
           ref: tmp-updater-branch
 
@@ -90,7 +90,7 @@ jobs:
     needs: update
     steps:
       # Clone the code from the temporary branch
-      - uses: actions/checkout@v4.1.0
+      - uses: actions/checkout@v4.1.1
         with:
           ref: tmp-updater-branch
 
@@ -112,7 +112,7 @@ jobs:
     needs: cache
     steps:
       # Clone the code from the temporary branch
-      - uses: actions/checkout@v4.1.0
+      - uses: actions/checkout@v4.1.1
         with:
           ref: tmp-updater-branch
 
@@ -133,7 +133,7 @@ jobs:
     runs-on: ubuntu-22.04
     needs: check
     steps:
-      - uses: actions/checkout@v4.1.0
+      - uses: actions/checkout@v4.1.1
         with:
           ref: main
 
@@ -164,7 +164,7 @@ jobs:
           - vps06
 
     steps:
-      - uses: actions/checkout@v4.1.0
+      - uses: actions/checkout@v4.1.1
       - run: |
           git pull
 
