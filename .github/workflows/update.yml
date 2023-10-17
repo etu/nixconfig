@@ -12,7 +12,10 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4.1.0
-      - uses: cachix/install-nix-action@v23
+
+      - uses: DeterminateSystems/nix-installer-action@v6
+      - uses: DeterminateSystems/magic-nix-cache-action@v2
+
       - uses: cachix/cachix-action@v12
         with:
           name: etu
@@ -63,7 +66,10 @@ jobs:
       - uses: actions/checkout@v4.1.0
         with:
           ref: tmp-updater-branch
-      - uses: cachix/install-nix-action@v23
+
+      - uses: DeterminateSystems/nix-installer-action@v6
+      - uses: DeterminateSystems/magic-nix-cache-action@v2
+
       - uses: cachix/cachix-action@v12
         with:
           name: etu
@@ -87,7 +93,10 @@ jobs:
       - uses: actions/checkout@v4.1.0
         with:
           ref: tmp-updater-branch
-      - uses: cachix/install-nix-action@v23
+
+      - uses: DeterminateSystems/nix-installer-action@v6
+      - uses: DeterminateSystems/magic-nix-cache-action@v2
+
       - uses: cachix/cachix-action@v12
         with:
           name: etu
@@ -106,7 +115,10 @@ jobs:
       - uses: actions/checkout@v4.1.0
         with:
           ref: tmp-updater-branch
-      - uses: cachix/install-nix-action@v23
+
+      - uses: DeterminateSystems/nix-installer-action@v6
+      - uses: DeterminateSystems/magic-nix-cache-action@v2
+
       - uses: cachix/cachix-action@v12
         with:
           name: etu
@@ -155,7 +167,10 @@ jobs:
       - uses: actions/checkout@v4.1.0
       - run: |
           git pull
-      - uses: cachix/install-nix-action@v23
+
+      - uses: DeterminateSystems/nix-installer-action@v6
+      - uses: DeterminateSystems/magic-nix-cache-action@v2
+
       - uses: cachix/cachix-action@v12
         with:
           name: etu

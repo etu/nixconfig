@@ -12,7 +12,10 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4.1.0
-      - uses: cachix/install-nix-action@v23
+
+      - uses: DeterminateSystems/nix-installer-action@v6
+      - uses: DeterminateSystems/magic-nix-cache-action@v2
+
       - name: Check nix file formatting
         run: 'nix fmt . -- --check'
       - name: Check yaml file formatting
@@ -36,7 +39,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4.1.0
-      - uses: cachix/install-nix-action@v23
+
+      - uses: DeterminateSystems/nix-installer-action@v6
+      - uses: DeterminateSystems/magic-nix-cache-action@v2
+
       - uses: cachix/cachix-action@v12
         with:
           name: etu
@@ -57,7 +63,10 @@ jobs:
     steps:
       # Clone the code from the temporary branch
       - uses: actions/checkout@v4.1.0
-      - uses: cachix/install-nix-action@v23
+
+      - uses: DeterminateSystems/nix-installer-action@v6
+      - uses: DeterminateSystems/magic-nix-cache-action@v2
+
       - uses: cachix/cachix-action@v12
         with:
           name: etu
@@ -73,7 +82,10 @@ jobs:
     needs: cache
     steps:
       - uses: actions/checkout@v4.1.0
-      - uses: cachix/install-nix-action@v23
+
+      - uses: DeterminateSystems/nix-installer-action@v6
+      - uses: DeterminateSystems/magic-nix-cache-action@v2
+
       - uses: cachix/cachix-action@v12
         with:
           name: etu
