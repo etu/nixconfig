@@ -5,9 +5,9 @@
 }: {
   # Make sure to have nginx enabled
   services.nginx.enable = true;
-  services.nginx.virtualHosts."local.elis.nu".locations = let
+  services.nginx.virtualHosts.${config.networking.hostName}.locations = let
     onlyLan = ''
-      allow 192.168.1.0/24;
+      allow 100.0.0.0/8;
       allow 127.0.0.1/24;
       deny all;
     '';
