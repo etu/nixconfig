@@ -75,6 +75,10 @@
         use_template = ["home"];
         autosnap = false;
       };
+      "zroot/backups/current/laptop-private-caroline/win10" = {
+        use_template = ["data"];
+        autosnap = false;
+      };
       "zroot/backups/current/laptop-private-elis/data" = {
         use_template = ["data"];
         autosnap = false;
