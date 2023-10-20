@@ -359,11 +359,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1697571351,
-        "narHash": "sha256-dRBQgUJSp9YGwyrETDjgBxpbIuX50afaJdxO0tsLwAw=",
+        "lastModified": 1697828736,
+        "narHash": "sha256-ZcCuJkIRu45r+j/tG38BjDavXn/Fl1/Ys/T9y2GRJcg=",
         "owner": "etu",
         "repo": "via.elis.nu",
-        "rev": "6867589ddc6e6b62b0a701d2b5821cd6f9f54fda",
+        "rev": "11ebd7898fd21a3ccd2ee307e37448a9385c4f14",
         "type": "github"
       },
       "original": {
