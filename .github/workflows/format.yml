@@ -1,0 +1,31 @@
+---
+name: Format 🔎
+
+'on':
+  push:
+    branches:
+      - main
+      - cache
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  format:
+    name: Format 🔎
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4.1.1
+
+      - uses: DeterminateSystems/nix-installer-action@v6
+      - uses: DeterminateSystems/magic-nix-cache-action@v2
+
+      - name: Check nix file formatting ❄️
+        run: 'nix fmt . -- --check'
+      - name: Check yaml file formatting 📂
+        run: 'nix run nixpkgs#yamllint -- --strict --format github .'
+      - name: Check deadnix file formatting ❄️
+        run: 'nix run nixpkgs#deadnix -- hosts/ modules/ packages/'
+      - name: Check statix file formatting ❄️
+        run: 'nix run nixpkgs#statix -- check --config .statix.toml'

@@ -7,28 +7,9 @@ name: Pull Request
       - main
 
 jobs:
-  format:
-    name: File formatting
-    runs-on: ubuntu-22.04
-    steps:
-      - uses: actions/checkout@v4.1.1
-
-      - uses: DeterminateSystems/nix-installer-action@v6
-      - uses: DeterminateSystems/magic-nix-cache-action@v2
-
-      - name: Check nix file formatting
-        run: 'nix fmt . -- --check'
-      - name: Check yaml file formatting
-        run: 'nix run nixpkgs#yamllint -- --strict --format github .'
-      - name: Check deadnix file formatting
-        run: 'nix run nixpkgs#deadnix -- hosts/ modules/ packages/'
-      - name: Check statix file formatting
-        run: 'nix run nixpkgs#statix -- check --config .statix.toml'
-
   build:
     name: Build systems
     runs-on: ubuntu-22.04
-    needs: format
     strategy:
       matrix:
         hostname:
@@ -57,7 +38,6 @@ jobs:
   build-shell:
     name: Cache nix shell
     runs-on: ubuntu-22.04
-    needs: format
     steps:
       - uses: actions/checkout@v4.1.1
 
