@@ -110,6 +110,12 @@
   (global-set-key (kbd "S-C-<up>") 'enlarge-window))
 
 
+;; Bind forward and backward buttons on my mouse to winner undo and redo
+(progn
+  (global-set-key (kbd "<mouse-8>") 'winner-undo)
+  (global-set-key (kbd "<mouse-9>") 'winner-redo))
+
+
 ;; Unbind suspend frame -- Usually not what you want with graphical emacses
 (global-unset-key (kbd "C-z"))
 (global-unset-key (kbd "C-x C-z"))
