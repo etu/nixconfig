@@ -50,11 +50,6 @@
     ip-failar-nu.inputs.nixpkgs.follows = "nixpkgs";
     ip-failar-nu.inputs.flake-utils.follows = "flake-utils";
 
-    # Import via-elis-nu, don't follow upstream nixpkgs to avoid
-    # unwanted changes and breakage.
-    via-elis-nu.url = "github:etu/via.elis.nu";
-    via-elis-nu.inputs.flake-utils.follows = "flake-utils";
-
     # Import NUR
     nur.url = "nur";
   };
@@ -123,7 +118,6 @@
 
             emacs-overlay = inputs.emacs-overlay.overlay;
             emacsWayland = nixpkgs.legacyPackages.${system}.emacs29-pgtk;
-            via-elis-nu = inputs.via-elis-nu.packages.${system}.website;
           }
           // extraArgs;
       };

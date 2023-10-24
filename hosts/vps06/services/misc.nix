@@ -1,4 +1,4 @@
-{via-elis-nu, ...}: {
+_: {
   # Enable the ip-failar-nu service
   services.ip-failar-nu.enable = true;
 
@@ -18,11 +18,6 @@
       forceSSL = true;
       enableACME = true;
       locations."/".proxyPass = "https://elis.nu/";
-    };
-    "via.elis.nu" = {
-      forceSSL = true;
-      enableACME = true;
-      locations."/".root = via-elis-nu;
     };
   };
 }
