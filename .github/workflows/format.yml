@@ -3,23 +3,17 @@ name: Format 🔎
 
 'on':
   push:
-    branches:
-      - main
-      - cache
-
   pull_request:
-    branches:
-      - main
 
 jobs:
   format:
     name: Format 🔎
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v4.1.1
-
+      - uses: actions/checkout@v4
       - uses: DeterminateSystems/nix-installer-action@v6
       - uses: DeterminateSystems/magic-nix-cache-action@v2
+      - uses: DeterminateSystems/flake-checker-action@v5
 
       - name: Check nix file formatting ❄️
         run: 'nix fmt . -- --check'
