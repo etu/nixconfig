@@ -26,6 +26,6 @@ jobs:
       - name: Check yaml file formatting 📂
         run: 'nix run nixpkgs#yamllint -- --strict --format github .'
       - name: Check deadnix file formatting ❄️
-        run: 'nix run nixpkgs#deadnix -- hosts/ modules/ packages/'
+        run: 'nix run nixpkgs#deadnix -- --fail hosts/ modules/ packages/'
       - name: Check statix file formatting ❄️
         run: 'nix run nixpkgs#statix -- check --config .statix.toml'
