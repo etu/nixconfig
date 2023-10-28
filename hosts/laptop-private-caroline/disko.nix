@@ -67,6 +67,11 @@ _: {
           mountpoint = "/nix";
           options.mountpoint = "legacy";
         };
+        "local/flatpak-data" = {
+          type = "zfs_fs";
+          mountpoint = "/data/flatpak-data";
+          options.mountpoint = "legacy";
+        };
         "local/var-log" = {
           type = "zfs_fs";
           mountpoint = "/var/log";
