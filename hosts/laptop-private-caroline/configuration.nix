@@ -63,7 +63,7 @@
       pkgs.firefox
       pkgs.git
       pkgs.virt-manager
-      pkgs.freecad
+      #pkgs.freecad
       pkgs.evince
       pkgs.unzip
     ];
