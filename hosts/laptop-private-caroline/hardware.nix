@@ -19,9 +19,6 @@
   # Install thinkpad modules for TLP.
   boot.extraModulePackages = with config.boot.kernelPackages; [acpi_call];
 
-  # Enable unstable ZFS to get an even newer kernel than latest for stable ZFS.
-  boot.zfs.enableUnstable = true;
-
   # Set kernel.
   boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
 
