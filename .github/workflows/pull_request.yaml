@@ -22,7 +22,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4.1.1
 
-      - uses: DeterminateSystems/nix-installer-action@v6
+      - uses: DeterminateSystems/nix-installer-action@v7
       - uses: DeterminateSystems/magic-nix-cache-action@v2
 
       - uses: cachix/cachix-action@v12
@@ -41,7 +41,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4.1.1
 
-      - uses: DeterminateSystems/nix-installer-action@v6
+      - uses: DeterminateSystems/nix-installer-action@v7
       - uses: DeterminateSystems/magic-nix-cache-action@v2
 
       - uses: cachix/cachix-action@v12
@@ -59,7 +59,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4.1.1
 
-      - uses: DeterminateSystems/nix-installer-action@v6
+      - uses: DeterminateSystems/nix-installer-action@v7
       - uses: DeterminateSystems/magic-nix-cache-action@v2
 
       - uses: cachix/cachix-action@v12
