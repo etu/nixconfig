@@ -15,6 +15,11 @@
       "/var/lib/netdata"
     ];
 
+    # Allow to install netdata
+    etu.base.nix.allowUnfree = [
+      "netdata"
+    ];
+
     # Include secret with token
     age.secrets.netdata-claim-token-file = myData.ageModules.netdata-claim-token-file;
 
