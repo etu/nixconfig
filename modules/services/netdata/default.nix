@@ -2,6 +2,7 @@
   config,
   lib,
   myData,
+  pkgs,
   ...
 }: {
   options.etu.services.netdata = {
@@ -19,6 +20,7 @@
 
     # Enable netdata
     services.netdata.enable = true;
+    services.netdata.package = pkgs.netdataCloud;
     services.netdata.claimTokenFile = config.age.secrets.netdata-claim-token-file.path;
   };
 }
