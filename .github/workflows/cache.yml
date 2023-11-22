@@ -22,7 +22,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4.1.1
 
-      - uses: DeterminateSystems/nix-installer-action@v7
+      - uses: DeterminateSystems/nix-installer-action@v8
       - uses: DeterminateSystems/magic-nix-cache-action@v2
 
       - uses: cachix/cachix-action@v12
@@ -46,7 +46,7 @@ jobs:
       # Clone the code from the temporary branch
       - uses: actions/checkout@v4.1.1
 
-      - uses: DeterminateSystems/nix-installer-action@v7
+      - uses: DeterminateSystems/nix-installer-action@v8
       - uses: DeterminateSystems/magic-nix-cache-action@v2
 
       - uses: cachix/cachix-action@v12
@@ -65,7 +65,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4.1.1
 
-      - uses: DeterminateSystems/nix-installer-action@v7
+      - uses: DeterminateSystems/nix-installer-action@v8
       - uses: DeterminateSystems/magic-nix-cache-action@v2
 
       - uses: cachix/cachix-action@v12
