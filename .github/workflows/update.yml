@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4.1.1
 
-      - uses: DeterminateSystems/nix-installer-action@v7
+      - uses: DeterminateSystems/nix-installer-action@v8
       - uses: DeterminateSystems/magic-nix-cache-action@v2
 
       - uses: cachix/cachix-action@v12
@@ -67,7 +67,7 @@ jobs:
         with:
           ref: tmp-updater-branch
 
-      - uses: DeterminateSystems/nix-installer-action@v7
+      - uses: DeterminateSystems/nix-installer-action@v8
       - uses: DeterminateSystems/magic-nix-cache-action@v2
 
       - uses: cachix/cachix-action@v12
@@ -94,7 +94,7 @@ jobs:
         with:
           ref: tmp-updater-branch
 
-      - uses: DeterminateSystems/nix-installer-action@v7
+      - uses: DeterminateSystems/nix-installer-action@v8
       - uses: DeterminateSystems/magic-nix-cache-action@v2
 
       - uses: cachix/cachix-action@v12
@@ -116,7 +116,7 @@ jobs:
         with:
           ref: tmp-updater-branch
 
-      - uses: DeterminateSystems/nix-installer-action@v7
+      - uses: DeterminateSystems/nix-installer-action@v8
       - uses: DeterminateSystems/magic-nix-cache-action@v2
 
       - uses: cachix/cachix-action@v12
@@ -168,7 +168,7 @@ jobs:
       - run: |
           git pull
 
-      - uses: DeterminateSystems/nix-installer-action@v7
+      - uses: DeterminateSystems/nix-installer-action@v8
       - uses: DeterminateSystems/magic-nix-cache-action@v2
 
       - uses: cachix/cachix-action@v12
