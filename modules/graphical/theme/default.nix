@@ -33,6 +33,11 @@
     fonts.enableDefaultPackages = true;
     fonts.enableGhostscriptFonts = true;
 
+    # Allow to install microsoft fonts
+    etu.base.nix.allowUnfree = [
+      "corefonts"
+    ];
+
     # Configure fontconfig to actually use more of Noto Color Emoji in
     # alacritty.
     fonts.fontconfig.defaultFonts.monospace = [
@@ -47,6 +52,9 @@
       # Cantarell fonts seems to be used by GTK applications (was mostly
       # noticable in Firefox UI elements).
       pkgs.cantarell-fonts
+
+      # Install microsoft fonts
+      pkgs.corefonts
 
       config.nur.repos.etu.font-etuvetica # My own font
       config.nur.repos.etu.font-talyznewroman # Install talyz's font
