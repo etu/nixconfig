@@ -66,6 +66,8 @@
       #pkgs.freecad
       pkgs.evince
       pkgs.unzip
+      pkgs.inkscape
+      pkgs.libreoffice
     ];
 
     # Allow home fileserver to connect to fetch snapshots.
