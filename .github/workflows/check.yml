@@ -16,7 +16,7 @@ jobs:
       - uses: DeterminateSystems/nix-installer-action@v8
       - uses: DeterminateSystems/magic-nix-cache-action@v2
 
-      - uses: cachix/cachix-action@v12
+      - uses: cachix/cachix-action@v13
         with:
           name: etu
           extraPullNames: 'nix-community'
@@ -45,7 +45,7 @@ jobs:
       - uses: DeterminateSystems/nix-installer-action@v8
       - uses: DeterminateSystems/magic-nix-cache-action@v2
 
-      - uses: cachix/cachix-action@v12
+      - uses: cachix/cachix-action@v13
         with:
           name: etu
           extraPullNames: 'nix-community'
