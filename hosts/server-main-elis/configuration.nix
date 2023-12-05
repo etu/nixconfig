@@ -165,6 +165,9 @@
     MINUTES 1      # Default from apcupsd: 3, NixOS default: 5
   '';
 
+  # Enable smartd.
+  services.smartd.enable = true;
+
   # Enable kvm
   virtualisation.libvirtd.enable = true;
   security.polkit.enable = true;
