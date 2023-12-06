@@ -1,7 +1,11 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{myData, ...}: {
+{
+  config,
+  myData,
+  ...
+}: {
   imports = [
     # Include my hardware settings.
     ./hardware.nix
@@ -56,7 +60,14 @@
 
   # Allow inbound traffic to lancache ports.
   networking.firewall.allowedTCPPorts = [80 443];
-  networking.firewall.allowedUDPPorts = [53];
+  networking.firewall.allowedUDPPorts = [
+    # DNS
+    53
+
+    # Valheim
+    2456
+    2457
+  ];
 
   # Set up docker.
   virtualisation.docker.enable = true;
@@ -87,7 +98,23 @@
         UPSTREAM_DNS = "1.1.1.2";
       };
     };
+
+    # Set up a valheim server
+    valheim-server = {
+      image = "ghcr.io/lloesche/valheim-server:latest";
+      ports = [
+        "2456-2457:2456-2457/udp"
+      ];
+      environmentFiles = [config.age.secrets.valheim-server-env.path];
+      volumes = [
+        "/media/zstorage/valheim/config:/config"
+        "/media/zstorage/valheim/data:/opt/valheim"
+      ];
+    };
   };
+
+  # Include secret
+  age.secrets.valheim-server-env = myData.ageModules.valheim-server-env;
 
   # Set up a minecraft server
   services.minecraft-server = {
