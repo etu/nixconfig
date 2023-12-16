@@ -4,6 +4,7 @@
 {
   config,
   myData,
+  pkgs,
   ...
 }: {
   imports = [
@@ -116,6 +117,20 @@
 
   # Include secret
   age.secrets.valheim-server-env = myData.ageModules.valheim-server-env;
+
+  # Restart valheim service every day
+  systemd.services.restart-valheim-service = {
+    description = "Restart valheim service";
+    after = ["docker.service"];
+    wantedBy = ["multi-user.target"];
+    startAt = "05:15";
+    serviceConfig = {
+      Type = "oneshot";
+      User = "root";
+      Group = "root";
+      ExecStart = "${pkgs.systemd}/bin/systemctl restart docker-valheim-server.service";
+    };
+  };
 
   # Set up a minecraft server
   services.minecraft-server = {
