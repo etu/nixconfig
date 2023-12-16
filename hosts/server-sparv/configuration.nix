@@ -44,6 +44,7 @@
       "zroot/safe/root".use_template = ["data"];
       "zroot/safe/home".use_template = ["data"];
       "zroot/local/minecraft".use_template = ["data"]; # Minecraft server
+      "zroot/local/valheim".use_template = ["data"]; # Valheim server
     };
 
     # Allow github to deploy system
@@ -107,8 +108,8 @@
       ];
       environmentFiles = [config.age.secrets.valheim-server-env.path];
       volumes = [
-        "/media/zstorage/valheim/config:/config"
-        "/media/zstorage/valheim/data:/opt/valheim"
+        "/var/lib/valheim/config:/config"
+        "/var/lib/valheim/data:/opt/valheim"
       ];
     };
   };
