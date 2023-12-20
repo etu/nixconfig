@@ -50,6 +50,21 @@
     services.netdata.enable = true;
   };
 
+  users.motd = ''
+    ===================================================================
+    Notis: Denna server planeras att stängas ner utan någon planerad
+           ersättare. Detta är på grund av att Elis har slutat
+           använda IRC direkt sedan en längre tid tillbaka och tycker
+           inte att det är så kul att sitta och betala för denna
+           server varje månad.
+
+           Det finns ingen hård dödslinje på när den kommer att stängas
+           ner ännu. Men ni som fortfarande är beroende av
+           funktionaliteten av denna server kan väl kanske samordna en
+           ersättare till er.
+    ===================================================================
+  '';
+
   # Disable documentation to make the system smaller.
   documentation.enable = false;
   documentation.doc.enable = false;
