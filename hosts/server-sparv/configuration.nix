@@ -124,12 +124,11 @@
     after = ["docker.service"];
     wantedBy = ["multi-user.target"];
     startAt = "05:15";
-    serviceConfig = {
-      Type = "oneshot";
-      User = "root";
-      Group = "root";
-      ExecStart = "${pkgs.systemd}/bin/systemctl restart docker-valheim-server.service";
-    };
+    script = ''
+      test $(date | grep ' 05:' | wc -l) = 1 &&
+      ${pkgs.systemd}/bin/systemctl restart docker-valheim-server.service ||
+      echo "Skipping due to time check"
+    '';
   };
 
   # Set up a minecraft server
