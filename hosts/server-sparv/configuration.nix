@@ -122,13 +122,16 @@
   systemd.services.restart-valheim-service = {
     description = "Restart valheim service";
     after = ["docker.service"];
-    wantedBy = ["multi-user.target"];
-    startAt = "05:15";
-    script = ''
-      test $(date | grep ' 05:' | wc -l) = 1 &&
-      ${pkgs.systemd}/bin/systemctl restart docker-valheim-server.service ||
-      echo "Skipping due to time check"
-    '';
+    serviceConfig.Type = "simple";
+    script = "${pkgs.systemd}/bin/systemctl restart docker-valheim-server.service";
+  };
+  systemd.timers.restart-valheim-service = {
+    wantedBy = ["timers.target"];
+    after = ["docker.service"];
+    timerConfig = {
+      OnCalendar = "05:15";
+      Persistent = "yes";
+    };
   };
 
   # Set up a minecraft server
