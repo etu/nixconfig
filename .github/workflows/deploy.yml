@@ -1,0 +1,60 @@
+---
+name: Deploy 🚀
+
+'on':
+  push:
+    branches:
+      - main
+
+jobs:
+  check:
+    name: Check ✔️
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@v9
+      - uses: DeterminateSystems/magic-nix-cache-action@v2
+      - name: Check the flake
+        run: 'nix flake check'
+
+  deploy:
+    name: Deploy 🚀
+    runs-on: ubuntu-22.04
+    needs: check
+    # Don't cancel jobs if one job fails
+    continue-on-error: true
+    strategy:
+      matrix:
+        hostname:
+          - server-main-elis
+          - server-sparv
+          - vps04
+          - vps06
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@v9
+      - uses: DeterminateSystems/magic-nix-cache-action@v2
+
+      # Build systems.
+      - name: Build system derivation
+        uses: nick-fields/retry@v2
+        with:
+          max_attempts: 2
+          timeout_minutes: 60
+          command: 'nix build .#nixosConfigurations.${{ matrix.hostname }}.config.system.build.toplevel'
+
+      # Configure SSH key
+      - uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          name: id_ed25519
+          known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
+
+      # Deploy systems
+      - name: Deploy system
+        uses: nick-fields/retry@v2
+        with:
+          max_attempts: 2
+          timeout_minutes: 30
+          command: 'nix develop -c deploy --skip-checks --targets .#${{ matrix.hostname }}'

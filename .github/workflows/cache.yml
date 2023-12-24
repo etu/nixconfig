@@ -1,14 +1,15 @@
 ---
-name: Cache
+name: Cache 📝
 
 'on':
   push:
     branches:
+      - main
       - cache
 
 jobs:
   cache:
-    name: Cache system
+    name: Cache 📝
     runs-on: ubuntu-22.04
     strategy:
       matrix:
@@ -20,59 +21,18 @@ jobs:
           - vps06
 
     steps:
-      - uses: actions/checkout@v4.1.1
-
+      - uses: actions/checkout@v4
       - uses: DeterminateSystems/nix-installer-action@v9
       - uses: DeterminateSystems/magic-nix-cache-action@v2
-
       - uses: cachix/cachix-action@v13
         with:
           name: etu
           extraPullNames: 'nix-community'
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-
       # Build systems.
       - name: Build system derivation
-        uses: nick-fields/retry@v2.9.0
+        uses: nick-fields/retry@v2
         with:
           max_attempts: 3
           timeout_minutes: 60
           command: 'nix build .#nixosConfigurations.${{ matrix.hostname }}.config.system.build.toplevel'
-
-  cache-shell:
-    name: Cache nix shell
-    runs-on: ubuntu-22.04
-    steps:
-      # Clone the code from the temporary branch
-      - uses: actions/checkout@v4.1.1
-
-      - uses: DeterminateSystems/nix-installer-action@v9
-      - uses: DeterminateSystems/magic-nix-cache-action@v2
-
-      - uses: cachix/cachix-action@v13
-        with:
-          name: etu
-          extraPullNames: 'nix-community'
-          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-
-      - name: Check the flake
-        run: 'nix build .#devShells.x86_64-linux.default'
-
-  check:
-    name: Check flake
-    runs-on: ubuntu-22.04
-    needs: cache
-    steps:
-      - uses: actions/checkout@v4.1.1
-
-      - uses: DeterminateSystems/nix-installer-action@v9
-      - uses: DeterminateSystems/magic-nix-cache-action@v2
-
-      - uses: cachix/cachix-action@v13
-        with:
-          name: etu
-          extraPullNames: 'nix-community'
-          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-
-      - name: Check the flake
-        run: 'nix flake check'

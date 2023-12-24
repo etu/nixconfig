@@ -1,5 +1,5 @@
 ---
-name: Check
+name: Check 🔎
 
 'on':
   push:
@@ -8,68 +8,11 @@ name: Check
 
 jobs:
   check:
-    name: Check flake
+    name: Check 🔎
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4.1.1
-
       - uses: DeterminateSystems/nix-installer-action@v9
       - uses: DeterminateSystems/magic-nix-cache-action@v2
-
-      - uses: cachix/cachix-action@v13
-        with:
-          name: etu
-          extraPullNames: 'nix-community'
-          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-
       - name: Check the flake
         run: 'nix flake check'
-
-  deploy:
-    name: Deploy systems
-    runs-on: ubuntu-22.04
-    needs: check
-    # Don't cancel jobs if one job fails
-    continue-on-error: true
-    strategy:
-      matrix:
-        hostname:
-          - server-main-elis
-          - server-sparv
-          - vps04
-          - vps06
-
-    steps:
-      - uses: actions/checkout@v4.1.1
-
-      - uses: DeterminateSystems/nix-installer-action@v9
-      - uses: DeterminateSystems/magic-nix-cache-action@v2
-
-      - uses: cachix/cachix-action@v13
-        with:
-          name: etu
-          extraPullNames: 'nix-community'
-          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-
-      # Configure SSH key
-      - uses: shimataro/ssh-key-action@v2.6.1
-        with:
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          name: id_ed25519
-          known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
-
-      # Build systems.
-      - name: Build system derivation
-        uses: nick-fields/retry@v2.9.0
-        with:
-          max_attempts: 2
-          timeout_minutes: 60
-          command: 'nix build .#nixosConfigurations.${{ matrix.hostname }}.config.system.build.toplevel'
-
-      # Deploy systems
-      - name: Deploy system
-        uses: nick-fields/retry@v2.9.0
-        with:
-          max_attempts: 2
-          timeout_minutes: 30
-          command: 'nix develop -c deploy .#${{ matrix.hostname }}'
