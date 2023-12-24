@@ -11,7 +11,7 @@ jobs:
     name: Update dependencies
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v4.1.1
+      - uses: actions/checkout@v4
 
       - uses: DeterminateSystems/nix-installer-action@v9
       - uses: DeterminateSystems/magic-nix-cache-action@v2
@@ -63,7 +63,7 @@ jobs:
 
     steps:
       # Clone the code from the temporary branch
-      - uses: actions/checkout@v4.1.1
+      - uses: actions/checkout@v4
         with:
           ref: tmp-updater-branch
 
@@ -78,7 +78,7 @@ jobs:
 
       # Build systems.
       - name: Build system derivation
-        uses: nick-fields/retry@v2.9.0
+        uses: nick-fields/retry@v2
         with:
           max_attempts: 3
           timeout_minutes: 60
@@ -90,7 +90,7 @@ jobs:
     needs: update
     steps:
       # Clone the code from the temporary branch
-      - uses: actions/checkout@v4.1.1
+      - uses: actions/checkout@v4
         with:
           ref: tmp-updater-branch
 
@@ -112,7 +112,7 @@ jobs:
     needs: cache
     steps:
       # Clone the code from the temporary branch
-      - uses: actions/checkout@v4.1.1
+      - uses: actions/checkout@v4
         with:
           ref: tmp-updater-branch
 
@@ -133,7 +133,7 @@ jobs:
     runs-on: ubuntu-22.04
     needs: check
     steps:
-      - uses: actions/checkout@v4.1.1
+      - uses: actions/checkout@v4
         with:
           ref: main
 
@@ -164,38 +164,32 @@ jobs:
           - vps06
 
     steps:
-      - uses: actions/checkout@v4.1.1
+      - uses: actions/checkout@v4
       - run: |
           git pull
 
       - uses: DeterminateSystems/nix-installer-action@v9
       - uses: DeterminateSystems/magic-nix-cache-action@v2
 
-      - uses: cachix/cachix-action@v13
-        with:
-          name: etu
-          extraPullNames: 'nix-community'
-          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-
-      # Configure SSH key
-      - uses: shimataro/ssh-key-action@v2.6.1
-        with:
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          name: id_ed25519
-          known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
-
       # Build systems.
       - name: Build system derivation
-        uses: nick-fields/retry@v2.9.0
+        uses: nick-fields/retry@v2
         with:
           max_attempts: 2
           timeout_minutes: 30
           command: 'nix build .#nixosConfigurations.${{ matrix.hostname }}.config.system.build.toplevel'
 
+      # Configure SSH key
+      - uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          name: id_ed25519
+          known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
+
       # Deploy systems
       - name: Deploy system
-        uses: nick-fields/retry@v2.9.0
+        uses: nick-fields/retry@v2
         with:
           max_attempts: 2
           timeout_minutes: 30
-          command: 'nix develop -c deploy .#${{ matrix.hostname }}'
+          command: 'nix develop -c deploy  --skip-checks --targets .#${{ matrix.hostname }}'

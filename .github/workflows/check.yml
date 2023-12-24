@@ -6,6 +6,11 @@ name: Check 🔎
     branches:
       - main
 
+    paths:
+      - '**.nix'
+      - '**.age'
+      - 'flake.lock'
+
 jobs:
   check:
     name: Check 🔎
