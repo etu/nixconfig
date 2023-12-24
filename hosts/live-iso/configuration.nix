@@ -20,7 +20,7 @@
 
   # My module settings
   etu = {
-    stateVersion = "23.11";
+    stateVersion = "24.05";
 
     # This is to make the openssh identity files to be located in a
     # reasonable place.

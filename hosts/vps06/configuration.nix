@@ -36,7 +36,7 @@
 
   # My module settings
   etu = {
-    stateVersion = "22.11";
+    stateVersion = "24.05";
 
     base.emacs.enable = lib.mkForce false;
 

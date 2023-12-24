@@ -20,7 +20,7 @@
 
   # My module settings
   etu = {
-    stateVersion = "22.11";
+    stateVersion = "24.05";
 
     development.enable = true;
     development.flipper-zero.enable = true;
