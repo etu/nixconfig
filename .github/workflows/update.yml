@@ -188,8 +188,4 @@ jobs:
 
       # Deploy systems
       - name: Deploy system
-        uses: nick-fields/retry@v2
-        with:
-          max_attempts: 2
-          timeout_minutes: 30
-          command: 'nix develop -c deploy  --skip-checks --targets .#${{ matrix.hostname }}'
+        run: 'nix develop -c deploy --skip-checks --targets .#${{ matrix.hostname }}'
