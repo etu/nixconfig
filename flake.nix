@@ -113,7 +113,7 @@
             inherit myData;
 
             # Emacs mode for typst-ts-mode.
-            typst-ts-mode = inputs.typst2nix.packages.${system}.typst-ts-mode;
+            inherit (inputs.typst2nix.packages.${system}) typst-ts-mode;
 
             # Customize ansible to add dependencies needed by kubespray.
             ansible_2_12 = pkgs-22-11.ansible_2_12.overrideAttrs (oa: {
