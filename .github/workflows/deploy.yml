@@ -11,6 +11,10 @@ name: Deploy 🚀
       - '**.age'
       - 'flake.lock'
 
+concurrency:
+  group: ci-${{ github.ref }}-deploy
+  cancel-in-progress: true
+
 jobs:
   check:
     name: Check ✔️

@@ -12,6 +12,10 @@ name: Cache 📝
       - '**.age'
       - 'flake.lock'
 
+concurrency:
+  group: ci-${{ github.ref }}-cache
+  cancel-in-progress: true
+
 jobs:
   cache:
     name: Cache 📝

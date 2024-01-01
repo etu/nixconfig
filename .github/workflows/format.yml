@@ -5,6 +5,10 @@ name: Format 🔎
   push:
   pull_request:
 
+concurrency:
+  group: ci-${{ github.ref }}-format
+  cancel-in-progress: true
+
 jobs:
   format:
     name: Format 🔎
