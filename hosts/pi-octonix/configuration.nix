@@ -115,7 +115,7 @@
         y_offset = "-7";
         # 2.4 was suggested preset for bltouch, but I have a crtouch
         # so it may differ I guess. This works well for me. ¯\_(ツ)_/¯
-        z_offset = "1.8";
+        z_offset = "1.9";
         speed = "3.0";
       };
 
