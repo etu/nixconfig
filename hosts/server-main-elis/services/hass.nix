@@ -43,6 +43,7 @@
       extraOptions = [
         "--network=host"
         "--device=/dev/serial/by-id/usb-dresden_elektronik_ingenieurtechnik_GmbH_ConBee_II_DE2124653-if00:/dev/ttyACM0"
+        "--device=/dev/serial/by-id/usb-Silicon_Labs_CP2102N_USB_to_UART_Bridge_Controller_041c5694bebaed119e51ad8238a92db5-if00-port0:/dev/ttyUSB0"
       ];
       volumes = [
         "${config.etu.dataPrefix}/var/lib/hass:/config"
