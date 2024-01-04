@@ -75,7 +75,11 @@
     system.activationScripts.diff = {
       supportsDryActivation = true;
       text = ''
-        ${pkgs.nvd}/bin/nvd --nix-bin-dir=${config.nix.package}/bin diff /run/current-system "$systemConfig"
+        if test -e /run/current-system; then
+          echo "--- diff to current-system"
+          ${pkgs.nvd}/bin/nvd --nix-bin-dir=${config.nix.package}/bin diff /run/current-system "$systemConfig"
+          echo "---"
+        fi
       '';
     };
 
