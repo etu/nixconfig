@@ -8,7 +8,11 @@
 
   config = lib.mkIf config.etu.graphical.fdm-printing.enable {
     # Install using home-manager.
-    etu.user.extraUserPackages = [pkgs.cura pkgs.openscad];
+    etu.user.extraUserPackages = [
+      pkgs.cura
+      pkgs.openscad
+      pkgs.prusa-slicer
+    ];
 
     # Enable persistence for fdm-printing related files.
     etu.base.zfs.user.directories = [
@@ -16,6 +20,7 @@
       ".config/cura"
       ".local/share/cura"
       ".config/OpenSCAD"
+      ".config/PrusaSlicer"
     ];
   };
 }
