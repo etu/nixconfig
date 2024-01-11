@@ -22,6 +22,7 @@
     stateVersion = "24.05";
 
     development.enable = true;
+    development.vscode.enableWork = true;
     graphical.enable = true;
     graphical.spotify.enable = true;
     graphical.virtualbox.enable = true;
