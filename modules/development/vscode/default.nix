@@ -91,23 +91,27 @@ in {
         ]);
 
       # Enable vscode settings
-      programs.vscode.userSettings = {
-        "[html]"."editor.formatOnSave" = false;
-        "[nix]"."editor.tabSize" = 2;
-        "[php]"."editor.defaultFormatter" = "wongjn.php-sniffer";
-        "editor.cursorBlinking" = "solid";
-        "editor.cursorStyle" = "block";
-        "editor.formatOnSave" = true;
-        "editor.minimap.enabled" = false; # I find the minimap to be distracting and a waste of space
-        "explorer.confirmDelete" = false;
-        "files.insertFinalNewline" = true; # Make sure to have a final new line at end of files
-        "files.trimFinalNewlines" = true; # Trim superfluous new lines at end of files
-        "files.trimTrailingWhitespace" = true; # Trim whitespace at end of lines on save
-        "github.copilot.enable"."markdown" = "true"; # Allow copilot to suggest in markdown files
-        "phpSniffer.standard" = "PSR12";
-        "telemetry.telemetryLevel" = "off";
-        "workbench.editor.showTabs" = "none"; # I find tabs to be distracting
-      };
+      programs.vscode.userSettings =
+        {
+          "[html]"."editor.formatOnSave" = false;
+          "[nix]"."editor.tabSize" = 2;
+          "[php]"."editor.defaultFormatter" = "wongjn.php-sniffer";
+          "editor.cursorBlinking" = "solid";
+          "editor.cursorStyle" = "block";
+          "editor.formatOnSave" = true;
+          "editor.minimap.enabled" = false; # I find the minimap to be distracting and a waste of space
+          "explorer.confirmDelete" = false;
+          "files.insertFinalNewline" = true; # Make sure to have a final new line at end of files
+          "files.trimFinalNewlines" = true; # Trim superfluous new lines at end of files
+          "files.trimTrailingWhitespace" = true; # Trim whitespace at end of lines on save
+          "github.copilot.enable"."markdown" = "true"; # Allow copilot to suggest in markdown files
+          "phpSniffer.standard" = "PSR12";
+          "telemetry.telemetryLevel" = "off";
+          "workbench.editor.showTabs" = "none"; # I find tabs to be distracting
+        }
+        // (lib.optionalAttrs config.etu.development.vscode.enableWork {
+          "[vue]"."editor.formatOnSave" = false;
+        });
 
       # This configures the keyring used for copilot to remember logins across reboots
       home.file.".vscode/argv.json".text = builtins.toJSON {
