@@ -48,6 +48,13 @@
               commit.gpgSign = false;
               user.email = config.etu.user.workEmail;
               user.signingKey = "";
+              core.excludesFile = pkgs.writeTextFile {
+                name = "tvnu-ignore";
+                text = ''
+                  .ac-php-conf.json
+                  .vscode/
+                '';
+              };
             };
           }
         ];
