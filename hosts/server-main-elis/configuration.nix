@@ -20,6 +20,7 @@
     ./services/guest-users.nix
     ./services/hass.nix
     ./services/home-nginx.nix
+    ./services/nextcloud.nix
     ./services/svtplay.nix
     ./services/usenet.nix
   ];

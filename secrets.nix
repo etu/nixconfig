@@ -37,6 +37,7 @@ in {
   "secrets/server-main-elis/cloudflare-api-env.age".publicKeys = etu ++ hosts.server-main-elis;
   "secrets/server-main-elis/etu-freshrss-password.age".publicKeys = etu ++ hosts.server-main-elis;
   "secrets/server-main-elis/initrd-sshd-ec.age".publicKeys = etu ++ hosts.server-main-elis;
+  "secrets/server-main-elis/nextcloud-admin-password.age".publicKeys = etu ++ hosts.server-main-elis;
   "secrets/server-main-elis/syncoid-ssh-ec.age".publicKeys = etu ++ hosts.server-main-elis;
   "secrets/server-main-elis/wallabag-secret.age".publicKeys = etu ++ hosts.server-main-elis;
   "secrets/server-sparv/valheim-server-env.age".publicKeys = etu ++ hosts.server-sparv;

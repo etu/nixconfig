@@ -31,6 +31,10 @@
       file = ./secrets/server-main-elis/etu-freshrss-password.age;
       owner = "freshrss";
     };
+    nextcloud-admin-password = {
+      file = ./secrets/server-main-elis/nextcloud-admin-password.age;
+      owner = "nextcloud";
+    };
     flummbot-toml = {
       file = ./secrets/vps04/flummbot.toml.age;
       owner = "bots";
