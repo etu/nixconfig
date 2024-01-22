@@ -268,6 +268,18 @@
 
         M84 X Y E             ; disable all steppers but Z
       ";
+
+      "gcode_macro M601".gcode = "
+        SAVE_GCODE_STATE NAME=M601_state     ; save current print position for resume
+        PAUSE                                ; pause print
+        G91                                  ; relative positioning
+        G1 E-2 F2700                         ; retract filament 2mm
+        G1 Z10                               ; move bed down by Z amount
+        G90                                  ; absolute positioning
+        G28 X Y                              ; home X Y
+        G91                                  ; relative positioning
+        RESTORE_GCODE_STATE NAME=M601_state  ; restore position from previous state
+      ";
     };
   };
 
