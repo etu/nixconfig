@@ -205,7 +205,7 @@
 
       "gcode_macro CANCEL_PRINT" = {
         description = "Cancel the actual running print";
-        rename_existing = "CANCEL_PRINT_BASE";
+        rename_existing = "BASE_CANCEL_PRINT";
         gcode = "
           TURN_OFF_HEATERS
           CLEAR_PAUSE
@@ -213,6 +213,61 @@
           BASE_CANCEL_PRINT
         ";
       };
+
+      # To use this macro, we can use the following start print gcode in the slicer:
+      #
+      # > START_PRINT EXTRUDER_TEMP=[first_layer_temperature] BED_TEMP=[first_layer_bed_temperature]
+      #
+      # See docs:
+      # https://github.com/Klipper3d/klipper/blob/daf875e6e4b8cb461a57623ecac37cf0f1f240e8/docs/Slicers.md#start_print-macros
+      "gcode_macro START_PRINT".gcode = "
+        {% set BED_TEMP = params.BED_TEMP|default(60)|float %}
+        {% set EXTRUDER_TEMP = params.EXTRUDER_TEMP|default(210)|float %}
+
+        G90                   ; use absolute coordinates
+        M83                   ; extruder relative mode
+        M140 S{BED_TEMP}      ; set final bed temp
+        M104 S150             ; set temporary nozzle temp to prevent oozing during homing and auto bed leveling
+        G4 S10                ; allow partial nozzle warmup
+        M190 S{BED_TEMP}      ; wait for bed temp to stabilize
+
+        G28                   ; home all axis
+        BED_MESH_CALIBRATE    ; calibrate the bed
+
+        G1 Z10 F240           ; lower bed 10mm
+        G1 X2 Y10 F3000       ; move to front left corner
+        M104 S{EXTRUDER_TEMP} ; set final nozzle temp
+        M109 S{EXTRUDER_TEMP} ; wait for nozzle temp to stabilize
+        G1 Z0.28 F240         ; Move close to bed
+        G92 E0                ; reset Extruder
+        G1 Y140 E10 F1500     ; draw first line
+        G1 X2.3 F5000         ; move sideways to avoid blob
+        G92 E0                ; reset Extruder
+        G1 Y10 E10 F1200      ; draw second line
+        G92 E0                ; reset Extruder
+      ";
+
+      # To use this macro, we can use the following end print gcode in the slicer:
+      #
+      # > END_PRINT
+      #
+      # See docs:
+      # https://github.com/Klipper3d/klipper/blob/daf875e6e4b8cb461a57623ecac37cf0f1f240e8/docs/Slicers.md#start_print-macros
+      "gcode_macro END_PRINT".gcode = "
+        G91                   ; relative positioning
+        G1 E-2 F2700          ; retract a bit
+        G1 E-2 Z0.2 F2400     ; retract and raise Z
+        G1 X5 Y5 F3000        ; wipe out
+        G1 Z10                ; raise Z more
+        G90                   ; absolute positioning
+
+        G28 X Y               ; present print
+        M107 S0               ; turn-off fan
+        M104 S0               ; turn-off hotend
+        M140 S0               ; turn-off heatbed
+
+        M84 X Y E             ; disable all steppers but Z
+      ";
     };
   };
 
