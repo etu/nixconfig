@@ -13,6 +13,7 @@
     description = "Cloudflare dyndns updater";
     after = ["network-online.target"];
     wantedBy = ["multi-user.target"];
+    requires = ["network-online.target"];
     startAt = "hourly";
     serviceConfig = {
       Type = "oneshot";
