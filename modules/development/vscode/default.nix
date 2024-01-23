@@ -42,6 +42,13 @@
       version = "1.34.0";
       sha256 = "sha256-WAcXWCMmvuw7nkfGcOgmK+s+Nw6XpvNR4POXD85E/So=";
     };
+    openscad = pkgs.vscode-utils.extensionFromVscodeMarketplace {
+      # https://marketplace.visualstudio.com/items?itemName=Leathong.openscad-language-support
+      publisher = "Leathong";
+      name = "openscad-language-support";
+      version = "1.2.5";
+      sha256 = "sha256-/CLxBXXdUfYlT0RaGox1epHnyAUlDihX1LfT5wGd2J8=";
+    };
   };
 in {
   options.etu.development.vscode.enable = lib.mkEnableOption "Enable development vscode settings";
@@ -85,6 +92,9 @@ in {
           pkgs.vscode-extensions.github.copilot # Copilot
           pkgs.vscode-extensions.github.copilot-chat # Copilot chat
         ]
+        ++ (lib.optionals config.etu.graphical.fdm-printing.enable [
+          vspkgs.openscad # Openscad support
+        ])
         ++ (lib.optionals config.etu.development.vscode.enableWork [
           # Only on work computer
           vspkgs.volar
