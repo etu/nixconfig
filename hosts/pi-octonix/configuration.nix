@@ -274,11 +274,24 @@
         PAUSE                                ; pause print
         G91                                  ; relative positioning
         G1 E-2 F2700                         ; retract filament 2mm
-        G1 Z10                               ; move bed down by Z amount
+        G1 Z10                               ; move bed down by 10mm
         G90                                  ; absolute positioning
         G28 X Y                              ; home X Y
         G91                                  ; relative positioning
         RESTORE_GCODE_STATE NAME=M601_state  ; restore position from previous state
+      ";
+
+      "gcode_macro M600".gcode = "
+        SAVE_GCODE_STATE NAME=M600_state     ; save current print position for resume
+        PAUSE                                ; pause print
+        G91                                  ; relative positioning
+        G1 E-2 F2700                         ; retract filament 2mm
+        G1 Z10                               ; move bed down by 10mm
+        G90                                  ; absolute positioning
+        G28 X Y                              ; home X Y
+        G91                                  ; relative positioning
+        G1 E-50 F1000                        ; retract filament 50mm
+        RESTORE_GCODE_STATE NAME=M600_state  ; restore position from previous state
       ";
     };
   };
