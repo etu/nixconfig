@@ -11,6 +11,7 @@
       owner = "netdata";
     };
     valheim-server-env.file = ./secrets/server-sparv/valheim-server-env.age;
+    enshrouded-server-env.file = ./secrets/server-sparv/enshrouded-server-env.age;
     hashed-ozeloten-password.file = ./secrets/vps04/hashed-ozeloten-password-file.age;
     "etu@aarch64.nixos.community" = {
       file = ./secrets/laptop-private-elis/etu_at_aarch64.nixos.community.age;

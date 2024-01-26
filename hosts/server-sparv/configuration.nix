@@ -46,6 +46,7 @@
       "zroot/safe/home".use_template = ["data"];
       "zroot/local/minecraft".use_template = ["data"]; # Minecraft server
       "zroot/local/valheim".use_template = ["data"]; # Valheim server
+      "zroot/local/enshrouded".use_template = ["data"]; # Enshrouded server
     };
 
     # Allow github to deploy system
@@ -69,6 +70,10 @@
     # Valheim
     2456
     2457
+
+    # Enshrouded
+    15636
+    15637
   ];
 
   # Set up docker.
@@ -113,10 +118,23 @@
         "/var/lib/valheim/data:/opt/valheim"
       ];
     };
+
+    # Set up a enshrouded server
+    enshrouded-server = {
+      image = "sknnr/enshrouded-dedicated-server:latest";
+      ports = [
+        "15636-15637:15636-15637/udp"
+      ];
+      environmentFiles = [config.age.secrets.enshrouded-server-env.path];
+      volumes = [
+        "/var/lib/enshrouded:/home/steam/enshrouded/savegame"
+      ];
+    };
   };
 
   # Include secret
   age.secrets.valheim-server-env = myData.ageModules.valheim-server-env;
+  age.secrets.enshrouded-server-env = myData.ageModules.enshrouded-server-env;
 
   # Restart valheim service every day
   systemd.services.restart-valheim-service = {
