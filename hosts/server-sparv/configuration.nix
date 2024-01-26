@@ -127,7 +127,7 @@
       ];
       environmentFiles = [config.age.secrets.enshrouded-server-env.path];
       volumes = [
-        "/var/lib/enshrouded:/home/steam/enshrouded/savegame"
+        "/var/lib/enshrouded:/home/steam/enshrouded"
       ];
     };
   };
