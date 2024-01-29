@@ -5,12 +5,11 @@
   ...
 }: {
   services.nextcloud.enable = true;
-  services.nextcloud.package = pkgs.nextcloud27;
+  services.nextcloud.package = pkgs.nextcloud28;
   services.nextcloud.config.adminuser = "etu";
   services.nextcloud.config.adminpassFile = config.age.secrets.nextcloud-admin-password.path;
-  # services.nextcloud.home = "/var/lib/nextcloud"; # default value
   services.nextcloud.extraApps = {
-    inherit (pkgs.nextcloud27Packages.apps) cookbook news;
+    inherit (pkgs.nextcloud28Packages.apps) cookbook notes;
   };
   services.nextcloud.hostName = "nextcloud.elis.nu";
   services.nextcloud.https = true;
