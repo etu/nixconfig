@@ -49,7 +49,7 @@ live-iso, it can be built locally:
 nix build github:etu/nixconfig#iso
 ```
 
-#### `hosts/pi-octonix/`
+#### `hosts/pi-ender6/`
 My Rasperry pi with Klipper and Moonraker running on NixOS for my 3D printer.
 
 ### `modules/`
