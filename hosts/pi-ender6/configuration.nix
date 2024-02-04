@@ -17,7 +17,7 @@
   documentation.man.enable = false;
 
   # Set hostname for system.
-  networking.hostName = "octonix";
+  networking.hostName = "ender6";
 
   # My module settings
   etu = {
@@ -319,8 +319,8 @@
           "*.lan"
           "*://app.fluidd.xyz"
           "*://my.mainsail.xyz"
-          "*://octonix"
-          "*://octonix.tail1c46e.ts.net"
+          "*://ender6"
+          "*://ender6.tail1c46e.ts.net"
         ];
         trusted_clients = [
           "10.0.0.0/8"
