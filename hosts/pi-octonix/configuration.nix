@@ -34,6 +34,9 @@
 
     # Don't set a password for root depending on agenix.
     user.setEmptyRootPassword = true;
+
+    # Disable fish shell, it just adds extra bloat on this system.
+    base.fish.enable = false;
   };
 
   # Allow root to log in without password.
