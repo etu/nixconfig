@@ -78,9 +78,9 @@
     services.xserver.desktopManager.xterm.enable = false;
 
     # Keyboard layout used by X11 (and the login screen).
-    services.xserver.layout = "us";
-    services.xserver.xkbOptions = "eurosign:e,ctrl:nocaps,numpad:mac,kpdl:dot";
-    services.xserver.xkbVariant = "dvorak";
+    services.xserver.xkb.layout = "us";
+    services.xserver.xkb.options = "eurosign:e,ctrl:nocaps,numpad:mac,kpdl:dot";
+    services.xserver.xkb.variant = "dvorak";
 
     # Set up Pipewire
     services.pipewire.enable = true;
