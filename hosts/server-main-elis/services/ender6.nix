@@ -10,9 +10,9 @@ _: {
     user = "moonraker";
     group = "moonraker";
 
-    # Enable building firmware
+    # Don't build the firmware, I have it flashed already.
     firmwares.mcu = {
-      enable = true;
+      enable = false;
       configFile = ./klipper-firmware.cfg;
       # Serial port connected to the printer
       serial = "/dev/serial/by-id/usb-1a86_USB_Serial-if00-port0";
@@ -302,6 +302,11 @@ _: {
     }
   ];
 
+  # Increase max file upload size from 10m
+  services.fluidd.nginx.extraConfig = ''
+    client_max_body_size 50M;
+  '';
+
   # Expose the mjpg-streamer through nginx.
   services.fluidd.nginx.locations."/webcam".extraConfig = ''
     set $pp_d http://127.0.0.1:5050/stream_simple.html;
@@ -331,4 +336,9 @@ _: {
     # Lowest resulotion for better framerate.
     inputPlugin = "input_uvc.so -d /dev/v4l/by-id/usb-046d_0821_F8E393A0-video-index0 -r 640x480";
   };
+
+  etu.base.zfs.system.directories = [
+    # Bind mount for persistent data for moonraker
+    "/var/lib/moonraker"
+  ];
 }
