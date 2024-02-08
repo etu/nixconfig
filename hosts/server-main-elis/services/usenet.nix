@@ -28,6 +28,7 @@
               <li><a href="/radarr">Radarr (Movies)</a></li>
               <li><a href="/lidarr">Lidarr (Music)</a></li>
               <li><a href="/nzbget">NzbGet</a></li>
+              <li><a href="http://100.100.6.114:8888/">Ender6</a></li>
             </ul>
           </body>
         </html>
