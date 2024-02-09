@@ -12,7 +12,7 @@ _: {
 
     # Don't build the firmware, I have it flashed already.
     firmwares.mcu = {
-      enable = false;
+      enable = true;
       configFile = ./klipper-firmware.cfg;
       # Serial port connected to the printer
       serial = "/dev/serial/by-id/usb-1a86_USB_Serial-if00-port0";
