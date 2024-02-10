@@ -1,4 +1,8 @@
-{config, pkgs, ...}: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   # Enable Klipper.
   services.klipper = {
     enable = true;
@@ -292,16 +296,17 @@
         ln -s ${config.services.fluidd.package}/share/fluidd/htdocs $out/klipper
       '';
     in {
-      #extraConfig = "client_max_body_size 50M;";
       locations = {
         "/klipper" = {
           root = fluidd-pkg;
+          extraConfig = "client_max_body_size 50M;";
           index = "index.html";
           tryFiles = "$uri $uri/ /index.html";
         };
         "/klipper/index.html" = {
           root = fluidd-pkg;
           extraConfig = ''
+            client_max_body_size 50M;
             add_header Cache-Control "no-store, no-cache, must-revalidate";
           '';
         };
@@ -309,10 +314,12 @@
         # patching or maybe configuration of fluidd so it knows where to look.
         "/websocket" = {
           proxyWebsockets = true;
+          extraConfig = "client_max_body_size 50M;";
           proxyPass = "http://fluidd-apiserver/websocket";
         };
         "~ ^/(printer|api|access|machine|server)/" = {
           proxyWebsockets = true;
+          extraConfig = "client_max_body_size 50M;";
           proxyPass = "http://fluidd-apiserver$request_uri";
         };
         "/klipper/webcam".extraConfig = ''
