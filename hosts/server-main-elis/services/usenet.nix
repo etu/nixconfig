@@ -19,6 +19,7 @@
         <html lang="en">
           <head>
             <meta charset="utf-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             <title>Links</title>
           </head>
           <body>
@@ -28,7 +29,7 @@
               <li><a href="/radarr">Radarr (Movies)</a></li>
               <li><a href="/lidarr">Lidarr (Music)</a></li>
               <li><a href="/nzbget">NzbGet</a></li>
-              <li><a href="http://100.100.6.114:8888/">Ender6</a></li>
+              <li><a href="/klipper">Klipper</a></li>
             </ul>
           </body>
         </html>

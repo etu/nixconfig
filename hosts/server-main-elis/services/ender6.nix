@@ -1,4 +1,4 @@
-_: {
+{config, pkgs, ...}: {
   # Enable Klipper.
   services.klipper = {
     enable = true;
@@ -260,75 +260,85 @@ _: {
 
     # Configure moonraker.
     settings = {
+      octoprint_compat = {};
       history = {};
       authorization = {
         force_logins = true;
         cors_domains = [
-          "*.local"
-          "*.lan"
-          "*://app.fluidd.xyz"
-          "*://my.mainsail.xyz"
-          "*://ender6"
-          "*://ender6.tail1c46e.ts.net"
-          "http://server-main-elis"
+          "*://${config.networking.hostName}"
+          "*://${config.networking.hostName}.tail1c46e.ts.net"
         ];
         trusted_clients = [
-          "10.0.0.0/8"
-          "100.64.0.0/10"
           "127.0.0.0/8"
-          "169.254.0.0/16"
-          "172.16.0.0/12"
-          "192.168.1.0/24"
-          "FE80::/10"
-          "::1/128"
         ];
       };
 
       # Static configuration of the camera to display in the UI.
       "webcam camera1" = {
-        stream_url = "/webcam/?action=stream";
-        snapshot_url = "/webcam/?action=snapshot";
+        stream_url = "/klipper/webcam/?action=stream";
+        snapshot_url = "/klipper/webcam/?action=snapshot";
       };
     };
   };
 
   # Enable Fluidd as a Web interface for Klipper via moonraker.
-  services.fluidd.enable = true;
-  services.fluidd.hostName = "ender6";
-  services.fluidd.nginx.listen = [
-    {
-      addr = "0.0.0.0";
-      port = 8888;
-    }
-  ];
+  services.nginx = {
+    upstreams.fluidd-apiserver.servers = {
+      "${config.services.moonraker.address}:${toString config.services.moonraker.port}" = {};
+    };
+    virtualHosts.${config.networking.hostName} = let
+      fluidd-pkg = pkgs.runCommand "fluidd-pkg" {} ''
+        mkdir $out
+        ln -s ${config.services.fluidd.package}/share/fluidd/htdocs $out/klipper
+      '';
+    in {
+      #extraConfig = "client_max_body_size 50M;";
+      locations = {
+        "/klipper" = {
+          root = fluidd-pkg;
+          index = "index.html";
+          tryFiles = "$uri $uri/ /index.html";
+        };
+        "/klipper/index.html" = {
+          root = fluidd-pkg;
+          extraConfig = ''
+            add_header Cache-Control "no-store, no-cache, must-revalidate";
+          '';
+        };
+        # TODO: Move these to be under /klipper as path, this however requires
+        # patching or maybe configuration of fluidd so it knows where to look.
+        "/websocket" = {
+          proxyWebsockets = true;
+          proxyPass = "http://fluidd-apiserver/websocket";
+        };
+        "~ ^/(printer|api|access|machine|server)/" = {
+          proxyWebsockets = true;
+          proxyPass = "http://fluidd-apiserver$request_uri";
+        };
+        "/klipper/webcam".extraConfig = ''
+          set $pp_d http://127.0.0.1:5050/stream_simple.html;
 
-  # Increase max file upload size from 10m
-  services.fluidd.nginx.extraConfig = ''
-    client_max_body_size 50M;
-  '';
+          if ( $args ~ '.*action=stream.*' ) {
+            set $pp_d http://127.0.0.1:5050/$is_args$args;
+          }
 
-  # Expose the mjpg-streamer through nginx.
-  services.fluidd.nginx.locations."/webcam".extraConfig = ''
-    set $pp_d http://127.0.0.1:5050/stream_simple.html;
+          if ( $args ~ '.*action=snapshot.*' ) {
+            set $pp_d http://127.0.0.1:5050/$is_args$args;
+          }
 
-    if ( $args ~ '.*action=stream.*' ) {
-      set $pp_d http://127.0.0.1:5050/$is_args$args;
-    }
-
-    if ( $args ~ '.*action=snapshot.*' ) {
-      set $pp_d http://127.0.0.1:5050/$is_args$args;
-    }
-
-    proxy_pass $pp_d;
-    proxy_http_version 1.1;
-    proxy_set_header Upgrade $http_upgrade;
-    proxy_set_header Connection "upgrade";
-    proxy_set_header Host $host:$server_port;
-    proxy_set_header X-Forwarded-Proto $scheme;
-    proxy_set_header X-Forwarded-For $remote_addr;
-    proxy_set_header X-Forwarded-Port $server_port;
-    proxy_set_header X-Request-Start $msec;
-  '';
+          proxy_pass $pp_d;
+          proxy_http_version 1.1;
+          proxy_set_header Upgrade $http_upgrade;
+          proxy_set_header Connection "upgrade";
+          proxy_set_header Host $host:$server_port;
+          proxy_set_header X-Forwarded-Proto $scheme;
+          proxy_set_header X-Forwarded-For $remote_addr;
+          proxy_set_header X-Forwarded-Port $server_port;
+          proxy_set_header X-Request-Start $msec;
+        '';
+      };
+    };
+  };
 
   # Enable mjpg-streamer.
   services.mjpg-streamer = {
