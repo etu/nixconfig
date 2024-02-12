@@ -100,7 +100,7 @@ in {
         };
         # Support sliding sync endpoints
         "~ ^/(client/|_matrix/client/unstable/org.matrix.msc3575/sync)" = {
-          proxyPass = "http://${config.services.matrix-synapse.sliding-sync.settings.SYNCV3_BINDADDR}";
+          proxyPass = "http://${config.services.matrix-sliding-sync.settings.SYNCV3_BINDADDR}";
           extraConfig = ''
             proxy_set_header Host $host;
             proxy_set_header X-Forwarded-For $remote_addr;
@@ -118,12 +118,6 @@ in {
 
   services.matrix-synapse = {
     enable = true;
-    sliding-sync = {
-      enable = true;
-      environmentFile = config.age.secrets.matrix-sliding-sync-secret.path;
-      settings.SYNCV3_SERVER = config.services.matrix-synapse.settings.public_baseurl;
-      settings.SYNCV3_BINDADDR = "127.0.0.1:8010";
-    };
     settings = {
       # registration_shared_secret = ""; # Set this value to be able
       # to use ${pkgs.matrix-synapse}/bin/register_new_matrix_user
@@ -299,6 +293,14 @@ in {
         membershipLists.global.ircToMatrix.requireMatrixJoined = true;
       };
     };
+  };
+
+  # Enable sliding sync
+  services.matrix-sliding-sync = {
+    enable = true;
+    environmentFile = config.age.secrets.matrix-sliding-sync-secret.path;
+    settings.SYNCV3_SERVER = config.services.matrix-synapse.settings.public_baseurl;
+    settings.SYNCV3_BINDADDR = "127.0.0.1:8010";
   };
 
   services.matrix-hookshot = {
