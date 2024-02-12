@@ -26,5 +26,6 @@ _: {
   services.gitea.settings.server.DOMAIN = "git.elis.nu";
   services.gitea.settings.server.ROOT_URL = "https://git.elis.nu/";
   services.gitea.settings.service.DISABLE_REGISTRATION = true;
+  services.gitea.settings.service.REQUIRE_SIGNIN_VIEW = true;
   services.gitea.settings.session.COOKIE_SECURE = true;
 }
