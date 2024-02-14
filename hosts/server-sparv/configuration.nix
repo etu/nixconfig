@@ -120,16 +120,16 @@
     };
 
     # Set up a enshrouded server
-    #enshrouded-server = {
-    #  image = "sknnr/enshrouded-dedicated-server:latest";
-    #  ports = [
-    #    "15636-15637:15636-15637/udp"
-    #  ];
-    #  environmentFiles = [config.age.secrets.enshrouded-server-env.path];
-    #  volumes = [
-    #    "/var/lib/enshrouded:/home/steam/enshrouded"
-    #  ];
-    #};
+    enshrouded-server = {
+      image = "sknnr/enshrouded-dedicated-server:latest";
+      ports = [
+        "15636-15637:15636-15637/udp"
+      ];
+      environmentFiles = [config.age.secrets.enshrouded-server-env.path];
+      volumes = [
+        "/var/lib/enshrouded:/home/steam/enshrouded"
+      ];
+    };
   };
 
   # Include secret
