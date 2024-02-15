@@ -35,6 +35,10 @@
           # Set default "git pull" behaviour so it doesn't try to default to
           # either "git fetch; git merge" (default) or "git fetch; git rebase".
           pull.ff = "only";
+
+          # REuse REcorded REsolution to remember and resolve merge conflicts
+          # better when you hit the several conflict several times.
+          rerere.enabled = true;
         };
 
         # Global ignores
