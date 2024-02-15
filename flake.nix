@@ -171,7 +171,6 @@
         vps06 = mkSystem {name = "vps06";};
         server-sparv = mkSystem {name = "server-sparv";};
         live-iso = mkSystem {name = "live-iso";};
-        pi-ender6 = mkArmSystem {name = "pi-ender6";};
       };
 
       # Specify deploy-rs deployments
@@ -184,10 +183,6 @@
           name = "server-sparv";
           hostname = "sparv.failar.nu";
         };
-        #pi-ender6 = mkArmDeploy {
-        #  name = "pi-ender6";
-        #  hostname = "ender6.tail1c46e.ts.net";
-        #};
         vps04 = mkDeploy {
           name = "vps04";
           hostname = "vps04.elis.nu";

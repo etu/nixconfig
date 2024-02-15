@@ -49,9 +49,6 @@ live-iso, it can be built locally:
 nix build github:etu/nixconfig#iso
 ```
 
-#### `hosts/pi-ender6/`
-My Rasperry pi with Klipper and Moonraker running on NixOS for my 3D printer.
-
 ### `modules/`
 This directory contains a whole bunch of modules that I've come up with to
 make it easier for me to quickly configure multiple systems to do similar
