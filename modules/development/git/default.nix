@@ -61,6 +61,12 @@
               };
             };
           }
+          {
+            condition = "gitdir:/home/${config.etu.user.username}/code/TaserudConsulting/";
+            contents = {
+              user.email = config.etu.user.companyEmail;
+            };
+          }
         ];
       };
     };
