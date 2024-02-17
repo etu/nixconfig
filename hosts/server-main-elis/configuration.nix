@@ -89,6 +89,10 @@
         use_template = ["home"];
         autosnap = false;
       };
+      "zroot/backups/current/laptop-private-elis/home-tickster" = {
+        use_template = ["home"];
+        autosnap = false;
+      };
       "zroot/backups/current/laptop-work-elis/data" = {
         use_template = ["data"];
         autosnap = false;
@@ -132,6 +136,7 @@
 
       "root@laptop-private-elis:zroot/safe/data".target = "zroot/backups/current/laptop-private-elis/data";
       "root@laptop-private-elis:zroot/safe/home".target = "zroot/backups/current/laptop-private-elis/home";
+      "root@laptop-private-elis:zroot/safe/home-tickster".target = "zroot/backups/current/laptop-private-elis/home-tickster";
 
       "root@laptop-work-elis:zroot/safe/data".target = "zroot/backups/current/laptop-work-elis/data";
       "root@laptop-work-elis:zroot/safe/home".target = "zroot/backups/current/laptop-work-elis/home";

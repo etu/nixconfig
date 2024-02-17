@@ -3,6 +3,7 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {
   config,
+  lib,
   myData,
   pkgs,
   ...
@@ -86,4 +87,68 @@
       supportedFeatures = ["big-parallel"];
     }
   ];
+
+  # Specialisation for work while working with tickster projects
+  specialisation.tickster.configuration = {
+    nix.distributedBuilds = lib.mkForce false;
+
+    etu = {
+      # Turn off some of my default modules.
+      development.flipper-zero.enable = lib.mkForce false;
+      games.minecraft.enable = lib.mkForce false;
+      graphical.fdm-printing.enable = lib.mkForce false;
+      graphical.hamradio.enable = lib.mkForce false;
+      graphical.signal.enable = lib.mkForce false;
+      graphical.telegram.enable = lib.mkForce false;
+
+      # Switch wallpaper
+      graphical.sway.wallpaper = lib.mkForce (toString (pkgs.stdenv.mkDerivation {
+        name = "dark-bg";
+        src = pkgs.fetchurl {
+          url = "https://taserud.net/img/logo-dark.svg";
+          sha256 = "sha256-PmWJ0pN+q6JyKOuQOHx0LFyGBFmGUZeKBoxLBO4Sn1E=";
+        };
+        dontUnpack = true;
+        buildInputs = [pkgs.inkscape pkgs.graphicsmagick];
+        installPhase = ''
+          inkscape --export-type=png               \
+                   --export-filename=logo-dark.png \
+                   --export-dpi=400                \
+                   $src
+
+          gm convert -size 1920x1440 xc:#2d3640 bg.png
+          gm composite -gravity center logo-dark.png bg.png $out
+        '';
+      }));
+
+      # Switch lockscreen image
+      graphical.sway.lockWallpaper = lib.mkForce (toString (pkgs.stdenv.mkDerivation {
+        name = "light-bg";
+        src = pkgs.fetchurl {
+          url = "https://taserud.net/img/logo-light.svg";
+          sha256 = "sha256-Q/Iz5087VWh1RSKqYd92JKvnucrGHm2f5DjxyYU27cc=";
+        };
+        dontUnpack = true;
+        buildInputs = [pkgs.inkscape pkgs.graphicsmagick];
+        installPhase = ''
+          inkscape --export-type=png                \
+                   --export-filename=logo-light.png \
+                   --export-dpi=400                 \
+                   $src
+
+          gm convert -size 1920x1440 xc:#dde3eb bg.png
+          gm composite -gravity center logo-light.png bg.png $out
+        '';
+      }));
+
+      # Enable snapshotting of filesystem while in use
+      base.sanoid.datasets."zroot/safe/home-tickster".use_template = ["home"];
+
+      # Disable snapshotting of my private home while work is in use
+      base.sanoid.datasets."zroot/safe/home".use_template = lib.mkForce [];
+    };
+
+    # Run on a separate home directory for isolation and ease of backups
+    fileSystems."${config.etu.dataPrefix}/home".device = lib.mkForce "zroot/safe/home-tickster";
+  };
 }
