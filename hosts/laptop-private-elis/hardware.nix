@@ -6,13 +6,14 @@
 }: {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
+    ./disko.nix
   ];
 
   # Configure boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  boot.initrd.availableKernelModules = ["nvme" "ehci_pci" "xhci_pci" "usb_storage" "sd_mod"];
+  boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "thunderbolt" "usb_storage" "sd_mod"];
   boot.initrd.kernelModules = [];
 
   boot.kernelModules = ["kvm-amd"];
@@ -54,43 +55,10 @@
   services.tlp.settings.START_CHARGE_THRESH_BAT0 = 40;
   services.tlp.settings.STOP_CHARGE_THRESH_BAT0 = 70;
 
-  # Filesystem mounts.
-  fileSystems."/" = {
-    device = "none";
-    fsType = "tmpfs";
-    options = ["defaults" "size=3G" "mode=755"];
-  };
-
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/D646-84B5";
-    fsType = "vfat";
-    options = ["defaults" "noexec" "noauto" "x-systemd.automount"];
-  };
-
-  fileSystems."/nix" = {
-    device = "zroot/local/nix";
-    fsType = "zfs";
-  };
-
-  fileSystems.${config.etu.dataPrefix} = {
-    device = "zroot/safe/data";
-    fsType = "zfs";
-    neededForBoot = true;
-    options = ["defaults" "noexec"];
-  };
-
-  fileSystems."${config.etu.dataPrefix}/home" = {
-    device = "zroot/safe/home";
-    fsType = "zfs";
-    neededForBoot = true;
-    options = ["defaults" "noexec"];
-  };
-
-  fileSystems."/var/log" = {
-    device = "zroot/local/var-log";
-    fsType = "zfs";
-    options = ["defaults" "noexec"];
-  };
+  # Mark filesystems as needed for boot
+  fileSystems.${config.etu.dataPrefix}.neededForBoot = true;
+  fileSystems."${config.etu.dataPrefix}/home".neededForBoot = true;
+  fileSystems."/nix".neededForBoot = true;
 
   # Bind mount for persistent libvirt state.
   etu.base.zfs.system.directories = [

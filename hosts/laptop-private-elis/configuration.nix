@@ -1,6 +1,18 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
+#
+# Initial deployment:
+# 1. Put filesystem password in /tmp/secret.key
+# 2. Deploy it from a remote system
+#    $ nix run github:numtide/nixos-anywhere -- --flake .#laptop-private-elis root@10.69.0.55
+# 3. Reboot back into install system
+# 4. sudo zpool import -f zroot
+# 5. sudo zfs load-key -a -L prompt
+# 6. sudo zfs change-key -o keylocation=prompt zroot
+#
+# Later deployments:
+# $ deploy --skip-checks --targets .#laptop-private-elis
 {
   config,
   lib,

@@ -154,12 +154,7 @@
       # Declare systems
       nixosConfigurations = {
         laptop-private-caroline = mkSystem {name = "laptop-private-caroline";};
-        laptop-private-elis = mkSystem {
-          name = "laptop-private-elis";
-          extraModules = [
-            inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t495
-          ];
-        };
+        laptop-private-elis = mkSystem {name = "laptop-private-elis";};
         laptop-work-elis = mkSystem {
           name = "laptop-work-elis";
           extraModules = [
