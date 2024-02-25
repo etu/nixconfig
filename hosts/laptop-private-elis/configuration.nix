@@ -84,13 +84,6 @@
   nix.distributedBuilds = true;
   nix.buildMachines = [
     {
-      hostName = "home.elis.nu";
-      maxJobs = 8;
-      sshKey = config.age.secrets.syncoid-workstations-ssh-ec.path;
-      sshUser = "root";
-      system = "x86_64-linux";
-    }
-    {
       hostName = "aarch64.nixos.community";
       maxJobs = 64;
       sshKey = config.age.secrets."etu@aarch64.nixos.community".path;
