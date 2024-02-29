@@ -255,6 +255,11 @@
         G1 E-50 F1000                        ; retract filament 50mm
         RESTORE_GCODE_STATE NAME=M600_state  ; restore position from previous state
       ";
+
+      "gcode_macro FILAMENT_DRYER".gcode = "
+        SET_IDLE_TIMEOUT IDLE_TIMEOUT=21600  ; Set idle timeout to 6 hours
+        M190 S60                             ; Set bed temperature to 60C
+      ";
     };
   };
 
