@@ -85,6 +85,8 @@ in {
           pkgs.vscode-extensions.bmewburn.vscode-intelephense-client # Better php support
           pkgs.vscode-extensions.tuttieee.emacs-mcx # Emacs keybindings
           pkgs.vscode-extensions.kahole.magit # Magit emulation
+          pkgs.vscode-extensions.golang.go # Go support
+          pkgs.vscode-extensions.mkhl.direnv # Direnv
           vspkgs.vscode-org-mode # Really basic org-mode highlighting
           vspkgs.vscode-ido # Decent file navigation
           vspkgs.php-sniffer # Php code style sniffing
