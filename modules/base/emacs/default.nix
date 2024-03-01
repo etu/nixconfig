@@ -61,7 +61,7 @@
 
     # Other programs
     pkgs.gnuplot # For use with org mode
-    pkgs.phpPackages.phpcs # PHP codestyle checker
+    pkgs.phpPackages.php-codesniffer # PHP codestyle checker
     pkgs.openscad # For use with scad and scad preview mode
   ];
 

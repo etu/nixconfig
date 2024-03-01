@@ -12,8 +12,7 @@
       # PHP utils
       pkgs.php
       pkgs.php.packages.composer
-      pkgs.php.packages.phpcbf
-      pkgs.php.packages.phpcs
+      pkgs.php.packages.php-codesniffer
     ];
   };
 }
