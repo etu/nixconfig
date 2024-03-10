@@ -76,13 +76,16 @@
     system.activationScripts.diff = {
       supportsDryActivation = true;
       text = ''
+        NO_FORMAT="\033[0m"
+        F_BOLD="\033[1m"
+        C_LIME="\033[38;5;10m"
+
         if test -e /run/current-system; then
-          echo "--- diff to current-system"
+          echo -e "''${F_BOLD}''${C_LIME}==> diff to current-system ''${NO_FORMAT}"
           ${pkgs.nvd}/bin/nvd --nix-bin-dir=${config.nix.package}/bin diff /run/current-system "$systemConfig"
-          echo "---"
         fi
 
-        echo "--- Indicate if a reboot is needed or not"
+        echo -e "''${F_BOLD}''${C_LIME}==> Indicate if a reboot is needed or not ''${NO_FORMAT}"
         ${nixos-needsreboot}/bin/nixos-needsreboot || true
       '';
     };
