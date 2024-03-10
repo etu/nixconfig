@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  nixos-needsreboot,
   ...
 }: {
   imports = [
@@ -80,6 +81,9 @@
           ${pkgs.nvd}/bin/nvd --nix-bin-dir=${config.nix.package}/bin diff /run/current-system "$systemConfig"
           echo "---"
         fi
+
+        echo "--- Indicate if a reboot is needed or not"
+        ${nixos-needsreboot}/bin/nixos-needsreboot || true
       '';
     };
 

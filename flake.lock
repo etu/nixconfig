@@ -297,6 +297,26 @@
         "type": "indirect"
       }
     },
+    "nixos-needtoreboot": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1709963535,
+        "narHash": "sha256-xQE+05FPr7ZmN9DxlO80LSbvRkPpX0hGyRTpBY6fL3Y=",
+        "owner": "thefossguy",
+        "repo": "nixos-needsreboot",
+        "rev": "5542f9ea8d86329561d7de091a326215b07a9135",
+        "type": "github"
+      },
+      "original": {
+        "owner": "thefossguy",
+        "repo": "nixos-needsreboot",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1709237383,
@@ -428,6 +448,7 @@
         "impermanence": "impermanence",
         "ip-failar-nu": "ip-failar-nu",
         "nixos-hardware": "nixos-hardware",
+        "nixos-needtoreboot": "nixos-needtoreboot",
         "nixpkgs": "nixpkgs",
         "nixpkgs-22-11": "nixpkgs-22-11",
         "nur": "nur",

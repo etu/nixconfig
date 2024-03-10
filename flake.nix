@@ -30,6 +30,10 @@
     home-manager.url = "home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    # Import nixos-needtoreboot
+    nixos-needtoreboot.url = "github:thefossguy/nixos-needsreboot";
+    nixos-needtoreboot.inputs.nixpkgs.follows = "nixpkgs";
+
     # Import agenix modules
     agenix.url = "github:ryantm/agenix";
     agenix.inputs.nixpkgs.follows = "nixpkgs";
@@ -126,6 +130,7 @@
 
             emacs-overlay = inputs.emacs-overlay.overlay;
             emacsWayland = nixpkgs.legacyPackages.${system}.emacs29-pgtk;
+            nixos-needsreboot = inputs.nixos-needtoreboot.packages.${system}.default;
           }
           // extraArgs;
       };
