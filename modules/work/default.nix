@@ -42,6 +42,7 @@
     etu.base.nix.allowUnfree = [
       "appgate-sdp"
       "slack"
+      "vagrant"
     ];
 
     etu.user.extraUserPackages = [
