@@ -44,11 +44,6 @@
     emacs-overlay.inputs.nixpkgs.follows = "nixpkgs";
     emacs-overlay.inputs.flake-utils.follows = "flake-utils";
 
-    # Some typst tools
-    typst2nix.url = "github:LEXUGE/typst2nix";
-    typst2nix.inputs.nixpkgs.follows = "nixpkgs";
-    typst2nix.inputs.utils.follows = "flake-utils";
-
     # Import flummbot
     flummbot.url = "github:etu/flummbot";
     flummbot.inputs.nixpkgs.follows = "nixpkgs";
@@ -115,9 +110,6 @@
             inherit (pkgs-22-11) chefdk;
             inherit (self.packages.${system}) swayWallpaper;
             inherit myData;
-
-            # Emacs mode for typst-ts-mode.
-            inherit (inputs.typst2nix.packages.${system}) typst-ts-mode;
 
             # Customize ansible to add dependencies needed by kubespray.
             ansible_2_12 = pkgs-22-11.ansible_2_12.overrideAttrs (oa: {

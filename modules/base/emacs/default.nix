@@ -5,7 +5,6 @@
   intelephense,
   lib,
   pkgs,
-  typst-ts-mode,
   ...
 }: let
   # Run my config trough substituteAll to replace font names from my
@@ -57,7 +56,6 @@
     pkgs.nodePackages.vscode-css-languageserver-bin # CSS/LESS/SASS language server
     pkgs.rnix-lsp # Nix language server
     pkgs.nodejs # For copilot.el
-    pkgs.typst-lsp # For typst language
 
     # Other programs
     pkgs.gnuplot # For use with org mode
@@ -88,7 +86,6 @@
       tree-sitter-rust
       tree-sitter-sql
       tree-sitter-toml
-      tree-sitter-typst
       tree-sitter-yaml
     ]);
 
@@ -141,9 +138,6 @@
             hash = "sha256-7LKB2JoYAVu5i23ZKBVZPe6azCItHK/tlBNPgFXxztc=";
           };
         })
-
-        # Typst treesit mode from the flake typst2nix
-        typst-ts-mode
       ];
     };
 

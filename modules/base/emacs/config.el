@@ -274,10 +274,6 @@
   :init (setq nix-indent-function 'nix-indent-line))
 
 
-;; Typst ts mode
-(use-package typst-ts-mode :mode "\\.typst$")
-
-
 ;; Set up Vue mode
 (use-package vue-mode
   :ensure t
@@ -372,13 +368,11 @@
           bash-ts-mode
           css-ts-mode
           dockerfile-ts-mode
-          typst-ts-mode
           ) . eglot-ensure)
   :config (progn
             (add-to-list 'eglot-server-programs '((dockerfile-mode dockerfile-ts-mode) . ("docker-langserver" "--stdio")))
             (add-to-list 'eglot-server-programs '((php-mode phps-mode) . ("intelephense" "--stdio")))
-            (add-to-list 'eglot-server-programs '((scss-mode css-mode css-ts-mode) . ("css-languageserver" "--stdio")))
-            (add-to-list 'eglot-server-programs '((typst-ts-mode) . ("typst-lsp")))))
+            (add-to-list 'eglot-server-programs '((scss-mode css-mode css-ts-mode) . ("css-languageserver" "--stdio")))))
 
 
 ;;;
