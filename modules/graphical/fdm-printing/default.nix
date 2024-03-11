@@ -12,7 +12,7 @@
       pkgs.cura
       pkgs.openscad
       pkgs.prusa-slicer
-      pkgs.super-slicer-latest
+      # pkgs.super-slicer-latest
     ];
 
     # Enable persistence for fdm-printing related files.
