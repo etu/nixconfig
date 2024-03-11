@@ -54,7 +54,7 @@
     intelephense # PHP language server
     pkgs.nodePackages.typescript-language-server # JS/TS language server
     pkgs.nodePackages.vscode-css-languageserver-bin # CSS/LESS/SASS language server
-    pkgs.rnix-lsp # Nix language server
+    # pkgs.rnix-lsp # Nix language server
     pkgs.nodejs # For copilot.el
 
     # Other programs
