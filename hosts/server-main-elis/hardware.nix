@@ -73,6 +73,15 @@
   # Enable ZFS scrubbing.
   services.zfs.autoScrub.enable = true;
 
+  # Enable nvidia drivers.
+  services.xserver.videoDrivers = ["nvidia"];
+
+  # Allow certain unfree packages.
+  etu.base.nix.allowUnfree = [
+    "nvidia-x11"
+    "nvidia-settings"
+  ];
+
   # Filesystem mounts.
   fileSystems."/" = {
     device = "none";
