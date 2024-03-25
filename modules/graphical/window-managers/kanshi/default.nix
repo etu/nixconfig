@@ -29,6 +29,18 @@
               status = "disable";
             }
           ];
+          elis-tickster-docked.outputs = [
+            {
+              criteria = "Dell Inc. DELL U2412M YPPY07AG0EUL";
+              mode = "1920x1200";
+              position = "0,0";
+            }
+            {
+              criteria = "eDP-1";
+              mode = "1920x1200";
+              position = "0,1200";
+            }
+          ];
           caroline-docked.outputs = [
             {
               criteria = "Ancor Communications Inc ASUS PB278 C9LMTF095084";
