@@ -42,6 +42,7 @@ in {
   "secrets/server-main-elis/wallabag-secret.age".publicKeys = etu ++ hosts.server-main-elis;
   "secrets/server-sparv/valheim-server-env.age".publicKeys = etu ++ hosts.server-sparv;
   "secrets/server-sparv/enshrouded-server-env.age".publicKeys = etu ++ hosts.server-sparv;
+  "secrets/server-sparv/cs2-dedicated-server-env.age".publicKeys = etu ++ hosts.server-sparv;
   "secrets/vps04/flummbot.toml.age".publicKeys = etu ++ hosts.vps04;
   "secrets/vps04/hashed-ozeloten-password-file.age".publicKeys = etu ++ hosts.vps04;
   "secrets/vps06/matrix-sliding-sync-secret.age".publicKeys = etu ++ hosts.vps06;

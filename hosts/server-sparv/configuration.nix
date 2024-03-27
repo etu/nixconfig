@@ -130,11 +130,29 @@
         "/var/lib/enshrouded:/home/steam/enshrouded"
       ];
     };
+
+    # Set up a counter-strike 2 server
+    cs2-dedicated-server = {
+      image = "git.zio.sh/astra/cs2:latest";
+      ports = [
+        "27015:27015/tcp"
+        "27015:27015/udp"
+      ];
+      environmentFiles = [config.age.secrets.cs2-dedicated-server-env.path];
+      environment = {
+        CS2_SERVERNAME = "Sparv CS2 Server";
+      };
+      volumes = [
+        "/var/lib/cs2/Steam:/home/steam/Steam"
+        "/var/lib/cs2/cs2-dedicated:/home/steam/cs2-dedicated"
+      ];
+    };
   };
 
   # Include secret
   age.secrets.valheim-server-env = myData.ageModules.valheim-server-env;
   age.secrets.enshrouded-server-env = myData.ageModules.enshrouded-server-env;
+  age.secrets.cs2-dedicated-server-env = myData.ageModules.cs2-dedicated-server-env;
 
   # Restart valheim service every day
   systemd.services.restart-valheim-service = {
