@@ -81,20 +81,6 @@
       # nzbget needs unrar
       nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) ["unrar"];
 
-      # Temporary apply the patch for buffer overflows: https://github.com/NixOS/nixpkgs/pull/298476
-      nixpkgs.overlays = [
-        (_: super: {
-          nzbget = super.nzbget.overrideAttrs (_: {
-            patches = [
-              (pkgs.fetchpatch {
-                url = "https://github.com/nzbget-ng/nzbget/commit/8fbbbfb40003c6f32379a562ce1d12515e61e93e.patch";
-                hash = "sha256-mgI/twEoMTFMFGfH1/Jm6mE9u9/CE6RwELCSGx5erUo=";
-              })
-            ];
-          });
-        })
-      ];
-
       services.bazarr = {
         enable = true;
         user = "downloads";
