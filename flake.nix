@@ -111,15 +111,6 @@
             inherit (self.packages.${system}) swayWallpaper;
             inherit myData;
 
-            # Customize ansible to add dependencies needed by kubespray.
-            ansible_2_12 = pkgs-22-11.ansible_2_12.overrideAttrs (oa: {
-              propagatedBuildInputs =
-                oa.propagatedBuildInputs
-                ++ [
-                  pkgs-22-11.python310Packages.jmespath
-                ];
-            });
-
             emacs-overlay = inputs.emacs-overlay.overlay;
             emacsWayland = nixpkgs.legacyPackages.${system}.emacs29-pgtk;
             nixos-needsreboot = inputs.nixos-needtoreboot.packages.${system}.default;

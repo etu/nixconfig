@@ -1,5 +1,4 @@
 {
-  ansible_2_12,
   config,
   chefdk,
   lib,
@@ -54,9 +53,6 @@
 
       # Install make
       pkgs.gnumake
-
-      # Install ansible
-      ansible_2_12
 
       # Install git crypt
       pkgs.git-crypt
