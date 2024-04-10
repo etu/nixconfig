@@ -21,7 +21,7 @@
     services.nfs.server.lockdPort = 4001;
 
     # Configure NFSd to listen to UDP
-    services.nfs.server.extraNfsdConfig = "udp=y";
+    services.nfs.settings.nfsd.udp = "y";
 
     # Open ports used by NFS
     networking.firewall.allowedTCPPorts = [2049 111 4000 4001 20048];
