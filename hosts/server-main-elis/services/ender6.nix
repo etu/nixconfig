@@ -78,9 +78,17 @@
         # 2.4 was suggested preset for bltouch, but I have a crtouch
         # so it may differ I guess. This works well for me. ¯\_(ツ)_/¯
         #
-        # I kinda jump between 1.8 and 1.9. It probably depend on the
-        # wear and tear of the nozzle.
-        z_offset = "1.8";
+        # The z_offset is the distance between the probe in probing
+        # mode (probe dropped down) and the distance up to the nozzle.
+        #
+        # This means that a fresh nozzle without wear and tear
+        # requires a lower number to not touch the build surface and
+        # then with some wear and tear you'd have to gradually
+        # increase the number to compensate.
+        #
+        # I kinda jump between 1.7 and 1.9. It depends on the wear and
+        # tear of the nozzle.
+        z_offset = "1.7";
         speed = "3.0";
       };
 
