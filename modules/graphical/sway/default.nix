@@ -68,11 +68,11 @@
 
     # Loginmanager
     services.xserver.displayManager.lightdm.enable = true;
-    services.xserver.displayManager.autoLogin.enable = true;
-    services.xserver.displayManager.autoLogin.user = config.etu.user.username;
 
     # Needed for autologin
-    services.xserver.displayManager.defaultSession = "sway";
+    services.displayManager.autoLogin.enable = true;
+    services.displayManager.autoLogin.user = config.etu.user.username;
+    services.displayManager.defaultSession = "sway";
 
     # Don't have xterm as a session.
     services.xserver.desktopManager.xterm.enable = false;
