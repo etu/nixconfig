@@ -285,6 +285,9 @@
         ];
       };
 
+      # Disable configuration for machine control.
+      machine.provider = "none";
+
       # Static configuration of the camera to display in the UI.
       "webcam camera1" = {
         stream_url = "/klipper/webcam/?action=stream";
