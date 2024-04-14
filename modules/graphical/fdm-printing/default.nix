@@ -10,7 +10,7 @@
     # Install using home-manager.
     etu.user.extraUserPackages = [
       pkgs.cura
-      pkgs.openscad
+      pkgs.openscad-unstable
       pkgs.prusa-slicer
       # pkgs.super-slicer-latest
     ];
