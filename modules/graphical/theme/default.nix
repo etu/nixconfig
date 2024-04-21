@@ -73,7 +73,7 @@
       # QT theme configs
       qt = {
         enable = true;
-        platformTheme = "gtk";
+        platformTheme.name = "gtk";
       }; # END qt
     };
   };
