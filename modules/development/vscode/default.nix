@@ -49,6 +49,17 @@
       version = "1.2.5";
       sha256 = "sha256-/CLxBXXdUfYlT0RaGox1epHnyAUlDihX1LfT5wGd2J8=";
     };
+    github-copilot-chat = pkgs.vscode-utils.extensionFromVscodeMarketplace {
+      # https://marketplace.visualstudio.com/items?itemName=github.copilot-chat
+      # Show versions:
+      # $ nix run nixpkgs#vsce -- show github.copilot-chat --json | bat -l json
+      #
+      # This is to pin it to a version to be compatible with vscode.
+      publisher = "github";
+      name = "copilot-chat";
+      version = "0.14.2024032901";
+      sha256 = "sha256-+6N7IGO5j0wP5Zg8CwapHeKGWiZzc43VM4jCtqJDJIQ=";
+    };
   };
 in {
   options.etu.development.vscode.enable = lib.mkEnableOption "Enable development vscode settings";
@@ -59,7 +70,6 @@ in {
     etu.base.nix.allowUnfree = [
       "vscode-extension-bmewburn-vscode-intelephense-client"
       "vscode-extension-github-copilot"
-      "vscode-extension-github-copilot-chat"
     ];
 
     # If my user exists, enable home-manager configurations
@@ -92,7 +102,7 @@ in {
           vspkgs.php-sniffer # Php code style sniffing
           vspkgs.php-debug # Php debug support
           pkgs.vscode-extensions.github.copilot # Copilot
-          pkgs.vscode-extensions.github.copilot-chat # Copilot chat
+          vspkgs.github-copilot-chat # Copilot chat
         ]
         ++ (lib.optionals config.etu.graphical.fdm-printing.enable [
           vspkgs.openscad # Openscad support
