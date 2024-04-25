@@ -26,7 +26,7 @@
       publisher = "Vue";
       name = "volar";
       version = "1.8.27";
-      sha256 = "sha256-6FktlAJmOD3dQNn2TV83ROw41NXZ/MgquB0RFQqwwW0=";
+      sha256 = "sha256-KfWgdz61NURmS1cwFsE9AmIrEykyN5MXIKfG8gDfmac=";
     };
     php-sniffer = pkgs.vscode-utils.extensionFromVscodeMarketplace {
       # https://marketplace.visualstudio.com/items?itemName=wongjn.php-sniffer
