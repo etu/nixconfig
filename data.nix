@@ -121,11 +121,11 @@
 
       # Private laptop
       laptop-private-elis = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOr9fpRag0ZQq3eMOPHygrt60GZl0NW32rzvvvgsm5HC";
-      laptop-private-caroline = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGCHcHcxKgufBHM2vrpScbyUCLKbo8qh9RUc7rqdf92u root@laptop-private-caroline";
+      laptop-private-caroline = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB93OSzktHi8Px6zCmaIOh8JSChMq6goav2eLFQe9jmY";
 
       # home.elis.nu
       server-main-elis = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJRZYWjxAqloB5MZtxBHkckZhKi+3M1OObzBdyi7La98";
-      server-main-elis-initrd = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGii+3fHNc3to81E0kY+W1yvPCnjFoMZxUr+SbH2nx1e root@fenchurch";
+      server-main-elis-initrd = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGii+3fHNc3to81E0kY+W1yvPCnjFoMZxUr+SbH2nx1e";
 
       # Sparv server
       server-sparv = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICHgZaEnCWXVULHjWqgsvf3mQDX20WmWzAagAtHsBEMZ";
