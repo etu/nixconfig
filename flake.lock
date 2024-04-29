@@ -147,29 +147,6 @@
         "type": "indirect"
       }
     },
-    "flummbot": {
-      "inputs": {
-        "flake-utils": [
-          "flake-utils"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1713717696,
-        "narHash": "sha256-VcUFyRH9oseggkHwlTLd9ZTilpMUm0jupIPT8+rAAE8=",
-        "owner": "etu",
-        "repo": "flummbot",
-        "rev": "d1b59ee5875e74710d1f025d0409ae0b302a8e80",
-        "type": "github"
-      },
-      "original": {
-        "owner": "etu",
-        "repo": "flummbot",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -330,7 +307,6 @@
         "disko": "disko",
         "emacs-overlay": "emacs-overlay",
         "flake-utils": "flake-utils",
-        "flummbot": "flummbot",
         "home-manager": "home-manager",
         "impermanence": "impermanence",
         "ip-failar-nu": "ip-failar-nu",

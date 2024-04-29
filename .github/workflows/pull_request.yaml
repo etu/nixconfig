@@ -16,7 +16,6 @@ jobs:
           - laptop-private-elis
           - server-main-elis
           - server-sparv
-          - vps04
           - vps06
 
     steps:

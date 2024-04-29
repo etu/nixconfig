@@ -34,10 +34,6 @@ and some other things.
 On location server for http://speliarvika.se, will be used for LAN cache
 among other things.
 
-#### `hosts/vps04/`
-System for IRC clients and an IRC bot. Nothing else. ZFS snapshots are pulled
-from this system to `server-main-elis`. Deployed using `deploy .#vps04`.
-
 #### `hosts/vps06/`
 System that runs Gitea, [ip.failar.nu](https://ip.failar.nu/), and a Matrix home server among some
 other things. Deployed using `deploy .#vps06`.

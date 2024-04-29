@@ -12,7 +12,6 @@
     };
     valheim-server-env.file = ./secrets/server-sparv/valheim-server-env.age;
     enshrouded-server-env.file = ./secrets/server-sparv/enshrouded-server-env.age;
-    hashed-ozeloten-password.file = ./secrets/vps04/hashed-ozeloten-password-file.age;
     "etu@aarch64.nixos.community" = {
       file = ./secrets/laptop-private-elis/etu_at_aarch64.nixos.community.age;
       path = "/data/home/etu/.ssh/etu@aarch64.nixos.community";
@@ -35,10 +34,6 @@
     nextcloud-admin-password = {
       file = ./secrets/server-main-elis/nextcloud-admin-password.age;
       owner = "nextcloud";
-    };
-    flummbot-toml = {
-      file = ./secrets/vps04/flummbot.toml.age;
-      owner = "bots";
     };
     syncoid-server-main-elis-ssh-ec = {
       file = ./secrets/server-main-elis/syncoid-ssh-ec.age;
@@ -129,9 +124,6 @@
 
       # Sparv server
       server-sparv = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICHgZaEnCWXVULHjWqgsvf3mQDX20WmWzAagAtHsBEMZ";
-
-      # vps04.elis.nu
-      vps04 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC/UewM3gYrEFZdaD6zDdP9Vkq1W9gOIXJoBG/ram+Fo";
 
       # vps06.elis.nu
       vps06 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINB1+Am7Ai9DfKjDv7JDmPA711FW9wrOXRGZZf0rmjTP";

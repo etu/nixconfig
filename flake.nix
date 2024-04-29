@@ -44,11 +44,6 @@
     emacs-overlay.inputs.nixpkgs.follows = "nixpkgs";
     emacs-overlay.inputs.flake-utils.follows = "flake-utils";
 
-    # Import flummbot
-    flummbot.url = "github:etu/flummbot";
-    flummbot.inputs.nixpkgs.follows = "nixpkgs";
-    flummbot.inputs.flake-utils.follows = "flake-utils";
-
     # Import ip-failar-nu
     ip-failar-nu.url = "github:etu/ip.failar.nu";
     ip-failar-nu.inputs.nixpkgs.follows = "nixpkgs";
@@ -96,7 +91,6 @@
             self.nixosModules.default
             inputs.agenix.nixosModules.age
             inputs.disko.nixosModules.disko
-            inputs.flummbot.nixosModules.${system}.default
             inputs.home-manager.nixosModules.home-manager
             inputs.impermanence.nixosModules.impermanence
             inputs.ip-failar-nu.nixosModules.${system}.default
@@ -150,7 +144,6 @@
           ];
         };
         server-main-elis = mkSystem {name = "server-main-elis";};
-        vps04 = mkSystem {name = "vps04";};
         vps06 = mkSystem {name = "vps06";};
         server-sparv = mkSystem {name = "server-sparv";};
         live-iso = mkSystem {name = "live-iso";};
@@ -165,10 +158,6 @@
         server-sparv = mkDeploy {
           name = "server-sparv";
           hostname = "sparv.failar.nu";
-        };
-        vps04 = mkDeploy {
-          name = "vps04";
-          hostname = "vps04.elis.nu";
         };
         vps06 = mkDeploy {
           name = "vps06";

@@ -16,9 +16,6 @@ server-main-elis:
 server-sparv:
 	nom build .#nixosConfigurations.server-sparv.config.system.build.toplevel
 
-vps04:
-	nom build .#nixosConfigurations.vps04.config.system.build.toplevel
-
 vps06:
 	nom build .#nixosConfigurations.vps06.config.system.build.toplevel
 
