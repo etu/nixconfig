@@ -110,8 +110,9 @@
         "type": "github"
       },
       "original": {
-        "id": "emacs-overlay",
-        "type": "indirect"
+        "owner": "nix-community",
+        "repo": "emacs-overlay",
+        "type": "github"
       }
     },
     "flake-compat": {
@@ -143,8 +144,9 @@
         "type": "github"
       },
       "original": {
-        "id": "flake-utils",
-        "type": "indirect"
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
       }
     },
     "home-manager": {
@@ -162,8 +164,9 @@
         "type": "github"
       },
       "original": {
-        "id": "home-manager",
-        "type": "indirect"
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "type": "github"
       }
     },
     "impermanence": {
@@ -214,8 +217,9 @@
         "type": "github"
       },
       "original": {
-        "id": "nixos-hardware",
-        "type": "indirect"
+        "owner": "nixos",
+        "repo": "nixos-hardware",
+        "type": "github"
       }
     },
     "nixos-needtoreboot": {

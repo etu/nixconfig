@@ -9,7 +9,7 @@
     nixpkgs-22-11.url = "github:NixOS/nixpkgs/nixos-22.11";
 
     # Main flake-utils
-    flake-utils.url = "flake-utils";
+    flake-utils.url = "github:numtide/flake-utils";
 
     # Import deploy-rs for deployments
     deploy-rs.url = "github:serokell/deploy-rs";
@@ -21,13 +21,13 @@
     disko.inputs.nixpkgs.follows = "nixpkgs";
 
     # Import nixos hardware quirks settings
-    nixos-hardware.url = "nixos-hardware";
+    nixos-hardware.url = "github:nixos/nixos-hardware";
 
     # Import impermanence modules for peristence
     impermanence.url = "github:nix-community/impermanence";
 
     # Import home-manager modules
-    home-manager.url = "home-manager";
+    home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # Import nixos-needtoreboot
@@ -40,7 +40,7 @@
     agenix.inputs.home-manager.follows = "home-manager";
 
     # Import emacs-overlay
-    emacs-overlay.url = "emacs-overlay";
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
     emacs-overlay.inputs.nixpkgs.follows = "nixpkgs";
     emacs-overlay.inputs.flake-utils.follows = "flake-utils";
 
