@@ -168,6 +168,9 @@
       # Storage path for uploaded files.
       virtual_sdcard.path = "/var/lib/moonraker/gcodes";
 
+      # Enable object exclude during prints.
+      exclude_object = {};
+
       # Other things fluidd needs to exist:
       display_status = {};
       pause_resume = {};
