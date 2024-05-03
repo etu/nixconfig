@@ -77,11 +77,7 @@ jobs:
 
       # Build systems.
       - name: Build system derivation
-        uses: nick-fields/retry@v3
-        with:
-          max_attempts: 3
-          timeout_minutes: 60
-          command: 'nix build .#nixosConfigurations.${{ matrix.hostname }}.config.system.build.toplevel'
+        run: 'nix build .#nixosConfigurations.${{ matrix.hostname }}.config.system.build.toplevel'
 
   cache-shell:
     name: Cache nix shell
@@ -171,11 +167,7 @@ jobs:
 
       # Build systems.
       - name: Build system derivation
-        uses: nick-fields/retry@v3
-        with:
-          max_attempts: 2
-          timeout_minutes: 30
-          command: 'nix build .#nixosConfigurations.${{ matrix.hostname }}.config.system.build.toplevel'
+        run: 'nix build .#nixosConfigurations.${{ matrix.hostname }}.config.system.build.toplevel'
 
       # Configure SSH key
       - uses: shimataro/ssh-key-action@v2
