@@ -2,8 +2,8 @@
 name: Update ⬆️
 
 'on':
-  schedule:
-    - cron: '30 3 * * 1,5'  # At 03:30 on Monday, and Friday.
+  # schedule:
+  #   - cron: '30 3 * * 1,5'  # At 03:30 on Monday, and Friday.
   workflow_dispatch:
 
 jobs:
