@@ -201,6 +201,9 @@
       # Build packages
       packages.swayWallpaper = pkgs.callPackage ./packages/wallpaper {};
       packages.moonraker-timelapse = pkgs.callPackage ./packages/moonraker-timelapse {};
+      packages.moonraker-with-timelapse = pkgs.callPackage ./packages/moonraker-with-timelapse {
+        inherit (self.packages.${system}) moonraker-timelapse;
+      };
       packages.iso = self.nixosConfigurations.live-iso.config.system.build.isoImage;
     });
 }
