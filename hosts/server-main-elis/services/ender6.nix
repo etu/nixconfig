@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  moonraker-with-timelapse,
   ...
 }: {
   nixpkgs.overlays = [
@@ -301,6 +302,9 @@
   # Expose Klipper API's so they can be used.
   services.moonraker = {
     enable = true;
+
+    # Set a moonraker built with timelapse support.
+    package = moonraker-with-timelapse;
 
     # Configure moonraker.
     settings = {
