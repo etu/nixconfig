@@ -102,7 +102,7 @@
           {
             inherit (pkgs-22-11.nodejs-14_x.pkgs) intelephense;
             inherit (pkgs-22-11) chefdk;
-            inherit (self.packages.${system}) swayWallpaper moonraker-with-timelapse;
+            inherit (self.packages.${system}) swayWallpaper moonraker-timelapse moonraker-with-timelapse;
             inherit myData;
 
             emacs-overlay = inputs.emacs-overlay.overlay;

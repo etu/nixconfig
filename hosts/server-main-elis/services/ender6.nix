@@ -2,6 +2,7 @@
   config,
   pkgs,
   moonraker-with-timelapse,
+  # moonraker-timelapse,
   ...
 }: {
   nixpkgs.overlays = [
@@ -39,6 +40,9 @@
     # These settings have the BLTouch/CRTouch features enabled and
     # some extra settings needed for fluidd.
     settings = {
+      # Include the moonraker-timelapse configuration file.
+      #"include ${moonraker-timelapse}/lib/moonraker-timelapse/klipper-macro/timelapse.cfg" = {};
+
       stepper_x = {
         step_pin = "PB8";
         dir_pin = "PB7";
