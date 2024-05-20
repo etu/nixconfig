@@ -31,14 +31,19 @@
           ];
           elis-tickster-docked.outputs = [
             {
-              criteria = "Dell Inc. DELL U2412M YPPY07AG0EUL";
-              mode = "1920x1200";
+              criteria = "HP Inc. HP E24 G5 CN432215XQ";
+              mode = "1920x1080";
               position = "0,0";
+            }
+            {
+              criteria = "HP Inc. HP E24 G5 CN432215XC";
+              mode = "1920x1080";
+              position = "1920,0";
             }
             {
               criteria = "eDP-1";
               mode = "1920x1200";
-              position = "0,1200";
+              position = "0,1080";
             }
           ];
           caroline-docked.outputs = [
