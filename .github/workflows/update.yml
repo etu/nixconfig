@@ -16,7 +16,7 @@ jobs:
       - uses: DeterminateSystems/nix-installer-action@v11
       - uses: DeterminateSystems/magic-nix-cache-action@v6
 
-      - uses: cachix/cachix-action@v14
+      - uses: cachix/cachix-action@v15
         with:
           name: etu
           extraPullNames: 'nix-community'
@@ -69,7 +69,7 @@ jobs:
       - uses: DeterminateSystems/nix-installer-action@v11
       - uses: DeterminateSystems/magic-nix-cache-action@v6
 
-      - uses: cachix/cachix-action@v14
+      - uses: cachix/cachix-action@v15
         with:
           name: etu
           extraPullNames: 'nix-community'
@@ -92,7 +92,7 @@ jobs:
       - uses: DeterminateSystems/nix-installer-action@v11
       - uses: DeterminateSystems/magic-nix-cache-action@v6
 
-      - uses: cachix/cachix-action@v14
+      - uses: cachix/cachix-action@v15
         with:
           name: etu
           extraPullNames: 'nix-community'
@@ -114,7 +114,7 @@ jobs:
       - uses: DeterminateSystems/nix-installer-action@v11
       - uses: DeterminateSystems/magic-nix-cache-action@v6
 
-      - uses: cachix/cachix-action@v14
+      - uses: cachix/cachix-action@v15
         with:
           name: etu
           extraPullNames: 'nix-community'
