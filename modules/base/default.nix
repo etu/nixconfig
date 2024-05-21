@@ -134,6 +134,9 @@
       '')
     ];
 
+    # Set backup file extensions for conflicts on home manager activation.
+    home-manager.backupFileExtension = "backup";
+
     # Set state version for my users home-manager (if it's enabled).
     home-manager.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
       home.stateVersion = config.etu.stateVersion;
