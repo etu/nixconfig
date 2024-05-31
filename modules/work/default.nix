@@ -24,6 +24,7 @@
 
     # Persist directories and files
     etu.base.zfs.user.directories = [
+      ".aws"
       ".chalet"
       ".chef"
       ".config/Slack"
@@ -75,6 +76,7 @@
       # Misc
       pkgs.mariadb
       pkgs.slack
+      pkgs.awscli
     ];
 
     # Enable appgate
