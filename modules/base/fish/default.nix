@@ -5,6 +5,9 @@
   ...
 }: let
   base = {
+    # Enable zoxide as an alternative navigation thing
+    programs.zoxide.enable = true;
+
     # Enable fish in home-manager
     programs.fish.enable = true;
     programs.fish.shellInit = ''
@@ -194,6 +197,7 @@ in {
     etu.base.zfs.user.directories = [
       ".config/fish"
       ".local/share/fish"
+      ".local/share/zoxide"
     ];
   };
 }
