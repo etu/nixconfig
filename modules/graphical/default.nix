@@ -38,6 +38,7 @@
 
       # Install using home-manager.
       user.extraUserPackages = [
+        pkgs.delfin # Jellyfin client
         pkgs.feh # Image display tool
         pkgs.mpv # Media player
         pkgs.pavucontrol # Pulse audio volume control
@@ -49,6 +50,7 @@
 
       # Directories to mount persistent for my user on graphical sessions
       base.zfs.user.directories = [
+        ".config/delfin"
         ".config/pipewire/media-session.d"
         ".local/state/wireplumber"
         "Downloads"
