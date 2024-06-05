@@ -3,6 +3,16 @@
   pkgs,
   ...
 }: {
+  nixpkgs.overlays = [
+    (_: super: {
+      # Use an older gcc for firmware building to fix the firmware
+      # build using nix.
+      klipper-firmware = super.klipper-firmware.override {
+        gcc-arm-embedded = pkgs.gcc-arm-embedded-11;
+      };
+    })
+  ];
+
   # Enable Klipper.
   services.klipper = {
     enable = true;
