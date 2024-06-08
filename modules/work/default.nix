@@ -34,6 +34,7 @@
     ];
 
     etu.base.zfs.user.files = [
+      ".config/goprocmgr.json"
       ".docker/config.json"
       ".kube/config"
     ];
@@ -47,6 +48,7 @@
 
     etu.user.extraUserPackages = [
       # Install chalet to manage running of containers
+      config.nur.repos.etu.goprocmgr
       config.nur.repos.etu.chalet
 
       # Install github-markdown-toc to format README TOC's
