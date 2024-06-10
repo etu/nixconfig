@@ -80,6 +80,7 @@
   etu.base.nix.allowUnfree = [
     "nvidia-x11"
     "nvidia-settings"
+    "libXNVCtrl"
   ];
 
   # Filesystem mounts.
