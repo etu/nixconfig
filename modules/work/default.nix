@@ -78,7 +78,7 @@
       # Misc
       pkgs.mariadb
       pkgs.slack
-      pkgs.awscli
+      pkgs.awscli2
     ];
 
     # Enable appgate
