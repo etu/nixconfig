@@ -35,7 +35,7 @@
     nixpkgs.config.packageOverrides = pkgs: {
       vaapiIntel = pkgs.vaapiIntel.override {enableHybridCodec = true;};
     };
-    hardware.opengl = {
+    hardware.graphics = {
       enable = true;
       extraPackages = [
         pkgs.intel-media-driver

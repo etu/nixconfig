@@ -25,6 +25,10 @@
       ])
     ];
 
+    etu.base.nix.allowUnfree = [
+      "aspell-dict-en-science"
+    ];
+
     # Configure aspell system wide
     environment.etc."aspell.conf".text = ''
       master en_US
