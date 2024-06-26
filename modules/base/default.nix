@@ -105,7 +105,6 @@
       pkgs.jc # parse different formats and command outputs to json
       pkgs.jq # parse, format and query json documents
       pkgs.ncdu # disk usage navigator
-      pkgs.nix-top # nix-top is a top for what nix is doing
       pkgs.pv # pipe viewer for progressbars in pipes
       pkgs.ripgrep # quick file searcher
       pkgs.testssl # print TLS certificate info
