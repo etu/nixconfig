@@ -116,7 +116,18 @@
         dir_pin = "!PB3";
         enable_pin = "!PC3";
         microsteps = 16;
-        rotation_distance = "22.857";
+        # Here's the documentation for how to calibrate the extruder:
+        # https://www.klipper3d.org/Rotation_Distance.html#calibrating-rotation_distance-on-extruders
+        #
+        # TLDR:
+        # 1. Cut the filament right at the exit of the extruder.
+        # 2. Run "G91" followed by "G1 E50 F60" to slowly extrude 50mm of filament.
+        # 3. Cut the filament right at the exit again.
+        # 4. Measure the extruded filament.
+        # 5. Calculate the new rotation_distance by the following:
+        #    rotaton_distance = <old_rotation_distance> * <extruded_length> / 50
+        # 6. Round to 3 decimal places.
+        rotation_distance = "23.405";
         nozzle_diameter = "0.400";
         filament_diameter = "1.750";
         heater_pin = "PA1";
