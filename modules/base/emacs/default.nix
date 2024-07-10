@@ -53,7 +53,7 @@
     pkgs.nodePackages.dockerfile-language-server-nodejs # Docker language server
     intelephense # PHP language server
     pkgs.nodePackages.typescript-language-server # JS/TS language server
-    pkgs.nodePackages.vscode-css-languageserver-bin # CSS/LESS/SASS language server
+    pkgs.vscode-langservers-extracted # CSS/LESS/SASS language server
     pkgs.nodejs # For copilot.el
 
     # Other programs
