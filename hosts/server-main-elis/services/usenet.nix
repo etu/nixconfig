@@ -9,6 +9,7 @@
     onlyLan = ''
       allow 100.0.0.0/8;
       allow 127.0.0.1/24;
+      allow ::1;
       deny all;
     '';
   in {
