@@ -65,5 +65,35 @@ _: {
         ];
       }
     ];
+    services = [
+      {
+        "Printer Status" = [
+          {
+            "Printer Status" = {
+              icon = "klipper.svg";
+              description = "Creality Ender 6";
+              widget = {
+                type = "moonraker";
+                url = "http://server-main-elis";
+              };
+            };
+          }
+        ];
+      }
+      {
+        "Printer Camera" = [
+          {
+            "Printer Camera" = {
+              icon = "klipper.svg";
+              description = "Creality Ender 6 Camera";
+              widget = {
+                type = "mjpeg";
+                stream = "http://server-main-elis/klipper/webcam?action=stream";
+              };
+            };
+          }
+        ];
+      }
+    ];
   };
 }
