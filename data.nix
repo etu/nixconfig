@@ -27,6 +27,9 @@
       path = "/data/etc/initrd-ssh/ssh_host_ed_25519_key";
       symlink = false;
     };
+    homepage-dashboard-environment = {
+      file = ./secrets/server-main-elis/homepage-dashboard-environment.age;
+    };
     freshrss-password-etu = {
       file = ./secrets/server-main-elis/etu-freshrss-password.age;
       owner = "freshrss";

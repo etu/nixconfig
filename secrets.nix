@@ -34,6 +34,7 @@ in {
   "secrets/laptop-private-elis/etu_at_aarch64.nixos.community.pub.age".publicKeys = etu ++ hosts.laptop-private-elis;
   "secrets/server-main-elis/cloudflare-api-env.age".publicKeys = etu ++ hosts.server-main-elis;
   "secrets/server-main-elis/etu-freshrss-password.age".publicKeys = etu ++ hosts.server-main-elis;
+  "secrets/server-main-elis/homepage-dashboard-environment.age".publicKeys = etu ++ hosts.server-main-elis;
   "secrets/server-main-elis/initrd-sshd-ec.age".publicKeys = etu ++ hosts.server-main-elis;
   "secrets/server-main-elis/nextcloud-admin-password.age".publicKeys = etu ++ hosts.server-main-elis;
   "secrets/server-main-elis/syncoid-ssh-ec.age".publicKeys = etu ++ hosts.server-main-elis;
