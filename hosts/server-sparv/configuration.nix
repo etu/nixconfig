@@ -85,7 +85,7 @@
   virtualisation.oci-containers.backend = "docker";
   virtualisation.oci-containers.containers = {
     lancache = {
-      image = "lancachenet/monolithic:latest";
+      image = "docker.io/lancachenet/monolithic:latest";
       ports = [
         "80:80/tcp"
         "443:443/tcp"
@@ -96,7 +96,7 @@
       ];
     };
     lancache-dns = {
-      image = "lancachenet/lancache-dns:latest";
+      image = "docker.io/lancachenet/lancache-dns:latest";
       ports = [
         "53:53/udp"
       ];
@@ -136,7 +136,7 @@
 
     # Set up a enshrouded server
     enshrouded-server = {
-      image = "sknnr/enshrouded-dedicated-server:latest";
+      image = "docker.io/sknnr/enshrouded-dedicated-server:latest";
       ports = [
         "15636-15637:15636-15637/udp"
       ];
