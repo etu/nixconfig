@@ -75,6 +75,10 @@
     # Enshrouded
     15636
     15637
+
+    # V Rising
+    9876
+    9877
   ];
 
   # Set up docker.
