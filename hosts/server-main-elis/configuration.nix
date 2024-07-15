@@ -21,6 +21,7 @@
     ./services/guest-users.nix
     ./services/hass.nix
     ./services/home-nginx.nix
+    ./services/homepage.nix
     ./services/nextcloud.nix
     ./services/svtplay.nix
     ./services/usenet.nix

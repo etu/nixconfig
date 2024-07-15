@@ -360,7 +360,7 @@
           extraConfig = "client_max_body_size 50M;";
           proxyPass = "http://fluidd-apiserver/websocket";
         };
-        "~ ^/(printer|api|access|machine|server)/" = {
+        "~ ^/(printer|access|machine|server)/" = {
           proxyWebsockets = true;
           extraConfig = "client_max_body_size 50M;";
           proxyPass = "http://fluidd-apiserver$request_uri";

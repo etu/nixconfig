@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{config, ...}: {
   # Make sure to have nginx enabled
   services.nginx.enable = true;
   services.nginx.virtualHosts.${config.networking.hostName}.locations = let
@@ -13,28 +9,9 @@
       deny all;
     '';
   in {
-    # Index file
     "/" = {
-      root = pkgs.writeTextDir "index.html" ''
-        <!DOCTYPE html>
-        <html lang="en">
-          <head>
-            <meta charset="utf-8" />
-            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-            <title>Links</title>
-          </head>
-          <body>
-            <ul>
-              <li><a href="/bazarr">Bazarr (Subtitles)</a></li>
-              <li><a href="/sonarr">Sonarr (Series)</a></li>
-              <li><a href="/radarr">Radarr (Movies)</a></li>
-              <li><a href="/lidarr">Lidarr (Music)</a></li>
-              <li><a href="/nzbget">NzbGet</a></li>
-              <li><a href="/klipper">Klipper</a></li>
-            </ul>
-          </body>
-        </html>
-      '';
+      proxyPass = "http://127.0.0.1:${toString config.services.homepage-dashboard.listenPort}";
+      recommendedProxySettings = true;
       extraConfig = onlyLan;
     };
     "/bazarr" = {
