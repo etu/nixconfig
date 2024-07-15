@@ -46,6 +46,7 @@
       "zroot/safe/home".use_template = ["data"];
       "zroot/local/minecraft".use_template = ["data"]; # Minecraft server
       "zroot/local/valheim".use_template = ["data"]; # Valheim server
+      "zroot/local/vrising".use_template = ["data"]; # V Rising server
       "zroot/local/enshrouded".use_template = ["data"]; # Enshrouded server
     };
 
@@ -116,6 +117,20 @@
       volumes = [
         "/var/lib/valheim/config:/config"
         "/var/lib/valheim/data:/opt/valheim"
+      ];
+    };
+
+    vrising-server = {
+      image = "docker.io/trueosiris/vrising:latest";
+      ports = [
+        "9876-9877:9876-9877/udp"
+      ];
+      environment = {
+        TZ = "Europe/Stockholm";
+        SERVERNAME = "SparvRising";
+      };
+      volumes = [
+        "/var/lib/vrising:/mnt/vrising"
       ];
     };
 
