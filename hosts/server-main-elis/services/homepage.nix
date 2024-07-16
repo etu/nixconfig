@@ -76,6 +76,34 @@
     ];
     services = [
       {
+        Calendar = [
+          {
+            Calendar = {
+              icon = "google-calendar.svg";
+              description = "Media Calendar";
+              widget = {
+                type = "calendar";
+                view = "monthly";
+                showTime = "true";
+                timezone = "Europe/Stockholm";
+                integrations = [
+                  {
+                    type = "sonarr";
+                    service_group = "Media";
+                    service_name = "Sonarr";
+                  }
+                  {
+                    type = "radarr";
+                    service_group = "Media";
+                    service_name = "Radarr";
+                  }
+                ];
+              };
+            };
+          }
+        ];
+      }
+      {
         Media = [
           {
             Sonarr = {
