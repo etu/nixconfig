@@ -134,7 +134,8 @@
         SERVERNAME = "SparvRising";
       };
       volumes = [
-        "/var/lib/vrising:/mnt/vrising"
+        "/var/lib/vrising/server:/mnt/vrising/server:rw"
+        "/var/lib/vrising/persistentdata:/mnt/vrising/persistentdata:rw"
       ];
     };
 
