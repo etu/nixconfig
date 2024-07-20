@@ -60,9 +60,6 @@
       wantedBy = ["multi-user.target"];
     };
 
-    # Install fonts needed for waybar
-    fonts.packages = [pkgs.font-awesome];
-
     # Enable the X11 windowing system (for the loginmanager).
     services.xserver.enable = true;
 
