@@ -35,6 +35,7 @@
 
     # Enable a graphical system.
     graphical.enable = true;
+    graphical.sway.enable = true;
 
     # Fore disable some graphical components unused on the live iso.
     graphical.gnupg.enable = false;

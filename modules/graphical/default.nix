@@ -29,7 +29,6 @@
       graphical.firefox.enable = lib.mkDefault true;
       graphical.flatpak.enable = lib.mkDefault true;
       graphical.gnupg.enable = lib.mkDefault true;
-      graphical.sway.enable = lib.mkDefault true;
       graphical.telegram.enable = lib.mkDefault true;
       graphical.terminal.enable = lib.mkDefault true;
       graphical.theme.enable = lib.mkDefault true;

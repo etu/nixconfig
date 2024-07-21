@@ -41,6 +41,7 @@
     games.enable = false;
     games.minecraft.enable = true;
     graphical.enable = true;
+    graphical.sway.enable = true;
     graphical.fdm-printing.enable = true;
     graphical.hamradio.enable = true;
     graphical.signal.enable = true;

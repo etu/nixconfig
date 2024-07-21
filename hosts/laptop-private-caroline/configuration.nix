@@ -50,6 +50,7 @@
 
     # Enable a graphical system.
     graphical.enable = true;
+    graphical.sway.enable = true;
     graphical.fdm-printing.enable = true;
 
     # Do not enable Elis configs for certain things.
