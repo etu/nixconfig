@@ -59,7 +59,7 @@
     # Other programs
     pkgs.gnuplot # For use with org mode
     pkgs.phpPackages.php-codesniffer # PHP codestyle checker
-    pkgs.openscad # For use with scad and scad preview mode
+    pkgs.openscad-unstable # For use with scad and scad preview mode
   ];
 
   # List custom treesitter grammars
