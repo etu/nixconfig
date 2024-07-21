@@ -35,6 +35,7 @@
   etu = {
     stateVersion = "24.05";
 
+    base.fish.enableUserZoxideCd = true;
     development.enable = true;
     development.flipper-zero.enable = true;
     games.enable = false;

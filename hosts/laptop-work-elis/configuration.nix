@@ -21,6 +21,7 @@
   etu = {
     stateVersion = "24.05";
 
+    base.fish.enableUserZoxideCd = true;
     development.enable = true;
     development.vscode.enableWork = true;
     graphical.enable = true;
