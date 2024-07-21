@@ -5,6 +5,11 @@
   ...
 }: {
   options.etu.graphical.hyprland.enable = lib.mkEnableOption "Enable graphical hyprland settings";
+  options.etu.graphical.hyprland.enableXwayland =
+    lib.mkEnableOption "Enable xwayland"
+    // {
+      default = true;
+    };
 
   config = lib.mkIf config.etu.graphical.hyprland.enable {
     # Enable a wayland build of Emacs.
@@ -133,6 +138,9 @@
       wayland.windowManager.hyprland.plugins = [
         pkgs.hyprlandPlugins.hy3
       ];
+
+      # Option to enable or disable xwayland.
+      wayland.windowManager.hyprland.xwayland.enable = config.etu.graphical.hyprland.enableXwayland;
 
       # Define submaps
       wayland.windowManager.hyprland.extraConfig = ''
