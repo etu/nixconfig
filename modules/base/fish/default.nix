@@ -4,9 +4,10 @@
   pkgs,
   ...
 }: let
-  base = {
+  base = username: {
     # Enable zoxide as an alternative navigation thing
     programs.zoxide.enable = true;
+    programs.zoxide.options = lib.mkIf (config.etu.base.fish.enableUserZoxideCd && username != "root") ["--cmd=cd"];
 
     # Enable fish in home-manager
     programs.fish.enable = true;
@@ -174,6 +175,7 @@
   };
 in {
   options.etu.base.fish.enable = lib.mkEnableOption "Enable base fish settings";
+  options.etu.base.fish.enableUserZoxideCd = lib.mkEnableOption "Enable fish zoxide cd alias for normal users";
 
   config = lib.mkIf config.etu.base.fish.enable {
     # Enable fish.
@@ -188,10 +190,10 @@ in {
     users.users.root.shell = pkgs.fish;
 
     # Configure fish for my users home-manager (if it's enabled).
-    home-manager.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable base;
+    home-manager.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable (base config.etu.user.username);
 
     # Configure fish for root users home-manager.
-    home-manager.users.root = base;
+    home-manager.users.root = base "root";
 
     # Enable persistence for fish files.
     etu.base.zfs.user.directories = [
