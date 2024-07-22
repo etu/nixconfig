@@ -4,6 +4,7 @@
 {
   config,
   myData,
+  pkgs,
   ...
 }: {
   imports = [
@@ -25,7 +26,11 @@
     development.enable = true;
     development.vscode.enableWork = true;
     graphical.enable = true;
-    graphical.sway.enable = true;
+    graphical.hyprland.enable = true;
+    graphical.hyprland.wallpapers = [
+      "${pkgs.hyprland}/share/hyprland/wall0.png"
+      "${pkgs.hyprland}/share/hyprland/wall1.png"
+    ];
     graphical.spotify.enable = true;
     graphical.virtualbox.enable = true;
     graphical.flatpak.enablePersistence = true;
