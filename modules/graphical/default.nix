@@ -38,14 +38,15 @@
 
       # Install using home-manager.
       user.extraUserPackages = [
+        pkgs.chromium # Chromium browser
         pkgs.delfin # Jellyfin client
         pkgs.feh # Image display tool
+        pkgs.imv # Image display tool
         pkgs.mpv # Media player
         pkgs.pavucontrol # Pulse audio volume control
         pkgs.sshfs-fuse # SSHFS client
-        pkgs.yt-dlp # Youtube download client
-        pkgs.chromium # Chromium browser
         pkgs.stupidterm # Another terminal emulator
+        pkgs.yt-dlp # Youtube download client
       ];
 
       # Directories to mount persistent for my user on graphical sessions
