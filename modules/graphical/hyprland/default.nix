@@ -19,6 +19,11 @@
     ];
     description = "Wallpapers to select from for hyprland";
   };
+  options.etu.graphical.hyprland.lockWallpaper = lib.mkOption {
+    type = lib.types.str;
+    default = "screenshot";
+    description = "Wallpaper to use for lockscreen";
+  };
 
   config = lib.mkIf config.etu.graphical.hyprland.enable {
     # Enable a wayland build of Emacs.
@@ -142,15 +147,18 @@
         };
         background = [
           {
-            path = "screenshot";
-            blur_passes = 3;
+            path = config.etu.graphical.hyprland.lockWallpaper;
+            blur_passes =
+              if config.etu.graphical.hyprland.lockWallpaper == "screenshot"
+              then 3
+              else 0;
             blur_size = 8;
           }
         ];
         input-field = [
           {
             size = "200, 50";
-            position = "0, -80";
+            position = "0, -410";
             monitor = "";
             dots_center = true;
             fade_on_empty = false;
@@ -165,7 +173,7 @@
         label = [
           {
             monitor = "";
-            position = "0, 240";
+            position = "0, 440";
             halign = "center";
             valign = "center";
             text = "$TIME";
