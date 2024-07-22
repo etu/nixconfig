@@ -41,7 +41,7 @@
     games.enable = false;
     games.minecraft.enable = true;
     graphical.enable = true;
-    graphical.sway.enable = true;
+    graphical.hyprland.enable = true;
     graphical.fdm-printing.enable = true;
     graphical.hamradio.enable = true;
     graphical.signal.enable = true;
@@ -109,44 +109,29 @@
       graphical.telegram.enable = lib.mkForce false;
 
       # Switch wallpaper
-      graphical.sway.wallpaper = lib.mkForce (toString (pkgs.stdenv.mkDerivation {
-        name = "dark-bg";
-        src = pkgs.fetchurl {
-          url = "https://taserud.net/img/logo-dark.svg";
-          sha256 = "sha256-PmWJ0pN+q6JyKOuQOHx0LFyGBFmGUZeKBoxLBO4Sn1E=";
-        };
-        dontUnpack = true;
-        buildInputs = [pkgs.inkscape pkgs.graphicsmagick];
-        installPhase = ''
-          inkscape --export-type=png               \
-                   --export-filename=logo-dark.png \
-                   --export-dpi=400                \
-                   $src
+      graphical.hyprland.wallpapers = [
+        (toString (pkgs.stdenv.mkDerivation {
+          name = "dark-bg";
+          src = pkgs.fetchurl {
+            url = "https://taserud.net/img/logo-dark.svg";
+            sha256 = "sha256-PmWJ0pN+q6JyKOuQOHx0LFyGBFmGUZeKBoxLBO4Sn1E=";
+          };
+          dontUnpack = true;
+          buildInputs = [pkgs.inkscape pkgs.graphicsmagick];
+          installPhase = ''
+            inkscape --export-type=png               \
+                     --export-filename=logo-dark.png \
+                     --export-dpi=400                \
+                     $src
 
-          gm convert -size 1920x1440 xc:#2d3640 bg.png
-          gm composite -gravity center logo-dark.png bg.png $out
-        '';
-      }));
+            gm convert -size 1920x1440 xc:#2d3640 bg.png
+            gm composite -gravity center logo-dark.png bg.png $out
+          '';
+        }))
+      ];
 
       # Switch lockscreen image
-      graphical.sway.lockWallpaper = lib.mkForce (toString (pkgs.stdenv.mkDerivation {
-        name = "light-bg";
-        src = pkgs.fetchurl {
-          url = "https://taserud.net/img/logo-light.svg";
-          sha256 = "sha256-Q/Iz5087VWh1RSKqYd92JKvnucrGHm2f5DjxyYU27cc=";
-        };
-        dontUnpack = true;
-        buildInputs = [pkgs.inkscape pkgs.graphicsmagick];
-        installPhase = ''
-          inkscape --export-type=png                \
-                   --export-filename=logo-light.png \
-                   --export-dpi=400                 \
-                   $src
-
-          gm convert -size 1920x1440 xc:#dde3eb bg.png
-          gm composite -gravity center logo-light.png bg.png $out
-        '';
-      }));
+      graphical.hyprland.lockWallpaper = builtins.head config.etu.graphical.hyprland.wallpapers;
 
       # Enable snapshotting of filesystem while in use
       base.sanoid.datasets."zroot/safe/home-tickster".use_template = ["home"];
