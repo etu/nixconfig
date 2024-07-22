@@ -10,6 +10,15 @@
     // {
       default = true;
     };
+  options.etu.graphical.hyprland.wallpapers = lib.mkOption {
+    type = lib.types.listOf lib.types.str;
+    default = [
+      "${pkgs.hyprland}/share/hyprland/wall0.png" # Hyprland logo
+      "${pkgs.hyprland}/share/hyprland/wall1.png" # Triangle background from hyprland
+      "${pkgs.hyprland}/share/hyprland/wall2.png" # Anime gal from hyprland
+    ];
+    description = "Wallpapers to select from for hyprland";
+  };
 
   config = lib.mkIf config.etu.graphical.hyprland.enable {
     # Enable a wayland build of Emacs.
@@ -67,6 +76,27 @@
     # Enable PAM settings for hyprlock to work.
     security.pam.services.hyprlock = {};
 
+    systemd.user.services.hyprpaper-randomizer = {
+      after = ["graphical-session-pre.target" "hyprpaper.service"];
+      partOf = ["graphical-session.target"];
+      wantedBy = ["graphical-session.target" "timers.target"];
+      path = [pkgs.hyprland];
+      startAt = "hourly";
+      script = ''
+        currentBg=$(hyprctl hyprpaper listactive | grep '^ =' | sed 's/ = //')
+
+        if test "$(hyprctl hyprpaper listloaded | grep -cv "$currentBg")" -gt 0; then
+            randomBg=$(hyprctl hyprpaper listloaded | grep -v "$currentBg" | sort -R | head -n 1)
+        else
+            randomBg=$(hyprctl hyprpaper listloaded | sort -R | head -n 1)
+        fi
+
+        if test "$currentBg" != "$randomBg"; then
+            hyprctl hyprpaper wallpaper ,"$randomBg"
+        fi
+      '';
+    };
+
     home-manager.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
       # Enable hypridle for idle management
       services.hypridle.enable = true;
@@ -89,6 +119,16 @@
             on-resume = "hyprctl dispatch dpms on; loginctl lock-session";
           }
         ];
+      };
+
+      # Install hyprpaper with configuration to render background images.
+      services.hyprpaper.enable = true;
+      services.hyprpaper.settings = {
+        ipc = "on";
+        splash = false;
+        splash_offset = 2.0;
+        preload = config.etu.graphical.hyprland.wallpapers;
+        wallpaper = ",${builtins.head config.etu.graphical.hyprland.wallpapers}";
       };
 
       # Enable hyprlock for screen locking
@@ -194,6 +234,9 @@
           "eDP-1, preferred, auto, 1"
         ];
 
+        # Set to true to fully disable the default wallpaper.
+        misc.disable_hyprland_logo = true;
+
         # Use the hy3 plugin as layout.
         general.layout = "hy3";
 
@@ -201,6 +244,8 @@
         # has it's latest settings.
         exec = [
           "systemctl --user restart hypridle.service"
+          "systemctl --user restart hyprpaper.service"
+          "systemctl --user restart hyprpaper-randomizer.service"
           "systemctl --user restart kanshi.service"
         ];
         exec-once = [
