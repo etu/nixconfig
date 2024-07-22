@@ -15,6 +15,10 @@
     # Enable a wayland build of Emacs.
     etu.base.emacs.package = "wayland";
 
+    # Set environment variable to make Electron and Chromium
+    # applications run under wayland.
+    environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
     # Install some programs
     etu.user.extraUserPackages = [
       pkgs.bluetuith
