@@ -127,7 +127,7 @@
         # 5. Calculate the new rotation_distance by the following:
         #    rotaton_distance = <old_rotation_distance> * <extruded_length> / 50
         # 6. Round to 3 decimal places.
-        rotation_distance = "23.405";
+        rotation_distance = "23.545";
         nozzle_diameter = "0.400";
         filament_diameter = "1.750";
         heater_pin = "PA1";
