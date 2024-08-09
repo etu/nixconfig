@@ -13,12 +13,16 @@
 
     # Import deploy-rs for deployments
     deploy-rs.url = "github:serokell/deploy-rs";
+    deploy-rs.inputs.flake-compat.follows = "flake-compat";
     deploy-rs.inputs.nixpkgs.follows = "nixpkgs";
     deploy-rs.inputs.utils.follows = "flake-utils";
 
     # Import disko for disk partitioning
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Import flake-compat for follow of others that use it
+    flake-compat.url = "github:edolstra/flake-compat";
 
     # Import nixos hardware quirks settings
     nixos-hardware.url = "github:nixos/nixos-hardware";
@@ -29,6 +33,11 @@
     # Import home-manager modules
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Import nixos-cosmic modules
+    nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
+    nixos-cosmic.inputs.flake-compat.follows = "flake-compat";
+    nixos-cosmic.inputs.nixpkgs.follows = "nixpkgs";
 
     # Import nixos-needtoreboot
     nixos-needtoreboot.url = "github:thefossguy/nixos-needsreboot";
@@ -94,6 +103,7 @@
             inputs.home-manager.nixosModules.home-manager
             inputs.impermanence.nixosModules.impermanence
             inputs.ip-failar-nu.nixosModules.${system}.default
+            inputs.nixos-cosmic.nixosModules.default
             inputs.nur.nixosModules.nur
           ]
           ++ extraModules;
