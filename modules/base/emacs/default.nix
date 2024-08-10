@@ -97,6 +97,12 @@
     ''
       makeWrapper ${buildEmacsPackage emacs}/bin/emacs $out/bin/emacs \
         --prefix PATH : ${lib.makeBinPath extraBinPaths} ${extraWrapperArgs}
+
+      mkdir -p $out/share/applications
+      ln -vs ${emacs}/share/applications/emacs.desktop $out/share/applications
+      ln -vs ${emacs}/share/icons $out/share/icons
+      ln -vs ${emacs}/share/info $out/share/info
+      ln -vs ${emacs}/share/man $out/share/man
     '';
 
   buildEmacsPackage = emacsPackage:
