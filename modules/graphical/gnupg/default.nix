@@ -14,7 +14,7 @@
     programs.gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
-      pinentryPackage = lib.mkForce pkgs.pinentry-gnome3;
+      pinentryPackage = pkgs.pinentry-gnome3;
     };
 
     # Install tools using home manager.
