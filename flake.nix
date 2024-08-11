@@ -194,9 +194,6 @@
           pkgs.curl
           pkgs.jq # For parsing json downloaded with curl
 
-          # Install nix-output-monitor for nice build commands
-          pkgs.nix-output-monitor
-
           # Linters
           pkgs.deadnix
           pkgs.statix
@@ -204,6 +201,8 @@
 
           # Secrets managing
           inputs.agenix.packages.${system}.agenix
+
+          # Deploy util
           inputs.deploy-rs.packages.${system}.deploy-rs
         ];
       };

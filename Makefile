@@ -2,22 +2,25 @@
 # Helpers to build things
 #
 laptop-private-elis:
-	nom build .#nixosConfigurations.laptop-private-elis.config.system.build.toplevel
+	nix run nixpkgs#nix-output-monitor -- build .#nixosConfigurations.laptop-private-elis.config.system.build.toplevel
+
+laptop-private-caroline:
+	nix run nixpkgs#nix-output-monitor -- build .#nixosConfigurations.laptop-private-caroline.config.system.build.toplevel
 
 laptop-work-elis:
-	nom build .#nixosConfigurations.laptop-work-elis.config.system.build.toplevel
+	nix run nixpkgs#nix-output-monitor -- build .#nixosConfigurations.laptop-work-elis.config.system.build.toplevel
 
 live-iso:
-	nom build .#iso
+	nix run nixpkgs#nix-output-monitor -- build .#iso
 
 server-main-elis:
-	nom build .#nixosConfigurations.server-main-elis.config.system.build.toplevel
+	nix run nixpkgs#nix-output-monitor -- build .#nixosConfigurations.server-main-elis.config.system.build.toplevel
 
 server-sparv:
-	nom build .#nixosConfigurations.server-sparv.config.system.build.toplevel
+	nix run nixpkgs#nix-output-monitor -- build .#nixosConfigurations.server-sparv.config.system.build.toplevel
 
 vps06:
-	nom build .#nixosConfigurations.vps06.config.system.build.toplevel
+	nix run nixpkgs#nix-output-monitor -- build .#nixosConfigurations.vps06.config.system.build.toplevel
 
 #
 # Helpers to format the code
