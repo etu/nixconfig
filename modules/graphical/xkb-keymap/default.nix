@@ -1,30 +1,33 @@
-{
-  lib,
-  pkgs,
-  ...
-}: {
-  options.etu.graphical.xkb-keymap = lib.mkOption {
-    type = lib.types.package;
-    default = pkgs.writeText "us-dvorak-compose" ''
-      // This file defines my own custom keymap. More information about which
-      // parts that gets included are available in the different subfolders in:
-      // ${pkgs.xorg.xkeyboardconfig}/share/X11/xkb/
-      xkb_keymap {
-        xkb_keycodes { include "evdev+aliases(qwerty)" };
-        xkb_types    { include "default" };
-        xkb_compat   { include "complete" };
-        xkb_symbols  {
-          include "pc+us(dvorak)+inet(evdev)+ctrl(nocaps)+eurosign(e)+kpdl(dot)"
+{lib, ...}: {
+  options.etu.graphical.xkb-keymap.model = lib.mkOption {
+    type = lib.types.str;
+    default = "pc105";
+    description = "Physical keyboard of use";
+  };
 
-          // Less than/Greater than/Pipe key on Swedish keyboards becomes Compose
-          replace key <LSGT> { [ Multi_key ] };
+  options.etu.graphical.xkb-keymap.layout = lib.mkOption {
+    type = lib.types.str;
+    default = "us";
+    description = "Keyboard layout to use";
+  };
 
-          // Scroll Lock becomes Compose
-          replace key <SCLK> { [ Multi_key ] };
-        };
-        xkb_geometry { include "pc(pc105)" };
-      };
-    '';
-    description = "Package with a file of my XKB keymap.";
+  options.etu.graphical.xkb-keymap.variant = lib.mkOption {
+    type = lib.types.str;
+    default = "dvorak";
+    description = "Keyboard variant to use";
+  };
+
+  options.etu.graphical.xkb-keymap.options = lib.mkOption {
+    type = lib.types.commas;
+    default = lib.strings.concatStringsSep "," [
+      "compose:102" # Make the LSGT/"<>"/"&lt; &gt;" key a Compose key
+      "compose:sclk" # Make the Scroll Lock key a Compose key
+      "ctrl:nocaps" # Make the Caps Lock a Ctrl key
+      "eurosign:e" # Make a Euro on E, third level
+      "kpdl:dot" # Make the keypad comma key a dot
+      "numpad:mac" # Numeric keypad always enters digits (as in macOS)
+      "terminate:ctrl_alt_bksp" # Remove the Ctrl+Alt+Backspace behavior
+    ];
+    description = "Additional options to include for layout";
   };
 }

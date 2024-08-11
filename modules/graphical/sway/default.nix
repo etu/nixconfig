@@ -75,18 +75,10 @@
     services.xserver.desktopManager.xterm.enable = false;
 
     # Keyboard layout used by X11 (and the login screen).
-    services.xserver.xkb.model = "pc105";
-    services.xserver.xkb.layout = "us";
-    services.xserver.xkb.options = lib.strings.concatStringsSep "," [
-      "compose:102" # Make the LSGT/"<>"/"&lt; &gt;" key a Compose key
-      "compose:sclk" # Make the Scroll Lock key a Compose key
-      "ctrl:nocaps" # Make the Caps Lock a Ctrl key
-      "eurosign:e" # Make a Euro on E, third level
-      "kpdl:dot" # Make the keypad comma key a dot
-      "numpad:mac" # Numeric keypad always enters digits (as in macOS)
-      "terminate:ctrl_alt_bksp" # Remove the Ctrl+Alt+Backspace behavior
-    ];
-    services.xserver.xkb.variant = "dvorak";
+    services.xserver.xkb.model = config.etu.graphical.xkb-keymap.model;
+    services.xserver.xkb.layout = config.etu.graphical.xkb-keymap.layout;
+    services.xserver.xkb.options = config.etu.graphical.xkb-keymap.options;
+    services.xserver.xkb.variant = config.etu.graphical.xkb-keymap.variant;
 
     # Set up Pipewire
     services.pipewire.enable = true;
@@ -397,7 +389,10 @@
           ];
 
           # Set a custom keymap
-          input."type:keyboard".xkb_file = toString config.etu.graphical.xkb-keymap;
+          input."type:keyboard".xkb_model = config.etu.graphical.xkb-keymap.model;
+          input."type:keyboard".xkb_layout = config.etu.graphical.xkb-keymap.layout;
+          input."type:keyboard".xkb_options = config.etu.graphical.xkb-keymap.options;
+          input."type:keyboard".xkb_variant = config.etu.graphical.xkb-keymap.variant;
 
           # Set wallpaper for all outputs
           output."*".bg = "${config.etu.graphical.sway.wallpaper} fill";
