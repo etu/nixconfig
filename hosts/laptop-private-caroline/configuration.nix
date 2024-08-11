@@ -15,6 +15,7 @@
 # $ deploy --skip-checks --targets .#laptop-private-caroline
 {
   config,
+  lib,
   pkgs,
   myData,
   ...
@@ -93,6 +94,14 @@
       "zroot/safe/data".use_template = ["data"];
       "zroot/safe/home".use_template = ["home"];
       "zroot/zvol/win10".use_template = ["data"];
+    };
+  };
+
+  # Specialisation to try out the cosmic desktop.
+  specialisation.cosmic.configuration = {
+    etu = {
+      graphical.cosmic.enable = true;
+      graphical.sway.enable = lib.mkForce false;
     };
   };
 
