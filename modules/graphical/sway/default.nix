@@ -75,8 +75,17 @@
     services.xserver.desktopManager.xterm.enable = false;
 
     # Keyboard layout used by X11 (and the login screen).
+    services.xserver.xkb.model = "pc105";
     services.xserver.xkb.layout = "us";
-    services.xserver.xkb.options = "eurosign:e,ctrl:nocaps,numpad:mac,kpdl:dot";
+    services.xserver.xkb.options = lib.strings.concatStringsSep "," [
+      "compose:102" # Make the LSGT/"<>"/"&lt; &gt;" key a Compose key
+      "compose:sclk" # Make the Scroll Lock key a Compose key
+      "ctrl:nocaps" # Make the Caps Lock a Ctrl key
+      "eurosign:e" # Make a Euro on E, third level
+      "kpdl:dot" # Make the keypad comma key a dot
+      "numpad:mac" # Numeric keypad always enters digits (as in macOS)
+      "terminate:ctrl_alt_bksp" # Remove the Ctrl+Alt+Backspace behavior
+    ];
     services.xserver.xkb.variant = "dvorak";
 
     # Set up Pipewire
