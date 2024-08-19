@@ -13,8 +13,15 @@
     };
     terminalPath = lib.mkOption {
       type = lib.types.str;
-      default = "${config.etu.graphical.terminal.terminalPackage}/bin/alacritty";
-      description = "Path to terminal to use.";
+      default = "${config.etu.graphical.terminal.terminalPackage}/bin/${config.etu.graphical.terminal.terminalName}";
+      description = "Path to terminal binary.";
+      readOnly = true;
+    };
+    terminalName = lib.mkOption {
+      type = lib.types.str;
+      default = config.etu.graphical.terminal.terminalPackage.meta.mainProgram;
+      description = "Binary name of the terminal.";
+      readOnly = true;
     };
   };
 
@@ -25,6 +32,7 @@
       programs.alacritty = {
         enable = true;
         settings = {
+          env.TERMINAL = config.etu.graphical.terminal.terminalName;
           env.TERM = "xterm-256color";
           font.size = config.etu.graphical.theme.fonts.size;
           font.normal.family = config.etu.graphical.theme.fonts.monospace;

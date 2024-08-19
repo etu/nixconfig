@@ -42,6 +42,7 @@
       pkgs.pavucontrol
       pkgs.wdisplays
       pkgs.wlr-randr
+      pkgs.rofi-wayland
 
       # Script to reload environment variables (if used nested sway
       # session and want chrome screen sharing to read the inner sway)
@@ -132,6 +133,9 @@
 
           # Run QT programs in wayland
           export QT_QPA_PLATFORM=wayland
+
+          # Set the TERMINAL environment variable for rofi-sensible-terminal
+          export TERMINAL=${config.etu.graphical.terminal.terminalName}
         '';
 
         # TODO:
