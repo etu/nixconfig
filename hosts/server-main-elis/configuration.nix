@@ -154,13 +154,13 @@
   hardware.enableRedistributableFirmware = true;
 
   # Enable apcupsd.
-  services.apcupsd.enable = true;
-  services.apcupsd.configText = ''
-    UPSTYPE usb
-    NISIP 127.0.0.1
-    BATTERYLEVEL 5 # Default from apcupsd: 5, NixOS default: 50
-    MINUTES 1      # Default from apcupsd: 3, NixOS default: 5
-  '';
+  #services.apcupsd.enable = true;
+  #services.apcupsd.configText = ''
+  #  UPSTYPE usb
+  #  NISIP 127.0.0.1
+  #  BATTERYLEVEL 5 # Default from apcupsd: 5, NixOS default: 50
+  #  MINUTES 1      # Default from apcupsd: 3, NixOS default: 5
+  #'';
 
   # Enable smartd.
   services.smartd.enable = true;
