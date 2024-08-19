@@ -159,9 +159,9 @@
               "${modifier}+Return" = "exec ${config.etu.graphical.terminal.terminalPath}";
 
               # Run Launcher
-              "${modifier}+e" = "exec ${rofi}/bin/rofi -show combi -theme glue_pro_blue | xargs swaymsg exec --";
+              "${modifier}+e" = "exec ${pkgs.rofi-wayland}/bin/rofi -show combi -modi combi -combi-modes 'window,drun' -theme glue_pro_blue | xargs swaymsg exec --";
 
-              # Run rofi
+              # Run rofi emoji picker
               "${modifier}+i" = "exec ${rofi}/bin/rofi -show emoji -theme glue_pro_blue";
 
               # Printscreen
