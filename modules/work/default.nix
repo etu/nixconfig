@@ -30,6 +30,7 @@
       ".config/Slack"
       ".config/helm"
       ".config/tvnu"
+      ".config/gh"
       ".vagrant.d"
     ];
 
@@ -60,6 +61,7 @@
       # Install git crypt
       pkgs.git-crypt
       pkgs.git-lfs
+      pkgs.github-cli
 
       # Install chef and vagrant for some legacy systems reasons
       chefdk
