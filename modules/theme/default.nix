@@ -27,6 +27,7 @@
 
       # Enable catppuchin for on home manager level for different applications.
       programs.alacritty.catppuccin.enable = true;
+      services.mako.catppuccin.enable = true;
     };
   };
 }
