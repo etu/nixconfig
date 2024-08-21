@@ -6,6 +6,7 @@
     ./games
     ./graphical
     ./services
+    ./theme
     ./user
     ./work
   ];

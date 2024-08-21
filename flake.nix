@@ -11,6 +11,9 @@
     # Main flake-utils
     flake-utils.url = "github:numtide/flake-utils";
 
+    # Catppuccin themes
+    catppuccin.url = "github:catppuccin/nix";
+
     # Import deploy-rs for deployments
     deploy-rs.url = "github:serokell/deploy-rs";
     deploy-rs.inputs.flake-compat.follows = "flake-compat";
@@ -99,6 +102,7 @@
             ./hosts/${name}/configuration.nix
             self.nixosModules.default
             inputs.agenix.nixosModules.age
+            inputs.catppuccin.nixosModules.catppuccin
             inputs.disko.nixosModules.disko
             inputs.home-manager.nixosModules.home-manager
             inputs.impermanence.nixosModules.impermanence
@@ -110,6 +114,7 @@
 
         specialArgs =
           {
+            inherit (inputs) catppuccin;
             inherit (pkgs-22-11.nodejs-14_x.pkgs) intelephense;
             inherit (pkgs-22-11) chefdk;
             inherit (self.packages.${system}) swayWallpaper;

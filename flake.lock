@@ -25,6 +25,21 @@
         "type": "github"
       }
     },
+    "catppuccin": {
+      "locked": {
+        "lastModified": 1724156255,
+        "narHash": "sha256-rpUCeS/QZwQdJmDrvCm0hRi8bFvQNQKAnIMK5ZDBfpM=",
+        "owner": "catppuccin",
+        "repo": "nix",
+        "rev": "8886a68edadb1d93c7101337f995ffce4b410ff2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "catppuccin",
+        "repo": "nix",
+        "type": "github"
+      }
+    },
     "darwin": {
       "inputs": {
         "nixpkgs": [
@@ -349,6 +364,7 @@
     "root": {
       "inputs": {
         "agenix": "agenix",
+        "catppuccin": "catppuccin",
         "deploy-rs": "deploy-rs",
         "disko": "disko",
         "emacs-overlay": "emacs-overlay",
