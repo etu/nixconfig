@@ -24,6 +24,9 @@
 
       # Set Catppuccin flavor.
       catppuccin.flavor = config.etu.theme.flavor;
+
+      # Enable catppuchin for on home manager level for different applications.
+      programs.alacritty.catppuccin.enable = true;
     };
   };
 }
