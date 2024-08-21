@@ -61,19 +61,12 @@
       wantedBy = ["multi-user.target"];
     };
 
-    # Enable the X11 windowing system (for the loginmanager).
-    services.xserver.enable = true;
-
-    # Loginmanager
-    services.xserver.displayManager.lightdm.enable = true;
-
-    # Needed for autologin
-    services.displayManager.autoLogin.enable = true;
-    services.displayManager.autoLogin.user = config.etu.user.username;
-    services.displayManager.defaultSession = "sway";
-
-    # Don't have xterm as a session.
-    services.xserver.desktopManager.xterm.enable = false;
+    # Enable greetd as a non-graphical login manager.
+    services.greetd.enable = true;
+    services.greetd.settings.default_session = {
+      command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd sway";
+      user = "greeter";
+    };
 
     # Keyboard layout used by X11 (and the login screen).
     services.xserver.xkb.model = config.etu.graphical.xkb-keymap.model;
