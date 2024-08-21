@@ -26,16 +26,6 @@
       trusted-public-keys = ["cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE="];
     };
 
-    # Keyboard layout usually used by the login manager, in this case
-    # it doesn't, it somehow just ends up in:
-    # ~/.config/cosmic/com.system76.CosmicComp/v1/xkb_config
-    #
-    # So I get the correct layout in logged in mode.
-    services.xserver.xkb.model = config.etu.graphical.xkb-keymap.model;
-    services.xserver.xkb.layout = config.etu.graphical.xkb-keymap.layout;
-    services.xserver.xkb.options = config.etu.graphical.xkb-keymap.options;
-    services.xserver.xkb.variant = config.etu.graphical.xkb-keymap.variant;
-
     # Enable cosmic desktop
     services.desktopManager.cosmic.enable = true;
     services.displayManager.cosmic-greeter.enable = true;

@@ -67,12 +67,6 @@
     # Don't have xterm as a session.
     services.xserver.desktopManager.xterm.enable = false;
 
-    # Keyboard layout used by X11 (and the login screen).
-    services.xserver.xkb.model = config.etu.graphical.xkb-keymap.model;
-    services.xserver.xkb.layout = config.etu.graphical.xkb-keymap.layout;
-    services.xserver.xkb.options = config.etu.graphical.xkb-keymap.options;
-    services.xserver.xkb.variant = config.etu.graphical.xkb-keymap.variant;
-
     # Set up Pipewire
     services.pipewire.enable = true;
     services.pipewire.alsa.enable = true;
