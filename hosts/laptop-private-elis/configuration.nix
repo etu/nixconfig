@@ -48,6 +48,7 @@
     graphical.flatpak.enablePersistence = true;
     services.syncthing.enable = true;
     services.netdata.enable = true;
+    theme.enable = true;
     user.enable = true;
     user.extraGroups = ["video" "docker" "libvirtd"];
 

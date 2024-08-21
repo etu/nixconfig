@@ -58,6 +58,7 @@
     graphical.firefox.enable = false;
     graphical.gnupg.enable = false;
     graphical.telegram.enable = false;
+    theme.enable = true;
 
     # Install packages
     user.extraUserPackages = [
