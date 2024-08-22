@@ -42,7 +42,6 @@
       pkgs.pavucontrol
       pkgs.wdisplays
       pkgs.wlr-randr
-      pkgs.rofi-wayland
 
       # Script to reload environment variables (if used nested sway
       # session and want chrome screen sharing to read the inner sway)
@@ -80,6 +79,10 @@
 
     # If my user exists, enable home-manager configurations
     home-manager.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
+      # Enable rofi home manager module.
+      programs.rofi.enable = true;
+      programs.rofi.package = pkgs.rofi-wayland;
+
       # Configure swayidle for automatic screen locking
       services.swayidle = {
         enable = true;
@@ -150,10 +153,10 @@
               "${modifier}+Return" = "exec ${config.etu.graphical.terminal.terminalPath}";
 
               # Run Launcher
-              "${modifier}+e" = "exec ${pkgs.rofi-wayland}/bin/rofi -show combi -modi combi -combi-modes 'window,drun' -theme glue_pro_blue | xargs swaymsg exec --";
+              "${modifier}+e" = "exec ${pkgs.rofi-wayland}/bin/rofi -show combi -modi combi -combi-modes 'window,drun' | xargs swaymsg exec --";
 
               # Run rofi emoji picker
-              "${modifier}+i" = "exec ${rofi}/bin/rofi -show emoji -theme glue_pro_blue";
+              "${modifier}+i" = "exec ${rofi}/bin/rofi -show emoji";
 
               # Printscreen
               Print = "exec ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.swappy}/bin/swappy -f -";

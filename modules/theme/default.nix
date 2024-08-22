@@ -27,7 +27,21 @@
 
       # Enable catppuchin for on home manager level for different applications.
       programs.alacritty.catppuccin.enable = true;
+      programs.fish.catppuccin.enable = true;
+      programs.rofi.catppuccin.enable = true;
       services.mako.catppuccin.enable = true;
+
+      # Bat module and theme
+      programs.bat.enable = true;
+      programs.bat.catppuccin.enable = true;
+
+      # Fzf module and theme
+      programs.fzf.enable = true;
+      programs.fzf.catppuccin.enable = true;
+
+      # Imv module and theme
+      programs.imv.enable = true;
+      programs.imv.catppuccin.enable = true;
 
       # Set up theme for sway.
       wayland.windowManager.sway.catppuccin.enable = true;
