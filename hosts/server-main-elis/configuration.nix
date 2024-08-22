@@ -62,7 +62,6 @@
     services.freshrss.enable = true;
     #services.wallabag.enable = true;
     services.jellyfin.enable = true;
-    services.syncthing.enable = true;
     services.netdata.enable = true;
     base.sanoid.datasets = {
       # Enable snapshotting for some filesystems

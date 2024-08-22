@@ -4,7 +4,6 @@
     ./jellyfin
     ./netdata
     ./nfs
-    ./syncthing
     ./wallabag
   ];
 }
