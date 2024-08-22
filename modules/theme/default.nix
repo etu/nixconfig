@@ -28,6 +28,37 @@
       # Enable catppuchin for on home manager level for different applications.
       programs.alacritty.catppuccin.enable = true;
       services.mako.catppuccin.enable = true;
+
+      # Set up theme for sway.
+      wayland.windowManager.sway.catppuccin.enable = true;
+      wayland.windowManager.sway.config.colors = let
+        background = "$base";
+        focusedInactive = {
+          background = "$base";
+          border = "$overlay0";
+          childBorder = "$overlay0";
+          indicator = "$rosewater";
+          text = "$text";
+        };
+        focused = {
+          background = "$base";
+          border = "$lavender";
+          childBorder = "$lavender";
+          indicator = "$rosewater";
+          text = "$text";
+        };
+        urgent = {
+          background = "$base";
+          border = "$peach";
+          childBorder = "$peach";
+          indicator = "$overlay0";
+          text = "$peach";
+        };
+        unfocused = focusedInactive;
+        "placeholder" = focusedInactive;
+      in {
+        inherit background focused focusedInactive urgent unfocused "placeholder";
+      };
     };
   };
 }
