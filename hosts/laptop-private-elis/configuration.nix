@@ -118,13 +118,14 @@
         dontUnpack = true;
         buildInputs = [pkgs.inkscape pkgs.graphicsmagick];
         installPhase = ''
+          mkdir -p $out
           inkscape --export-type=png               \
                    --export-filename=logo-dark.png \
                    --export-dpi=400                \
                    $src
 
           gm convert -size 1920x1440 xc:#2d3640 bg.png
-          gm composite -gravity center logo-dark.png bg.png $out
+          gm composite -gravity center logo-dark.png bg.png $out/bg.png
         '';
       }));
 

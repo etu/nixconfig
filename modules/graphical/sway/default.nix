@@ -2,7 +2,7 @@
   config,
   lib,
   pkgs,
-  swayWallpaper,
+  spaceWallpapers,
   ...
 }: {
   options.etu.graphical.sway = {
@@ -13,19 +13,14 @@
       description = "Which sway package to use";
       readOnly = true;
     };
-    lockCommand = lib.mkOption {
-      type = lib.types.str;
-      default = "${pkgs.swaylock}/bin/swaylock -f -k -i ${config.etu.graphical.sway.lockWallpaper}";
-      description = "Lock screen command";
-    };
     wallpaper = lib.mkOption {
       type = lib.types.str;
-      default = "${swayWallpaper}/default.jpg";
+      default = "${spaceWallpapers}/share/spaceWallpapers/";
       description = "Wallpaper to use for sway";
     };
     lockWallpaper = lib.mkOption {
       type = lib.types.str;
-      default = "${swayWallpaper}/lock.jpg";
+      default = "screenshot";
       description = "Wallpaper to use for lockscreen";
     };
   };
@@ -83,13 +78,35 @@
       programs.rofi.enable = true;
       programs.rofi.package = pkgs.rofi-wayland;
 
+      # Set up a wallpaper manager.
+      programs.wpaperd.enable = true;
+      programs.wpaperd.settings = {
+        default = {
+          duration = "30m";
+          mode = "center";
+        };
+        any.path = config.etu.graphical.sway.wallpaper;
+      };
+
+      systemd.user.services.wpaperd = {
+        Unit = {
+          After = ["graphical-session-pre.target" "sway-session.target"];
+          PartOf = ["graphical-session.target"];
+        };
+        Service = {
+          ExecStart = "${pkgs.wpaperd}/bin/wpaperd";
+          Restart = "on-failure";
+        };
+        Install.WantedBy = ["graphical-session.target" "sway-session.target"];
+      };
+
       # Configure swayidle for automatic screen locking
       services.swayidle = {
         enable = true;
         timeouts = [
           {
             timeout = 300;
-            command = config.etu.graphical.sway.lockCommand;
+            command = "swaylock";
           }
           {
             timeout = 600;
@@ -103,10 +120,28 @@
           }
           {
             event = "before-sleep";
-            command = config.etu.graphical.sway.lockCommand;
+            command = "swaylock";
           }
         ];
       }; # END swayidle
+
+      # Configure swaylock
+      programs.swaylock.enable = true;
+      programs.swaylock.package = pkgs.swaylock-effects;
+      programs.swaylock.settings =
+        {
+          clock = true;
+          datestr = "%Y-%m-%e";
+          timestr = "%k:%M";
+        }
+        // (lib.optionalAttrs (config.etu.graphical.sway.lockWallpaper == "screenshot") {
+          indicator = true;
+          screenshots = true;
+          effect-blur = "5x5";
+        })
+        // (lib.optionalAttrs (config.etu.graphical.sway.lockWallpaper != "screenshot") {
+          image = config.etu.graphical.sway.lockWallpaper;
+        });
 
       # Sway user configs
       wayland.windowManager.sway = {
@@ -176,7 +211,7 @@
               XF86Favorites = "exec ${config.services.emacs.package}/bin/emacs";
 
               # Launch screen locker
-              "${modifier}+l" = "exec ${config.etu.graphical.sway.lockCommand}";
+              "${modifier}+l" = "exec swaylock";
 
               # Kill focused window
               "${modifier}+Shift+apostrophe" = "kill";
@@ -388,9 +423,6 @@
           input."type:keyboard".xkb_options = config.etu.graphical.xkb-keymap.options;
           input."type:keyboard".xkb_variant = config.etu.graphical.xkb-keymap.variant;
 
-          # Set wallpaper for all outputs
-          output."*".bg = "${config.etu.graphical.sway.wallpaper} fill";
-
           # Enable titlebars
           window.titlebar = true;
           floating.titlebar = true;
@@ -404,6 +436,11 @@
             # Reload kanshi on reload of config
             {
               command = "${config.systemd.package}/bin/systemctl --user restart kanshi";
+              always = true;
+            }
+            # Reload swayidle on reload of config
+            {
+              command = "${config.systemd.package}/bin/systemctl --user restart swayidle";
               always = true;
             }
           ];

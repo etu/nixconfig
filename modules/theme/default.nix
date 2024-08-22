@@ -30,6 +30,7 @@
       programs.fish.catppuccin.enable = true;
       programs.rofi.catppuccin.enable = true;
       services.mako.catppuccin.enable = true;
+      programs.swaylock.catppuccin.enable = true;
 
       # Bat module and theme
       programs.bat.enable = true;
