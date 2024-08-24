@@ -68,6 +68,7 @@
         font.name = config.etu.graphical.theme.fonts.normal;
         font.size = config.etu.graphical.theme.fonts.size;
         gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
+        gtk4.extraConfig.gtk-application-prefer-dark-theme = 1;
       }; # END gtk
 
       # QT theme configs
