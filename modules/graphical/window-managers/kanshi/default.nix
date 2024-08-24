@@ -10,11 +10,8 @@
     home-manager.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
       # Set up kanshi (which kinda is an autorandr for wayland)
       services.kanshi = {
-        systemdTarget =
-          if config.etu.graphical.sway.enable
-          then "sway-session.target"
-          else "hyprland-session.target";
         enable = true;
+        systemdTarget = "sway-session.target";
         settings = [
           {
             profile.name = "undocked";

@@ -16,11 +16,7 @@
       programs.waybar = {
         enable = true;
         systemd.enable = true;
-        systemd.target =
-          if config.etu.graphical.sway.enable
-          then "sway-session.target"
-          else "hyprland-session.target";
-
+        systemd.target = "sway-session.target";
         style = pkgs.runCommand "waybar-styles.css" {} ''
           sed -e 's/font-family: /font-family: ${config.etu.graphical.theme.fonts.normal}, /'              \
               -e 's/font-size: 13px/font-size: ${toString config.etu.graphical.theme.fonts.biggerSize}px/' \
@@ -39,28 +35,10 @@
             margin-left = 100;
 
             modules-left = ["idle_inhibitor" "backlight" "cpu" "memory" "temperature" "battery" "battery#bat2"];
-            modules-center = ["hyprland/workspaces" "sway/workspaces" "sway/mode"];
+            modules-center = ["sway/workspaces" "sway/mode"];
             modules-right = ["pulseaudio" "network" "clock" "tray"];
 
             "sway/workspaces" = {
-              disable-scroll = true;
-              format = "{icon}";
-              format-icons = {
-                "1" = "Ⅰ";
-                "2" = "Ⅱ";
-                "3" = "Ⅲ";
-                "4" = "Ⅳ";
-                "5" = "Ⅴ";
-                "6" = "Ⅵ";
-                "7" = "Ⅶ";
-                "8" = "Ⅷ";
-                "9" = "Ⅸ";
-                "10" = "Ⅹ";
-                default = "";
-              };
-            };
-
-            "hyprland/workspaces" = {
               disable-scroll = true;
               format = "{icon}";
               format-icons = {

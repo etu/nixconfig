@@ -17,7 +17,7 @@
   pkgs,
   ...
 }: {
-  options.etu.graphical.cosmic.enable = lib.mkEnableOption "Enable graphical hyprland settings";
+  options.etu.graphical.cosmic.enable = lib.mkEnableOption "Enable graphical cosmic settings";
 
   config = lib.mkIf config.etu.graphical.cosmic.enable {
     # Enable binary cache for cosmic builds

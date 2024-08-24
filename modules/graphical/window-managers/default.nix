@@ -9,7 +9,7 @@
     ./waybar
   ];
 
-  config = lib.mkIf (config.etu.graphical.sway.enable || config.etu.graphical.hyprland.enable) {
+  config = lib.mkIf config.etu.graphical.sway.enable {
     # Set up kanshi (which kinda is an autorandr for wayland)
     etu.graphical.window-managers.kanshi.enable = true;
 
