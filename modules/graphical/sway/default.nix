@@ -101,38 +101,39 @@
       };
 
       # Configure swayidle for automatic screen locking
-      services.swayidle = {
-        enable = true;
-        timeouts = [
-          {
-            timeout = 300;
-            command = "swaylock";
-          }
-          {
-            timeout = 600;
-            command = "${config.etu.graphical.sway.package}/bin/swaymsg 'output * dpms off'";
-          }
-        ];
-        events = [
-          {
-            event = "after-resume";
-            command = "${config.etu.graphical.sway.package}/bin/swaymsg 'output * dpms on'";
-          }
-          {
-            event = "before-sleep";
-            command = "swaylock";
-          }
-        ];
-      }; # END swayidle
+      services.swayidle.enable = true;
+      services.swayidle.systemdTarget = "sway-session.target";
+      services.swayidle.events = [
+        {
+          event = "before-sleep";
+          command = "${pkgs.swaylock-effects}/bin/swaylock";
+        }
+        {
+          event = "lock";
+          command = "${pkgs.swaylock-effects}/bin/swaylock";
+        }
+      ];
+      services.swayidle.timeouts = [
+        {
+          timeout = 300;
+          command = "${pkgs.swaylock-effects}/bin/swaylock";
+        }
+        {
+          timeout = 600;
+          command = "${pkgs.systemd}/bin/systemctl suspend";
+        }
+      ];
 
       # Configure swaylock
       programs.swaylock.enable = true;
       programs.swaylock.package = pkgs.swaylock-effects;
       programs.swaylock.settings =
         {
+          daemonize = true;
           clock = true;
-          datestr = "%Y-%m-%e";
           timestr = "%k:%M";
+          datestr = "%Y-%m-%e";
+          show-failed-attempts = true;
         }
         // (lib.optionalAttrs (config.etu.graphical.sway.lockWallpaper == "screenshot") {
           indicator = true;
