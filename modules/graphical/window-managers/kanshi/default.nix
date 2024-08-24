@@ -26,22 +26,12 @@
             profile.name = "elis-docked";
             profile.outputs = [
               {
-                criteria = "Samsung Electric Company LC49G95T H4ZN900853";
-                mode = "5120x1440";
-                position = "0,0";
-              }
-              {
-                criteria = "eDP-1";
-                status = "disable";
-              }
-            ];
-          }
-          {
-            profile.name = "elis-new-docked";
-            profile.outputs = [
-              {
                 criteria = "LG Electronics LG SDQHD 402NTGY0Z759";
-                mode = "2560x2880";
+                mode = "2560x2880${
+                  if (config.networking.hostName == "laptop-work-elis")
+                  then "@30Hz"
+                  else ""
+                }";
                 position = "0,0";
               }
               {
