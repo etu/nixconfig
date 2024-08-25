@@ -34,10 +34,10 @@ in
   runCommandNoCC "spaceWallpapers" {} ''
     mkdir -p $out/share/spaceWallpapers
 
-    cp -vr ${images.wallhaven-8x1odo} $out/share/spaceWallpapers/wallhaven-8x1odo.jpg
-    cp -vr ${images.wallhaven-0wryzq} $out/share/spaceWallpapers/wallhaven-0wryzq.jpg
-    cp -vr ${images.wallhaven-6ol5z7} $out/share/spaceWallpapers/wallhaven-6ol5z7.jpg
-    cp -vr ${images.wallhaven-e78y9r} $out/share/spaceWallpapers/wallhaven-e78y9r.jpg
-    cp -vr ${images.wallhaven-4ddjr3} $out/share/spaceWallpapers/wallhaven-4ddjr3.jpg
-    cp -vr ${images.wallhaven-dpl57g} $out/share/spaceWallpapers/wallhaven-dpl57g.png
+    ln -vs ${images.wallhaven-8x1odo} $out/share/spaceWallpapers/wallhaven-8x1odo.jpg
+    ln -vs ${images.wallhaven-0wryzq} $out/share/spaceWallpapers/wallhaven-0wryzq.jpg
+    ln -vs ${images.wallhaven-6ol5z7} $out/share/spaceWallpapers/wallhaven-6ol5z7.jpg
+    ln -vs ${images.wallhaven-e78y9r} $out/share/spaceWallpapers/wallhaven-e78y9r.jpg
+    ln -vs ${images.wallhaven-4ddjr3} $out/share/spaceWallpapers/wallhaven-4ddjr3.jpg
+    ln -vs ${images.wallhaven-dpl57g} $out/share/spaceWallpapers/wallhaven-dpl57g.png
   ''
