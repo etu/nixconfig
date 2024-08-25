@@ -35,7 +35,7 @@
 
             modules-left = ["idle_inhibitor" "backlight" "cpu" "memory" "temperature" "battery" "battery#bat2"];
             modules-center = ["sway/workspaces" "sway/mode" "sway/scratchpad"];
-            modules-right = ["pulseaudio" "network" "clock" "tray"];
+            modules-right = ["privacy" "pulseaudio" "network" "clock" "tray"];
 
             "sway/workspaces" = {
               disable-scroll = true;
@@ -119,6 +119,29 @@
               default = ["" "" ""];
             };
             pulseaudio.on-click = "${pkgs.pavucontrol}/bin/pavucontrol";
+
+            privacy = {
+              icon-spacing = 4;
+              icon-size = 18;
+              transition-duration = 250;
+              modules = [
+                {
+                  type = "screenshare";
+                  tooltip = true;
+                  tooltip-icon-size = 24;
+                }
+                {
+                  type = "audio-out";
+                  tooltip = true;
+                  tooltip-icon-size = 24;
+                }
+                {
+                  type = "audio-in";
+                  tooltip = true;
+                  tooltip-icon-size = 24;
+                }
+              ];
+            };
 
             temperature.critical-threshold = 80;
             temperature.format = "{icon} {temperatureC}°C";

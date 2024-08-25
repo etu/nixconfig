@@ -63,6 +63,7 @@ button:hover {
 #memory,
 #mode,
 #network,
+#privacy,
 #pulseaudio,
 #scratchpad,
 #temperature,
@@ -144,6 +145,30 @@ button:hover {
 #network.disconnected {
     color: @red;
     box-shadow: inset 0 -3px @red;
+}
+
+/* Privacy module */
+#privacy {
+    padding: 0;
+}
+
+#privacy-item {
+    padding: 0 5px;
+    color: @text;
+}
+
+#privacy-item.screenshare {
+    color: @red;
+    box-shadow: inset 0 -3px @red;
+}
+
+#privacy-item.audio-out {
+    color: @blue;
+}
+
+#privacy-item.audio-in {
+    color: @yellow;
+    box-shadow: inset 0 -3px @yellow;
 }
 
 /* Pulseaudio module */
