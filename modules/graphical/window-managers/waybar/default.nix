@@ -85,6 +85,7 @@
 
             clock.format = "<span color=\"#88c0d0\"></span> {:%Y-%m-%d %H:%M:%S}";
             clock.interval = 5;
+            clock.tooltip = false;
 
             cpu.format = "{usage}% ";
             cpu.tooltip = true;
