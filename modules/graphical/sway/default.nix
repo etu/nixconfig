@@ -15,7 +15,7 @@
     };
     wallpaper = lib.mkOption {
       type = lib.types.str;
-      default = "${spaceWallpapers}/share/spaceWallpapers/";
+      default = builtins.toString spaceWallpapers;
       description = "Wallpaper to use for sway";
     };
     lockWallpaper = lib.mkOption {
