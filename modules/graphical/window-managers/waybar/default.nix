@@ -34,7 +34,7 @@
             margin-left = 100;
 
             modules-left = ["idle_inhibitor" "backlight" "cpu" "memory" "temperature" "battery" "battery#bat2"];
-            modules-center = ["sway/workspaces" "sway/mode"];
+            modules-center = ["sway/workspaces" "sway/mode" "sway/scratchpad"];
             modules-right = ["pulseaudio" "network" "clock" "tray"];
 
             "sway/workspaces" = {
@@ -53,6 +53,14 @@
                 "10" = "Ⅹ";
                 default = "";
               };
+            };
+
+            "sway/scratchpad" = {
+              format = "{icon} {count}";
+              format-icons = ["" ""];
+              show-empty = false;
+              tooltip = true;
+              tooltip-format = "{app}: {title}";
             };
 
             "sway/mode".format = "<span style=\"italic\">{}</span>";

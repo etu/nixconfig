@@ -64,6 +64,7 @@ button:hover {
 #mode,
 #network,
 #pulseaudio,
+#scratchpad,
 #temperature,
 #tray {
     background-color: @surface0;
