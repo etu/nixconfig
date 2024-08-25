@@ -60,16 +60,96 @@
     graphical.telegram.enable = false;
     theme.enable = true;
 
+    games.minecraft.enable = true;
+
     # Install packages
     user.extraUserPackages = [
       pkgs.firefox
       pkgs.git
+      pkgs.vscodium
       pkgs.virt-manager
-      #pkgs.freecad
       pkgs.evince
       pkgs.unzip
       pkgs.inkscape
       pkgs.libreoffice
+      pkgs.blender
+      pkgs.minikube
+
+      (pkgs.rWrapper.override {
+        packages = with pkgs.rPackages; [
+          FactoMineR
+          GGally
+          ISLR
+          MASS
+          arsenal
+          broom
+          caTools
+          coefplot
+          corrplot
+          cowplot
+          devtools
+          esquisse
+          gapminder
+          ggiraph
+          ggrepel
+          ggridges
+          gridExtra
+          here
+          interplot
+          mapdata
+          mapproj
+          maps
+          margins
+          patchwork
+          quantreg
+          rlang
+          scales
+          srvyr
+          survey
+          tidyverse
+          tinytex
+          viridis
+          viridisLite
+        ];
+      })
+
+      (pkgs.rstudioWrapper.override {
+        packages = with pkgs.rPackages; [
+          FactoMineR
+          GGally
+          ISLR
+          MASS
+          arsenal
+          broom
+          caTools
+          coefplot
+          corrplot
+          cowplot
+          devtools
+          esquisse
+          gapminder
+          ggiraph
+          ggrepel
+          ggridges
+          gridExtra
+          here
+          interplot
+          mapdata
+          mapproj
+          maps
+          margins
+          patchwork
+          quantreg
+          rlang
+          scales
+          srvyr
+          survey
+          tidyverse
+          tinytex
+          viridis
+          viridisLite
+        ];
+      })
     ];
 
     # Allow home fileserver to connect to fetch snapshots.
@@ -86,6 +166,10 @@
 
   # Enable blueman.
   services.blueman.enable = true;
+
+  # Enable docker deamon
+  virtualisation.docker.enable = true;
+  virtualisation.docker.storageDriver = "zfs";
 
   # Set up virt-managar
   virtualisation.libvirtd.enable = true;
