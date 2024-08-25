@@ -1,0 +1,182 @@
+@import "catppuccin.css";
+
+* {
+    font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+    font-size: 13px;
+}
+
+/* Base bar look */
+window#waybar {
+    background: @base;
+    color: @text;
+    /* catppuccin suggested: margin: 5px 5px */
+}
+
+/* Reset how buttons looks */
+button {
+    border: none;
+    border-radius: 0;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+button:hover {
+    background: inherit;
+}
+
+/* Styles for the workspaces area and buttons */
+#workspaces {
+    background-color: @surface0;
+    padding: 0;
+    margin: 0;
+}
+
+#workspaces button {
+    color: @lavender;
+    background-color: transparent;
+    padding: 0 5px;
+}
+
+#workspaces button:hover {
+    background-color: @surface2;
+    color: @yellow;
+    box-shadow: inset 0 -3px @yellow;
+}
+
+#workspaces button.focused {
+    background-color: @surface1;
+    color: @sky;
+    box-shadow: inset 0 -3px @sky;
+}
+
+#workspaces button.urgent {
+    background-color: @surface2;
+    color: @red;
+    box-shadow: inset 0 -3px @red;
+}
+
+/* Base styles for the rest of the objects */
+#backlight,
+#battery,
+#clock,
+#cpu,
+#idle_inhibitor,
+#memory,
+#mode,
+#network,
+#pulseaudio,
+#temperature,
+#tray {
+    background-color: @surface0;
+    color: @lavender;
+    padding: 0 10px;
+}
+
+/* Override styles for the rest of the objects */
+
+/* Backlight */
+#backlight {
+    color: @yellow;
+}
+
+/* Battery indicator */
+#battery {
+    color: @green;
+}
+
+#battery.charging, #battery.plugged {
+    color: @green;
+    box-shadow: inset 0 -3px @green;
+}
+
+#battery.warning:not(.charging) {
+    color: @yellow;
+    box-shadow: inset 0 -3px @yellow;
+}
+
+@keyframes blink {
+    to {
+        box-shadow: inset 0 -3px @surface0;
+    }
+}
+
+/* Using steps() instead of linear as a timing function to limit cpu usage */
+#battery.critical:not(.charging) {
+    color: @red;
+    box-shadow: inset 0 -3px @red;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: steps(12);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+/* Clock */
+#clock {
+    color: @blue;
+}
+
+/* CPU usage */
+#cpu {
+    color: @green;
+}
+
+/* Idle inhibitor */
+#idle_inhibitor.activated {
+    box-shadow: inset 0 -3px @lavender;
+}
+
+/* Memory usage */
+#memory {
+    color: @mauve;
+}
+
+/* Mode inicator (resize mode for instance) */
+#mode {
+    box-shadow: inset 0 -3px @lavender;
+}
+
+/* Network indicator */
+#network {
+    color: @green;
+}
+
+#network.disconnected {
+    color: @red;
+    box-shadow: inset 0 -3px @red;
+}
+
+/* Pulseaudio module */
+#pulseaudio {
+    color: @yellow;
+    box-shadow: inset 0 -3px @yellow;
+}
+
+#pulseaudio.muted {
+    color: @teal;
+    box-shadow: inset 0 -3px @surface0;
+}
+
+#pulseaudio:hover {
+    color: @peach;
+    box-shadow: inset 0 -3px @peach;
+}
+
+/* Temperature module */
+#temperature {
+    color: @peach;
+}
+
+#temperature.critical {
+    color: @red;
+    box-shadow: inset 0 -3px @red;
+}
+
+/* Tray module */
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    box-shadow: inset 0 -3px @red;
+}

@@ -20,8 +20,7 @@
         style = pkgs.runCommand "waybar-styles.css" {} ''
           sed -e 's/font-family: /font-family: ${config.etu.graphical.theme.fonts.normal}, /'              \
               -e 's/font-size: 13px/font-size: ${toString config.etu.graphical.theme.fonts.biggerSize}px/' \
-              -e 's/#workspaces button.focused/#workspaces button.focused, #workspaces button.active/'     \
-              ${pkgs.waybar}/etc/xdg/waybar/style.css > $out
+              ${./style.css} > $out
         '';
         settings = [
           {

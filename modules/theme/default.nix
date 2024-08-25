@@ -74,6 +74,10 @@
       in {
         inherit background focused focusedInactive urgent unfocused "placeholder";
       };
+
+      # Set up theme for waybar.
+      programs.waybar.catppuccin.enable = true;
+      programs.waybar.catppuccin.mode = "createLink";
     };
   };
 }
