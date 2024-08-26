@@ -42,7 +42,7 @@
     user.username = "concate";
     user.realname = "Caroline Hirwing";
     user.email = "caroline@hirwing.se";
-    user.extraGroups = ["video" "libvirtd"];
+    user.extraGroups = ["docker" "video" "libvirtd"];
 
     # Don't set a password for root / user depending on agenix.
     user.userPasswordAgeModule = myData.ageModules.hashed-caroline-laptop-concate-password;
