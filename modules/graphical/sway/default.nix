@@ -100,6 +100,9 @@
         Install.WantedBy = ["graphical-session.target" "sway-session.target"];
       };
 
+      # Enable and import network-manager-applet
+      services.network-manager-applet.enable = true;
+
       # Configure swayidle for automatic screen locking
       services.swayidle.enable = true;
       services.swayidle.systemdTarget = "sway-session.target";
@@ -442,6 +445,11 @@
             # Reload swayidle on reload of config
             {
               command = "${config.systemd.package}/bin/systemctl --user restart swayidle";
+              always = true;
+            }
+            # Reload network manager applet on reload of config
+            {
+              command = "${config.systemd.package}/bin/systemctl --user restart network-manager-applet";
               always = true;
             }
           ];
