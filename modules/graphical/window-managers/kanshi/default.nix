@@ -27,11 +27,7 @@
             profile.outputs = [
               {
                 criteria = "LG Electronics LG SDQHD 402NTGY0Z759";
-                mode = "2560x2880${
-                  if (config.networking.hostName == "laptop-work-elis")
-                  then "@30Hz"
-                  else ""
-                }";
+                mode = "2560x2880";
                 position = "0,0";
               }
               {
