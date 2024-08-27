@@ -422,6 +422,10 @@
               class = "Google-chrome";
               title = "Share your new meeting - Google Chrome";
             }
+            {
+              app_id = "nm-connection-editor";
+              title = "Network Connections";
+            }
           ];
 
           # Set a custom keymap
