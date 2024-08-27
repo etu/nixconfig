@@ -103,6 +103,9 @@
       # Enable and import network-manager-applet
       services.network-manager-applet.enable = true;
 
+      # Enable the blueman applet service.
+      services.blueman-applet.enable = true;
+
       # Configure swayidle for automatic screen locking
       services.swayidle.enable = true;
       services.swayidle.systemdTarget = "sway-session.target";
@@ -450,6 +453,11 @@
             # Reload network manager applet on reload of config
             {
               command = "${config.systemd.package}/bin/systemctl --user restart network-manager-applet";
+              always = true;
+            }
+            # Reload blueman applet on reload of config
+            {
+              command = "${config.systemd.package}/bin/systemctl --user restart blueman-applet";
               always = true;
             }
           ];
