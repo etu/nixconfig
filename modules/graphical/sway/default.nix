@@ -372,10 +372,6 @@
               command = "border pixel 3";
             }
             {
-              criteria.class = "Emacs";
-              command = "border pixel 3";
-            }
-            {
               criteria.app_id = "emacs";
               command = "border pixel 3";
             }
@@ -388,10 +384,6 @@
             {
               criteria.app_id = "Alacritty";
               command = "opacity set 0.9";
-            }
-            {
-              criteria.class = "Emacs";
-              command = "opacity set 0.99";
             }
             {
               criteria.app_id = "emacs";
