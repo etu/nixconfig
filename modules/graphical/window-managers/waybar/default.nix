@@ -146,6 +146,8 @@
             temperature.critical-threshold = 80;
             temperature.format = "{icon} {temperatureC}°C";
             temperature.format-icons = ["" "" ""];
+
+            tray.spacing = 12;
           }
         ];
       }; # END waybar
