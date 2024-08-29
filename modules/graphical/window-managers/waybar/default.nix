@@ -33,7 +33,7 @@
             margin-right = 100;
             margin-left = 100;
 
-            modules-left = ["idle_inhibitor" "backlight" "cpu" "memory" "temperature" "battery" "battery#bat2"];
+            modules-left = ["idle_inhibitor" "backlight" "cpu" "memory" "temperature" "battery"];
             modules-center = ["sway/workspaces" "sway/mode" "sway/scratchpad"];
             modules-right = ["privacy" "pulseaudio" "network" "clock" "tray"];
 
@@ -64,8 +64,6 @@
             };
 
             "sway/mode".format = "<span style=\"italic\">{}</span>";
-
-            "battery#bat2".bat = "BAT2";
 
             backlight.format = "{percent}% {icon}";
             backlight.format-icons = ["" ""];
