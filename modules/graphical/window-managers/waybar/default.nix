@@ -33,7 +33,7 @@
             margin-right = 100;
             margin-left = 100;
 
-            modules-left = ["idle_inhibitor" "backlight" "cpu" "memory" "temperature" "battery"];
+            modules-left = ["idle_inhibitor" "backlight" "cpu" "memory" "temperature" "battery" "mpris"];
             modules-center = ["sway/workspaces" "sway/mode" "sway/scratchpad"];
             modules-right = ["privacy" "pulseaudio" "network" "clock" "tray"];
 
@@ -64,6 +64,25 @@
             };
 
             "sway/mode".format = "<span style=\"italic\">{}</span>";
+
+            mpris = {
+              format = "{player_icon} {status_icon} {dynamic}";
+              format-paused = "{player_icon} {status_icon} <i>{dynamic}</i>";
+              tooltip-format = "{player_icon} {status_icon} {dynamic}";
+              tooltip-format-paused = "{player_icon} {status_icon} {dynamic}";
+              artist-len = 15;
+              album-len = 0;
+              title-len = 30;
+              dynamic-len = 40;
+              player-icons = {
+                default = "";
+                firefox = "";
+              };
+              status-icons = {
+                default = "▶";
+                paused = "⏸";
+              };
+            };
 
             backlight.format = "{percent}% {icon}";
             backlight.format-icons = ["" ""];
