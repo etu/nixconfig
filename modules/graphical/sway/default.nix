@@ -106,6 +106,10 @@
       # Enable the blueman applet service.
       services.blueman-applet.enable = true;
 
+      # Enable the playerctld to be able to control music players and mpris-proxy to proxy bluetooth devices.
+      services.playerctld.enable = true;
+      services.mpris-proxy.enable = true;
+
       # Configure swayidle for automatic screen locking
       services.swayidle.enable = true;
       services.swayidle.systemdTarget = "sway-session.target";
