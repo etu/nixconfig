@@ -460,6 +460,11 @@
               command = "${config.systemd.package}/bin/systemctl --user restart blueman-applet";
               always = true;
             }
+            # Reload waybar on reload of config
+            {
+              command = "${config.systemd.package}/bin/systemctl --user restart waybar";
+              always = true;
+            }
           ];
 
           # Disable the default bar
