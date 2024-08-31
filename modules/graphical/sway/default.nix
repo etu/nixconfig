@@ -68,6 +68,9 @@
     services.pipewire.pulse.enable = true;
     services.pipewire.jack.enable = true;
 
+    # Set up upower to be able to get battery levels of connected devices.
+    services.upower.enable = true;
+
     # Set up XDG Portals
     xdg.portal.enable = true;
     xdg.portal.extraPortals = with pkgs; [xdg-desktop-portal-wlr];

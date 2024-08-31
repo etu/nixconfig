@@ -59,6 +59,7 @@ button:hover {
 #battery,
 #clock,
 #cpu,
+#custom-mxergo,
 #idle_inhibitor,
 #memory,
 #mode,
@@ -121,6 +122,18 @@ button:hover {
 /* CPU usage */
 #cpu {
     color: @green;
+}
+
+/* Styles for my custom battery indicator for my MX Ergo */
+#custom-mxergo.good {
+    color: @green;
+}
+#custom-mxergo.moderate {
+    color: @yellow;
+}
+#custom-mxergo.critical {
+    color: @red;
+    box-shadow: inset 0 -3px @red;
 }
 
 /* Idle inhibitor */

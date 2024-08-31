@@ -33,9 +33,56 @@
             margin-right = 100;
             margin-left = 100;
 
-            modules-left = ["idle_inhibitor" "backlight" "cpu" "memory" "temperature" "battery" "mpris"];
+            modules-left = ["idle_inhibitor" "backlight" "cpu" "memory" "temperature" "custom/mxergo" "battery" "mpris"];
             modules-center = ["sway/workspaces" "sway/mode" "sway/scratchpad"];
             modules-right = ["privacy" "pulseaudio" "network" "clock" "tray"];
+
+            "custom/mxergo" = {
+              interval = 60;
+              tooltip = true;
+              return-type = "json";
+              exec = let
+                awk = "${pkgs.gawk}/bin/awk";
+                grep = "${pkgs.gnugrep}/bin/grep";
+                printf = "${pkgs.coreutils}/bin/printf";
+                sed = "${pkgs.gnused}/bin/sed";
+                test = "${pkgs.coreutils}/bin/test";
+                upower = "${config.services.upower.package}/bin/upower";
+                xargs = "${pkgs.findutils}/bin/xargs";
+              in
+                pkgs.writeShellScript "mxergo-battery" ''
+                  DEVICE_PATH=$(${upower} -e | ${grep} battery_hidpp_battery)
+
+                  if test -z "$DEVICE_PATH"; then
+                    echo "{}"
+                    exit 0
+                  fi
+
+                  DEVICE_INFO=$(${upower} -i "$DEVICE_PATH")
+
+                  MODEL_NAME=$(echo "$DEVICE_INFO" | ${grep} model | ${awk} -F': ' '{print $2}' | ${xargs})
+                  PERCENTAGE=$(echo "$DEVICE_INFO" | ${grep} percentage | ${awk} '{print $2}' | ${sed} 's/%//')
+                  STATE=$(echo "$DEVICE_INFO" | ${grep} state | ${awk} '{print $2}')
+
+                  # Determine the class based on battery percentage
+                  if ${test} "$PERCENTAGE" -ge 80; then
+                    CLASS="good"
+                    ICON=""
+                  elif ${test} "$PERCENTAGE" -ge 40; then
+                    CLASS="moderate"
+                    ICON=""
+                  else
+                    CLASS="critical"
+                    ICON=""
+                  fi
+
+                  # Output JSON for Waybar
+                  ${printf} '{"text":"%s","tooltip":"%s","class":"%s"}'                 \
+                    " $PERCENTAGE% $ICON"                                              \
+                    "Device: $MODEL_NAME \nBattery: $PERCENTAGE% $ICON\nState: $STATE" \
+                    "$CLASS"
+                '';
+            };
 
             "sway/workspaces" = {
               disable-scroll = true;
