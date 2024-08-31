@@ -6,10 +6,6 @@
   # Assorted images from: https://wallhaven.cc/search?q=space&atleast=2560x2880
   images = [
     (fetchurl {
-      url = "https://w.wallhaven.cc/full/8x/wallhaven-8x1odo.jpg";
-      hash = "sha256-C3lAjdp0Ey0MP2+BNz90tVvlwN1GnWIpqPjJfNYpAQU=";
-    })
-    (fetchurl {
       url = "https://w.wallhaven.cc/full/0w/wallhaven-0wryzq.jpg";
       hash = "sha256-61DKr+YemXEraAfzxwddMzFCUZAXFn11LUqW2TdGi8w=";
     })
