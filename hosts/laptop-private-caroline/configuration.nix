@@ -76,7 +76,11 @@
       pkgs.inkscape
       pkgs.libreoffice
       pkgs.blender
+
+      # Kubernetes things
       pkgs.minikube
+      pkgs.kubectl
+      pkgs.helm
 
       (pkgs.rWrapper.override {
         packages = with pkgs.rPackages; [
@@ -165,6 +169,11 @@
       "zroot/safe/home".use_template = ["home"];
       "zroot/zvol/win10".use_template = ["data"];
     };
+  };
+
+  # Home manager settings
+  home-manager.users.${config.etu.user.username} = {
+    programs.fish.shellAbbrs.k = "kubectl";
   };
 
   # Enable blueman.
