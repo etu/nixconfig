@@ -66,7 +66,48 @@
     games.minecraft.enable = true;
 
     # Install packages
-    user.extraUserPackages = [
+    user.extraUserPackages = let
+      rOverridePackages = with pkgs.rPackages; [
+        FactoMineR
+        GGally
+        ISLR
+        MASS
+        arsenal
+        broom
+        caTools
+        coefplot
+        corrplot
+        cowplot
+        devtools
+        esquisse
+        gapminder
+        ggiraph
+        ggrepel
+        ggridges
+        gridExtra
+        here
+        interplot
+        mapdata
+        mapproj
+        maps
+        margins
+        patchwork
+        quantreg
+        rlang
+        scales
+        srvyr
+        survey
+        tidyverse
+        tinytex
+        viridis
+        viridisLite
+      ];
+    in [
+      # R and R studio with extra packages
+      (pkgs.rWrapper.override {packages = rOverridePackages;})
+      (pkgs.rstudioWrapper.override {packages = rOverridePackages;})
+
+      # Other packages to have installed
       pkgs.firefox
       pkgs.git
       pkgs.vscodium
@@ -81,82 +122,6 @@
       pkgs.minikube
       pkgs.kubectl
       pkgs.helm
-
-      (pkgs.rWrapper.override {
-        packages = with pkgs.rPackages; [
-          FactoMineR
-          GGally
-          ISLR
-          MASS
-          arsenal
-          broom
-          caTools
-          coefplot
-          corrplot
-          cowplot
-          devtools
-          esquisse
-          gapminder
-          ggiraph
-          ggrepel
-          ggridges
-          gridExtra
-          here
-          interplot
-          mapdata
-          mapproj
-          maps
-          margins
-          patchwork
-          quantreg
-          rlang
-          scales
-          srvyr
-          survey
-          tidyverse
-          tinytex
-          viridis
-          viridisLite
-        ];
-      })
-
-      (pkgs.rstudioWrapper.override {
-        packages = with pkgs.rPackages; [
-          FactoMineR
-          GGally
-          ISLR
-          MASS
-          arsenal
-          broom
-          caTools
-          coefplot
-          corrplot
-          cowplot
-          devtools
-          esquisse
-          gapminder
-          ggiraph
-          ggrepel
-          ggridges
-          gridExtra
-          here
-          interplot
-          mapdata
-          mapproj
-          maps
-          margins
-          patchwork
-          quantreg
-          rlang
-          scales
-          srvyr
-          survey
-          tidyverse
-          tinytex
-          viridis
-          viridisLite
-        ];
-      })
     ];
 
     # Allow home fileserver to connect to fetch snapshots.
