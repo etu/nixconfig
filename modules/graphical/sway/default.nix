@@ -443,6 +443,12 @@
             # Import variables needed for screen sharing and gnome3 pinentry to work.
             {command = "${pkgs.dbus}/bin/dbus-update-activation-environment WAYLAND_DISPLAY";}
 
+            # Import user environment PATH to systemctl as user and then restart the xdg-desktop-portal
+            # This is to get xdg-open to work in flatpaks to be able to open links inside of flatpaks.
+            {
+              command = "${config.systemd.package}/bin/systemctl --user import-environment PATH && ${config.systemd.package}/bin/systemctl --user restart xdg-desktop-portal.service";
+            }
+
             # Reload kanshi on reload of config
             {
               command = "${config.systemd.package}/bin/systemctl --user restart kanshi";
