@@ -145,7 +145,7 @@
           daemonize = true;
           clock = true;
           timestr = "%k:%M";
-          datestr = "%Y-%m-%e";
+          datestr = "%Y-%m-%d";
           show-failed-attempts = true;
         }
         // (lib.optionalAttrs (config.etu.graphical.sway.lockWallpaper == "screenshot") {
