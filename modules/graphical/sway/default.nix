@@ -80,6 +80,7 @@
       # Enable rofi home manager module.
       programs.rofi.enable = true;
       programs.rofi.package = pkgs.rofi-wayland;
+      programs.rofi.font = "${config.etu.graphical.theme.fonts.monospace} ${toString config.etu.graphical.theme.fonts.size}";
 
       # Set up a wallpaper manager.
       programs.wpaperd.enable = true;
@@ -480,9 +481,6 @@
           bars = [{mode = "invisible";}];
         };
       }; # END sway
-
-      # Set the rofi font
-      programs.rofi.font = "${config.etu.graphical.theme.fonts.monospace} ${toString config.etu.graphical.theme.fonts.size}";
     }; # END home-manager
   };
 }
