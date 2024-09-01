@@ -46,6 +46,7 @@
     graphical.hamradio.enable = true;
     graphical.signal.enable = true;
     graphical.flatpak.enablePersistence = true;
+    graphical.flatpak.persistencePath = "${config.etu.dataPrefix}/flatpak-data";
     services.netdata.enable = true;
     theme.enable = true;
     user.enable = true;

@@ -70,6 +70,12 @@ _: {
             options.mountpoint = "/var/lib/docker";
             options.copies = "1"; # Override the pool setting
           };
+          "local/flatpak-data" = {
+            type = "zfs_fs";
+            mountpoint = "/data/flatpak-data";
+            options.mountpoint = "legacy";
+            options.copies = "1"; # Override the pool setting
+          };
           "safe/data" = {
             type = "zfs_fs";
             mountpoint = "/data";

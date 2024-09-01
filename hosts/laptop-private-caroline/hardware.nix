@@ -63,18 +63,6 @@
   fileSystems.${config.etu.dataPrefix}.neededForBoot = true;
   fileSystems."${config.etu.dataPrefix}/flatpak-data".neededForBoot = true;
 
-  # Mount flatpak persistence under flatpak data
-  environment.persistence."${config.etu.dataPrefix}/flatpak-data" = {
-    directories = [
-      "/var/lib/flatpak"
-    ];
-    users.${config.etu.user.username}.directories = [
-      ".cache/io.elementary.appcenter/"
-      ".local/share/flatpak/"
-      ".var/app/"
-    ];
-  };
-
   # Swap devices.
   swapDevices = [];
 
