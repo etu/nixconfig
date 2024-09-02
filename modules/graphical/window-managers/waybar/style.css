@@ -156,6 +156,10 @@ button:hover {
     color: @maroon;
 }
 
+#mpris.spotify {
+    color: @green;
+}
+
 /* Network indicator */
 #network {
     color: @green;

@@ -124,6 +124,7 @@
               player-icons = {
                 default = "";
                 firefox = "";
+                spotify = "";
               };
               status-icons = {
                 default = "▶";
