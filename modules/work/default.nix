@@ -27,7 +27,6 @@
       ".aws"
       ".chalet"
       ".chef"
-      ".config/Slack"
       ".config/helm"
       ".config/tvnu"
       ".config/gh"
@@ -43,7 +42,6 @@
     # Allow certain unfree packages.
     etu.base.nix.allowUnfree = [
       "appgate-sdp"
-      "slack"
       "vagrant"
     ];
 
@@ -79,7 +77,6 @@
 
       # Misc
       pkgs.mariadb
-      pkgs.slack
       pkgs.awscli2
     ];
 
