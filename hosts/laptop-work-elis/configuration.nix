@@ -26,7 +26,6 @@
     development.vscode.enableWork = true;
     graphical.enable = true;
     graphical.sway.enable = true;
-    graphical.spotify.enable = true;
     graphical.virtualbox.enable = true;
     graphical.flatpak.enablePersistence = true;
     graphical.flatpak.persistencePath = "${config.etu.dataPrefix}/flatpak-data";

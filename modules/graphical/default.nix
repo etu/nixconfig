@@ -12,7 +12,6 @@
     ./gnupg
     ./hamradio
     ./signal
-    ./spotify
     ./sway
     ./telegram
     ./terminal
