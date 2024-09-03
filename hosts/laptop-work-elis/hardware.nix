@@ -90,6 +90,13 @@
     options = ["defaults" "noexec"];
   };
 
+  fileSystems."${config.etu.dataPrefix}/flatpak-data" = {
+    device = "zroot/local/flatpak-data";
+    fsType = "zfs";
+    neededForBoot = true;
+    options = ["defaults" "noexec"];
+  };
+
   fileSystems."/var/log" = {
     device = "zroot/local/var-log";
     fsType = "zfs";

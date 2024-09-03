@@ -29,6 +29,7 @@
     graphical.spotify.enable = true;
     graphical.virtualbox.enable = true;
     graphical.flatpak.enablePersistence = true;
+    graphical.flatpak.persistencePath = "${config.etu.dataPrefix}/flatpak-data";
     services.nfs.enable = true;
     services.nfs.exports = ''
       ${config.etu.dataPrefix}/home/etu/tvnu/projects 192.168.5.102(rw,no_subtree_check,all_squash,anonuid=1000,anongid=100)
