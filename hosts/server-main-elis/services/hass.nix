@@ -38,7 +38,7 @@
   virtualisation.oci-containers.containers = {
     home-assistant = {
       environment.TZ = config.time.timeZone;
-      image = "ghcr.io/home-assistant/home-assistant:2024.8.2";
+      image = "ghcr.io/home-assistant/home-assistant:2024.9.0";
       ports = ["8123"];
       extraOptions = [
         "--network=host"
@@ -63,7 +63,7 @@
       ];
     };
     zwavejs2mqtt = {
-      image = "zwavejs/zwavejs2mqtt:9.17.0";
+      image = "zwavejs/zwavejs2mqtt:9.18.0";
       ports = [
         "3000:3000"
         # "8091:8091" # Admin interface port

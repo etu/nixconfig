@@ -75,6 +75,7 @@
 
   # Enable nvidia drivers.
   services.xserver.videoDrivers = ["nvidia"];
+  hardware.nvidia.open = false;
 
   # Allow certain unfree packages.
   etu.base.nix.allowUnfree = [
