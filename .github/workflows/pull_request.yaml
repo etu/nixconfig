@@ -22,7 +22,7 @@ jobs:
       - uses: actions/checkout@v4.1.1
 
       - uses: DeterminateSystems/nix-installer-action@v14
-      - uses: DeterminateSystems/magic-nix-cache-action@v7
+      - uses: DeterminateSystems/magic-nix-cache-action@v8
 
       - uses: cachix/cachix-action@v15
         with:
@@ -41,7 +41,7 @@ jobs:
       - uses: actions/checkout@v4.1.1
 
       - uses: DeterminateSystems/nix-installer-action@v14
-      - uses: DeterminateSystems/magic-nix-cache-action@v7
+      - uses: DeterminateSystems/magic-nix-cache-action@v8
 
       - uses: cachix/cachix-action@v15
         with:
@@ -59,7 +59,7 @@ jobs:
       - uses: actions/checkout@v4.1.1
 
       - uses: DeterminateSystems/nix-installer-action@v14
-      - uses: DeterminateSystems/magic-nix-cache-action@v7
+      - uses: DeterminateSystems/magic-nix-cache-action@v8
 
       - uses: cachix/cachix-action@v15
         with:
