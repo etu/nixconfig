@@ -19,6 +19,7 @@
   in {
     enable = lib.mkEnableOption "Enable base zfs persistence settings";
     local = options "local" config.etu.localPrefix;
+    localUser = options "localUser" config.etu.localPrefix;
     system = options "system" config.etu.dataPrefix;
     user = options "user" config.etu.dataPrefix;
     root = options "root" config.etu.dataPrefix;
@@ -53,6 +54,11 @@
     # Persistence for local files that may not be backed up
     environment.persistence.${config.etu.localPrefix} = {
       inherit (config.etu.base.zfs.local) directories files;
+
+      # Local user persistence
+      users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
+        inherit (config.etu.base.zfs.localUser) directories files;
+      };
     };
   };
 }

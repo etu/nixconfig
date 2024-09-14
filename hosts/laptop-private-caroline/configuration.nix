@@ -60,7 +60,6 @@
     graphical.gnupg.enable = false;
     graphical.telegram.enable = false;
     graphical.flatpak.enablePersistence = true;
-    graphical.flatpak.persistencePath = "${config.etu.dataPrefix}/flatpak-data";
     theme.enable = true;
 
     games.minecraft.enable = true;

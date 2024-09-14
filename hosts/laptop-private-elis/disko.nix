@@ -74,11 +74,6 @@ _: {
             type = "zfs_fs";
             mountpoint = "/data/local";
             options.mountpoint = "legacy";
-          };
-          "local/flatpak-data" = {
-            type = "zfs_fs";
-            mountpoint = "/data/flatpak-data";
-            options.mountpoint = "legacy";
             options.copies = "1"; # Override the pool setting
           };
           "safe/data" = {

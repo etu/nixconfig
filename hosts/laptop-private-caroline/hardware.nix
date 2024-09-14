@@ -61,7 +61,7 @@
   fileSystems."/home".neededForBoot = true;
   fileSystems."/nix".neededForBoot = true;
   fileSystems.${config.etu.dataPrefix}.neededForBoot = true;
-  fileSystems."${config.etu.dataPrefix}/flatpak-data".neededForBoot = true;
+  fileSystems.${config.etu.localPrefix}.neededForBoot = true;
 
   # Swap devices.
   swapDevices = [];

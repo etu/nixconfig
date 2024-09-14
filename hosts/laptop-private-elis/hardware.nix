@@ -57,9 +57,8 @@
 
   # Mark filesystems as needed for boot
   fileSystems.${config.etu.dataPrefix}.neededForBoot = true;
-  fileSystems."${config.etu.dataPrefix}/local".neededForBoot = true;
   fileSystems."${config.etu.dataPrefix}/home".neededForBoot = true;
-  fileSystems."${config.etu.dataPrefix}/flatpak-data".neededForBoot = true;
+  fileSystems.${config.etu.localPrefix}.neededForBoot = true;
   fileSystems."/nix".neededForBoot = true;
 
   # Bind mount for persistent libvirt state.
