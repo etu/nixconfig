@@ -4,23 +4,24 @@
   ...
 }: {
   options.etu.base.zfs = let
-    options = param: {
+    options = param: prefix: {
       directories = lib.mkOption {
         type = lib.types.listOf lib.types.str;
         default = [];
-        description = "Directories to pass to environment.persistence attribute for ${param} under ${config.etu.dataPrefix}";
+        description = "Directories to pass to environment.persistence attribute for ${param} under ${prefix}";
       };
       files = lib.mkOption {
         type = lib.types.listOf lib.types.str;
         default = [];
-        description = "Files to pass to environment.persistence attribute for ${param} under ${config.etu.dataPrefix}";
+        description = "Files to pass to environment.persistence attribute for ${param} under ${prefix}";
       };
     };
   in {
     enable = lib.mkEnableOption "Enable base zfs persistence settings";
-    system = options "system";
-    user = options "user";
-    root = options "root";
+    local = options "local" config.etu.localPrefix;
+    system = options "system" config.etu.dataPrefix;
+    user = options "user" config.etu.dataPrefix;
+    root = options "root" config.etu.dataPrefix;
   };
 
   config = lib.mkIf config.etu.base.zfs.enable {
@@ -49,6 +50,11 @@
         inherit (config.etu.base.zfs.user) directories;
         inherit (config.etu.base.zfs.user) files;
       };
+    };
+
+    # Persistence for local files that may not be backed up
+    environment.persistence.${config.etu.localPrefix} = {
+      inherit (config.etu.base.zfs.local) directories files;
     };
   };
 }

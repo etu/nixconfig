@@ -30,6 +30,11 @@
       default = "/data";
       description = "The path to where persistent storage happens";
     };
+    localPrefix = lib.mkOption {
+      type = lib.types.str;
+      default = "/data/local";
+      description = "The path to where persistent local storage happens";
+    };
   };
 
   config = {
