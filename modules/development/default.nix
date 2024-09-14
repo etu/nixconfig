@@ -8,6 +8,7 @@
     ./flipper-zero
     ./git
     ./php
+    ./rtl-sdr
     ./vscode
     ./zed
   ];
@@ -19,6 +20,7 @@
       development.direnv.enable = lib.mkDefault true;
       development.git.enable = lib.mkDefault true;
       development.php.enable = lib.mkDefault true;
+      development.rtl-sdr.enable = lib.mkDefault true;
       development.vscode.enable = lib.mkDefault true;
       development.zed.enable = lib.mkDefault true;
 

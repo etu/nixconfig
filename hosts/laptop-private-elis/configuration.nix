@@ -103,6 +103,7 @@
     etu = {
       # Turn off some of my default modules.
       development.flipper-zero.enable = lib.mkForce false;
+      development.rtl-sdr.enable = lib.mkForce false;
       games.minecraft.enable = lib.mkForce false;
       graphical.fdm-printing.enable = lib.mkForce false;
       graphical.hamradio.enable = lib.mkForce false;
