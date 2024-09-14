@@ -41,14 +41,12 @@
       # Root user persistence
       users.root = {
         inherit (config.users.users.root) home;
-        inherit (config.etu.base.zfs.root) directories;
-        inherit (config.etu.base.zfs.root) files;
+        inherit (config.etu.base.zfs.root) directories files;
       };
 
       # My user persistence
       users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
-        inherit (config.etu.base.zfs.user) directories;
-        inherit (config.etu.base.zfs.user) files;
+        inherit (config.etu.base.zfs.user) directories files;
       };
     };
 
