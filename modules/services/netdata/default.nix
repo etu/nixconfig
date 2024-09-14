@@ -10,7 +10,11 @@
   };
 
   config = lib.mkIf config.etu.services.netdata.enable {
-    # Bind mount for persistent data for jellyfin
+    etu.base.zfs.local.directories = [
+      "/var/cache/netdata"
+    ];
+
+    # Bind mount for persistent data for netdata
     etu.base.zfs.system.directories = [
       "/var/lib/netdata"
     ];

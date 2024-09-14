@@ -41,6 +41,13 @@
     neededForBoot = true;
   };
 
+  fileSystems.${config.etu.localPrefix} = {
+    device = "zroot/local/data";
+    fsType = "zfs";
+    neededForBoot = true;
+    options = ["defaults" "noexec"];
+  };
+
   fileSystems."/nix" = {
     device = "zroot/local/nix";
     fsType = "zfs";

@@ -83,6 +83,13 @@
     options = ["defaults" "noexec"];
   };
 
+  fileSystems.${config.etu.localPrefix} = {
+    device = "zroot/local/data";
+    fsType = "zfs";
+    neededForBoot = true;
+    options = ["defaults" "noexec"];
+  };
+
   fileSystems."${config.etu.dataPrefix}/home" = {
     device = "zroot/safe/home";
     fsType = "zfs";

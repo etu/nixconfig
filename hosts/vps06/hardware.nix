@@ -47,6 +47,13 @@
     neededForBoot = true;
   };
 
+  fileSystems.${config.etu.localPrefix} = {
+    device = "zroot/local/data";
+    fsType = "zfs";
+    neededForBoot = true;
+    options = ["defaults" "noexec"];
+  };
+
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/2828bb52-e581-4820-989c-3c9ca18c2925";
     fsType = "ext4";
