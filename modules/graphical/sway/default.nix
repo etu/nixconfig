@@ -178,9 +178,6 @@
           export TERMINAL=${config.etu.graphical.terminal.terminalName}
         '';
 
-        # TODO:
-        # - Network manager applet
-        # - Media keys (Missing: XF86Display)
         config = let
           rofi = pkgs.rofi.override {plugins = [pkgs.rofi-emoji];};
           pactl = "${config.hardware.pulseaudio.package}/bin/pactl";
@@ -220,6 +217,9 @@
               XF86AudioLowerVolume = "exec ${pactl} set-sink-volume @DEFAULT_SINK@ -10%";
               XF86AudioRaiseVolume = "exec ${pactl} set-sink-volume @DEFAULT_SINK@ +10%";
               XF86AudioMicMute = "exec ${pactl} set-source-mute @DEFAULT_SOURCE@ toggle";
+              XF86AudioPrev = "exec ${pkgs.playerctl}/bin/playerctl previous";
+              XF86AudioPlay = "exec ${pkgs.playerctl}/bin/playerctl play-pause";
+              XF86AudioNext = "exec ${pkgs.playerctl}/bin/playerctl next";
 
               # Misc buttons:
               XF86Tools = "exec ${config.services.emacs.package}/bin/emacs";
