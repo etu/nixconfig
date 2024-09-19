@@ -37,6 +37,15 @@
     # Enable flatpak
     services.flatpak.enable = true;
 
+    # Add the global override to allow reading the ~/.XCompose file in
+    # all the flatpak applications.
+    home-manager.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
+      home.file.".local/share/flatpak/overrides/global".text = ''
+        [Context]
+        filesystems=~/.XCompose:ro
+      '';
+    };
+
     # Configure flathub
     systemd.services.flatpak-setup-flathub = {
       wantedBy = ["multi-user.target"];
