@@ -10,15 +10,11 @@
     # Install using home-manager.
     etu.user.extraUserPackages = [
       pkgs.openscad-unstable
-      pkgs.prusa-slicer
-      # pkgs.super-slicer-latest
     ];
 
     # Enable persistence for fdm-printing related files.
     etu.base.zfs.user.directories = [
       ".config/OpenSCAD"
-      ".config/PrusaSlicer"
-      ".config/SuperSlicer"
     ];
   };
 }
