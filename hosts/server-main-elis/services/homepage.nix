@@ -60,19 +60,6 @@
           }
         ];
       }
-      {
-        Printer = [
-          {
-            Klipper = [
-              {
-                icon = "klipper.svg";
-                href = "/klipper";
-                description = "Creality Ender 6";
-              }
-            ];
-          }
-        ];
-      }
     ];
     services = [
       {
@@ -156,30 +143,6 @@
               widget = {
                 type = "nzbget";
                 url = "http://server-main-elis/nzbget";
-              };
-            };
-          }
-        ];
-      }
-      {
-        "Printer Status" = [
-          {
-            "Printer Status" = {
-              icon = "klipper.svg";
-              description = "Creality Ender 6";
-              widget = {
-                type = "moonraker";
-                url = "http://server-main-elis";
-              };
-            };
-          }
-          {
-            "Printer Camera" = {
-              icon = "klipper.svg";
-              description = "Creality Ender 6 Camera";
-              widget = {
-                type = "mjpeg";
-                stream = "http://server-main-elis/klipper/webcam?action=stream";
               };
             };
           }
