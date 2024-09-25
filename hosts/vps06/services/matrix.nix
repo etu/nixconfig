@@ -274,6 +274,9 @@ in {
       homeserver.url = "https://matrix.${domain}";
       homeserver.domain = domain;
 
+      # Not sure where this value is used.
+      ircService.mediaProxy.publicUrl = "https://matrix.${domain}";
+
       ircService.servers."irc.beanjuice.me" = {
         name = "beanjuice";
         port = 6697;
@@ -303,7 +306,7 @@ in {
     settings.SYNCV3_BINDADDR = "127.0.0.1:8010";
   };
 
-  services.matrix-hookshot = {
+  my-services.matrix-hookshot = {
     enable = true;
     registration = {
       sender_localpart = "_hookshot_";

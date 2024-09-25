@@ -8,7 +8,6 @@
 # $ sudo dd if=result/iso/<tab> of=/dev/<device> status=progress bs=16M
 #
 {
-  config,
   lib,
   modulesPath,
   ...
@@ -51,10 +50,6 @@
     # There's no need to run tailscale on the live-iso.
     base.tailscale.enable = false;
   };
-
-  boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
-  # Enable this to get unstable ZFS versions to allow newer kernels.
-  # boot.zfs.enableUnstable = true;
 
   networking.wireless.enable = false;
   services.openssh.settings.PermitRootLogin = lib.mkForce "prohibit-password";

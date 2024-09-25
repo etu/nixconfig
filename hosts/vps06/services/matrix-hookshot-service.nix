@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: let
-  cfg = config.services.matrix-hookshot;
+  cfg = config.my-services.matrix-hookshot;
 
   # Config file paths
   registrationFilePath = "/var/lib/matrix-hookshot/registration.yaml";
@@ -19,7 +19,7 @@
   configFormat = pkgs.formats.yaml {};
   configFile = configFormat.generate "matrix-hookshot-config.yaml" cfg.config;
 in {
-  options.services.matrix-hookshot = {
+  options.my-services.matrix-hookshot = {
     enable = lib.mkEnableOption (lib.mdDoc "the Matrix webhook integration");
 
     port = lib.mkOption {
