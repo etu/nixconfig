@@ -35,13 +35,6 @@
       version = "1.3.0";
       sha256 = "sha256-dPF1CRX9WVQFyC7RZxiPDtIg6+oUituY0qEn5Hipd5Q=";
     };
-    php-debug = pkgs.vscode-utils.extensionFromVscodeMarketplace {
-      # https://marketplace.visualstudio.com/items?itemName=xdebug.php-debug
-      publisher = "xdebug";
-      name = "php-debug";
-      version = "1.34.0";
-      sha256 = "sha256-WAcXWCMmvuw7nkfGcOgmK+s+Nw6XpvNR4POXD85E/So=";
-    };
     openscad = pkgs.vscode-utils.extensionFromVscodeMarketplace {
       # https://marketplace.visualstudio.com/items?itemName=Leathong.openscad-language-support
       publisher = "Leathong";
@@ -57,8 +50,8 @@
       # This is to pin it to a version to be compatible with vscode.
       publisher = "github";
       name = "copilot-chat";
-      version = "0.16.2024060502";
-      sha256 = "sha256-SAydDc3JlJzfCtbJICy3rWx8psVPdRdPfOuzR9Dqtp8=";
+      version = "0.21.2024090602";
+      sha256 = "sha256-9wl/orFbf1OFwGnF1uLfyOOtO2v5k2H1aUMBtngXDfs=";
     };
   };
 in {
@@ -97,10 +90,10 @@ in {
           pkgs.vscode-extensions.kahole.magit # Magit emulation
           pkgs.vscode-extensions.golang.go # Go support
           pkgs.vscode-extensions.mkhl.direnv # Direnv
+          pkgs.vscode-extensions.xdebug.php-debug # Php debug support
           vspkgs.vscode-org-mode # Really basic org-mode highlighting
           vspkgs.vscode-ido # Decent file navigation
           vspkgs.php-sniffer # Php code style sniffing
-          vspkgs.php-debug # Php debug support
           pkgs.vscode-extensions.github.copilot # Copilot
           vspkgs.github-copilot-chat # Copilot chat
         ]
