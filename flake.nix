@@ -214,6 +214,7 @@
 
       # Build packages
       packages.spaceWallpapers = pkgs.callPackage ./packages/spaceWallpapers {};
+      packages.wowAddonUpdater = pkgs.callPackage ./packages/wowAddonUpdater {};
       packages.iso = self.nixosConfigurations.live-iso.config.system.build.isoImage;
     });
 }
