@@ -21,6 +21,7 @@ writeShellApplication {
         "BigWigsMods/BigWigs"
         "BigWigsMods/LittleWigs"
         "simulationcraft/simc-addon"
+        "WeakAuras/WeakAuras2"
     )
     DETAILS_REPO="Tercioo/Details-Damage-Meter"
 
