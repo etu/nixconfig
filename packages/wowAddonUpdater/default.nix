@@ -20,10 +20,8 @@ writeShellApplication {
     GITHUB_REPOS=(
         "BigWigsMods/BigWigs"
         "BigWigsMods/LittleWigs"
-        "simulationcraft/simc-addon"
-        "WeakAuras/WeakAuras2"
     )
-    DETAILS_REPO="Tercioo/Details-Damage-Meter"
+    MANAGED_ADDONS=("BigWigs" "LittleWigs")
 
     # Function to get the latest release URL using GitHub CLI
     get_latest_release_url() {
@@ -36,19 +34,6 @@ writeShellApplication {
         fi
 
         echo "$LATEST_RELEASE_URL"
-    }
-
-    # Function to get the latest tag URL for Details! using GitHub CLI
-    get_latest_details_tag_url() {
-        REPO="$1"
-        LATEST_TAG=$(curl -s "https://github.com/$REPO/tags.atom" | xq -r '.feed.entry[0].title')
-
-        if test -z "$LATEST_TAG" || test "$LATEST_TAG" == "null"; then
-            echo "Failed to fetch latest tag for $REPO" >&2
-            return 1
-        fi
-
-        echo "https://github.com/$REPO/archive/refs/tags/$LATEST_TAG.zip"
     }
 
     # Step 1: Make a temporary and history directory
@@ -67,39 +52,26 @@ writeShellApplication {
             echo "Downloading from: $LATEST_URL"
             curl -L -o "$TEMP_DIR/$(basename "$LATEST_URL")" "$LATEST_URL" || { echo "Failed to download $REPO"; exit 1; }
         done
-
-        # Download Details! separately
-        DETAILS_URL=$(get_latest_details_tag_url "$DETAILS_REPO")
-        echo "Downloading Details! from: $DETAILS_URL"
-        curl -L -o "$TEMP_DIR/$(basename "$DETAILS_URL")" "$DETAILS_URL" || { echo "Failed to download Details!"; exit 1; }
     }
 
-    # Step 3: Move old addons to history
+    # Step 3: Move old managed addons to history
     step_3_move_old_addons_to_history() {
         HISTORY_TARGET="$HISTORY_DIR/$(date +"%Y-%m-%d_%H:%M:%S")"
-
         mkdir -p "$HISTORY_TARGET"
 
-        echo "Moving old addons to history..."
-        mv "$WOW_ADDON_DIR"/* "$HISTORY_TARGET/" || { echo "Failed to move old addons to history"; exit 1; }
+        echo "Moving old managed addons to history..."
+        for ADDON in "''${MANAGED_ADDONS[@]}"; do
+            if test -d "$WOW_ADDON_DIR/$ADDON"; then
+                mv "$WOW_ADDON_DIR/$ADDON"* "$HISTORY_TARGET/" || { echo "Failed to move $ADDON to history"; exit 1; }
+            fi
+        done
     }
 
     # Step 4: Unpack new addons
     step_4_unpacking_new_addons() {
         echo "Unpacking new addons..."
         for ZIP_FILE in "$TEMP_DIR"/*.zip; do
-            if test "$ZIP_FILE" == "$TEMP_DIR/Details"*; then
-                # Special handling for Details!
-                DETAILS_TEMP_DIR="$TEMP_DIR/details_temp"
-                mkdir -p "$DETAILS_TEMP_DIR"
-                unzip -q "$ZIP_FILE" -d "$DETAILS_TEMP_DIR" || { echo "Failed to unzip Details!"; exit 1; }
-                DETAILS_DIR=$(find "$DETAILS_TEMP_DIR" -maxdepth 1 -type d -name "Details-Damage-Meter-*")
-                mv "$DETAILS_DIR/plugins"/* "$WOW_ADDON_DIR/" || { echo "Failed to move Details plugins"; exit 1; }
-                mv "$DETAILS_DIR" "$WOW_ADDON_DIR/Details" || { echo "Failed to move Details folder"; exit 1; }
-                rm -rf "$DETAILS_TEMP_DIR"
-            else
-                unzip -o "$ZIP_FILE" -d "$WOW_ADDON_DIR" || { echo "Failed to unzip $ZIP_FILE"; exit 1; }
-            fi
+            unzip -o "$ZIP_FILE" -d "$WOW_ADDON_DIR" || { echo "Failed to unzip $ZIP_FILE"; exit 1; }
         done
     }
 
