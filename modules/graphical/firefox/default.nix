@@ -38,6 +38,8 @@
         enable = true;
         inherit (config.etu.graphical.firefox) package;
 
+        languagePacks = ["sv-SE" "en-GB"];
+
         profiles.default = {
           # Install extensions.
           extensions = [
