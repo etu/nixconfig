@@ -46,7 +46,6 @@
             config.nur.repos.rycee.firefox-addons.facebook-container
             config.nur.repos.rycee.firefox-addons.multi-account-containers
             config.nur.repos.rycee.firefox-addons.privacy-badger
-            config.nur.repos.rycee.firefox-addons.sidebery
             config.nur.repos.rycee.firefox-addons.streetpass-for-mastodon
             config.nur.repos.rycee.firefox-addons.swedish-dictionary
             config.nur.repos.rycee.firefox-addons.terms-of-service-didnt-read
@@ -98,14 +97,10 @@
 
             # Enable userChrome customisations
             "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
-          };
-          userChrome = ''
-            /* Completely hide tabs */
-            #TabsToolbar { visibility: collapse; }
 
-            /* Hide sidebar header (from Sidebery / Tree-Style-Tabs) */
-            #sidebar-header { display: none; }
-          '';
+            # Enable firefox built in vertical tabs
+            "sidebar.verticalTabs" = true;
+          };
         };
       };
     };
