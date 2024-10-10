@@ -44,6 +44,7 @@
             config.nur.repos.rycee.firefox-addons.browserpass
             config.nur.repos.rycee.firefox-addons.elasticvue
             config.nur.repos.rycee.firefox-addons.facebook-container
+            config.nur.repos.rycee.firefox-addons.firefox-color
             config.nur.repos.rycee.firefox-addons.multi-account-containers
             config.nur.repos.rycee.firefox-addons.privacy-badger
             config.nur.repos.rycee.firefox-addons.streetpass-for-mastodon
