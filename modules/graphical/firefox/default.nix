@@ -55,6 +55,32 @@
           isDefault = true;
           search.default = "DuckDuckGo";
           search.force = true;
+          search.engines = {
+            Bing.metaData.hidden = true;
+            GitHub = {
+              urls = [{template = "https://github.com/search?q={searchTerms}";}];
+              iconUpdateURL = "https://github.com/fluidicon.png";
+              updateInterval = 7 * 24 * 60 * 60 * 1000;
+              definedAliases = ["@gh"];
+            };
+            Google.metaData.alias = "@g";
+            "Nix Packages" = {
+              urls = [{template = "https://search.nixos.org/packages?type=packages&query={searchTerms}";}];
+              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+              definedAliases = ["@np"];
+            };
+            "NixOS Wiki" = {
+              urls = [{template = "https://wiki.nixos.org/w/index.php?search={searchTerms}";}];
+              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+              definedAliases = ["@nw"];
+            };
+            Perplexity = {
+              urls = [{template = "https://www.perplexity.ai/?q={searchTerms}";}];
+              iconUpdateURL = "https://www.perplexity.ai/favicon.ico";
+              updateInterval = 7 * 24 * 60 * 60 * 1000;
+              definedAliases = ["@p"];
+            };
+          };
           settings = {
             # Extensions are managed with Nix, so don't update.
             "extensions.update.autoUpdateDefault" = false;
