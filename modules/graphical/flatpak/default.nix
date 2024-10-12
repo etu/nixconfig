@@ -40,7 +40,11 @@
     # Add the global override to allow reading the ~/.XCompose file in
     # all the flatpak applications.
     home-manager.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
-      home.file.".local/share/flatpak/overrides/global".text = ''
+      home.file.".local/share/flatpak/overrides/com.slack.Slack".text = ''
+        [Context]
+        filesystems=~/.XCompose:ro
+      '';
+      home.file.".local/share/flatpak/overrides/com.discordapp.Discord".text = ''
         [Context]
         filesystems=~/.XCompose:ro
       '';
