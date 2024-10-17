@@ -33,7 +33,7 @@
               {
                 criteria = "LG Electronics LG SDQHD 402NTZN0Z757";
                 mode = "2560x2880";
-                position = "2560,0";
+                position = "2560,110";
                 transform = "270";
               }
               {
