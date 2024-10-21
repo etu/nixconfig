@@ -7,6 +7,7 @@
     ./minecraft
     ./mumble
     ./steam
+    ./wowup
   ];
 
   options.etu.games.enable = lib.mkEnableOption "Enable games settings";

@@ -40,6 +40,7 @@
     development.flipper-zero.enable = true;
     games.enable = false;
     games.minecraft.enable = true;
+    games.wowup.enable = true;
     graphical.enable = true;
     graphical.sway.enable = true;
     graphical.fdm-printing.enable = true;
@@ -104,6 +105,7 @@
       development.flipper-zero.enable = lib.mkForce false;
       development.rtl-sdr.enable = lib.mkForce false;
       games.minecraft.enable = lib.mkForce false;
+      games.wowup.enable = lib.mkForce false;
       graphical.fdm-printing.enable = lib.mkForce false;
       graphical.hamradio.enable = lib.mkForce false;
       graphical.signal.enable = lib.mkForce false;

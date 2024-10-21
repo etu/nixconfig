@@ -63,6 +63,7 @@
     theme.enable = true;
 
     games.minecraft.enable = true;
+    games.wowup.enable = true;
 
     # Install packages
     user.extraUserPackages = let
