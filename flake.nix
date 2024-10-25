@@ -54,7 +54,6 @@
     # Import emacs-overlay
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     emacs-overlay.inputs.nixpkgs.follows = "nixpkgs";
-    emacs-overlay.inputs.flake-utils.follows = "flake-utils";
 
     # Import ip-failar-nu
     ip-failar-nu.url = "github:etu/ip.failar.nu";

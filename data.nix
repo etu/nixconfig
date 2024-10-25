@@ -48,10 +48,6 @@
       file = ./secrets/server-main-elis/wallabag-secret.age;
       owner = "wallabag";
     };
-    matrix-sliding-sync-secret = {
-      file = ./secrets/vps06/matrix-sliding-sync-secret.age;
-      owner = "root";
-    };
     syncoid-workstations-ssh-ec = {
       file = ./secrets/workstations/syncoid-ssh-ec.age;
       path = "/var/lib/syncoid/.ssh/id_ed25519";

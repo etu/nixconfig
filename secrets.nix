@@ -41,6 +41,5 @@ in {
   "secrets/server-main-elis/wallabag-secret.age".publicKeys = etu ++ hosts.server-main-elis;
   "secrets/server-sparv/valheim-server-env.age".publicKeys = etu ++ hosts.server-sparv;
   "secrets/server-sparv/enshrouded-server-env.age".publicKeys = etu ++ hosts.server-sparv;
-  "secrets/vps06/matrix-sliding-sync-secret.age".publicKeys = etu ++ hosts.vps06;
   "secrets/workstations/syncoid-ssh-ec.age".publicKeys = etu ++ hosts.laptop-private-elis ++ hosts.laptop-work-elis;
 }
