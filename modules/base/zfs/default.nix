@@ -26,18 +26,16 @@
   };
 
   config = lib.mkIf config.etu.base.zfs.enable {
+    environment.etc."machine-id".source = "${config.etu.dataPrefix}/etc/machine-id";
+
     environment.persistence.${config.etu.dataPrefix} = {
       # System persistence
+      inherit (config.etu.base.zfs.system) files;
       directories =
         [
           "/var/lib/nixos"
         ]
         ++ config.etu.base.zfs.system.directories;
-      files =
-        [
-          "/etc/machine-id"
-        ]
-        ++ config.etu.base.zfs.system.files;
 
       # Root user persistence
       users.root = {
