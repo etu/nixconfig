@@ -108,7 +108,7 @@
       (pkgs.rstudioWrapper.override {packages = rOverridePackages;})
 
       # Other packages to have installed
-      pkgs.firefox
+      pkgs.firefox-bin
       pkgs.git
       pkgs.vscodium
       pkgs.virt-manager
