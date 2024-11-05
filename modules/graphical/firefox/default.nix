@@ -43,7 +43,7 @@
         profiles.default = {
           # Install extensions.
           extensions = [
-            config.nur.repos.rycee.firefox-addons.browserpass
+            config.nur.repos.rycee.firefox-addons.bitwarden
             config.nur.repos.rycee.firefox-addons.elasticvue
             config.nur.repos.rycee.firefox-addons.facebook-container
             config.nur.repos.rycee.firefox-addons.firefox-color

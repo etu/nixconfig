@@ -21,15 +21,11 @@
     etu.user.extraUserPackages = [
       # Install gnupg
       pkgs.gnupg
-
-      # Install pass with expensions
-      (pkgs.pass.withExtensions (ext: with ext; [pass-otp pass-update pass-checkup]))
     ];
 
     # Enable persistence for gnupg and pass files.
     etu.base.zfs.user.directories = [
       ".gnupg"
-      ".password-store"
     ];
   };
 }
