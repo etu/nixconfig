@@ -17,10 +17,6 @@
   config = lib.mkIf config.etu.graphical.firefox.enable {
     # Configure firefox for my users home-manager (if it's enabled).
     home-manager.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
-      # Enable browserpass integration
-      programs.browserpass.enable = true;
-      programs.browserpass.browsers = ["firefox"];
-
       # Make firefox the default browser
       xdg.mimeApps = {
         enable = true;
