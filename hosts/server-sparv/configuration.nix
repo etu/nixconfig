@@ -46,8 +46,6 @@
       "zroot/safe/home".use_template = ["data"];
       "zroot/local/minecraft".use_template = ["data"]; # Minecraft server
       "zroot/local/valheim".use_template = ["data"]; # Valheim server
-      "zroot/local/vrising".use_template = ["data"]; # V Rising server
-      "zroot/local/enshrouded".use_template = ["data"]; # Enshrouded server
     };
 
     # Allow github to deploy system
@@ -71,14 +69,6 @@
     # Valheim
     2456
     2457
-
-    # Enshrouded
-    15636
-    15637
-
-    # V Rising
-    9876
-    9877
   ];
 
   # Set up docker.
@@ -121,33 +111,6 @@
       volumes = [
         "/var/lib/valheim/config:/config"
         "/var/lib/valheim/data:/opt/valheim"
-      ];
-    };
-
-    vrising-server = {
-      image = "docker.io/trueosiris/vrising:latest";
-      ports = [
-        "9876-9877:9876-9877/udp"
-      ];
-      environment = {
-        TZ = "Europe/Stockholm";
-        SERVERNAME = "SparvRising";
-      };
-      volumes = [
-        "/var/lib/vrising/server:/mnt/vrising/server:rw"
-        "/var/lib/vrising/persistentdata:/mnt/vrising/persistentdata:rw"
-      ];
-    };
-
-    # Set up a enshrouded server
-    enshrouded-server = {
-      image = "docker.io/sknnr/enshrouded-dedicated-server:latest";
-      ports = [
-        "15636-15637:15636-15637/udp"
-      ];
-      environmentFiles = [config.age.secrets.enshrouded-server-env.path];
-      volumes = [
-        "/var/lib/enshrouded:/home/steam/enshrouded"
       ];
     };
   };
