@@ -64,6 +64,11 @@
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDvsU9DbT9Buk0FcEA6cuq8UdE1wG+bD0UpyGoxJc93x etu@fenchurch-2019-12-22"
       ];
 
+      # Desktop computer
+      desktop-elis = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKm0NHTsWdN+R+Ksvvva6FTZ9kVPexQpIGm7+6HGmX7q etu@desktop-elis-2024-11-15"
+      ];
+
       # New private laptop T495
       laptop-private-elis = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKALrQoSasNAaAvERCMsztZkezg0gRSFXWbc1vXpA1+C etu@laptop-private-elis-2023-01-27"
@@ -84,10 +89,10 @@
       github-actions = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBsVq+lSP7EuU0KUurWYjlLWm1PJWKtYUXVayi1jD6lU github-actions-deployment-2023-08-30"];
     in {
       # Include all separate units
-      inherit server-main-elis syncoid laptop-private-elis laptop-work-elis github-actions;
+      inherit desktop-elis server-main-elis syncoid laptop-private-elis laptop-work-elis github-actions;
 
       # Include a meta name of all computers
-      computers = server-main-elis ++ laptop-private-elis ++ laptop-work-elis;
+      computers = desktop-elis ++ server-main-elis ++ laptop-private-elis ++ laptop-work-elis;
     };
 
     concate = [
@@ -112,6 +117,9 @@
     systems = {
       # aarch64.nixos.community
       "aarch64.nixos.community" = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMUTz5i9u5H2FHNAmZJyoJfIGyUm/HfGhfwnc142L3ds";
+
+      # Desktop system
+      desktop-elis = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIT37fYpCIdvXtvAVhsbx3fVMp+2ve50BXy5svsC4du3";
 
       # Private laptop
       laptop-private-elis = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOr9fpRag0ZQq3eMOPHygrt60GZl0NW32rzvvvgsm5HC";
