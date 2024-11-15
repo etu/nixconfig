@@ -1,6 +1,9 @@
 #
 # Helpers to build things
 #
+desktop-elis:
+	nix run nixpkgs#nix-output-monitor -- build .#nixosConfigurations.desktop-elis.config.system.build.toplevel
+
 laptop-private-elis:
 	nix run nixpkgs#nix-output-monitor -- build .#nixosConfigurations.laptop-private-elis.config.system.build.toplevel
 
