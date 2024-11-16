@@ -117,7 +117,6 @@
 
   # Include secret
   age.secrets.valheim-server-env = myData.ageModules.valheim-server-env;
-  age.secrets.enshrouded-server-env = myData.ageModules.enshrouded-server-env;
 
   # Restart valheim service every day
   systemd.services.restart-valheim-service = {
