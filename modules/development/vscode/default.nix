@@ -5,6 +5,13 @@
   ...
 }: let
   vspkgs = {
+    vscode-codeception = pkgs.vscode-utils.extensionFromVscodeMarketplace {
+      # https://marketplace.visualstudio.com/items?itemName=joelwmale.vscode-codeception
+      publisher = "joelwmale";
+      name = "vscode-codeception";
+      version = "1.2.0";
+      sha256 = "sha256-UiYD2BbumMjUP5PpdIsklBuA4UcxVV8WKePXO8p1e4k=";
+    };
     vscode-org-mode = pkgs.vscode-utils.extensionFromVscodeMarketplace {
       # This is super barebones, but at least it got highligts for headlines:
       # https://marketplace.visualstudio.com/items?itemName=vscode-org-mode.org-mode
@@ -102,6 +109,7 @@ in {
         ])
         ++ (lib.optionals config.etu.development.vscode.enableWork [
           # Only on work computer
+          vspkgs.vscode-codeception # Codeception support
           vspkgs.volar
         ]);
 
