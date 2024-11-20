@@ -23,6 +23,22 @@
             ];
           }
           {
+            profile.name = "elis-desktop";
+            profile.outputs = [
+              {
+                criteria = "LG Electronics LG SDQHD 402NTGY0Z759";
+                mode = "2560x2880";
+                position = "0,0";
+              }
+              {
+                criteria = "LG Electronics LG SDQHD 402NTZN0Z757";
+                mode = "2560x2880";
+                position = "2560,110";
+                transform = "270";
+              }
+            ];
+          }
+          {
             profile.name = "elis-docked";
             profile.outputs = [
               {
