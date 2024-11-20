@@ -4,6 +4,5 @@
     ./jellyfin
     ./netdata
     ./nfs
-    ./wallabag
   ];
 }

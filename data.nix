@@ -43,10 +43,6 @@
       owner = "syncoid";
       symlink = false;
     };
-    wallabag-secret = {
-      file = ./secrets/server-main-elis/wallabag-secret.age;
-      owner = "wallabag";
-    };
     syncoid-workstations-ssh-ec = {
       file = ./secrets/workstations/syncoid-ssh-ec.age;
       path = "/var/lib/syncoid/.ssh/id_ed25519";
