@@ -3,7 +3,7 @@ let
   keys = (import ./data.nix).pubkeys;
 
   # Assemble public keys for user-facing computers
-  etu = keys.etu.laptop-private-elis ++ keys.etu.laptop-work-elis;
+  etu = keys.etu.desktop-elis ++ keys.etu.laptop-private-elis ++ keys.etu.laptop-work-elis;
 
   # Computers host keys
   hosts = let

@@ -81,14 +81,14 @@
     environment.homeBinInPath = config.etu.user.enable;
 
     # Load password files.
-    age.secrets.hashed-etu-password = lib.mkIf (!config.etu.user.setEmptyPassword && config.etu.user.enable) config.etu.user.userPasswordAgeModule;
+    age.secrets.hashed-user-password = lib.mkIf (!config.etu.user.setEmptyPassword && config.etu.user.enable) config.etu.user.userPasswordAgeModule;
     age.secrets.hashed-root-password = lib.mkIf (!config.etu.user.setEmptyRootPassword) config.etu.user.rootPasswordAgeModule;
 
     # Define my user account.
     users.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
       description = "${config.etu.user.realname},,,,";
       extraGroups = ["wheel"] ++ config.etu.user.extraGroups;
-      hashedPasswordFile = lib.mkIf (!config.etu.user.setEmptyPassword) config.age.secrets.hashed-etu-password.path;
+      hashedPasswordFile = lib.mkIf (!config.etu.user.setEmptyPassword) config.age.secrets.hashed-user-password.path;
       isNormalUser = true;
       openssh.authorizedKeys.keys = myData.pubkeys.etu.computers ++ config.etu.user.extraAuthorizedKeys;
       inherit (config.etu.user) uid;
