@@ -7,6 +7,7 @@
     ./minecraft
     ./mumble
     ./steam
+    ./steam-controller
     ./wowup
   ];
 
@@ -17,6 +18,7 @@
       minecraft.enable = lib.mkDefault true;
       mumble.enable = lib.mkDefault true;
       steam.enable = lib.mkDefault true;
+      steam-controller.enable = lib.mkDefault true;
     };
   };
 }

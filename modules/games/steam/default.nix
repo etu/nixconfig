@@ -23,17 +23,12 @@
     # Support 32bit audio things
     services.pipewire.alsa.support32Bit = true;
 
-    # Enable udev rules for steam controller
-    services.udev.packages = [
-      pkgs.sc-controller
-    ];
-
     # Steam link ports
     networking.firewall.allowedTCPPorts = [27036 27037];
     networking.firewall.allowedUDPPorts = [27031 27036];
 
     # Install steam using home manager.
-    etu.user.extraUserPackages = [pkgs.steam pkgs.sc-controller];
+    etu.user.extraUserPackages = [pkgs.steam];
 
     # Enable persistence for steam files.
     etu.base.zfs.user.directories = [
