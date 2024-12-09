@@ -15,7 +15,6 @@
 # $ deploy --skip-checks --targets .#laptop-private-elis
 {
   config,
-  lib,
   myData,
   pkgs,
   ...
@@ -95,54 +94,4 @@
       supportedFeatures = ["big-parallel"];
     }
   ];
-
-  # Specialisation for work while working with tickster projects
-  specialisation.tickster.configuration = {
-    nix.distributedBuilds = lib.mkForce false;
-
-    etu = {
-      # Turn off some of my default modules.
-      development.flipper-zero.enable = lib.mkForce false;
-      development.rtl-sdr.enable = lib.mkForce false;
-      games.minecraft.enable = lib.mkForce false;
-      games.wowup.enable = lib.mkForce false;
-      graphical.fdm-printing.enable = lib.mkForce false;
-      graphical.hamradio.enable = lib.mkForce false;
-      graphical.signal.enable = lib.mkForce false;
-      graphical.telegram.enable = lib.mkForce false;
-
-      # Switch wallpaper
-      graphical.sway.wallpaper = toString (pkgs.stdenv.mkDerivation {
-        name = "tcab-bg";
-        src = pkgs.fetchurl {
-          url = "https://taserud.net/img/logo-dark.svg";
-          sha256 = "sha256-PmWJ0pN+q6JyKOuQOHx0LFyGBFmGUZeKBoxLBO4Sn1E=";
-        };
-        dontUnpack = true;
-        buildInputs = [pkgs.inkscape pkgs.graphicsmagick];
-        installPhase = ''
-          mkdir -p $out
-          inkscape --export-type=png               \
-                   --export-filename=logo-dark.png \
-                   --export-dpi=400                \
-                   $src
-
-          gm convert -size 1920x1440 xc:#2d3640 bg.png
-          gm composite -gravity center logo-dark.png bg.png $out/bg.png
-        '';
-      });
-
-      # Switch lockscreen image
-      graphical.sway.lockWallpaper = "${config.specialisation.tickster.configuration.etu.graphical.sway.wallpaper}/bg.png";
-
-      # Enable snapshotting of filesystem while in use
-      base.sanoid.datasets."zroot/safe/home-tickster".use_template = ["home"];
-
-      # Disable snapshotting of my private home while work is in use
-      base.sanoid.datasets."zroot/safe/home".use_template = lib.mkForce [];
-    };
-
-    # Run on a separate home directory for isolation and ease of backups
-    fileSystems."${config.etu.dataPrefix}/home".device = lib.mkForce "zroot/safe/home-tickster";
-  };
 }
