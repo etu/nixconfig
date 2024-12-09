@@ -11,7 +11,7 @@
     etu.user.extraUserPackages = [
       pkgs.flrig # flrig to connect to the radio
       pkgs.wsjtx # wsjtx to run FT-8
-      config.nur.repos.etu.g90updatefw # Install g90 update fw for easy firmware updating on linux.
+      pkgs.nur.repos.etu.g90updatefw # Install g90 update fw for easy firmware updating on linux.
     ];
 
     etu.base.zfs.user.files = [

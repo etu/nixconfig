@@ -50,6 +50,14 @@
       # The NixOS release to be compatible with for stateful data such as databases.
       system.stateVersion = config.etu.stateVersion;
 
+      # dotnet for sonarr seems to be very old
+      nixpkgs.config.permittedInsecurePackages = [
+        "aspnetcore-runtime-6.0.36"
+        "aspnetcore-runtime-wrapped-6.0.36"
+        "dotnet-sdk-6.0.428"
+        "dotnet-sdk-wrapped-6.0.428"
+      ];
+
       # Disable documentation to make the system smaller.
       documentation.enable = false;
       documentation.doc.enable = false;
