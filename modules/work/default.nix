@@ -47,11 +47,11 @@
 
     etu.user.extraUserPackages = [
       # Install chalet to manage running of containers
-      config.nur.repos.etu.goprocmgr
-      config.nur.repos.etu.chalet
+      pkgs.nur.repos.etu.goprocmgr
+      pkgs.nur.repos.etu.chalet
 
       # Install github-markdown-toc to format README TOC's
-      config.nur.repos.etu.github-markdown-toc
+      pkgs.nur.repos.etu.github-markdown-toc
 
       # Install make
       pkgs.gnumake

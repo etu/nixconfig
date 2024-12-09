@@ -39,16 +39,16 @@
         profiles.default = {
           # Install extensions.
           extensions = [
-            config.nur.repos.rycee.firefox-addons.bitwarden
-            config.nur.repos.rycee.firefox-addons.elasticvue
-            config.nur.repos.rycee.firefox-addons.facebook-container
-            config.nur.repos.rycee.firefox-addons.firefox-color
-            config.nur.repos.rycee.firefox-addons.multi-account-containers
-            config.nur.repos.rycee.firefox-addons.privacy-badger
-            config.nur.repos.rycee.firefox-addons.streetpass-for-mastodon
-            config.nur.repos.rycee.firefox-addons.swedish-dictionary
-            config.nur.repos.rycee.firefox-addons.terms-of-service-didnt-read
-            config.nur.repos.rycee.firefox-addons.ublock-origin
+            pkgs.nur.repos.rycee.firefox-addons.bitwarden
+            pkgs.nur.repos.rycee.firefox-addons.elasticvue
+            pkgs.nur.repos.rycee.firefox-addons.facebook-container
+            pkgs.nur.repos.rycee.firefox-addons.firefox-color
+            pkgs.nur.repos.rycee.firefox-addons.multi-account-containers
+            pkgs.nur.repos.rycee.firefox-addons.privacy-badger
+            pkgs.nur.repos.rycee.firefox-addons.streetpass-for-mastodon
+            pkgs.nur.repos.rycee.firefox-addons.swedish-dictionary
+            pkgs.nur.repos.rycee.firefox-addons.terms-of-service-didnt-read
+            pkgs.nur.repos.rycee.firefox-addons.ublock-origin
           ];
 
           isDefault = true;

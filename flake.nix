@@ -107,7 +107,7 @@
             inputs.impermanence.nixosModules.impermanence
             inputs.ip-failar-nu.nixosModules.${system}.default
             inputs.nixos-cosmic.nixosModules.default
-            inputs.nur.nixosModules.nur
+            inputs.nur.modules.nixos.default
           ]
           ++ extraModules;
 
