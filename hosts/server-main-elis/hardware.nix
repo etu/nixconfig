@@ -1,5 +1,6 @@
 {
   config,
+  pkgs,
   lib,
   modulesPath,
   myData,
@@ -73,16 +74,17 @@
   # Enable ZFS scrubbing.
   services.zfs.autoScrub.enable = true;
 
-  # Enable nvidia drivers.
-  services.xserver.videoDrivers = ["nvidia"];
-  hardware.nvidia.open = false;
+  # Enable graphics drivers for the graphics card.
+  hardware.opengl = {
+    enable = true;
+    extraPackages = [
+      # for newer GPUs on NixOS >24.05 or unstable
+      pkgs.vpl-gpu-rt
+    ];
+  };
 
-  # Allow certain unfree packages.
-  etu.base.nix.allowUnfree = [
-    "nvidia-x11"
-    "nvidia-settings"
-    "libXNVCtrl"
-  ];
+  # Newer kernel is needed as well for the graphics card.
+  boot.kernelPackages = pkgs.linuxPackages_6_12;
 
   # Filesystem mounts.
   fileSystems."/" = {

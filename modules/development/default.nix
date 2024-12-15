@@ -22,7 +22,6 @@
       development.php.enable = lib.mkDefault true;
       development.rtl-sdr.enable = lib.mkDefault true;
       development.vscode.enable = lib.mkDefault true;
-      development.zed.enable = lib.mkDefault true;
 
       # Define extra groups for user.
       user.extraGroups = ["dialout"];
