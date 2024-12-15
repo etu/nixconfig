@@ -75,13 +75,11 @@
   services.zfs.autoScrub.enable = true;
 
   # Enable graphics drivers for the graphics card.
-  hardware.opengl = {
-    enable = true;
-    extraPackages = [
-      # for newer GPUs on NixOS >24.05 or unstable
-      pkgs.vpl-gpu-rt
-    ];
-  };
+  hardware.graphics.enable = true;
+  hardware.graphics.extraPackages = [
+    # for newer GPUs on NixOS >24.05 or unstable
+    pkgs.vpl-gpu-rt
+  ];
 
   # Newer kernel is needed as well for the graphics card.
   boot.kernelPackages = pkgs.linuxPackages_6_12;
