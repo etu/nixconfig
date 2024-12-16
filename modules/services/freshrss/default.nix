@@ -16,10 +16,6 @@
   config = lib.mkIf config.etu.services.freshrss.enable {
     # Make sure to have nginx enabled
     services.nginx.enable = true;
-    services.nginx.virtualHosts.${config.etu.services.freshrss.hostname} = {
-      forceSSL = true;
-      enableACME = true;
-    };
 
     age.secrets = {
       inherit (myData.ageModules) freshrss-password-etu;
@@ -28,7 +24,7 @@
     # Set up freshrss.
     services.freshrss = {
       enable = true;
-      baseUrl = "https://${config.etu.services.freshrss.hostname}";
+      baseUrl = "http://${config.etu.services.freshrss.hostname}";
       virtualHost = config.etu.services.freshrss.hostname;
 
       # Set up my user

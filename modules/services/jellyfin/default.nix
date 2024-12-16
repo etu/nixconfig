@@ -14,18 +14,6 @@
   };
 
   config = lib.mkIf config.etu.services.jellyfin.enable {
-    # Make sure to have nginx enabled
-    services.nginx.enable = true;
-    services.nginx.clientMaxBodySize = "20m"; # Increase body size since we handle video.
-    services.nginx.virtualHosts.${config.etu.services.jellyfin.hostname} = {
-      forceSSL = true;
-      enableACME = true;
-      locations."/" = {
-        proxyPass = "http://127.0.0.1:8096";
-        proxyWebsockets = true;
-      };
-    };
-
     # Bind mount for persistent data for jellyfin
     etu.base.zfs.system.directories = [
       "/var/lib/jellyfin"

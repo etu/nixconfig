@@ -3,24 +3,6 @@
   pkgs,
   ...
 }: {
-  # Make sure to have NGiNX enabled
-  services.nginx.enable = true;
-  services.nginx.virtualHosts."hass.elis.nu" = {
-    forceSSL = true;
-    enableACME = true;
-    locations."/".proxyWebsockets = true;
-    locations."/".proxyPass = "http://127.0.0.1:8123/";
-    locations."/".extraConfig = ''
-      proxy_set_header Host $host;
-      proxy_set_header X-Real-IP $remote_addr;
-      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-      proxy_set_header X-Forwarded-Host $host;
-      proxy_read_timeout 300;
-      proxy_connect_timeout 300;
-      proxy_send_timeout 300;
-    '';
-  };
-
   # Garbage collect podman images
   systemd.services.podman-system-prune = {
     description = "Garbage collect podman";

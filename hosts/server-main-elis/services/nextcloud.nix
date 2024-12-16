@@ -12,13 +12,7 @@
     inherit (pkgs.nextcloud30Packages.apps) cookbook notes;
   };
   services.nextcloud.hostName = "nextcloud.elis.nu";
-  services.nextcloud.https = true;
-
   services.nginx.enable = true;
-  services.nginx.virtualHosts.${config.services.nextcloud.hostName} = {
-    forceSSL = true;
-    enableACME = true;
-  };
 
   # Import secret
   age.secrets = {
