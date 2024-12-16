@@ -30,6 +30,22 @@
   boot.kernelModules = [];
   boot.extraModulePackages = [];
 
+  # Newer kernel is needed for the graphics card.
+  boot.kernelPackages = pkgs.linuxPackages_6_12;
+
+  # Enable graphics drivers for the graphics card.
+  hardware.graphics.enable = true;
+  hardware.graphics.extraPackages = [
+    # for newer GPUs on NixOS >24.05 or unstable
+    pkgs.vpl-gpu-rt
+  ];
+
+  # Additonal intel things
+  environment.systemPackages = [
+    pkgs.pciutils
+    pkgs.nvtopPackages.intel
+  ];
+
   age.secrets = {
     inherit (myData.ageModules) server-main-elis-initrd-sshd;
     inherit (myData.ageModules) syncoid-server-main-elis-ssh-ec;
@@ -73,16 +89,6 @@
 
   # Enable ZFS scrubbing.
   services.zfs.autoScrub.enable = true;
-
-  # Enable graphics drivers for the graphics card.
-  hardware.graphics.enable = true;
-  hardware.graphics.extraPackages = [
-    # for newer GPUs on NixOS >24.05 or unstable
-    pkgs.vpl-gpu-rt
-  ];
-
-  # Newer kernel is needed as well for the graphics card.
-  boot.kernelPackages = pkgs.linuxPackages_6_12;
 
   # Filesystem mounts.
   fileSystems."/" = {
