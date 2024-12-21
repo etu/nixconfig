@@ -26,26 +26,26 @@
       catppuccin.flavor = config.etu.theme.flavor;
 
       # Enable catppuchin for on home manager level for different applications.
-      programs.alacritty.catppuccin.enable = true;
-      programs.fish.catppuccin.enable = true;
-      programs.rofi.catppuccin.enable = true;
-      services.mako.catppuccin.enable = true;
-      programs.swaylock.catppuccin.enable = true;
+      catppuccin.alacritty.enable = true;
+      catppuccin.fish.enable = true;
+      catppuccin.rofi.enable = true;
+      catppuccin.mako.enable = true;
+      catppuccin.swaylock.enable = true;
 
       # Bat module and theme
       programs.bat.enable = true;
-      programs.bat.catppuccin.enable = true;
+      catppuccin.bat.enable = true;
 
       # Fzf module and theme
       programs.fzf.enable = true;
-      programs.fzf.catppuccin.enable = true;
+      catppuccin.fzf.enable = true;
 
       # Imv module and theme
       programs.imv.enable = true;
-      programs.imv.catppuccin.enable = true;
+      catppuccin.imv.enable = true;
 
       # Set up theme for sway.
-      wayland.windowManager.sway.catppuccin.enable = true;
+      catppuccin.sway.enable = true;
       wayland.windowManager.sway.config.colors = let
         background = "$base";
         focusedInactive = {
@@ -76,8 +76,8 @@
       };
 
       # Set up theme for waybar.
-      programs.waybar.catppuccin.enable = true;
-      programs.waybar.catppuccin.mode = "createLink";
+      catppuccin.waybar.enable = true;
+      catppuccin.waybar.mode = "createLink";
     };
   };
 }
