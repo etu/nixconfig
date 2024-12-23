@@ -43,7 +43,7 @@
     # Enable jellyfin itself
     services.jellyfin.enable = true;
 
-    # Open NGiNX port
-    networking.firewall.allowedTCPPorts = [80 443];
+    # Open the port for local network access
+    networking.firewall.allowedTCPPorts = [8096];
   };
 }
