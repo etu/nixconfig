@@ -15,7 +15,7 @@
     ./networking.nix
 
     # Import matrix settings
-    ./services/gitea.nix
+    ./services/forgejo.nix
     ./services/matrix.nix
     ./services/misc.nix
     ./services/postgres.nix
