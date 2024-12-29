@@ -89,4 +89,56 @@
     user = "downloads";
     group = "downloads";
   };
+
+  # Enable service protections
+  systemd.services = let
+    perms = {
+      CapabilityBoundingSet = "";
+      NoNewPrivileges = true;
+      PrivateDevices = true;
+      PrivateMounts = true;
+      PrivateTmp = true;
+      ProtectClock = true;
+      ProtectHome = true;
+      ProtectHostname = true;
+      ProtectKernelModules = true;
+      ProtectProc = "invisible";
+      ProtectSystem = "strict";
+      ReadOnlyPaths = ["/"];
+      RestrictAddressFamilies = ["AF_INET" "AF_INET6"];
+      RestrictNamespaces = true;
+      RestrictSUIDSGID = true;
+      SystemCallFilter = ["@system-service"];
+    };
+  in {
+    bazarr.serviceConfig =
+      perms
+      // {
+        ReadWritePaths = ["/var/lib/bazarr" "/media/zstorage/files/video/series" "/media/zstorage/files/video/movies"];
+        UMask = "0022"; # Make all files world readwrite by defaults
+      };
+    nzbget.serviceConfig =
+      perms
+      // {
+        ReadWritePaths = ["/var/lib/nzbget" "/var/lib/nzbget-dst"];
+      };
+    sonarr.serviceConfig =
+      perms
+      // {
+        ReadWritePaths = ["/var/lib/sonarr" "/media/zstorage/files/video/series" "/var/lib/nzbget-dst"];
+        UMask = "0022"; # Make all files world readwrite by defaults
+      };
+    radarr.serviceConfig =
+      perms
+      // {
+        ReadWritePaths = ["/var/lib/radarr" "/media/zstorage/files/video/movies" "/var/lib/nzbget-dst"];
+        UMask = "0022"; # Make all files world readwrite by defaults
+      };
+    lidarr.serviceConfig =
+      perms
+      // {
+        ReadWritePaths = ["/var/lib/lidarr" "/media/zstorage/files/audio/music" "/var/lib/nzbget-dst"];
+        UMask = "0022"; # Make all files world readwrite by defaults
+      };
+  };
 }
