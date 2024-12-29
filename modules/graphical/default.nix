@@ -46,6 +46,11 @@
         pkgs.sshfs-fuse # SSHFS client
         pkgs.stupidterm # Another terminal emulator
         pkgs.yt-dlp # Youtube download client
+
+        # Wake-On-Lan script for home server
+        (pkgs.writeShellScriptBin "wol-homeserver" ''
+          ${pkgs.wol}/bin/wol 4c:cc:6a:28:3f:5c
+        '')
       ];
 
       # Directories to mount persistent for my user on graphical sessions
