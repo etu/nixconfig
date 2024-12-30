@@ -30,6 +30,7 @@
       ];
       volumes = [
         "${config.etu.dataPrefix}/var/lib/hass:/config"
+        "/media/zstorage/files/video/svt-series:/media:ro"
       ];
       dependsOn = ["mqtt" "zwavejs2mqtt"];
     };
