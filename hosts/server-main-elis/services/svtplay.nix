@@ -1,19 +1,19 @@
 {pkgs, ...}: let
   buildSvtPlayService = svtSlug: {
-    description = "${svtSlug} updater";
+    description = "${svtSlug} playlist updater";
     wants = ["network-online.target"];
     after = ["network-online.target"];
-    path = [pkgs.ffmpeg pkgs.svtplay-dl];
-    script = "svtplay-dl --nfo --all-episodes --output ${svtSlug} https://www.svtplay.se/${svtSlug}";
+    path = [pkgs.svtplay-dl];
+    script = "svtplay-dl --all-episodes --get-url --preferred DASH https://www.svtplay.se/${svtSlug} > ${svtSlug}.m3u";
     serviceConfig = {
       Type = "simple";
       User = "downloads";
       Group = "downloads";
-      WorkingDirectory = "/media/zstorage/files/video/svt-series";
+      WorkingDirectory = "/data/var/www/misc.elis.nu/.svtplay";
     };
   };
   buildSvtPlayTimer = svtSlug: {
-    description = "${svtSlug} updater timer";
+    description = "${svtSlug} playlist updater timer";
     after = ["network-online.target"];
     wants = ["network-online.target"];
     wantedBy = ["timers.target"];
