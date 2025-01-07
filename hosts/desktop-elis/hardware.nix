@@ -13,6 +13,9 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Set boot loader timeout to longer than 5s to give me more time to choose.
+  boot.loader.timeout = 15;
+
   boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "thunderbolt" "usbhid" "usb_storage" "sd_mod"];
   boot.initrd.kernelModules = [];
 
