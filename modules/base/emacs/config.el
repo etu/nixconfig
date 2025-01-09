@@ -381,6 +381,7 @@
 (use-package copilot
   :ensure t
   :hook ((dockerfile-mode php-mode nix-mode go-mode lisp-mode yaml-mode markdown-mode) . copilot-mode)
+  :init (setq copilot-indent-offset-warning-disable t)
   :bind (("C-c M-f" . copilot-complete)
          :map copilot-completion-map
          ("C-g" . 'copilot-clear-overlay)
