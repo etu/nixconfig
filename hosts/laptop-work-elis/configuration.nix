@@ -52,21 +52,6 @@
         ;; Install VCL mode
         (use-package vcl-mode :ensure t)
       ''
-      # Install copilot.el
-      ''
-        ;; Copilot.el
-        (use-package copilot
-          :ensure t
-          :hook ((dockerfile-mode php-mode nix-mode go-mode lisp-mode yaml-mode markdown-mode) . copilot-mode)
-          :bind (("C-c M-f" . copilot-complete)
-                 :map copilot-completion-map
-                 ("C-g" . 'copilot-clear-overlay)
-                 ("M-p" . 'copilot-previous-completion)
-                 ("M-n" . 'copilot-next-completion)
-                 ("<tab>" . 'copilot-accept-completion)
-                 ("M-f" . 'copilot-accept-completion-by-word)
-                 ("M-<return>" . 'copilot-accept-completion-by-line)))
-      ''
     ];
 
     base.sanoid.datasets = {
