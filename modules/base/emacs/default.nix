@@ -117,32 +117,12 @@
       config = builtins.readFile emacsConfig;
 
       # Extra packages to install
-      extraEmacsPackages = epkgs: [
+      extraEmacsPackages = _: [
         # Add my config initializer as an emacs package
         (pkgs.runCommand "my-emacs-default-package" {} ''
           mkdir -p $out/share/emacs/site-lisp
           cp ${emacsConfigInit} $out/share/emacs/site-lisp/default.el
         '')
-
-        # Install copilot.el
-        (epkgs.trivialBuild {
-          pname = "copilot";
-          version = "2023-09-13";
-
-          packageRequires = with epkgs; [dash editorconfig s];
-
-          preInstall = ''
-            mkdir -p $out/share/emacs/site-lisp
-            cp -vr $src/dist $out/share/emacs/site-lisp
-          '';
-
-          src = pkgs.fetchFromGitHub {
-            owner = "zerolfx";
-            repo = "copilot.el";
-            rev = "421703f5dd5218ec2a3aa23ddf09d5f13e5014c2";
-            hash = "sha256-7LKB2JoYAVu5i23ZKBVZPe6azCItHK/tlBNPgFXxztc=";
-          };
-        })
       ];
     };
 
