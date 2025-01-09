@@ -8,6 +8,7 @@
   services.nextcloud.package = pkgs.nextcloud30;
   services.nextcloud.config.adminuser = "etu";
   services.nextcloud.config.adminpassFile = config.age.secrets.nextcloud-admin-password.path;
+  services.nextcloud.config.dbtype = "sqlite";
   services.nextcloud.extraApps = {
     inherit (pkgs.nextcloud30Packages.apps) cookbook notes;
   };

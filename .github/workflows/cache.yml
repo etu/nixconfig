@@ -23,7 +23,6 @@ jobs:
     strategy:
       matrix:
         hostname:
-          - laptop-private-elis
           - server-main-elis
           - server-sparv
           - vps06

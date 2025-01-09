@@ -180,7 +180,7 @@
 
         config = let
           rofi = pkgs.rofi.override {plugins = [pkgs.rofi-emoji];};
-          pactl = "${config.hardware.pulseaudio.package}/bin/pactl";
+          pactl = "${config.services.pulseaudio.package}/bin/pactl";
 
           # Set default modifier
           modifier = "Mod4";
