@@ -23,6 +23,7 @@
 
     base.fish.enableUserZoxideCd = true;
     development.enable = true;
+    development.rtl-sdr.enable = false;
     development.vscode.enableWork = true;
     graphical.enable = true;
     graphical.sway.enable = true;

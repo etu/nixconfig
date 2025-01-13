@@ -6,10 +6,10 @@
 }: {
   options.etu.development.rtl-sdr.enable = lib.mkEnableOption "Enable development rtl-sdr settings";
 
-  config = lib.mkIf config.etu.development.enable {
+  config = lib.mkIf config.etu.development.rtl-sdr.enable {
     hardware.rtl-sdr.enable = true;
 
-    # Install php utils using home manager.
+    # Install rtl-sdr utils using home manager.
     etu.user.extraUserPackages = [
       pkgs.cubicsdr
       pkgs.rtl-sdr
