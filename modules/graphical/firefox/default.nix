@@ -116,10 +116,6 @@
             # Enable browser debugging
             "devtools.chrome.enabled" = true;
 
-            # Do Not Track header
-            "privacy.donottrackheader.enabled" = true;
-            "privacy.donottrackheader.value" = 1;
-
             # Enable userChrome customisations
             "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
 
