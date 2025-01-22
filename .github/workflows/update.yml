@@ -14,7 +14,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - uses: DeterminateSystems/nix-installer-action@v16
-      - uses: DeterminateSystems/magic-nix-cache-action@v8
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
 
       - uses: cachix/cachix-action@v15
         with:
@@ -66,7 +66,7 @@ jobs:
           ref: tmp-updater-branch
 
       - uses: DeterminateSystems/nix-installer-action@v16
-      - uses: DeterminateSystems/magic-nix-cache-action@v8
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
 
       - uses: cachix/cachix-action@v15
         with:
@@ -89,7 +89,7 @@ jobs:
           ref: tmp-updater-branch
 
       - uses: DeterminateSystems/nix-installer-action@v16
-      - uses: DeterminateSystems/magic-nix-cache-action@v8
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
 
       - uses: cachix/cachix-action@v15
         with:
@@ -111,7 +111,7 @@ jobs:
           ref: tmp-updater-branch
 
       - uses: DeterminateSystems/nix-installer-action@v16
-      - uses: DeterminateSystems/magic-nix-cache-action@v8
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
 
       - uses: cachix/cachix-action@v15
         with:
@@ -162,7 +162,7 @@ jobs:
           git pull
 
       - uses: DeterminateSystems/nix-installer-action@v16
-      - uses: DeterminateSystems/magic-nix-cache-action@v8
+      - uses: DeterminateSystems/magic-nix-cache-action@v9
 
       # Build systems.
       - name: Build system derivation
