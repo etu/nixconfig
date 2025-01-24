@@ -30,9 +30,6 @@
   boot.kernelModules = [];
   boot.extraModulePackages = [];
 
-  # Newer kernel is needed for the graphics card.
-  boot.kernelPackages = pkgs.linuxPackages_6_12;
-
   # Enable graphics drivers for the graphics card.
   hardware.graphics.enable = true;
   hardware.graphics.extraPackages = [
