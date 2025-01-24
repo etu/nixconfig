@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }: {
   options.etu.games.steam.enable = lib.mkEnableOption "Enable games steam settings";
@@ -10,28 +9,19 @@
     # Allow to install some unfree packages.
     etu.base.nix.allowUnfree = [
       "steam"
-      "steam-original"
-      "steam-runtime"
+      "steam-unwrapped"
     ];
 
-    # Enable 32bit libs for steam and such.
-    hardware.opengl = {
-      driSupport = true;
-      driSupport32Bit = true;
+    # Enable steam settings.
+    programs.steam = {
+      enable = true;
+      remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+      dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+      localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
     };
 
-    # Support 32bit audio things
-    services.pipewire.alsa.support32Bit = true;
-
-    # Steam link ports
-    networking.firewall.allowedTCPPorts = [27036 27037];
-    networking.firewall.allowedUDPPorts = [27031 27036];
-
-    # Install steam using home manager.
-    etu.user.extraUserPackages = [pkgs.steam];
-
     # Enable persistence for steam files.
-    etu.base.zfs.user.directories = [
+    etu.base.zfs.localUser.directories = [
       ".steam"
       ".local/share/Steam"
     ];
