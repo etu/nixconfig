@@ -53,12 +53,8 @@
 
   # Remote unlocking of encrypted ZFS
   boot.initrd = {
-    # Probably the ones I want:
-    # availableKernelModules = ["nvme" "xhci_pci" "thunderbolt" "usbhid" "usb_storage" "sd_mod"];
     availableKernelModules = ["xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" "nvme" "thunderbolt"];
-    # Probably the ones I want:
-    # kernelModules = ["r8169" "kvm-amd"];
-    kernelModules = ["e1000e" "kvm-intel" "r8169" "kvm-amd"];
+    kernelModules = ["kvm-amd" "r8169"];
     network.enable = true;
     # Listen to ssh to let me decrypt zfs
     network.ssh = {
