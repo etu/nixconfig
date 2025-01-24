@@ -47,6 +47,10 @@
   # Set video driver.
   services.xserver.videoDrivers = ["modesetting"];
 
+  # Enable AMDVLK for Vulkan support.
+  hardware.amdgpu.amdvlk.enable = true;
+  hardware.amdgpu.amdvlk.support32Bit.enable = true;
+
   # Enable fwupd for firmware updates etc.
   services.fwupd.enable = true;
 
