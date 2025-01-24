@@ -43,6 +43,7 @@
     games.enable = false;
     games.minecraft.enable = true;
     games.wowup.enable = true;
+    games.steam.enable = true;
     games.steam-controller.enable = true;
     graphical.enable = true;
     graphical.sway.enable = true;
