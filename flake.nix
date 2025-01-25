@@ -163,15 +163,15 @@
       deploy.nodes = {
         server-main-elis = mkDeploy {
           name = "server-main-elis";
-          hostname = "home.elis.nu";
+          hostname = "server-main-elis";
         };
         server-sparv = mkDeploy {
           name = "server-sparv";
-          hostname = "sparv.failar.nu";
+          hostname = "server-sparv";
         };
         vps06 = mkDeploy {
           name = "vps06";
-          hostname = "vps06.elis.nu";
+          hostname = "vps06";
         };
       };
 

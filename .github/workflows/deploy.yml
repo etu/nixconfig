@@ -66,6 +66,13 @@ jobs:
           name: id_ed25519
           known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
 
+      # Connect to tailscale
+      - uses: tailscale/github-action@v3
+        with:
+          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+          oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+          tags: tag:ci
+
       # Deploy systems
       - name: Deploy system
         run: 'nix develop -c deploy --skip-checks --targets .#${{ matrix.hostname }}'
