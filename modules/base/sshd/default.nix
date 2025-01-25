@@ -50,9 +50,12 @@
         extraHostNames = ["home.elis.nu" "local.elis.nu" "192.168.1.101"];
         publicKey = myData.pubkeys.systems.server-main-elis-initrd;
       };
-      "sparv.failar.nu".publicKey = myData.pubkeys.systems.server-sparv;
+      "sparv.failar.nu" = {
+        extraHostNames = ["server-sparv"];
+        publicKey = myData.pubkeys.systems.server-sparv;
+      };
       "vps06.elis.nu" = {
-        extraHostNames = ["git.elis.nu"];
+        extraHostNames = ["vps06" "git.elis.nu"];
         publicKey = myData.pubkeys.systems.vps06;
       };
     };

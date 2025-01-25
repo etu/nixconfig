@@ -138,7 +138,7 @@
       "root@laptop-work-elis:zroot/safe/data".target = "zroot/backups/current/laptop-work-elis/data";
       "root@laptop-work-elis:zroot/safe/home".target = "zroot/backups/current/laptop-work-elis/home";
 
-      "root@vps06.elis.nu:zroot/safe/data".target = "zroot/backups/current/vps06/data";
+      "root@vps06:zroot/safe/data".target = "zroot/backups/current/vps06/data";
     };
   };
 
