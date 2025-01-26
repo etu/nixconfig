@@ -5,7 +5,6 @@
   ...
 }: {
   imports = [
-    ./cosmic
     ./fdm-printing
     ./firefox
     ./flatpak

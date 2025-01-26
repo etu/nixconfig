@@ -37,11 +37,6 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    # Import nixos-cosmic modules
-    nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
-    nixos-cosmic.inputs.flake-compat.follows = "flake-compat";
-    nixos-cosmic.inputs.nixpkgs.follows = "nixpkgs";
-
     # Import nixos-needtoreboot
     nixos-needtoreboot.url = "github:thefossguy/nixos-needsreboot";
     nixos-needtoreboot.inputs.nixpkgs.follows = "nixpkgs";
@@ -106,7 +101,6 @@
             inputs.home-manager.nixosModules.home-manager
             inputs.impermanence.nixosModules.impermanence
             inputs.ip-failar-nu.nixosModules.${system}.default
-            inputs.nixos-cosmic.nixosModules.default
             inputs.nur.modules.nixos.default
           ]
           ++ extraModules;

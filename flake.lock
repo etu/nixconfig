@@ -244,30 +244,6 @@
         "type": "github"
       }
     },
-    "nixos-cosmic": {
-      "inputs": {
-        "flake-compat": [
-          "flake-compat"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "nixpkgs-stable": "nixpkgs-stable_2"
-      },
-      "locked": {
-        "lastModified": 1737603687,
-        "narHash": "sha256-/uTWz6xk/Psfl1sqCK3CTSjUVoiq1O988tHRfQpiMP8=",
-        "owner": "lilyinstarlight",
-        "repo": "nixos-cosmic",
-        "rev": "e24740b458a5b6932b393977100964ac9e1ef2a1",
-        "type": "github"
-      },
-      "original": {
-        "owner": "lilyinstarlight",
-        "repo": "nixos-cosmic",
-        "type": "github"
-      }
-    },
     "nixos-hardware": {
       "locked": {
         "lastModified": 1737590910,
@@ -351,22 +327,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-stable_2": {
-      "locked": {
-        "lastModified": 1737299813,
-        "narHash": "sha256-Qw2PwmkXDK8sPQ5YQ/y/icbQ+TYgbxfjhgnkNJyT1X8=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "107d5ef05c0b1119749e381451389eded30fb0d5",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-24.11",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1737469691,
@@ -430,7 +390,6 @@
         "home-manager": "home-manager",
         "impermanence": "impermanence",
         "ip-failar-nu": "ip-failar-nu",
-        "nixos-cosmic": "nixos-cosmic",
         "nixos-hardware": "nixos-hardware",
         "nixos-needtoreboot": "nixos-needtoreboot",
         "nixpkgs": "nixpkgs_2",
