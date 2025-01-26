@@ -1,20 +1,14 @@
 {
-  config,
   pkgs,
   lib,
   ...
 }: let
   domain = "failar.nu";
 in {
-  imports = [
-    ./matrix-hookshot-service.nix
-  ];
-
   etu.base.zfs.system.directories = [
     # Persistence of synapse data between boots.
     "/var/lib/matrix-synapse"
     "/var/lib/matrix-appservice-irc"
-    "/var/lib/matrix-hookshot"
   ];
 
   services.postgresql = {
@@ -90,10 +84,6 @@ in {
             proxy_set_header X-Forwarded-Proto $scheme;
             proxy_read_timeout 900s;
           '';
-        };
-        "~ ^/_hookshot/(.*)" = {
-          proxyPass = "http://127.0.0.1:9000/$1";
-          extraConfig = "proxy_set_header X-Forwarded-Ssl on;";
         };
       };
     };
@@ -240,7 +230,6 @@ in {
       ];
       app_service_config_files = [
         "/var/lib/matrix-appservice-irc/registration.yml"
-        "/var/lib/matrix-hookshot/registration.yaml"
       ];
     };
   };
@@ -278,53 +267,6 @@ in {
         membershipLists.global.ircToMatrix.initial = true;
         membershipLists.global.ircToMatrix.requireMatrixJoined = true;
       };
-    };
-  };
-
-  my-services.matrix-hookshot = {
-    enable = true;
-    registration = {
-      sender_localpart = "_hookshot_";
-      namespaces = {
-        users = [
-          {
-            exclusive = true;
-            regex = "^@webhook_.*:${domain}";
-          }
-        ];
-      };
-    };
-    config = {
-      bridge.domain = domain;
-      bridge.url = "http://localhost:8448";
-      bridge.mediaUrl = "https://matrix.${domain}";
-
-      generic.enabled = true;
-      generic.urlPrefix = "https://matrix.${domain}/_hookshot/webhook";
-      generic.allowJsTransformationFunctions = false;
-      generic.waitForComplete = false;
-      generic.enableHttpGet = false;
-      generic.userIdPrefix = "webhook_";
-
-      permissions = [
-        {
-          actor = "@etu:${domain}";
-          services = [
-            {
-              service = "*";
-              level = "admin";
-            }
-          ];
-        }
-      ];
-
-      listeners = [
-        {
-          port = 9000;
-          bindAddress = "127.0.0.1";
-          resources = ["webhooks"];
-        }
-      ];
     };
   };
 
