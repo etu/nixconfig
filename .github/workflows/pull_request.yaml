@@ -18,11 +18,8 @@ jobs:
           - vps06
 
     steps:
-      - uses: actions/checkout@v4.1.1
-
+      - uses: actions/checkout@v4
       - uses: DeterminateSystems/nix-installer-action@v16
-      - uses: DeterminateSystems/magic-nix-cache-action@v9
-
       - uses: cachix/cachix-action@v15
         with:
           name: etu
@@ -37,11 +34,8 @@ jobs:
     name: Cache nix shell
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v4.1.1
-
+      - uses: actions/checkout@v4
       - uses: DeterminateSystems/nix-installer-action@v16
-      - uses: DeterminateSystems/magic-nix-cache-action@v9
-
       - uses: cachix/cachix-action@v15
         with:
           name: etu
@@ -56,10 +50,7 @@ jobs:
     needs: build
     steps:
       - uses: actions/checkout@v4.1.1
-
       - uses: DeterminateSystems/nix-installer-action@v16
-      - uses: DeterminateSystems/magic-nix-cache-action@v9
-
       - uses: cachix/cachix-action@v15
         with:
           name: etu
