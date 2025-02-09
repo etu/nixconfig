@@ -140,6 +140,38 @@
 
       "root@vps06:zroot/safe/data".target = "zroot/backups/current/vps06/data";
     };
+
+    # Allow beszel to monitor this system
+    services.beszel-agent.enable = true;
+    services.beszel-agent.extraFilesystems = [
+      "/boot"
+      "/boot-fallback"
+      "/data"
+      "/data/home"
+      "/data/local"
+      "/media/zstorage"
+      "/nix"
+    ];
+
+    # Enable monitoring hub of systems
+    services.beszel-hub.enable = true;
+    services.beszel-hub.settings = [
+      {
+        name = "server-main-elis";
+        host = "server-main-elis";
+        port = 45876;
+      }
+      {
+        name = "vps06";
+        host = "vps06";
+        port = 45876;
+      }
+      {
+        name = "server-sparv";
+        host = "server-sparv";
+        port = 45876;
+      }
+    ];
   };
 
   # Add a user for concate

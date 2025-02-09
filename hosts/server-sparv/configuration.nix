@@ -52,6 +52,18 @@
     user.extraRootAuthorizedKeys = myData.pubkeys.etu.github-actions;
 
     services.netdata.enable = true;
+
+    # Allow beszel to monitor this system
+    services.beszel-agent.enable = true;
+    services.beszel-agent.extraFilesystems = [
+      "/boot"
+      "/boot-fallback"
+      "/data"
+      "/data/local"
+      "/home"
+      "/media/zstorage"
+      "/nix"
+    ];
   };
 
   # Disable documentation to make the system smaller.

@@ -12,7 +12,16 @@
     environmentFile = config.age.secrets.homepage-dashboard-environment.path;
     bookmarks = [
       {
-        Media = [
+        Bookmarks = [
+          {
+            Beszel = [
+              {
+                icon = "beszel.svg";
+                href = "http://server-main-elis:6432";
+                description = "Beszel";
+              }
+            ];
+          }
           {
             Bazarr = [
               {

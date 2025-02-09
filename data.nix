@@ -37,6 +37,11 @@
       file = ./secrets/server-main-elis/nextcloud-admin-password.age;
       owner = "nextcloud";
     };
+    beszel-ssh-ec = {
+      file = ./secrets/server-main-elis/beszel-ssh-ec.age;
+      path = "/data/var/lib/beszel-hub/beszel_data/id_ed25519";
+      owner = "root";
+    };
     syncoid-server-main-elis-ssh-ec = {
       file = ./secrets/server-main-elis/syncoid-ssh-ec.age;
       path = "/var/lib/syncoid/.ssh/id_ed25519";
