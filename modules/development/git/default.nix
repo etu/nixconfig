@@ -42,7 +42,7 @@
         };
 
         # Global ignores
-        ignores = [".ac-php-conf.json"];
+        ignores = [".ac-php-conf.json" ".projectile-cache.eld"];
 
         # Conditonally included configs
         includes = [
