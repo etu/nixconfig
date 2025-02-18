@@ -38,7 +38,7 @@
 
         profiles.default = {
           # Install extensions.
-          extensions = [
+          extensions.packages = [
             pkgs.nur.repos.rycee.firefox-addons.bitwarden
             pkgs.nur.repos.rycee.firefox-addons.elasticvue
             pkgs.nur.repos.rycee.firefox-addons.facebook-container
