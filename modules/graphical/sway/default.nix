@@ -158,10 +158,6 @@
           # Firefox wayland
           export MOZ_ENABLE_WAYLAND=1
 
-          # XDG portal related variables (for screen sharing etc)
-          export XDG_SESSION_TYPE=wayland
-          export XDG_CURRENT_DESKTOP=sway
-
           # Run QT programs in wayland
           export QT_QPA_PLATFORM=wayland
 
