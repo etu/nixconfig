@@ -83,25 +83,13 @@
       programs.rofi.font = "${config.etu.graphical.theme.fonts.monospace} ${toString config.etu.graphical.theme.fonts.size}";
 
       # Set up a wallpaper manager.
-      programs.wpaperd.enable = true;
-      programs.wpaperd.settings = {
+      services.wpaperd.enable = true;
+      services.wpaperd.settings = {
         default = {
           duration = "30m";
           mode = "center";
         };
         any.path = config.etu.graphical.sway.wallpaper;
-      };
-
-      systemd.user.services.wpaperd = {
-        Unit = {
-          After = ["graphical-session-pre.target" "sway-session.target"];
-          PartOf = ["graphical-session.target"];
-        };
-        Service = {
-          ExecStart = "${pkgs.wpaperd}/bin/wpaperd";
-          Restart = "on-failure";
-        };
-        Install.WantedBy = ["graphical-session.target" "sway-session.target"];
       };
 
       # Enable and import network-manager-applet
@@ -116,7 +104,6 @@
 
       # Configure swayidle for automatic screen locking
       services.swayidle.enable = true;
-      services.swayidle.systemdTarget = "sway-session.target";
       services.swayidle.events = [
         {
           event = "before-sleep";
@@ -158,9 +145,13 @@
           image = config.etu.graphical.sway.lockWallpaper;
         });
 
+      wayland.systemd.target = "sway-session.target";
+
       # Sway user configs
       wayland.windowManager.sway = {
         enable = true;
+        systemd.enable = true;
+
         extraSessionCommands = ''
           export SDL_VIDEODRIVER=wayland
 
@@ -448,32 +439,6 @@
             # This is to get xdg-open to work in flatpaks to be able to open links inside of flatpaks.
             {
               command = "${config.systemd.package}/bin/systemctl --user import-environment PATH && ${config.systemd.package}/bin/systemctl --user restart xdg-desktop-portal.service";
-            }
-
-            # Reload kanshi on reload of config
-            {
-              command = "${config.systemd.package}/bin/systemctl --user restart kanshi";
-              always = true;
-            }
-            # Reload swayidle on reload of config
-            {
-              command = "${config.systemd.package}/bin/systemctl --user restart swayidle";
-              always = true;
-            }
-            # Reload network manager applet on reload of config
-            {
-              command = "${config.systemd.package}/bin/systemctl --user restart network-manager-applet";
-              always = true;
-            }
-            # Reload blueman applet on reload of config
-            {
-              command = "${config.systemd.package}/bin/systemctl --user restart blueman-applet";
-              always = true;
-            }
-            # Reload waybar on reload of config
-            {
-              command = "${config.systemd.package}/bin/systemctl --user restart waybar";
-              always = true;
             }
           ];
 

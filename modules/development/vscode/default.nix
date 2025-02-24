@@ -86,10 +86,10 @@ in {
 
       # It probably doesn't hurt to get notices about out of date extensions, especially when I
       # have extensions defined here in this file.
-      programs.vscode.enableExtensionUpdateCheck = true;
+      programs.vscode.profiles.default.enableExtensionUpdateCheck = true;
 
       # TODO: disable vscode.php-language-features in code somehow
-      programs.vscode.extensions =
+      programs.vscode.profiles.default.extensions =
         [
           pkgs.vscode-extensions.bbenoist.nix # .nix file extension
           pkgs.vscode-extensions.bmewburn.vscode-intelephense-client # Better php support
@@ -114,7 +114,7 @@ in {
         ]);
 
       # Enable vscode settings
-      programs.vscode.userSettings =
+      programs.vscode.profiles.default.userSettings =
         {
           "[html]"."editor.formatOnSave" = false;
           "[nix]"."editor.tabSize" = 2;
@@ -142,7 +142,7 @@ in {
         password-store = "gnome";
       };
 
-      programs.vscode.keybindings = [
+      programs.vscode.profiles.default.keybindings = [
         {
           # Bind open folder
           key = "ctrl+x , p";
