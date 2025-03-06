@@ -20,7 +20,7 @@
   virtualisation.oci-containers.containers = {
     home-assistant = {
       environment.TZ = config.time.timeZone;
-      image = "ghcr.io/home-assistant/home-assistant:2025.2.5";
+      image = "ghcr.io/home-assistant/home-assistant:2025.3.0";
       ports = ["8123"];
       extraOptions = [
         "--network=host"
