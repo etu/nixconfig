@@ -114,7 +114,7 @@
             inherit myData;
 
             emacs-overlay = inputs.emacs-overlay.overlay;
-            emacsWayland = nixpkgs.legacyPackages.${system}.emacs29-pgtk;
+            emacsWayland = nixpkgs.legacyPackages.${system}.emacs30-pgtk;
             nixos-needsreboot = inputs.nixos-needtoreboot.packages.${system}.default;
           }
           // extraArgs;
