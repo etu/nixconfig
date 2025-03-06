@@ -54,7 +54,7 @@
     services.netdata.enable = true;
     theme.enable = true;
     user.enable = true;
-    user.extraGroups = ["video" "docker" "libvirtd"];
+    user.extraGroups = ["video" "libvirtd"];
 
     # Allow home fileserver to connect to fetch snapshots.
     user.extraRootAuthorizedKeys = myData.pubkeys.etu.syncoid.server-main-elis;
@@ -69,10 +69,6 @@
       "zroot/safe/home".use_template = ["home"];
     };
   };
-
-  # Set up docker
-  virtualisation.docker.enable = true;
-  virtualisation.docker.storageDriver = "zfs";
 
   # Set up virt-manager
   virtualisation.libvirtd.enable = true;
