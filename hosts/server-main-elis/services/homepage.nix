@@ -100,6 +100,68 @@
         ];
       }
       {
+        Beszel = [
+          {
+            Beszel = {
+              icon = "beszel.svg";
+              description = "Overview";
+              widget = {
+                type = "beszel";
+                url = "http://localhost:6432";
+                username = "{{HOMEPAGE_VAR_BESZEL_USERNAME}}";
+                password = "{{HOMEPAGE_VAR_BESZEL_PASSWORD}}";
+                version = 2;
+              };
+            };
+          }
+          {
+            Beszel = {
+              icon = "beszel.svg";
+              description = "server-main-elis";
+              widget = {
+                type = "beszel";
+                url = "http://localhost:6432";
+                username = "{{HOMEPAGE_VAR_BESZEL_USERNAME}}";
+                password = "{{HOMEPAGE_VAR_BESZEL_PASSWORD}}";
+                systemId = "server-main-elis";
+                version = 2;
+                fields = ["cpu" "memory" "disk" "network"];
+              };
+            };
+          }
+          {
+            Beszel = {
+              icon = "beszel.svg";
+              description = "server-sparv";
+              widget = {
+                type = "beszel";
+                url = "http://localhost:6432";
+                username = "{{HOMEPAGE_VAR_BESZEL_USERNAME}}";
+                password = "{{HOMEPAGE_VAR_BESZEL_PASSWORD}}";
+                systemId = "server-sparv";
+                version = 2;
+                fields = ["cpu" "memory" "disk" "network"];
+              };
+            };
+          }
+          {
+            Beszel = {
+              icon = "beszel.svg";
+              description = "vps06";
+              widget = {
+                type = "beszel";
+                url = "http://localhost:6432";
+                username = "{{HOMEPAGE_VAR_BESZEL_USERNAME}}";
+                password = "{{HOMEPAGE_VAR_BESZEL_PASSWORD}}";
+                systemId = "vps06";
+                version = 2;
+                fields = ["cpu" "memory" "disk" "network"];
+              };
+            };
+          }
+        ];
+      }
+      {
         Media = [
           {
             Sonarr = {
