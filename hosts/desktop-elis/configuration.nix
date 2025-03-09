@@ -70,6 +70,11 @@
     };
   };
 
+  # Make some extra fish abbreviations
+  home-manager.users.${config.etu.user.username}.programs.fish.shellAbbrs = {
+    sway-wow-resize = "swaymsg '[title=\"World of Warcraft\"] resize set height 1791px'";
+  };
+
   # Set up virt-manager
   virtualisation.libvirtd.enable = true;
   programs.dconf.enable = true;
