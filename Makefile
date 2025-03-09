@@ -37,6 +37,27 @@ yaml-fmt:
 	nix run nixpkgs#yamllint -- --strict --format github .
 
 #
+# Helpers to check formatting of code
+#
+nix-fmt-check:
+	@echo "Check nix file formatting ❄️"
+	nix fmt . -- --check
+
+yaml-fmt-check:
+	@echo "Check yaml file formatting 📂"
+	nix run nixpkgs#yamllint -- --strict --format github .
+
+deadnix-fmt-check:
+	@echo "Check deadnix file formatting ❄️"
+	nix run nixpkgs#deadnix -- --fail hosts/ modules/ packages/
+
+statix-fmt-check:
+	@echo "Check statix file formatting ❄️"
+	nix run nixpkgs#statix -- check --config .statix.toml
+
+all-fmt-check: nix-fmt-check yaml-fmt-check deadnix-fmt-check statix-fmt-check
+
+#
 # Helpers to update containers
 #
 update-all: update-hass update-zwavejs2mqtt update-mosquitto
