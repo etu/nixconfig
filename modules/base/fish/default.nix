@@ -44,12 +44,7 @@
                                (UU)'
       end
     '';
-    programs.fish.shellAbbrs = {
-      "-" = "cd -";
-      "ipython" = "nix run nixpkgs#python3Packages.ipython";
-      "nrun" = "nix run nixpkgs#";
-      "nsh" = "nix-shell --run fish -p";
-    };
+    programs.fish.shellAbbrs = builtins.listToAttrs config.etu.base.fish.shellAbbrs;
     programs.fish.functions = {
       "256colors" = ''
         for i in (seq 1 255)
@@ -176,6 +171,28 @@
 in {
   options.etu.base.fish.enable = lib.mkEnableOption "Enable base fish settings";
   options.etu.base.fish.enableUserZoxideCd = lib.mkEnableOption "Enable fish zoxide cd alias for normal users";
+  options.etu.base.fish.shellAbbrs = lib.mkOption {
+    type = lib.types.listOf lib.types.attrs;
+    default = [
+      {
+        name = "-";
+        value = "cd -";
+      }
+      {
+        name = "ipython";
+        value = "nix run nixpkgs#python3Packages.ipython";
+      }
+      {
+        name = "nrun";
+        value = "nix run nixpkgs#";
+      }
+      {
+        name = "nsh";
+        value = "nix-shell --run fish -p";
+      }
+    ];
+    description = "Shell abbreviations for fish";
+  };
 
   config = lib.mkIf config.etu.base.fish.enable {
     # Enable fish.

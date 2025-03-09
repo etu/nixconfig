@@ -63,16 +63,19 @@
       pkgs.nvtopPackages.amd
     ];
 
+    # Add some fish abbreviations
+    base.fish.shellAbbrs = [
+      {
+        name = "sway-wow-resize";
+        value = "swaymsg '[title=\"World of Warcraft\"] resize set height 1791px'";
+      }
+    ];
+
     base.sanoid.datasets = {
       # Enable snapshotting for some filesystems
       "zroot/safe/data".use_template = ["data"];
       "zroot/safe/home".use_template = ["home"];
     };
-  };
-
-  # Make some extra fish abbreviations
-  home-manager.users.${config.etu.user.username}.programs.fish.shellAbbrs = {
-    sway-wow-resize = "swaymsg '[title=\"World of Warcraft\"] resize set height 1791px'";
   };
 
   # Set up virt-manager
