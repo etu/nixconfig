@@ -57,8 +57,8 @@
       # This is to pin it to a version to be compatible with vscode.
       publisher = "github";
       name = "copilot-chat";
-      version = "0.23.2024102903";
-      sha256 = "sha256-FGvB+b24i23bdhpJpCQDvIHqqFvCJrWAKnX6fJgkr2E=";
+      version = "0.26.2025030506";
+      sha256 = "sha256-mCmZs5xGxcqHyo8NyMjk2mu9LmxFlMb2NGUwjXg27JA=";
     };
   };
 in {
