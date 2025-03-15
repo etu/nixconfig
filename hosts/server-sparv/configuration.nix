@@ -46,6 +46,7 @@
       "zroot/safe/home".use_template = ["data"];
       "zroot/local/minecraft".use_template = ["data"]; # Minecraft server
       "zroot/local/valheim".use_template = ["data"]; # Valheim server
+      "zroot/local/project-zomboid".use_template = ["data"]; # Project Zomboid server
     };
 
     # Allow github to deploy system
@@ -73,7 +74,24 @@
   documentation.man.enable = false;
 
   # Allow inbound traffic to lancache ports.
-  networking.firewall.allowedTCPPorts = [80 443];
+  networking.firewall.allowedTCPPorts = [
+    # HTTP
+    80
+    443
+
+    # Project Zomboid
+    16262
+    16263
+    16264
+    16265
+    16266
+    16267
+    16268
+    16269
+    16270
+    16271
+    16272
+  ];
   networking.firewall.allowedUDPPorts = [
     # DNS
     53
@@ -81,6 +99,11 @@
     # Valheim
     2456
     2457
+
+    # Project Zomboid
+    8766
+    8767
+    16261
   ];
 
   # Set up docker.
@@ -125,10 +148,25 @@
         "/var/lib/valheim/data:/opt/valheim"
       ];
     };
+
+    # Set up a project zomboid server
+    project-zomboid = {
+      image = "docker.io/danixu86/project-zomboid-dedicated-server:latest";
+      ports = [
+        "8766-8767:8766-8767/udp"
+        "16261:16261/udp"
+        "16262-16272:16262-16272/tcp"
+      ];
+      environmentFiles = [config.age.secrets.project-zomboid-env.path];
+      volumes = [
+        "/var/lib/project-zomboid:/home/steam/Zomboid"
+      ];
+    };
   };
 
   # Include secret
   age.secrets.valheim-server-env = myData.ageModules.valheim-server-env;
+  age.secrets.project-zomboid-env = myData.ageModules.project-zomboid-env;
 
   # Restart valheim service every day
   systemd.services.restart-valheim-service = {

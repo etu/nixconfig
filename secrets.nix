@@ -42,5 +42,6 @@ in {
   "secrets/server-main-elis/syncoid-ssh-ec.age".publicKeys = etu ++ hosts.server-main-elis;
   "secrets/server-main-elis/beszel-ssh-ec.age".publicKeys = etu ++ hosts.server-main-elis;
   "secrets/server-sparv/valheim-server-env.age".publicKeys = etu ++ hosts.server-sparv;
+  "secrets/server-sparv/project-zomboid-env.age".publicKeys = etu ++ hosts.server-sparv;
   "secrets/workstations/syncoid-ssh-ec.age".publicKeys = etu ++ hosts.desktop-elis ++ hosts.laptop-private-elis ++ hosts.laptop-work-elis;
 }
