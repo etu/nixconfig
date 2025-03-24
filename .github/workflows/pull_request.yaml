@@ -20,7 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: DeterminateSystems/nix-installer-action@v16
-      - uses: cachix/cachix-action@v15
+      - uses: cachix/cachix-action@v16
         with:
           name: etu
           extraPullNames: 'nix-community'
@@ -36,7 +36,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: DeterminateSystems/nix-installer-action@v16
-      - uses: cachix/cachix-action@v15
+      - uses: cachix/cachix-action@v16
         with:
           name: etu
           extraPullNames: 'nix-community'
@@ -51,7 +51,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4.1.1
       - uses: DeterminateSystems/nix-installer-action@v16
-      - uses: cachix/cachix-action@v15
+      - uses: cachix/cachix-action@v16
         with:
           name: etu
           extraPullNames: 'nix-community'

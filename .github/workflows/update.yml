@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: DeterminateSystems/nix-installer-action@v16
-      - uses: cachix/cachix-action@v15
+      - uses: cachix/cachix-action@v16
         with:
           name: etu
           extraPullNames: 'nix-community'
@@ -62,7 +62,7 @@ jobs:
         with:
           ref: tmp-updater-branch
       - uses: DeterminateSystems/nix-installer-action@v16
-      - uses: cachix/cachix-action@v15
+      - uses: cachix/cachix-action@v16
         with:
           name: etu
           extraPullNames: 'nix-community'
@@ -82,7 +82,7 @@ jobs:
         with:
           ref: tmp-updater-branch
       - uses: DeterminateSystems/nix-installer-action@v16
-      - uses: cachix/cachix-action@v15
+      - uses: cachix/cachix-action@v16
         with:
           name: etu
           extraPullNames: 'nix-community'
@@ -101,7 +101,7 @@ jobs:
         with:
           ref: tmp-updater-branch
       - uses: DeterminateSystems/nix-installer-action@v16
-      - uses: cachix/cachix-action@v15
+      - uses: cachix/cachix-action@v16
         with:
           name: etu
           extraPullNames: 'nix-community'
@@ -149,7 +149,7 @@ jobs:
       - run: |
           git pull
       - uses: DeterminateSystems/nix-installer-action@v16
-      - uses: cachix/cachix-action@v15
+      - uses: cachix/cachix-action@v16
         with:
           name: etu
           extraPullNames: 'nix-community'
