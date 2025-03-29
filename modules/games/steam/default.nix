@@ -23,6 +23,7 @@
     # Enable persistence for steam files.
     etu.base.zfs.localUser.directories = [
       ".steam"
+      ".config/unity3d/" # To remember settings for Valheim
       ".local/share/Steam"
     ];
   };
