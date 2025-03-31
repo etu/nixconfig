@@ -21,8 +21,10 @@
 
   boot.kernelModules = ["kvm-amd"];
 
-  # Wifi needs at least 6.11 and ethernet may work with 6.12.
-  boot.kernelPackages = pkgs.linuxPackages_6_12;
+  # Wifi needs at least 6.11, system works overall well with 6.12
+  # (with a separate network card) and built in ethernet works
+  # starting with 6.13.
+  boot.kernelPackages = pkgs.linuxPackages_6_13;
 
   # Enable a nice boot splash screen.
   boot.initrd.systemd.enable = true; # needed for ZFS password prompt with plymouth.
