@@ -184,17 +184,6 @@
 
 
 ;;;
-;;; Dependencies for other modes that really should be auto installed
-;;; but for some reason isn't.
-;;;
-(use-package spark :ensure t)               ; Needed for es-mode
-(use-package know-your-http-well :ensure t) ; Needed for company-restclient
-(use-package nixos-options :ensure t)       ; Needed for company-nixos-options
-(use-package request :ensure t)             ; Needed for webpaste
-(use-package projectile :ensure t)          ; Needed for helm-projectile
-
-
-;;;
 ;;; Theme related settings
 ;;;
 
