@@ -27,6 +27,7 @@
 
       # Enable catppuchin for on home manager level for different applications.
       catppuccin.alacritty.enable = true;
+      catppuccin.foot.enable = true;
       catppuccin.fish.enable = true;
       catppuccin.rofi.enable = true;
       catppuccin.mako.enable = true;

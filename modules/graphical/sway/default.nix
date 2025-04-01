@@ -351,6 +351,10 @@
               command = "border pixel 3";
             }
             {
+              criteria.app_id = "foot";
+              command = "border pixel 3";
+            }
+            {
               criteria.app_id = "firefox";
               command = "border pixel 3";
             }
@@ -378,6 +382,10 @@
             # Set opacity for some programs
             {
               criteria.app_id = "Alacritty";
+              command = "opacity set 0.9";
+            }
+            {
+              criteria.app_id = "foot";
               command = "opacity set 0.9";
             }
             {
