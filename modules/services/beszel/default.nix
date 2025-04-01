@@ -7,7 +7,9 @@
 }: let
   beszelConfigFile = pkgs.writeTextFile {
     name = "beszel-config.yml";
-    text = lib.generators.toYAML {} config.etu.services.beszel-hub.settings;
+    text = lib.generators.toYAML {} {
+      systems = config.etu.services.beszel-hub.settings;
+    };
   };
 in {
   options.etu.services.beszel-hub = {
