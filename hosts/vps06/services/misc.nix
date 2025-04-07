@@ -2,9 +2,9 @@
   # Enable the ip-failar-nu service
   services.ip-failar-nu.enable = true;
 
-  # Add this to avoid nginx validation errors when upgrading tailscale
+  # This is to avoid nginx validation errors when upgrading tailscale
   # and restarting nginx at the same time.
-  #networking.hosts."100.100.6.114" = [ "server-main-elis" ];
+  networking.hosts."100.100.6.114" = ["server-main-elis"];
 
   services.nginx.virtualHosts = {
     "ip.failar.nu" = {
