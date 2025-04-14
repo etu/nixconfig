@@ -8,7 +8,7 @@
 
   config = lib.mkIf config.etu.graphical.signal.enable {
     # Install signal desktop using home manager.
-    etu.user.extraUserPackages = [pkgs.signal-desktop];
+    etu.user.extraUserPackages = [pkgs.signal-desktop-bin];
 
     # Enable persistence for signal files.
     etu.base.zfs.user.directories = [
