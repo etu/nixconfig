@@ -123,6 +123,10 @@
         "/media/zstorage/lancache/data:/data/cache"
         "/media/zstorage/lancache/logs:/data/logs"
       ];
+      extraOptions = [
+        "--ulimit"
+        "nofile=1048576:1048576"
+      ];
     };
     lancache-dns = {
       image = "docker.io/lancachenet/lancache-dns:latest";
