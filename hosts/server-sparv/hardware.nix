@@ -29,8 +29,13 @@
   # Enable ZFS.
   boot.supportedFilesystems = ["zfs"];
 
-  # Enable a bigger ARC, reserve 38GiB (38 * 1024 * 1024 * 1024).
-  boot.kernelParams = ["zfs.zfs_arc_max=40802189312"];
+  # Tune some ZFS parameters to use more RAM.
+  boot.kernelParams = [
+    # Enable a bigger ARC max size, reserve 30GiB.
+    "zfs.zfs_arc_max=${builtins.toString (30 * 1024 * 1024 * 1024)}"
+    # Enable a bigger ARC target size, reserve 28GiB.
+    "zfs.zfs_arc_min=${builtins.toString (28 * 1024 * 1024 * 1024)}"
+  ];
 
   # Enable ZFS scrubbing.
   services.zfs.autoScrub.enable = true;
