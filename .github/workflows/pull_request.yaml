@@ -19,7 +19,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - uses: DeterminateSystems/nix-installer-action@v16
+      - uses: DeterminateSystems/nix-installer-action@v17
       - uses: cachix/cachix-action@v16
         with:
           name: etu
@@ -35,7 +35,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
-      - uses: DeterminateSystems/nix-installer-action@v16
+      - uses: DeterminateSystems/nix-installer-action@v17
       - uses: cachix/cachix-action@v16
         with:
           name: etu
@@ -50,7 +50,7 @@ jobs:
     needs: build
     steps:
       - uses: actions/checkout@v4.1.1
-      - uses: DeterminateSystems/nix-installer-action@v16
+      - uses: DeterminateSystems/nix-installer-action@v17
       - uses: cachix/cachix-action@v16
         with:
           name: etu
