@@ -111,8 +111,11 @@
     valheim-server = {
       image = "ghcr.io/lloesche/valheim-server:latest";
       ports = [
-        "2456-2457:2456-2457/udp"
+        "2456-2458:2456-2458/udp"
       ];
+      environment = {
+        CROSSPLAY = "true";
+      };
       environmentFiles = [config.age.secrets.valheim-server-env.path];
       volumes = [
         "/var/lib/valheim/config:/config"
