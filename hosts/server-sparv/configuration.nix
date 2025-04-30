@@ -73,6 +73,9 @@
   documentation.info.enable = false;
   documentation.man.enable = false;
 
+  # Set cpupower governor to performance.
+  powerManagement.cpuFreqGovernor = "performance";
+
   # Set up docker.
   virtualisation.docker.enable = true;
   virtualisation.docker.storageDriver = "zfs";
