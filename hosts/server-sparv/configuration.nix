@@ -73,39 +73,6 @@
   documentation.info.enable = false;
   documentation.man.enable = false;
 
-  # Allow inbound traffic to lancache ports.
-  networking.firewall.allowedTCPPorts = [
-    # HTTP
-    80
-    443
-
-    # Project Zomboid
-    16262
-    16263
-    16264
-    16265
-    16266
-    16267
-    16268
-    16269
-    16270
-    16271
-    16272
-  ];
-  networking.firewall.allowedUDPPorts = [
-    # DNS
-    53
-
-    # Valheim
-    2456
-    2457
-
-    # Project Zomboid
-    8766
-    8767
-    16261
-  ];
-
   # Set up docker.
   virtualisation.docker.enable = true;
   virtualisation.docker.storageDriver = "zfs";
