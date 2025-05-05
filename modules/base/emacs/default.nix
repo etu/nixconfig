@@ -156,7 +156,7 @@ in {
     ];
 
     # Allow to install intelephense which is an unfree package.
-    etu.base.nix.allowUnfree = ["intelephense" "copilot-node-server"];
+    etu.base.nix.allowUnfree = ["intelephense" "copilot-language-server"];
 
     # Install my emacs package system-wide.
     services.emacs = {
