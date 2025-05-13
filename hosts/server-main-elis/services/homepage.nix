@@ -61,7 +61,7 @@
           {
             NZBGet = [
               {
-                icon = "sabnzbd.svg";
+                icon = "nzbget.svg";
                 href = "/nzbget";
                 description = "NZBGet";
               }
@@ -209,7 +209,7 @@
           }
           {
             NZBGet = {
-              icon = "sabnzbd.svg";
+              icon = "nzbget.svg";
               description = "NZBGet";
               widget = {
                 type = "nzbget";
