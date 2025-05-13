@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  nixos-needsreboot,
   ...
 }: {
   imports = [
@@ -95,9 +94,6 @@
           echo -e "''${F_BOLD}''${C_LIME}==> diff to current-system ''${NO_FORMAT}"
           ${pkgs.nvd}/bin/nvd --nix-bin-dir=${config.nix.package}/bin diff /run/current-system "$systemConfig"
         fi
-
-        echo -e "''${F_BOLD}''${C_LIME}==> Indicate if a reboot is needed or not ''${NO_FORMAT}"
-        ${nixos-needsreboot}/bin/nixos-needsreboot || true
       '';
     };
 
