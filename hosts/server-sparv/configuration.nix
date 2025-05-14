@@ -5,7 +5,6 @@
   config,
   myData,
   pkgs,
-  lib,
   ...
 }: {
   imports = [
@@ -113,24 +112,20 @@
 
     # Set up a valheim server
     valheim-server = {
-      image = "ghcr.io/lloesche/valheim-server:latest";
+      image = "ghcr.io/mbround18/valheim:latest";
       ports = [
-        "2456-2457:2456-2457/udp"
-        "2498-2499:2498-2499/udp"
+        "2456-2458:2456-2458/udp"
       ];
       environment = {
-        ADMINLIST_IDS = lib.strings.concatStringsSep "," [
-          "76561198023278736" # Elvar
-          "76561197966003752" # Angrontyr
-          "76561197982338836" # Helga
-        ];
-        SERVER_ARGS = "-crossplay";
-        SERVER_PUBLIC = "false";
+        PORT = "2456";
+        PUBLIC = "0";
+        ENABLE_CROSSPLAY = "1";
       };
       environmentFiles = [config.age.secrets.valheim-server-env.path];
       volumes = [
-        "/var/lib/valheim/config:/config"
-        "/var/lib/valheim/data:/opt/valheim"
+        "/var/lib/valheim/backups:/home/steam/backups"
+        "/var/lib/valheim/saves:/home/steam/.config/unity3d/IronGate/Valheim"
+        "/var/lib/valheim/server:/home/steam/valheim"
       ];
     };
 
