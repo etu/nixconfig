@@ -120,6 +120,16 @@
         PORT = "2456";
         PUBLIC = "0";
         ENABLE_CROSSPLAY = "1";
+
+        # Disable updates
+        AUTO_UPDATE = "0";
+        UPDATE_ON_STARTUP = "0";
+
+        # Enable mods
+        TYPE = "BepInEx";
+        MODS = ''
+          CW_Jesse-BetterNetworking_Valheim-2.3.2
+        '';
       };
       environmentFiles = [config.age.secrets.valheim-server-env.path];
       volumes = [
