@@ -11,9 +11,11 @@
       # Set up mako, a notification deamon for wayland
       services.mako = {
         enable = true;
-        borderSize = 3;
-        defaultTimeout = 6000;
-        font = "${config.etu.graphical.theme.fonts.monospace} ${toString config.etu.graphical.theme.fonts.size}";
+        settings = {
+          borderSize = 3;
+          defaultTimeout = 6000;
+          font = "${config.etu.graphical.theme.fonts.monospace} ${toString config.etu.graphical.theme.fonts.size}";
+        };
       }; # END mako
     };
   };
