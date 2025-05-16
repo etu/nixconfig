@@ -12,8 +12,8 @@
       services.mako = {
         enable = true;
         settings = {
-          borderSize = 3;
-          defaultTimeout = 6000;
+          border-size = 3;
+          default-timeout = 6000;
           font = "${config.etu.graphical.theme.fonts.monospace} ${toString config.etu.graphical.theme.fonts.size}";
         };
       }; # END mako
