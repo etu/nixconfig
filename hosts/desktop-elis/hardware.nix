@@ -23,8 +23,8 @@
 
   # Wifi needs at least 6.11, system works overall well with 6.12
   # (with a separate network card) and built in ethernet works
-  # starting with 6.13.
-  boot.kernelPackages = pkgs.linuxPackages_6_13;
+  # starting with 6.13. Then bluetooth audio starts to work in 6.14.
+  boot.kernelPackages = pkgs.linuxPackages_6_14;
 
   # Enable a nice boot splash screen.
   boot.initrd.systemd.enable = true; # needed for ZFS password prompt with plymouth.
