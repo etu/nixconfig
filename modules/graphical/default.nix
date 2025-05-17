@@ -74,6 +74,12 @@
       ];
     };
 
+    # Mount the /etc/nixos directory in the home directory as well.
+    fileSystems."/home/${config.etu.user.username}/code/nixos" = {
+      device = "${config.etu.dataPrefix}/etc/nixos";
+      options = ["bind" "noauto" "x-systemd.automount" "x-systemd.requires-mounts-for=${config.etu.dataPrefix}"];
+    };
+
     # Install adb and fastboot.
     programs.adb.enable = true;
 
