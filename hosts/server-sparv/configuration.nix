@@ -215,6 +215,8 @@
       "ScarletHunter22" = "1cf53c7c-75c3-480a-b91a-8a64fe84a3cc";
       "Pralin" = "72343c63-2442-4333-8e97-72c98d691905";
       "gondelix" = "7e095af1-c96a-408d-ad22-334c64db9700";
+      "Slysor" = "e370b6b0-a470-4367-8d1c-51cf31432898";
+      "M1TTEN5" = "75e6ab27-5fb1-4fc3-aafb-c6f00c0d98e7";
     };
   };
 }
