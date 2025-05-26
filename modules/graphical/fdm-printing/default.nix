@@ -10,7 +10,7 @@
     # Install using home-manager.
     etu.user.extraUserPackages = [
       pkgs.freecad
-      pkgs.openscad-unstable
+      pkgs.openscad
     ];
 
     # Enable persistence for fdm-printing related files.
