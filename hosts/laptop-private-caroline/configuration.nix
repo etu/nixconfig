@@ -92,7 +92,6 @@
       # Enable snapshotting for some filesystems
       "zroot/safe/data".use_template = ["data"];
       "zroot/safe/home".use_template = ["home"];
-      "zroot/zvol/win10".use_template = ["data"];
     };
   };
 
