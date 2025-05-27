@@ -75,6 +75,7 @@
       pkgs.inkscape
       pkgs.libreoffice
       pkgs.blender
+      pkgs.gnumake
     ];
 
     # Allow home fileserver to connect to fetch snapshots.
