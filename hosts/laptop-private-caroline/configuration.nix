@@ -14,7 +14,6 @@
 # Later deployments:
 # $ deploy --skip-checks --targets .#laptop-private-caroline
 {
-  config,
   pkgs,
   myData,
   ...
@@ -43,7 +42,7 @@
     user.username = "concate";
     user.realname = "Caroline Hirwing";
     user.email = "caroline@hirwing.se";
-    user.extraGroups = ["docker" "video" "libvirtd"];
+    user.extraGroups = ["video"];
 
     # Don't set a password for root / user depending on agenix.
     user.userPasswordAgeModule = myData.ageModules.hashed-caroline-laptop-concate-password;
@@ -71,17 +70,11 @@
       pkgs.firefox-bin
       pkgs.git
       pkgs.vscodium
-      pkgs.virt-manager
       pkgs.evince
       pkgs.unzip
       pkgs.inkscape
       pkgs.libreoffice
       pkgs.blender
-
-      # Kubernetes things
-      pkgs.minikube
-      pkgs.kubectl
-      pkgs.helm
     ];
 
     # Allow home fileserver to connect to fetch snapshots.
@@ -95,20 +88,6 @@
     };
   };
 
-  # Home manager settings
-  home-manager.users.${config.etu.user.username} = {
-    programs.fish.shellAbbrs.k = "kubectl";
-  };
-
   # Enable blueman.
   services.blueman.enable = true;
-
-  # Enable docker deamon
-  virtualisation.docker.enable = true;
-  virtualisation.docker.storageDriver = "zfs";
-
-  # Set up virt-managar
-  virtualisation.libvirtd.enable = true;
-  programs.dconf.enable = true;
-  virtualisation.spiceUSBRedirection.enable = true;
 }
