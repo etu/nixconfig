@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: DeterminateSystems/nix-installer-action@v17
-      - uses: DeterminateSystems/flake-checker-action@v9
+      - uses: DeterminateSystems/flake-checker-action@v10
 
       - name: Check nix file formatting ❄️
         run: 'nix fmt . -- --check'
