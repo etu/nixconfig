@@ -48,6 +48,10 @@
         [Context]
         filesystems=~/.XCompose:ro
       '';
+      home.file.".local/share/flatpak/overrides/dev.vencord.Vesktop".text = ''
+        [Context]
+        filesystems=~/.XCompose:ro
+      '';
       home.file.".local/share/flatpak/overrides/net.lutris.Lutris".text = ''
         [Context]
         filesystems=/data/local/home/${config.etu.user.username}/Games:rw
