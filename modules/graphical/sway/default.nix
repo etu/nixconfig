@@ -125,6 +125,28 @@
         }
       ];
 
+      # Set up the cursor theme
+      home.pointerCursor = {
+        enable = true;
+        name = "Adwaita";
+        size = 24;
+        package = pkgs.adwaita-icon-theme;
+      };
+
+      # Set up some session environment variables
+      home.sessionVariables = {
+        SDL_VIDEODRIVER = "wayland";
+
+        # Firefox wayland
+        MOZ_ENABLE_WAYLAND = "1";
+
+        # Run QT programs in wayland
+        QT_QPA_PLATFORM = "wayland";
+
+        # Set the TERMINAL environment variable for rofi-sensible-terminal
+        TERMINAL = config.etu.graphical.terminal.terminalName;
+      };
+
       # Configure swaylock
       programs.swaylock.enable = true;
       programs.swaylock.package = pkgs.swaylock-effects;
@@ -151,19 +173,6 @@
       wayland.windowManager.sway = {
         enable = true;
         systemd.enable = true;
-
-        extraSessionCommands = ''
-          export SDL_VIDEODRIVER=wayland
-
-          # Firefox wayland
-          export MOZ_ENABLE_WAYLAND=1
-
-          # Run QT programs in wayland
-          export QT_QPA_PLATFORM=wayland
-
-          # Set the TERMINAL environment variable for rofi-sensible-terminal
-          export TERMINAL=${config.etu.graphical.terminal.terminalName}
-        '';
 
         config = let
           rofi = pkgs.rofi.override {plugins = [pkgs.rofi-emoji];};
