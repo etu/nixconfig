@@ -102,6 +102,26 @@
       services.playerctld.enable = true;
       services.mpris-proxy.enable = true;
 
+      # Set up easyeffects
+      services.easyeffects.enable = true;
+      services.easyeffects.extraPresets.my-preset = {
+        input = {
+          blocklist = [];
+          plugins_order = ["rnnoise#0"];
+          "rnnoise#0" = {
+            bypass = false;
+            enable-vad = true;
+            input-gain = 0.0;
+            model-name = "";
+            output-gain = 0.0;
+            release = 20.0;
+            vad-thres = 95.0;
+            wet = 0.0;
+          };
+        };
+      };
+      services.easyeffects.preset = "my-preset";
+
       # Configure swayidle for automatic screen locking
       services.swayidle.enable = true;
       services.swayidle.events = [
