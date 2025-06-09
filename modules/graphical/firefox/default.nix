@@ -15,6 +15,17 @@
   };
 
   config = lib.mkIf config.etu.graphical.firefox.enable {
+    # Allow to install some unfree packages.
+    etu.base.nix.allowUnfree = [
+      "firefox-bin"
+      "firefox-release-bin-unwrapped"
+    ];
+
+    # Allow to install some unfree packages.
+    etu.base.nix.allowUnfreeHome = [
+      "firefox-bin"
+    ];
+
     # Configure firefox for my users home-manager (if it's enabled).
     home-manager.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
       # Make firefox the default browser
