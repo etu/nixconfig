@@ -81,6 +81,12 @@
     # Allow home fileserver to connect to fetch snapshots.
     user.extraRootAuthorizedKeys = myData.pubkeys.etu.syncoid.server-main-elis;
 
+    # Allow to install some unfree packages.
+    base.nix.allowUnfree = [
+      "firefox-bin"
+      "firefox-release-bin-unwrapped"
+    ];
+
     # Configure sanoid snapshotting.
     base.sanoid.datasets = {
       # Enable snapshotting for some filesystems
