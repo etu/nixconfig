@@ -9,7 +9,7 @@ name: Pull Request
 jobs:
   build:
     name: Build systems
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     strategy:
       matrix:
         hostname:
@@ -38,7 +38,7 @@ jobs:
 
   build-shell:
     name: Cache nix shell
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: DeterminateSystems/nix-installer-action@v17
@@ -52,7 +52,7 @@ jobs:
 
   check:
     name: Check flake
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: build
     steps:
       - uses: actions/checkout@v4.1.1

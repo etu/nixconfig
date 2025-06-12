@@ -18,7 +18,7 @@ concurrency:
 jobs:
   check:
     name: Check ✔️
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: wimpysworld/nothing-but-nix@v6
@@ -34,7 +34,7 @@ jobs:
 
   deploy:
     name: Deploy 🚀
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: check
     # Don't cancel jobs if one job fails
     continue-on-error: true

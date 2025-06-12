@@ -9,7 +9,7 @@ name: Update ⬆️
 jobs:
   update:
     name: Update dependencies
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: wimpysworld/nothing-but-nix@v6
@@ -48,7 +48,7 @@ jobs:
 
   cache:
     name: Cache system
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: update
     strategy:
       matrix:
@@ -81,7 +81,7 @@ jobs:
 
   cache-shell:
     name: Cache nix shell
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: update
     steps:
       # Clone the code from the temporary branch
@@ -101,7 +101,7 @@ jobs:
 
   check:
     name: Check flake
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: cache
     steps:
       # Clone the code from the temporary branch
@@ -121,7 +121,7 @@ jobs:
 
   promote:
     name: Promote to main branch
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: check
     steps:
       - uses: actions/checkout@v4
@@ -142,7 +142,7 @@ jobs:
 
   deploy:
     name: Deploy systems
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: promote
     # Don't cancel jobs if one job fails
     continue-on-error: true
