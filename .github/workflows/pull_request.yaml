@@ -13,12 +13,18 @@ jobs:
     strategy:
       matrix:
         hostname:
+          - desktop-elis
+          - laptop-private-caroline
+          - laptop-private-elis
+          - laptop-work-elis
+          - live-iso
           - server-main-elis
           - server-sparv
           - vps06
 
     steps:
       - uses: actions/checkout@v4
+      - uses: wimpysworld/nothing-but-nix@v6
       - uses: DeterminateSystems/nix-installer-action@v17
       - uses: cachix/cachix-action@v16
         with:
@@ -50,6 +56,7 @@ jobs:
     needs: build
     steps:
       - uses: actions/checkout@v4.1.1
+      - uses: wimpysworld/nothing-but-nix@v6
       - uses: DeterminateSystems/nix-installer-action@v17
       - uses: cachix/cachix-action@v16
         with:
