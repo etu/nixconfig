@@ -1,0 +1,34 @@
+---
+name: Check nix flake ❄
+
+'on':
+  workflow_call:
+    inputs:
+      skipPush:
+        required: false
+        type: boolean
+        default: false
+      branch:
+        required: false
+        type: string
+        default: main
+
+jobs:
+  check-nix-flake:
+    name: Check flake ❄
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.branch }}
+      - uses: wimpysworld/nothing-but-nix@v6
+      - uses: DeterminateSystems/nix-installer-action@v17
+      - uses: cachix/cachix-action@v16
+        with:
+          name: etu
+          extraPullNames: 'nix-community'
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+          skipPush: ${{ inputs.skipPush }}
+
+      - name: Check the flake
+        run: 'nix flake check'

@@ -15,6 +15,11 @@ jobs:
     with:
       skipPush: true
 
+  check-flake:
+    uses: ./.github/workflows/helper_check_flake.yaml
+    with:
+      skipPush: true
+
   build:
     needs: matrix
     runs-on: ubuntu-24.04
@@ -33,19 +38,3 @@ jobs:
           skipPush: true
       - name: Build system
         run: nix build -L ".#nixosConfigurations.${{ matrix.hostname }}.config.system.build.toplevel"
-
-  check:
-    name: Check flake
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@v4.1.1
-      - uses: wimpysworld/nothing-but-nix@v6
-      - uses: DeterminateSystems/nix-installer-action@v17
-      - uses: cachix/cachix-action@v16
-        with:
-          name: etu
-          extraPullNames: 'nix-community'
-          skipPush: true
-
-      - name: Check the flake
-        run: 'nix flake check'
