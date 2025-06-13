@@ -6,7 +6,6 @@ name: Cache 📝
     branches:
       - main
       - cache
-
     paths:
       - '**.nix'
       - '**.age'
@@ -17,21 +16,15 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  matrix:
+    uses: ./.github/workflows/helper_host_matrix.yaml
+
   cache:
-    name: Cache 📝
+    needs: matrix
     runs-on: ubuntu-24.04
     strategy:
-      matrix:
-        hostname:
-          - desktop-elis
-          - laptop-private-caroline
-          - laptop-private-elis
-          - laptop-work-elis
-          - live-iso
-          - server-main-elis
-          - server-sparv
-          - vps06
-
+      matrix: ${{ fromJSON(needs.matrix.outputs.matrix) }}
+    name: Cache ${{ matrix.hostname }} 📝
     steps:
       - uses: actions/checkout@v4
       - uses: wimpysworld/nothing-but-nix@v6
@@ -41,6 +34,5 @@ jobs:
           name: etu
           extraPullNames: 'nix-community'
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-      # Build systems.
-      - name: Build system derivation
-        run: 'nix build .#nixosConfigurations.${{ matrix.hostname }}.config.system.build.toplevel'
+      - name: Build system
+        run: nix build -L ".#nixosConfigurations.${{ matrix.hostname }}.config.system.build.toplevel"

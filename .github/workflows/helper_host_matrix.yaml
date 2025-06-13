@@ -1,0 +1,41 @@
+---
+name: Generate Host Matrix 💻💻💻
+
+'on':
+  workflow_call:
+    inputs:
+      deployOnly:
+        required: false
+        type: boolean
+        default: false
+    outputs:
+      matrix:
+        description: "Matrix of hosts"
+        value: ${{ jobs.generate.outputs.matrix }}
+
+jobs:
+  generate:
+    runs-on: ubuntu-24.04
+    outputs:
+      matrix: ${{ steps.set.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@v17
+
+      - name: Generate matrix
+        id: set
+        run: |
+          set -Eeuo pipefail
+
+          # Get the hosts
+          if [[ "${{ inputs.deployOnly }}" == "true" ]]; then
+            hosts=$(nix eval .#deploy.nodes --apply 'builtins.attrNames' --json)
+          else
+            hosts=$(nix eval .#nixosConfigurations --apply 'builtins.attrNames' --json)
+          fi
+
+          # Create the matrix object
+          matrix=$(jq -c '[.[] | {hostname: .}]' <<< "$hosts")
+
+          # Output
+          echo "matrix={\"include\": $matrix}" >> "$GITHUB_OUTPUT"

@@ -7,6 +7,16 @@ name: Update ⬆️
   workflow_dispatch:
 
 jobs:
+  # Generate build hosts matrix
+  build-matrix:
+    uses: ./.github/workflows/helper_host_matrix.yaml
+
+  # Generate deploy hosts matrix
+  deploy-matrix:
+    uses: ./.github/workflows/helper_host_matrix.yaml
+    with:
+      deployOnly: true
+
   update:
     name: Update dependencies
     runs-on: ubuntu-24.04
@@ -47,21 +57,11 @@ jobs:
           push_options: '--force'
 
   cache:
-    name: Cache system
+    name: Cache ${{ matrix.hostname }} 📝
     runs-on: ubuntu-24.04
-    needs: update
+    needs: [update, build-matrix]
     strategy:
-      matrix:
-        hostname:
-          - desktop-elis
-          - laptop-private-caroline
-          - laptop-private-elis
-          - laptop-work-elis
-          - live-iso
-          - server-main-elis
-          - server-sparv
-          - vps06
-
+      matrix: ${{ fromJSON(needs.build-matrix.outputs.matrix) }}
     steps:
       # Clone the code from the temporary branch
       - uses: actions/checkout@v4
@@ -141,17 +141,13 @@ jobs:
         run: 'git push origin --delete tmp-updater-branch'
 
   deploy:
-    name: Deploy systems
+    name: Deploy ${{ matrix.hostname }} 🚀
     runs-on: ubuntu-24.04
-    needs: promote
+    needs: [promote, deploy-matrix]
     # Don't cancel jobs if one job fails
     continue-on-error: true
     strategy:
-      matrix:
-        hostname:
-          - server-main-elis
-          - server-sparv
-          - vps06
+      matrix: ${{ fromJSON(needs.build-matrix.outputs.matrix) }}
 
     steps:
       - uses: actions/checkout@v4
