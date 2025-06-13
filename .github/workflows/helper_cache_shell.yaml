@@ -1,0 +1,26 @@
+---
+name: Cache nix shell ❄
+
+'on':
+  workflow_call:
+    inputs:
+      skipPush:
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  cache-nix-shell:
+    name: Cache nix shell
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@v17
+      - uses: cachix/cachix-action@v16
+        with:
+          name: etu
+          extraPullNames: 'nix-community'
+          skipPush: ${{ inputs.skipPush }}
+
+      - name: Build the nix shell 🔨❄
+        run: 'nix build .#devShells.x86_64-linux.default'

@@ -10,6 +10,11 @@ jobs:
   matrix:
     uses: ./.github/workflows/helper_host_matrix.yaml
 
+  build-shell:
+    uses: ./.github/workflows/helper_cache_shell.yaml
+    with:
+      skipPush: true
+
   build:
     needs: matrix
     runs-on: ubuntu-24.04
@@ -28,20 +33,6 @@ jobs:
           skipPush: true
       - name: Build system
         run: nix build -L ".#nixosConfigurations.${{ matrix.hostname }}.config.system.build.toplevel"
-
-  build-shell:
-    name: Cache nix shell
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@v4
-      - uses: DeterminateSystems/nix-installer-action@v17
-      - uses: cachix/cachix-action@v16
-        with:
-          name: etu
-          extraPullNames: 'nix-community'
-
-      - name: Check the flake
-        run: 'nix build .#devShells.x86_64-linux.default'
 
   check:
     name: Check flake

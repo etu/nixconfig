@@ -17,6 +17,10 @@ jobs:
     with:
       deployOnly: true
 
+  cache-shell:
+    uses: ./.github/workflows/helper_cache_shell.yaml
+    needs: update
+
   update:
     name: Update dependencies
     runs-on: ubuntu-24.04
@@ -78,26 +82,6 @@ jobs:
       # Build systems.
       - name: Build system derivation
         run: 'nix build .#nixosConfigurations.${{ matrix.hostname }}.config.system.build.toplevel'
-
-  cache-shell:
-    name: Cache nix shell
-    runs-on: ubuntu-24.04
-    needs: update
-    steps:
-      # Clone the code from the temporary branch
-      - uses: actions/checkout@v4
-        with:
-          ref: tmp-updater-branch
-      - uses: wimpysworld/nothing-but-nix@v6
-      - uses: DeterminateSystems/nix-installer-action@v17
-      - uses: cachix/cachix-action@v16
-        with:
-          name: etu
-          extraPullNames: 'nix-community'
-          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-
-      - name: Check the flake
-        run: 'nix build .#devShells.x86_64-linux.default'
 
   check:
     name: Check flake
