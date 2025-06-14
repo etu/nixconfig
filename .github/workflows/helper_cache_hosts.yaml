@@ -1,0 +1,40 @@
+---
+name: Cache hosts 📝
+
+'on':
+  workflow_call:
+    inputs:
+      skipPush:
+        required: false
+        type: boolean
+        default: false
+      branch:
+        required: false
+        type: string
+        default: ${{ github.ref }}
+
+jobs:
+  matrix:
+    uses: ./.github/workflows/helper_host_matrix.yaml
+
+  cache:
+    needs: matrix
+    runs-on: ubuntu-24.04
+    strategy:
+      matrix: ${{ fromJSON(needs.matrix.outputs.matrix) }}
+    name: Cache ${{ matrix.hostname }} 📝
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.branch }}
+      - uses: wimpysworld/nothing-but-nix@v6
+      - uses: DeterminateSystems/nix-installer-action@v17
+      - uses: cachix/cachix-action@v16
+        with:
+          name: etu
+          extraPullNames: 'nix-community'
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+          skipPush: ${{ inputs.skipPush }}
+
+      - name: Build system
+        run: nix build -L ".#nixosConfigurations.${{ matrix.hostname }}.config.system.build.toplevel"

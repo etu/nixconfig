@@ -7,9 +7,6 @@ name: Pull Request
       - main
 
 jobs:
-  matrix:
-    uses: ./.github/workflows/helper_host_matrix.yaml
-
   build-shell:
     uses: ./.github/workflows/helper_cache_shell.yaml
     with:
@@ -20,21 +17,8 @@ jobs:
     with:
       skipPush: true
 
-  build:
-    needs: matrix
-    runs-on: ubuntu-24.04
-    strategy:
-      matrix: ${{ fromJSON(needs.matrix.outputs.matrix) }}
-    name: Build ${{ matrix.hostname }} 🔨
-    steps:
-      - uses: actions/checkout@v4
-      - uses: wimpysworld/nothing-but-nix@v6
-      - uses: DeterminateSystems/nix-installer-action@v17
-      - uses: cachix/cachix-action@v16
-        with:
-          name: etu
-          extraPullNames: 'nix-community'
-          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-          skipPush: true
-      - name: Build system
-        run: nix build -L ".#nixosConfigurations.${{ matrix.hostname }}.config.system.build.toplevel"
+  build-hosts:
+    uses: ./.github/workflows/helper_cache_hosts.yaml
+    with:
+      skipPush: true
+      branch: ${{ github.head_ref }}

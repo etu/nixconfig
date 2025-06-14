@@ -7,10 +7,6 @@ name: Update ⬆️
   workflow_dispatch:
 
 jobs:
-  # Generate build hosts matrix
-  build-matrix:
-    uses: ./.github/workflows/helper_host_matrix.yaml
-
   # Generate deploy hosts matrix
   deploy-matrix:
     uses: ./.github/workflows/helper_host_matrix.yaml
@@ -23,7 +19,13 @@ jobs:
 
   check:
     uses: ./.github/workflows/helper_check_flake.yaml
-    needs: cache
+    needs: cache-hosts
+    with:
+      branch: tmp-updater-branch
+
+  cache-hosts:
+    uses: ./.github/workflows/helper_cache_hosts.yaml
+    needs: update
     with:
       branch: tmp-updater-branch
 
@@ -66,29 +68,6 @@ jobs:
           create_branch: true
           push_options: '--force'
 
-  cache:
-    name: Cache ${{ matrix.hostname }} 📝
-    runs-on: ubuntu-24.04
-    needs: [update, build-matrix]
-    strategy:
-      matrix: ${{ fromJSON(needs.build-matrix.outputs.matrix) }}
-    steps:
-      # Clone the code from the temporary branch
-      - uses: actions/checkout@v4
-        with:
-          ref: tmp-updater-branch
-      - uses: wimpysworld/nothing-but-nix@v6
-      - uses: DeterminateSystems/nix-installer-action@v17
-      - uses: cachix/cachix-action@v16
-        with:
-          name: etu
-          extraPullNames: 'nix-community'
-          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-
-      # Build systems.
-      - name: Build system derivation
-        run: 'nix build .#nixosConfigurations.${{ matrix.hostname }}.config.system.build.toplevel'
-
   promote:
     name: Promote to main branch
     runs-on: ubuntu-24.04
@@ -117,7 +96,7 @@ jobs:
     # Don't cancel jobs if one job fails
     continue-on-error: true
     strategy:
-      matrix: ${{ fromJSON(needs.build-matrix.outputs.matrix) }}
+      matrix: ${{ fromJSON(needs.deploy-matrix.outputs.matrix) }}
 
     steps:
       - uses: actions/checkout@v4
