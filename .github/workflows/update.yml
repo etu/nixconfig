@@ -7,19 +7,13 @@ name: Update ⬆️
   workflow_dispatch:
 
 jobs:
-  # Generate deploy hosts matrix
-  deploy-matrix:
-    uses: ./.github/workflows/helper_host_matrix.yaml
-    with:
-      deployOnly: true
-
   cache-shell:
     uses: ./.github/workflows/helper_cache_shell.yaml
     needs: update
 
-  check:
+  flake-check:
     uses: ./.github/workflows/helper_check_flake.yaml
-    needs: cache-hosts
+    needs: update
     with:
       branch: tmp-updater-branch
     secrets:
@@ -85,7 +79,7 @@ jobs:
   promote:
     name: Promote to main branch
     runs-on: ubuntu-24.04
-    needs: check
+    needs: [cache-shell, cache-hosts, flake-check]
     steps:
       - uses: actions/checkout@v4
         with:
