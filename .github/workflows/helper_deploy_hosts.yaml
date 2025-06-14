@@ -1,5 +1,5 @@
 ---
-name: 'Helper: Deploy hosts 🚀'
+name: 'Workflow: Deploy hosts 🚀'
 
 'on':
   workflow_call:

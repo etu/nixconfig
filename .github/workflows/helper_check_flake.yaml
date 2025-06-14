@@ -1,5 +1,5 @@
 ---
-name: 'Helper: Check nix flake ❄️'
+name: 'Workflow: Check nix flake ❄️'
 
 'on':
   workflow_call:

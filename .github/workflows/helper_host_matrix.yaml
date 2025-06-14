@@ -1,5 +1,5 @@
 ---
-name: 'Helper: Generate Host Matrix 🖥️'
+name: 'Workflow: Generate Host Matrix 🖥️'
 
 'on':
   workflow_call:

@@ -1,5 +1,5 @@
 ---
-name: 'Helper: Cache nix shell ❄️'
+name: 'Workflow: Cache nix shell ❄️'
 
 'on':
   workflow_call:

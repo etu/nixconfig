@@ -1,5 +1,5 @@
 ---
-name: 'Helper: Cache hosts 🖥️'
+name: 'Workflow: Cache hosts 🖥️'
 
 'on':
   workflow_call:
