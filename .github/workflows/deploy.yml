@@ -15,50 +15,17 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  matrix:
-    uses: ./.github/workflows/helper_host_matrix.yaml
-    with:
-      deployOnly: true
-
   check-flake:
     uses: ./.github/workflows/helper_check_flake.yaml
     secrets:
       CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
-  deploy:
-    name: Deploy ${{ matrix.hostname }} 🚀
-    runs-on: ubuntu-24.04
-    needs: [check-flake, matrix]
-    # Don't cancel jobs if one job fails
-    continue-on-error: true
-    strategy:
-      matrix: ${{ fromJSON(needs.matrix.outputs.matrix) }}
-    steps:
-      - uses: actions/checkout@v4
-      - uses: wimpysworld/nothing-but-nix@v6
-      - uses: DeterminateSystems/nix-installer-action@v17
-      - uses: cachix/cachix-action@v16
-        with:
-          name: etu
-          extraPullNames: 'nix-community'
-          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-
-      - name: Build ${{ matrix.hostname }} 🔨
-        run: 'nix build .#nixosConfigurations.${{ matrix.hostname }}.config.system.build.toplevel'
-
-      # Configure SSH key
-      - uses: shimataro/ssh-key-action@v2
-        with:
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          name: id_ed25519
-          known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
-
-      # Connect to tailscale
-      - uses: tailscale/github-action@v3
-        with:
-          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
-          oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
-          tags: tag:ci
-
-      - name: Deploy ${{ matrix.hostname }} 🚀
-        run: nix develop -c deploy --skip-checks --targets .#${{ matrix.hostname }}
+  deploy-hosts:
+    uses: ./.github/workflows/helper_deploy_hosts.yaml
+    needs: check-flake
+    secrets:
+      CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
+      SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+      TS_OAUTH_CLIENT_ID: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+      TS_OAUTH_SECRET: ${{ secrets.TS_OAUTH_SECRET }}
