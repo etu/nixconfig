@@ -12,6 +12,9 @@ name: Cache hosts 📝
         required: false
         type: string
         default: ${{ github.ref }}
+    secrets:
+      CACHIX_AUTH_TOKEN:
+        required: true
 
 jobs:
   matrix:

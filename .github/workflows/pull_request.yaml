@@ -24,3 +24,5 @@ jobs:
     with:
       skipPush: true
       branch: ${{ github.head_ref }}
+    secrets:
+      CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}

@@ -30,6 +30,8 @@ jobs:
     needs: update
     with:
       branch: tmp-updater-branch
+    secrets:
+      CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
   update:
     name: Update dependencies

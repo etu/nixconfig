@@ -18,3 +18,5 @@ concurrency:
 jobs:
   cache-hosts:
     uses: ./.github/workflows/helper_cache_hosts.yaml
+    secrets:
+      CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
