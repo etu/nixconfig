@@ -1,5 +1,5 @@
 ---
-name: Cache nix shell ❄
+name: 'Helper: Cache nix shell ❄️'
 
 'on':
   workflow_call:
@@ -11,7 +11,7 @@ name: Cache nix shell ❄
 
 jobs:
   cache-nix-shell:
-    name: Cache nix shell
+    name: 'Cache nix shell ❄️'
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
@@ -22,5 +22,5 @@ jobs:
           extraPullNames: 'nix-community'
           skipPush: ${{ inputs.skipPush }}
 
-      - name: Build the nix shell 🔨❄
+      - name: 'Build the nix shell 🔨❄️'
         run: 'nix build .#devShells.x86_64-linux.default'

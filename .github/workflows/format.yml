@@ -1,5 +1,5 @@
 ---
-name: Format 🔎
+name: 'Format 🔎'
 
 'on':
   push:
@@ -18,7 +18,7 @@ jobs:
       - uses: DeterminateSystems/nix-installer-action@v17
       - uses: DeterminateSystems/flake-checker-action@v10
 
-      - name: Check nix file formatting ❄️
+      - name: 'Check nix file formatting ❄️'
         run: 'nix fmt . -- --check'
       - name: Check yaml file formatting 📂
         run: 'nix run nixpkgs#yamllint -- --strict --format github .'

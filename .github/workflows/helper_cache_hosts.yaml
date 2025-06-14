@@ -1,5 +1,5 @@
 ---
-name: Cache hosts 📝
+name: 'Helper: Cache hosts 🖥️'
 
 'on':
   workflow_call:
@@ -25,7 +25,7 @@ jobs:
     runs-on: ubuntu-24.04
     strategy:
       matrix: ${{ fromJSON(needs.matrix.outputs.matrix) }}
-    name: Cache ${{ matrix.hostname }} 📝
+    name: 'Cache ${{ matrix.hostname }} 🖥️'
     steps:
       - uses: actions/checkout@v4
         with:

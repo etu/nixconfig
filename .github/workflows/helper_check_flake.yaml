@@ -1,5 +1,5 @@
 ---
-name: Check nix flake ❄
+name: 'Helper: Check nix flake ❄️'
 
 'on':
   workflow_call:
@@ -18,7 +18,7 @@ name: Check nix flake ❄
 
 jobs:
   check-nix-flake:
-    name: Check flake ❄
+    name: 'Check flake ❄️'
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
@@ -33,5 +33,5 @@ jobs:
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
           skipPush: ${{ inputs.skipPush }}
 
-      - name: Check the flake
+      - name: 'Check flake ❄️'
         run: 'nix flake check'
