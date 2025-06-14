@@ -16,6 +16,8 @@ jobs:
     uses: ./.github/workflows/helper_check_flake.yaml
     with:
       skipPush: true
+    secrets:
+      CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
   build-hosts:
     uses: ./.github/workflows/helper_cache_hosts.yaml

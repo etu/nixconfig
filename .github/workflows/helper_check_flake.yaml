@@ -12,6 +12,9 @@ name: Check nix flake ❄
         required: false
         type: string
         default: main
+    secrets:
+      CACHIX_AUTH_TOKEN:
+        required: true
 
 jobs:
   check-nix-flake:

@@ -22,6 +22,8 @@ jobs:
 
   check-flake:
     uses: ./.github/workflows/helper_check_flake.yaml
+    secrets:
+      CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
   deploy:
     name: Deploy ${{ matrix.hostname }} 🚀
