@@ -12,7 +12,7 @@
     # Configure PHP to be the correct version with the right extensions
     nixpkgs.overlays = [
       (_self: _super: {
-        php = pkgs.php81.withExtensions (
+        php = pkgs.php84.withExtensions (
           {
             all,
             enabled,
