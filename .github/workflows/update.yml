@@ -73,7 +73,6 @@ jobs:
         with:
           commit_message: 'cron(treewide): Upgrade systems'
           branch: tmp-updater-branch
-          create_branch: true
           push_options: '--force'
 
   promote:
