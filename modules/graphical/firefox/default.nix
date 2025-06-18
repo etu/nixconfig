@@ -18,6 +18,7 @@
     # Allow to install some unfree packages.
     etu.base.nix.allowUnfree = [
       "firefox-bin"
+      "firefox-bin-unwrapped"
       "firefox-release-bin-unwrapped"
     ];
 
