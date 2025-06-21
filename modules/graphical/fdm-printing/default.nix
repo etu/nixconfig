@@ -17,6 +17,7 @@
     etu.base.zfs.user.directories = [
       ".config/FreeCAD"
       ".config/OpenSCAD"
+      ".local/share/FreeCAD"
     ];
   };
 }
