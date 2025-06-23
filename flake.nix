@@ -199,5 +199,11 @@
       # Build packages
       packages.spaceWallpapers = pkgs.callPackage ./packages/spaceWallpapers {};
       packages.iso = self.nixosConfigurations.live-iso.config.system.build.isoImage;
+
+      # Expose commands/programs under nix run .#foo
+      apps.vcodeGetLatestExtensions = {
+        type = "app";
+        program = "${(pkgs.callPackage ./packages/vscodeGetLatestExtensions {})}/bin/vscode-get-latest-extensions";
+      };
     });
 }

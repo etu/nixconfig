@@ -51,14 +51,13 @@
     };
     github-copilot-chat = pkgs.vscode-utils.extensionFromVscodeMarketplace {
       # https://marketplace.visualstudio.com/items?itemName=github.copilot-chat
-      # Show versions:
-      # $ nix run nixpkgs#vsce -- show github.copilot-chat --json | bat -l json
-      #
-      # This is to pin it to a version to be compatible with vscode.
+      # Show latest compatible version in my nixconfig repo:
+      # $ nix run .#vcodeGetLatestExtensions
+      # $ nix run .#vcodeGetLatestExtensions 1.101 (optional to specify version)
       publisher = "github";
       name = "copilot-chat";
-      version = "0.28.2025061202";
-      sha256 = "sha256-kjHxht+J/BPzFxxrlr5Li7moTysMu1kg3eziNEIqBfg=";
+      version = "0.28.1";
+      sha256 = "sha256-xOv1JYhE9Q8zRXoZVs/W1U58+SdbJwR5y354LLfKeDQ=";
     };
   };
 in {
