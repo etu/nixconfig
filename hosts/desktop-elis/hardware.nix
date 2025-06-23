@@ -24,7 +24,9 @@
   # Wifi needs at least 6.11, system works overall well with 6.12
   # (with a separate network card) and built in ethernet works
   # starting with 6.13. Then bluetooth audio starts to work in 6.14,
-  # interestingly, Wifi stops working on 6.14.
+  # interestingly, Wifi stops working on 6.14, Wifi then starts
+  # working on 6.14.11. Now 6.14 is EOL so 6.15 has to be tested.
+  # Wifi also stops working on 6.15.3.
   #
   # Network Card:
   # $ lspci -s 10:00.0 -nn -k
