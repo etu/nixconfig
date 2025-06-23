@@ -1,5 +1,5 @@
 ---
-name: 'Workflow: Cache hosts 🖥️'
+name: 'Workflow: Cache hosts 🔨🖥️'
 
 'on':
   workflow_call:
@@ -39,5 +39,5 @@ jobs:
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
           skipPush: ${{ inputs.skipPush }}
 
-      - name: Build system
+      - name: 'Build system 🔨🖥️'
         run: nix build -L ".#nixosConfigurations.${{ matrix.hostname }}.config.system.build.toplevel"

@@ -27,7 +27,7 @@ jobs:
       deployOnly: true
 
   deploy:
-    name: Deploy ${{ matrix.hostname }} 🚀
+    name: 'Deploy ${{ matrix.hostname }} 🚀'
     runs-on: ubuntu-24.04
     needs: matrix
     # Don't cancel jobs if one job fails
@@ -49,7 +49,7 @@ jobs:
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
       # Build systems.
-      - name: Build system derivation
+      - name: 'Build system ${{ matrix.hostname }} 🔨'
         run: 'nix build .#nixosConfigurations.${{ matrix.hostname }}.config.system.build.toplevel'
 
       # Configure SSH key
@@ -67,5 +67,5 @@ jobs:
           tags: tag:ci
 
       # Deploy systems
-      - name: Deploy system
+      - name: 'Deploy host ${{ matrix.hostname }} 🚀'
         run: 'nix develop -c deploy --skip-checks --targets .#${{ matrix.hostname }}'
