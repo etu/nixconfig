@@ -82,6 +82,11 @@ pkgs.writeShellApplication {
     echo >&2
 
     cat <<EOF
+    # This file is automatically updated by the output from
+    # nix run github:etu/nixconfig#vcodeGetLatestExtensions $EXT_ORG $EXT_NAME
+    #
+    # Store page: https://marketplace.visualstudio.com/items?itemName=$EXT_ORG.$EXT_NAME
+    {pkgs, ...}:
     pkgs.vscode-utils.extensionFromVscodeMarketplace {
       publisher = "$EXT_ORG";
       name = "$EXT_NAME";
