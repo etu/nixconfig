@@ -12,14 +12,6 @@
       version = "1.2.0";
       sha256 = "sha256-UiYD2BbumMjUP5PpdIsklBuA4UcxVV8WKePXO8p1e4k=";
     };
-    vscode-org-mode = pkgs.vscode-utils.extensionFromVscodeMarketplace {
-      # This is super barebones, but at least it got highligts for headlines:
-      # https://marketplace.visualstudio.com/items?itemName=vscode-org-mode.org-mode
-      publisher = "vscode-org-mode";
-      name = "org-mode";
-      version = "1.0.0";
-      sha256 = "sha256-o9CIjMlYQQVRdtTlOp9BAVjqrfFIhhdvzlyhlcOv5rY=";
-    };
     vscode-ido = pkgs.vscode-utils.extensionFromVscodeMarketplace {
       # This actually gives me a quite good file selection experience:
       # https://marketplace.visualstudio.com/items?itemName=kimgronqvist.vscode-ido
@@ -97,7 +89,6 @@ in {
           pkgs.vscode-extensions.golang.go # Go support
           pkgs.vscode-extensions.mkhl.direnv # Direnv
           pkgs.vscode-extensions.xdebug.php-debug # Php debug support
-          vspkgs.vscode-org-mode # Really basic org-mode highlighting
           vspkgs.vscode-ido # Decent file navigation
           vspkgs.php-sniffer # Php code style sniffing
           pkgs.vscode-extensions.github.copilot # Copilot
