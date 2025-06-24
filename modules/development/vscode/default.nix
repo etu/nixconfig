@@ -43,9 +43,9 @@
     };
     github-copilot-chat = pkgs.vscode-utils.extensionFromVscodeMarketplace {
       # https://marketplace.visualstudio.com/items?itemName=github.copilot-chat
-      # Show latest compatible version in my nixconfig repo:
-      # $ nix run .#vcodeGetLatestExtensions
-      # $ nix run .#vcodeGetLatestExtensions 1.101 (optional to specify version)
+      #
+      # $ nix run github:etu/nixconfig#vcodeGetLatestExtensions github copilot-chat
+      # $ nix run github:etu/nixconfig#vcodeGetLatestExtensions github copilot-chat 1.101 (optional to specify version)
       publisher = "github";
       name = "copilot-chat";
       version = "0.28.1";
