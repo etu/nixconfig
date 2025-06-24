@@ -60,7 +60,7 @@ all-fmt-check: nix-fmt-check yaml-fmt-check deadnix-fmt-check statix-fmt-check
 #
 # Helpers to update containers
 #
-update-all: update-hass update-zwavejs2mqtt update-mosquitto
+update-all: update-hass update-zwavejs2mqtt update-mosquitto update-vscode-extensions
 
 update-hass:
 	@echo "Updating to latest home assistant container"
@@ -73,3 +73,13 @@ update-zwavejs2mqtt:
 update-mosquitto:
 	@echo "Updating to latest mosquitto container"
 	@sed -i -r 's#(eclipse-mosquitto):[1-9]+\.[0-9]+\.?[0-9]*#\1:'`git ls-remote --tags 'https://github.com/eclipse/mosquitto.git' | cut -d 'v' -f 2 | grep -v '\^{}' | sort -V | tail -n 1`'#' hosts/server-main-elis/services/hass.nix
+
+update-vscode-extensions:
+	@echo "Updating github.copilot-chat"
+	@nix run .#vcodeGetLatestExtensions github copilot-chat > modules/development/vscode/extensions/github-copilot-chat.nix
+	@nix run .#vcodeGetLatestExtensions Leathong openscad-language-support > modules/development/vscode/extensions/openscad.nix
+	@nix run .#vcodeGetLatestExtensions wongjn php-sniffer > modules/development/vscode/extensions/php-sniffer.nix
+	@nix run .#vcodeGetLatestExtensions Vue volar > modules/development/vscode/extensions/volar.nix
+	@nix run .#vcodeGetLatestExtensions joelwmale vscode-codeception > modules/development/vscode/extensions/vscode-codeception.nix
+	@nix run .#vcodeGetLatestExtensions kimgronqvist vscode-ido > modules/development/vscode/extensions/vscode-ido.nix
+	@nix run .#vcodeGetLatestExtensions ms-vscode vscode-speech > modules/development/vscode/extensions/vscode-speech.nix
