@@ -1,7 +1,7 @@
-# https://marketplace.visualstudio.com/items?itemName=github.copilot-chat
+# This file is automatically updated by the output from
+# nix run github:etu/nixconfig#vcodeGetLatestExtensions github copilot-chat
 #
-# $ nix run github:etu/nixconfig#vcodeGetLatestExtensions github copilot-chat
-# $ nix run github:etu/nixconfig#vcodeGetLatestExtensions github copilot-chat 1.101 (optional to specify version)
+# Store page: https://marketplace.visualstudio.com/items?itemName=github.copilot-chat
 {pkgs, ...}:
 pkgs.vscode-utils.extensionFromVscodeMarketplace {
   publisher = "github";

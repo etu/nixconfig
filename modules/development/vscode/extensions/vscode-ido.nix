@@ -1,7 +1,9 @@
+# This file is automatically updated by the output from
+# nix run github:etu/nixconfig#vcodeGetLatestExtensions kimgronqvist vscode-ido
+#
+# Store page: https://marketplace.visualstudio.com/items?itemName=kimgronqvist.vscode-ido
 {pkgs, ...}:
 pkgs.vscode-utils.extensionFromVscodeMarketplace {
-  # This actually gives me a quite good file selection experience:
-  # https://marketplace.visualstudio.com/items?itemName=kimgronqvist.vscode-ido
   publisher = "kimgronqvist";
   name = "vscode-ido";
   version = "0.3.0";
