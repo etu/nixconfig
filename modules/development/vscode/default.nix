@@ -5,52 +5,13 @@
   ...
 }: let
   vspkgs = {
-    vscode-codeception = pkgs.vscode-utils.extensionFromVscodeMarketplace {
-      # https://marketplace.visualstudio.com/items?itemName=joelwmale.vscode-codeception
-      publisher = "joelwmale";
-      name = "vscode-codeception";
-      version = "1.2.0";
-      sha256 = "sha256-UiYD2BbumMjUP5PpdIsklBuA4UcxVV8WKePXO8p1e4k=";
-    };
-    vscode-ido = pkgs.vscode-utils.extensionFromVscodeMarketplace {
-      # This actually gives me a quite good file selection experience:
-      # https://marketplace.visualstudio.com/items?itemName=kimgronqvist.vscode-ido
-      publisher = "kimgronqvist";
-      name = "vscode-ido";
-      version = "0.3.0";
-      sha256 = "sha256-Pr3o7FkVu7r0V+PGcs5BRqBh3iXcXOwPRCb2MtoAZJ4=";
-    };
-    volar = pkgs.vscode-utils.extensionFromVscodeMarketplace {
-      # https://marketplace.visualstudio.com/items?itemName=Vue.volar
-      publisher = "Vue";
-      name = "volar";
-      version = "1.8.27";
-      sha256 = "sha256-KfWgdz61NURmS1cwFsE9AmIrEykyN5MXIKfG8gDfmac=";
-    };
-    php-sniffer = pkgs.vscode-utils.extensionFromVscodeMarketplace {
-      # https://marketplace.visualstudio.com/items?itemName=wongjn.php-sniffer
-      publisher = "wongjn";
-      name = "php-sniffer";
-      version = "1.3.0";
-      sha256 = "sha256-dPF1CRX9WVQFyC7RZxiPDtIg6+oUituY0qEn5Hipd5Q=";
-    };
-    openscad = pkgs.vscode-utils.extensionFromVscodeMarketplace {
-      # https://marketplace.visualstudio.com/items?itemName=Leathong.openscad-language-support
-      publisher = "Leathong";
-      name = "openscad-language-support";
-      version = "1.2.5";
-      sha256 = "sha256-/CLxBXXdUfYlT0RaGox1epHnyAUlDihX1LfT5wGd2J8=";
-    };
-    github-copilot-chat = pkgs.vscode-utils.extensionFromVscodeMarketplace {
-      # https://marketplace.visualstudio.com/items?itemName=github.copilot-chat
-      #
-      # $ nix run github:etu/nixconfig#vcodeGetLatestExtensions github copilot-chat
-      # $ nix run github:etu/nixconfig#vcodeGetLatestExtensions github copilot-chat 1.101 (optional to specify version)
-      publisher = "github";
-      name = "copilot-chat";
-      version = "0.28.1";
-      sha256 = "sha256-xOv1JYhE9Q8zRXoZVs/W1U58+SdbJwR5y354LLfKeDQ=";
-    };
+    vscode-codeception = pkgs.callPackage ./extensions/vscode-codeception.nix {};
+    vscode-ido = pkgs.callPackage ./extensions/vscode-ido.nix {};
+    vscode-speech = pkgs.callPackage ./extensions/vscode-speech.nix {};
+    volar = pkgs.callPackage ./extensions/volar.nix {};
+    php-sniffer = pkgs.callPackage ./extensions/php-sniffer.nix {};
+    openscad = pkgs.callPackage ./extensions/openscad.nix {};
+    github-copilot-chat = pkgs.callPackage ./extensions/github-copilot-chat.nix {};
   };
 in {
   options.etu.development.vscode.enable = lib.mkEnableOption "Enable development vscode settings";
