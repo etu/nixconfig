@@ -7,32 +7,25 @@
   options.etu.base.spell.enable = lib.mkEnableOption "Enable base spell settings";
 
   config = lib.mkIf config.etu.base.spell.enable {
-    environment.systemPackages = [
-      pkgs.aspell
+    etu.user.extraUserPackages = [
+      # Aspell Dictionaries
+      (pkgs.aspellWithDicts (dicts: [
+        dicts.en
+        dicts.en-computers
+        dicts.en-science
+        dicts.sv
+      ]))
 
-      # Dictionaries
-      pkgs.aspellDicts.en
-      pkgs.aspellDicts.en-computers
-      pkgs.aspellDicts.en-science
-      pkgs.aspellDicts.sv
-
-      # Also install hunspell with dictionaries
-      (pkgs.hunspellWithDicts [
-        pkgs.hunspellDicts.en-gb-ize
-        pkgs.hunspellDicts.en-us
-        pkgs.hunspellDicts.sv-se
-      ])
+      # Hunspell Dictionaries
+      (pkgs.hunspell.withDicts (dicts: [
+        dicts.en_GB-ize
+        dicts.en_US
+        dicts.sv_SE
+      ]))
     ];
 
     etu.base.nix.allowUnfree = [
       "aspell-dict-en-science"
     ];
-
-    # Configure aspell system wide
-    environment.etc."aspell.conf".text = ''
-      master en_US
-      extra-dicts en-computers.rws
-      add-extra-dicts en_US-science.rws sv.rws
-    '';
   };
 }
