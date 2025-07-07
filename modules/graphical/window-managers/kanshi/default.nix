@@ -58,7 +58,7 @@
             ];
           }
           {
-            profile.name = "caroline-docked";
+            profile.name = "caroline-desktop";
             profile.outputs = [
               {
                 criteria = "Ancor Communications Inc ASUS PB278 C9LMTF095084";

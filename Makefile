@@ -1,6 +1,9 @@
 #
 # Helpers to build things
 #
+desktop-caroline:
+	nix run nixpkgs#nix-output-monitor -- build .#nixosConfigurations.desktop-caroline.config.system.build.toplevel
+
 desktop-elis:
 	nix run nixpkgs#nix-output-monitor -- build .#nixosConfigurations.desktop-elis.config.system.build.toplevel
 

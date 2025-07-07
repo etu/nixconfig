@@ -66,6 +66,15 @@
       "zroot/safe/data".use_template = ["data"];
       "zroot/safe/home".use_template = ["home"];
 
+      # Enable cleanup for synced backups
+      "zroot/backups/current/desktop-caroline/data" = {
+        use_template = ["data"];
+        autosnap = false;
+      };
+      "zroot/backups/current/desktop-caroline/home" = {
+        use_template = ["home"];
+        autosnap = false;
+      };
       "zroot/backups/current/desktop-elis/data" = {
         use_template = ["data"];
         autosnap = false;
@@ -78,8 +87,6 @@
         use_template = ["home"];
         autosnap = false;
       };
-
-      # Enable cleanup for synced backups
       "zroot/backups/current/laptop-private-caroline/data" = {
         use_template = ["data"];
         autosnap = false;
@@ -120,6 +127,9 @@
     base.syncoid.enable = true;
     # Enable syncing of some filesystems
     base.syncoid.commands = {
+      "root@desktop-caroline:zroot/safe/data".target = "zroot/backups/current/desktop-caroline/data";
+      "root@desktop-caroline:zroot/safe/home".target = "zroot/backups/current/desktop-caroline/home";
+
       "root@desktop-elis:zroot/safe/data".target = "zroot/backups/current/desktop-elis/data";
       "root@desktop-elis:zroot/safe/home".target = "zroot/backups/current/desktop-elis/home";
       "root@desktop-elis:zroot/safe/work-home".target = "zroot/backups/current/desktop-elis/work-home";
