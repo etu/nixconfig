@@ -18,7 +18,6 @@
 
       # Also install hunspell with dictionaries
       (pkgs.hunspellWithDicts [
-        pkgs.hunspellDicts.en-gb-ise
         pkgs.hunspellDicts.en-gb-ize
         pkgs.hunspellDicts.en-us
         pkgs.hunspellDicts.sv-se
