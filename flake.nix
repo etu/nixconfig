@@ -204,6 +204,7 @@
       apps.vcodeGetLatestExtensions = {
         type = "app";
         program = "${(pkgs.callPackage ./packages/vscodeGetLatestExtensions {})}/bin/vscode-get-latest-extensions";
+        meta.description = "Get latest compatible VSCode extension for specified version of VSCode";
       };
     });
 }
