@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-      - uses: DeterminateSystems/nix-installer-action@v17
+      - uses: DeterminateSystems/nix-installer-action@v18
       - uses: DeterminateSystems/flake-checker-action@v11
 
       - name: 'Check nix file formatting ❄️'
