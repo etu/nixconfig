@@ -31,6 +31,8 @@ jobs:
         with:
           ref: ${{ inputs.branch }}
       - uses: wimpysworld/nothing-but-nix@v6
+        with:
+          hatchet-protocol: 'rampage'
       - uses: DeterminateSystems/nix-installer-action@v18
       - uses: cachix/cachix-action@v16
         with:
