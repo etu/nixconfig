@@ -94,6 +94,30 @@
   hardware.openrazer.users = [ config.etu.user.username ];
   etu.user.extraUserPackages = [ pkgs.polychromatic ];
 
+  # Use a newer version of OpenRGB to get support for my motherboard.
+  #
+  # There's a PR to update to OpenRGB 1.0rc1, which is:
+  # 1) not merged, 2) too old anyways.
+  #
+  # So here's an override to build from source.
+  #
+  # https://github.com/NixOS/nixpkgs/pull/381881
+  services.hardware.openrgb.package = pkgs.openrgb.overrideAttrs (oa: {
+    version = "2025-07-08";
+
+    src = pkgs.fetchFromGitLab {
+      inherit (oa.src) owner repo;
+      rev = "bdaebe12184c7ad3bbebeff67119f4e8ca4daaf9";
+      sha256 = "sha256-Rhbjss9FqQr4nNmVRdbe5DcPOt5qFnT4YQzvk6Si+iw=";
+    };
+
+    postPatch = ''
+      substituteInPlace scripts/build-udev-rules.sh \
+        --replace-fail "/usr/bin/env" "${pkgs.lib.getExe' pkgs.coreutils "env"}" \
+        --replace-fail chmod "${pkgs.lib.getExe' pkgs.coreutils "chmod"}"
+    '';
+  });
+
   # Set video driver.
   services.xserver.videoDrivers = [ "modesetting" ];
 
