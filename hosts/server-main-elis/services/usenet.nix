@@ -114,7 +114,13 @@
     bazarr.serviceConfig =
       perms
       // {
-        ReadWritePaths = ["/var/lib/bazarr" "/media/zstorage/files/video/series" "/media/zstorage/files/video/movies"];
+        ReadWritePaths = [
+          "/var/lib/bazarr"
+          "/media/zstorage/files/video/series"
+          "/media/zstorage/files/video/series.sv"
+          "/media/zstorage/files/video/movies"
+          "/media/zstorage/files/video/movies.sv"
+        ];
         UMask = "0022"; # Make all files world readwrite by defaults
       };
     nzbget.serviceConfig =
@@ -125,13 +131,23 @@
     sonarr.serviceConfig =
       perms
       // {
-        ReadWritePaths = ["/var/lib/sonarr" "/media/zstorage/files/video/series" "/var/lib/nzbget-dst"];
+        ReadWritePaths = [
+          "/var/lib/sonarr"
+          "/media/zstorage/files/video/series"
+          "/media/zstorage/files/video/series.sv"
+          "/var/lib/nzbget-dst"
+        ];
         UMask = "0022"; # Make all files world readwrite by defaults
       };
     radarr.serviceConfig =
       perms
       // {
-        ReadWritePaths = ["/var/lib/radarr" "/media/zstorage/files/video/movies" "/var/lib/nzbget-dst"];
+        ReadWritePaths = [
+          "/var/lib/radarr"
+          "/media/zstorage/files/video/movies"
+          "/media/zstorage/files/video/movies.sv"
+          "/var/lib/nzbget-dst"
+        ];
         UMask = "0022"; # Make all files world readwrite by defaults
       };
     lidarr.serviceConfig =
