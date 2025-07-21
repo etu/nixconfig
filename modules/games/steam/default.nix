@@ -20,6 +20,9 @@
       localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
     };
 
+    # Enable steam hardware support.
+    hardware.steam-hardware.enable = true;
+
     # Enable persistence for steam files.
     etu.base.zfs.localUser.directories = [
       ".steam"
