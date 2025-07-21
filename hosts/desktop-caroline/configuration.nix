@@ -61,8 +61,10 @@
     graphical.flatpak.enablePersistence = true;
     theme.enable = true;
 
+    games.enable = false;
     games.minecraft.enable = true;
     games.wowup.enable = true;
+    games.steam.enable = true;
 
     # Install packages
     user.extraUserPackages = [
