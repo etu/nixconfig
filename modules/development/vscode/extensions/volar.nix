@@ -6,6 +6,6 @@
 pkgs.vscode-utils.extensionFromVscodeMarketplace {
   publisher = "Vue";
   name = "volar";
-  version = "3.0.1";
-  sha256 = "sha256-nv9DmW7DuYVVsibpSJ8A7AawsL9cySgp2r5xgpE0WYM=";
+  version = "3.0.3";
+  sha256 = "sha256-6iInkhGZ0r4xtJCiHrsTa6EMnNR4mXUARR4B9YXRm+I=";
 }
