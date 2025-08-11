@@ -58,7 +58,7 @@
     # Enable greetd as a non-graphical login manager.
     services.greetd.enable = true;
     services.greetd.settings.default_session = {
-      command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd sway";
+      command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd sway";
       user = "greeter";
     };
 
