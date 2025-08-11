@@ -27,6 +27,7 @@
   # interestingly, Wifi stops working on 6.14, Wifi then starts
   # working on 6.14.11. Now 6.14 is EOL so 6.15 has to be tested.
   # Wifi also stops working on 6.15.3. And keeps not working on 6.15.4.
+  # Then WiFi starts working on 6.15.9, and bluetooth is still fine.
   #
   # Network Card:
   # $ lspci -s 10:00.0 -nn -k
