@@ -14,7 +14,7 @@ jobs:
     name: Format 🔎
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: DeterminateSystems/nix-installer-action@v19
       - uses: DeterminateSystems/flake-checker-action@v12
 
