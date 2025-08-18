@@ -21,6 +21,11 @@
   # Enable ZFS.
   boot.supportedFilesystems = ["zfs"];
 
+  # Roll back certain filesystems to empty state on boot
+  boot.initrd.postDeviceCommands = lib.mkAfter ''
+    zfs rollback -r zroot/local/nginx-cache@empty
+  '';
+
   # Enable ZFS scrubbing.
   services.zfs.autoScrub.enable = true;
 
@@ -49,6 +54,13 @@
 
   fileSystems.${config.etu.localPrefix} = {
     device = "zroot/local/data";
+    fsType = "zfs";
+    neededForBoot = true;
+    options = ["defaults" "noexec"];
+  };
+
+  fileSystems."/var/cache/nginx" = {
+    device = "zroot/local/nginx-cache";
     fsType = "zfs";
     neededForBoot = true;
     options = ["defaults" "noexec"];

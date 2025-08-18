@@ -71,4 +71,17 @@
   };
 
   services.nginx.clientMaxBodySize = "20m"; # Increase body size since we handle jellyfin.
+
+  # Configure temp paths
+  services.nginx.appendHttpConfig = ''
+    proxy_temp_path       /var/cache/nginx/proxy_temp 1 2;
+    client_body_temp_path /var/cache/nginx/client_temp 1 2;
+  '';
+
+  # Ensure directories exist with correct perms
+  systemd.tmpfiles.rules = [
+    "d /var/cache/nginx 0755 nginx nginx -"
+    "d /var/cache/nginx/proxy_temp 0750 nginx nginx -"
+    "d /var/cache/nginx/client_temp 0750 nginx nginx -"
+  ];
 }
