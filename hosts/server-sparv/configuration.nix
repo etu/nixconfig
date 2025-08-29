@@ -47,6 +47,7 @@
       "zroot/local/minecraft".use_template = ["data"]; # Minecraft server
       "zroot/local/valheim".use_template = ["data"]; # Valheim server
       "zroot/local/project-zomboid".use_template = ["data"]; # Project Zomboid server
+      "zroot/local/vrising".use_template = ["data"]; # V Rising server
     };
 
     # Allow github to deploy system
@@ -150,6 +151,21 @@
       environmentFiles = [config.age.secrets.project-zomboid-env.path];
       volumes = [
         "/var/lib/project-zomboid:/home/steam/Zomboid"
+      ];
+    };
+
+    vrising-server = {
+      image = "docker.io/trueosiris/vrising:latest";
+      ports = [
+        "9876-9877:9876-9877/udp"
+      ];
+      environment = {
+        TZ = "Europe/Stockholm";
+        SERVERNAME = "SparvRising";
+      };
+      volumes = [
+        "/var/lib/vrising/server:/mnt/vrising/server:rw"
+        "/var/lib/vrising/persistentdata:/mnt/vrising/persistentdata:rw"
       ];
     };
   };
