@@ -26,8 +26,10 @@
   # starting with 6.13. Then bluetooth audio starts to work in 6.14,
   # interestingly, Wifi stops working on 6.14, Wifi then starts
   # working on 6.14.11. Now 6.14 is EOL so 6.15 has to be tested.
-  # Wifi also stops working on 6.15.3. And keeps not working on 6.15.4.
-  # Then WiFi starts working on 6.15.9, and bluetooth is still fine.
+  # Wifi also stops working on 6.15.3. And keeps not working on
+  # 6.15.4. Then WiFi starts working on 6.15.9, and bluetooth is still
+  # fine. Next step, 6.16.4, and bluetooth is still fine, and WiFi is
+  # also fine.
   #
   # Network Card:
   # $ lspci -s 10:00.0 -nn -k
@@ -56,7 +58,7 @@
   # May 17 14:36:06 desktop-elis kernel: ath12k_pci 0000:10:00.0: failed to start core: -110
   # May 17 14:36:06 desktop-elis kernel: ath12k_pci 0000:10:00.0: qmi failed to send mode request, mode: 4, err = -5
   # May 17 14:36:06 desktop-elis kernel: ath12k_pci 0000:10:00.0: qmi failed to send wlan mode off
-  boot.kernelPackages = pkgs.linuxPackages_6_15;
+  boot.kernelPackages = pkgs.linuxPackages_6_16;
 
   # Enable a nice boot splash screen.
   boot.initrd.systemd.enable = true; # needed for ZFS password prompt with plymouth.
