@@ -78,6 +78,10 @@
   services.hardware.openrgb.enable = true;
   services.hardware.openrgb.motherboard = "amd";
 
+  # Enable openrazer to control razer devices.
+  hardware.openrazer.enable = true;
+  hardware.openrazer.users = [config.etu.user.username];
+
   # Set video driver.
   services.xserver.videoDrivers = ["modesetting"];
 
