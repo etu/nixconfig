@@ -48,6 +48,7 @@
   # Enable openrazer to control razer devices.
   hardware.openrazer.enable = true;
   hardware.openrazer.users = [config.etu.user.username];
+  etu.user.extraUserPackages = [pkgs.polychromatic];
 
   # Set video driver.
   services.xserver.videoDrivers = ["modesetting"];
