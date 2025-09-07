@@ -182,6 +182,34 @@
     #noCheck = true;
   };
 
+  fileSystems."/media/zstorage/files/video/movies" = {
+    device = "zstorage/files/video/movies";
+    fsType = "zfs";
+    options = ["noauto" "x-systemd.automount"];
+    #noCheck = true;
+  };
+
+  fileSystems."/media/zstorage/files/video/movies.sv" = {
+    device = "zstorage/files/video/movies.sv";
+    fsType = "zfs";
+    options = ["noauto" "x-systemd.automount"];
+    #noCheck = true;
+  };
+
+  fileSystems."/media/zstorage/files/video/series" = {
+    device = "zstorage/files/video/series";
+    fsType = "zfs";
+    options = ["noauto" "x-systemd.automount"];
+    #noCheck = true;
+  };
+
+  fileSystems."/media/zstorage/files/video/series.sv" = {
+    device = "zstorage/files/video/series.sv";
+    fsType = "zfs";
+    options = ["noauto" "x-systemd.automount"];
+    #noCheck = true;
+  };
+
   # Persistence of certain hosts paths and home directory paths.
   etu.base.zfs.user.directories = [
     "backups"
