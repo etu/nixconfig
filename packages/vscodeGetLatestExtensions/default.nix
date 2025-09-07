@@ -1,8 +1,4 @@
-{
-  pkgs,
-  lib,
-  ...
-}:
+{pkgs, ...}:
 pkgs.writeShellApplication {
   name = "vscode-get-latest-extensions";
 
