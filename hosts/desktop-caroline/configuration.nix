@@ -51,6 +51,7 @@
     # Enable a graphical system.
     graphical.enable = true;
     graphical.sway.enable = true;
+    graphical.sway.enableSuspendOnTimeout = false;
     graphical.fdm-printing.enable = true;
 
     # Do not enable Elis configs for certain things.

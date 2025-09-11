@@ -23,6 +23,11 @@
       default = "screenshot";
       description = "Wallpaper to use for lockscreen";
     };
+    enableSuspendOnTimeout =
+      lib.mkEnableOption "Lock the screen before suspending"
+      // {
+        default = true;
+      };
   };
 
   config = lib.mkIf config.etu.graphical.sway.enable {
@@ -136,16 +141,19 @@
           command = "${pkgs.swaylock-effects}/bin/swaylock";
         }
       ];
-      services.swayidle.timeouts = [
-        {
-          timeout = 300;
-          command = "${pkgs.swaylock-effects}/bin/swaylock";
-        }
-        {
-          timeout = 600;
-          command = "${pkgs.systemd}/bin/systemctl suspend";
-        }
-      ];
+      services.swayidle.timeouts =
+        [
+          {
+            timeout = 300;
+            command = "${pkgs.swaylock-effects}/bin/swaylock";
+          }
+        ]
+        ++ lib.optionals config.etu.graphical.sway.enableSuspendOnTimeout [
+          {
+            timeout = 600;
+            command = "${pkgs.systemd}/bin/systemctl suspend";
+          }
+        ];
 
       # Set up the cursor theme
       home.pointerCursor = {
