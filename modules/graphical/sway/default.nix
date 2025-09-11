@@ -57,9 +57,11 @@
 
     # Enable greetd as a non-graphical login manager.
     services.greetd.enable = true;
-    services.greetd.settings.default_session = {
-      command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd sway";
-      user = "greeter";
+    services.greetd.settings = {
+      default_session.command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd sway";
+      default_session.user = "greeter";
+      initial_session.command = "sway";
+      initial_session.user = config.etu.user.username;
     };
 
     # Set up Pipewire
