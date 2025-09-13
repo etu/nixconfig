@@ -15,5 +15,11 @@
     etu.base.zfs.system.directories = [
       "/var/lib/tailscale"
     ];
+
+    # Use systemd-resolved for DNS resolution to not rely on
+    # tailscaled. It seems like tailscaled has troubles when it comes
+    # to suspend and resume and the network not being available right
+    # after resume.
+    services.resolved.enable = true;
   };
 }
