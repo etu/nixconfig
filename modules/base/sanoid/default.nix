@@ -27,7 +27,8 @@
         hourly = 23;
         daily = 6;
         weekly = 3;
-        monthly = 2;
+        monthly = 11;
+        yearly = 1;
       };
 
       # Data snapshotting rules
@@ -38,7 +39,8 @@
         hourly = 12;
         daily = 6;
         weekly = 3;
-        monthly = 2;
+        monthly = 11;
+        yearly = 1;
       };
 
       # Bulk storage snapshotting rules
@@ -49,7 +51,8 @@
         hourly = 0;
         daily = 6;
         weekly = 3;
-        monthly = 2;
+        monthly = 11;
+        yearly = 1;
       };
     };
   };
