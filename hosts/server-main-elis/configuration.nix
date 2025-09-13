@@ -182,14 +182,6 @@
     ];
   };
 
-  # Add a user for concate
-  users.users.concate = {
-    isNormalUser = true;
-    home = "${config.etu.dataPrefix}/home/concate";
-    uid = 1001;
-    openssh.authorizedKeys.keys = myData.pubkeys.concate;
-  };
-
   # Disable documentation to make the system smaller.
   documentation.enable = false;
   documentation.doc.enable = false;
