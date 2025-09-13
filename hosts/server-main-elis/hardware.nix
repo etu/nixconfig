@@ -168,13 +168,6 @@
     #noCheck = true;
   };
 
-  fileSystems."/media/zstorage/files/upload" = {
-    device = "zstorage/files/upload";
-    fsType = "zfs";
-    options = ["noauto" "x-systemd.automount"];
-    #noCheck = true;
-  };
-
   fileSystems."/media/zstorage/files/video" = {
     device = "zstorage/files/video";
     fsType = "zfs";
