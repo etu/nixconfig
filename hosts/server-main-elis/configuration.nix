@@ -120,7 +120,6 @@
       "zstorage/files/audio".use_template = ["storage"];
       "zstorage/files/ebooks".use_template = ["storage"];
       "zstorage/files/software".use_template = ["storage"];
-      "zstorage/files/upload".use_template = ["storage"];
       "zstorage/files/video".use_template = ["storage"];
       "zstorage/files/video/movies".use_template = ["storage"];
       "zstorage/files/video/movies.sv".use_template = ["storage"];
