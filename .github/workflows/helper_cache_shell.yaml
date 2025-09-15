@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v5
-      - uses: DeterminateSystems/nix-installer-action@v19
+      - uses: DeterminateSystems/nix-installer-action@v20
       - uses: cachix/cachix-action@v16
         with:
           name: etu
