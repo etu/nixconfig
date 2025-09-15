@@ -50,7 +50,7 @@
     pkgs.go # Go language
     pkgs.gopls # Go language server
     pkgs.bash-language-server # Bash language server
-    pkgs.nodePackages.dockerfile-language-server-nodejs # Docker language server
+    pkgs.dockerfile-language-server # Docker language server
     intelephense # PHP language server
     pkgs.nodePackages.typescript-language-server # JS/TS language server
     pkgs.vscode-langservers-extracted # CSS/LESS/SASS language server
