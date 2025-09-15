@@ -86,7 +86,6 @@
     home-manager.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
       # Enable rofi home manager module.
       programs.rofi.enable = true;
-      programs.rofi.package = pkgs.rofi-wayland;
       programs.rofi.font = "${config.etu.graphical.theme.fonts.monospace} ${toString config.etu.graphical.theme.fonts.size}";
 
       # Set up a wallpaper manager.
@@ -226,7 +225,7 @@
               "${modifier}+Return" = "exec ${config.etu.graphical.terminal.terminalPath}";
 
               # Run Launcher
-              "${modifier}+e" = "exec ${pkgs.rofi-wayland}/bin/rofi -show combi -modi combi -combi-modes 'window,drun' | xargs swaymsg exec --";
+              "${modifier}+e" = "exec ${pkgs.rofi}/bin/rofi -show combi -modi combi -combi-modes 'window,drun' | xargs swaymsg exec --";
 
               # Run rofi emoji picker
               "${modifier}+i" = "exec ${rofi}/bin/rofi -show emoji";
