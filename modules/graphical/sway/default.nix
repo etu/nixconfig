@@ -225,7 +225,7 @@
               "${modifier}+Return" = "exec ${config.etu.graphical.terminal.terminalPath}";
 
               # Run Launcher
-              "${modifier}+e" = "exec ${pkgs.rofi}/bin/rofi -show combi -modi combi -combi-modes 'window,drun' | xargs swaymsg exec --";
+              "${modifier}+e" = "exec ${rofi}/bin/rofi -show combi -modi combi -combi-modes 'window,drun' | xargs swaymsg exec --";
 
               # Run rofi emoji picker
               "${modifier}+i" = "exec ${rofi}/bin/rofi -show emoji";
