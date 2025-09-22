@@ -50,7 +50,6 @@
     graphical.sway.enableSuspendOnTimeout = false;
     graphical.fdm-printing.enable = true;
     graphical.hamradio.enable = true;
-    graphical.signal.enable = true;
     graphical.flatpak.enablePersistence = true;
     services.netdata.enable = true;
     theme.enable = true;

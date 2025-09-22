@@ -10,7 +10,6 @@
     ./flatpak
     ./gnupg
     ./hamradio
-    ./signal
     ./sway
     ./terminal
     ./theme
