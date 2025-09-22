@@ -75,7 +75,7 @@ update-zwavejs2mqtt:
 
 update-mosquitto:
 	@echo "Updating to latest mosquitto container"
-	@sed -i -r 's#(eclipse-mosquitto):[1-9]+\.[0-9]+\.?[0-9]*#\1:'`git ls-remote --tags 'https://github.com/eclipse/mosquitto.git' | cut -d 'v' -f 2 | grep -v '\^{}' | sort -V | tail -n 1`'#' hosts/server-main-elis/services/hass.nix
+	@sed -i -r 's#(eclipse-mosquitto):[1-9]+\.[0-9]+\.?[0-9]*#\1:'`git ls-remote --tags 'https://github.com/eclipse/mosquitto.git' | cut -d 'v' -f 2 | grep -v -e '\^{}' -e 'refs/tags' | sort -V | tail -n 1`'#' hosts/server-main-elis/services/hass.nix
 
 update-vscode-extensions:
 	@echo "Updating vscode extensions"
