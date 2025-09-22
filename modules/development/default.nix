@@ -10,7 +10,6 @@
     ./php
     ./rtl-sdr
     ./vscode
-    ./zed
   ];
 
   options.etu.development.enable = lib.mkEnableOption "Enable development settings";
