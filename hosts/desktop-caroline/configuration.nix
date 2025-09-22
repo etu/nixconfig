@@ -58,7 +58,6 @@
     base.emacs.enable = false;
     graphical.firefox.enable = false;
     graphical.gnupg.enable = false;
-    graphical.telegram.enable = false;
     graphical.flatpak.enablePersistence = true;
     theme.enable = true;
 

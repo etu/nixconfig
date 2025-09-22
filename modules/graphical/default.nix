@@ -12,7 +12,6 @@
     ./hamradio
     ./signal
     ./sway
-    ./telegram
     ./terminal
     ./theme
     ./virtualbox
@@ -27,7 +26,6 @@
       graphical.firefox.enable = lib.mkDefault true;
       graphical.flatpak.enable = lib.mkDefault true;
       graphical.gnupg.enable = lib.mkDefault true;
-      graphical.telegram.enable = lib.mkDefault true;
       graphical.terminal.enable = lib.mkDefault true;
       graphical.theme.enable = lib.mkDefault true;
 

@@ -38,7 +38,6 @@
 
     # Fore disable some graphical components unused on the live iso.
     graphical.gnupg.enable = false;
-    graphical.telegram.enable = false;
 
     # Force disable persistence modules since this system doesn't
     # use ZFS.
