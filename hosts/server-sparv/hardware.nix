@@ -70,11 +70,11 @@
   };
 
   # Make sure to import ZFS pool for cache.
-  fileSystems."/media/zstorage/lancache" = {
-    device = "zstorage/lancache";
-    fsType = "zfs";
-    neededForBoot = true;
-  };
+  #fileSystems."/media/zstorage/lancache" = {
+  #  device = "zstorage/lancache";
+  #  fsType = "zfs";
+  #  neededForBoot = true;
+  #};
 
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/2A9D-C192";

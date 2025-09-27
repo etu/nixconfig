@@ -63,7 +63,7 @@
       "/data"
       "/data/local"
       "/home"
-      "/media/zstorage"
+      #"/media/zstorage"
       "/nix"
     ];
   };
@@ -84,32 +84,32 @@
   # Set up lancache docker container.
   virtualisation.oci-containers.backend = "docker";
   virtualisation.oci-containers.containers = {
-    lancache = {
-      image = "docker.io/lancachenet/monolithic:latest";
-      ports = [
-        "80:80/tcp"
-        "443:443/tcp"
-      ];
-      volumes = [
-        "/media/zstorage/lancache/data:/data/cache"
-        "/media/zstorage/lancache/logs:/data/logs"
-      ];
-      extraOptions = [
-        "--ulimit"
-        "nofile=1048576:1048576"
-      ];
-    };
-    lancache-dns = {
-      image = "docker.io/lancachenet/lancache-dns:latest";
-      ports = [
-        "53:53/udp"
-      ];
-      environment = {
-        LANCACHE_IP = "10.69.0.3";
-        USE_GENERIC_CACHE = "true";
-        UPSTREAM_DNS = "1.1.1.2";
-      };
-    };
+    #lancache = {
+    #  image = "docker.io/lancachenet/monolithic:latest";
+    #  ports = [
+    #    "80:80/tcp"
+    #    "443:443/tcp"
+    #  ];
+    #  volumes = [
+    #    "/media/zstorage/lancache/data:/data/cache"
+    #    "/media/zstorage/lancache/logs:/data/logs"
+    #  ];
+    #  extraOptions = [
+    #    "--ulimit"
+    #    "nofile=1048576:1048576"
+    #  ];
+    #};
+    #lancache-dns = {
+    #  image = "docker.io/lancachenet/lancache-dns:latest";
+    #  ports = [
+    #    "53:53/udp"
+    #  ];
+    #  environment = {
+    #    LANCACHE_IP = "10.69.0.3";
+    #    USE_GENERIC_CACHE = "true";
+    #    UPSTREAM_DNS = "1.1.1.2";
+    #  };
+    #};
 
     # Set up a valheim server
     valheim-server = {
