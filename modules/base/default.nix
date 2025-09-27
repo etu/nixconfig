@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  nixosSystemdKexec,
   ...
 }: {
   imports = [
@@ -138,6 +139,9 @@
         install -Dm755 xterm-${pkgs.xterm.version}/vttests/256colors2.pl $out/bin/256colors2.pl
         install -Dm755 xterm-${pkgs.xterm.version}/vttests/88colors2.pl $out/bin/88colors2.pl
       '')
+
+      # Package to do kexec to other systemd-boot nixos generations
+      nixosSystemdKexec
     ];
 
     # Set backup file extensions for conflicts on home manager activation.

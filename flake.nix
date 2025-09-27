@@ -106,7 +106,7 @@
             inherit (inputs) catppuccin;
             inherit (pkgs-22-11.nodejs-14_x.pkgs) intelephense;
             inherit (pkgs-22-11) chefdk vagrant;
-            inherit (self.packages.${system}) spaceWallpapers;
+            inherit (self.packages.${system}) spaceWallpapers nixosSystemdKexec;
             inherit myData;
 
             emacs-overlay = inputs.emacs-overlay.overlay;
@@ -199,6 +199,7 @@
 
       # Build packages
       packages.spaceWallpapers = pkgs.callPackage ./packages/spaceWallpapers {};
+      packages.nixosSystemdKexec = pkgs.callPackage ./packages/nixosSystemdKexec {};
       packages.iso = self.nixosConfigurations.live-iso.config.system.build.isoImage;
 
       # Expose commands/programs under nix run .#foo
