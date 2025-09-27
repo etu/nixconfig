@@ -44,14 +44,18 @@
       # Enable snapshotting for some filesystems
       "zroot/safe/root".use_template = ["data"];
       "zroot/safe/home".use_template = ["data"];
-      "zroot/local/minecraft".use_template = ["data"]; # Minecraft server
-      "zroot/local/valheim".use_template = ["data"]; # Valheim server
+      "zroot/safe/minecraft".use_template = ["data"]; # Minecraft server
+      "zroot/safe/valheim".use_template = ["data"]; # Valheim server
       "zroot/local/project-zomboid".use_template = ["data"]; # Project Zomboid server
       "zroot/local/vrising".use_template = ["data"]; # V Rising server
     };
 
-    # Allow github to deploy system
-    user.extraRootAuthorizedKeys = myData.pubkeys.etu.github-actions;
+    user.extraRootAuthorizedKeys =
+      # Allow home server to pull backups
+      myData.pubkeys.etu.syncoid.server-main-elis
+      ++
+      # Allow github to deploy system
+      myData.pubkeys.etu.github-actions;
 
     services.netdata.enable = true;
 
