@@ -134,6 +134,7 @@
         TYPE = "BepInEx";
         MODS = ''
           CW_Jesse-BetterNetworking_Valheim-2.3.2
+          mvp-Serverside_Simulations-1.1.9
         '';
       };
       environmentFiles = [config.age.secrets.valheim-server-env.path];
