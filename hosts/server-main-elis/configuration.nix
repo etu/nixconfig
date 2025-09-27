@@ -146,7 +146,7 @@
       "root@laptop-work-elis:zroot/safe/data".target = "zroot/backups/current/laptop-work-elis/data";
       "root@laptop-work-elis:zroot/safe/home".target = "zroot/backups/current/laptop-work-elis/home";
 
-      "root@server-sparv:zroot/safe/valheim".target = "zroot/backups/current/server-sparv/valheim";
+      "root@server-sparv:zroot/safe/valheim-saves".target = "zroot/backups/current/server-sparv/valheim-saves";
       "root@server-sparv:zroot/safe/minecraft".target = "zroot/backups/current/server-sparv/minecraft";
 
       "root@vps06:zroot/safe/data".target = "zroot/backups/current/vps06/data";

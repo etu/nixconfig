@@ -45,7 +45,7 @@
       "zroot/safe/root".use_template = ["data"];
       "zroot/safe/home".use_template = ["data"];
       "zroot/safe/minecraft".use_template = ["data"]; # Minecraft server
-      "zroot/safe/valheim".use_template = ["data"]; # Valheim server
+      "zroot/safe/valheim-saves".use_template = ["data"]; # Valheim server
       "zroot/local/project-zomboid".use_template = ["data"]; # Project Zomboid server
       "zroot/local/vrising".use_template = ["data"]; # V Rising server
     };
