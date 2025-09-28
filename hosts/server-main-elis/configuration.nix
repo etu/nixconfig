@@ -114,6 +114,14 @@
         use_template = ["data"];
         autosnap = false;
       };
+      "zroot/backups/current/server-sparv/minecraft" = {
+        use_template = ["data"];
+        autosnap = false;
+      };
+      "zroot/backups/current/server-sparv/valheim-saves" = {
+        use_template = ["data"];
+        autosnap = false;
+      };
 
       # Enable snapshotting for bulk storage
       "zstorage/files".use_template = ["storage"];
