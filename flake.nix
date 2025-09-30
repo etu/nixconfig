@@ -64,54 +64,45 @@
     mkArmSystem = {
       name,
       extraArgs ? {},
-      extraModules ? [],
     }:
       mkSystem {
-        inherit name extraArgs extraModules;
+        inherit name;
         system = "aarch64-linux";
       };
 
     mkSystem = {
       name,
       system ? "x86_64-linux",
-      extraArgs ? {},
-      extraModules ? [],
-    }: let
-      pkgs-22-11 = import inputs.nixpkgs-22-11 {
-        inherit system;
-        config.allowUnfree = true;
-      };
-    in
+    }:
       nixpkgs.lib.nixosSystem {
         inherit system;
 
-        modules =
-          [
-            ./hosts/${name}/configuration.nix
-          ]
-          ++ extraModules;
+        modules = [./hosts/${name}/configuration.nix];
 
-        specialArgs =
-          {
-            inherit inputs;
+        specialArgs = {
+          inherit inputs;
 
-            # Fake perSystem inspired by numtide/blueprint and to avoid having as much
-            # separate as arguments.
-            perSystem = {
-              self = {
-                inherit (self.packages.${system}) spaceWallpapers nixosSystemdKexec;
-              };
-              nixpkgs-22-11 = {
-                # nodejs-14_x.pkgs.intelephense
-                inherit (pkgs-22-11) chefdk vagrant nodejs-14_x;
-              };
+          # Fake flake inspired by numtide/blueprint to avoid having to pass modules
+          # as a separate argument.
+          flake = self;
+
+          # Fake perSystem inspired by numtide/blueprint and to avoid having as much
+          # separate as arguments.
+          perSystem = {
+            self = {
+              inherit (self.packages.${system}) spaceWallpapers nixosSystemdKexec;
             };
-
-            # Fake flake inspired by numtide/blueprint to avoid having to pass modules
-            # as a separate argument.
-            flake = self;
-          }
-          // extraArgs;
+            nixpkgs-22-11 = let
+              pkgs-22-11 = import inputs.nixpkgs-22-11 {
+                inherit system;
+                config.allowUnfree = true;
+              };
+            in {
+              # nodejs-14_x.pkgs.intelephense
+              inherit (pkgs-22-11) chefdk vagrant nodejs-14_x;
+            };
+          };
+        };
       };
 
     mkArmDeploy = {
