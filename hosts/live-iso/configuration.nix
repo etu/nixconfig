@@ -9,12 +9,16 @@
 #
 {
   lib,
+  flake,
   modulesPath,
   ...
 }: {
   imports = [
     # Import base settings for live isos
     (modulesPath + "/installer/cd-dvd/installation-cd-base.nix")
+
+    # Import my default modules
+    flake.nixosModules.default
   ];
 
   # My module settings

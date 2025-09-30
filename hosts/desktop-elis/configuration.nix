@@ -15,12 +15,16 @@
 # $ deploy --skip-checks --targets .#desktop-elis
 {
   config,
+  flake,
   pkgs,
   ...
 }: {
   imports = [
     # Include my hardware settings.
     ./hardware.nix
+
+    # Import my default modules
+    flake.nixosModules.default
   ];
 
   # Set hostname

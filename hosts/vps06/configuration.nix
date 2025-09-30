@@ -4,6 +4,7 @@
 {
   config,
   lib,
+  flake,
   ...
 }: {
   imports = [
@@ -18,6 +19,9 @@
     ./services/matrix.nix
     ./services/misc.nix
     ./services/postgres.nix
+
+    # Import my default modules
+    flake.nixosModules.default
   ];
 
   # Set hostname

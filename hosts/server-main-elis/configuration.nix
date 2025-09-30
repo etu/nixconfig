@@ -3,6 +3,7 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {
   config,
+  flake,
   pkgs,
   ...
 }: {
@@ -22,6 +23,9 @@
     ./services/nextcloud.nix
     ./services/svtplay.nix
     ./services/usenet.nix
+
+    # Import my default modules
+    flake.nixosModules.default
   ];
 
   # Set hostname

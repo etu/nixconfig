@@ -88,7 +88,6 @@
         modules =
           [
             ./hosts/${name}/configuration.nix
-            self.nixosModules.default
             inputs.ip-failar-nu.nixosModules.${system}.default
           ]
           ++ extraModules;
@@ -108,6 +107,10 @@
                 inherit (pkgs-22-11) chefdk vagrant;
               };
             };
+
+            # Fake flake inspired by numtide/blueprint to avoid having to pass modules
+            # as a separate argument.
+            flake = self;
 
             emacs-overlay = inputs.emacs-overlay.overlay;
             emacsWayland = nixpkgs.legacyPackages.${system}.emacs30-pgtk;

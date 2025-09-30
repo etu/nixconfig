@@ -4,11 +4,15 @@
 {
   config,
   pkgs,
+  flake,
   ...
 }: {
   imports = [
     # Include my hardware settings.
     ./hardware.nix
+
+    # Import my default modules
+    flake.nixosModules.default
   ];
 
   # Set hostname
