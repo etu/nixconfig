@@ -1,5 +1,5 @@
 {lib, ...}: {
   options.etu.data = lib.mkOption {
-    default = import ../../data.nix;
+    default = import ../../../data.nix;
   };
 }

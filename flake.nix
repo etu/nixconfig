@@ -157,7 +157,7 @@
       };
 
       # Expose my modules as a nixos module
-      nixosModules.default = ./modules;
+      nixosModules.default = ./modules/nixos;
 
       # This is highly advised, and will prevent many possible mistakes
       checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) inputs.deploy-rs.lib;
