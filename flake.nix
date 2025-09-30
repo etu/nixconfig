@@ -178,24 +178,7 @@
       formatter = pkgs.alejandra;
 
       # Set up nix develop shell environment
-      devShells.default = pkgs.mkShell {
-        buildInputs = [
-          pkgs.cacert # Install certs for curl to work in pure shells
-          pkgs.curl
-          pkgs.jq # For parsing json downloaded with curl
-
-          # Linters
-          pkgs.deadnix
-          pkgs.statix
-          pkgs.yamllint
-
-          # Secrets managing
-          inputs.agenix.packages.${system}.agenix
-
-          # Deploy util
-          inputs.deploy-rs.packages.${system}.deploy-rs
-        ];
-      };
+      devShells.default = pkgs.callPackage ./devshell.nix {flake = self;};
 
       # Build packages
       packages.spaceWallpapers = pkgs.callPackage ./packages/spaceWallpapers {};
