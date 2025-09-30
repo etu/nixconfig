@@ -1,4 +1,13 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  flake,
+  ...
+}: {
+  imports = [
+    # Import the ip-failar-nu module
+    flake.inputs.ip-failar-nu.nixosModules.x86_64-linux.default
+  ];
+
   # Enable the ip-failar-nu service
   services.ip-failar-nu.enable = true;
 

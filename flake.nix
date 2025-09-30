@@ -88,7 +88,6 @@
         modules =
           [
             ./hosts/${name}/configuration.nix
-            inputs.ip-failar-nu.nixosModules.${system}.default
           ]
           ++ extraModules;
 
