@@ -1,12 +1,11 @@
 {
   config,
-  myData,
   pkgs,
   ...
 }: {
   # Decrypt secret to expected location.
   age.secrets = {
-    inherit (myData.ageModules) cloudflare-api-env;
+    inherit (config.etu.data.ageModules) cloudflare-api-env;
   };
 
   systemd.services.cloudflare-dyndns = {

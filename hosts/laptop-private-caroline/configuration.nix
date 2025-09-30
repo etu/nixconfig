@@ -15,7 +15,7 @@
 # $ deploy --skip-checks --targets .#laptop-private-caroline
 {
   pkgs,
-  myData,
+  config,
   ...
 }: {
   imports = [
@@ -45,8 +45,8 @@
     user.extraGroups = ["video"];
 
     # Don't set a password for root / user depending on agenix.
-    user.userPasswordAgeModule = myData.ageModules.hashed-caroline-laptop-concate-password;
-    user.rootPasswordAgeModule = myData.ageModules.hashed-caroline-laptop-root-password;
+    user.userPasswordAgeModule = config.etu.data.ageModules.hashed-caroline-laptop-concate-password;
+    user.rootPasswordAgeModule = config.etu.data.ageModules.hashed-caroline-laptop-root-password;
 
     # Enable a graphical system.
     graphical.enable = true;
@@ -78,7 +78,7 @@
     ];
 
     # Allow home fileserver to connect to fetch snapshots.
-    user.extraRootAuthorizedKeys = myData.pubkeys.etu.syncoid.server-main-elis;
+    user.extraRootAuthorizedKeys = config.etu.data.pubkeys.etu.syncoid.server-main-elis;
 
     # Allow to install some unfree packages.
     base.nix.allowUnfree = [

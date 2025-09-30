@@ -3,7 +3,6 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {
   config,
-  myData,
   pkgs,
   ...
 }: {
@@ -52,10 +51,10 @@
 
     user.extraRootAuthorizedKeys =
       # Allow home server to pull backups
-      myData.pubkeys.etu.syncoid.server-main-elis
+      config.etu.data.pubkeys.etu.syncoid.server-main-elis
       ++
       # Allow github to deploy system
-      myData.pubkeys.etu.github-actions;
+      config.etu.data.pubkeys.etu.github-actions;
 
     services.netdata.enable = true;
 
@@ -176,8 +175,8 @@
   };
 
   # Include secret
-  age.secrets.valheim-server-env = myData.ageModules.valheim-server-env;
-  age.secrets.project-zomboid-env = myData.ageModules.project-zomboid-env;
+  age.secrets.valheim-server-env = config.etu.data.ageModules.valheim-server-env;
+  age.secrets.project-zomboid-env = config.etu.data.ageModules.project-zomboid-env;
 
   # Restart valheim service every day
   systemd.services.restart-valheim-service = {

@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  myData,
   ...
 }: {
   options.etu.services.freshrss = {
@@ -18,7 +17,7 @@
     services.nginx.enable = true;
 
     age.secrets = {
-      inherit (myData.ageModules) freshrss-password-etu;
+      inherit (config.etu.data.ageModules) freshrss-password-etu;
     };
 
     # Set up freshrss.

@@ -15,7 +15,6 @@
 # $ deploy --skip-checks --targets .#laptop-private-elis
 {
   config,
-  myData,
   pkgs,
   ...
 }: {
@@ -53,7 +52,7 @@
     user.extraGroups = ["video" "docker" "libvirtd"];
 
     # Allow home fileserver to connect to fetch snapshots.
-    user.extraRootAuthorizedKeys = myData.pubkeys.etu.syncoid.server-main-elis;
+    user.extraRootAuthorizedKeys = config.etu.data.pubkeys.etu.syncoid.server-main-elis;
 
     base.sanoid.datasets = {
       # Enable snapshotting for some filesystems
@@ -76,11 +75,11 @@
   services.blueman.enable = true;
 
   # Add community server to known hosts
-  programs.ssh.knownHosts."aarch64.nixos.community".publicKey = myData.pubkeys.systems."aarch64.nixos.community";
+  programs.ssh.knownHosts."aarch64.nixos.community".publicKey = config.etu.data.pubkeys.systems."aarch64.nixos.community";
 
   age.secrets = {
-    inherit (myData.ageModules) "etu@aarch64.nixos.community" "etu@aarch64.nixos.community.pub";
-    inherit (myData.ageModules) syncoid-workstations-ssh-ec;
+    inherit (config.etu.data.ageModules) "etu@aarch64.nixos.community" "etu@aarch64.nixos.community.pub";
+    inherit (config.etu.data.ageModules) syncoid-workstations-ssh-ec;
   };
 
   # Set up remote builds

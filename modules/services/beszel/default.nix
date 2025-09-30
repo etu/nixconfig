@@ -1,6 +1,5 @@
 {
   config,
-  myData,
   pkgs,
   lib,
   ...
@@ -45,7 +44,7 @@ in {
   config = lib.mkIf (config.etu.services.beszel-hub.enable || config.etu.services.beszel-agent.enable) {
     # Include private ssh key as secret
     age.secrets = lib.mkIf config.etu.services.beszel-hub.enable {
-      inherit (myData.ageModules) beszel-ssh-ec;
+      inherit (config.etu.data.ageModules) beszel-ssh-ec;
     };
 
     # Make sure the bezsel hub home directory exists

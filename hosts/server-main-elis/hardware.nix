@@ -3,7 +3,6 @@
   pkgs,
   lib,
   modulesPath,
-  myData,
   ...
 }: {
   imports = [
@@ -44,8 +43,8 @@
   ];
 
   age.secrets = {
-    inherit (myData.ageModules) server-main-elis-initrd-sshd;
-    inherit (myData.ageModules) syncoid-server-main-elis-ssh-ec;
+    inherit (config.etu.data.ageModules) server-main-elis-initrd-sshd;
+    inherit (config.etu.data.ageModules) syncoid-server-main-elis-ssh-ec;
   };
 
   # Remote unlocking of encrypted ZFS
@@ -58,7 +57,7 @@
       enable = true;
       port = 2222;
       hostKeys = [
-        myData.ageModules.server-main-elis-initrd-sshd.path
+        config.etu.data.ageModules.server-main-elis-initrd-sshd.path
       ];
       authorizedKeys = config.users.users.etu.openssh.authorizedKeys.keys;
     };

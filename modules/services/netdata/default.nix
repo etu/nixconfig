@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  myData,
   pkgs,
   ...
 }: {
@@ -25,7 +24,7 @@
     ];
 
     # Include secret with token
-    age.secrets.netdata-claim-token-file = myData.ageModules.netdata-claim-token-file;
+    age.secrets.netdata-claim-token-file = config.etu.data.ageModules.netdata-claim-token-file;
 
     # Enable netdata
     services.netdata.enable = true;

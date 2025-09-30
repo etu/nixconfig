@@ -1,10 +1,6 @@
-{
-  config,
-  myData,
-  ...
-}: {
+{config, ...}: {
   age.secrets = {
-    inherit (myData.ageModules) homepage-dashboard-environment;
+    inherit (config.etu.data.ageModules) homepage-dashboard-environment;
   };
 
   services.homepage-dashboard = {

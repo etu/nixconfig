@@ -61,8 +61,6 @@
     nixpkgs,
     ...
   } @ inputs: let
-    myData = import ./data.nix;
-
     mkArmSystem = {
       name,
       extraArgs ? {},
@@ -101,7 +99,6 @@
             inherit (pkgs-22-11.nodejs-14_x.pkgs) intelephense;
             inherit (pkgs-22-11) chefdk vagrant;
             inherit (self.packages.${system}) spaceWallpapers nixosSystemdKexec;
-            inherit myData;
 
             emacs-overlay = inputs.emacs-overlay.overlay;
             emacsWayland = nixpkgs.legacyPackages.${system}.emacs30-pgtk;

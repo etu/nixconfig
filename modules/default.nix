@@ -2,6 +2,7 @@
   imports = [
     # New module organization
     ./base
+    ./data
     ./development
     ./games
     ./graphical

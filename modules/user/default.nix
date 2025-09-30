@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  myData,
   pkgs,
   ...
 }: {
@@ -62,11 +61,11 @@
       description = "Extra packages to install in my users profile.";
     };
     userPasswordAgeModule = lib.mkOption {
-      default = myData.ageModules.hashed-etu-password;
+      default = config.etu.data.ageModules.hashed-etu-password;
       description = "Age file to include to use as user password";
     };
     rootPasswordAgeModule = lib.mkOption {
-      default = myData.ageModules.hashed-root-password;
+      default = config.etu.data.ageModules.hashed-root-password;
       description = "Age file to include to use as root password";
     };
     setEmptyPassword = lib.mkEnableOption "If disabled, it will set a user password which requires agenix set up.";
@@ -90,14 +89,14 @@
       extraGroups = ["wheel"] ++ config.etu.user.extraGroups;
       hashedPasswordFile = lib.mkIf (!config.etu.user.setEmptyPassword) config.age.secrets.hashed-user-password.path;
       isNormalUser = true;
-      openssh.authorizedKeys.keys = myData.pubkeys.etu.computers ++ config.etu.user.extraAuthorizedKeys;
+      openssh.authorizedKeys.keys = config.etu.data.pubkeys.etu.computers ++ config.etu.user.extraAuthorizedKeys;
       inherit (config.etu.user) uid;
     };
 
     # Define password, authorized keys and shell for root user.
     users.users.root = {
       hashedPasswordFile = lib.mkIf (!config.etu.user.setEmptyRootPassword) config.age.secrets.hashed-root-password.path;
-      openssh.authorizedKeys.keys = myData.pubkeys.etu.computers ++ config.etu.user.extraRootAuthorizedKeys;
+      openssh.authorizedKeys.keys = config.etu.data.pubkeys.etu.computers ++ config.etu.user.extraRootAuthorizedKeys;
     };
 
     # Configure some miscellaneous dotfiles for my user.

@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  myData,
   ...
 }: {
   options.etu.base.sshd.enable = lib.mkEnableOption "Enable base sshd settings";
@@ -38,26 +37,26 @@
     # Add known hosts for all of my systems that I access remotely to
     # they always are trusted.
     programs.ssh.knownHosts = {
-      desktop-caroline.publicKey = myData.pubkeys.systems.desktop-caroline;
-      desktop-elis.publicKey = myData.pubkeys.systems.desktop-elis;
-      laptop-private-caroline.publicKey = myData.pubkeys.systems.laptop-private-caroline;
-      laptop-private-elis.publicKey = myData.pubkeys.systems.laptop-private-elis;
-      laptop-work-elis.publicKey = myData.pubkeys.systems.laptop-work-elis;
+      desktop-caroline.publicKey = config.etu.data.pubkeys.systems.desktop-caroline;
+      desktop-elis.publicKey = config.etu.data.pubkeys.systems.desktop-elis;
+      laptop-private-caroline.publicKey = config.etu.data.pubkeys.systems.laptop-private-caroline;
+      laptop-private-elis.publicKey = config.etu.data.pubkeys.systems.laptop-private-elis;
+      laptop-work-elis.publicKey = config.etu.data.pubkeys.systems.laptop-work-elis;
       server-main-elis = {
         extraHostNames = ["home.elis.nu" "local.elis.nu" "192.168.1.101"];
-        publicKey = myData.pubkeys.systems.server-main-elis;
+        publicKey = config.etu.data.pubkeys.systems.server-main-elis;
       };
       server-main-elis-initrd = {
         extraHostNames = ["home.elis.nu" "local.elis.nu" "192.168.1.101"];
-        publicKey = myData.pubkeys.systems.server-main-elis-initrd;
+        publicKey = config.etu.data.pubkeys.systems.server-main-elis-initrd;
       };
       "sparv.failar.nu" = {
         extraHostNames = ["server-sparv"];
-        publicKey = myData.pubkeys.systems.server-sparv;
+        publicKey = config.etu.data.pubkeys.systems.server-sparv;
       };
       "vps06.elis.nu" = {
         extraHostNames = ["vps06" "git.elis.nu"];
-        publicKey = myData.pubkeys.systems.vps06;
+        publicKey = config.etu.data.pubkeys.systems.vps06;
       };
     };
   };

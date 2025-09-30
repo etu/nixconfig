@@ -1,7 +1,6 @@
 {
   config,
   pkgs,
-  myData,
   ...
 }: {
   services.nextcloud.enable = true;
@@ -17,7 +16,7 @@
 
   # Import secret
   age.secrets = {
-    inherit (myData.ageModules) nextcloud-admin-password;
+    inherit (config.etu.data.ageModules) nextcloud-admin-password;
   };
 
   etu.base.zfs.system.directories = [

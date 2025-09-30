@@ -3,7 +3,6 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {
   config,
-  myData,
   pkgs,
   ...
 }: {
@@ -52,10 +51,10 @@
 
     user.extraRootAuthorizedKeys =
       # Allow workstations to push snapshots
-      myData.pubkeys.etu.syncoid.workstations
+      config.etu.data.pubkeys.etu.syncoid.workstations
       ++
       # Allow github to deploy system
-      myData.pubkeys.etu.github-actions;
+      config.etu.data.pubkeys.etu.github-actions;
 
     services.freshrss.enable = true;
     services.jellyfin.enable = true;

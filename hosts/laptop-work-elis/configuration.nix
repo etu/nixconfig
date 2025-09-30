@@ -1,11 +1,7 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{
-  config,
-  myData,
-  ...
-}: {
+{config, ...}: {
   imports = [
     # Include my hardware settings.
     ./hardware.nix
@@ -39,7 +35,7 @@
     user.extraGroups = ["video" "docker"];
 
     # Allow home fileserver to connect to fetch snapshots.
-    user.extraRootAuthorizedKeys = myData.pubkeys.etu.syncoid.server-main-elis;
+    user.extraRootAuthorizedKeys = config.etu.data.pubkeys.etu.syncoid.server-main-elis;
 
     # Install extra modes for work.
     base.emacs.extraConfig = [
@@ -71,7 +67,7 @@
 
   # Include agenix encripted secret for secret password file
   age.secrets = {
-    inherit (myData.ageModules) syncoid-workstations-ssh-ec;
+    inherit (config.etu.data.ageModules) syncoid-workstations-ssh-ec;
   };
 
   # Enable ClamAV.

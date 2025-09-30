@@ -4,7 +4,6 @@
 {
   config,
   lib,
-  myData,
   ...
 }: {
   imports = [
@@ -42,10 +41,10 @@
 
     user.extraRootAuthorizedKeys =
       # Allow home server to pull backups
-      myData.pubkeys.etu.syncoid.server-main-elis
+      config.etu.data.pubkeys.etu.syncoid.server-main-elis
       ++
       # Allow github to deploy system
-      myData.pubkeys.etu.github-actions;
+      config.etu.data.pubkeys.etu.github-actions;
 
     base.sanoid.datasets = {
       # Enable snapshotting for some filesystems
