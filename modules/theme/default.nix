@@ -1,7 +1,7 @@
 {
-  catppuccin,
   config,
   lib,
+  inputs,
   ...
 }: {
   options.etu.theme.enable = lib.mkEnableOption "Enable theme settings";
@@ -19,7 +19,7 @@
     home-manager.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
       # Import the catppuccin home manager modules.
       imports = [
-        catppuccin.homeModules.catppuccin
+        inputs.catppuccin.homeModules.catppuccin
       ];
 
       # Set Catppuccin flavor.

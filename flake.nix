@@ -91,19 +91,13 @@
           [
             ./hosts/${name}/configuration.nix
             self.nixosModules.default
-            inputs.agenix.nixosModules.age
-            inputs.catppuccin.nixosModules.catppuccin
-            inputs.disko.nixosModules.disko
-            inputs.home-manager.nixosModules.home-manager
-            inputs.impermanence.nixosModules.impermanence
             inputs.ip-failar-nu.nixosModules.${system}.default
-            inputs.nur.modules.nixos.default
           ]
           ++ extraModules;
 
         specialArgs =
           {
-            inherit (inputs) catppuccin;
+            inherit inputs;
             inherit (pkgs-22-11.nodejs-14_x.pkgs) intelephense;
             inherit (pkgs-22-11) chefdk vagrant;
             inherit (self.packages.${system}) spaceWallpapers nixosSystemdKexec;
