@@ -2,6 +2,7 @@
   config,
   pkgs,
   modulesPath,
+  lib,
   ...
 }: {
   imports = [
@@ -107,6 +108,9 @@
 
   # Set max jobs in nix.
   #nix.settings.max-jobs = lib.mkDefault 8;
+
+  # Use the host platform for building by default to avoid cross compiling.
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
   # Set CPU Frequency Governor.
   #powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
