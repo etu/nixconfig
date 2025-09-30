@@ -56,4 +56,7 @@
 
   networking.wireless.enable = false;
   services.openssh.settings.PermitRootLogin = lib.mkForce "prohibit-password";
+
+  # Use the host platform for building by default to avoid cross compiling.
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }
