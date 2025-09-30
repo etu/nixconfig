@@ -110,9 +110,6 @@
             # Fake flake inspired by numtide/blueprint to avoid having to pass modules
             # as a separate argument.
             flake = self;
-
-            emacs-overlay = inputs.emacs-overlay.overlay;
-            emacsWayland = nixpkgs.legacyPackages.${system}.emacs30-pgtk;
           }
           // extraArgs;
       };
