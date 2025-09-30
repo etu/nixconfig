@@ -61,15 +61,6 @@
     nixpkgs,
     ...
   } @ inputs: let
-    mkArmSystem = {
-      name,
-      extraArgs ? {},
-    }:
-      mkSystem {
-        inherit name;
-        system = "aarch64-linux";
-      };
-
     mkSystem = {
       name,
       system ? "x86_64-linux",
@@ -103,16 +94,6 @@
             };
           };
         };
-      };
-
-    mkArmDeploy = {
-      name,
-      hostname,
-      sshUser ? "root",
-    }:
-      mkDeploy {
-        inherit name hostname sshUser;
-        system = "aarch64-linux";
       };
 
     mkDeploy = {
