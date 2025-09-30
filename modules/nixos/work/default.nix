@@ -61,8 +61,8 @@
       pkgs.github-cli
 
       # Install chef and vagrant for some legacy systems reasons
-      perSystem.pkgs-22-11.chefdk
-      perSystem.pkgs-22-11.vagrant
+      perSystem.nixpkgs-22-11.chefdk
+      perSystem.nixpkgs-22-11.vagrant
 
       # Kubernetes and Docker utils
       pkgs.docker-compose

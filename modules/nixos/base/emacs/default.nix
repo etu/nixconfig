@@ -50,7 +50,7 @@
     pkgs.gopls # Go language server
     pkgs.bash-language-server # Bash language server
     pkgs.dockerfile-language-server # Docker language server
-    perSystem.pkgs-22-11.nodejs-14_x.pkgs.intelephense # PHP language server
+    perSystem.nixpkgs-22-11.nodejs-14_x.pkgs.intelephense # PHP language server
     pkgs.nodePackages.typescript-language-server # JS/TS language server
     pkgs.vscode-langservers-extracted # CSS/LESS/SASS language server
     pkgs.nodejs # For copilot.el

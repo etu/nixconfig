@@ -101,7 +101,7 @@
               self = {
                 inherit (self.packages.${system}) spaceWallpapers nixosSystemdKexec;
               };
-              pkgs-22-11 = {
+              nixpkgs-22-11 = {
                 # nodejs-14_x.pkgs.intelephense
                 inherit (pkgs-22-11) chefdk vagrant nodejs-14_x;
               };
