@@ -6,6 +6,16 @@ hostname := shell('hostname')
 _default:
     @just --list
 
+# nix flake show
+[group('nix')]
+flake-show:
+    nix flake show --option allow-import-from-derivation true
+
+# nix flake check
+[group('nix')]
+flake-check :
+    nix flake check
+
 # Build the current host
 [group('build')]
 build:
