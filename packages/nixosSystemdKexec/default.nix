@@ -1,16 +1,8 @@
-{
-  writeShellApplication,
-  fzf,
-  kexec-tools,
-  gawk,
-  gnused,
-  coreutils,
-  ...
-}:
-writeShellApplication {
+{pkgs, ...}:
+pkgs.writeShellApplication {
   name = "nixos-systemd-kexec";
 
-  runtimeInputs = [fzf kexec-tools gawk gnused coreutils];
+  runtimeInputs = [pkgs.fzf pkgs.kexec-tools pkgs.gawk pkgs.gnused pkgs.coreutils];
 
   text = ''
     EFI_MOUNT_DIR=/boot
