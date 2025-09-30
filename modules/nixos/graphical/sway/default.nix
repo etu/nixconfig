@@ -1,8 +1,8 @@
 {
   config,
+  perSystem,
   lib,
   pkgs,
-  spaceWallpapers,
   ...
 }: {
   options.etu.graphical.sway = {
@@ -15,7 +15,7 @@
     };
     wallpaper = lib.mkOption {
       type = lib.types.str;
-      default = builtins.toString spaceWallpapers;
+      default = builtins.toString perSystem.self.spaceWallpapers;
       description = "Wallpaper to use for sway";
     };
     lockWallpaper = lib.mkOption {

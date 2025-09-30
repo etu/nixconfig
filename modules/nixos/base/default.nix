@@ -2,7 +2,7 @@
   config,
   lib,
   pkgs,
-  nixosSystemdKexec,
+  perSystem,
   ...
 }: {
   imports = [
@@ -141,7 +141,7 @@
       '')
 
       # Package to do kexec to other systemd-boot nixos generations
-      nixosSystemdKexec
+      perSystem.self.nixosSystemdKexec
     ];
 
     # Set backup file extensions for conflicts on home manager activation.

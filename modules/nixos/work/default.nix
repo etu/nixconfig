@@ -1,9 +1,8 @@
 {
   config,
-  chefdk,
   lib,
+  perSystem,
   pkgs,
-  vagrant,
   ...
 }: {
   options.etu.work.enable = lib.mkEnableOption "Enables work module";
@@ -62,8 +61,8 @@
       pkgs.github-cli
 
       # Install chef and vagrant for some legacy systems reasons
-      chefdk
-      vagrant
+      perSystem.pkgs-22-11.chefdk
+      perSystem.pkgs-22-11.vagrant
 
       # Kubernetes and Docker utils
       pkgs.docker-compose

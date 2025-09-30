@@ -96,9 +96,18 @@
         specialArgs =
           {
             inherit inputs;
-            inherit (pkgs-22-11.nodejs-14_x.pkgs) intelephense;
-            inherit (pkgs-22-11) chefdk vagrant;
-            inherit (self.packages.${system}) spaceWallpapers nixosSystemdKexec;
+
+            # Fake perSystem inspired by numtide/blueprint and to avoid having as much
+            # separate as arguments.
+            perSystem = {
+              self = {
+                inherit (self.packages.${system}) spaceWallpapers nixosSystemdKexec;
+              };
+              pkgs-22-11 = {
+                inherit (pkgs-22-11.nodejs-14_x.pkgs) intelephense;
+                inherit (pkgs-22-11) chefdk vagrant;
+              };
+            };
 
             emacs-overlay = inputs.emacs-overlay.overlay;
             emacsWayland = nixpkgs.legacyPackages.${system}.emacs30-pgtk;

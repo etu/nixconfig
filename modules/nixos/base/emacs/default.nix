@@ -2,7 +2,7 @@
   config,
   emacs-overlay,
   emacsWayland,
-  intelephense,
+  perSystem,
   lib,
   pkgs,
   ...
@@ -51,7 +51,7 @@
     pkgs.gopls # Go language server
     pkgs.bash-language-server # Bash language server
     pkgs.dockerfile-language-server # Docker language server
-    intelephense # PHP language server
+    perSystem.pkgs-22-11.intelephense # PHP language server
     pkgs.nodePackages.typescript-language-server # JS/TS language server
     pkgs.vscode-langservers-extracted # CSS/LESS/SASS language server
     pkgs.nodejs # For copilot.el
