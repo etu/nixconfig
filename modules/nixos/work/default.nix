@@ -4,7 +4,8 @@
   perSystem,
   pkgs,
   ...
-}: {
+}:
+{
   options.etu.work.enable = lib.mkEnableOption "Enables work module";
 
   config = lib.mkIf config.etu.work.enable {
@@ -16,7 +17,14 @@
             all,
             enabled,
           }:
-            enabled ++ (with all; [imagick memcached redis pcov protobuf])
+          enabled
+          ++ (with all; [
+            imagick
+            memcached
+            redis
+            pcov
+            protobuf
+          ])
         );
       })
     ];

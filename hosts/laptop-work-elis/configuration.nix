@@ -5,7 +5,8 @@
   config,
   flake,
   ...
-}: {
+}:
+{
   imports = [
     # Include my hardware settings.
     ./hardware.nix
@@ -39,7 +40,10 @@
     services.netdata.enable = true;
     theme.enable = true;
     user.enable = true;
-    user.extraGroups = ["video" "docker"];
+    user.extraGroups = [
+      "video"
+      "docker"
+    ];
 
     # Allow home fileserver to connect to fetch snapshots.
     user.extraRootAuthorizedKeys = config.etu.data.pubkeys.etu.syncoid.server-main-elis;
@@ -60,8 +64,8 @@
 
     base.sanoid.datasets = {
       # Enable snapshotting for some filesystems
-      "zroot/safe/data".use_template = ["data"];
-      "zroot/safe/home".use_template = ["home"];
+      "zroot/safe/data".use_template = [ "data" ];
+      "zroot/safe/home".use_template = [ "home" ];
     };
 
     # Enable work modules

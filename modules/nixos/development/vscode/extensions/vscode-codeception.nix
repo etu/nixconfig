@@ -2,7 +2,7 @@
 # nix run github:etu/nixconfig#vcodeGetLatestExtensions joelwmale vscode-codeception
 #
 # Store page: https://marketplace.visualstudio.com/items?itemName=joelwmale.vscode-codeception
-{pkgs, ...}:
+{ pkgs, ... }:
 pkgs.vscode-utils.extensionFromVscodeMarketplace {
   publisher = "joelwmale";
   name = "vscode-codeception";

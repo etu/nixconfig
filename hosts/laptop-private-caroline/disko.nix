@@ -13,7 +13,12 @@ _: {
               type = "filesystem";
               format = "vfat";
               mountpoint = "/boot";
-              mountOptions = ["defaults" "noexec" "noauto" "x-systemd.automount"];
+              mountOptions = [
+                "defaults"
+                "noexec"
+                "noauto"
+                "x-systemd.automount"
+              ];
             };
           };
           zroot = {

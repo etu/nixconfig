@@ -6,7 +6,8 @@
   flake,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     # Include my hardware settings.
     ./hardware.nix
@@ -42,7 +43,7 @@
   nix.gc.dates = "weekly";
   nix.gc.options = "--delete-older-than 7d";
   nix.optimise.automatic = true;
-  nix.optimise.dates = ["daily"];
+  nix.optimise.dates = [ "daily" ];
 
   # My module settings
   etu = {
@@ -51,91 +52,91 @@
     base.emacs.enable = false; # Disable emacs that is enabled by default.
     development.git.enable = true;
     user.enable = true;
-    user.extraGroups = ["libvirtd"];
+    user.extraGroups = [ "libvirtd" ];
 
     user.extraRootAuthorizedKeys =
       # Allow workstations to push snapshots
       config.etu.data.pubkeys.etu.syncoid.workstations
       ++
-      # Allow github to deploy system
-      config.etu.data.pubkeys.etu.github-actions;
+        # Allow github to deploy system
+        config.etu.data.pubkeys.etu.github-actions;
 
     services.freshrss.enable = true;
     services.jellyfin.enable = true;
     services.netdata.enable = true;
     base.sanoid.datasets = {
       # Enable snapshotting for some filesystems
-      "zroot/safe/data".use_template = ["data"];
-      "zroot/safe/home".use_template = ["home"];
+      "zroot/safe/data".use_template = [ "data" ];
+      "zroot/safe/home".use_template = [ "home" ];
 
       # Enable cleanup for synced backups
       "zroot/backups/current/desktop-caroline/data" = {
-        use_template = ["data"];
+        use_template = [ "data" ];
         autosnap = false;
       };
       "zroot/backups/current/desktop-caroline/home" = {
-        use_template = ["home"];
+        use_template = [ "home" ];
         autosnap = false;
       };
       "zroot/backups/current/desktop-elis/data" = {
-        use_template = ["data"];
+        use_template = [ "data" ];
         autosnap = false;
       };
       "zroot/backups/current/desktop-elis/home" = {
-        use_template = ["home"];
+        use_template = [ "home" ];
         autosnap = false;
       };
       "zroot/backups/current/desktop-elis/work-home" = {
-        use_template = ["home"];
+        use_template = [ "home" ];
         autosnap = false;
       };
       "zroot/backups/current/laptop-private-caroline/data" = {
-        use_template = ["data"];
+        use_template = [ "data" ];
         autosnap = false;
       };
       "zroot/backups/current/laptop-private-caroline/home" = {
-        use_template = ["home"];
+        use_template = [ "home" ];
         autosnap = false;
       };
       "zroot/backups/current/laptop-private-elis/data" = {
-        use_template = ["data"];
+        use_template = [ "data" ];
         autosnap = false;
       };
       "zroot/backups/current/laptop-private-elis/home" = {
-        use_template = ["home"];
+        use_template = [ "home" ];
         autosnap = false;
       };
       "zroot/backups/current/laptop-work-elis/data" = {
-        use_template = ["data"];
+        use_template = [ "data" ];
         autosnap = false;
       };
       "zroot/backups/current/laptop-work-elis/home" = {
-        use_template = ["home"];
+        use_template = [ "home" ];
         autosnap = false;
       };
       "zroot/backups/current/vps06/data" = {
-        use_template = ["data"];
+        use_template = [ "data" ];
         autosnap = false;
       };
       "zroot/backups/current/server-sparv/minecraft" = {
-        use_template = ["data"];
+        use_template = [ "data" ];
         autosnap = false;
       };
       "zroot/backups/current/server-sparv/valheim-saves" = {
-        use_template = ["data"];
+        use_template = [ "data" ];
         autosnap = false;
       };
 
       # Enable snapshotting for bulk storage
-      "zstorage/files".use_template = ["storage"];
-      "zstorage/files/audio".use_template = ["storage"];
-      "zstorage/files/ebooks".use_template = ["storage"];
-      "zstorage/files/software".use_template = ["storage"];
-      "zstorage/files/video".use_template = ["storage"];
-      "zstorage/files/video/movies".use_template = ["storage"];
-      "zstorage/files/video/movies.sv".use_template = ["storage"];
-      "zstorage/files/video/series".use_template = ["storage"];
-      "zstorage/files/video/series.sv".use_template = ["storage"];
+      "zstorage/files".use_template = [ "storage" ];
+      "zstorage/files/audio".use_template = [ "storage" ];
+      "zstorage/files/ebooks".use_template = [ "storage" ];
+      "zstorage/files/software".use_template = [ "storage" ];
+      "zstorage/files/video".use_template = [ "storage" ];
+      "zstorage/files/video/movies".use_template = [ "storage" ];
+      "zstorage/files/video/movies.sv".use_template = [ "storage" ];
+      "zstorage/files/video/series".use_template = [ "storage" ];
+      "zstorage/files/video/series.sv".use_template = [ "storage" ];
     };
     base.syncoid.enable = true;
     # Enable syncing of some filesystems
@@ -147,17 +148,23 @@
       "root@desktop-elis:zroot/safe/home".target = "zroot/backups/current/desktop-elis/home";
       "root@desktop-elis:zroot/safe/work-home".target = "zroot/backups/current/desktop-elis/work-home";
 
-      "root@laptop-private-caroline:zroot/safe/data".target = "zroot/backups/current/laptop-private-caroline/data";
-      "root@laptop-private-caroline:zroot/safe/home".target = "zroot/backups/current/laptop-private-caroline/home";
-      "root@laptop-private-caroline:zroot/zvol/win10".target = "zroot/backups/current/laptop-private-caroline/win10";
+      "root@laptop-private-caroline:zroot/safe/data".target =
+        "zroot/backups/current/laptop-private-caroline/data";
+      "root@laptop-private-caroline:zroot/safe/home".target =
+        "zroot/backups/current/laptop-private-caroline/home";
+      "root@laptop-private-caroline:zroot/zvol/win10".target =
+        "zroot/backups/current/laptop-private-caroline/win10";
 
-      "root@laptop-private-elis:zroot/safe/data".target = "zroot/backups/current/laptop-private-elis/data";
-      "root@laptop-private-elis:zroot/safe/home".target = "zroot/backups/current/laptop-private-elis/home";
+      "root@laptop-private-elis:zroot/safe/data".target =
+        "zroot/backups/current/laptop-private-elis/data";
+      "root@laptop-private-elis:zroot/safe/home".target =
+        "zroot/backups/current/laptop-private-elis/home";
 
       "root@laptop-work-elis:zroot/safe/data".target = "zroot/backups/current/laptop-work-elis/data";
       "root@laptop-work-elis:zroot/safe/home".target = "zroot/backups/current/laptop-work-elis/home";
 
-      "root@server-sparv:zroot/safe/valheim-saves".target = "zroot/backups/current/server-sparv/valheim-saves";
+      "root@server-sparv:zroot/safe/valheim-saves".target =
+        "zroot/backups/current/server-sparv/valheim-saves";
       "root@server-sparv:zroot/safe/minecraft".target = "zroot/backups/current/server-sparv/minecraft";
 
       "root@vps06:zroot/safe/data".target = "zroot/backups/current/vps06/data";

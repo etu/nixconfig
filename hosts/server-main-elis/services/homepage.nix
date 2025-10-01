@@ -1,4 +1,5 @@
-{config, ...}: {
+{ config, ... }:
+{
   age.secrets = {
     inherit (config.etu.data.ageModules) homepage-dashboard-environment;
   };
@@ -121,7 +122,12 @@
                 password = "{{HOMEPAGE_VAR_BESZEL_PASSWORD}}";
                 systemId = "server-main-elis";
                 version = 2;
-                fields = ["cpu" "memory" "disk" "network"];
+                fields = [
+                  "cpu"
+                  "memory"
+                  "disk"
+                  "network"
+                ];
               };
             };
           }
@@ -136,7 +142,12 @@
                 password = "{{HOMEPAGE_VAR_BESZEL_PASSWORD}}";
                 systemId = "server-sparv";
                 version = 2;
-                fields = ["cpu" "memory" "disk" "network"];
+                fields = [
+                  "cpu"
+                  "memory"
+                  "disk"
+                  "network"
+                ];
               };
             };
           }
@@ -151,7 +162,12 @@
                 password = "{{HOMEPAGE_VAR_BESZEL_PASSWORD}}";
                 systemId = "vps06";
                 version = 2;
-                fields = ["cpu" "memory" "disk" "network"];
+                fields = [
+                  "cpu"
+                  "memory"
+                  "disk"
+                  "network"
+                ];
               };
             };
           }

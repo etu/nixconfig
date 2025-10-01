@@ -2,7 +2,7 @@
 # nix run github:etu/nixconfig#vcodeGetLatestExtensions kimgronqvist vscode-ido
 #
 # Store page: https://marketplace.visualstudio.com/items?itemName=kimgronqvist.vscode-ido
-{pkgs, ...}:
+{ pkgs, ... }:
 pkgs.vscode-utils.extensionFromVscodeMarketplace {
   publisher = "kimgronqvist";
   name = "vscode-ido";

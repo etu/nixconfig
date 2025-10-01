@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   options.etu.services.netdata = {
     enable = lib.mkEnableOption "Enable services netdata service";
   };

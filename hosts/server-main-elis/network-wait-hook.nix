@@ -1,4 +1,5 @@
-_: let
+_:
+let
   preStart = ''
     echo "Checking for nameservers to appear in /etc/resolv.conf";
     while ! grep nameserver /etc/resolv.conf > /dev/null; do
@@ -6,7 +7,8 @@ _: let
       sleep 1;
     done
   '';
-in {
+in
+{
   # Add a pre start check for network to be up for certain services.
   config.systemd.services."cloudflare-dyndns".preStart = preStart;
   config.systemd.services."container@usenet".preStart = preStart;

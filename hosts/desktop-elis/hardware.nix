@@ -4,7 +4,8 @@
   modulesPath,
   lib,
   ...
-}: {
+}:
+{
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
     ./disko.nix
@@ -17,10 +18,17 @@
   # Set boot loader timeout to longer than 5s to give me more time to choose.
   boot.loader.timeout = 15;
 
-  boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "thunderbolt" "usbhid" "usb_storage" "sd_mod"];
-  boot.initrd.kernelModules = [];
+  boot.initrd.availableKernelModules = [
+    "nvme"
+    "xhci_pci"
+    "thunderbolt"
+    "usbhid"
+    "usb_storage"
+    "sd_mod"
+  ];
+  boot.initrd.kernelModules = [ ];
 
-  boot.kernelModules = ["kvm-amd"];
+  boot.kernelModules = [ "kvm-amd" ];
 
   # Wifi needs at least 6.11, system works overall well with 6.12
   # (with a separate network card) and built in ethernet works
@@ -66,7 +74,7 @@
   boot.plymouth.enable = true;
 
   # Enable ZFS.
-  boot.supportedFilesystems = ["zfs"];
+  boot.supportedFilesystems = [ "zfs" ];
 
   # Enable ZFS scrubbing.
   services.zfs.autoScrub.enable = true;
@@ -83,11 +91,11 @@
 
   # Enable openrazer to control razer devices.
   hardware.openrazer.enable = true;
-  hardware.openrazer.users = [config.etu.user.username];
-  etu.user.extraUserPackages = [pkgs.polychromatic];
+  hardware.openrazer.users = [ config.etu.user.username ];
+  etu.user.extraUserPackages = [ pkgs.polychromatic ];
 
   # Set video driver.
-  services.xserver.videoDrivers = ["modesetting"];
+  services.xserver.videoDrivers = [ "modesetting" ];
 
   # Enable fwupd for firmware updates etc.
   services.fwupd.enable = true;
@@ -104,7 +112,7 @@
   ];
 
   # Swap devices.
-  swapDevices = [];
+  swapDevices = [ ];
 
   # Set max jobs in nix.
   #nix.settings.max-jobs = lib.mkDefault 8;

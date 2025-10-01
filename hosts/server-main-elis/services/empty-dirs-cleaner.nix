@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   systemd.services.media-empty-dirs-cleaner = {
     description = "Remove empty directories from /media/zstorage/files/{audio,video}";
     serviceConfig = {
@@ -13,7 +14,7 @@
     };
   };
   systemd.timers.media-empty-dirs-cleaner = {
-    wantedBy = ["timers.target"];
+    wantedBy = [ "timers.target" ];
     timerConfig = {
       OnCalendar = "hourly";
       Persistent = "yes";

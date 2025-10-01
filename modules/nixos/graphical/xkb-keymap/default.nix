@@ -1,4 +1,5 @@
-{lib, ...}: {
+{ lib, ... }:
+{
   options.etu.graphical.xkb-keymap.model = lib.mkOption {
     type = lib.types.str;
     default = "pc105";

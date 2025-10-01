@@ -2,7 +2,8 @@
   config,
   lib,
   ...
-}: {
+}:
+{
   options.etu.services.freshrss = {
     enable = lib.mkEnableOption "Enable services freshrss service";
     hostname = lib.mkOption {

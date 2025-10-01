@@ -4,7 +4,8 @@
   lib,
   modulesPath,
   ...
-}: {
+}:
+{
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
@@ -21,13 +22,13 @@
 
   boot.loader.grub.mirroredBoots = [
     {
-      devices = ["/dev/disk/by-uuid/6258-01A0"];
+      devices = [ "/dev/disk/by-uuid/6258-01A0" ];
       path = "/boot-fallback";
     }
   ];
 
-  boot.kernelModules = [];
-  boot.extraModulePackages = [];
+  boot.kernelModules = [ ];
+  boot.extraModulePackages = [ ];
 
   # Enable graphics drivers for the graphics card.
   hardware.graphics.enable = true;
@@ -49,8 +50,19 @@
 
   # Remote unlocking of encrypted ZFS
   boot.initrd = {
-    availableKernelModules = ["xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" "nvme" "thunderbolt"];
-    kernelModules = ["kvm-amd" "r8169"];
+    availableKernelModules = [
+      "xhci_pci"
+      "ahci"
+      "usbhid"
+      "usb_storage"
+      "sd_mod"
+      "nvme"
+      "thunderbolt"
+    ];
+    kernelModules = [
+      "kvm-amd"
+      "r8169"
+    ];
     network.enable = true;
     # Listen to ssh to let me decrypt zfs
     network.ssh = {
@@ -81,7 +93,7 @@
   '';
 
   # Enable ZFS.
-  boot.supportedFilesystems = ["zfs"];
+  boot.supportedFilesystems = [ "zfs" ];
 
   # Enable ZFS scrubbing.
   services.zfs.autoScrub.enable = true;
@@ -90,7 +102,11 @@
   fileSystems."/" = {
     device = "none";
     fsType = "tmpfs";
-    options = ["defaults" "size=10G" "mode=755"];
+    options = [
+      "defaults"
+      "size=10G"
+      "mode=755"
+    ];
   };
 
   fileSystems."/nix" = {
@@ -108,7 +124,10 @@
     device = "zroot/local/data";
     fsType = "zfs";
     neededForBoot = true;
-    options = ["defaults" "noexec"];
+    options = [
+      "defaults"
+      "noexec"
+    ];
   };
 
   fileSystems."${config.etu.dataPrefix}/home" = {
@@ -130,13 +149,19 @@
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/6241-1BC1";
     fsType = "vfat";
-    options = ["noauto" "x-systemd.automount"];
+    options = [
+      "noauto"
+      "x-systemd.automount"
+    ];
   };
 
   fileSystems."/boot-fallback" = {
     device = "/dev/disk/by-uuid/6258-01A0";
     fsType = "vfat";
-    options = ["noauto" "x-systemd.automount"];
+    options = [
+      "noauto"
+      "x-systemd.automount"
+    ];
   };
 
   fileSystems."/media/zstorage/files" = {
@@ -149,56 +174,80 @@
   fileSystems."/media/zstorage/files/audio" = {
     device = "zstorage/files/audio";
     fsType = "zfs";
-    options = ["noauto" "x-systemd.automount"];
+    options = [
+      "noauto"
+      "x-systemd.automount"
+    ];
     #noCheck = true;
   };
 
   fileSystems."/media/zstorage/files/ebooks" = {
     device = "zstorage/files/ebooks";
     fsType = "zfs";
-    options = ["noauto" "x-systemd.automount"];
+    options = [
+      "noauto"
+      "x-systemd.automount"
+    ];
     #noCheck = true;
   };
 
   fileSystems."/media/zstorage/files/software" = {
     device = "zstorage/files/software";
     fsType = "zfs";
-    options = ["noauto" "x-systemd.automount"];
+    options = [
+      "noauto"
+      "x-systemd.automount"
+    ];
     #noCheck = true;
   };
 
   fileSystems."/media/zstorage/files/video" = {
     device = "zstorage/files/video";
     fsType = "zfs";
-    options = ["noauto" "x-systemd.automount"];
+    options = [
+      "noauto"
+      "x-systemd.automount"
+    ];
     #noCheck = true;
   };
 
   fileSystems."/media/zstorage/files/video/movies" = {
     device = "zstorage/files/video/movies";
     fsType = "zfs";
-    options = ["noauto" "x-systemd.automount"];
+    options = [
+      "noauto"
+      "x-systemd.automount"
+    ];
     #noCheck = true;
   };
 
   fileSystems."/media/zstorage/files/video/movies.sv" = {
     device = "zstorage/files/video/movies.sv";
     fsType = "zfs";
-    options = ["noauto" "x-systemd.automount"];
+    options = [
+      "noauto"
+      "x-systemd.automount"
+    ];
     #noCheck = true;
   };
 
   fileSystems."/media/zstorage/files/video/series" = {
     device = "zstorage/files/video/series";
     fsType = "zfs";
-    options = ["noauto" "x-systemd.automount"];
+    options = [
+      "noauto"
+      "x-systemd.automount"
+    ];
     #noCheck = true;
   };
 
   fileSystems."/media/zstorage/files/video/series.sv" = {
     device = "zstorage/files/video/series.sv";
     fsType = "zfs";
-    options = ["noauto" "x-systemd.automount"];
+    options = [
+      "noauto"
+      "x-systemd.automount"
+    ];
     #noCheck = true;
   };
 
@@ -213,7 +262,7 @@
   ];
 
   # Swap devices.
-  swapDevices = [];
+  swapDevices = [ ];
 
   # Set max jobs in nix.
   nix.settings.max-jobs = lib.mkDefault 8;

@@ -18,7 +18,8 @@
   flake,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     # Include my hardware settings.
     ./hardware.nix
@@ -53,15 +54,19 @@
     services.netdata.enable = true;
     theme.enable = true;
     user.enable = true;
-    user.extraGroups = ["video" "docker" "libvirtd"];
+    user.extraGroups = [
+      "video"
+      "docker"
+      "libvirtd"
+    ];
 
     # Allow home fileserver to connect to fetch snapshots.
     user.extraRootAuthorizedKeys = config.etu.data.pubkeys.etu.syncoid.server-main-elis;
 
     base.sanoid.datasets = {
       # Enable snapshotting for some filesystems
-      "zroot/safe/data".use_template = ["data"];
-      "zroot/safe/home".use_template = ["home"];
+      "zroot/safe/data".use_template = [ "data" ];
+      "zroot/safe/home".use_template = [ "home" ];
     };
   };
 
@@ -72,17 +77,21 @@
   # Set up virt-manager
   virtualisation.libvirtd.enable = true;
   programs.dconf.enable = true;
-  environment.systemPackages = with pkgs; [virt-manager];
+  environment.systemPackages = with pkgs; [ virt-manager ];
   virtualisation.spiceUSBRedirection.enable = true;
 
   # Enable blueman.
   services.blueman.enable = true;
 
   # Add community server to known hosts
-  programs.ssh.knownHosts."aarch64.nixos.community".publicKey = config.etu.data.pubkeys.systems."aarch64.nixos.community";
+  programs.ssh.knownHosts."aarch64.nixos.community".publicKey =
+    config.etu.data.pubkeys.systems."aarch64.nixos.community";
 
   age.secrets = {
-    inherit (config.etu.data.ageModules) "etu@aarch64.nixos.community" "etu@aarch64.nixos.community.pub";
+    inherit (config.etu.data.ageModules)
+      "etu@aarch64.nixos.community"
+      "etu@aarch64.nixos.community.pub"
+      ;
     inherit (config.etu.data.ageModules) syncoid-workstations-ssh-ec;
   };
 
@@ -95,7 +104,7 @@
       sshKey = config.age.secrets."etu@aarch64.nixos.community".path;
       sshUser = "etu";
       system = "aarch64-linux";
-      supportedFeatures = ["big-parallel"];
+      supportedFeatures = [ "big-parallel" ];
     }
   ];
 }

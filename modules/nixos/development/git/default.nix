@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   options.etu.development.git.enable = lib.mkEnableOption "Enable development git settings";
 
   config = lib.mkIf config.etu.development.git.enable {
@@ -42,7 +43,10 @@
         };
 
         # Global ignores
-        ignores = [".ac-php-conf.json" ".projectile-cache.eld"];
+        ignores = [
+          ".ac-php-conf.json"
+          ".projectile-cache.eld"
+        ];
 
         # Conditonally included configs
         includes = [

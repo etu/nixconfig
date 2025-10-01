@@ -2,7 +2,7 @@
 # nix run github:etu/nixconfig#vcodeGetLatestExtensions wongjn php-sniffer
 #
 # Store page: https://marketplace.visualstudio.com/items?itemName=wongjn.php-sniffer
-{pkgs, ...}:
+{ pkgs, ... }:
 pkgs.vscode-utils.extensionFromVscodeMarketplace {
   publisher = "wongjn";
   name = "php-sniffer";

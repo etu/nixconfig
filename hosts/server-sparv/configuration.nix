@@ -6,7 +6,8 @@
   pkgs,
   flake,
   ...
-}: {
+}:
+{
   imports = [
     # Include my hardware settings.
     ./hardware.nix
@@ -26,7 +27,7 @@
   nix.gc.dates = "weekly";
   nix.gc.options = "--delete-older-than 7d";
   nix.optimise.automatic = true;
-  nix.optimise.dates = ["daily"];
+  nix.optimise.dates = [ "daily" ];
 
   # My module settings
   etu = {
@@ -40,25 +41,25 @@
     # and just keep the files on /
     base.zfs.enable = false; # Disable emacs that is enabled by default.
 
-    base.nix.allowUnfree = ["minecraft-server"];
+    base.nix.allowUnfree = [ "minecraft-server" ];
 
     base.emacs.enable = false; # Disable emacs that is enabled by default.
     base.sanoid.datasets = {
       # Enable snapshotting for some filesystems
-      "zroot/safe/root".use_template = ["data"];
-      "zroot/safe/home".use_template = ["data"];
-      "zroot/safe/minecraft".use_template = ["data"]; # Minecraft server
-      "zroot/safe/valheim-saves".use_template = ["data"]; # Valheim server
-      "zroot/local/project-zomboid".use_template = ["data"]; # Project Zomboid server
-      "zroot/local/vrising".use_template = ["data"]; # V Rising server
+      "zroot/safe/root".use_template = [ "data" ];
+      "zroot/safe/home".use_template = [ "data" ];
+      "zroot/safe/minecraft".use_template = [ "data" ]; # Minecraft server
+      "zroot/safe/valheim-saves".use_template = [ "data" ]; # Valheim server
+      "zroot/local/project-zomboid".use_template = [ "data" ]; # Project Zomboid server
+      "zroot/local/vrising".use_template = [ "data" ]; # V Rising server
     };
 
     user.extraRootAuthorizedKeys =
       # Allow home server to pull backups
       config.etu.data.pubkeys.etu.syncoid.server-main-elis
       ++
-      # Allow github to deploy system
-      config.etu.data.pubkeys.etu.github-actions;
+        # Allow github to deploy system
+        config.etu.data.pubkeys.etu.github-actions;
 
     services.netdata.enable = true;
 
@@ -140,7 +141,7 @@
           mvp-Serverside_Simulations-1.1.9
         '';
       };
-      environmentFiles = [config.age.secrets.valheim-server-env.path];
+      environmentFiles = [ config.age.secrets.valheim-server-env.path ];
       volumes = [
         "/var/lib/valheim/backups:/home/steam/backups"
         "/var/lib/valheim/saves:/home/steam/.config/unity3d/IronGate/Valheim"
@@ -156,7 +157,7 @@
         "16261:16261/udp"
         "16262-16272:16262-16272/tcp"
       ];
-      environmentFiles = [config.age.secrets.project-zomboid-env.path];
+      environmentFiles = [ config.age.secrets.project-zomboid-env.path ];
       volumes = [
         "/var/lib/project-zomboid:/home/steam/Zomboid"
       ];
@@ -185,13 +186,13 @@
   # Restart valheim service every day
   systemd.services.restart-valheim-service = {
     description = "Restart valheim service";
-    after = ["docker.service"];
+    after = [ "docker.service" ];
     serviceConfig.Type = "simple";
     script = "${pkgs.systemd}/bin/systemctl restart docker-valheim-server.service";
   };
   systemd.timers.restart-valheim-service = {
-    wantedBy = ["timers.target"];
-    after = ["docker.service"];
+    wantedBy = [ "timers.target" ];
+    after = [ "docker.service" ];
     timerConfig = {
       OnCalendar = "05:15";
       Persistent = "yes";

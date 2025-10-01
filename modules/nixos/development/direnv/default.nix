@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   options.etu.development.direnv.enable = lib.mkEnableOption "Enable development direnv settings";
 
   config = lib.mkIf config.etu.development.direnv.enable {

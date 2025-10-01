@@ -4,7 +4,8 @@
   pkgs,
   perSystem,
   ...
-}: {
+}:
+{
   imports = [
     ./emacs
     ./fish
@@ -39,7 +40,7 @@
 
   config = {
     # Set the nixpkgs inputs path as channel in the NIX_PATH variable.
-    nix.nixPath = ["nixpkgs=${pkgs.path}"];
+    nix.nixPath = [ "nixpkgs=${pkgs.path}" ];
 
     # Enable base services.
     etu.base = {
@@ -78,7 +79,10 @@
 
     # Enable experimental features in the nix command to make nix
     # search work.
-    nix.settings.experimental-features = ["nix-command" "flakes"];
+    nix.settings.experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
 
     # Set system state version.
     system.stateVersion = config.etu.stateVersion;
@@ -127,13 +131,13 @@
       pkgs.host # look up host info
       pkgs.whois # whois duh
       pkgs.prettyping # pretty ping output
-      (pkgs.runCommand "prettyping-pp" {} ''
+      (pkgs.runCommand "prettyping-pp" { } ''
         mkdir -p $out/bin
         ln -s ${pkgs.prettyping}/bin/prettyping $out/bin/pp
       '')
 
       # Install some color test scripts from xterm
-      (pkgs.runCommand "xterm-color-scripts" {} ''
+      (pkgs.runCommand "xterm-color-scripts" { } ''
         tar -xf ${pkgs.xterm.src}
 
         install -Dm755 xterm-${pkgs.xterm.version}/vttests/256colors2.pl $out/bin/256colors2.pl

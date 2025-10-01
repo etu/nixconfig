@@ -3,7 +3,8 @@
   lib,
   inputs,
   ...
-}: {
+}:
+{
   options.etu.theme.enable = lib.mkEnableOption "Enable theme settings";
   options.etu.theme.flavor = lib.mkOption {
     type = lib.types.str;
@@ -47,34 +48,43 @@
 
       # Set up theme for sway.
       catppuccin.sway.enable = true;
-      wayland.windowManager.sway.config.colors = let
-        background = "$base";
-        focusedInactive = {
+      wayland.windowManager.sway.config.colors =
+        let
           background = "$base";
-          border = "$overlay0";
-          childBorder = "$overlay0";
-          indicator = "$rosewater";
-          text = "$text";
+          focusedInactive = {
+            background = "$base";
+            border = "$overlay0";
+            childBorder = "$overlay0";
+            indicator = "$rosewater";
+            text = "$text";
+          };
+          focused = {
+            background = "$base";
+            border = "$lavender";
+            childBorder = "$lavender";
+            indicator = "$rosewater";
+            text = "$text";
+          };
+          urgent = {
+            background = "$base";
+            border = "$peach";
+            childBorder = "$peach";
+            indicator = "$overlay0";
+            text = "$peach";
+          };
+          unfocused = focusedInactive;
+          "placeholder" = focusedInactive;
+        in
+        {
+          inherit
+            background
+            focused
+            focusedInactive
+            urgent
+            unfocused
+            "placeholder"
+            ;
         };
-        focused = {
-          background = "$base";
-          border = "$lavender";
-          childBorder = "$lavender";
-          indicator = "$rosewater";
-          text = "$text";
-        };
-        urgent = {
-          background = "$base";
-          border = "$peach";
-          childBorder = "$peach";
-          indicator = "$overlay0";
-          text = "$peach";
-        };
-        unfocused = focusedInactive;
-        "placeholder" = focusedInactive;
-      in {
-        inherit background focused focusedInactive urgent unfocused "placeholder";
-      };
 
       # Set up theme for waybar.
       catppuccin.waybar.enable = true;

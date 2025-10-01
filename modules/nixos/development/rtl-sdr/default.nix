@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   options.etu.development.rtl-sdr.enable = lib.mkEnableOption "Enable development rtl-sdr settings";
 
   config = lib.mkIf config.etu.development.rtl-sdr.enable {
@@ -17,6 +18,6 @@
     ];
 
     # Define extra groups for user.
-    etu.user.extraGroups = ["plugdev"];
+    etu.user.extraGroups = [ "plugdev" ];
   };
 }

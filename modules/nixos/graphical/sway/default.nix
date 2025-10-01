@@ -4,7 +4,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   options.etu.graphical.sway = {
     enable = lib.mkEnableOption "Enables sway and auto login for my user";
     package = lib.mkOption {
@@ -23,11 +24,9 @@
       default = "screenshot";
       description = "Wallpaper to use for lockscreen";
     };
-    enableSuspendOnTimeout =
-      lib.mkEnableOption "Lock the screen before suspending"
-      // {
-        default = true;
-      };
+    enableSuspendOnTimeout = lib.mkEnableOption "Lock the screen before suspending" // {
+      default = true;
+    };
   };
 
   config = lib.mkIf config.etu.graphical.sway.enable {
@@ -56,8 +55,8 @@
 
     # Make sure to start the home-manager activation before I log in.
     systemd.services."home-manager-${config.etu.user.username}" = {
-      before = ["display-manager.service"];
-      wantedBy = ["multi-user.target"];
+      before = [ "display-manager.service" ];
+      wantedBy = [ "multi-user.target" ];
     };
 
     # Enable greetd as a non-graphical login manager.
@@ -80,7 +79,7 @@
 
     # Set up XDG Portals
     xdg.portal.enable = true;
-    xdg.portal.extraPortals = with pkgs; [xdg-desktop-portal-wlr];
+    xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-wlr ];
 
     # If my user exists, enable home-manager configurations
     home-manager.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
@@ -112,8 +111,8 @@
       services.easyeffects.enable = true;
       services.easyeffects.extraPresets.my-preset = {
         input = {
-          blocklist = [];
-          plugins_order = ["rnnoise#0"];
+          blocklist = [ ];
+          plugins_order = [ "rnnoise#0" ];
           "rnnoise#0" = {
             bypass = false;
             enable-vad = true;
@@ -140,19 +139,18 @@
           command = "${pkgs.swaylock-effects}/bin/swaylock";
         }
       ];
-      services.swayidle.timeouts =
-        [
-          {
-            timeout = 300;
-            command = "${pkgs.swaylock-effects}/bin/swaylock";
-          }
-        ]
-        ++ lib.optionals config.etu.graphical.sway.enableSuspendOnTimeout [
-          {
-            timeout = 600;
-            command = "${pkgs.systemd}/bin/systemctl suspend";
-          }
-        ];
+      services.swayidle.timeouts = [
+        {
+          timeout = 300;
+          command = "${pkgs.swaylock-effects}/bin/swaylock";
+        }
+      ]
+      ++ lib.optionals config.etu.graphical.sway.enableSuspendOnTimeout [
+        {
+          timeout = 600;
+          command = "${pkgs.systemd}/bin/systemctl suspend";
+        }
+      ];
 
       # Set up the cursor theme
       home.pointerCursor = {
@@ -179,22 +177,21 @@
       # Configure swaylock
       programs.swaylock.enable = true;
       programs.swaylock.package = pkgs.swaylock-effects;
-      programs.swaylock.settings =
-        {
-          daemonize = true;
-          clock = true;
-          timestr = "%k:%M";
-          datestr = "%Y-%m-%d";
-          show-failed-attempts = true;
-        }
-        // (lib.optionalAttrs (config.etu.graphical.sway.lockWallpaper == "screenshot") {
-          indicator = true;
-          screenshots = true;
-          effect-blur = "5x5";
-        })
-        // (lib.optionalAttrs (config.etu.graphical.sway.lockWallpaper != "screenshot") {
-          image = config.etu.graphical.sway.lockWallpaper;
-        });
+      programs.swaylock.settings = {
+        daemonize = true;
+        clock = true;
+        timestr = "%k:%M";
+        datestr = "%Y-%m-%d";
+        show-failed-attempts = true;
+      }
+      // (lib.optionalAttrs (config.etu.graphical.sway.lockWallpaper == "screenshot") {
+        indicator = true;
+        screenshots = true;
+        effect-blur = "5x5";
+      })
+      // (lib.optionalAttrs (config.etu.graphical.sway.lockWallpaper != "screenshot") {
+        image = config.etu.graphical.sway.lockWallpaper;
+      });
 
       wayland.systemd.target = "sway-session.target";
 
@@ -203,29 +200,37 @@
         enable = true;
         systemd.enable = true;
 
-        config = let
-          rofi = pkgs.rofi.override {plugins = [pkgs.rofi-emoji];};
-          pactl = "${config.services.pulseaudio.package}/bin/pactl";
+        config =
+          let
+            rofi = pkgs.rofi.override { plugins = [ pkgs.rofi-emoji ]; };
+            pactl = "${config.services.pulseaudio.package}/bin/pactl";
 
-          # Set default modifier
-          modifier = "Mod4";
+            # Set default modifier
+            modifier = "Mod4";
 
-          # Direction keys (Emacs logic)
-          left = "b";
-          right = "f";
-          up = "p";
-          down = "n";
-        in {
-          # Set default modifier
-          inherit modifier left right up down;
+            # Direction keys (Emacs logic)
+            left = "b";
+            right = "f";
+            up = "p";
+            down = "n";
+          in
+          {
+            # Set default modifier
+            inherit
+              modifier
+              left
+              right
+              up
+              down
+              ;
 
-          keybindings =
-            {
+            keybindings = {
               # Run terminal
               "${modifier}+Return" = "exec ${config.etu.graphical.terminal.terminalPath}";
 
               # Run Launcher
-              "${modifier}+e" = "exec ${rofi}/bin/rofi -show combi -modi combi -combi-modes 'window,drun' | xargs swaymsg exec --";
+              "${modifier}+e" =
+                "exec ${rofi}/bin/rofi -show combi -modi combi -combi-modes 'window,drun' | xargs swaymsg exec --";
 
               # Run rofi emoji picker
               "${modifier}+i" = "exec ${rofi}/bin/rofi -show emoji";
@@ -341,152 +346,155 @@
               "${modifier}+Shift+r" = "mode passthrough";
 
               # Exit Sway
-              "${modifier}+Shift+e" = "exec ${config.etu.graphical.sway.package}/bin/swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' '${config.etu.graphical.sway.package}/bin/swaymsg exit'";
+              "${modifier}+Shift+e" =
+                "exec ${config.etu.graphical.sway.package}/bin/swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' '${config.etu.graphical.sway.package}/bin/swaymsg exit'";
             }
             // lib.optionalAttrs config.etu.games.mumble.enable {
               # Add PTT button for mumble in the gaming module:
-              "--no-repeat Alt_R" = "exec ${pkgs.glib}/bin/gdbus call -e -d net.sourceforge.mumble.mumble -o / -m net.sourceforge.mumble.Mumble.startTalking";
-              "--no-repeat --release Alt_R" = "exec ${pkgs.glib}/bin/gdbus call -e -d net.sourceforge.mumble.mumble -o / -m net.sourceforge.mumble.Mumble.stopTalking";
+              "--no-repeat Alt_R" =
+                "exec ${pkgs.glib}/bin/gdbus call -e -d net.sourceforge.mumble.mumble -o / -m net.sourceforge.mumble.Mumble.startTalking";
+              "--no-repeat --release Alt_R" =
+                "exec ${pkgs.glib}/bin/gdbus call -e -d net.sourceforge.mumble.mumble -o / -m net.sourceforge.mumble.Mumble.stopTalking";
             };
 
-          modes.resize = {
-            "${left}" = "resize shrink width 10px"; # Pressing left will shrink the window’s width.
-            "${right}" = "resize grow width 10px"; # Pressing right will grow the window’s width.
-            "${up}" = "resize shrink height 10px"; # Pressing up will shrink the window’s height.
-            "${down}" = "resize grow height 10px"; # Pressing down will grow the window’s height.
+            modes.resize = {
+              "${left}" = "resize shrink width 10px"; # Pressing left will shrink the window’s width.
+              "${right}" = "resize grow width 10px"; # Pressing right will grow the window’s width.
+              "${up}" = "resize shrink height 10px"; # Pressing up will shrink the window’s height.
+              "${down}" = "resize grow height 10px"; # Pressing down will grow the window’s height.
 
-            # You can also use the arrow keys:
-            Left = "resize shrink width 10px";
-            Down = "resize grow height 10px";
-            Up = "resize shrink height 10px";
-            Right = "resize grow width 10px";
+              # You can also use the arrow keys:
+              Left = "resize shrink width 10px";
+              Down = "resize grow height 10px";
+              Up = "resize shrink height 10px";
+              Right = "resize grow width 10px";
 
-            # Exit mode
-            Return = "mode default";
-            Escape = "mode default";
-            "${modifier}+r" = "mode default";
+              # Exit mode
+              Return = "mode default";
+              Escape = "mode default";
+              "${modifier}+r" = "mode default";
+            };
+            modes.passthrough = {
+              # Exit mode
+              "Shift+Escape" = "mode default";
+              "${modifier}+Shift+r" = "mode default";
+            };
+
+            focus.wrapping = "workspace";
+            focus.newWindow = "urgent";
+            fonts = {
+              names = [ config.etu.graphical.theme.fonts.monospace ];
+              size = config.etu.graphical.theme.fonts.size + 0.0;
+            };
+            gaps.inner = 5;
+
+            defaultWorkspace = "workspace number 1";
+
+            window.commands = [
+              # Set borders instead of title bars for some programs
+              {
+                criteria.app_id = "Alacritty";
+                command = "border pixel 3";
+              }
+              {
+                criteria.app_id = "foot";
+                command = "border pixel 3";
+              }
+              {
+                criteria.app_id = "firefox";
+                command = "border pixel 3";
+              }
+              {
+                criteria.class = "Brave-browser";
+                command = "border pixel 3";
+              }
+              {
+                criteria.class = "Chromium-browser";
+                command = "border pixel 3";
+              }
+              {
+                criteria.class = "Google-chrome";
+                command = "border pixel 3";
+              }
+              {
+                criteria.app_id = "emacs";
+                command = "border pixel 3";
+              }
+              {
+                criteria.app_id = "wlroots";
+                command = "border pixel 3";
+              }
+
+              # Set opacity for some programs
+              {
+                criteria.app_id = "Alacritty";
+                command = "opacity set 0.9";
+              }
+              {
+                criteria.app_id = "foot";
+                command = "opacity set 0.9";
+              }
+              {
+                criteria.app_id = "emacs";
+                command = "opacity set 0.99";
+              }
+            ];
+
+            # Make some programs floating
+            floating.criteria = [
+              {
+                app_id = "firefox";
+                title = "Firefox - Sharing Indicator";
+              }
+              {
+                app_id = "firefox";
+                title = "Firefox — Sharing Indicator";
+              }
+              {
+                app_id = "firefox";
+                title = "Picture-in-Picture";
+              }
+              {
+                app_id = ".blueman-manager-wrapped";
+                title = "Bluetooth Devices";
+              }
+              { title = "Welcome to Google Chrome"; }
+              {
+                class = "Google-chrome";
+                title = "Share your new meeting - Google Chrome";
+              }
+              {
+                app_id = "nm-connection-editor";
+                title = "Network Connections";
+              }
+            ];
+
+            # Set a custom keymap
+            input."type:keyboard".xkb_model = config.etu.graphical.xkb-keymap.model;
+            input."type:keyboard".xkb_layout = config.etu.graphical.xkb-keymap.layout;
+            input."type:keyboard".xkb_options = config.etu.graphical.xkb-keymap.options;
+            input."type:keyboard".xkb_variant = config.etu.graphical.xkb-keymap.variant;
+
+            # Enable titlebars
+            window.titlebar = true;
+            floating.titlebar = true;
+
+            startup = [
+              { command = "${pkgs.mako}/bin/mako"; }
+
+              # Import variables needed for screen sharing and gnome3 pinentry to work.
+              { command = "${pkgs.dbus}/bin/dbus-update-activation-environment WAYLAND_DISPLAY"; }
+
+              # Import user environment PATH to systemctl as user and then restart the xdg-desktop-portal
+              # This is to get xdg-open to work in flatpaks to be able to open links inside of flatpaks.
+              {
+                command = "${config.systemd.package}/bin/systemctl --user import-environment PATH && ${config.systemd.package}/bin/systemctl --user restart xdg-desktop-portal.service";
+              }
+            ];
+
+            # Disable the default bar
+            bars = [ { mode = "invisible"; } ];
           };
-          modes.passthrough = {
-            # Exit mode
-            "Shift+Escape" = "mode default";
-            "${modifier}+Shift+r" = "mode default";
-          };
-
-          focus.wrapping = "workspace";
-          focus.newWindow = "urgent";
-          fonts = {
-            names = [config.etu.graphical.theme.fonts.monospace];
-            size = config.etu.graphical.theme.fonts.size + 0.0;
-          };
-          gaps.inner = 5;
-
-          defaultWorkspace = "workspace number 1";
-
-          window.commands = [
-            # Set borders instead of title bars for some programs
-            {
-              criteria.app_id = "Alacritty";
-              command = "border pixel 3";
-            }
-            {
-              criteria.app_id = "foot";
-              command = "border pixel 3";
-            }
-            {
-              criteria.app_id = "firefox";
-              command = "border pixel 3";
-            }
-            {
-              criteria.class = "Brave-browser";
-              command = "border pixel 3";
-            }
-            {
-              criteria.class = "Chromium-browser";
-              command = "border pixel 3";
-            }
-            {
-              criteria.class = "Google-chrome";
-              command = "border pixel 3";
-            }
-            {
-              criteria.app_id = "emacs";
-              command = "border pixel 3";
-            }
-            {
-              criteria.app_id = "wlroots";
-              command = "border pixel 3";
-            }
-
-            # Set opacity for some programs
-            {
-              criteria.app_id = "Alacritty";
-              command = "opacity set 0.9";
-            }
-            {
-              criteria.app_id = "foot";
-              command = "opacity set 0.9";
-            }
-            {
-              criteria.app_id = "emacs";
-              command = "opacity set 0.99";
-            }
-          ];
-
-          # Make some programs floating
-          floating.criteria = [
-            {
-              app_id = "firefox";
-              title = "Firefox - Sharing Indicator";
-            }
-            {
-              app_id = "firefox";
-              title = "Firefox — Sharing Indicator";
-            }
-            {
-              app_id = "firefox";
-              title = "Picture-in-Picture";
-            }
-            {
-              app_id = ".blueman-manager-wrapped";
-              title = "Bluetooth Devices";
-            }
-            {title = "Welcome to Google Chrome";}
-            {
-              class = "Google-chrome";
-              title = "Share your new meeting - Google Chrome";
-            }
-            {
-              app_id = "nm-connection-editor";
-              title = "Network Connections";
-            }
-          ];
-
-          # Set a custom keymap
-          input."type:keyboard".xkb_model = config.etu.graphical.xkb-keymap.model;
-          input."type:keyboard".xkb_layout = config.etu.graphical.xkb-keymap.layout;
-          input."type:keyboard".xkb_options = config.etu.graphical.xkb-keymap.options;
-          input."type:keyboard".xkb_variant = config.etu.graphical.xkb-keymap.variant;
-
-          # Enable titlebars
-          window.titlebar = true;
-          floating.titlebar = true;
-
-          startup = [
-            {command = "${pkgs.mako}/bin/mako";}
-
-            # Import variables needed for screen sharing and gnome3 pinentry to work.
-            {command = "${pkgs.dbus}/bin/dbus-update-activation-environment WAYLAND_DISPLAY";}
-
-            # Import user environment PATH to systemctl as user and then restart the xdg-desktop-portal
-            # This is to get xdg-open to work in flatpaks to be able to open links inside of flatpaks.
-            {
-              command = "${config.systemd.package}/bin/systemctl --user import-environment PATH && ${config.systemd.package}/bin/systemctl --user restart xdg-desktop-portal.service";
-            }
-          ];
-
-          # Disable the default bar
-          bars = [{mode = "invisible";}];
-        };
       }; # END sway
     }; # END home-manager
   };

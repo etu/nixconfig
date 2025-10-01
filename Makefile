@@ -44,7 +44,7 @@ yaml-fmt:
 #
 nix-fmt-check:
 	@echo "Check nix file formatting ❄️"
-	nix fmt . -- --check
+	nix fmt . -- --ci
 
 yaml-fmt-check:
 	@echo "Check yaml file formatting 📂"

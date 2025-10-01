@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   etu.base.zfs.system.directories = [
     # Persistence of postgres database between boots.
     "/var/lib/postgresql"

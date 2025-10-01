@@ -18,7 +18,8 @@
   config,
   flake,
   ...
-}: {
+}:
+{
   imports = [
     # Include my hardware settings.
     ./hardware.nix
@@ -46,7 +47,7 @@
     user.username = "concate";
     user.realname = "Caroline Hirwing";
     user.email = "caroline@hirwing.se";
-    user.extraGroups = ["video"];
+    user.extraGroups = [ "video" ];
 
     # Don't set a password for root / user depending on agenix.
     user.userPasswordAgeModule = config.etu.data.ageModules.hashed-caroline-laptop-concate-password;
@@ -94,8 +95,8 @@
     # Configure sanoid snapshotting.
     base.sanoid.datasets = {
       # Enable snapshotting for some filesystems
-      "zroot/safe/data".use_template = ["data"];
-      "zroot/safe/home".use_template = ["home"];
+      "zroot/safe/data".use_template = [ "data" ];
+      "zroot/safe/home".use_template = [ "home" ];
     };
   };
 

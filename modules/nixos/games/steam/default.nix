@@ -2,7 +2,8 @@
   config,
   lib,
   ...
-}: {
+}:
+{
   options.etu.games.steam.enable = lib.mkEnableOption "Enable games steam settings";
 
   config = lib.mkIf config.etu.games.steam.enable {

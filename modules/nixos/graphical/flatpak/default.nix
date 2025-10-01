@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   options.etu.graphical.flatpak.enable = lib.mkEnableOption "Enable graphical flatpak settings";
-  options.etu.graphical.flatpak.enablePersistence = lib.mkEnableOption "Enable graphical flatpak persistence settings";
+  options.etu.graphical.flatpak.enablePersistence =
+    lib.mkEnableOption "Enable graphical flatpak persistence settings";
 
   config = lib.mkIf config.etu.graphical.flatpak.enable {
     # Install appcenter
@@ -14,7 +16,7 @@
     ];
 
     # Required for link opening to browsers to work in apps when on Sway
-    xdg.portal.extraPortals = with pkgs; [xdg-desktop-portal-gtk];
+    xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
 
     # Mount flatpak persistence under flatpak data
     etu.base.zfs.local.directories = lib.mkIf config.etu.graphical.flatpak.enablePersistence [
@@ -31,7 +33,7 @@
     # the parent filesystem. Otherwise it doesn't really work to
     # install or run things :'D
     fileSystems = lib.mkIf config.etu.graphical.flatpak.enablePersistence {
-      "/var/lib/flatpak".options = ["exec"];
+      "/var/lib/flatpak".options = [ "exec" ];
     };
 
     # Enable flatpak
@@ -60,8 +62,8 @@
 
     # Configure flathub
     systemd.services.flatpak-setup-flathub = {
-      wantedBy = ["multi-user.target"];
-      path = [pkgs.flatpak];
+      wantedBy = [ "multi-user.target" ];
+      path = [ pkgs.flatpak ];
       script = ''
         flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
       '';

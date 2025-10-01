@@ -55,69 +55,78 @@
     nur.url = "nur";
   };
 
-  outputs = {
-    flake-utils,
-    self,
-    nixpkgs,
-    ...
-  } @ inputs: let
-    mkSystem = {
-      name,
-      system ? "x86_64-linux",
-    }:
-      nixpkgs.lib.nixosSystem {
-        inherit system;
+  outputs =
+    {
+      flake-utils,
+      self,
+      nixpkgs,
+      ...
+    }@inputs:
+    let
+      mkSystem =
+        {
+          name,
+          system ? "x86_64-linux",
+        }:
+        nixpkgs.lib.nixosSystem {
+          inherit system;
 
-        modules = [./hosts/${name}/configuration.nix];
+          modules = [ ./hosts/${name}/configuration.nix ];
 
-        specialArgs = {
-          inherit inputs;
+          specialArgs = {
+            inherit inputs;
 
-          # Fake flake inspired by numtide/blueprint to avoid having to pass modules
-          # as a separate argument.
-          flake = self;
+            # Fake flake inspired by numtide/blueprint to avoid having to pass modules
+            # as a separate argument.
+            flake = self;
 
-          # Fake perSystem inspired by numtide/blueprint and to avoid having as much
-          # separate as arguments.
-          perSystem = {
-            self = {
-              inherit (self.packages.${system}) spaceWallpapers nixosSystemdKexec;
-            };
-            nixpkgs-22-11 = let
-              pkgs-22-11 = import inputs.nixpkgs-22-11 {
-                inherit system;
-                config.allowUnfree = true;
+            # Fake perSystem inspired by numtide/blueprint and to avoid having as much
+            # separate as arguments.
+            perSystem = {
+              self = {
+                inherit (self.packages.${system}) spaceWallpapers nixosSystemdKexec;
               };
-            in {
-              # nodejs-14_x.pkgs.intelephense
-              inherit (pkgs-22-11) chefdk vagrant nodejs-14_x;
+              nixpkgs-22-11 =
+                let
+                  pkgs-22-11 = import inputs.nixpkgs-22-11 {
+                    inherit system;
+                    config.allowUnfree = true;
+                  };
+                in
+                {
+                  # nodejs-14_x.pkgs.intelephense
+                  inherit (pkgs-22-11) chefdk vagrant nodejs-14_x;
+                };
             };
           };
         };
-      };
 
-    mkDeploy = {
-      name,
-      hostname,
-      sshUser ? "root",
-      system ? "x86_64-linux",
-    }: {
-      inherit sshUser hostname;
-      profiles.system.path = inputs.deploy-rs.lib.${system}.activate.nixos self.nixosConfigurations.${name};
-    };
-  in
+      mkDeploy =
+        {
+          name,
+          hostname,
+          sshUser ? "root",
+          system ? "x86_64-linux",
+        }:
+        {
+          inherit sshUser hostname;
+          profiles.system.path =
+            inputs.deploy-rs.lib.${system}.activate.nixos
+              self.nixosConfigurations.${name};
+        };
+    in
     {
       # Declare systems
       nixosConfigurations = {
-        desktop-caroline = mkSystem {name = "desktop-caroline";};
-        desktop-elis = mkSystem {name = "desktop-elis";};
-        laptop-private-caroline = mkSystem {name = "laptop-private-caroline";};
-        laptop-private-elis = mkSystem {name = "laptop-private-elis";};
-        laptop-work-elis = mkSystem {name = "laptop-work-elis";};
-        server-main-elis = mkSystem {name = "server-main-elis";};
-        vps06 = mkSystem {name = "vps06";};
-        server-sparv = mkSystem {name = "server-sparv";};
-        live-iso = mkSystem {name = "live-iso";};
+        desktop-caroline = mkSystem { name = "desktop-caroline"; };
+        desktop-elis = mkSystem { name = "desktop-elis"; };
+        laptop-private-caroline = mkSystem { name = "laptop-private-caroline"; };
+        laptop-private-elis = mkSystem { name = "laptop-private-elis"; };
+        laptop-work-elis = mkSystem { name = "laptop-work-elis"; };
+        server-main-elis = mkSystem { name = "server-main-elis"; };
+        vps06 = mkSystem { name = "vps06"; };
+        server-sparv = mkSystem { name = "server-sparv"; };
+        live-iso = mkSystem { name = "live-iso"; };
       };
 
       # Specify deploy-rs deployments
@@ -140,27 +149,35 @@
       nixosModules.default = ./modules/nixos;
 
       # This is highly advised, and will prevent many possible mistakes
-      checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) inputs.deploy-rs.lib;
+      checks = builtins.mapAttrs (
+        system: deployLib: deployLib.deployChecks self.deploy
+      ) inputs.deploy-rs.lib;
     }
-    // flake-utils.lib.eachSystem ["x86_64-linux"] (system: let
-      pkgs = nixpkgs.legacyPackages.${system};
-    in {
-      # Specify formatter package for "nix fmt ." and "nix fmt . -- --check"
-      formatter = pkgs.alejandra;
+    // flake-utils.lib.eachSystem [ "x86_64-linux" ] (
+      system:
+      let
+        pkgs = nixpkgs.legacyPackages.${system};
+      in
+      {
+        # Specify formatter package for "nix fmt ." and "nix fmt . -- --check"
+        formatter = pkgs.nixfmt-tree;
 
-      # Set up nix develop shell environment
-      devShells.default = pkgs.callPackage ./devshell.nix {flake = self;};
+        # Set up nix develop shell environment
+        devShells.default = pkgs.callPackage ./devshell.nix { flake = self; };
 
-      # Build packages
-      packages.spaceWallpapers = pkgs.callPackage ./packages/spaceWallpapers {};
-      packages.nixosSystemdKexec = pkgs.callPackage ./packages/nixosSystemdKexec {};
-      packages.iso = self.nixosConfigurations.live-iso.config.system.build.isoImage;
+        # Build packages
+        packages.spaceWallpapers = pkgs.callPackage ./packages/spaceWallpapers { };
+        packages.nixosSystemdKexec = pkgs.callPackage ./packages/nixosSystemdKexec { };
+        packages.iso = self.nixosConfigurations.live-iso.config.system.build.isoImage;
 
-      # Expose commands/programs under nix run .#foo
-      apps.vcodeGetLatestExtensions = {
-        type = "app";
-        program = "${(pkgs.callPackage ./packages/vscodeGetLatestExtensions {})}/bin/vscode-get-latest-extensions";
-        meta.description = "Get latest compatible VSCode extension for specified version of VSCode";
-      };
-    });
+        # Expose commands/programs under nix run .#foo
+        apps.vcodeGetLatestExtensions = {
+          type = "app";
+          program = "${
+            (pkgs.callPackage ./packages/vscodeGetLatestExtensions { })
+          }/bin/vscode-get-latest-extensions";
+          meta.description = "Get latest compatible VSCode extension for specified version of VSCode";
+        };
+      }
+    );
 }

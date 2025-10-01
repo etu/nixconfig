@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   options.etu.games.wowup.enable = lib.mkEnableOption "Enable games wowup settings";
 
   config = lib.mkIf config.etu.games.wowup.enable {
@@ -12,7 +13,7 @@
       "wowup-cf"
     ];
     # Install steam using home manager.
-    etu.user.extraUserPackages = [pkgs.wowup-cf];
+    etu.user.extraUserPackages = [ pkgs.wowup-cf ];
 
     # Enable persistence for steam files.
     etu.base.zfs.user.directories = [

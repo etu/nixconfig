@@ -6,7 +6,8 @@
   lib,
   flake,
   ...
-}: {
+}:
+{
   imports = [
     # Include my hardware settings.
     ./hardware.nix
@@ -35,7 +36,7 @@
   nix.gc.dates = "weekly";
   nix.gc.options = "--delete-older-than 7d";
   nix.optimise.automatic = true;
-  nix.optimise.dates = ["daily"];
+  nix.optimise.dates = [ "daily" ];
 
   # My module settings
   etu = {
@@ -47,12 +48,12 @@
       # Allow home server to pull backups
       config.etu.data.pubkeys.etu.syncoid.server-main-elis
       ++
-      # Allow github to deploy system
-      config.etu.data.pubkeys.etu.github-actions;
+        # Allow github to deploy system
+        config.etu.data.pubkeys.etu.github-actions;
 
     base.sanoid.datasets = {
       # Enable snapshotting for some filesystems
-      "zroot/safe/data".use_template = ["data"];
+      "zroot/safe/data".use_template = [ "data" ];
     };
     services.netdata.enable = true;
 
@@ -81,7 +82,10 @@
     "/var/lib/acme"
   ];
 
-  networking.firewall.allowedTCPPorts = [80 443];
+  networking.firewall.allowedTCPPorts = [
+    80
+    443
+  ];
 
   services.nginx.enable = true;
 }

@@ -3,7 +3,8 @@
   lib,
   modulesPath,
   ...
-}: {
+}:
+{
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
@@ -16,18 +17,24 @@
 
   boot.loader.grub.mirroredBoots = [
     {
-      devices = ["/dev/disk/by-uuid/ata-Samsung_SSD_850_EVO_250GB_S21PNSAFC51888N-part1"];
+      devices = [ "/dev/disk/by-uuid/ata-Samsung_SSD_850_EVO_250GB_S21PNSAFC51888N-part1" ];
       path = "/boot-fallback";
     }
   ];
 
-  boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod"];
-  boot.initrd.kernelModules = [];
-  boot.kernelModules = ["kvm-intel"];
-  boot.extraModulePackages = [];
+  boot.initrd.availableKernelModules = [
+    "xhci_pci"
+    "ahci"
+    "usb_storage"
+    "usbhid"
+    "sd_mod"
+  ];
+  boot.initrd.kernelModules = [ ];
+  boot.kernelModules = [ "kvm-intel" ];
+  boot.extraModulePackages = [ ];
 
   # Enable ZFS.
-  boot.supportedFilesystems = ["zfs"];
+  boot.supportedFilesystems = [ "zfs" ];
 
   # Tune some ZFS parameters to use more RAM.
   boot.kernelParams = [
@@ -50,7 +57,10 @@
     device = "zroot/local/data";
     fsType = "zfs";
     neededForBoot = true;
-    options = ["defaults" "noexec"];
+    options = [
+      "defaults"
+      "noexec"
+    ];
   };
 
   fileSystems."/nix" = {
@@ -86,7 +96,7 @@
     fsType = "vfat";
   };
 
-  swapDevices = [];
+  swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   options.etu.graphical.terminal = {
     enable = lib.mkEnableOption "Enable graphical terminal settings";
     terminalPackage = lib.mkOption {

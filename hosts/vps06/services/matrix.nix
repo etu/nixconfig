@@ -2,9 +2,11 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   domain = "failar.nu";
-in {
+in
+{
   etu.base.zfs.system.directories = [
     # Persistence of synapse data between boots.
     "/var/lib/matrix-synapse"
@@ -12,7 +14,7 @@ in {
   ];
 
   services.postgresql = {
-    ensureDatabases = ["matrix-synapse"];
+    ensureDatabases = [ "matrix-synapse" ];
     ensureUsers = [
       {
         name = "matrix-synapse";
@@ -26,19 +28,23 @@ in {
       enableACME = true;
       forceSSL = true;
       locations = {
-        "/.well-known/matrix/server".extraConfig = let
-          server."m.server" = "matrix.${domain}:443";
-        in ''
-          add_header Content-Type application/json;
-          return 200 '${builtins.toJSON server}';
-        '';
-        "/.well-known/matrix/client".extraConfig = let
-          client."m.homeserver".base_url = "https://matrix.${domain}";
-        in ''
-          add_header Content-Type application/json;
-          add_header Access-Control-Allow-Origin *;
-          return 200 '${builtins.toJSON client}';
-        '';
+        "/.well-known/matrix/server".extraConfig =
+          let
+            server."m.server" = "matrix.${domain}:443";
+          in
+          ''
+            add_header Content-Type application/json;
+            return 200 '${builtins.toJSON server}';
+          '';
+        "/.well-known/matrix/client".extraConfig =
+          let
+            client."m.homeserver".base_url = "https://matrix.${domain}";
+          in
+          ''
+            add_header Content-Type application/json;
+            add_header Access-Control-Allow-Origin *;
+            return 200 '${builtins.toJSON client}';
+          '';
         "/_matrix/".return = "307 http://matrix.${domain}$request_uri";
       };
     };
@@ -54,7 +60,7 @@ in {
             };
             integrations_ui_url = "";
             integgrations_rest_url = "";
-            integrations_widgets_urls = [];
+            integrations_widgets_urls = [ ];
             disable_guests = true;
             roomDirectory.servers = [
               domain
@@ -111,21 +117,21 @@ in {
         {
           type = "metrics";
           port = 9148;
-          bind_addresses = ["127.0.0.1"];
-          resources = [];
+          bind_addresses = [ "127.0.0.1" ];
+          resources = [ ];
           tls = false;
         }
         {
-          bind_addresses = ["::1"];
+          bind_addresses = [ "::1" ];
           port = 8448;
           resources = [
             {
               compress = false;
-              names = ["client"];
+              names = [ "client" ];
             }
             {
               compress = false;
-              names = ["federation"];
+              names = [ "federation" ];
             }
           ];
           tls = false;
@@ -176,57 +182,67 @@ in {
           handlers: [journal]
       '';
       extraConfigFiles = [
-        (pkgs.writeText "misc.yml" (builtins.toJSON {
-          #session_lifetime = "24h"; # disabled to allow guest accounts
-          experimental_features = {spaces_enabled = true;};
-        }))
-        (pkgs.writeText "retention.yml" (builtins.toJSON {
-          retention = {
-            enabled = true;
-            default_policy = {
-              min_lifetime = "1d";
-              max_lifetime = "36500d";
+        (pkgs.writeText "misc.yml" (
+          builtins.toJSON {
+            #session_lifetime = "24h"; # disabled to allow guest accounts
+            experimental_features = {
+              spaces_enabled = true;
             };
-            #allowed_lifetime_min = "1d";
-            #allowed_lifetime_max = "365d";
-            #purge_jobs = [
-            #  {
-            #    shorted_max_lifetime = "1d";
-            #    longest_max_lifetime = "7d";
-            #    interval = "5m";
-            #  }
-            #  {
-            #    shorted_max_lifetime = "7d";
-            #    longest_max_lifetime = "90d";
-            #    interval = "24h";
-            #  }
-            #];
-          };
-        }))
-        (pkgs.writeText "url-preview.yml" (builtins.toJSON {
-          url_preview_enabled = true;
-          url_preview_ip_range_blacklist = [
-            "127.0.0.0/8"
-            "10.0.0.0/8"
-            "172.16.0.0/12"
-            "192.168.0.0/16"
-            "100.64.0.0/10"
-            "169.254.0.0/16"
-            "::1/128"
-            "fe80::/64"
-            "fc00::/7"
-          ];
-          url_preview_url_blacklist = [
-            {username = "*";}
-            {netloc = "google.com";}
-            {netloc = "*.google.com";}
-            {netloc = "^[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$";}
-          ];
-          max_spider_size = "10M";
-        }))
-        (pkgs.writeText "push.yml" (builtins.toJSON {
-          push.include_content = false;
-        }))
+          }
+        ))
+        (pkgs.writeText "retention.yml" (
+          builtins.toJSON {
+            retention = {
+              enabled = true;
+              default_policy = {
+                min_lifetime = "1d";
+                max_lifetime = "36500d";
+              };
+              #allowed_lifetime_min = "1d";
+              #allowed_lifetime_max = "365d";
+              #purge_jobs = [
+              #  {
+              #    shorted_max_lifetime = "1d";
+              #    longest_max_lifetime = "7d";
+              #    interval = "5m";
+              #  }
+              #  {
+              #    shorted_max_lifetime = "7d";
+              #    longest_max_lifetime = "90d";
+              #    interval = "24h";
+              #  }
+              #];
+            };
+          }
+        ))
+        (pkgs.writeText "url-preview.yml" (
+          builtins.toJSON {
+            url_preview_enabled = true;
+            url_preview_ip_range_blacklist = [
+              "127.0.0.0/8"
+              "10.0.0.0/8"
+              "172.16.0.0/12"
+              "192.168.0.0/16"
+              "100.64.0.0/10"
+              "169.254.0.0/16"
+              "::1/128"
+              "fe80::/64"
+              "fc00::/7"
+            ];
+            url_preview_url_blacklist = [
+              { username = "*"; }
+              { netloc = "google.com"; }
+              { netloc = "*.google.com"; }
+              { netloc = "^[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$"; }
+            ];
+            max_spider_size = "10M";
+          }
+        ))
+        (pkgs.writeText "push.yml" (
+          builtins.toJSON {
+            push.include_content = false;
+          }
+        ))
       ];
       app_service_config_files = [
         "/var/lib/matrix-appservice-irc/registration.yml"

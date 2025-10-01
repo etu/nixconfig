@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   options.etu.graphical.firefox = {
     enable = lib.mkEnableOption "Enable graphical firefox settings";
     package = lib.mkOption {
@@ -33,11 +34,11 @@
       xdg.mimeApps = {
         enable = true;
         defaultApplications = {
-          "text/html" = ["firefox.desktop"];
-          "x-scheme-handler/http" = ["firefox.desktop"];
-          "x-scheme-handler/https" = ["firefox.desktop"];
-          "x-scheme-handler/about" = ["firefox.desktop"];
-          "x-scheme-handler/unknown" = ["firefox.desktop"];
+          "text/html" = [ "firefox.desktop" ];
+          "x-scheme-handler/http" = [ "firefox.desktop" ];
+          "x-scheme-handler/https" = [ "firefox.desktop" ];
+          "x-scheme-handler/about" = [ "firefox.desktop" ];
+          "x-scheme-handler/unknown" = [ "firefox.desktop" ];
         };
       }; # END xdg.mimeApps
 
@@ -46,7 +47,10 @@
         enable = true;
         inherit (config.etu.graphical.firefox) package;
 
-        languagePacks = ["sv-SE" "en-GB"];
+        languagePacks = [
+          "sv-SE"
+          "en-GB"
+        ];
 
         profiles.default = {
           # Install extensions.
@@ -69,27 +73,27 @@
           search.engines = {
             bing.metaData.hidden = true;
             GitHub = {
-              urls = [{template = "https://github.com/search?q={searchTerms}";}];
+              urls = [ { template = "https://github.com/search?q={searchTerms}"; } ];
               icon = "https://github.com/fluidicon.png";
               updateInterval = 7 * 24 * 60 * 60 * 1000;
-              definedAliases = ["@gh"];
+              definedAliases = [ "@gh" ];
             };
             google.metaData.alias = "@g";
             "Nix Packages" = {
-              urls = [{template = "https://search.nixos.org/packages?type=packages&query={searchTerms}";}];
+              urls = [ { template = "https://search.nixos.org/packages?type=packages&query={searchTerms}"; } ];
               icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-              definedAliases = ["@np"];
+              definedAliases = [ "@np" ];
             };
             "NixOS Wiki" = {
-              urls = [{template = "https://wiki.nixos.org/w/index.php?search={searchTerms}";}];
+              urls = [ { template = "https://wiki.nixos.org/w/index.php?search={searchTerms}"; } ];
               icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-              definedAliases = ["@nw"];
+              definedAliases = [ "@nw" ];
             };
             Perplexity = {
-              urls = [{template = "https://www.perplexity.ai/?q={searchTerms}";}];
+              urls = [ { template = "https://www.perplexity.ai/?q={searchTerms}"; } ];
               icon = "https://www.perplexity.ai/favicon.ico";
               updateInterval = 7 * 24 * 60 * 60 * 1000;
-              definedAliases = ["@p"];
+              definedAliases = [ "@p" ];
             };
           };
           settings = {

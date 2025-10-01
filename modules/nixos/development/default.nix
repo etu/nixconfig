@@ -2,7 +2,8 @@
   config,
   lib,
   ...
-}: {
+}:
+{
   imports = [
     ./direnv
     ./flipper-zero
@@ -23,7 +24,7 @@
       development.vscode.enable = lib.mkDefault true;
 
       # Define extra groups for user.
-      user.extraGroups = ["dialout"];
+      user.extraGroups = [ "dialout" ];
     };
   };
 }

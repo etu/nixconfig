@@ -2,7 +2,7 @@
 # nix run github:etu/nixconfig#vcodeGetLatestExtensions Leathong openscad-language-support
 #
 # Store page: https://marketplace.visualstudio.com/items?itemName=Leathong.openscad-language-support
-{pkgs, ...}:
+{ pkgs, ... }:
 pkgs.vscode-utils.extensionFromVscodeMarketplace {
   publisher = "Leathong";
   name = "openscad-language-support";

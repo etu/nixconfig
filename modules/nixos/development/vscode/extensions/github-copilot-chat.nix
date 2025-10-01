@@ -2,7 +2,7 @@
 # nix run github:etu/nixconfig#vcodeGetLatestExtensions github copilot-chat
 #
 # Store page: https://marketplace.visualstudio.com/items?itemName=github.copilot-chat
-{pkgs, ...}:
+{ pkgs, ... }:
 pkgs.vscode-utils.extensionFromVscodeMarketplace {
   publisher = "github";
   name = "copilot-chat";

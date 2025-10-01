@@ -3,7 +3,8 @@
   lib,
   modulesPath,
   ...
-}: {
+}:
+{
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
     ./disko.nix
@@ -13,20 +14,26 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "thunderbolt" "usb_storage" "sd_mod"];
-  boot.initrd.kernelModules = [];
+  boot.initrd.availableKernelModules = [
+    "nvme"
+    "xhci_pci"
+    "thunderbolt"
+    "usb_storage"
+    "sd_mod"
+  ];
+  boot.initrd.kernelModules = [ ];
 
-  boot.kernelModules = ["kvm-amd"];
+  boot.kernelModules = [ "kvm-amd" ];
 
   # Install thinkpad modules for TLP.
-  boot.extraModulePackages = with config.boot.kernelPackages; [acpi_call];
+  boot.extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
 
   # Enable a nice boot splash screen.
   boot.initrd.systemd.enable = true; # needed for ZFS password prompt with plymouth.
   boot.plymouth.enable = true;
 
   # Enable ZFS.
-  boot.supportedFilesystems = ["zfs"];
+  boot.supportedFilesystems = [ "zfs" ];
 
   # Enable ZFS scrubbing.
   services.zfs.autoScrub.enable = true;
@@ -42,7 +49,7 @@
   hardware.acpilight.enable = true;
 
   # Set video driver.
-  services.xserver.videoDrivers = ["modesetting"];
+  services.xserver.videoDrivers = [ "modesetting" ];
 
   # Enable fwupd for firmware updates etc.
   services.fwupd.enable = true;
@@ -64,7 +71,7 @@
   ];
 
   # Swap devices.
-  swapDevices = [];
+  swapDevices = [ ];
 
   # Set max jobs in nix.
   nix.settings.max-jobs = lib.mkDefault 8;

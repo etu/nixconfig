@@ -2,12 +2,13 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   # Garbage collect podman images
   systemd.services.podman-system-prune = {
     description = "Garbage collect podman";
-    after = ["podman.service"];
-    wantedBy = ["multi-user.target"];
+    after = [ "podman.service" ];
+    wantedBy = [ "multi-user.target" ];
     startAt = "05:30";
     serviceConfig = {
       Type = "oneshot";
@@ -21,7 +22,7 @@
     home-assistant = {
       environment.TZ = config.time.timeZone;
       image = "ghcr.io/home-assistant/home-assistant:2025.9.4";
-      ports = ["8123"];
+      ports = [ "8123" ];
       extraOptions = [
         "--network=host"
         "--device=/dev/serial/by-id/usb-Silicon_Labs_CP2102N_USB_to_UART_Bridge_Controller_041c5694bebaed119e51ad8238a92db5-if00-port0:/dev/ttyUSB0"
@@ -31,11 +32,14 @@
         "${config.etu.dataPrefix}/var/lib/hass:/config"
         "/media/zstorage/files/video/svt-series:/media:ro"
       ];
-      dependsOn = ["mqtt" "zwavejs2mqtt"];
+      dependsOn = [
+        "mqtt"
+        "zwavejs2mqtt"
+      ];
     };
     mqtt = {
       image = "eclipse-mosquitto:2.0.22";
-      ports = ["1883:1883"];
+      ports = [ "1883:1883" ];
       extraOptions = [
         "--network=host"
       ];

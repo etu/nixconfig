@@ -1,8 +1,11 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 pkgs.writeShellApplication {
   name = "vscode-get-latest-extensions";
 
-  runtimeInputs = [pkgs.jq pkgs.vsce];
+  runtimeInputs = [
+    pkgs.jq
+    pkgs.vsce
+  ];
 
   text = ''
     if [[ $# -lt 2 ]]; then

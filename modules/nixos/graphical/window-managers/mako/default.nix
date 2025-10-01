@@ -2,8 +2,10 @@
   config,
   lib,
   ...
-}: {
-  options.etu.graphical.window-managers.mako.enable = lib.mkEnableOption "Enable mako, a notification daemon for wayland";
+}:
+{
+  options.etu.graphical.window-managers.mako.enable =
+    lib.mkEnableOption "Enable mako, a notification daemon for wayland";
 
   config = lib.mkIf config.etu.graphical.window-managers.mako.enable {
     # If my user exists, enable home-manager configurations

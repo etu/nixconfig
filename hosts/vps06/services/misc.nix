@@ -2,7 +2,8 @@
   pkgs,
   flake,
   ...
-}: {
+}:
+{
   imports = [
     # Import the ip-failar-nu module
     flake.inputs.ip-failar-nu.nixosModules.x86_64-linux.default
@@ -13,7 +14,7 @@
 
   # This is to avoid nginx validation errors when upgrading tailscale
   # and restarting nginx at the same time.
-  networking.hosts."100.100.6.114" = ["server-main-elis"];
+  networking.hosts."100.100.6.114" = [ "server-main-elis" ];
 
   services.nginx.virtualHosts = {
     "ip.failar.nu" = {

@@ -2,7 +2,8 @@
   config,
   lib,
   ...
-}: {
+}:
+{
   options.etu.base.sshd.enable = lib.mkEnableOption "Enable base sshd settings";
 
   config = lib.mkIf config.etu.base.sshd.enable {
@@ -43,19 +44,30 @@
       laptop-private-elis.publicKey = config.etu.data.pubkeys.systems.laptop-private-elis;
       laptop-work-elis.publicKey = config.etu.data.pubkeys.systems.laptop-work-elis;
       server-main-elis = {
-        extraHostNames = ["home.elis.nu" "local.elis.nu" "192.168.1.101"];
+        extraHostNames = [
+          "home.elis.nu"
+          "local.elis.nu"
+          "192.168.1.101"
+        ];
         publicKey = config.etu.data.pubkeys.systems.server-main-elis;
       };
       server-main-elis-initrd = {
-        extraHostNames = ["home.elis.nu" "local.elis.nu" "192.168.1.101"];
+        extraHostNames = [
+          "home.elis.nu"
+          "local.elis.nu"
+          "192.168.1.101"
+        ];
         publicKey = config.etu.data.pubkeys.systems.server-main-elis-initrd;
       };
       "sparv.failar.nu" = {
-        extraHostNames = ["server-sparv"];
+        extraHostNames = [ "server-sparv" ];
         publicKey = config.etu.data.pubkeys.systems.server-sparv;
       };
       "vps06.elis.nu" = {
-        extraHostNames = ["vps06" "git.elis.nu"];
+        extraHostNames = [
+          "vps06"
+          "git.elis.nu"
+        ];
         publicKey = config.etu.data.pubkeys.systems.vps06;
       };
     };

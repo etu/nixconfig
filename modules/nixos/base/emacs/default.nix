@@ -5,7 +5,8 @@
   perSystem,
   pkgs,
   ...
-}: let
+}:
+let
   # Run my config trough substituteAll to replace font names from my
   # system font settings.
   emacsConfig = pkgs.runCommand "config.el" {
@@ -62,49 +63,54 @@
   ];
 
   # List custom treesitter grammars
-  treesitGrammars = emacsPackages.${config.etu.base.emacs.package}.pkgs.treesit-grammars.with-grammars (g:
-    with g; [
-      tree-sitter-bash
-      tree-sitter-c
-      tree-sitter-cmake
-      tree-sitter-cpp
-      tree-sitter-css
-      tree-sitter-dockerfile
-      tree-sitter-go
-      tree-sitter-gomod
-      tree-sitter-hcl
-      tree-sitter-html
-      tree-sitter-java
-      tree-sitter-json
-      tree-sitter-latex
-      tree-sitter-make
-      tree-sitter-nix
-      tree-sitter-php
-      tree-sitter-python
-      tree-sitter-rust
-      tree-sitter-sql
-      tree-sitter-toml
-      tree-sitter-yaml
-    ]);
+  treesitGrammars =
+    emacsPackages.${config.etu.base.emacs.package}.pkgs.treesit-grammars.with-grammars
+      (
+        g: with g; [
+          tree-sitter-bash
+          tree-sitter-c
+          tree-sitter-cmake
+          tree-sitter-cpp
+          tree-sitter-css
+          tree-sitter-dockerfile
+          tree-sitter-go
+          tree-sitter-gomod
+          tree-sitter-hcl
+          tree-sitter-html
+          tree-sitter-java
+          tree-sitter-json
+          tree-sitter-latex
+          tree-sitter-make
+          tree-sitter-nix
+          tree-sitter-php
+          tree-sitter-python
+          tree-sitter-rust
+          tree-sitter-sql
+          tree-sitter-toml
+          tree-sitter-yaml
+        ]
+      );
 
   # Function to wrap emacs to contain the path for language servers
-  wrapEmacsWithExtraBinPaths = {
-    emacs ? emacsPackages.${config.etu.base.emacs.package},
-    extraWrapperArgs ? "",
-  }:
-    pkgs.runCommand "${emacs.name}-with-extra-bin-paths" {nativeBuildInputs = [pkgs.makeWrapper];}
-    ''
-      makeWrapper ${buildEmacsPackage emacs}/bin/emacs $out/bin/emacs \
-        --prefix PATH : ${lib.makeBinPath extraBinPaths} ${extraWrapperArgs}
+  wrapEmacsWithExtraBinPaths =
+    {
+      emacs ? emacsPackages.${config.etu.base.emacs.package},
+      extraWrapperArgs ? "",
+    }:
+    pkgs.runCommand "${emacs.name}-with-extra-bin-paths" { nativeBuildInputs = [ pkgs.makeWrapper ]; }
+      ''
+        makeWrapper ${buildEmacsPackage emacs}/bin/emacs $out/bin/emacs \
+          --prefix PATH : ${lib.makeBinPath extraBinPaths} ${extraWrapperArgs}
 
-      mkdir -p $out/share/applications
-      ln -vs ${emacs}/share/applications/emacs.desktop $out/share/applications
-      ln -vs ${emacs}/share/icons $out/share/icons
-      ln -vs ${emacs}/share/info $out/share/info
-      ln -vs ${emacs}/share/man $out/share/man
-    '';
+        mkdir -p $out/share/applications
+        ln -vs ${emacs}/share/applications/emacs.desktop $out/share/applications
+        ln -vs ${emacs}/share/icons $out/share/icons
+        ln -vs ${emacs}/share/info $out/share/info
+        ln -vs ${emacs}/share/man $out/share/man
+      '';
 
-  buildEmacsPackage = emacsPackage:
+  buildEmacsPackage =
+    emacsPackage:
     pkgs.emacsWithPackagesFromUsePackage {
       package = emacsPackage;
 
@@ -118,7 +124,7 @@
       # Extra packages to install
       extraEmacsPackages = _: [
         # Add my config initializer as an emacs package
-        (pkgs.runCommand "my-emacs-default-package" {} ''
+        (pkgs.runCommand "my-emacs-default-package" { } ''
           mkdir -p $out/share/emacs/site-lisp
           cp ${emacsConfigInit} $out/share/emacs/site-lisp/default.el
         '')
@@ -131,12 +137,13 @@
     nox = pkgs.emacs-nox;
     wayland = pkgs.emacs-pgtk;
   };
-in {
+in
+{
   options.etu.base.emacs = {
     enable = lib.mkEnableOption "Enable base emacs settings";
     extraConfig = lib.mkOption {
       type = lib.types.listOf lib.types.str;
-      default = [];
+      default = [ ];
       description = "This allows to add strings that gets added to the emacs config file.";
     };
     package = lib.mkOption {
@@ -155,13 +162,16 @@ in {
     ];
 
     # Allow to install intelephense which is an unfree package.
-    etu.base.nix.allowUnfree = ["intelephense" "copilot-language-server"];
+    etu.base.nix.allowUnfree = [
+      "intelephense"
+      "copilot-language-server"
+    ];
 
     # Install my emacs package system-wide.
     services.emacs = {
       enable = true;
       defaultEditor = true;
-      package = wrapEmacsWithExtraBinPaths {};
+      package = wrapEmacsWithExtraBinPaths { };
     };
 
     # Install emacs icons symbols if we have any kind of graphical emacs

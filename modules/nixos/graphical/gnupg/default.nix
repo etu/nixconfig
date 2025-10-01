@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   options.etu.graphical.gnupg.enable = lib.mkEnableOption "Enable graphical gnupg settings";
 
   config = lib.mkIf config.etu.graphical.gnupg.enable {

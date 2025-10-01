@@ -3,19 +3,22 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   vspkgs = {
-    vscode-codeception = pkgs.callPackage ./extensions/vscode-codeception.nix {};
-    vscode-ido = pkgs.callPackage ./extensions/vscode-ido.nix {};
-    vscode-speech = pkgs.callPackage ./extensions/vscode-speech.nix {};
-    volar = pkgs.callPackage ./extensions/volar.nix {};
-    php-sniffer = pkgs.callPackage ./extensions/php-sniffer.nix {};
-    openscad = pkgs.callPackage ./extensions/openscad.nix {};
-    github-copilot-chat = pkgs.callPackage ./extensions/github-copilot-chat.nix {};
+    vscode-codeception = pkgs.callPackage ./extensions/vscode-codeception.nix { };
+    vscode-ido = pkgs.callPackage ./extensions/vscode-ido.nix { };
+    vscode-speech = pkgs.callPackage ./extensions/vscode-speech.nix { };
+    volar = pkgs.callPackage ./extensions/volar.nix { };
+    php-sniffer = pkgs.callPackage ./extensions/php-sniffer.nix { };
+    openscad = pkgs.callPackage ./extensions/openscad.nix { };
+    github-copilot-chat = pkgs.callPackage ./extensions/github-copilot-chat.nix { };
   };
-in {
+in
+{
   options.etu.development.vscode.enable = lib.mkEnableOption "Enable development vscode settings";
-  options.etu.development.vscode.enableWork = lib.mkEnableOption "Enable development vscode for work settings";
+  options.etu.development.vscode.enableWork =
+    lib.mkEnableOption "Enable development vscode for work settings";
 
   config = lib.mkIf config.etu.development.vscode.enable {
     # Enable unfree packages on system level.
@@ -41,51 +44,49 @@ in {
       programs.vscode.profiles.default.enableExtensionUpdateCheck = true;
 
       # TODO: disable vscode.php-language-features in code somehow
-      programs.vscode.profiles.default.extensions =
-        [
-          pkgs.vscode-extensions.bbenoist.nix # .nix file extension
-          pkgs.vscode-extensions.bmewburn.vscode-intelephense-client # Better php support
-          pkgs.vscode-extensions.tuttieee.emacs-mcx # Emacs keybindings
-          pkgs.vscode-extensions.kahole.magit # Magit emulation
-          pkgs.vscode-extensions.golang.go # Go support
-          pkgs.vscode-extensions.mkhl.direnv # Direnv
-          pkgs.vscode-extensions.xdebug.php-debug # Php debug support
-          vspkgs.vscode-ido # Decent file navigation
-          vspkgs.php-sniffer # Php code style sniffing
-          pkgs.vscode-extensions.github.copilot # Copilot
-          vspkgs.github-copilot-chat # Copilot chat
-        ]
-        ++ (lib.optionals config.etu.graphical.fdm-printing.enable [
-          vspkgs.openscad # Openscad support
-        ])
-        ++ (lib.optionals config.etu.development.vscode.enableWork [
-          # Only on work computer
-          vspkgs.vscode-codeception # Codeception support
-          vspkgs.volar
-        ]);
+      programs.vscode.profiles.default.extensions = [
+        pkgs.vscode-extensions.bbenoist.nix # .nix file extension
+        pkgs.vscode-extensions.bmewburn.vscode-intelephense-client # Better php support
+        pkgs.vscode-extensions.tuttieee.emacs-mcx # Emacs keybindings
+        pkgs.vscode-extensions.kahole.magit # Magit emulation
+        pkgs.vscode-extensions.golang.go # Go support
+        pkgs.vscode-extensions.mkhl.direnv # Direnv
+        pkgs.vscode-extensions.xdebug.php-debug # Php debug support
+        vspkgs.vscode-ido # Decent file navigation
+        vspkgs.php-sniffer # Php code style sniffing
+        pkgs.vscode-extensions.github.copilot # Copilot
+        vspkgs.github-copilot-chat # Copilot chat
+      ]
+      ++ (lib.optionals config.etu.graphical.fdm-printing.enable [
+        vspkgs.openscad # Openscad support
+      ])
+      ++ (lib.optionals config.etu.development.vscode.enableWork [
+        # Only on work computer
+        vspkgs.vscode-codeception # Codeception support
+        vspkgs.volar
+      ]);
 
       # Enable vscode settings
-      programs.vscode.profiles.default.userSettings =
-        {
-          "[html]"."editor.formatOnSave" = false;
-          "[nix]"."editor.tabSize" = 2;
-          "[php]"."editor.defaultFormatter" = "wongjn.php-sniffer";
-          "editor.cursorBlinking" = "solid";
-          "editor.cursorStyle" = "block";
-          "editor.formatOnSave" = true;
-          "editor.minimap.enabled" = false; # I find the minimap to be distracting and a waste of space
-          "explorer.confirmDelete" = false;
-          "files.insertFinalNewline" = true; # Make sure to have a final new line at end of files
-          "files.trimFinalNewlines" = true; # Trim superfluous new lines at end of files
-          "files.trimTrailingWhitespace" = true; # Trim whitespace at end of lines on save
-          "github.copilot.enable"."markdown" = "true"; # Allow copilot to suggest in markdown files
-          "phpSniffer.standard" = "PSR12";
-          "telemetry.telemetryLevel" = "off";
-          "workbench.editor.showTabs" = "none"; # I find tabs to be distracting
-        }
-        // (lib.optionalAttrs config.etu.development.vscode.enableWork {
-          "[vue]"."editor.formatOnSave" = false;
-        });
+      programs.vscode.profiles.default.userSettings = {
+        "[html]"."editor.formatOnSave" = false;
+        "[nix]"."editor.tabSize" = 2;
+        "[php]"."editor.defaultFormatter" = "wongjn.php-sniffer";
+        "editor.cursorBlinking" = "solid";
+        "editor.cursorStyle" = "block";
+        "editor.formatOnSave" = true;
+        "editor.minimap.enabled" = false; # I find the minimap to be distracting and a waste of space
+        "explorer.confirmDelete" = false;
+        "files.insertFinalNewline" = true; # Make sure to have a final new line at end of files
+        "files.trimFinalNewlines" = true; # Trim superfluous new lines at end of files
+        "files.trimTrailingWhitespace" = true; # Trim whitespace at end of lines on save
+        "github.copilot.enable"."markdown" = "true"; # Allow copilot to suggest in markdown files
+        "phpSniffer.standard" = "PSR12";
+        "telemetry.telemetryLevel" = "off";
+        "workbench.editor.showTabs" = "none"; # I find tabs to be distracting
+      }
+      // (lib.optionalAttrs config.etu.development.vscode.enableWork {
+        "[vue]"."editor.formatOnSave" = false;
+      });
 
       # This configures the keyring used for copilot to remember logins across reboots
       home.file.".vscode/argv.json".text = builtins.toJSON {

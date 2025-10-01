@@ -2,7 +2,7 @@
 # nix run github:etu/nixconfig#vcodeGetLatestExtensions ms-vscode vscode-speech
 #
 # Store page: https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-speech
-{pkgs, ...}:
+{ pkgs, ... }:
 pkgs.vscode-utils.extensionFromVscodeMarketplace {
   publisher = "ms-vscode";
   name = "vscode-speech";

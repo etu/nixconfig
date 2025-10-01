@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   options.etu.services.jellyfin = {
     enable = lib.mkEnableOption "Enable services jellyfin service";
     hostname = lib.mkOption {
@@ -21,7 +22,7 @@
 
     # Enable vaapi on OS-level
     nixpkgs.config.packageOverrides = pkgs: {
-      vaapiIntel = pkgs.vaapiIntel.override {enableHybridCodec = true;};
+      vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
     };
     hardware.graphics = {
       enable = true;
@@ -34,16 +35,19 @@
     };
 
     # Allow jellyfin user to access the graphics card
-    users.users.${config.services.jellyfin.user}.extraGroups = ["video" "render"];
+    users.users.${config.services.jellyfin.user}.extraGroups = [
+      "video"
+      "render"
+    ];
 
     # Override default hardening measure from NixOS
     systemd.services.jellyfin.serviceConfig.PrivateDevices = lib.mkForce false;
-    systemd.services.jellyfin.serviceConfig.DeviceAllow = lib.mkForce ["/dev/dri/renderD128"];
+    systemd.services.jellyfin.serviceConfig.DeviceAllow = lib.mkForce [ "/dev/dri/renderD128" ];
 
     # Enable jellyfin itself
     services.jellyfin.enable = true;
 
     # Open the port for local network access
-    networking.firewall.allowedTCPPorts = [8096];
+    networking.firewall.allowedTCPPorts = [ 8096 ];
   };
 }

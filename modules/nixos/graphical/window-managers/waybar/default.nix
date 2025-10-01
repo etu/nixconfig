@@ -3,12 +3,14 @@
   lib,
   pkgs,
   ...
-}: {
-  options.etu.graphical.window-managers.waybar.enable = lib.mkEnableOption "Enable waybar, a bar for wayland";
+}:
+{
+  options.etu.graphical.window-managers.waybar.enable =
+    lib.mkEnableOption "Enable waybar, a bar for wayland";
 
   config = lib.mkIf config.etu.graphical.window-managers.waybar.enable {
     # Install fonts needed for waybar
-    fonts.packages = [pkgs.font-awesome];
+    fonts.packages = [ pkgs.font-awesome ];
 
     # If my user exists, enable home-manager configurations
     home-manager.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
@@ -16,7 +18,7 @@
       programs.waybar = {
         enable = true;
         systemd.enable = true;
-        style = pkgs.runCommand "waybar-styles.css" {} ''
+        style = pkgs.runCommand "waybar-styles.css" { } ''
           sed -e 's/font-family: /font-family: ${config.etu.graphical.theme.fonts.normal}, /'              \
               -e 's/font-size: 13px/font-size: ${toString config.etu.graphical.theme.fonts.biggerSize}px/' \
               ${./style.css} > $out
@@ -32,58 +34,82 @@
             margin-right = 100;
             margin-left = 100;
 
-            modules-left = ["idle_inhibitor" "backlight" "cpu" "memory" "temperature" "custom/mxergo" "battery" "mpris"];
-            modules-center = ["sway/workspaces" "sway/mode" "sway/scratchpad"];
-            modules-right = ["privacy" "pulseaudio" "network" "clock" "tray"];
+            modules-left = [
+              "idle_inhibitor"
+              "backlight"
+              "cpu"
+              "memory"
+              "temperature"
+              "custom/mxergo"
+              "battery"
+              "mpris"
+            ];
+            modules-center = [
+              "sway/workspaces"
+              "sway/mode"
+              "sway/scratchpad"
+            ];
+            modules-right = [
+              "privacy"
+              "pulseaudio"
+              "network"
+              "clock"
+              "tray"
+            ];
 
             "custom/mxergo" = {
               interval = 60;
               tooltip = true;
               return-type = "json";
-              exec = lib.getExe (pkgs.writeShellApplication {
-                name = "mxergo-battery";
-                bashOptions = ["nounset" "pipefail"]; # TODO: Improve script to work with ["errexit"]
-                runtimeInputs = [
-                  pkgs.coreutils
-                  pkgs.findutils
-                  pkgs.gawk
-                  pkgs.gnugrep
-                  pkgs.gnused
-                  config.services.upower.package
-                ];
-                text = ''
-                  DEVICE_PATH=$(upower -e | grep battery_hidpp_battery)
+              exec = lib.getExe (
+                pkgs.writeShellApplication {
+                  name = "mxergo-battery";
+                  bashOptions = [
+                    "nounset"
+                    "pipefail"
+                  ]; # TODO: Improve script to work with ["errexit"]
+                  runtimeInputs = [
+                    pkgs.coreutils
+                    pkgs.findutils
+                    pkgs.gawk
+                    pkgs.gnugrep
+                    pkgs.gnused
+                    config.services.upower.package
+                  ];
+                  text = ''
+                    DEVICE_PATH=$(upower -e | grep battery_hidpp_battery)
 
-                  if test -z "$DEVICE_PATH"; then
-                    echo "{}"
-                    exit 0
-                  fi
+                    if test -z "$DEVICE_PATH"; then
+                      echo "{}"
+                      exit 0
+                    fi
 
-                  DEVICE_INFO=$(upower -i "$DEVICE_PATH")
+                    DEVICE_INFO=$(upower -i "$DEVICE_PATH")
 
-                  MODEL_NAME=$(echo "$DEVICE_INFO" | grep model | awk -F': ' '{print $2}' | xargs)
-                  PERCENTAGE=$(echo "$DEVICE_INFO" | grep percentage | awk '{print $2}' | sed 's/%//')
-                  STATE=$(echo "$DEVICE_INFO" | grep state | awk '{print $2}')
+                    MODEL_NAME=$(echo "$DEVICE_INFO" | grep model | awk -F': ' '{print $2}' | xargs)
+                    PERCENTAGE=$(echo "$DEVICE_INFO" | grep percentage | awk '{print $2}' | sed 's/%//')
+                    STATE=$(echo "$DEVICE_INFO" | grep state | awk '{print $2}')
 
-                  # Determine the class based on battery percentage
-                  if test "$PERCENTAGE" -ge 80; then
-                    CLASS="good"
-                    ICON=""
-                  elif test "$PERCENTAGE" -ge 40; then
-                    CLASS="moderate"
-                    ICON=""
-                  else
-                    CLASS="critical"
-                    ICON=""
-                  fi
+                    # Determine the class based on battery percentage
+                    if test "$PERCENTAGE" -ge 80; then
+                      CLASS="good"
+                      ICON=""
+                    elif test "$PERCENTAGE" -ge 40; then
+                      CLASS="moderate"
+                      ICON=""
+                    else
+                      CLASS="critical"
+                      ICON=""
+                    fi
 
-                  # Output JSON for Waybar
-                  printf '{"text":"%s","tooltip":"%s","class":"%s"}'                    \
-                    " $PERCENTAGE% $ICON"                                              \
-                    "Device: $MODEL_NAME \nBattery: $PERCENTAGE% $ICON\nState: $STATE" \
-                    "$CLASS"
-                '';
-              });
+                    # Output JSON for Waybar
+                    printf '{"text":"%s","tooltip":"%s","class":"%s"}'                    \
+                      " $PERCENTAGE% $ICON"                                              \
+                      "Device: $MODEL_NAME \nBattery: $PERCENTAGE% $ICON\nState: $STATE" \
+                      "$CLASS"
+                  '';
+                }
+              );
             };
 
             "sway/workspaces" = {
@@ -106,7 +132,10 @@
 
             "sway/scratchpad" = {
               format = "{icon} {count}";
-              format-icons = ["" ""];
+              format-icons = [
+                ""
+                ""
+              ];
               show-empty = false;
               tooltip = true;
               tooltip-format = "{app}: {title}";
@@ -135,14 +164,23 @@
             };
 
             backlight.format = "{percent}% {icon}";
-            backlight.format-icons = ["" ""];
+            backlight.format-icons = [
+              ""
+              ""
+            ];
 
             battery.format = "{capacity}% {icon}";
             battery.format-alt = "{time} {icon}";
             battery.format-charging = "{capacity}% ";
             battery.format-full = "{capacity}% {icon}";
             battery.format-good = "{capacity}% {icon}";
-            battery.format-icons = ["" "" "" "" ""];
+            battery.format-icons = [
+              ""
+              ""
+              ""
+              ""
+              ""
+            ];
             battery.format-plugged = "{capacity}% ";
             battery.states = {
               good = 80;
@@ -183,7 +221,11 @@
               phone = "";
               portable = "";
               car = "";
-              default = ["" "" ""];
+              default = [
+                ""
+                ""
+                ""
+              ];
             };
             pulseaudio.on-click = "${pkgs.pavucontrol}/bin/pavucontrol";
 
@@ -212,7 +254,11 @@
 
             temperature.critical-threshold = 80;
             temperature.format = "{icon} {temperatureC}°C";
-            temperature.format-icons = ["" "" ""];
+            temperature.format-icons = [
+              ""
+              ""
+              ""
+            ];
 
             tray.spacing = 12;
           }

@@ -1,9 +1,10 @@
-{pkgs, ...}: let
+{ pkgs, ... }:
+let
   buildSvtPlayService = svtSlug: {
     description = "${svtSlug} playlist updater";
-    wants = ["network-online.target"];
-    after = ["network-online.target"];
-    path = [pkgs.svtplay-dl];
+    wants = [ "network-online.target" ];
+    after = [ "network-online.target" ];
+    path = [ pkgs.svtplay-dl ];
     script = "svtplay-dl --all-episodes --get-url --preferred DASH https://www.svtplay.se/${svtSlug} > ${svtSlug}.m3u";
     serviceConfig = {
       Type = "simple";
@@ -14,12 +15,13 @@
   };
   buildSvtPlayTimer = svtSlug: {
     description = "${svtSlug} playlist updater timer";
-    after = ["network-online.target"];
-    wants = ["network-online.target"];
-    wantedBy = ["timers.target"];
+    after = [ "network-online.target" ];
+    wants = [ "network-online.target" ];
+    wantedBy = [ "timers.target" ];
     timerConfig.OnCalendar = "daily";
   };
-in {
+in
+{
   systemd.services.svtplay-faret-shaun = buildSvtPlayService "faret-shaun";
   systemd.timers.svtplay-faret-shaun = buildSvtPlayTimer "faret-shaun";
 

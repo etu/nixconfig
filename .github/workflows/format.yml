@@ -19,7 +19,7 @@ jobs:
       - uses: DeterminateSystems/flake-checker-action@v12
 
       - name: 'Check nix file formatting ❄️'
-        run: 'nix fmt . -- --check'
+        run: 'nix fmt . -- --ci'
       - name: Check yaml file formatting 📂
         run: 'nix run nixpkgs#yamllint -- --strict --format github .'
       - name: Check deadnix file formatting ❄️

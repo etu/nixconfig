@@ -2,7 +2,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   etu.base.zfs.system.directories = [
     # Persistence of forgejo data.
     "/var/lib/forgejo"
@@ -11,7 +12,8 @@
   services.nginx.virtualHosts."git.elis.nu" = {
     forceSSL = true;
     enableACME = true;
-    locations."/".proxyPass = "http://127.0.0.1:${builtins.toString config.services.forgejo.settings.server.HTTP_PORT}/";
+    locations."/".proxyPass =
+      "http://127.0.0.1:${builtins.toString config.services.forgejo.settings.server.HTTP_PORT}/";
     locations."/robots.txt".root = pkgs.writeTextDir "robots.txt" ''
       User-agent: *
       Disallow: /
@@ -19,7 +21,7 @@
   };
 
   services.postgresql = {
-    ensureDatabases = ["forgejo"];
+    ensureDatabases = [ "forgejo" ];
     ensureUsers = [
       {
         name = "forgejo";

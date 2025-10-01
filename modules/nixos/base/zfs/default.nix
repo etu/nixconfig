@@ -2,28 +2,31 @@
   config,
   lib,
   ...
-}: {
-  options.etu.base.zfs = let
-    options = param: prefix: {
-      directories = lib.mkOption {
-        type = lib.types.listOf lib.types.str;
-        default = [];
-        description = "Directories to pass to environment.persistence attribute for ${param} under ${prefix}";
+}:
+{
+  options.etu.base.zfs =
+    let
+      options = param: prefix: {
+        directories = lib.mkOption {
+          type = lib.types.listOf lib.types.str;
+          default = [ ];
+          description = "Directories to pass to environment.persistence attribute for ${param} under ${prefix}";
+        };
+        files = lib.mkOption {
+          type = lib.types.listOf lib.types.str;
+          default = [ ];
+          description = "Files to pass to environment.persistence attribute for ${param} under ${prefix}";
+        };
       };
-      files = lib.mkOption {
-        type = lib.types.listOf lib.types.str;
-        default = [];
-        description = "Files to pass to environment.persistence attribute for ${param} under ${prefix}";
-      };
+    in
+    {
+      enable = lib.mkEnableOption "Enable base zfs persistence settings";
+      local = options "local" config.etu.localPrefix;
+      localUser = options "localUser" config.etu.localPrefix;
+      system = options "system" config.etu.dataPrefix;
+      user = options "user" config.etu.dataPrefix;
+      root = options "root" config.etu.dataPrefix;
     };
-  in {
-    enable = lib.mkEnableOption "Enable base zfs persistence settings";
-    local = options "local" config.etu.localPrefix;
-    localUser = options "localUser" config.etu.localPrefix;
-    system = options "system" config.etu.dataPrefix;
-    user = options "user" config.etu.dataPrefix;
-    root = options "root" config.etu.dataPrefix;
-  };
 
   config = lib.mkIf config.etu.base.zfs.enable {
     environment.etc."machine-id".source = "${config.etu.dataPrefix}/etc/machine-id";
@@ -31,11 +34,10 @@
     environment.persistence.${config.etu.dataPrefix} = {
       # System persistence
       inherit (config.etu.base.zfs.system) files;
-      directories =
-        [
-          "/var/lib/nixos"
-        ]
-        ++ config.etu.base.zfs.system.directories;
+      directories = [
+        "/var/lib/nixos"
+      ]
+      ++ config.etu.base.zfs.system.directories;
 
       # Root user persistence
       users.root = {

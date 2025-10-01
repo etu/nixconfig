@@ -12,7 +12,8 @@
   flake,
   modulesPath,
   ...
-}: {
+}:
+{
   imports = [
     # Import base settings for live isos
     (modulesPath + "/installer/cd-dvd/installation-cd-base.nix")

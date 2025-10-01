@@ -14,7 +14,12 @@ _: {
                 type = "filesystem";
                 format = "vfat";
                 mountpoint = "/boot";
-                mountOptions = ["defaults" "noexec" "noauto" "x-systemd.automount"];
+                mountOptions = [
+                  "defaults"
+                  "noexec"
+                  "noauto"
+                  "x-systemd.automount"
+                ];
               };
             };
             zroot = {
@@ -30,7 +35,11 @@ _: {
     }; # END disk
     nodev."/" = {
       fsType = "tmpfs";
-      mountOptions = ["size=10G" "defaults" "mode=755"];
+      mountOptions = [
+        "size=10G"
+        "defaults"
+        "mode=755"
+      ];
     };
     zpool = {
       zroot = {

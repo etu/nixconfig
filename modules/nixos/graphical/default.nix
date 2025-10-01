@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     ./fdm-printing
     ./firefox
@@ -29,7 +30,10 @@
       graphical.theme.enable = lib.mkDefault true;
 
       # Define extra groups for user.
-      user.extraGroups = ["networkmanager" "adbusers"];
+      user.extraGroups = [
+        "networkmanager"
+        "adbusers"
+      ];
 
       # Install using home-manager.
       user.extraUserPackages = [
@@ -72,7 +76,12 @@
     # Mount the /etc/nixos directory in the home directory as well.
     fileSystems."/home/${config.etu.user.username}/code/nixos" = {
       device = "${config.etu.dataPrefix}/etc/nixos";
-      options = ["bind" "noauto" "x-systemd.automount" "x-systemd.requires-mounts-for=${config.etu.dataPrefix}"];
+      options = [
+        "bind"
+        "noauto"
+        "x-systemd.automount"
+        "x-systemd.requires-mounts-for=${config.etu.dataPrefix}"
+      ];
     };
 
     # Install adb and fastboot.
@@ -87,7 +96,7 @@
     networking.wireless.iwd.settings.Settings.AutoConnect = true;
 
     # 8000 is for random web sharing things.
-    networking.firewall.allowedTCPPorts = [8000];
+    networking.firewall.allowedTCPPorts = [ 8000 ];
 
     # Install some comand line tools I cummonly want available for my
     # home directory on graphical systems.

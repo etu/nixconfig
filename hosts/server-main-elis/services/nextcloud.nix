@@ -2,7 +2,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   services.nextcloud.enable = true;
   services.nextcloud.package = pkgs.nextcloud31;
   services.nextcloud.config.adminuser = "etu";
