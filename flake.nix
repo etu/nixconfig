@@ -171,7 +171,7 @@
         packages.iso = self.nixosConfigurations.live-iso.config.system.build.isoImage;
 
         # Expose commands/programs under nix run .#foo
-        apps.vcodeGetLatestExtensions = {
+        apps.vscodeGetLatestExtensions = {
           type = "app";
           program = "${
             (pkgs.callPackage ./packages/vscodeGetLatestExtensions { })

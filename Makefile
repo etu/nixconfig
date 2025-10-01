@@ -79,10 +79,10 @@ update-mosquitto:
 
 update-vscode-extensions:
 	@echo "Updating vscode extensions"
-	@nix run .#vcodeGetLatestExtensions github copilot-chat > modules/development/vscode/extensions/github-copilot-chat.nix
-	@nix run .#vcodeGetLatestExtensions Leathong openscad-language-support > modules/development/vscode/extensions/openscad.nix
-	@nix run .#vcodeGetLatestExtensions wongjn php-sniffer > modules/development/vscode/extensions/php-sniffer.nix
-	@nix run .#vcodeGetLatestExtensions Vue volar > modules/development/vscode/extensions/volar.nix
-	@nix run .#vcodeGetLatestExtensions joelwmale vscode-codeception > modules/development/vscode/extensions/vscode-codeception.nix
-	@nix run .#vcodeGetLatestExtensions kimgronqvist vscode-ido > modules/development/vscode/extensions/vscode-ido.nix
-	@nix run .#vcodeGetLatestExtensions ms-vscode vscode-speech > modules/development/vscode/extensions/vscode-speech.nix
+	@nix run .#vscodeGetLatestExtensions github copilot-chat > modules/development/vscode/extensions/github-copilot-chat.nix
+	@nix run .#vscodeGetLatestExtensions Leathong openscad-language-support > modules/development/vscode/extensions/openscad.nix
+	@nix run .#vscodeGetLatestExtensions wongjn php-sniffer > modules/development/vscode/extensions/php-sniffer.nix
+	@nix run .#vscodeGetLatestExtensions Vue volar > modules/development/vscode/extensions/volar.nix
+	@nix run .#vscodeGetLatestExtensions joelwmale vscode-codeception > modules/development/vscode/extensions/vscode-codeception.nix
+	@nix run .#vscodeGetLatestExtensions kimgronqvist vscode-ido > modules/development/vscode/extensions/vscode-ido.nix
+	@nix run .#vscodeGetLatestExtensions ms-vscode vscode-speech > modules/development/vscode/extensions/vscode-speech.nix
