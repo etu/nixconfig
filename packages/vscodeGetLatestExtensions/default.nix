@@ -85,7 +85,7 @@ pkgs.writeShellApplication {
     # nix run github:etu/nixconfig#vcodeGetLatestExtensions $EXT_ORG $EXT_NAME
     #
     # Store page: https://marketplace.visualstudio.com/items?itemName=$EXT_ORG.$EXT_NAME
-    {pkgs, ...}:
+    { pkgs, ... }:
     pkgs.vscode-utils.extensionFromVscodeMarketplace {
       publisher = "$EXT_ORG";
       name = "$EXT_NAME";
