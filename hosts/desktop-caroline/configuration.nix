@@ -82,7 +82,7 @@
       pkgs.inkscape
       pkgs.libreoffice
       pkgs.blender
-      pkgs.gnumake
+      pkgs.just
       pkgs.nvtopPackages.amd
     ];
 

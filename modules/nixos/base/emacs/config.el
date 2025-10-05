@@ -215,6 +215,7 @@
 (use-package dockerfile-mode :ensure t)
 (use-package es-mode :ensure t)
 (use-package fish-mode :ensure t)
+(use-package just-mode :ensure t)
 (use-package markdown-mode :ensure t)
 (use-package vcl-mode :ensure t)
 (use-package yaml-mode :ensure t)

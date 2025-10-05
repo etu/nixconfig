@@ -64,7 +64,7 @@ jobs:
 
       # Do updates of nixpkgs and other dependencies.
       - name: Update all dependencies
-        run: 'nix develop --command make update-all'
+        run: 'nix develop --command just update-all'
         env:
           github_token: '${{ secrets.GITHUB_TOKEN }}'
 
