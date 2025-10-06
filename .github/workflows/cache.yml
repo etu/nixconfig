@@ -16,6 +16,11 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  check-flake:
+    uses: ./.github/workflows/helper_check_flake.yaml
+    secrets:
+      CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
+
   cache-hosts:
     uses: ./.github/workflows/helper_cache_hosts.yaml
     secrets:
