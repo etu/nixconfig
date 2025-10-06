@@ -56,6 +56,21 @@ build-server-sparv:
 build-vps06:
     nom build '.#nixosConfigurations.vps06.config.system.build.toplevel'
 
+# Deploy the server-main-elis host
+[group('deploy')]
+deploy-server-main-elis:
+    deploy --skip-checks --targets '.#server-main-elis'
+
+# Deploy the server-sparv host
+[group('deploy')]
+deploy-server-sparv:
+    deploy --skip-checks --targets '.#server-sparv'
+
+# Deploy the vps06 host
+[group('deploy')]
+deploy-vps06:
+    deploy --skip-checks --targets '.#vps06'
+
 # Nix format
 [group('format')]
 nix-fmt:
