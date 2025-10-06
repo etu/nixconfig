@@ -58,6 +58,9 @@
     graphical.sway.enable = true;
     graphical.fdm-printing.enable = true;
 
+    # Enable direnv for nix config purposes
+    development.direnv.enable = true;
+
     # Do not enable Elis configs for certain things.
     base.emacs.enable = false;
     graphical.firefox.enable = false;
@@ -79,7 +82,6 @@
       pkgs.inkscape
       pkgs.libreoffice
       pkgs.blender
-      pkgs.just
     ];
 
     # Allow home fileserver to connect to fetch snapshots.
