@@ -16,10 +16,10 @@
     # Configure git for my users home-manager (if it's enabled).
     home-manager.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
       home.file = {
-        "bin/git-branchclean".source = ../../dotfiles/bin/git-branchclean;
-        "bin/git-git".source = ../../dotfiles/bin/git-git;
-        "bin/git-lol".source = ../../dotfiles/bin/git-lol;
-        "bin/git-refetch-tags".source = ../../dotfiles/bin/git-refetch-tags;
+        "bin/git-branchclean".source = ./bin/git-branchclean;
+        "bin/git-git".source = ./bin/git-git;
+        "bin/git-lol".source = ./bin/git-lol;
+        "bin/git-refetch-tags".source = ./bin/git-refetch-tags;
       };
 
       programs.git = {

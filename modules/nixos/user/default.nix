@@ -125,13 +125,13 @@
               inherit (config.etu) dataPrefix;
             }
             ''
-              substituteAll ${../dotfiles/bin/restow} $out
+              substituteAll ${./bin/restow} $out
               chmod +x $out
             '';
-        "bin/spacecolors".source = ../dotfiles/bin/spacecolors;
+        "bin/spacecolors".source = ./bin/spacecolors;
 
         "bin/keep".source = pkgs.runCommand "keep" { } ''
-          cp ${../dotfiles/bin/keep} $out
+          cp ${./bin/keep} $out
           substituteInPlace $out --replace /bin/zsh ${pkgs.zsh}/bin/zsh
         '';
       };

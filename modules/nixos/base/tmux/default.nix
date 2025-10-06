@@ -13,10 +13,10 @@
 
     # Configure tmux for my users home-manager (if it's enabled).
     home-manager.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
-      home.file.".tmux.conf".source = ../../dotfiles/tmux.conf;
+      home.file.".tmux.conf".source = ./tmux.conf;
     };
 
     # Configure tmux for root users home-manager.
-    home-manager.users.root.home.file.".tmux.conf".source = ../../dotfiles/tmux.conf;
+    home-manager.users.root.home.file.".tmux.conf".source = ./tmux.conf;
   };
 }
