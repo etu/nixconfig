@@ -265,7 +265,7 @@ in
       # Not sure where this value is used.
       ircService.mediaProxy.publicUrl = "https://matrix.${domain}";
 
-      ircService.servers."irc.beanjuice.me" = {
+      ircService.servers."cthulhu.irc.beanjuice.me" = {
         name = "beanjuice";
         port = 6697;
         ssl = true;
