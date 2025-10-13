@@ -69,7 +69,7 @@ jobs:
           github_token: '${{ secrets.GITHUB_TOKEN }}'
 
       # Commit the updated dependencies to temporary branch
-      - uses: stefanzweifel/git-auto-commit-action@v6
+      - uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_message: 'cron(treewide): Upgrade systems'
           branch: tmp-updater-branch
