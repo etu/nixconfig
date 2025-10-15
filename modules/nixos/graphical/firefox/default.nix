@@ -65,6 +65,7 @@
             pkgs.nur.repos.rycee.firefox-addons.swedish-dictionary
             pkgs.nur.repos.rycee.firefox-addons.terms-of-service-didnt-read
             pkgs.nur.repos.rycee.firefox-addons.ublock-origin
+            pkgs.nur.repos.rycee.firefox-addons.sponsorblock
           ];
 
           isDefault = true;
