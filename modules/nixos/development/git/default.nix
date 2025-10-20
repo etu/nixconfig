@@ -26,7 +26,7 @@
         enable = true;
 
         # Default configs
-        extraConfig = {
+        settings = {
           commit.gpgSign = config.etu.graphical.gnupg.enable;
 
           user.name = config.etu.user.realname;
