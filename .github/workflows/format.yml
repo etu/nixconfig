@@ -18,6 +18,8 @@ jobs:
       - uses: DeterminateSystems/nix-installer-action@v20
       - uses: DeterminateSystems/flake-checker-action@v12
 
+      - name: Print nix version ❄️
+        run: 'nix --version'
       - name: 'Check nix file formatting ❄️'
         run: 'nix fmt . -- --ci'
       - name: Check yaml file formatting 📂
