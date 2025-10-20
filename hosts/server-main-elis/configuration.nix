@@ -47,7 +47,7 @@
 
   # My module settings
   etu = {
-    stateVersion = "24.05";
+    stateVersion = "25.11";
 
     base.emacs.enable = false; # Disable emacs that is enabled by default.
     development.git.enable = true;

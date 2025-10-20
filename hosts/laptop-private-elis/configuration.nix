@@ -36,7 +36,7 @@
 
   # My module settings
   etu = {
-    stateVersion = "24.05";
+    stateVersion = "25.11";
 
     base.fish.enableUserZoxideCd = true;
     development.enable = true;

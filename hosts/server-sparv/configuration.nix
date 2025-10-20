@@ -31,7 +31,7 @@
 
   # My module settings
   etu = {
-    stateVersion = "24.05";
+    stateVersion = "25.11";
 
     # Set data prefix so agenix can find the host keys.
     dataPrefix = "/";
