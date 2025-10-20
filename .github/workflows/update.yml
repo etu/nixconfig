@@ -74,6 +74,8 @@ jobs:
           commit_message: 'cron(treewide): Upgrade systems'
           branch: tmp-updater-branch
           push_options: '--force'
+          create_branch: true
+          skip_fetch: false
 
   promote:
     name: Promote to main branch
