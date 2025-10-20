@@ -15,6 +15,10 @@
   # This is to avoid nginx validation errors when upgrading tailscale
   # and restarting nginx at the same time.
   networking.hosts."100.100.6.114" = [ "server-main-elis" ];
+  networking.hosts."185.199.108.153" = [ "elis.nu" ];
+  networking.hosts."185.199.109.153" = [ "elis.nu" ];
+  networking.hosts."185.199.110.153" = [ "elis.nu" ];
+  networking.hosts."185.199.111.153" = [ "elis.nu" ];
 
   services.nginx.virtualHosts = {
     "ip.failar.nu" = {
