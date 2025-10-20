@@ -30,9 +30,6 @@
   };
 
   config = lib.mkIf config.etu.graphical.sway.enable {
-    # Enable a wayland build of Emacs.
-    etu.base.emacs.package = "wayland";
-
     # Install packages using home manager.
     etu.user.extraUserPackages = [
       pkgs.bluetuith

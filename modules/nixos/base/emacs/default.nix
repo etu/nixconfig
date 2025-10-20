@@ -6,6 +6,8 @@
   ...
 }:
 let
+  emacsPackage = pkgs.emacs-pgtk;
+
   # Run my config trough substituteAll to replace font names from my
   # system font settings.
   emacsConfig = pkgs.runCommand "config.el" {
@@ -62,38 +64,36 @@ let
   ];
 
   # List custom treesitter grammars
-  treesitGrammars =
-    emacsPackages.${config.etu.base.emacs.package}.pkgs.treesit-grammars.with-grammars
-      (
-        g: with g; [
-          tree-sitter-bash
-          tree-sitter-c
-          tree-sitter-cmake
-          tree-sitter-cpp
-          tree-sitter-css
-          tree-sitter-dockerfile
-          tree-sitter-go
-          tree-sitter-gomod
-          tree-sitter-hcl
-          tree-sitter-html
-          tree-sitter-java
-          tree-sitter-json
-          tree-sitter-latex
-          tree-sitter-make
-          tree-sitter-nix
-          tree-sitter-php
-          tree-sitter-python
-          tree-sitter-rust
-          tree-sitter-sql
-          tree-sitter-toml
-          tree-sitter-yaml
-        ]
-      );
+  treesitGrammars = emacsPackage.pkgs.treesit-grammars.with-grammars (
+    g: with g; [
+      tree-sitter-bash
+      tree-sitter-c
+      tree-sitter-cmake
+      tree-sitter-cpp
+      tree-sitter-css
+      tree-sitter-dockerfile
+      tree-sitter-go
+      tree-sitter-gomod
+      tree-sitter-hcl
+      tree-sitter-html
+      tree-sitter-java
+      tree-sitter-json
+      tree-sitter-latex
+      tree-sitter-make
+      tree-sitter-nix
+      tree-sitter-php
+      tree-sitter-python
+      tree-sitter-rust
+      tree-sitter-sql
+      tree-sitter-toml
+      tree-sitter-yaml
+    ]
+  );
 
   # Function to wrap emacs to contain the path for language servers
   wrapEmacsWithExtraBinPaths =
     {
-      emacs ? emacsPackages.${config.etu.base.emacs.package},
+      emacs ? emacsPackage,
       extraWrapperArgs ? "",
     }:
     pkgs.runCommand "${emacs.name}-with-extra-bin-paths" { nativeBuildInputs = [ pkgs.makeWrapper ]; }
@@ -129,13 +129,6 @@ let
         '')
       ];
     };
-
-  # Selection of emacs packages to choose from
-  emacsPackages = {
-    default = pkgs.emacs;
-    nox = pkgs.emacs-nox;
-    wayland = pkgs.emacs-pgtk;
-  };
 in
 {
   options.etu.base.emacs = {
@@ -144,12 +137,6 @@ in
       type = lib.types.listOf lib.types.str;
       default = [ ];
       description = "This allows to add strings that gets added to the emacs config file.";
-    };
-    package = lib.mkOption {
-      type = lib.types.str;
-      default = "default";
-      defaultText = "default";
-      description = "Which emacs package to use.";
     };
   };
 
@@ -173,8 +160,8 @@ in
       package = wrapEmacsWithExtraBinPaths { };
     };
 
-    # Install emacs icons symbols if we have any kind of graphical emacs
-    fonts.packages = lib.mkIf (config.etu.base.emacs.package != "nox") [
+    # Install emacs icons symbols
+    fonts.packages = [
       pkgs.emacs-all-the-icons-fonts
     ];
 
