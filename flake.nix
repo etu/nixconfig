@@ -21,6 +21,7 @@
 
     # Themes
     catppuccin.url = "github:catppuccin/nix";
+    catppuccin.inputs.nixpkgs.follows = "nixpkgs";
 
     # Deployments
     deploy-rs.url = "github:serokell/deploy-rs";
