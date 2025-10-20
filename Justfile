@@ -9,7 +9,7 @@ _default:
 # nix flake show
 [group('nix')]
 flake-show:
-    nix flake show --option allow-import-from-derivation true
+    nix flake show
 
 # nix flake check
 [group('nix')]
