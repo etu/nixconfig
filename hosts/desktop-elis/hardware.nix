@@ -97,24 +97,24 @@
   # Use a newer version of OpenRGB to get support for my motherboard.
   #
   # There's a PR for future updates to upstream: https://github.com/NixOS/nixpkgs/pull/381881
-  services.hardware.openrgb.package = pkgs.openrgb.overrideAttrs (oa: {
-    version = "1.0rc2";
-
-    src = pkgs.fetchFromGitLab {
-      inherit (oa.src) owner repo;
-      rev = "release_candidate_1.0rc2";
-      sha256 = "sha256-vdIA9i1ewcrfX5U7FkcRR+ISdH5uRi9fz9YU5IkPKJQ=";
-    };
-
-    postPatch = ''
-      substituteInPlace scripts/build-udev-rules.sh \
-        --replace-fail "/usr/bin/env" "${pkgs.lib.getExe' pkgs.coreutils "env"}" \
-        --replace-fail chmod "${pkgs.lib.getExe' pkgs.coreutils "chmod"}"
-
-      substituteInPlace OpenRGB.pro \
-        --replace-fail "/etc/systemd/system" "$out/etc/systemd/system"
-    '';
-  });
+  #services.hardware.openrgb.package = pkgs.openrgb.overrideAttrs (oa: {
+  #  version = "1.0rc2";
+  #
+  #  src = pkgs.fetchFromGitLab {
+  #    inherit (oa.src) owner repo;
+  #    rev = "release_candidate_1.0rc2";
+  #    sha256 = "sha256-vdIA9i1ewcrfX5U7FkcRR+ISdH5uRi9fz9YU5IkPKJQ=";
+  #  };
+  #
+  #  postPatch = ''
+  #    substituteInPlace scripts/build-udev-rules.sh \
+  #      --replace-fail "/usr/bin/env" "${pkgs.lib.getExe' pkgs.coreutils "env"}" \
+  #      --replace-fail chmod "${pkgs.lib.getExe' pkgs.coreutils "chmod"}"
+  #
+  #    substituteInPlace OpenRGB.pro \
+  #      --replace-fail "/etc/systemd/system" "$out/etc/systemd/system"
+  #  '';
+  #});
 
   # Set video driver.
   services.xserver.videoDrivers = [ "modesetting" ];
