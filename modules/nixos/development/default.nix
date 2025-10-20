@@ -20,7 +20,7 @@
       development.direnv.enable = lib.mkDefault true;
       development.git.enable = lib.mkDefault true;
       development.php.enable = lib.mkDefault true;
-      development.rtl-sdr.enable = lib.mkDefault true;
+      development.rtl-sdr.enable = lib.mkDefault false;
       development.vscode.enable = lib.mkDefault true;
 
       # Define extra groups for user.
