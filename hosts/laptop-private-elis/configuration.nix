@@ -49,6 +49,7 @@
     graphical.enable = true;
     graphical.sway.enable = true;
     graphical.fdm-printing.enable = true;
+    graphical.hamradio.enable = true;
     graphical.flatpak.enablePersistence = true;
     services.netdata.enable = true;
     theme.enable = true;
