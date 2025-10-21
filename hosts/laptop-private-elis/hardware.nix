@@ -2,11 +2,18 @@
   config,
   lib,
   modulesPath,
+  inputs,
   ...
 }:
 {
   imports = [
+    # Hardware settings
+    inputs.nixos-hardware.nixosModules.lenovo-thinkpad-p14s-amd-gen4
+
+    # Scanned modules
     (modulesPath + "/installer/scan/not-detected.nix")
+
+    # Filesystem layout
     ./disko.nix
   ];
 
