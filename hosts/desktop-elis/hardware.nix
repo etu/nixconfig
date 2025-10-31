@@ -3,11 +3,19 @@
   pkgs,
   modulesPath,
   lib,
+  inputs,
   ...
 }:
 {
   imports = [
+    # Hardware settings
+    inputs.nixos-hardware.nixosModules.common-cpu-amd
+    inputs.nixos-hardware.nixosModules.common-gpu-intel
+
+    # Scanned modules
     (modulesPath + "/installer/scan/not-detected.nix")
+
+    # Filesystem layout
     ./disko.nix
   ];
 
@@ -115,9 +123,6 @@
   #      --replace-fail "/etc/systemd/system" "$out/etc/systemd/system"
   #  '';
   #});
-
-  # Set video driver.
-  services.xserver.videoDrivers = [ "modesetting" ];
 
   # Enable fwupd for firmware updates etc.
   services.fwupd.enable = true;

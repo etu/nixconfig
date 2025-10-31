@@ -3,10 +3,16 @@
   lib,
   pkgs,
   modulesPath,
+  inputs,
   ...
 }:
 {
   imports = [
+    # Hardware settings
+    inputs.nixos-hardware.nixosModules.common-cpu-amd
+    inputs.nixos-hardware.nixosModules.common-gpu-amd
+
+    # Scanned modules
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
@@ -47,7 +53,6 @@
 
   # Install firmware for hardware.
   hardware.enableRedistributableFirmware = true;
-  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
   # Test to use OpenRGB to see if it works with my RGB
   services.hardware.openrgb.enable = true;
@@ -57,9 +62,6 @@
   hardware.openrazer.enable = true;
   hardware.openrazer.users = [ config.etu.user.username ];
   etu.user.extraUserPackages = [ pkgs.polychromatic ];
-
-  # Set video driver.
-  services.xserver.videoDrivers = [ "modesetting" ];
 
   # Enable fwupd for firmware updates etc.
   services.fwupd.enable = true;
