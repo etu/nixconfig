@@ -2,10 +2,15 @@
   config,
   lib,
   modulesPath,
+  inputs,
   ...
 }:
 {
   imports = [
+    # Hardware settings
+    inputs.nixos-hardware.nixosModules.common-cpu-amd
+
+    # Scanned modules
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 

@@ -3,10 +3,16 @@
   pkgs,
   lib,
   modulesPath,
+  inputs,
   ...
 }:
 {
   imports = [
+    # Hardware settings
+    inputs.nixos-hardware.nixosModules.common-cpu-amd
+    inputs.nixos-hardware.nixosModules.common-gpu-amd
+
+    # Scanned modules
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
