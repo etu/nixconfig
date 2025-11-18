@@ -142,6 +142,10 @@
             # Set default website appearence setting to dark (0) rather than the
             # default: automatic (2) or light (1).
             "layout.css.prefers-color-scheme.content-override" = 0;
+
+            # Disable the annoying suggestions to do things with chatgpt by selecting text
+            "browser.ml.enable" = false;
+            "browser.ml.chat.enabled" = false;
           };
         };
       };
