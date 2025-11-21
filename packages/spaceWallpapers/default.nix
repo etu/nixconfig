@@ -34,7 +34,7 @@ let
   # Concat these for use in the shell script.
   symlinkCommands = builtins.concatStringsSep "\n" symlinkCommandList;
 in
-pkgs.runCommandNoCC "spaceWallpapers" { } ''
+pkgs.runCommand "spaceWallpapers" { } ''
   mkdir -p $out
 
   ${symlinkCommands}

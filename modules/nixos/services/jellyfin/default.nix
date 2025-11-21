@@ -29,7 +29,7 @@
       extraPackages = [
         pkgs.intel-media-driver
         pkgs.intel-vaapi-driver
-        pkgs.vaapiVdpau
+        pkgs.libva-vdpau-driver
         pkgs.libvdpau-va-gl
       ];
     };
