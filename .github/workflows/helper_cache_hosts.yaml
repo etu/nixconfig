@@ -27,7 +27,7 @@ jobs:
       matrix: ${{ fromJSON(needs.matrix.outputs.matrix) }}
     name: 'Cache ${{ matrix.hostname }} 🖥️'
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
         with:
           ref: ${{ inputs.branch }}
       - uses: wimpysworld/nothing-but-nix@v6
