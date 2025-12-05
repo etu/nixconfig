@@ -50,6 +50,7 @@
     etu.base.nix.allowUnfree = [
       "appgate-sdp"
       "vagrant"
+      "terraform"
     ];
 
     etu.user.extraUserPackages = [
@@ -85,6 +86,8 @@
       # Misc
       pkgs.mariadb
       pkgs.awscli2
+      pkgs.terraform
+      pkgs.terragrunt
     ];
 
     # Enable appgate
