@@ -92,5 +92,8 @@
 
     # Enable appgate
     programs.appgate-sdp.enable = true;
+
+    # Enable orca the screen reader
+    services.orca.enable = true;
   };
 }
