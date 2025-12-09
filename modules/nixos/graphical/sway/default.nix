@@ -106,16 +106,8 @@
 
       # Configure swayidle for automatic screen locking
       services.swayidle.enable = true;
-      services.swayidle.events = [
-        {
-          event = "before-sleep";
-          command = "${pkgs.swaylock-effects}/bin/swaylock";
-        }
-        {
-          event = "lock";
-          command = "${pkgs.swaylock-effects}/bin/swaylock";
-        }
-      ];
+      services.swayidle.events.before-sleep = "${pkgs.swaylock-effects}/bin/swaylock";
+      services.swayidle.events.lock = "${pkgs.swaylock-effects}/bin/swaylock";
       services.swayidle.timeouts = [
         {
           timeout = 300;
