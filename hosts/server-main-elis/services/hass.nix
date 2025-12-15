@@ -9,13 +9,20 @@
     description = "Garbage collect podman";
     after = [ "podman.service" ];
     wantedBy = [ "multi-user.target" ];
-    startAt = "05:30";
+    path = [ pkgs.podman ];
+    script = "podman system prune -a -f";
     serviceConfig = {
       Type = "oneshot";
       User = "root";
       Group = "root";
-      ExecStart = "${pkgs.podman}/bin/podman system prune -a -f";
     };
+  };
+
+  systemd.timers.podman-system-prune = {
+    description = "Garbage collect podman";
+    after = [ "podman.service" ];
+    wantedBy = [ "multi-user.target" ];
+    timerConfig.OnCalendar = "05:30";
   };
 
   virtualisation.oci-containers.containers = {
