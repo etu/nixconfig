@@ -52,6 +52,7 @@
       "zroot/safe/valheim-saves".use_template = [ "data" ]; # Valheim server
       "zroot/local/project-zomboid".use_template = [ "data" ]; # Project Zomboid server
       "zroot/local/vrising".use_template = [ "data" ]; # V Rising server
+      "zroot/local/enshrouded".use_template = [ "data" ]; # Enshrouded server
     };
 
     user.extraRootAuthorizedKeys =
@@ -177,11 +178,25 @@
         "/var/lib/vrising/persistentdata:/mnt/vrising/persistentdata:rw"
       ];
     };
+
+    enshrouded-server = {
+      image = "docker.io/sknnr/enshrouded-dedicated-server:latest";
+      ports = [
+        "15636-15637:15636-15637/udp"
+        "27015:27015/udp"
+      ];
+      environmentFiles = [ config.age.secrets.enshrouded-server-env.path ];
+      volumes = [
+        "/var/lib/enshrouded/state:/home/steam/enshrouded"
+        "/var/lib/enshrouded/saves:/home/steam/enshrouded/savegame"
+      ];
+    };
   };
 
   # Include secret
   age.secrets.valheim-server-env = config.etu.data.ageModules.valheim-server-env;
   age.secrets.project-zomboid-env = config.etu.data.ageModules.project-zomboid-env;
+  age.secrets.enshrouded-server-env = config.etu.data.ageModules.enshrouded-server-env;
 
   # Restart valheim service every day
   systemd.services.restart-valheim-service = {

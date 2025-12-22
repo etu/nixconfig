@@ -12,6 +12,7 @@
     };
     valheim-server-env.file = ./secrets/server-sparv/valheim-server-env.age;
     project-zomboid-env.file = ./secrets/server-sparv/project-zomboid-env.age;
+    enshrouded-server-env.file = ./secrets/server-sparv/enshrouded-server-env.age;
     "etu@aarch64.nixos.community" = {
       file = ./secrets/laptop-private-elis/etu_at_aarch64.nixos.community.age;
       path = "/data/home/etu/.ssh/etu@aarch64.nixos.community";
