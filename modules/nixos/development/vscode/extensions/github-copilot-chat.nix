@@ -6,6 +6,6 @@
 pkgs.vscode-utils.extensionFromVscodeMarketplace {
   publisher = "github";
   name = "copilot-chat";
-  version = "0.33.5";
-  sha256 = "sha256-vxM5EjFqhkD++f16SMvwq3ipxWNbpMxbW8fwIwpa4dI=";
+  version = "0.35.2";
+  sha256 = "sha256-uUSfG/TY/meE4IcptDH7iy2bvM/38WL7u0Y2y+NrE4Y=";
 }
