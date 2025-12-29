@@ -16,7 +16,6 @@
     ./network-wait-hook.nix
 
     # Import local services that are host specific
-    ./services/cfdyndns.nix
     ./services/empty-dirs-cleaner.nix
     ./services/hass.nix
     ./services/home-nginx.nix
@@ -64,6 +63,10 @@
     services.freshrss.enable = true;
     services.jellyfin.enable = true;
     services.netdata.enable = true;
+    services.cloudflare-dyndns = {
+      enable = true;
+      secretName = "cloudflare-api-env";
+    };
     base.sanoid.datasets = {
       # Enable snapshotting for some filesystems
       "zroot/safe/data".use_template = [ "data" ];
