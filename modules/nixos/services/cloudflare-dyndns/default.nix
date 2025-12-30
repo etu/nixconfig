@@ -17,9 +17,9 @@ in
 
     secretName = mkOption {
       type = types.str;
-      description = "Name of the age secret containing Cloudflare API credentials (e.g., 'cloudflare-api-env')";
-      example = "cloudflare-api-env";
-      longDescription = ''
+      description = ''
+        Name of the age secret containing Cloudflare API credentials (e.g., 'cloudflare-api-env').
+
         The secret file should contain environment variables:
 
         - DNS_ZONE: Cloudflare Zone ID
@@ -27,6 +27,7 @@ in
         - AUTH_KEY: Cloudflare API Token with DNS edit permissions
         - DNS_RECORD_NAME: The DNS record name to update (e.g., "home.example.com")
       '';
+      example = "cloudflare-api-env";
     };
 
     schedule = mkOption {
