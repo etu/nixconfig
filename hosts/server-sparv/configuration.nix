@@ -196,7 +196,8 @@
       image = "docker.io/mornedhels/icarus-server:latest";
       ports = [
         "17777:17777/udp"
-        "27025:27015/udp"
+        "17777:17777/tcp"
+        "27025:27025/udp"
       ];
       environmentFiles = [ config.age.secrets.icarus-server-env.path ];
       volumes = [
