@@ -191,27 +191,12 @@
         "/var/lib/enshrouded/saves:/home/steam/enshrouded/savegame"
       ];
     };
-
-    icarus-server = {
-      image = "docker.io/mornedhels/icarus-server:latest";
-      ports = [
-        "17777:17777/udp"
-        "17777:17777/tcp"
-        "27025:27025/udp"
-      ];
-      environmentFiles = [ config.age.secrets.icarus-server-env.path ];
-      volumes = [
-        "/var/lib/icarus/server:/opt/icarus"
-        "/var/lib/icarus/saves:/home/icarus/drive_c/icarus"
-      ];
-    };
   };
 
   # Include secret
   age.secrets.valheim-server-env = config.etu.data.ageModules.valheim-server-env;
   age.secrets.project-zomboid-env = config.etu.data.ageModules.project-zomboid-env;
   age.secrets.enshrouded-server-env = config.etu.data.ageModules.enshrouded-server-env;
-  age.secrets.icarus-server-env = config.etu.data.ageModules.icarus-server-env;
 
   # Restart valheim service every day
   systemd.services.restart-valheim-service = {
