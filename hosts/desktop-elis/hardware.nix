@@ -75,7 +75,8 @@
   # May 17 14:36:06 desktop-elis kernel: ath12k_pci 0000:10:00.0: failed to start core: -110
   # May 17 14:36:06 desktop-elis kernel: ath12k_pci 0000:10:00.0: qmi failed to send mode request, mode: 4, err = -5
   # May 17 14:36:06 desktop-elis kernel: ath12k_pci 0000:10:00.0: qmi failed to send wlan mode off
-  boot.kernelPackages = pkgs.linuxPackages_6_17;
+  boot.kernelPackages = pkgs.linuxPackages_6_18;
+  boot.zfs.package = pkgs.zfs_2_4;
 
   # Enable a nice boot splash screen.
   boot.initrd.systemd.enable = true; # needed for ZFS password prompt with plymouth.
