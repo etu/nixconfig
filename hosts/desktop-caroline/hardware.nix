@@ -32,9 +32,6 @@
 
   boot.kernelModules = [ "kvm-amd" ];
 
-  # Install thinkpad modules for TLP.
-  boot.extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
-
   # Use a newer kernel.
   boot.kernelPackages = pkgs.linuxPackages_6_17;
 
