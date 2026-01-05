@@ -1,29 +1,11 @@
 {
   config,
-  pkgs,
   ...
 }:
 {
   # Garbage collect podman images
-  systemd.services.podman-system-prune = {
-    description = "Garbage collect podman";
-    after = [ "podman.service" ];
-    wantedBy = [ "multi-user.target" ];
-    path = [ pkgs.podman ];
-    script = "podman system prune -a -f";
-    serviceConfig = {
-      Type = "oneshot";
-      User = "root";
-      Group = "root";
-    };
-  };
-
-  systemd.timers.podman-system-prune = {
-    description = "Garbage collect podman";
-    after = [ "podman.service" ];
-    wantedBy = [ "multi-user.target" ];
-    timerConfig.OnCalendar = "05:30";
-  };
+  virtualisation.podman.autoPrune.enable = true;
+  virtualisation.podman.autoPrune.flags = [ "--all" ];
 
   virtualisation.oci-containers.containers = {
     home-assistant = {
