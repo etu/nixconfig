@@ -45,6 +45,7 @@
         pkgs.sshfs-fuse # SSHFS client
         pkgs.stupidterm # Another terminal emulator
         pkgs.yt-dlp # Youtube download client
+        pkgs.android-tools # ADB & Fastboot
       ];
 
       # Directories to mount persistent for my user on graphical sessions
@@ -83,9 +84,6 @@
         "x-systemd.requires-mounts-for=${config.etu.dataPrefix}"
       ];
     };
-
-    # Install adb and fastboot.
-    programs.adb.enable = true;
 
     # Enable gnome keyring (related to ~/.config/goa-1.0 and ~/.local/share/keyrings).
     services.gnome.gnome-keyring.enable = true;
