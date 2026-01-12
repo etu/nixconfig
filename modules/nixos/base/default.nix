@@ -109,6 +109,7 @@
     environment.systemPackages = [
       # Nice extra command line tools
       pkgs.bat # "bat - cat with wings", cat|less with language highlight
+      pkgs.btop # CLI system monitor
       pkgs.curl # curl duh
       pkgs.duf # nice disk usage output
       pkgs.fd # find util
