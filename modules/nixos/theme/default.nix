@@ -31,6 +31,7 @@
       catppuccin.foot.enable = true;
       catppuccin.fish.enable = true;
       catppuccin.rofi.enable = true;
+      catppuccin.vicinae.enable = true;
       catppuccin.mako.enable = true;
       catppuccin.swaylock.enable = true;
 

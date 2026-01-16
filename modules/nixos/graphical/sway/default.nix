@@ -84,6 +84,9 @@
       programs.rofi.enable = true;
       programs.rofi.font = "${config.etu.graphical.theme.fonts.monospace} ${toString config.etu.graphical.theme.fonts.size}";
 
+      # Enable vicinae home manager module.
+      programs.vicinae.enable = true;
+
       # Set up a wallpaper manager.
       services.wpaperd.enable = true;
       services.wpaperd.settings = {
@@ -200,6 +203,9 @@
               # Run Launcher
               "${modifier}+e" =
                 "exec ${rofi}/bin/rofi -show combi -modi combi -combi-modes 'window,drun' | xargs swaymsg exec --";
+
+              # Test launcher
+              "${modifier}+Shift+i" = "exec ${pkgs.vicinae}/bin/vicinae open";
 
               # Run rofi emoji picker
               "${modifier}+i" = "exec ${rofi}/bin/rofi -show emoji";
