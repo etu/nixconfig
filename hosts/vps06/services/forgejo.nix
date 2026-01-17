@@ -37,6 +37,7 @@
   services.forgejo.settings.DEFAULT.APP_NAME = "Elis Git Service";
   services.forgejo.settings.server.DOMAIN = "git.elis.nu";
   services.forgejo.settings.server.ROOT_URL = "https://git.elis.nu/";
+  services.forgejo.settings.server.HTTP_PORT = 3001; # Avoid conflict with grafana.
   services.forgejo.settings.service.DISABLE_REGISTRATION = true;
   services.forgejo.settings.service.REQUIRE_SIGNIN_VIEW = true;
   services.forgejo.settings.session.COOKIE_SECURE = true;
