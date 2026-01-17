@@ -17,6 +17,7 @@
 
     # Import matrix settings
     ./services/forgejo.nix
+    ./services/matomo.nix
     ./services/matrix.nix
     ./services/misc.nix
     ./services/postgres.nix
