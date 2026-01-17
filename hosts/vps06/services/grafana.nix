@@ -1,5 +1,6 @@
 {
   config,
+  pkgs,
   ...
 }:
 {
@@ -10,6 +11,9 @@
 
   # Enable grafana
   services.grafana.enable = true;
+  services.grafana.declarativePlugins = [
+    pkgs.grafanaPlugins.yesoreyeram-infinity-datasource
+  ];
 
   services.nginx.virtualHosts."grafana.elis.nu" = {
     forceSSL = true;
