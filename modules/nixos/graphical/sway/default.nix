@@ -86,6 +86,7 @@
 
       # Enable vicinae home manager module.
       programs.vicinae.enable = true;
+      programs.vicinae.systemd.enable = true;
 
       # Set up a wallpaper manager.
       services.wpaperd.enable = true;
