@@ -47,7 +47,7 @@
     ip-failar-nu.inputs.nixpkgs.follows = "nixpkgs";
 
     # NUR
-    nur.url = "nur";
+    nur.url = "github:nix-community/NUR";
   };
 
   outputs =
