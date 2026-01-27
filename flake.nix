@@ -40,7 +40,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     # Impermanence
-    impermanence.url = "github:nix-community/impermanence";
+    impermanence.url = "github:nix-community/impermanence/5f42ef6c4a11af8541a7c3915afe783c9d485b86";
 
     # ip-failar-nu
     ip-failar-nu.url = "github:etu/ip.failar.nu";
