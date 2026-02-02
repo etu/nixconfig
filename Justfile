@@ -123,7 +123,14 @@ update-flake:
 # Update home assistant container
 [group('updaters')]
 update-hass:
-    sed -i -r 's#(ghcr.io/home-assistant/home-assistant):[0-9]{4}\.[0-9]{1,2}\.[0-9]{1,2}#\1:'`git ls-remote --tags 'https://github.com/home-assistant/core.git' | cut -d '/' -f 3 | grep -e '^20' | grep -v b | sort -V | tail -n 1`'#' hosts/server-main-elis/services/hass.nix
+    #!/usr/bin/env bash
+    set -euo pipefail
+    latest=$(git ls-remote --tags 'https://github.com/home-assistant/core.git' | cut -d '/' -f 3 | grep -e '^20' | grep -v b | sort -V | tail -n 1) || { echo "Failed to fetch tags from GitHub"; exit 1; }
+    if [ -z "$latest" ]; then
+      echo "Failed to find latest version"
+      exit 1
+    fi
+    sed -i -r "s#(ghcr.io/home-assistant/home-assistant):[0-9]{4}\.[0-9]{1,2}\.[0-9]{1,2}#\1:$latest#" hosts/server-main-elis/services/hass.nix
 
 # Update zwavejs2mqtt container
 [group('updaters')]
