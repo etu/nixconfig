@@ -443,6 +443,9 @@
                 app_id = "nm-connection-editor";
                 title = "Network Connections";
               }
+              {
+                app_id = "be.alexandervanhee.gradia";
+              }
             ];
 
             # Set a custom keymap
