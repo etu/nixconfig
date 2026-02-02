@@ -123,17 +123,40 @@ update-flake:
 # Update home assistant container
 [group('updaters')]
 update-hass:
-    sed -i -r 's#(ghcr.io/home-assistant/home-assistant):[0-9]{4}\.[0-9]{1,2}\.[0-9]{1,2}#\1:'`git ls-remote --tags 'https://github.com/home-assistant/core.git' | cut -d '/' -f 3 | grep -e '^20' | grep -v b | sort -V | tail -n 1`'#' hosts/server-main-elis/services/hass.nix
+    #!/usr/bin/env bash
+    set -euo pipefail
+    latest=$(git ls-remote --tags 'https://github.com/home-assistant/core.git' | cut -d '/' -f 3 | grep -e '^20' | grep -v b | sort -V | tail -n 1) || { echo "Failed to fetch tags from GitHub"; exit 1; }
+    if [ -z "$latest" ]; then
+      echo "Failed to find latest version"
+      exit 1
+    fi
+    sed -i -r "s#(ghcr.io/home-assistant/home-assistant):[0-9]{4}\.[0-9]{1,2}\.[0-9]{1,2}#\1:$latest#" hosts/server-main-elis/services/hass.nix
 
 # Update zwavejs2mqtt container
 [group('updaters')]
 update-zwavejs2mqtt:
-    sed -i -r 's#(zwavejs/zwavejs2mqtt):[1-9]+\.[0-9]+\.[0-9]+#\1:'`git ls-remote --tags 'https://github.com/zwave-js/zwavejs2mqtt.git' | cut -d 'v' -f 2 | grep -v '\^{}' | sort -V | tail -n 1`'#' hosts/server-main-elis/services/hass.nix
+    #!/usr/bin/env bash
+    set -euo pipefail
+    response=$(curl -s -f "https://registry.hub.docker.com/v2/repositories/zwavejs/zwavejs2mqtt/tags?page_size=100") || { echo "Failed to fetch tags from Docker Hub"; exit 1; }
+    latest=$(echo "$response" | jq -r '.results[].name' | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$' | sort -V | tail -n 1) || { echo "Failed to parse JSON response"; exit 1; }
+    if [ -z "$latest" ]; then
+      echo "Failed to find latest version"
+      exit 1
+    fi
+    sed -i -r "s#(zwavejs/zwavejs2mqtt):[0-9]+\.[0-9]+\.[0-9]+#\1:$latest#" hosts/server-main-elis/services/hass.nix
 
 # Update mosquitto container
 [group('updaters')]
 update-mosquitto:
-    sed -i -r 's#(eclipse-mosquitto):[1-9]+\.[0-9]+\.?[0-9]*#\1:'`git ls-remote --tags 'https://github.com/eclipse/mosquitto.git' | cut -d 'v' -f 2 | grep -v -e '\^{}' -e 'refs/tags' -e 'rc' -e 2.1.0 | sort -V | tail -n 1`'#' hosts/server-main-elis/services/hass.nix
+    #!/usr/bin/env bash
+    set -euo pipefail
+    response=$(curl -s -f "https://registry.hub.docker.com/v2/repositories/library/eclipse-mosquitto/tags?page_size=100") || { echo "Failed to fetch tags from Docker Hub"; exit 1; }
+    latest=$(echo "$response" | jq -r '.results[].name' | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$' | sort -V | tail -n 1) || { echo "Failed to parse JSON response"; exit 1; }
+    if [ -z "$latest" ]; then
+      echo "Failed to find latest version"
+      exit 1
+    fi
+    sed -i -r "s#(eclipse-mosquitto):[0-9]+\.[0-9]+\.?[0-9]*#\1:$latest#" hosts/server-main-elis/services/hass.nix
 
 # Update vscode extensions
 [group('updaters')]
