@@ -136,7 +136,7 @@ update-zwavejs2mqtt:
       echo "Failed to find latest version"
       exit 1
     fi
-    sed -i -r "s#(zwavejs/zwavejs2mqtt):[1-9]+\.[0-9]+\.[0-9]+#\1:$latest#" hosts/server-main-elis/services/hass.nix
+    sed -i -r "s#(zwavejs/zwavejs2mqtt):[0-9]+\.[0-9]+\.[0-9]+#\1:$latest#" hosts/server-main-elis/services/hass.nix
 
 # Update mosquitto container
 [group('updaters')]
@@ -149,7 +149,7 @@ update-mosquitto:
       echo "Failed to find latest version"
       exit 1
     fi
-    sed -i -r "s#(eclipse-mosquitto):[1-9]+\.[0-9]+\.?[0-9]*#\1:$latest#" hosts/server-main-elis/services/hass.nix
+    sed -i -r "s#(eclipse-mosquitto):[0-9]+\.[0-9]+\.?[0-9]*#\1:$latest#" hosts/server-main-elis/services/hass.nix
 
 # Update vscode extensions
 [group('updaters')]
