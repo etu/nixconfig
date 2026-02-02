@@ -212,7 +212,7 @@
               "${modifier}+i" = "exec ${rofi}/bin/rofi -show emoji";
 
               # Printscreen
-              Print = "exec ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp)\" - | ${pkgs.swappy}/bin/swappy -f -";
+              Print = "exec ${pkgs.gradia}/bin/gradia --screenshot=INTERACTIVE";
 
               # Backlight:
               XF86MonBrightnessUp = "exec ${pkgs.acpilight}/bin/xbacklight -inc 10";
@@ -442,6 +442,9 @@
               {
                 app_id = "nm-connection-editor";
                 title = "Network Connections";
+              }
+              {
+                app_id = "be.alexandervanhee.gradia";
               }
             ];
 
