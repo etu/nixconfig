@@ -27,7 +27,7 @@
       ];
     };
     mqtt = {
-      image = "eclipse-mosquitto:2.1.0";
+      image = "eclipse-mosquitto:2.0.22";
       ports = [ "1883:1883" ];
       extraOptions = [
         "--network=host"
