@@ -133,16 +133,20 @@ update-zwavejs2mqtt:
     page=1
     all_tags=""
     while true; do
-      response=$(curl -s "https://registry.hub.docker.com/v2/repositories/zwavejs/zwavejs2mqtt/tags?page=$page&page_size=100")
-      tags=$(echo "$response" | jq -r '.results[].name')
+      response=$(curl -s -f "https://registry.hub.docker.com/v2/repositories/zwavejs/zwavejs2mqtt/tags?page=$page&page_size=100") || { echo "Failed to fetch tags from Docker Hub"; exit 1; }
+      tags=$(echo "$response" | jq -r '.results[].name') || { echo "Failed to parse JSON response"; exit 1; }
       all_tags="$all_tags$tags"$'\n'
-      next_page=$(echo "$response" | jq -r '.next')
+      next_page=$(echo "$response" | jq -r '.next') || { echo "Failed to parse JSON response"; exit 1; }
       if [ "$next_page" = "null" ]; then
         break
       fi
       ((page++))
     done
     latest=$(echo "$all_tags" | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$' | sort -V | tail -n 1)
+    if [ -z "$latest" ]; then
+      echo "Failed to find latest version"
+      exit 1
+    fi
     sed -i -r "s#(zwavejs/zwavejs2mqtt):[1-9]+\.[0-9]+\.[0-9]+#\1:$latest#" hosts/server-main-elis/services/hass.nix
 
 # Update mosquitto container
@@ -153,16 +157,20 @@ update-mosquitto:
     page=1
     all_tags=""
     while true; do
-      response=$(curl -s "https://registry.hub.docker.com/v2/repositories/library/eclipse-mosquitto/tags?page=$page&page_size=100")
-      tags=$(echo "$response" | jq -r '.results[].name')
+      response=$(curl -s -f "https://registry.hub.docker.com/v2/repositories/library/eclipse-mosquitto/tags?page=$page&page_size=100") || { echo "Failed to fetch tags from Docker Hub"; exit 1; }
+      tags=$(echo "$response" | jq -r '.results[].name') || { echo "Failed to parse JSON response"; exit 1; }
       all_tags="$all_tags$tags"$'\n'
-      next_page=$(echo "$response" | jq -r '.next')
+      next_page=$(echo "$response" | jq -r '.next') || { echo "Failed to parse JSON response"; exit 1; }
       if [ "$next_page" = "null" ]; then
         break
       fi
       ((page++))
     done
     latest=$(echo "$all_tags" | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$' | sort -V | tail -n 1)
+    if [ -z "$latest" ]; then
+      echo "Failed to find latest version"
+      exit 1
+    fi
     sed -i -r "s#(eclipse-mosquitto):[1-9]+\.[0-9]+\.?[0-9]*#\1:$latest#" hosts/server-main-elis/services/hass.nix
 
 # Update vscode extensions
