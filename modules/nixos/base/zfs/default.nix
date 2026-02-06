@@ -41,7 +41,6 @@
 
       # Root user persistence
       users.root = {
-        inherit (config.users.users.root) home;
         inherit (config.etu.base.zfs.root) directories files;
       };
 
