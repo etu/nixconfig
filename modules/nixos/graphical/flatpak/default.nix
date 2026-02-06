@@ -32,9 +32,17 @@
     # Hack to make bind mount to allow exec since I don't allow it on
     # the parent filesystem. Otherwise it doesn't really work to
     # install or run things :'D
-    fileSystems = lib.mkIf config.etu.graphical.flatpak.enablePersistence {
-      "/var/lib/flatpak".options = [ "exec" ];
-    };
+    # Note: With new impermanence using systemd.mounts, we need to define the mount
+    # with exec option. This will merge with impermanence's mount definition.
+    systemd.mounts = lib.mkIf config.etu.graphical.flatpak.enablePersistence [
+      {
+        what = "${config.etu.localPrefix}/var/lib/flatpak";
+        where = "/var/lib/flatpak";
+        type = "none";
+        options = "bind,exec";
+        requiredBy = [ "local-fs.target" ];
+      }
+    ];
 
     # Enable flatpak
     services.flatpak.enable = true;
