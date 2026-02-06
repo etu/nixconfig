@@ -41,6 +41,8 @@
 
     # Impermanence
     impermanence.url = "github:nix-community/impermanence";
+    impermanence.inputs.nixpkgs.follows = "nixpkgs";
+    impermanence.inputs.home-manager.follows = "home-manager";
 
     # ip-failar-nu
     ip-failar-nu.url = "github:etu/ip.failar.nu";
