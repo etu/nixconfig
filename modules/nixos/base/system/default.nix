@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   # Set the nixpkgs inputs path as channel in the NIX_PATH variable.
   nix.nixPath = [ "nixpkgs=${pkgs.path}" ];
