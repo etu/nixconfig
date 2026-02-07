@@ -1,10 +1,20 @@
-{
-  config,
-  lib,
-  pkgs,
-  flake,
-  ...
-}:
+{ config, pkgs, lib, flake, ... }:
+let
+  # Define Firefox extensions with NUR packages
+  defaultExtensions = [
+    pkgs.nur.repos.rycee.firefox-addons.bitwarden
+    pkgs.nur.repos.rycee.firefox-addons.elasticvue
+    pkgs.nur.repos.rycee.firefox-addons.facebook-container
+    pkgs.nur.repos.rycee.firefox-addons.firefox-color
+    pkgs.nur.repos.rycee.firefox-addons.multi-account-containers
+    pkgs.nur.repos.rycee.firefox-addons.privacy-badger
+    pkgs.nur.repos.rycee.firefox-addons.streetpass-for-mastodon
+    pkgs.nur.repos.rycee.firefox-addons.swedish-dictionary
+    pkgs.nur.repos.rycee.firefox-addons.terms-of-service-didnt-read
+    pkgs.nur.repos.rycee.firefox-addons.ublock-origin
+    pkgs.nur.repos.rycee.firefox-addons.sponsorblock
+  ];
+in
 {
   options.etu.graphical.firefox = {
     enable = lib.mkEnableOption "Enable graphical firefox settings";
@@ -13,6 +23,11 @@
       default = pkgs.firefox-bin;
       description = "Firefox package to use.";
       readOnly = true;
+    };
+    extensions = lib.mkOption {
+      type = lib.types.listOf lib.types.package;
+      default = defaultExtensions;
+      description = "Firefox extensions to install.";
     };
   };
 

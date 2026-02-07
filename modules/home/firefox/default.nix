@@ -23,20 +23,8 @@
     ];
 
     profiles.default = {
-      # Install extensions.
-      extensions.packages = [
-        pkgs.nur.repos.rycee.firefox-addons.bitwarden
-        pkgs.nur.repos.rycee.firefox-addons.elasticvue
-        pkgs.nur.repos.rycee.firefox-addons.facebook-container
-        pkgs.nur.repos.rycee.firefox-addons.firefox-color
-        pkgs.nur.repos.rycee.firefox-addons.multi-account-containers
-        pkgs.nur.repos.rycee.firefox-addons.privacy-badger
-        pkgs.nur.repos.rycee.firefox-addons.streetpass-for-mastodon
-        pkgs.nur.repos.rycee.firefox-addons.swedish-dictionary
-        pkgs.nur.repos.rycee.firefox-addons.terms-of-service-didnt-read
-        pkgs.nur.repos.rycee.firefox-addons.ublock-origin
-        pkgs.nur.repos.rycee.firefox-addons.sponsorblock
-      ];
+      # Install extensions from NixOS configuration
+      extensions.packages = config.etu.graphical.firefox.extensions;
 
       isDefault = true;
       search.default = "ddg";
