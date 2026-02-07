@@ -101,7 +101,7 @@
         # Enable firefox built in vertical tabs
         "sidebar.verticalTabs" = true;
 
-        # Set default website appearence setting to dark (0) rather than the
+        # Set default website appearance setting to dark (0) rather than the
         # default: automatic (2) or light (1).
         "layout.css.prefers-color-scheme.content-override" = 0;
 
