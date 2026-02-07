@@ -1,4 +1,4 @@
-{ config, osConfig, ... }:
+{ osConfig, ... }:
 {
   programs.foot = {
     enable = true;

@@ -1,4 +1,4 @@
-{ config, osConfig, ... }:
+{ osConfig, ... }:
 {
   # Configure alacritty
   programs.alacritty = {

@@ -1,4 +1,4 @@
-{ config, osConfig, ... }:
+{ osConfig, ... }:
 {
   # Set up mako, a notification daemon for wayland
   services.mako = {

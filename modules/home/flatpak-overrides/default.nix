@@ -1,4 +1,4 @@
-{ config, osConfig, ... }:
+{ osConfig, ... }:
 {
   home.file.".local/share/flatpak/overrides/com.slack.Slack".text = ''
     [Context]
