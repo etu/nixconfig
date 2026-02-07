@@ -1,4 +1,10 @@
-{ config, pkgs, lib, flake, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  flake,
+  ...
+}:
 let
   # Define Firefox extensions with NUR packages
   defaultExtensions = [
