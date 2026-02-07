@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, osConfig, pkgs, ... }:
 {
   # Make firefox the default browser
   xdg.mimeApps = {
@@ -15,7 +15,7 @@
   # Install my defined firefox package
   programs.firefox = {
     enable = true;
-    inherit (config.etu.graphical.firefox) package;
+    inherit (osConfig.etu.graphical.firefox) package;
 
     languagePacks = [
       "sv-SE"
@@ -24,7 +24,7 @@
 
     profiles.default = {
       # Install extensions from NixOS configuration
-      extensions.packages = config.etu.graphical.firefox.extensions;
+      extensions.packages = osConfig.etu.graphical.firefox.extensions;
 
       isDefault = true;
       search.default = "ddg";
@@ -61,7 +61,7 @@
         "extensions.update.enabled" = false;
 
         # Sync
-        "services.sync.username" = config.etu.user.email;
+        "services.sync.username" = osConfig.etu.user.email;
 
         # Do not sync extensions.
         "services.sync.engine.addons" = false;

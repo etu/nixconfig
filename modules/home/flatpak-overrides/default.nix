@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, osConfig, ... }:
 {
   home.file.".local/share/flatpak/overrides/com.slack.Slack".text = ''
     [Context]
@@ -14,6 +14,6 @@
   '';
   home.file.".local/share/flatpak/overrides/net.lutris.Lutris".text = ''
     [Context]
-    filesystems=/data/local/home/${config.etu.user.username}/Games:rw
+    filesystems=/data/local/home/${osConfig.etu.user.username}/Games:rw
   '';
 }

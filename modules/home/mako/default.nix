@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, osConfig, ... }:
 {
   # Set up mako, a notification daemon for wayland
   services.mako = {
@@ -6,7 +6,7 @@
     settings = {
       border-size = 3;
       default-timeout = 6000;
-      font = "${config.etu.graphical.theme.fonts.monospace} ${toString config.etu.graphical.theme.fonts.size}";
+      font = "${osConfig.etu.graphical.theme.fonts.monospace} ${toString osConfig.etu.graphical.theme.fonts.size}";
     };
   };
 }
