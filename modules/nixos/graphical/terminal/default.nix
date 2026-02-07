@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  flake,
   ...
 }:
 {
@@ -29,25 +30,10 @@
   config = lib.mkIf config.etu.graphical.terminal.enable {
     # If my user exists, enable home-manager configurations
     home-manager.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
-      # Configure alacritty
-      programs.alacritty = {
-        enable = true;
-        settings = {
-          env.TERMINAL = config.etu.graphical.terminal.terminalName;
-          env.TERM = "xterm-256color";
-          font.size = config.etu.graphical.theme.fonts.size;
-          font.normal.family = config.etu.graphical.theme.fonts.monospace;
-        };
-      }; # END alacritty
-
-      programs.foot = {
-        enable = true;
-        settings = {
-          main.term = "xterm-256color";
-          main.font = "${config.etu.graphical.theme.fonts.monospace}:size=${builtins.toString config.etu.graphical.theme.fonts.size}";
-          environment.TERMINAL = "foot";
-        };
-      }; # END foot
-    }; # END home-manager
+      imports = [
+        flake.homeModules.alacritty
+        flake.homeModules.foot
+      ];
+    };
   };
 }
