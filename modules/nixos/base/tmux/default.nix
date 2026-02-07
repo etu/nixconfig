@@ -7,7 +7,7 @@
 {
   options.etu.base.tmux.enable = lib.mkEnableOption "Enable base tmux settings";
 
-  config = lib.mkIf config.etu.base.htop.enable {
+  config = lib.mkIf config.etu.base.tmux.enable {
     # Configure tmux for my users home-manager (if it's enabled).
     home-manager.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
       imports = [
