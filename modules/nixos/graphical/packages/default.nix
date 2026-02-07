@@ -9,7 +9,7 @@
     pkgs.pavucontrol # Pulse audio volume control
     pkgs.sshfs-fuse # SSHFS client
     pkgs.stupidterm # Another terminal emulator
-    pkgs.yt-dlp # Youtube download client
+    pkgs.yt-dlp # YouTube download client
     pkgs.android-tools # ADB & Fastboot
   ];
 }
