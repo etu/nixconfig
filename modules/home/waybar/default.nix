@@ -84,19 +84,19 @@
                 # Determine the class based on battery percentage
                 if test "$PERCENTAGE" -ge 80; then
                   CLASS="good"
-                  ICON=""
+                  ICON=""
                 elif test "$PERCENTAGE" -ge 40; then
                   CLASS="moderate"
-                  ICON=""
+                  ICON=""
                 else
                   CLASS="critical"
-                  ICON=""
+                  ICON=""
                 fi
 
                 # Output JSON for Waybar
                 printf '{"text":"%s","tooltip":"%s","class":"%s"}'                    \
-                  " $PERCENTAGE% $ICON"                                              \
-                  "Device: $MODEL_NAME \nBattery: $PERCENTAGE% $ICON\nState: $STATE" \
+                  " $PERCENTAGE% $ICON"                                              \
+                  "Device: $MODEL_NAME \nBattery: $PERCENTAGE% $ICON\nState: $STATE" \
                   "$CLASS"
               '';
             }
@@ -117,15 +117,15 @@
             "8" = "Ⅷ";
             "9" = "Ⅸ";
             "10" = "Ⅹ";
-            default = "";
+            default = "";
           };
         };
 
         "sway/scratchpad" = {
           format = "{icon} {count}";
           format-icons = [
-            ""
-            ""
+            ""
+            ""
           ];
           show-empty = false;
           tooltip = true;
@@ -144,7 +144,7 @@
           title-len = 30;
           dynamic-len = 40;
           player-icons = {
-            default = "";
+            default = "";
             firefox = "";
             spotify = "";
           };
@@ -156,13 +156,13 @@
 
         backlight.format = "{percent}% {icon}";
         backlight.format-icons = [
-          ""
           ""
+          ""
         ];
 
         battery.format = "{capacity}% {icon}";
         battery.format-alt = "{time} {icon}";
-        battery.format-charging = "{capacity}% ";
+        battery.format-charging = "{capacity}% ";
         battery.format-full = "{capacity}% {icon}";
         battery.format-good = "{capacity}% {icon}";
         battery.format-icons = [
@@ -172,50 +172,50 @@
           ""
           ""
         ];
-        battery.format-plugged = "{capacity}% ";
+        battery.format-plugged = "{capacity}% ";
         battery.states = {
           good = 80;
           warning = 30;
           critical = 15;
         };
 
-        clock.format = "<span color=\"#88c0d0\"></span> {:%Y-%m-%d %H:%M:%S}";
+        clock.format = "<span color=\"#88c0d0\"></span> {:%Y-%m-%d %H:%M:%S}";
         clock.interval = 5;
         clock.tooltip = false;
 
-        cpu.format = "{usage}% ";
+        cpu.format = "{usage}% ";
         cpu.tooltip = true;
 
         idle_inhibitor.format = "{icon}";
         idle_inhibitor.format-icons.activated = "";
         idle_inhibitor.format-icons.deactivated = "";
 
-        memory.format = "{}% ";
+        memory.format = "{}% ";
 
         network.format-alt = "{ifname}: {ipaddr}/{cidr}";
         network.format-disconnected = "Disconnected ⚠";
-        network.format-ethernet = "{ifname}: {ipaddr}/{cidr} ";
-        network.format-linked = "{ifname} (No IP) ";
-        network.format-wifi = "{essid} ({signalStrength}%) ";
+        network.format-ethernet = "{ifname}: {ipaddr}/{cidr} ";
+        network.format-linked = "{ifname} (No IP) ";
+        network.format-wifi = "{essid} ({signalStrength}%) ";
         network.interval = 15;
 
         pulseaudio.format = "{volume}% {icon} {format_source}";
-        pulseaudio.format-bluetooth = "{volume}% {icon} {format_source}";
-        pulseaudio.format-bluetooth-muted = " {icon} {format_source}";
-        pulseaudio.format-muted = " {format_source}";
-        pulseaudio.format-source = "{volume}% ";
+        pulseaudio.format-bluetooth = "{volume}% {icon} {format_source}";
+        pulseaudio.format-bluetooth-muted = " {icon} {format_source}";
+        pulseaudio.format-muted = " {format_source}";
+        pulseaudio.format-source = "{volume}% ";
         pulseaudio.format-source-muted = "";
         pulseaudio.format-icons = {
-          headphone = "";
-          hands-free = "";
-          headset = "";
-          phone = "";
-          portable = "";
-          car = "";
+          headphone = "";
+          hands-free = "";
+          headset = "";
+          phone = "";
+          portable = "";
+          car = "";
           default = [
-            ""
-            ""
-            ""
+            ""
+            ""
+            ""
           ];
         };
         pulseaudio.on-click = "${pkgs.pavucontrol}/bin/pavucontrol";
@@ -246,9 +246,9 @@
         temperature.critical-threshold = 80;
         temperature.format = "{icon} {temperatureC}°C";
         temperature.format-icons = [
-          ""
+          ""
           ""
-          ""
+          ""
         ];
 
         tray.spacing = 12;
