@@ -9,11 +9,6 @@
   programs.waybar = {
     enable = true;
     systemd.enable = true;
-    style = pkgs.runCommand "waybar-styles.css" { } ''
-      sed -e 's/font-family: /font-family: ${osConfig.etu.graphical.theme.fonts.normal}, /'              \
-          -e 's/font-size: 13px/font-size: ${toString osConfig.etu.graphical.theme.fonts.biggerSize}px/' \
-          ${./style.css} > $out
-    '';
     settings = [
       {
         # Height of bar
@@ -255,4 +250,14 @@
       }
     ];
   };
+
+  # Custom style.css that imports catppuccin and adds font customization
+  xdg.configFile."waybar/style.css".text = builtins.readFile (
+    pkgs.runCommand "waybar-style-processed" { } ''
+      ${pkgs.gnused}/bin/sed \
+        -e 's/font-family: /font-family: ${osConfig.etu.graphical.theme.fonts.normal}, /' \
+        -e 's/font-size: 13px/font-size: ${toString osConfig.etu.graphical.theme.fonts.biggerSize}px/' \
+        ${./style.css} > $out
+    ''
+  );
 }
