@@ -1,5 +1,4 @@
-{ ... }:
-{
+_: {
   # Set up kanshi (which kinda is an autorandr for wayland)
   services.kanshi = {
     enable = true;
