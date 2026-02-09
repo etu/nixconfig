@@ -1,16 +1,16 @@
 _: {
   programs.tmux = {
     enable = true;
-    
+
     # Set prefix to C-q instead of default C-b
     prefix = "C-q";
-    
+
     # Use 24-hour clock format
     clock24 = true;
-    
+
     # Set terminal type
     terminal = "screen-256color";
-    
+
     # Additional tmux configuration
     extraConfig = ''
       # Remove keybindings to resize panes
