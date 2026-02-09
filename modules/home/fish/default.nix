@@ -9,12 +9,10 @@
   # Enable zoxide as an alternative navigation thing
   programs.zoxide.enable = true;
   programs.zoxide.options =
-    lib.mkIf (
-      osConfig.etu.base.fish.enableUserZoxideCd && config.home.username != "root"
-    )
-    [
-      "--cmd=cd"
-    ];
+    lib.mkIf (osConfig.etu.base.fish.enableUserZoxideCd && config.home.username != "root")
+      [
+        "--cmd=cd"
+      ];
 
   # Enable fish in home-manager
   programs.fish.enable = true;
@@ -35,30 +33,29 @@
       set -l PRIMARY (set_color red)
       set -l SECONDARY (set_color yellow)
       set --global fish_greeting $PRIMARY'                  ___
-         ___======____='$SECONDARY'---='$PRIMARY')
-        /T            \_'$SECONDARY'--==='$PRIMARY')
-        L \ '$SECONDARY'(0)   '$PRIMARY'\~    \_'$SECONDARY'-=='$PRIMARY')
-         \      / )J'$SECONDARY'~~    '$PRIMARY'\\'$SECONDARY'-='$PRIMARY')
-          \\\\___/  )JJ'$SECONDARY'~~    '$PRIMARY'\)
-           \_____/JJJ'$SECONDARY'~~      '$PRIMARY'\
-           / \  , \\'$PRIMARY'J'$SECONDARY'~~~~      \
-          (-\)'$PRIMARY'\='$SECONDARY'|  \~~~        L__
-          ('$PRIMARY'\\'$SECONDARY'\\)  ( -\)_            ==__
-           '$PRIMARY'\V    '$SECONDARY'\-'$PRIMARY'\) =='$SECONDARY'=_____  J\   \\\\
-                  '$PRIMARY'\V)     \_)'$SECONDARY' \   JJ J\)
-                              /J J'$PRIMARY'T'$SECONDARY'\JJJ'$PRIMARY'J)
-                              (J'$SECONDARY'JJ| '$PRIMARY'\UUU)
-                               (UU)'
+       ___======____='$SECONDARY'---='$PRIMARY')
+      /T            \_'$SECONDARY'--==='$PRIMARY')
+      L \ '$SECONDARY'(0)   '$PRIMARY'\~    \_'$SECONDARY'-=='$PRIMARY')
+       \      / )J'$SECONDARY'~~    '$PRIMARY'\\'$SECONDARY'-='$PRIMARY')
+        \\\\___/  )JJ'$SECONDARY'~~    '$PRIMARY'\)
+         \_____/JJJ'$SECONDARY'~~      '$PRIMARY'\
+         / \  , \\'$PRIMARY'J'$SECONDARY'~~~~      \
+        (-\)'$PRIMARY'\='$SECONDARY'|  \~~~        L__
+        ('$PRIMARY'\\'$SECONDARY'\\)  ( -\)_            ==__
+         '$PRIMARY'\V    '$SECONDARY'\-'$PRIMARY'\) =='$SECONDARY'=_____  J\   \\\\
+                '$PRIMARY'\V)     \_)'$SECONDARY' \   JJ J\)
+                            /J J'$PRIMARY'T'$SECONDARY'\JJJ'$PRIMARY'J)
+                            (J'$SECONDARY'JJ| '$PRIMARY'\UUU)
+                             (UU)'
     end
   '';
-  programs.fish.shellAbbrs =
-    {
-      "-" = "cd -";
-      "ipython" = "nix run nixpkgs#python3Packages.ipython";
-      "nrun" = "nix run nixpkgs#";
-      "nsh" = "nix-shell --run fish -p";
-    }
-    // (builtins.listToAttrs osConfig.etu.base.fish.shellAbbrs);
+  programs.fish.shellAbbrs = {
+    "-" = "cd -";
+    "ipython" = "nix run nixpkgs#python3Packages.ipython";
+    "nrun" = "nix run nixpkgs#";
+    "nsh" = "nix-shell --run fish -p";
+  }
+  // (builtins.listToAttrs osConfig.etu.base.fish.shellAbbrs);
   programs.fish.functions = {
     "256colors" = ''
       for i in (seq 1 255)
