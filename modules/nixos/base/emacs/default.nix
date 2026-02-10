@@ -1,5 +1,6 @@
 {
   config,
+  flake,
   inputs,
   lib,
   pkgs,
@@ -167,11 +168,15 @@ in
 
     # Configure emacs for my users home-manager (if it's enabled).
     home-manager.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
-      home.file.".emacs".text = "(setq-default inhibit-startup-screen t)";
+      imports = [
+        flake.homeModules.emacs
+      ];
     };
 
     # Configure emacs for root users home-manager.
-    home-manager.users.root.home.file.".emacs".text = "(setq-default inhibit-startup-screen t)";
+    home-manager.users.root.imports = [
+      flake.homeModules.emacs
+    ];
 
     # Enable persistence for Emacs.
     etu.base.zfs.user.directories = [
