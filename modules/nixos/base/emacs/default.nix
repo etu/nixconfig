@@ -45,6 +45,9 @@
       imports = [
         flake.homeModules.emacs
       ];
+
+      # Pass just the emacs overlay to home module
+      _module.args.emacsOverlay = inputs.emacs-overlay.overlay;
     };
 
     # Enable persistence for Emacs.

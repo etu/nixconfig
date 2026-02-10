@@ -3,11 +3,11 @@
   lib,
   osConfig,
   pkgs,
+  emacsOverlay,
   ...
 }:
 let
-  # The emacs overlay is already applied to pkgs via nixpkgs.overlays in the NixOS module,
-  # so we can use emacsWithPackagesFromUsePackage directly from pkgs
+  # Get the emacs package with treesitter support
   emacsPackage = pkgs.emacs-pgtk;
 
   # List custom treesitter grammars
@@ -94,6 +94,9 @@ let
   };
 in
 {
+  # Apply emacs overlay to home-manager's pkgs
+  nixpkgs.overlays = [ emacsOverlay ];
+
   # Install language servers and tools as home packages
   home.packages = extraPackages;
 
