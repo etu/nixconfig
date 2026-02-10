@@ -45,11 +45,6 @@
       imports = [
         flake.homeModules.emacs
       ];
-
-      # Pass the emacs-overlay to home module so it can build the package
-      _module.args = {
-        inherit flake;
-      };
     };
 
     # Enable persistence for Emacs.

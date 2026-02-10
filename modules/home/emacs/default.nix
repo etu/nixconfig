@@ -3,16 +3,12 @@
   lib,
   osConfig,
   pkgs,
-  flake,
   ...
 }:
 let
-  # Apply the emacs overlay to get emacsWithPackagesFromUsePackage
-  # Using pkgs.extend is more efficient than re-importing nixpkgs
-  pkgsWithOverlay = pkgs.extend flake.inputs.emacs-overlay.overlay;
-
-  # Get the emacs package with treesitter support
-  emacsPackage = pkgsWithOverlay.emacs-pgtk;
+  # The emacs overlay is already applied to pkgs via nixpkgs.overlays in the NixOS module,
+  # so we can use emacsWithPackagesFromUsePackage directly from pkgs
+  emacsPackage = pkgs.emacs-pgtk;
 
   # List custom treesitter grammars
   treesitGrammars = emacsPackage.pkgs.treesit-grammars.with-grammars (
@@ -84,7 +80,7 @@ let
   emacsConfigFile = pkgs.writeText "config.el" emacsConfigSubstituted;
 
   # Build emacs with packages from use-package config
-  emacsWithPackages = pkgsWithOverlay.emacsWithPackagesFromUsePackage {
+  emacsWithPackages = pkgs.emacsWithPackagesFromUsePackage {
     package = emacsPackage;
 
     # Don't assume ensuring of all use-package declarations
