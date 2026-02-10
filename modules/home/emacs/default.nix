@@ -1,5 +1,4 @@
 {
-  config,
   lib,
   osConfig,
   pkgs,
@@ -101,7 +100,7 @@ let
     name = "${emacsWithPackages.name}-wrapped";
     paths = [ emacsWithPackages ];
     nativeBuildInputs = [ pkgs.makeWrapper ];
-    
+
     postBuild = ''
       # Wrap all emacs binaries with language servers in PATH
       for bin in $out/bin/*; do
@@ -109,7 +108,7 @@ let
           --prefix PATH : ${lib.makeBinPath extraPackages}
       done
     '';
-    
+
     # Preserve meta attributes from the original package
     inherit (emacsWithPackages) meta;
   };
