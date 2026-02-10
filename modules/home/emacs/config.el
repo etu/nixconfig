@@ -57,7 +57,7 @@
 
 
 (setq
- ;; Disable creation of lock-files named .#<filaname>
+ ;; Disable creation of lock-files named .#<filename>
  create-lockfiles nil
 
  ;; Move auto save list files to cache
@@ -316,7 +316,7 @@
   :hook (company-mode . company-flx-mode))
 
 
-;; Statustics based ranking in company
+;; Statistics based ranking in company
 (use-package company-statistics
   :ensure t
   :init (setq company-statistics-file (concat user-emacs-data-directory "/company-statistics.dat"))
@@ -607,7 +607,7 @@
 
 ;; Three column layout
 (defun three-column-layout ()
-  "Split into three equaly sized columns."
+  "Split into three equally sized columns."
   (interactive)
   (let ((new-size (/ (window-total-width) 3)))
     (split-window-right new-size)
@@ -615,7 +615,7 @@
     (split-window-right new-size)
     (other-window -1)
 
-    (message "Splitted to three-column-layout")))
+    (message "Split to three-column-layout")))
 
 
 ;;;

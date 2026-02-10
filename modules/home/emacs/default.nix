@@ -54,14 +54,29 @@ let
     pkgs.openscad # For use with scad and scad preview mode
   ];
 
-  # Load the config file and substitute variables
-  emacsConfig = pkgs.runCommand "config.el" {
-    inherit treesitGrammars;
-    dataPrefix = osConfig.etu.dataPrefix;
-    extraConfig = lib.concatStringsSep "\n\n" osConfig.etu.base.emacs.extraConfig;
-    fontname = osConfig.etu.graphical.theme.fonts.monospace;
-    fontsize = osConfig.etu.graphical.theme.fonts.size;
-  } "substituteAll ${./config.el} $out";
+  # Load the config file and substitute variables in pure Nix (avoiding IFD)
+  emacsConfigRaw = builtins.readFile ./config.el;
+  
+  # Perform substitutions in pure Nix
+  emacsConfigSubstituted = builtins.replaceStrings
+    [
+      "@treesitGrammars@"
+      "@dataPrefix@"
+      "@extraConfig@"
+      "@fontname@"
+      "@fontsize@"
+    ]
+    [
+      "${treesitGrammars}/lib"
+      osConfig.etu.dataPrefix
+      (lib.concatStringsSep "\n\n" osConfig.etu.base.emacs.extraConfig)
+      osConfig.etu.graphical.theme.fonts.monospace
+      (toString osConfig.etu.graphical.theme.fonts.size)
+    ]
+    emacsConfigRaw;
+  
+  # Write the substituted config to a file for loading
+  emacsConfigFile = pkgs.writeText "config.el" emacsConfigSubstituted;
 in
 {
   # Install language servers and tools as home packages
@@ -78,7 +93,7 @@ in
         alwaysEnsure = false;
 
         # config to be able to pull in use-package dependencies
-        config = builtins.readFile emacsConfig;
+        config = emacsConfigSubstituted;
 
         # No extra packages needed, all handled via use-package
         extraEmacsPackages = _: [ ];
@@ -103,7 +118,7 @@ in
             (file-name-handler-alist nil))
 
         ;; Load config
-        (load-file "${emacsConfig}"))
+        (load-file "${emacsConfigFile}"))
     '';
   };
 
