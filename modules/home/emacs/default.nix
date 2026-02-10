@@ -8,11 +8,8 @@
 }:
 let
   # Apply the emacs overlay to get emacsWithPackagesFromUsePackage
-  pkgsWithOverlay = import pkgs.path {
-    inherit (pkgs) system;
-    overlays = [ emacsOverlay ];
-    config = pkgs.config;
-  };
+  # Using pkgs.extend is more efficient than re-importing nixpkgs
+  pkgsWithOverlay = pkgs.extend emacsOverlay;
 
   # Get the emacs package with treesitter support
   emacsPackage = pkgsWithOverlay.emacs-pgtk;
