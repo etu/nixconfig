@@ -52,18 +52,6 @@
       };
     };
 
-    # Configure emacs for root users home-manager.
-    home-manager.users.root = {
-      imports = [
-        flake.homeModules.emacs
-      ];
-      
-      # Pass the emacs-overlay to home module so it can build the package
-      _module.args = {
-        emacsOverlay = inputs.emacs-overlay.overlay;
-      };
-    };
-
     # Enable persistence for Emacs.
     etu.base.zfs.user.directories = [
       ".config/github-copilot"

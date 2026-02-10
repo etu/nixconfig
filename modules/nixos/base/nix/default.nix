@@ -30,12 +30,6 @@
       }
     );
 
-    # Also configure unfree allowlist for root user's home-manager
-    home-manager.users.root = lib.mkIf ((builtins.length config.etu.base.nix.allowUnfreeHome) > 0) {
-      nixpkgs.config.allowUnfreePredicate =
-        (pkg: builtins.elem (lib.getName pkg) config.etu.base.nix.allowUnfreeHome);
-    };
-
     # Extra binary caches
     nix.settings.substituters = [
       "https://nix-community.cachix.org"
