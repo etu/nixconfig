@@ -25,8 +25,9 @@
     # If we allow certain unfree packages on a home level, enable the nix option to do so.
     home-manager.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable (
       lib.mkIf ((builtins.length config.etu.base.nix.allowUnfreeHome) > 0) {
-        nixpkgs.config.allowUnfreePredicate =
-          (pkg: builtins.elem (lib.getName pkg) config.etu.base.nix.allowUnfreeHome);
+        nixpkgs.config.allowUnfreePredicate = (
+          pkg: builtins.elem (lib.getName pkg) config.etu.base.nix.allowUnfreeHome
+        );
       }
     );
 

@@ -61,22 +61,23 @@ let
   emacsConfigRaw = builtins.readFile ./config.el;
 
   # Perform substitutions in pure Nix
-  emacsConfigSubstituted = builtins.replaceStrings
-    [
-      "@treesitGrammars@"
-      "@dataPrefix@"
-      "@extraConfig@"
-      "@fontname@"
-      "@fontsize@"
-    ]
-    [
-      "${treesitGrammars}/lib"
-      osConfig.etu.dataPrefix
-      (lib.concatStringsSep "\n\n" osConfig.etu.base.emacs.extraConfig)
-      osConfig.etu.graphical.theme.fonts.monospace
-      (toString osConfig.etu.graphical.theme.fonts.size)
-    ]
-    emacsConfigRaw;
+  emacsConfigSubstituted =
+    builtins.replaceStrings
+      [
+        "@treesitGrammars@"
+        "@dataPrefix@"
+        "@extraConfig@"
+        "@fontname@"
+        "@fontsize@"
+      ]
+      [
+        "${treesitGrammars}/lib"
+        osConfig.etu.dataPrefix
+        (lib.concatStringsSep "\n\n" osConfig.etu.base.emacs.extraConfig)
+        osConfig.etu.graphical.theme.fonts.monospace
+        (toString osConfig.etu.graphical.theme.fonts.size)
+      ]
+      emacsConfigRaw;
 
   # Write the substituted config to a file for loading
   emacsConfigFile = pkgs.writeText "config.el" emacsConfigSubstituted;
