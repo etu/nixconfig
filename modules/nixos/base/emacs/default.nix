@@ -6,69 +6,6 @@
   pkgs,
   ...
 }:
-let
-  emacsPackage = pkgs.emacs-pgtk;
-
-  # List custom treesitter grammars
-  treesitGrammars = emacsPackage.pkgs.treesit-grammars.with-grammars (
-    g: with g; [
-      tree-sitter-bash
-      tree-sitter-c
-      tree-sitter-cmake
-      tree-sitter-cpp
-      tree-sitter-css
-      tree-sitter-dockerfile
-      tree-sitter-go
-      tree-sitter-gomod
-      tree-sitter-hcl
-      tree-sitter-html
-      tree-sitter-java
-      tree-sitter-json
-      tree-sitter-latex
-      tree-sitter-make
-      tree-sitter-nix
-      tree-sitter-php
-      tree-sitter-python
-      tree-sitter-rust
-      tree-sitter-sql
-      tree-sitter-toml
-      tree-sitter-yaml
-    ]
-  );
-
-  # Define language servers and tools to include in PATH for Emacs
-  extraPackages = [
-    # Language Servers
-    pkgs.go # Go language
-    pkgs.gopls # Go language server
-    pkgs.bash-language-server # Bash language server
-    pkgs.dockerfile-language-server # Docker language server
-    pkgs.intelephense # PHP language server
-    pkgs.nodePackages.typescript-language-server # JS/TS language server
-    pkgs.vscode-langservers-extracted # CSS/LESS/SASS language server
-    pkgs.nodejs # For copilot.el
-
-    # Other programs
-    pkgs.gnuplot # For use with org mode
-    pkgs.phpPackages.php-codesniffer # PHP codestyle checker
-    pkgs.openscad # For use with scad and scad preview mode
-  ];
-
-  # Function to build emacs with packages from use-package config
-  buildEmacsPackage = configSubstituted:
-    pkgs.emacsWithPackagesFromUsePackage {
-      package = emacsPackage;
-      
-      # Don't assume ensuring of all use-package declarations
-      alwaysEnsure = false;
-      
-      # config to be able to pull in use-package dependencies
-      config = configSubstituted;
-      
-      # No extra packages needed, all handled via use-package
-      extraEmacsPackages = _: [ ];
-    };
-in
 {
   options.etu.base.emacs = {
     enable = lib.mkEnableOption "Enable base emacs settings";
@@ -109,11 +46,9 @@ in
         flake.homeModules.emacs
       ];
       
-      # Pass the package builder function and other needed values
+      # Pass the emacs-overlay to home module so it can build the package
       _module.args = {
-        emacsPackageBuilder = buildEmacsPackage;
-        emacsTreesitGrammars = treesitGrammars;
-        emacsExtraPackages = extraPackages;
+        emacsOverlay = inputs.emacs-overlay.overlay;
       };
     };
 
@@ -123,11 +58,9 @@ in
         flake.homeModules.emacs
       ];
       
-      # Pass the package builder function and other needed values
+      # Pass the emacs-overlay to home module so it can build the package
       _module.args = {
-        emacsPackageBuilder = buildEmacsPackage;
-        emacsTreesitGrammars = treesitGrammars;
-        emacsExtraPackages = extraPackages;
+        emacsOverlay = inputs.emacs-overlay.overlay;
       };
     };
 
