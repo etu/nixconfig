@@ -3,57 +3,12 @@
   lib,
   osConfig,
   pkgs,
+  emacsPackageBuilder ? null,
+  emacsTreesitGrammars ? null,
+  emacsExtraPackages ? [],
   ...
 }:
 let
-  # Get the emacs package with treesitter support
-  emacsPackage = pkgs.emacs-pgtk;
-
-  # List custom treesitter grammars
-  treesitGrammars = emacsPackage.pkgs.treesit-grammars.with-grammars (
-    g: with g; [
-      tree-sitter-bash
-      tree-sitter-c
-      tree-sitter-cmake
-      tree-sitter-cpp
-      tree-sitter-css
-      tree-sitter-dockerfile
-      tree-sitter-go
-      tree-sitter-gomod
-      tree-sitter-hcl
-      tree-sitter-html
-      tree-sitter-java
-      tree-sitter-json
-      tree-sitter-latex
-      tree-sitter-make
-      tree-sitter-nix
-      tree-sitter-php
-      tree-sitter-python
-      tree-sitter-rust
-      tree-sitter-sql
-      tree-sitter-toml
-      tree-sitter-yaml
-    ]
-  );
-
-  # Define language servers and tools to include in PATH for Emacs
-  extraPackages = [
-    # Language Servers
-    pkgs.go # Go language
-    pkgs.gopls # Go language server
-    pkgs.bash-language-server # Bash language server
-    pkgs.dockerfile-language-server # Docker language server
-    pkgs.intelephense # PHP language server
-    pkgs.nodePackages.typescript-language-server # JS/TS language server
-    pkgs.vscode-langservers-extracted # CSS/LESS/SASS language server
-    pkgs.nodejs # For copilot.el
-
-    # Other programs
-    pkgs.gnuplot # For use with org mode
-    pkgs.phpPackages.php-codesniffer # PHP codestyle checker
-    pkgs.openscad # For use with scad and scad preview mode
-  ];
-
   # Load the config file and substitute variables in pure Nix (avoiding IFD)
   emacsConfigRaw = builtins.readFile ./config.el;
   
@@ -67,7 +22,7 @@ let
       "@fontsize@"
     ]
     [
-      "${treesitGrammars}/lib"
+      "${emacsTreesitGrammars}/lib"
       osConfig.etu.dataPrefix
       (lib.concatStringsSep "\n\n" osConfig.etu.base.emacs.extraConfig)
       osConfig.etu.graphical.theme.fonts.monospace
@@ -80,25 +35,13 @@ let
 in
 {
   # Install language servers and tools as home packages
-  home.packages = extraPackages;
+  home.packages = emacsExtraPackages;
 
   # Enable emacs in home-manager using programs.emacs
   programs.emacs = {
     enable = true;
-    package = (
-      pkgs.emacsWithPackagesFromUsePackage {
-        package = emacsPackage;
-
-        # Don't assume ensuring of all use-package declarations
-        alwaysEnsure = false;
-
-        # config to be able to pull in use-package dependencies
-        config = emacsConfigSubstituted;
-
-        # No extra packages needed, all handled via use-package
-        extraEmacsPackages = _: [ ];
-      }
-    );
+    # Use the package built in nixos module (where overlay is available)
+    package = emacsPackageBuilder emacsConfigSubstituted;
 
     # Initialize with the config file
     extraConfig = ''
