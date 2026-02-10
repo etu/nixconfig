@@ -3,9 +3,9 @@
   lib,
   osConfig,
   pkgs,
-  emacsPackageBuilder ? null,
-  emacsTreesitGrammars ? null,
-  emacsExtraPackages ? [],
+  emacsPackageBuilder,
+  emacsTreesitGrammars,
+  emacsExtraPackages,
   ...
 }:
 let
