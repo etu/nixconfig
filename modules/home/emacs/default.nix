@@ -95,19 +95,34 @@ let
     # No extra packages needed, all handled via use-package
     extraEmacsPackages = _: [ ];
   };
+
+  # Wrap emacs to add language servers to PATH, keeping user environment clean
+  wrappedEmacs = pkgs.runCommand "${emacsWithPackages.name}-wrapped" {
+    nativeBuildInputs = [ pkgs.makeWrapper ];
+  } ''
+    mkdir -p $out/bin
+
+    # Wrap emacs binary with language servers in PATH
+    makeWrapper ${emacsWithPackages}/bin/emacs $out/bin/emacs \
+      --prefix PATH : ${lib.makeBinPath extraPackages}
+
+    # Create symlinks for desktop file, icons, info, and man pages
+    mkdir -p $out/share/applications
+    ln -s ${emacsWithPackages}/share/applications/emacs.desktop $out/share/applications/
+    ln -s ${emacsWithPackages}/share/icons $out/share/icons
+    ln -s ${emacsWithPackages}/share/info $out/share/info
+    ln -s ${emacsWithPackages}/share/man $out/share/man
+  '';
 in
 {
   # Apply emacs overlay to home-manager's pkgs
   nixpkgs.overlays = [ emacsOverlay ];
 
-  # Install language servers and tools as home packages
-  home.packages = extraPackages;
-
   # Enable emacs in home-manager using programs.emacs
   programs.emacs = {
     enable = true;
-    # Use the package built with overlay in this module
-    package = emacsWithPackages;
+    # Use the wrapped package with language servers in PATH
+    package = wrappedEmacs;
 
     # Initialize with the config file
     extraConfig = ''
