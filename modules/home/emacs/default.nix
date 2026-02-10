@@ -102,9 +102,11 @@ let
   } ''
     mkdir -p $out/bin
 
-    # Wrap emacs binary with language servers in PATH
-    makeWrapper ${emacsWithPackages}/bin/emacs $out/bin/emacs \
-      --prefix PATH : ${lib.makeBinPath extraPackages}
+    # Wrap all emacs binaries with language servers in PATH
+    for bin in ${emacsWithPackages}/bin/*; do
+      makeWrapper "$bin" "$out/bin/$(basename "$bin")" \
+        --prefix PATH : ${lib.makeBinPath extraPackages}
+    done
 
     # Create symlinks for desktop file, icons, info, and man pages
     mkdir -p $out/share/applications
