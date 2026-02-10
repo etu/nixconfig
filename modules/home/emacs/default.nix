@@ -61,7 +61,7 @@ let
     extraConfig = lib.concatStringsSep "\n\n" osConfig.etu.base.emacs.extraConfig;
     fontname = osConfig.etu.graphical.theme.fonts.monospace;
     fontsize = osConfig.etu.graphical.theme.fonts.size;
-  } "substituteAll ${../../../modules/nixos/base/emacs/config.el} $out";
+  } "substituteAll ${./config.el} $out";
 in
 {
   # Install language servers and tools as home packages
