@@ -6,131 +6,6 @@
   pkgs,
   ...
 }:
-let
-  emacsPackage = pkgs.emacs-pgtk;
-
-  # Run my config trough substituteAll to replace font names from my
-  # system font settings.
-  emacsConfig = pkgs.runCommand "config.el" {
-    inherit treesitGrammars;
-    inherit (config.etu) dataPrefix;
-    extraConfig = lib.concatStringsSep "\n\n" config.etu.base.emacs.extraConfig;
-    fontname = config.etu.graphical.theme.fonts.monospace;
-    fontsize = config.etu.graphical.theme.fonts.size;
-  } "substituteAll ${./config.el} $out";
-
-  # Config to wrap loading of the emacs config file.
-  emacsConfigInit = pkgs.writeText "${emacsConfig.name}-init.el" ''
-    ;;; ${emacsConfig.name}-init.el -- starts here
-    ;;; Commentary:
-    ;;; Code:
-
-    ;; Add a startup hook that logs the startup time to the messages buffer
-    (add-hook 'emacs-startup-hook
-        (lambda ()
-            (message "Emacs ready in %s with %d garbage collections."
-                (format "%.2f seconds"
-                    (float-time
-                        (time-subtract after-init-time before-init-time)))
-                    gcs-done)))
-
-    ;; Increase the threshold to reduce the amount of garbage collections made
-    ;; during startups.
-    (let ((gc-cons-threshold (* 50 1000 1000))
-          (gc-cons-percentage 0.6)
-          (file-name-handler-alist nil))
-
-      ;; Load config
-      (load-file "${emacsConfig}"))
-
-    ;;; ${emacsConfig.name}-init.el ends here
-  '';
-
-  # Define language servers to include in the wrapper for Emacs
-  extraBinPaths = [
-    # Language Servers
-    pkgs.go # Go language
-    pkgs.gopls # Go language server
-    pkgs.bash-language-server # Bash language server
-    pkgs.dockerfile-language-server # Docker language server
-    pkgs.intelephense # PHP language server
-    pkgs.nodePackages.typescript-language-server # JS/TS language server
-    pkgs.vscode-langservers-extracted # CSS/LESS/SASS language server
-    pkgs.nodejs # For copilot.el
-
-    # Other programs
-    pkgs.gnuplot # For use with org mode
-    pkgs.phpPackages.php-codesniffer # PHP codestyle checker
-    pkgs.openscad # For use with scad and scad preview mode
-  ];
-
-  # List custom treesitter grammars
-  treesitGrammars = emacsPackage.pkgs.treesit-grammars.with-grammars (
-    g: with g; [
-      tree-sitter-bash
-      tree-sitter-c
-      tree-sitter-cmake
-      tree-sitter-cpp
-      tree-sitter-css
-      tree-sitter-dockerfile
-      tree-sitter-go
-      tree-sitter-gomod
-      tree-sitter-hcl
-      tree-sitter-html
-      tree-sitter-java
-      tree-sitter-json
-      tree-sitter-latex
-      tree-sitter-make
-      tree-sitter-nix
-      tree-sitter-php
-      tree-sitter-python
-      tree-sitter-rust
-      tree-sitter-sql
-      tree-sitter-toml
-      tree-sitter-yaml
-    ]
-  );
-
-  # Function to wrap emacs to contain the path for language servers
-  wrapEmacsWithExtraBinPaths =
-    {
-      emacs ? emacsPackage,
-      extraWrapperArgs ? "",
-    }:
-    pkgs.runCommand "${emacs.name}-with-extra-bin-paths" { nativeBuildInputs = [ pkgs.makeWrapper ]; }
-      ''
-        makeWrapper ${buildEmacsPackage emacs}/bin/emacs $out/bin/emacs \
-          --prefix PATH : ${lib.makeBinPath extraBinPaths} ${extraWrapperArgs}
-
-        mkdir -p $out/share/applications
-        ln -vs ${emacs}/share/applications/emacs.desktop $out/share/applications
-        ln -vs ${emacs}/share/icons $out/share/icons
-        ln -vs ${emacs}/share/info $out/share/info
-        ln -vs ${emacs}/share/man $out/share/man
-      '';
-
-  buildEmacsPackage =
-    emacsPackage:
-    pkgs.emacsWithPackagesFromUsePackage {
-      package = emacsPackage;
-
-      # Don't assume ensuring of all use-package declarations, this is
-      # the default behaviour, but this gets rid of the notice.
-      alwaysEnsure = false;
-
-      # config to be able to pull in use-package dependencies from there.
-      config = builtins.readFile emacsConfig;
-
-      # Extra packages to install
-      extraEmacsPackages = _: [
-        # Add my config initializer as an emacs package
-        (pkgs.runCommand "my-emacs-default-package" { } ''
-          mkdir -p $out/share/emacs/site-lisp
-          cp ${emacsConfigInit} $out/share/emacs/site-lisp/default.el
-        '')
-      ];
-    };
-in
 {
   options.etu.base.emacs = {
     enable = lib.mkEnableOption "Enable base emacs settings";
@@ -154,12 +29,11 @@ in
       "copilot-language-server"
     ];
 
-    # Install my emacs package system-wide.
-    services.emacs = {
-      enable = true;
-      defaultEditor = true;
-      package = wrapEmacsWithExtraBinPaths { };
-    };
+    # Allow unfree packages in home-manager as well
+    etu.base.nix.allowUnfreeHome = [
+      "intelephense"
+      "copilot-language-server"
+    ];
 
     # Install emacs icons symbols
     fonts.packages = [
