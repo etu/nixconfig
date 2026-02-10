@@ -3,6 +3,8 @@
   lib,
   osConfig,
   pkgs,
+  # Emacs overlay from nix-community/emacs-overlay, passed via _module.args
+  # to provide emacsWithPackagesFromUsePackage function
   emacsOverlay,
   ...
 }:
