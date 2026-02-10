@@ -3,13 +3,13 @@
   lib,
   osConfig,
   pkgs,
-  emacsOverlay,
+  flake,
   ...
 }:
 let
   # Apply the emacs overlay to get emacsWithPackagesFromUsePackage
   # Using pkgs.extend is more efficient than re-importing nixpkgs
-  pkgsWithOverlay = pkgs.extend emacsOverlay;
+  pkgsWithOverlay = pkgs.extend flake.inputs.emacs-overlay.overlay;
 
   # Get the emacs package with treesitter support
   emacsPackage = pkgsWithOverlay.emacs-pgtk;
@@ -61,7 +61,7 @@ let
 
   # Load the config file and substitute variables in pure Nix (avoiding IFD)
   emacsConfigRaw = builtins.readFile ./config.el;
-  
+
   # Perform substitutions in pure Nix
   emacsConfigSubstituted = builtins.replaceStrings
     [
@@ -79,20 +79,20 @@ let
       (toString osConfig.etu.graphical.theme.fonts.size)
     ]
     emacsConfigRaw;
-  
+
   # Write the substituted config to a file for loading
   emacsConfigFile = pkgs.writeText "config.el" emacsConfigSubstituted;
 
   # Build emacs with packages from use-package config
   emacsWithPackages = pkgsWithOverlay.emacsWithPackagesFromUsePackage {
     package = emacsPackage;
-    
+
     # Don't assume ensuring of all use-package declarations
     alwaysEnsure = false;
-    
+
     # config to be able to pull in use-package dependencies
     config = emacsConfigSubstituted;
-    
+
     # No extra packages needed, all handled via use-package
     extraEmacsPackages = _: [ ];
   };
