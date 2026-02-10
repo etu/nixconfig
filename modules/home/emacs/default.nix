@@ -97,24 +97,22 @@ let
   };
 
   # Wrap emacs to add language servers to PATH, keeping user environment clean
-  wrappedEmacs = pkgs.runCommand "${emacsWithPackages.name}-wrapped" {
+  wrappedEmacs = pkgs.symlinkJoin {
+    name = "${emacsWithPackages.name}-wrapped";
+    paths = [ emacsWithPackages ];
     nativeBuildInputs = [ pkgs.makeWrapper ];
-  } ''
-    mkdir -p $out/bin
-
-    # Wrap all emacs binaries with language servers in PATH
-    for bin in ${emacsWithPackages}/bin/*; do
-      makeWrapper "$bin" "$out/bin/$(basename "$bin")" \
-        --prefix PATH : ${lib.makeBinPath extraPackages}
-    done
-
-    # Create symlinks for desktop file, icons, info, and man pages
-    mkdir -p $out/share/applications
-    ln -s ${emacsWithPackages}/share/applications/emacs.desktop $out/share/applications/
-    ln -s ${emacsWithPackages}/share/icons $out/share/icons
-    ln -s ${emacsWithPackages}/share/info $out/share/info
-    ln -s ${emacsWithPackages}/share/man $out/share/man
-  '';
+    
+    postBuild = ''
+      # Wrap all emacs binaries with language servers in PATH
+      for bin in $out/bin/*; do
+        wrapProgram "$bin" \
+          --prefix PATH : ${lib.makeBinPath extraPackages}
+      done
+    '';
+    
+    # Preserve meta attributes from the original package
+    inherit (emacsWithPackages) meta;
+  };
 in
 {
   # Apply emacs overlay to home-manager's pkgs
