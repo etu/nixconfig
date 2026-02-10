@@ -73,18 +73,18 @@ in
     package = (
       pkgs.emacsWithPackagesFromUsePackage {
         package = emacsPackage;
-        
+
         # Don't assume ensuring of all use-package declarations
         alwaysEnsure = false;
-        
+
         # config to be able to pull in use-package dependencies
         config = builtins.readFile emacsConfig;
-        
+
         # No extra packages needed, all handled via use-package
         extraEmacsPackages = _: [ ];
       }
     );
-    
+
     # Initialize with the config file
     extraConfig = ''
       ;; Add a startup hook that logs the startup time to the messages buffer
