@@ -125,6 +125,9 @@ in
 
     # Initialize with the config file
     extraConfig = ''
+      ;; Don't show the welcome splash screen
+      (setq-default inhibit-startup-screen t)
+
       ;; Add a startup hook that logs the startup time to the messages buffer
       (add-hook 'emacs-startup-hook
           (lambda ()
