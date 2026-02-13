@@ -20,6 +20,7 @@
     etu.base.nix.allowUnfreeHome = [
       "vscode"
       "vscode-extension-bmewburn-vscode-intelephense-client"
+      "vscode-extension-github-copilot"
     ];
 
     # If my user exists, enable home-manager configurations
