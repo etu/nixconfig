@@ -117,6 +117,11 @@ in
   # Apply emacs overlay to home-manager's pkgs
   nixpkgs.overlays = [ emacsOverlay ];
 
+  home.file.".emacs".text = ''
+    ;; Don't show the welcome splash screen
+    (setq-default inhibit-startup-screen t)
+  '';
+
   # Enable emacs in home-manager using programs.emacs
   programs.emacs = {
     enable = true;
@@ -125,9 +130,6 @@ in
 
     # Initialize with the config file
     extraConfig = ''
-      ;; Don't show the welcome splash screen
-      (setq-default inhibit-startup-screen t)
-
       ;; Add a startup hook that logs the startup time to the messages buffer
       (add-hook 'emacs-startup-hook
           (lambda ()
