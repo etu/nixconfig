@@ -73,59 +73,59 @@
       "zroot/safe/home".use_template = [ "home" ];
 
       # Enable cleanup for synced backups
-      "zroot/backups/current/desktop-caroline/data" = {
+      "zstorage/backups/current/desktop-caroline/data" = {
         use_template = [ "data" ];
         autosnap = false;
       };
-      "zroot/backups/current/desktop-caroline/home" = {
+      "zstorage/backups/current/desktop-caroline/home" = {
         use_template = [ "home" ];
         autosnap = false;
       };
-      "zroot/backups/current/desktop-elis/data" = {
+      "zstorage/backups/current/desktop-elis/data" = {
         use_template = [ "data" ];
         autosnap = false;
       };
-      "zroot/backups/current/desktop-elis/home" = {
+      "zstorage/backups/current/desktop-elis/home" = {
         use_template = [ "home" ];
         autosnap = false;
       };
-      "zroot/backups/current/desktop-elis/work-home" = {
+      "zstorage/backups/current/desktop-elis/work-home" = {
         use_template = [ "home" ];
         autosnap = false;
       };
-      "zroot/backups/current/laptop-private-caroline/data" = {
+      "zstorage/backups/current/laptop-private-caroline/data" = {
         use_template = [ "data" ];
         autosnap = false;
       };
-      "zroot/backups/current/laptop-private-caroline/home" = {
+      "zstorage/backups/current/laptop-private-caroline/home" = {
         use_template = [ "home" ];
         autosnap = false;
       };
-      "zroot/backups/current/laptop-private-elis/data" = {
+      "zstorage/backups/current/laptop-private-elis/data" = {
         use_template = [ "data" ];
         autosnap = false;
       };
-      "zroot/backups/current/laptop-private-elis/home" = {
+      "zstorage/backups/current/laptop-private-elis/home" = {
         use_template = [ "home" ];
         autosnap = false;
       };
-      "zroot/backups/current/laptop-work-elis/data" = {
+      "zstorage/backups/current/laptop-work-elis/data" = {
         use_template = [ "data" ];
         autosnap = false;
       };
-      "zroot/backups/current/laptop-work-elis/home" = {
+      "zstorage/backups/current/laptop-work-elis/home" = {
         use_template = [ "home" ];
         autosnap = false;
       };
-      "zroot/backups/current/vps06/data" = {
+      "zstorage/backups/current/vps06/data" = {
         use_template = [ "data" ];
         autosnap = false;
       };
-      "zroot/backups/current/server-sparv/minecraft" = {
+      "zstorage/backups/current/server-sparv/minecraft" = {
         use_template = [ "data" ];
         autosnap = false;
       };
-      "zroot/backups/current/server-sparv/valheim-saves" = {
+      "zstorage/backups/current/server-sparv/valheim-saves" = {
         use_template = [ "data" ];
         autosnap = false;
       };
@@ -144,33 +144,33 @@
     base.syncoid.enable = true;
     # Enable syncing of some filesystems
     base.syncoid.commands = {
-      "root@desktop-caroline:zroot/safe/data".target = "zroot/backups/current/desktop-caroline/data";
-      "root@desktop-caroline:zroot/safe/home".target = "zroot/backups/current/desktop-caroline/home";
+      "root@desktop-caroline:zroot/safe/data".target = "zstorage/backups/current/desktop-caroline/data";
+      "root@desktop-caroline:zroot/safe/home".target = "zstorage/backups/current/desktop-caroline/home";
 
-      "root@desktop-elis:zroot/safe/data".target = "zroot/backups/current/desktop-elis/data";
-      "root@desktop-elis:zroot/safe/home".target = "zroot/backups/current/desktop-elis/home";
-      "root@desktop-elis:zroot/safe/work-home".target = "zroot/backups/current/desktop-elis/work-home";
+      "root@desktop-elis:zroot/safe/data".target = "zstorage/backups/current/desktop-elis/data";
+      "root@desktop-elis:zroot/safe/home".target = "zstorage/backups/current/desktop-elis/home";
+      "root@desktop-elis:zroot/safe/work-home".target = "zstorage/backups/current/desktop-elis/work-home";
 
       "root@laptop-private-caroline:zroot/safe/data".target =
-        "zroot/backups/current/laptop-private-caroline/data";
+        "zstorage/backups/current/laptop-private-caroline/data";
       "root@laptop-private-caroline:zroot/safe/home".target =
-        "zroot/backups/current/laptop-private-caroline/home";
+        "zstorage/backups/current/laptop-private-caroline/home";
       "root@laptop-private-caroline:zroot/zvol/win10".target =
-        "zroot/backups/current/laptop-private-caroline/win10";
+        "zstorage/backups/current/laptop-private-caroline/win10";
 
       "root@laptop-private-elis:zroot/safe/data".target =
-        "zroot/backups/current/laptop-private-elis/data";
+        "zstorage/backups/current/laptop-private-elis/data";
       "root@laptop-private-elis:zroot/safe/home".target =
-        "zroot/backups/current/laptop-private-elis/home";
+        "zstorage/backups/current/laptop-private-elis/home";
 
-      "root@laptop-work-elis:zroot/safe/data".target = "zroot/backups/current/laptop-work-elis/data";
-      "root@laptop-work-elis:zroot/safe/home".target = "zroot/backups/current/laptop-work-elis/home";
+      "root@laptop-work-elis:zroot/safe/data".target = "zstorage/backups/current/laptop-work-elis/data";
+      "root@laptop-work-elis:zroot/safe/home".target = "zstorage/backups/current/laptop-work-elis/home";
 
       "root@server-sparv:zroot/safe/valheim-saves".target =
-        "zroot/backups/current/server-sparv/valheim-saves";
-      "root@server-sparv:zroot/safe/minecraft".target = "zroot/backups/current/server-sparv/minecraft";
+        "zstorage/backups/current/server-sparv/valheim-saves";
+      "root@server-sparv:zroot/safe/minecraft".target = "ztorage/backups/current/server-sparv/minecraft";
 
-      "root@vps06:zroot/safe/data".target = "zroot/backups/current/vps06/data";
+      "root@vps06:zroot/safe/data".target = "zstorage/backups/current/vps06/data";
     };
 
     # Allow beszel to monitor this system
