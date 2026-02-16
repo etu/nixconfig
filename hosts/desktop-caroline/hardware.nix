@@ -32,9 +32,6 @@
 
   boot.kernelModules = [ "kvm-amd" ];
 
-  # Use a newer kernel.
-  boot.kernelPackages = pkgs.linuxPackages_6_18;
-
   # Enable a nice boot splash screen.
   boot.initrd.systemd.enable = true; # needed for ZFS password prompt with plymouth.
   boot.plymouth.enable = true;
