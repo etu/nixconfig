@@ -35,7 +35,6 @@ in
     pkgs.vscode-extensions.xdebug.php-debug # Php debug support
     vspkgs.vscode-ido # Decent file navigation
     vspkgs.php-sniffer # Php code style sniffing
-    pkgs.vscode-extensions.github.copilot # Copilot
     vspkgs.github-copilot-chat # Copilot chat
   ]
   ++ (lib.optionals osConfig.etu.graphical.fdm-printing.enable [
