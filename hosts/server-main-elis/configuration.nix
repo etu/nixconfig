@@ -168,7 +168,7 @@
 
       "root@server-sparv:zroot/safe/valheim-saves".target =
         "zstorage/backups/current/server-sparv/valheim-saves";
-      "root@server-sparv:zroot/safe/minecraft".target = "ztorage/backups/current/server-sparv/minecraft";
+      "root@server-sparv:zroot/safe/minecraft".target = "zstorage/backups/current/server-sparv/minecraft";
 
       "root@vps06:zroot/safe/data".target = "zstorage/backups/current/vps06/data";
     };
