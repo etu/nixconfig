@@ -86,6 +86,7 @@
       # Misc
       pkgs.mariadb
       pkgs.awscli2
+      pkgs.ssm-session-manager-plugin # Session manager plugin for aws
       pkgs.terraform
       pkgs.terragrunt
     ];
