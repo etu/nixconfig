@@ -62,11 +62,11 @@
       # Load blueprint.
       (inputs.blueprint { inherit inputs; })
 
-      # And depclare my own things that gets recursivly merged with
+      # And declare my own things that gets recursively merged with
       # blueprint so they don't overwrite each other.
       (
         let
-          # Functions to create deplayable nodes with deploy-rs
+          # Functions to create deployable nodes with deploy-rs
           mkDeploy =
             {
               name,

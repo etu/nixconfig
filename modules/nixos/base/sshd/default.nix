@@ -35,8 +35,8 @@
       "/etc/ssh/ssh_host_ed25519_key.pub"
     ];
 
-    # Add known hosts for all of my systems that I access remotely to
-    # they always are trusted.
+    # Add known hosts for all of my systems that I access remotely so
+    # they are always trusted.
     programs.ssh.knownHosts = {
       desktop-caroline.publicKey = config.etu.data.pubkeys.systems.desktop-caroline;
       desktop-elis.publicKey = config.etu.data.pubkeys.systems.desktop-elis;

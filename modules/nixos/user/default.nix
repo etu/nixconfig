@@ -59,7 +59,7 @@
     extraUserPackages = lib.mkOption {
       type = lib.types.listOf lib.types.package;
       default = [ ];
-      description = "Extra packages to install in my users profile.";
+      description = "Extra packages to install in my user's profile.";
     };
     userPasswordAgeModule = lib.mkOption {
       default = config.etu.data.ageModules.hashed-etu-password;
@@ -136,7 +136,7 @@
         '';
       };
 
-      # Install some comand line tools I cummonly want available for
+      # Install some command line tools I commonly want available for
       # my home directory, as well as extra packages defined by the
       # system or other modules.
       home.packages = config.etu.user.extraUserPackages ++ [

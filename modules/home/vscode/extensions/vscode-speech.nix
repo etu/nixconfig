@@ -1,5 +1,5 @@
 # This file is automatically updated by the output from
-# nix run github:etu/nixconfig#vcodeGetLatestExtensions ms-vscode vscode-speech
+# nix run github:etu/nixconfig#vscodeGetLatestExtensions ms-vscode vscode-speech
 #
 # Store page: https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-speech
 { pkgs, ... }:

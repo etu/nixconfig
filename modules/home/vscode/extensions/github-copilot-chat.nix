@@ -1,5 +1,5 @@
 # This file is automatically updated by the output from
-# nix run github:etu/nixconfig#vcodeGetLatestExtensions github copilot-chat
+# nix run github:etu/nixconfig#vscodeGetLatestExtensions github copilot-chat
 #
 # Store page: https://marketplace.visualstudio.com/items?itemName=github.copilot-chat
 { pkgs, ... }:

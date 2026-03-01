@@ -1,5 +1,5 @@
 # This file is automatically updated by the output from
-# nix run github:etu/nixconfig#vcodeGetLatestExtensions wongjn php-sniffer
+# nix run github:etu/nixconfig#vscodeGetLatestExtensions wongjn php-sniffer
 #
 # Store page: https://marketplace.visualstudio.com/items?itemName=wongjn.php-sniffer
 { pkgs, ... }:

@@ -1,5 +1,5 @@
 # This file is automatically updated by the output from
-# nix run github:etu/nixconfig#vcodeGetLatestExtensions kimgronqvist vscode-ido
+# nix run github:etu/nixconfig#vscodeGetLatestExtensions kimgronqvist vscode-ido
 #
 # Store page: https://marketplace.visualstudio.com/items?itemName=kimgronqvist.vscode-ido
 { pkgs, ... }:

@@ -37,7 +37,7 @@
     dataPrefix = "/";
 
     # We do have a persistent root on this system, I know, it's
-    # weird. So here I disable the persstence settings for this system
+    # weird. So here I disable the persistence settings for this system
     # and just keep the files on /
     base.zfs.enable = false; # Disable emacs that is enabled by default.
 

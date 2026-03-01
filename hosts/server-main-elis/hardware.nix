@@ -82,7 +82,7 @@
     # Prompt me for password to decrypt zfs
     #
     # This was fun, the reason it looks like this is because of the
-    # initramfs that firsts imports a pool, then it stalls on running
+    # initramfs that first imports a pool, then it stalls on running
     # "zfs load-key -a" on the terminal, but we never input data there
     # since it's on SSH. So I have to run that command when I log in,
     # then it has to kill the other zfs command to continue the init

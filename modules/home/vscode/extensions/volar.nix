@@ -1,5 +1,5 @@
 # This file is automatically updated by the output from
-# nix run github:etu/nixconfig#vcodeGetLatestExtensions Vue volar
+# nix run github:etu/nixconfig#vscodeGetLatestExtensions Vue volar
 #
 # Store page: https://marketplace.visualstudio.com/items?itemName=Vue.volar
 { pkgs, ... }:

@@ -1,5 +1,5 @@
 # This file is automatically updated by the output from
-# nix run github:etu/nixconfig#vcodeGetLatestExtensions joelwmale vscode-codeception
+# nix run github:etu/nixconfig#vscodeGetLatestExtensions joelwmale vscode-codeception
 #
 # Store page: https://marketplace.visualstudio.com/items?itemName=joelwmale.vscode-codeception
 { pkgs, ... }:

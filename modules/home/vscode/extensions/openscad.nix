@@ -1,5 +1,5 @@
 # This file is automatically updated by the output from
-# nix run github:etu/nixconfig#vcodeGetLatestExtensions Leathong openscad-language-support
+# nix run github:etu/nixconfig#vscodeGetLatestExtensions Leathong openscad-language-support
 #
 # Store page: https://marketplace.visualstudio.com/items?itemName=Leathong.openscad-language-support
 { pkgs, ... }:
