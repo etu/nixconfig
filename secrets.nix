@@ -67,6 +67,7 @@ in
   "secrets/server-sparv/enshrouded-server-env.age".publicKeys = etu ++ hosts.server-sparv;
   "secrets/server-sparv/valheim-server-env.age".publicKeys = etu ++ hosts.server-sparv;
   "secrets/server-sparv/project-zomboid-env.age".publicKeys = etu ++ hosts.server-sparv;
+  "secrets/vps06/grafana-secret-key.age".publicKeys = etu ++ hosts.vps06;
   "secrets/workstations/syncoid-ssh-ec.age".publicKeys =
     etu ++ hosts.desktop-elis ++ hosts.laptop-private-elis ++ hosts.laptop-work-elis;
 }

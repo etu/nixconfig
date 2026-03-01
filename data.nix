@@ -56,6 +56,10 @@
       owner = "syncoid";
       symlink = false;
     };
+    grafana-secret-key = {
+      file = ./secrets/vps06/grafana-secret-key.age;
+      owner = "grafana";
+    };
   };
 
   # Public keys for a bunch of devices, users and hosts.

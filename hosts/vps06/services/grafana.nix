@@ -14,6 +14,11 @@
   services.grafana.declarativePlugins = [
     pkgs.grafanaPlugins.yesoreyeram-infinity-datasource
   ];
+  services.grafana.settings.security.secret_key =
+    "$__file{${config.age.secrets.grafana-secret-key.path}}";
+
+  # Configure age secret for grafana
+  age.secrets.grafana-secret-key = config.etu.data.ageModules.grafana-secret-key;
 
   services.nginx.virtualHosts."grafana.elis.nu" = {
     forceSSL = true;
