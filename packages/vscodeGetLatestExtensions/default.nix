@@ -82,7 +82,7 @@ pkgs.writeShellApplication {
 
     cat <<EOF
     # This file is automatically updated by the output from
-    # nix run github:etu/nixconfig#vcodeGetLatestExtensions $EXT_ORG $EXT_NAME
+    # nix run github:etu/nixconfig#vscodeGetLatestExtensions $EXT_ORG $EXT_NAME
     #
     # Store page: https://marketplace.visualstudio.com/items?itemName=$EXT_ORG.$EXT_NAME
     { pkgs, ... }:

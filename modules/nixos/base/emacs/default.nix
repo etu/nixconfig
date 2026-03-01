@@ -12,7 +12,7 @@
     extraConfig = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       default = [ ];
-      description = "This allows to add strings that gets added to the emacs config file.";
+      description = "This allows adding strings that get added to the emacs config file.";
     };
   };
 

@@ -12,7 +12,7 @@
     # Include my hardware settings.
     ./hardware.nix
 
-    # Some networking wait tooks for certain services
+    # Some networking wait hooks for certain services
     ./network-wait-hook.nix
 
     # Import local services that are host specific
