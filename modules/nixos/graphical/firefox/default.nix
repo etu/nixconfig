@@ -8,7 +8,6 @@
 let
   # Define Firefox extensions with NUR packages
   defaultExtensions = [
-    pkgs.nur.repos.rycee.firefox-addons.bitwarden
     pkgs.nur.repos.rycee.firefox-addons.elasticvue
     pkgs.nur.repos.rycee.firefox-addons.facebook-container
     pkgs.nur.repos.rycee.firefox-addons.firefox-color
