@@ -1,9 +1,10 @@
 # AGENTS.md — Guide for AI Agents
 
-> **Important:** Whenever you make changes to this repository that affect its
-> structure, tooling, conventions, hosts, modules, or workflows, please update
-> this file **and** the [README.md](./README.md) accordingly so that both
-> remain accurate for future agents and human contributors.
+> **Important:** Whenever you make changes to this repository, update this file
+> **and** [README.md](./README.md) before finishing. This applies to: adding or
+> removing hosts, adding Justfile recipes, adding/changing secrets, changing
+> modules or CI workflows, and discovering new upgrade breakage patterns.
+> A reminder checklist is at the **bottom of this file**.
 
 ---
 
@@ -365,3 +366,18 @@ These patterns have caused evaluation or build failures in past upgrades:
 3. Add a logical reference in `data.nix` under `ageModules` if the secret
    needs to be referenced by name in NixOS configs.
 4. Run `agenix -r` to re-encrypt if you changed which keys have access.
+
+---
+
+## Checklist Before Finishing a Task
+
+Before completing any task, check whether your changes require updating this
+file or `README.md`. Update them if you did any of the following:
+
+- [ ] Added, removed, or renamed a **host**
+- [ ] Added or changed a **Justfile recipe**
+- [ ] Added or changed a **secret** (new `.age` file, `secrets.nix`, `data.nix`)
+- [ ] Added or changed a **module** (`modules/nixos/` or `modules/home/`)
+- [ ] Changed a **CI workflow** (`.github/workflows/`)
+- [ ] Changed **tooling or conventions** (formatters, linters, deploy method)
+- [ ] Discovered a new **upgrade breakage pattern** worth documenting
