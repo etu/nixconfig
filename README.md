@@ -7,15 +7,14 @@
 
 ##  Files and Directories in this repository
 
-### `data.nix`
+### `pubkeys.nix`
 
-This file doesn't contain any secrets at all, it's just miscellaneous
-public data that I need to be able to access from many places.
-
-It also contains public SSH keys for all the systems I have and care
-about, but also for trusted users that should have access to accounts
-on different systems. This becomes a central place to manage said keys
-for said users.
+This file doesn't contain any secrets at all, it's just the public SSH keys
+for all the systems I have and care about, but also for trusted users that
+should have access to accounts on different systems. This becomes a central
+place to manage said keys. It is imported by `secrets-registry.nix` (to
+declare which hosts may decrypt each secret) and by `modules/nixos/data/`
+(which exposes the keys as `config.etu.data.pubkeys`).
 
 ### `hosts/`
 
@@ -68,7 +67,7 @@ Here's things like Emacs,
 [home-manager](https://github.com/nix-community/home-manager), sway
 configuration, the list goes on.
 
-### `secrets.nix` and `secrets/`
+### `secrets-registry.nix`, `secrets.nix` and `secrets/`
 
 This is the directory with real secrets managed with
 [agenix](https://github.com/ryantm/agenix) which
@@ -78,3 +77,9 @@ SSH-key on the host of intended use. This way I can see, edit and
 update encryption keys on my primary laptops and commit these files to
 the repository. But then also the target system of intended use can
 decrypt it with it's stateful private SSH key.
+
+`secrets-registry.nix` is the **single source of truth**: each secret is
+defined once with its file path, optional agenix options (`owner`, `path`,
+`symlink`), and the list of host keys allowed to decrypt it. Both
+`secrets.nix` (used by the agenix CLI) and `config.etu.data.ageModules`
+(via `modules/nixos/data/`) are derived automatically from this registry.

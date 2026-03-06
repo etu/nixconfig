@@ -28,8 +28,9 @@ flake outputs.
 |------|-------------|
 | `flake.nix` | Main flake definition: inputs, blueprint wiring, deploy-rs nodes, and the live-iso package alias |
 | `flake.lock` | Locked versions of all flake inputs |
-| `data.nix` | Public, non-secret data: SSH public keys for all users and hosts; also exposes `ageModules` used by host configs |
-| `secrets.nix` | Maps each `.age` secret file to the public keys that may decrypt it (used by agenix) |
+| `pubkeys.nix` | All SSH public keys for users and host systems — standalone, no imports |
+| `secrets-registry.nix` | **Single source of truth** for all agenix secrets: file path, owner/path/symlink options, and the list of host keys allowed to decrypt each secret |
+| `secrets.nix` | Auto-derived from `secrets-registry.nix` — do not edit directly; consumed by the agenix CLI |
 | `secrets/` | Directory of agenix-encrypted secret files (`.age`) |
 | `hosts/` | Per-machine NixOS configurations |
 | `modules/` | Reusable NixOS (`modules/nixos/`) and home-manager (`modules/home/`) modules |
@@ -70,7 +71,7 @@ Reusable NixOS modules covering:
 | Directory | Purpose |
 |-----------|---------|
 | `base/` | Base system settings shared across hosts |
-| `data/` | Exposes `data.nix` values into NixOS option space |
+| `data/` | Defines `config.etu.data` option: derives `ageModules` from `secrets-registry.nix` and imports `pubkeys.nix` |
 | `development/` | Development tooling options |
 | `games/` | Gaming-related configuration |
 | `graphical/` | Graphical desktop (Sway/Wayland) stack |
@@ -197,20 +198,39 @@ Run `just all-fmt-check` to verify all checks locally before pushing.
 
 ## Secrets Management
 
-Secrets are managed with [agenix](https://github.com/ryantm/agenix):
+Secrets are managed with [agenix](https://github.com/ryantm/agenix).
 
-- **`secrets.nix`** — declares each `.age` file and the list of SSH public keys
-  (users + hosts) that are allowed to decrypt it. Edit this file when adding
-  new secrets or rekeying existing ones.
-- **`data.nix`** — contains `pubkeys` with the public SSH keys for all users
-  (`etu`, `concate`) and all host systems. Update this when adding a new host
-  or rotating keys.
-- **`secrets/`** — directory of encrypted `.age` files. Never commit plaintext
-  secrets here.
-- **`data.nix` → `ageModules`** — maps logical secret names to their `.age`
-  file paths and (optionally) owner/path overrides. Used by NixOS host configs.
+### File layout
 
-To re-encrypt secrets after adding a new key:
+| File | Purpose | Edit? |
+|------|---------|-------|
+| `pubkeys.nix` | All SSH public keys (users + host systems) | Yes — when adding hosts or rotating keys |
+| `secrets-registry.nix` | **Single source of truth**: one entry per secret with `file`, optional agenix module fields (`owner`, `path`, `symlink`), and `hostKeys` | Yes — when adding/changing secrets |
+| `secrets.nix` | Derived from registry; maps `.age` file paths → `publicKeys` for the agenix CLI | **No** — auto-generated |
+| `secrets/` | Encrypted `.age` files. Never commit plaintext here | Encrypted only |
+
+### How it works
+
+`secrets-registry.nix` is the only file you touch when managing secrets. It
+imports `pubkeys.nix` and defines every secret as an attribute:
+
+```nix
+my-secret = {
+  file     = ./secrets/server-foo/my-secret.age;  # path to .age file
+  owner    = "someuser";                           # optional agenix options
+  hostKeys = etu ++ h.server-foo;                  # keys that can decrypt
+};
+```
+
+- `modules/nixos/data/default.nix` calls `builtins.removeAttrs secret ["hostKeys"]` on each
+  registry entry to produce the `ageModules` attrset consumed by host/module configs via
+  `config.etu.data.ageModules.<name>`.
+- `secrets.nix` maps each entry's `file` path to `{ publicKeys = hostKeys; }`
+  for the agenix CLI.
+
+`secrets.nix` is the only derived file — do not edit it by hand.
+
+### Re-encrypting after adding a key
 
 ```sh
 agenix -r -i <identity-file>
@@ -278,8 +298,8 @@ versions.
   `repeated_keys` (see `.statix.toml`).
 - **Secrets stay encrypted**: never commit decrypted secret content. Only `.age`
   files go into `secrets/`.
-- **Public keys in `data.nix`**: all SSH public keys (user and host) live in
-  `data.nix`. Update it when adding hosts or rotating keys.
+- **Public keys in `pubkeys.nix`**: all SSH public keys (user and host) live in
+  `pubkeys.nix`. Update it when adding hosts or rotating keys.
 - **blueprint conventions**: the flake uses blueprint, so follow its directory
   conventions for hosts, modules, and packages.
 - **`just` for tasks**: prefer `just <recipe>` over raw `nix`/`deploy` commands
@@ -321,7 +341,7 @@ These patterns have caused evaluation or build failures in past upgrades:
   making previously-optional config mandatory.
   - Example (26.05): `services.grafana.settings.security.secret_key` lost its
     default. Fix: create an agenix secret with the existing key (retrieve from
-    the running host if upgrading), add it to `data.nix` + `secrets.nix`, then
+    the running host if upgrading), add an entry to `secrets-registry.nix`, then
     set the option via `"$__file{${config.age.secrets.<name>.path}}"`.
 
 - **New agenix secrets**: when adding a new `.age` file, always `git add` it
@@ -350,9 +370,9 @@ These patterns have caused evaluation or build failures in past upgrades:
 
 1. Create `hosts/<new-hostname>/` with at minimum a `default.nix` (or whatever
    blueprint expects).
-2. Add the host's SSH public key to `data.nix` under `pubkeys.systems`.
-3. Add the host to `secrets.nix` as needed (to grant it access to relevant
-   secrets).
+2. Add the host's SSH public key to `pubkeys.nix` under `systems`.
+3. Add `h.<hostname>` shorthands in `secrets-registry.nix` and include them in
+   the `hostKeys` of each secret that the new host should decrypt.
 4. If the host should be remotely deployable, add a `mkDeploy` entry in
    `flake.nix` and a corresponding recipe in `Justfile`.
 5. Update `README.md` and this `AGENTS.md` to document the new host.
@@ -362,10 +382,15 @@ These patterns have caused evaluation or build failures in past upgrades:
 ## Adding a New Secret
 
 1. Create the encrypted file: `agenix -e secrets/<path/to/secret>.age`
-2. Add the entry to `secrets.nix` with the appropriate public keys.
-3. Add a logical reference in `data.nix` under `ageModules` if the secret
-   needs to be referenced by name in NixOS configs.
-4. Run `agenix -r` to re-encrypt if you changed which keys have access.
+2. `git add` the new `.age` file (required before `nix flake check` can find it).
+3. Add one entry to **`secrets-registry.nix`** with `file`, any agenix module
+   options (`owner`, `path`, `symlink`), and `hostKeys`.
+4. Reference the secret in the consuming module/host via
+   `age.secrets.<name> = config.etu.data.ageModules.<name>;` and
+   `config.age.secrets.<name>.path`.
+5. Run `agenix -r` if you changed which keys have access.
+
+`secrets.nix` is derived automatically — do not edit it.
 
 ---
 
@@ -376,7 +401,7 @@ file or `README.md`. Update them if you did any of the following:
 
 - [ ] Added, removed, or renamed a **host**
 - [ ] Added or changed a **Justfile recipe**
-- [ ] Added or changed a **secret** (new `.age` file, `secrets.nix`, `data.nix`)
+- [ ] Added or changed a **secret** (new `.age` file, `secrets-registry.nix`, `pubkeys.nix`)
 - [ ] Added or changed a **module** (`modules/nixos/` or `modules/home/`)
 - [ ] Changed a **CI workflow** (`.github/workflows/`)
 - [ ] Changed **tooling or conventions** (formatters, linters, deploy method)
