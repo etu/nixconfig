@@ -66,6 +66,10 @@ build-server-sparv:
 build-vps06:
     nom build '.#nixosConfigurations.vps06.config.system.build.toplevel'
 
+# Build all hosts
+[group('build')]
+build-all: build-desktop-caroline build-desktop-elis build-laptop-private-caroline build-laptop-private-elis build-laptop-work-elis build-server-main-elis build-server-sparv build-vps06 build-live-iso
+
 # Deploy the server-main-elis host
 [group('deploy')]
 deploy-server-main-elis:

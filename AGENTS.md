@@ -135,6 +135,7 @@ Run `just` to list all available recipes. Key groups:
 ```sh
 just build                        # Build current host (auto-detected via `hostname`)
 just build-<hostname>             # Build a specific host
+just build-all                    # Build all hosts (plus the live ISO)
 just build-live-iso               # Build the live ISO image
 ```
 
