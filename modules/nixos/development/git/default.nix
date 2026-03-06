@@ -20,6 +20,11 @@
         "bin/git-git".source = ./bin/git-git;
         "bin/git-lol".source = ./bin/git-lol;
         "bin/git-refetch-tags".source = ./bin/git-refetch-tags;
+
+        # Allowed signers file for verifying SSH-signed git commits.
+        ".ssh/allowed_signers".text = lib.concatMapStrings (
+          key: "${config.etu.user.email} ${key}\n"
+        ) config.etu.data.pubkeys.etu.computers;
       };
 
       programs.git = {
@@ -32,6 +37,10 @@
           user.name = config.etu.user.realname;
           user.email = config.etu.user.email;
           user.signingKey = config.etu.user.signingKey;
+
+          # Use SSH keys for commit signing instead of GPG.
+          gpg.format = "ssh";
+          gpg.ssh.allowedSignersFile = "~/.ssh/allowed_signers";
 
           # Set default "git pull" behaviour so it doesn't try to default to
           # either "git fetch; git merge" (default) or "git fetch; git rebase".

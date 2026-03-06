@@ -39,7 +39,7 @@
     };
     signingKey = lib.mkOption {
       type = lib.types.str;
-      default = "67FE98F28C44CF221828E12FD57EFA625C9A925F";
+      default = "~/.ssh/id_ed25519.pub";
       description = "My public signing key for this system.";
     };
     extraGroups = lib.mkOption {
