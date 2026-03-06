@@ -55,10 +55,10 @@
 
     user.extraRootAuthorizedKeys =
       # Allow workstations to push snapshots
-      config.etu.data.pubkeys.etu.syncoid.workstations
+      config.etu.data.pubkeys.syncoid.workstations
       ++
         # Allow github to deploy system
-        config.etu.data.pubkeys.etu.github-actions;
+        config.etu.data.pubkeys.github-actions;
 
     services.freshrss.enable = true;
     services.jellyfin.enable = true;

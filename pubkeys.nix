@@ -20,36 +20,34 @@ let
       laptop-work-elis = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINwl7wWkYdxmUutxr2vzPPm7hiM5TuIwhV+YoCjrY0Qn etu@laptop-work-elis-2023-01-27"
       ];
-
-      # Public keys used for syncoid.
-      syncoid = {
-        server-main-elis = [
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMGc+oDfq+OCsApi1qsMDx1wlDwfu7oIHOeV0laVdq6W syncoid@fenchurch-2020-07-11"
-        ];
-        workstations = [
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICdtbbrBHT1i29nFdaf54zsJ4Yrt2tOLnNotaRIneazp syncoid@workstations-2021-07-11"
-        ];
-      };
-
-      # Github actions deployment key.
-      github-actions = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBsVq+lSP7EuU0KUurWYjlLWm1PJWKtYUXVayi1jD6lU github-actions-deployment-2023-08-30"
-      ];
     in
     {
       # Include all separate units
       inherit
         desktop-elis
         server-main-elis
-        syncoid
         laptop-private-elis
         laptop-work-elis
-        github-actions
         ;
 
       # Include a meta name of all computers
       computers = desktop-elis ++ server-main-elis ++ laptop-private-elis ++ laptop-work-elis;
     };
+
+  # Public keys used for syncoid.
+  syncoid = {
+    server-main-elis = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMGc+oDfq+OCsApi1qsMDx1wlDwfu7oIHOeV0laVdq6W syncoid@fenchurch-2020-07-11"
+    ];
+    workstations = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICdtbbrBHT1i29nFdaf54zsJ4Yrt2tOLnNotaRIneazp syncoid@workstations-2021-07-11"
+    ];
+  };
+
+  # Github Actions deployment key.
+  github-actions = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBsVq+lSP7EuU0KUurWYjlLWm1PJWKtYUXVayi1jD6lU github-actions-deployment-2023-08-30"
+  ];
 
   # Public keys of different hosts
   systems = {
@@ -78,5 +76,10 @@ let
   };
 in
 {
-  inherit etu systems;
+  inherit
+    etu
+    github-actions
+    syncoid
+    systems
+    ;
 }

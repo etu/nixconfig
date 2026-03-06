@@ -57,10 +57,10 @@
 
     user.extraRootAuthorizedKeys =
       # Allow home server to pull backups
-      config.etu.data.pubkeys.etu.syncoid.server-main-elis
+      config.etu.data.pubkeys.syncoid.server-main-elis
       ++
         # Allow github to deploy system
-        config.etu.data.pubkeys.etu.github-actions;
+        config.etu.data.pubkeys.github-actions;
 
     services.netdata.enable = true;
 

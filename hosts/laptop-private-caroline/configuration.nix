@@ -85,7 +85,7 @@
     ];
 
     # Allow home fileserver to connect to fetch snapshots.
-    user.extraRootAuthorizedKeys = config.etu.data.pubkeys.etu.syncoid.server-main-elis;
+    user.extraRootAuthorizedKeys = config.etu.data.pubkeys.syncoid.server-main-elis;
 
     # Allow to install some unfree packages.
     base.nix.allowUnfree = [
