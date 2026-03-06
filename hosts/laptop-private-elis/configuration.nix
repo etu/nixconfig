@@ -83,28 +83,7 @@
   # Enable blueman.
   services.blueman.enable = true;
 
-  # Add community server to known hosts
-  programs.ssh.knownHosts."aarch64.nixos.community".publicKey =
-    config.etu.data.pubkeys.systems."aarch64.nixos.community";
-
   age.secrets = {
-    inherit (config.etu.data.ageModules)
-      "etu@aarch64.nixos.community"
-      "etu@aarch64.nixos.community.pub"
-      ;
     inherit (config.etu.data.ageModules) syncoid-workstations-ssh-ec;
   };
-
-  # Set up remote builds
-  nix.distributedBuilds = true;
-  nix.buildMachines = [
-    {
-      hostName = "aarch64.nixos.community";
-      maxJobs = 64;
-      sshKey = config.age.secrets."etu@aarch64.nixos.community".path;
-      sshUser = "etu";
-      system = "aarch64-linux";
-      supportedFeatures = [ "big-parallel" ];
-    }
-  ];
 }

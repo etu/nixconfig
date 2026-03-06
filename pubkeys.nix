@@ -53,10 +53,6 @@ let
 
   # Public keys of different hosts
   systems = {
-    # aarch64.nixos.community
-    "aarch64.nixos.community" =
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMUTz5i9u5H2FHNAmZJyoJfIGyUm/HfGhfwnc142L3ds";
-
     # Desktop computer for Caroline
     desktop-caroline = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPGp2BbNa2Jum5qaIfuxsBgiqBi6wOiclGBziq9B/2lD";
 

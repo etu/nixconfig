@@ -84,24 +84,6 @@ in
   };
 
   # ---------------------------------------------------------------------------
-  # Elis laptop secrets
-  # ---------------------------------------------------------------------------
-
-  "etu@aarch64.nixos.community" = {
-    file = ./secrets/laptop-private-elis/etu_at_aarch64.nixos.community.age;
-    path = "/data/home/etu/.ssh/etu@aarch64.nixos.community";
-    owner = "etu";
-    hostKeys = etu ++ h.desktop-elis ++ h.laptop-private-elis;
-  };
-
-  "etu@aarch64.nixos.community.pub" = {
-    file = ./secrets/laptop-private-elis/etu_at_aarch64.nixos.community.pub.age;
-    path = "/data/home/etu/.ssh/etu@aarch64.nixos.community.pub";
-    owner = "etu";
-    hostKeys = etu ++ h.desktop-elis ++ h.laptop-private-elis;
-  };
-
-  # ---------------------------------------------------------------------------
   # server-main-elis secrets
   # ---------------------------------------------------------------------------
 
