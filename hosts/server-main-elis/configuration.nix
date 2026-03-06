@@ -62,7 +62,6 @@
 
     services.freshrss.enable = true;
     services.jellyfin.enable = true;
-    services.netdata.enable = true;
     services.cloudflare-dyndns = {
       enable = true;
       secretName = "cloudflare-api-env";

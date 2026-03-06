@@ -62,8 +62,6 @@
         # Allow github to deploy system
         config.etu.data.pubkeys.github-actions;
 
-    services.netdata.enable = true;
-
     # Allow beszel to monitor this system
     services.beszel-agent.enable = true;
     services.beszel-agent.extraFilesystems = [

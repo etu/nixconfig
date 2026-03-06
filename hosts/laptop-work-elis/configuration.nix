@@ -37,7 +37,6 @@
     services.nfs.exports = ''
       ${config.etu.dataPrefix}/home/etu/tvnu/projects 192.168.5.102(rw,no_subtree_check,all_squash,anonuid=1000,anongid=100)
     '';
-    services.netdata.enable = true;
     theme.enable = true;
     user.enable = true;
     user.extraGroups = [

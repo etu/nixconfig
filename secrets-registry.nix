@@ -63,12 +63,6 @@ in
     hostKeys = etu ++ h.all;
   };
 
-  netdata-claim-token-file = {
-    file = ./secrets/any/netdata-claim-token-file.age;
-    owner = "netdata";
-    hostKeys = etu ++ h.all;
-  };
-
   # ---------------------------------------------------------------------------
   # Caroline's laptop secrets
   # ---------------------------------------------------------------------------

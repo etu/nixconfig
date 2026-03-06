@@ -55,7 +55,6 @@
     graphical.fdm-printing.enable = true;
     graphical.hamradio.enable = true;
     graphical.flatpak.enablePersistence = true;
-    services.netdata.enable = true;
     theme.enable = true;
     user.enable = true;
     user.extraGroups = [

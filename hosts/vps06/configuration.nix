@@ -57,8 +57,6 @@
       # Enable snapshotting for some filesystems
       "zroot/safe/data".use_template = [ "data" ];
     };
-    services.netdata.enable = true;
-
     # Allow beszel to monitor this system
     services.beszel-agent.enable = true;
     services.beszel-agent.extraFilesystems = [

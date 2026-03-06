@@ -5,7 +5,6 @@
     ./cloudflare-dyndns
     ./freshrss
     ./jellyfin
-    ./netdata
     ./nfs
   ];
 }
