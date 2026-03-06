@@ -136,6 +136,10 @@
         '';
       };
 
+      # Configure the SSH client to automatically add keys to the agent on
+      # first use, prompting for the passphrase once per login session.
+      programs.ssh.addKeysToAgent = "yes";
+
       # Install some command line tools I commonly want available for
       # my home directory, as well as extra packages defined by the
       # system or other modules.
