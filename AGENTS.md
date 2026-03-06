@@ -288,6 +288,62 @@ versions.
 
 ---
 
+## Performing System Upgrades
+
+The upgrade workflow mirrors what `.github/workflows/update.yml` automates.
+When doing a manual upgrade, follow these steps in order:
+
+1. **Update flake inputs**: `just update-flake` (runs `nix flake update`)
+2. **Run all updaters**: `just update-all` (updates HASS container tag, VSCode
+   extensions, etc.)
+3. **Lint/format check**: `just all-fmt-check` — must be clean before
+   continuing.
+4. **Flake check**: `just flake-check` — fix any evaluation errors first.
+5. **Build all hosts**: `just build-<hostname>` for each host, or let CI do it.
+6. **Commit**, then **deploy** each remotely-managed server and confirm it is
+   healthy before pushing. Deployment order: `server-main-elis` →
+   `server-sparv` → `vps06`.
+7. **Push** once all deployments are confirmed.
+
+### Common nixpkgs upgrade breakages to watch for
+
+These patterns have caused evaluation or build failures in past upgrades:
+
+- **Renamed options**: nixpkgs occasionally renames or restructures NixOS
+  options between releases. If `nix flake check` or a host build fails with
+  "option does not exist", search nixpkgs for the new option name.
+  - Example (26.05): `services.homepage-dashboard.environmentFile` (scalar)
+    was renamed to `environmentFiles` (list).
+
+- **Removed option defaults**: modules sometimes drop their default values,
+  making previously-optional config mandatory.
+  - Example (26.05): `services.grafana.settings.security.secret_key` lost its
+    default. Fix: create an agenix secret with the existing key (retrieve from
+    the running host if upgrading), add it to `data.nix` + `secrets.nix`, then
+    set the option via `"$__file{${config.age.secrets.<name>.path}}"`.
+
+- **New agenix secrets**: when adding a new `.age` file, always `git add` it
+  before running `nix flake check` — the file must be tracked for Nix to find
+  it through the flake's git source.
+
+- **Nextcloud major versions**: nixpkgs only allows single-step major upgrades
+  (e.g. 32 → 33). After an update, an evaluation warning will appear if the
+  running version is behind the latest. Handle this as a *separate* step after
+  the main upgrade is confirmed stable.
+
+- **deploy-rs rollback**: if a deployment activates but a systemd unit fails,
+  deploy-rs will automatically roll back. On the next attempt the issue may be
+  transient (e.g. a new upstream service failing on first start). Always check
+  `journalctl -u <failing-unit>` on the host to understand the failure before
+  retrying.
+
+- **VSCode extension updates**: `just update-vscode-extensions` (part of
+  `just update-all`) updates all extension version pins. If you want to hold
+  back a specific extension (e.g. for manual review), simply don't stage that
+  file when committing.
+
+---
+
 ## Adding a New Host
 
 1. Create `hosts/<new-hostname>/` with at minimum a `default.nix` (or whatever
