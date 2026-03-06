@@ -64,6 +64,7 @@ in
   "secrets/server-main-elis/nextcloud-admin-password.age".publicKeys = etu ++ hosts.server-main-elis;
   "secrets/server-main-elis/syncoid-ssh-ec.age".publicKeys = etu ++ hosts.server-main-elis;
   "secrets/server-main-elis/beszel-ssh-ec.age".publicKeys = etu ++ hosts.server-main-elis;
+  "secrets/vps06/grafana-secret-key.age".publicKeys = etu ++ hosts.vps06;
   "secrets/server-sparv/enshrouded-server-env.age".publicKeys = etu ++ hosts.server-sparv;
   "secrets/server-sparv/valheim-server-env.age".publicKeys = etu ++ hosts.server-sparv;
   "secrets/server-sparv/project-zomboid-env.age".publicKeys = etu ++ hosts.server-sparv;

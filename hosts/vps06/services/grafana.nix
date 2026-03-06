@@ -4,6 +4,10 @@
   ...
 }:
 {
+  age.secrets = {
+    inherit (config.etu.data.ageModules) grafana-secret-key;
+  };
+
   etu.base.zfs.system.directories = [
     # Bind mount for persistent data for grafana
     config.services.grafana.dataDir
@@ -11,6 +15,8 @@
 
   # Enable grafana
   services.grafana.enable = true;
+  services.grafana.settings.security.secret_key =
+    "$__file{${config.age.secrets.grafana-secret-key.path}}";
   services.grafana.declarativePlugins = [
     pkgs.grafanaPlugins.yesoreyeram-infinity-datasource
   ];

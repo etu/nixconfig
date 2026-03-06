@@ -6,7 +6,7 @@
 
   services.homepage-dashboard = {
     enable = true;
-    environmentFile = config.age.secrets.homepage-dashboard-environment.path;
+    environmentFiles = [ config.age.secrets.homepage-dashboard-environment.path ];
     bookmarks = [
       {
         Bookmarks = [

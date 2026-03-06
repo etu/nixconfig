@@ -44,6 +44,10 @@
       path = "/data/var/lib/beszel-hub/beszel_data/id_ed25519";
       owner = "root";
     };
+    grafana-secret-key = {
+      file = ./secrets/vps06/grafana-secret-key.age;
+      owner = "grafana";
+    };
     syncoid-server-main-elis-ssh-ec = {
       file = ./secrets/server-main-elis/syncoid-ssh-ec.age;
       path = "/var/lib/syncoid/.ssh/id_ed25519";
