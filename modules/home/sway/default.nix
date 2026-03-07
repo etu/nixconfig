@@ -169,8 +169,8 @@ in
           XF86Tools = "exec ${osConfig.services.emacs.package}/bin/emacs";
           XF86Favorites = "exec ${osConfig.services.emacs.package}/bin/emacs";
 
-          # Launch screen locker
-          "${modifier}+l" = "exec ${lockCommand}/bin/lock";
+          # Launch screen locker by triggering swaylock.
+          "${modifier}+l" = "exec loginctl lock-session";
 
           # Kill focused window
           "${modifier}+Shift+apostrophe" = "kill";
