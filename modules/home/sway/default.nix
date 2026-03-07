@@ -5,7 +5,10 @@
   ...
 }:
 let
-  lockCommand = "${pkgs.openssh}/bin/ssh-add -D; ${pkgs.swaylock-effects}/bin/swaylock";
+  lockCommand = pkgs.writeShellScript "lock" ''
+    ${pkgs.openssh}/bin/ssh-add -D
+    ${pkgs.swaylock-effects}/bin/swaylock
+  '';
 in
 {
   # Enable rofi home manager module.
