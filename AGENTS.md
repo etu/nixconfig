@@ -253,6 +253,23 @@ Located in `.github/workflows/`:
 Helper workflow files (`helper_*.yaml`) are reusable workflows called by the
 above.
 
+### Pinning the Nix version in CI
+
+If a Determinate Nix release breaks CI (e.g. `nix flake check` fails on GitHub
+Actions but works locally), you can pin the Nix version installed by
+`nix-installer-action` by adding a `with: nix-package-url:` argument pointing
+to a specific release from `releases.nixos.org`. Example:
+
+```yaml
+- uses: DeterminateSystems/nix-installer-action@v21
+  with:
+    nix-package-url: https://releases.nixos.org/nix/nix-2.31.3/nix-2.31.3-x86_64-linux.tar.xz
+```
+
+Run `nix eval nixpkgs#nix.version --raw` locally to find the version your
+nixpkgs provides. Apply the `with:` block to all seven workflow files that
+use `nix-installer-action`. Remove it again once the upstream issue is resolved.
+
 ### Required GitHub Secrets
 
 | Secret | Used by |
@@ -363,6 +380,12 @@ These patterns have caused evaluation or build failures in past upgrades:
   `just update-all`) updates all extension version pins. If you want to hold
   back a specific extension (e.g. for manual review), simply don't stage that
   file when committing.
+
+- **CI Nix version drift**: a Determinate Nix release can break CI even when
+  local builds succeed. If this happens, pin the Nix version in all seven
+  workflow files by adding `with: nix-package-url:` to the
+  `nix-installer-action` step — see the *Pinning the Nix version in CI*
+  section under CI/CD Workflows for the exact snippet.
 
 ---
 
