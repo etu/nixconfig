@@ -8,11 +8,13 @@ let
   lockCommand = pkgs.writeShellApplication {
     name = "lock";
     runtimeInputs = [
+      pkgs.dbus
       pkgs.openssh
       pkgs.swaylock-effects
     ];
     text = ''
       ssh-add -D
+      dbus-send --dest=org.gnome.keyring --print-reply /org/freedesktop/secrets org.freedesktop.Secret.Service.LockService || true
       swaylock
     '';
   };
