@@ -41,12 +41,12 @@ in
 
   # Configure swayidle for automatic screen locking
   services.swayidle.enable = true;
-  services.swayidle.events.before-sleep = lockCommand;
-  services.swayidle.events.lock = lockCommand;
+  services.swayidle.events.before-sleep = "${lockCommand}";
+  services.swayidle.events.lock = "${lockCommand}";
   services.swayidle.timeouts = [
     {
       timeout = 300;
-      command = lockCommand;
+      command = "${lockCommand}";
     }
   ]
   ++ lib.optionals osConfig.etu.graphical.sway.enableSuspendOnTimeout [
