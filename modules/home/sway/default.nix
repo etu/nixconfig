@@ -4,6 +4,19 @@
   pkgs,
   ...
 }:
+let
+  lockCommand = pkgs.writeShellApplication {
+    name = "lock";
+    runtimeInputs = [
+      pkgs.openssh
+      pkgs.swaylock-effects
+    ];
+    text = ''
+      ssh-add -D
+      swaylock
+    '';
+  };
+in
 {
   # Enable rofi home manager module.
   programs.rofi.enable = true;
@@ -35,12 +48,12 @@
 
   # Configure swayidle for automatic screen locking
   services.swayidle.enable = true;
-  services.swayidle.events.before-sleep = "${pkgs.swaylock-effects}/bin/swaylock";
-  services.swayidle.events.lock = "${pkgs.swaylock-effects}/bin/swaylock";
+  services.swayidle.events.before-sleep = "${lockCommand}/bin/lock";
+  services.swayidle.events.lock = "${lockCommand}/bin/lock";
   services.swayidle.timeouts = [
     {
       timeout = 300;
-      command = "${pkgs.swaylock-effects}/bin/swaylock";
+      command = "${lockCommand}/bin/lock";
     }
   ]
   ++ lib.optionals osConfig.etu.graphical.sway.enableSuspendOnTimeout [
@@ -156,8 +169,8 @@
           XF86Tools = "exec ${osConfig.services.emacs.package}/bin/emacs";
           XF86Favorites = "exec ${osConfig.services.emacs.package}/bin/emacs";
 
-          # Launch screen locker
-          "${modifier}+l" = "exec swaylock";
+          # Launch screen locker by triggering swaylock.
+          "${modifier}+l" = "exec loginctl lock-session";
 
           # Kill focused window
           "${modifier}+Shift+apostrophe" = "kill";
