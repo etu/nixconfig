@@ -16,6 +16,8 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: DeterminateSystems/nix-installer-action@v21
+        with:
+          nix-package-url: https://releases.nixos.org/nix/nix-2.31.3/nix-2.31.3-x86_64-linux.tar.xz
       - uses: DeterminateSystems/flake-checker-action@v12
 
       - name: Print nix version ❄️
