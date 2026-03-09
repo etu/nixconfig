@@ -21,13 +21,6 @@
     set --global --export LESS_TERMCAP_se (builtin echo -e '\e[0m')
     set --global --export LESS_TERMCAP_so (builtin echo -e '\e[38;5;16m\e[48;5;15m')
 
-    # Point SSH_AUTH_SOCK at the GCR ssh-agent socket if it exists.
-    # This is needed because Sway sessions don't always inherit the PAM
-    # environment where GNOME keyring sets this variable.
-    if test -S "$XDG_RUNTIME_DIR/gcr/ssh"
-      set --global --export SSH_AUTH_SOCK "$XDG_RUNTIME_DIR/gcr/ssh"
-    end
-
     # Enable the direnv hook
     if command -v direnv > /dev/null
       eval (direnv hook fish)

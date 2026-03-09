@@ -41,6 +41,12 @@
     # Enable gnome keyring (related to ~/.config/goa-1.0 and ~/.local/share/keyrings).
     services.gnome.gnome-keyring.enable = true;
 
+    # Point the entire login session at the GCR SSH agent socket.
+    # The gcr-ssh-agent systemd unit sets this via set-environment, but
+    # that only reaches systemd-launched services — greetd/sway and
+    # everything spawned inside (terminals, VSCode, etc.) need it via PAM.
+    environment.sessionVariables.SSH_AUTH_SOCK = "\${XDG_RUNTIME_DIR}/gcr/ssh";
+
     # Enable networkmanager.
     networking.networkmanager.enable = true;
     networking.networkmanager.wifi.backend = "iwd";
