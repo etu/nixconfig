@@ -54,6 +54,7 @@ in
     "editor.cursorBlinking" = "solid";
     "editor.cursorStyle" = "block";
     "editor.formatOnSave" = true;
+    "git.enableCommitSigning" = true;
     "editor.minimap.enabled" = false; # I find the minimap to be distracting and a waste of space
     "explorer.confirmDelete" = false;
     "files.insertFinalNewline" = true; # Make sure to have a final new line at end of files
