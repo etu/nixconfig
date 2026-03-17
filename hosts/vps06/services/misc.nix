@@ -15,10 +15,6 @@
   # This is to avoid nginx validation errors when upgrading tailscale
   # and restarting nginx at the same time.
   networking.hosts."100.100.6.114" = [ "server-main-elis" ];
-  networking.hosts."185.199.108.153" = [ "elis.nu" ];
-  networking.hosts."185.199.109.153" = [ "elis.nu" ];
-  networking.hosts."185.199.110.153" = [ "elis.nu" ];
-  networking.hosts."185.199.111.153" = [ "elis.nu" ];
 
   services.nginx.virtualHosts = {
     "ip.failar.nu" = {
@@ -26,11 +22,6 @@
       enableACME = true;
       locations."/".proxyPass = "http://127.0.0.1:8123/";
       locations."/".extraConfig = "proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;";
-    };
-    "sa4b.se" = {
-      forceSSL = true;
-      enableACME = true;
-      locations."/".proxyPass = "https://elis.nu/";
     };
     "freshrss.elis.nu" = {
       forceSSL = true;
