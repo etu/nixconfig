@@ -6,13 +6,13 @@
 }:
 let
   vspkgs = {
-    vscode-codeception = pkgs.callPackage ./extensions/vscode-codeception.nix { };
-    vscode-ido = pkgs.callPackage ./extensions/vscode-ido.nix { };
-    vscode-speech = pkgs.callPackage ./extensions/vscode-speech.nix { };
-    volar = pkgs.callPackage ./extensions/volar.nix { };
-    php-sniffer = pkgs.callPackage ./extensions/php-sniffer.nix { };
-    openscad = pkgs.callPackage ./extensions/openscad.nix { };
-    github-copilot-chat = pkgs.callPackage ./extensions/github-copilot-chat.nix { };
+    vscode-codeception = pkgs.callPackage ../../../packages/vscode-codeception { };
+    vscode-ido = pkgs.callPackage ../../../packages/vscode-ido { };
+    vscode-speech = pkgs.callPackage ../../../packages/vscode-speech { };
+    volar = pkgs.callPackage ../../../packages/volar { };
+    php-sniffer = pkgs.callPackage ../../../packages/php-sniffer { };
+    openscad = pkgs.callPackage ../../../packages/openscad { };
+    github-copilot-chat = pkgs.callPackage ../../../packages/github-copilot-chat { };
   };
 in
 {
