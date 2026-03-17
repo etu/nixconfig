@@ -172,6 +172,7 @@ update-vscode-extensions:
     nix run '.#vscodeGetLatestExtensions' joelwmale vscode-codeception > packages/vscode-extension-vscode-codeception/default.nix
     nix run '.#vscodeGetLatestExtensions' kimgronqvist vscode-ido > packages/vscode-extension-vscode-ido/default.nix
     nix run '.#vscodeGetLatestExtensions' ms-vscode vscode-speech > packages/vscode-extension-vscode-speech/default.nix
+    nix run '.#vscodeGetLatestExtensions' fastly vscode-fastly-vcl > packages/vscode-extension-fastly-vcl/default.nix
 
 # Update all
 [group('updaters')]

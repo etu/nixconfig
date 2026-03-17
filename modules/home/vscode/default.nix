@@ -34,6 +34,7 @@
     # Only on work computer
     perSystem.self.vscode-extension-vscode-codeception # Codeception support
     perSystem.self.vscode-extension-volar
+    perSystem.self.vscode-extension-fastly-vcl # Fastly VCL support
   ]);
 
   # Enable vscode settings
