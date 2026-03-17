@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  perSystem,
   pkgs,
   ...
 }:
@@ -37,6 +38,9 @@
 
   # Set backup file extensions for conflicts on home manager activation.
   home-manager.backupFileExtension = "backup";
+
+  # Pass perSystem to home-manager modules.
+  home-manager.extraSpecialArgs = { inherit perSystem; };
 
   # Set state version for my users home-manager (if it's enabled).
   home-manager.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {

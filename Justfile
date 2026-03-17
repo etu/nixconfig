@@ -165,13 +165,13 @@ update-mosquitto:
 # Update vscode extensions
 [group('updaters')]
 update-vscode-extensions:
-    nix run '.#vscodeGetLatestExtensions' github copilot-chat > modules/home/vscode/extensions/github-copilot-chat.nix
-    nix run '.#vscodeGetLatestExtensions' Leathong openscad-language-support > modules/home/vscode/extensions/openscad.nix
-    nix run '.#vscodeGetLatestExtensions' wongjn php-sniffer > modules/home/vscode/extensions/php-sniffer.nix
-    nix run '.#vscodeGetLatestExtensions' Vue volar > modules/home/vscode/extensions/volar.nix
-    nix run '.#vscodeGetLatestExtensions' joelwmale vscode-codeception > modules/home/vscode/extensions/vscode-codeception.nix
-    nix run '.#vscodeGetLatestExtensions' kimgronqvist vscode-ido > modules/home/vscode/extensions/vscode-ido.nix
-    nix run '.#vscodeGetLatestExtensions' ms-vscode vscode-speech > modules/home/vscode/extensions/vscode-speech.nix
+    nix run '.#vscodeGetLatestExtensions' github copilot-chat > packages/vscode-extension-github-copilot-chat/default.nix
+    nix run '.#vscodeGetLatestExtensions' Leathong openscad-language-support > packages/vscode-extension-openscad/default.nix
+    nix run '.#vscodeGetLatestExtensions' wongjn php-sniffer > packages/vscode-extension-php-sniffer/default.nix
+    nix run '.#vscodeGetLatestExtensions' Vue volar > packages/vscode-extension-volar/default.nix
+    nix run '.#vscodeGetLatestExtensions' joelwmale vscode-codeception > packages/vscode-extension-vscode-codeception/default.nix
+    nix run '.#vscodeGetLatestExtensions' kimgronqvist vscode-ido > packages/vscode-extension-vscode-ido/default.nix
+    nix run '.#vscodeGetLatestExtensions' ms-vscode vscode-speech > packages/vscode-extension-vscode-speech/default.nix
 
 # Update all
 [group('updaters')]

@@ -1,18 +1,19 @@
 {
   lib,
   osConfig,
+  perSystem,
   pkgs,
   ...
 }:
 let
   vspkgs = {
-    vscode-codeception = pkgs.callPackage ../../../packages/vscode-codeception { };
-    vscode-ido = pkgs.callPackage ../../../packages/vscode-ido { };
-    vscode-speech = pkgs.callPackage ../../../packages/vscode-speech { };
-    volar = pkgs.callPackage ../../../packages/volar { };
-    php-sniffer = pkgs.callPackage ../../../packages/php-sniffer { };
-    openscad = pkgs.callPackage ../../../packages/openscad { };
-    github-copilot-chat = pkgs.callPackage ../../../packages/github-copilot-chat { };
+    vscode-codeception = perSystem.self.vscode-extension-vscode-codeception;
+    vscode-ido = perSystem.self.vscode-extension-vscode-ido;
+    vscode-speech = perSystem.self.vscode-extension-vscode-speech;
+    volar = perSystem.self.vscode-extension-volar;
+    php-sniffer = perSystem.self.vscode-extension-php-sniffer;
+    openscad = perSystem.self.vscode-extension-openscad;
+    github-copilot-chat = perSystem.self.vscode-extension-github-copilot-chat;
   };
 in
 {
