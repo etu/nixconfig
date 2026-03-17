@@ -1,20 +1,10 @@
 {
   lib,
   osConfig,
+  perSystem,
   pkgs,
   ...
 }:
-let
-  vspkgs = {
-    vscode-codeception = pkgs.callPackage ./extensions/vscode-codeception.nix { };
-    vscode-ido = pkgs.callPackage ./extensions/vscode-ido.nix { };
-    vscode-speech = pkgs.callPackage ./extensions/vscode-speech.nix { };
-    volar = pkgs.callPackage ./extensions/volar.nix { };
-    php-sniffer = pkgs.callPackage ./extensions/php-sniffer.nix { };
-    openscad = pkgs.callPackage ./extensions/openscad.nix { };
-    github-copilot-chat = pkgs.callPackage ./extensions/github-copilot-chat.nix { };
-  };
-in
 {
   # Enable vscode itself
   programs.vscode.enable = true;
@@ -33,17 +23,17 @@ in
     pkgs.vscode-extensions.golang.go # Go support
     pkgs.vscode-extensions.mkhl.direnv # Direnv
     pkgs.vscode-extensions.xdebug.php-debug # Php debug support
-    vspkgs.vscode-ido # Decent file navigation
-    vspkgs.php-sniffer # Php code style sniffing
-    vspkgs.github-copilot-chat # Copilot chat
+    perSystem.self.vscode-extension-vscode-ido # Decent file navigation
+    perSystem.self.vscode-extension-php-sniffer # Php code style sniffing
+    perSystem.self.vscode-extension-github-copilot-chat # Copilot chat
   ]
   ++ (lib.optionals osConfig.etu.graphical.fdm-printing.enable [
-    vspkgs.openscad # Openscad support
+    perSystem.self.vscode-extension-openscad # Openscad support
   ])
   ++ (lib.optionals osConfig.etu.development.vscode.enableWork [
     # Only on work computer
-    vspkgs.vscode-codeception # Codeception support
-    vspkgs.volar
+    perSystem.self.vscode-extension-vscode-codeception # Codeception support
+    perSystem.self.vscode-extension-volar
   ]);
 
   # Enable vscode settings
