@@ -66,9 +66,12 @@
     '';
     "bonk" = ''
       for arg in $argv
-        set -l store_path (string unescape (nix-instantiate --eval --expr "with (import <nixpkgs> {}); builtins.toString (lib.getBin $arg)"))
-        nix-store --quiet -r $store_path
-        set PATH "$store_path/bin" $PATH
+        set -l store_paths (nix build --no-link --print-out-paths "nixpkgs#$arg")
+        for store_path in $store_paths
+          if test -d "$store_path/bin"
+            fish_add_path --global --prepend "$store_path/bin"
+          end
+        end
         set -g -a __bonk_pkgs $arg
       end
     '';
