@@ -15,14 +15,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  check-flake:
-    uses: ./.github/workflows/helper_check_flake.yaml
-    secrets:
-      CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
-
   deploy-hosts:
     uses: ./.github/workflows/helper_deploy_hosts.yaml
-    needs: check-flake
     secrets:
       CACHIX_AUTH_TOKEN: ${{ secrets.CACHIX_AUTH_TOKEN }}
       SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
