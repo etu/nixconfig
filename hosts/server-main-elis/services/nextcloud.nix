@@ -5,12 +5,12 @@
 }:
 {
   services.nextcloud.enable = true;
-  services.nextcloud.package = pkgs.nextcloud32;
+  services.nextcloud.package = pkgs.nextcloud33;
   services.nextcloud.config.adminuser = "etu";
   services.nextcloud.config.adminpassFile = config.age.secrets.nextcloud-admin-password.path;
   services.nextcloud.config.dbtype = "sqlite";
   services.nextcloud.extraApps = {
-    inherit (pkgs.nextcloud32Packages.apps) cookbook notes forms;
+    inherit (pkgs.nextcloud33Packages.apps) cookbook notes forms;
   };
   services.nextcloud.hostName = "nextcloud.elis.nu";
   services.nginx.enable = true;
