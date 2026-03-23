@@ -9,13 +9,14 @@ pkgs.writeShellApplication {
 
   text = ''
     if [[ $# -lt 2 ]]; then
-      echo "Usage: $0 <publisher> <extension> [vscode-version]" >&2
+      echo "Usage: $0 <publisher> <extension> [output-file|-] [vscode-version]" >&2
       exit 1
     fi
 
     EXT_ORG="$1"
     EXT_NAME="$2"
-    VSCODE_VERSION="''${3:-${pkgs.lib.versions.majorMinor pkgs.vscode.version}}"
+    OUTPUT_FILE="''${3:--}"
+    VSCODE_VERSION="''${4:-${pkgs.lib.versions.majorMinor pkgs.vscode.version}}"
 
     echo "Using VSCode version: $VSCODE_VERSION" >&2
     echo "Checking extension: $EXT_ORG.$EXT_NAME" >&2
@@ -80,7 +81,14 @@ pkgs.writeShellApplication {
     echo "Pre-formatted nix code to build $EXT_ORG.$EXT_NAME for vscode $VSCODE_VERSION:" >&2
     echo >&2
 
-    cat <<EOF
+    if [[ "$OUTPUT_FILE" == "-" ]]; then
+      tmpfile=$(mktemp)
+    else
+      tmpfile=$(mktemp "$(dirname "$OUTPUT_FILE")/.vscode-ext-XXXXXX")
+    fi
+    trap 'rm -f "''${tmpfile}"' EXIT
+
+    cat > "$tmpfile" <<EOF
     # This file is automatically updated by the output from
     # nix run github:etu/nixconfig#vscodeGetLatestExtensions $EXT_ORG $EXT_NAME
     #
@@ -93,5 +101,11 @@ pkgs.writeShellApplication {
       sha256 = "$HASH_BASE64";
     }
     EOF
+
+    if [[ "$OUTPUT_FILE" == "-" ]]; then
+      cat "$tmpfile"
+    else
+      mv "$tmpfile" "$OUTPUT_FILE"
+    fi
   '';
 }
