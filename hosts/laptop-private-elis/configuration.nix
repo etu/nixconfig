@@ -59,11 +59,6 @@
       "libvirtd"
     ];
 
-    # Install extra packages
-    user.extraUserPackages = [
-      pkgs.libreoffice
-    ];
-
     # Allow home fileserver to connect to fetch snapshots.
     user.extraRootAuthorizedKeys = config.etu.data.pubkeys.syncoid.server-main-elis;
 
