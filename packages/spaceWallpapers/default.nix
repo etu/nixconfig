@@ -22,6 +22,10 @@
       url = "https://w.wallhaven.cc/full/dp/wallhaven-dpl57g.png";
       hash = "sha256-fUkbZwvm440MKVdro8X3+qx4jgYpjYWu9WkulL8C5Mo=";
     })
+    (pkgs.fetchurl {
+      url = "https://w.wallhaven.cc/full/5d/wallhaven-5dkx61.jpg";
+      hash = "sha256-6KmeGzSx9Odljflpxy9BTjIg0wdm84sv4nfVvi5zMTU=";
+    })
   ]
   ++ extraImages,
   extraImages ? [ ],
