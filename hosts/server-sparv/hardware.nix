@@ -41,6 +41,9 @@
   # Enable ZFS.
   boot.supportedFilesystems = [ "zfs" ];
 
+  # Import the zstorage pool on boot.
+  boot.zfs.extraPools = [ "zstorage" ];
+
   # Tune some ZFS parameters to use more RAM.
   boot.kernelParams = [
     # Enable a bigger ARC max size, reserve 30GiB.
