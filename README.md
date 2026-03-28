@@ -104,9 +104,11 @@ Runs a large collection of services:
 #### `hosts/server-sparv/`
 
 On-location server for [speliarvika.se](http://speliarvika.se). Primarily a
-game server host running Valheim, Project Zomboid, V Rising, Enshrouded, and a
-whitelisted Minecraft server — all via Docker with ZFS storage. ZFS snapshots
-via sanoid. Beszel agent for monitoring. Deployed using `deploy .#server-sparv`.
+game server host and LAN cache. Runs Valheim and Project Zomboid via Docker,
+plus a whitelisted Minecraft server (NixOS service). Includes lancache
+(monolithic + DNS) for LAN game cache. ZFS snapshots via sanoid. Monitoring
+with Netdata (local dashboard) and Beszel agent. Deployed using
+`deploy .#server-sparv`.
 
 #### `hosts/vps06/`
 

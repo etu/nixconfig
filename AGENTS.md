@@ -56,7 +56,7 @@ Each host lives in `hosts/<hostname>/` and is automatically picked up by bluepri
 | `laptop-private-caroline` | Laptop | `nixos-rebuild` locally | Private laptop for Caroline |
 | `laptop-work-elis` | Laptop | `nixos-rebuild` locally | Work laptop; pushes ZFS snapshots to `server-main-elis` |
 | `server-main-elis` | Server | `deploy .#server-main-elis` | Home file server; also a Nix build machine, ZFS snapshot target, runs Home Assistant |
-| `server-sparv` | Server | `deploy .#server-sparv` | On-location server for speliarvika.se, LAN cache |
+| `server-sparv` | Server | `deploy .#server-sparv` | On-location server for speliarvika.se, LAN cache, game servers (Valheim, Project Zomboid, Minecraft) |
 | `vps06` | VPS | `deploy .#vps06` | Runs Gitea, ip.failar.nu, Matrix homeserver |
 | `live-iso` | ISO | `nix build .#iso` | Live ISO of this config; not deployed remotely |
 
