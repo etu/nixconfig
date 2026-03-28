@@ -4,6 +4,7 @@
 {
   config,
   flake,
+  perSystem,
   pkgs,
   ...
 }:
@@ -248,5 +249,6 @@
   environment.systemPackages = [
     pkgs.mkvtoolnix-cli # mkvinfo and mkvmerge
     pkgs.ffmpeg # ffmpeg
+    perSystem.self.syncoid-recv-check
   ];
 }
