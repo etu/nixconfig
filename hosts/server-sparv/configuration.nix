@@ -70,7 +70,7 @@
       "/data"
       "/data/local"
       "/home"
-      #"/media/zstorage"
+      "/media/zstorage"
       "/nix"
     ];
   };
