@@ -84,6 +84,14 @@
   # Set cpupower governor to performance.
   powerManagement.cpuFreqGovernor = "performance";
 
+  # Disable the systemd-resolved stub listener on port 53 so the
+  # lancache-dns container can bind to it instead.
+  services.resolved.settings.Resolve.DNSStubListener = false;
+  networking.nameservers = [
+    "1.1.1.3"
+    "1.0.0.3"
+  ];
+
   # Set up docker.
   virtualisation.docker.enable = true;
   virtualisation.docker.storageDriver = "zfs";
