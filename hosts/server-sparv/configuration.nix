@@ -162,33 +162,33 @@
       ];
     };
 
-    vrising-server = {
-      image = "docker.io/trueosiris/vrising:latest";
-      ports = [
-        "9876-9877:9876-9877/udp"
-      ];
-      environment = {
-        TZ = "Europe/Stockholm";
-        SERVERNAME = "SparvRising";
-      };
-      volumes = [
-        "/var/lib/vrising/server:/mnt/vrising/server:rw"
-        "/var/lib/vrising/persistentdata:/mnt/vrising/persistentdata:rw"
-      ];
-    };
+    #vrising-server = {
+    #  image = "docker.io/trueosiris/vrising:latest";
+    #  ports = [
+    #    "9876-9877:9876-9877/udp"
+    #  ];
+    #  environment = {
+    #    TZ = "Europe/Stockholm";
+    #    SERVERNAME = "SparvRising";
+    #  };
+    #  volumes = [
+    #    "/var/lib/vrising/server:/mnt/vrising/server:rw"
+    #    "/var/lib/vrising/persistentdata:/mnt/vrising/persistentdata:rw"
+    #  ];
+    #};
 
-    enshrouded-server = {
-      image = "docker.io/sknnr/enshrouded-dedicated-server:latest";
-      ports = [
-        "15636-15637:15636-15637/udp"
-        "27015:27015/udp"
-      ];
-      environmentFiles = [ config.age.secrets.enshrouded-server-env.path ];
-      volumes = [
-        "/var/lib/enshrouded/state:/home/steam/enshrouded"
-        "/var/lib/enshrouded/saves:/home/steam/enshrouded/savegame"
-      ];
-    };
+    #enshrouded-server = {
+    #  image = "docker.io/sknnr/enshrouded-dedicated-server:latest";
+    #  ports = [
+    #    "15636-15637:15636-15637/udp"
+    #    "27015:27015/udp"
+    #  ];
+    #  environmentFiles = [ config.age.secrets.enshrouded-server-env.path ];
+    #  volumes = [
+    #    "/var/lib/enshrouded/state:/home/steam/enshrouded"
+    #    "/var/lib/enshrouded/saves:/home/steam/enshrouded/savegame"
+    #  ];
+    #};
   };
 
   # Include secret
