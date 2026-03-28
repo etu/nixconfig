@@ -41,7 +41,10 @@
     # and just keep the files on /
     base.zfs.enable = false; # Disable emacs that is enabled by default.
 
-    base.nix.allowUnfree = [ "minecraft-server" ];
+    base.nix.allowUnfree = [
+      "minecraft-server"
+      "netdata"
+    ];
 
     base.emacs.enable = false; # Disable emacs that is enabled by default.
     base.sanoid.datasets = {
@@ -217,6 +220,24 @@
     timerConfig = {
       OnCalendar = "05:15";
       Persistent = "yes";
+    };
+  };
+
+  # Set up netdata monitoring (no cloud, local dashboard only).
+  networking.firewall.allowedTCPPorts = [ 19999 ];
+
+  services.netdata = {
+    enable = true;
+    package = pkgs.netdata.override {
+      withCloudUi = true;
+    };
+    config = {
+      global = {
+        "memory mode" = "ram";
+        "debug log" = "none";
+        "access log" = "none";
+        "error log" = "syslog";
+      };
     };
   };
 
