@@ -40,6 +40,7 @@
 
     base.fish.enableUserZoxideCd = true;
     development.enable = true;
+    development.claude-code.enable = true;
     development.flipper-zero.enable = true;
     games.enable = false;
     games.minecraft.enable = true;

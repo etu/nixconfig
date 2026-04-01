@@ -5,6 +5,7 @@
 }:
 {
   imports = [
+    ./claude-code
     ./direnv
     ./flipper-zero
     ./git
