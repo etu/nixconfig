@@ -173,6 +173,15 @@
       ];
     };
 
+    # Set up openspeedtest
+    openspeedtest = {
+      image = "docker.io/openspeedtest/latest:latest";
+      ports = [
+        "3000:3000/tcp"
+        "3001:3001/tcp"
+      ];
+    };
+
     #vrising-server = {
     #  image = "docker.io/trueosiris/vrising:latest";
     #  ports = [
@@ -224,7 +233,11 @@
   };
 
   # Set up netdata monitoring (no cloud, local dashboard only).
-  networking.firewall.allowedTCPPorts = [ 19999 ];
+  networking.firewall.allowedTCPPorts = [
+    19999
+    3000 # openspeedtest HTTP
+    3001 # openspeedtest HTTPS
+  ];
 
   services.netdata = {
     enable = true;
