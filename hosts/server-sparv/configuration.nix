@@ -105,8 +105,8 @@
     lancache = {
       image = "docker.io/lancachenet/monolithic:latest";
       ports = [
-        "80:80/tcp"
-        "443:443/tcp"
+        "127.0.0.1:8080:80/tcp"
+        "127.0.0.1:8443:443/tcp"
       ];
       volumes = [
         "/media/zstorage/lancache/data:/data/cache"
@@ -232,11 +232,42 @@
     };
   };
 
+  # Nginx reverse proxy: routes netdata.failar.nu, speed.failar.nu, and the
+  # lancache catchall on both HTTP (virtualHosts) and HTTPS (stream/SNI).
+  services.nginx.enable = true;
+
+  # HTTP (port 80) — host-based routing
+  services.nginx.virtualHosts = {
+    "netdata.failar.nu".locations."/" = {
+      proxyPass = "http://127.0.0.1:19999/";
+      extraConfig = "proxy_set_header Host $host;";
+    };
+    "speed.failar.nu".locations."/" = {
+      proxyPass = "http://127.0.0.1:3000/";
+      extraConfig = "proxy_set_header Host $host;";
+    };
+    "_" = {
+      default = true;
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:8080/";
+        extraConfig = "proxy_set_header Host $host;";
+      };
+    };
+  };
+
+  # HTTPS (port 443) — SNI passthrough; lancache handles its own SSL interception
+  services.nginx.streamConfig = ''
+    server {
+      listen 443;
+      proxy_pass 127.0.0.1:8443;
+      ssl_preread on;
+    }
+  '';
+
   # Set up netdata monitoring (no cloud, local dashboard only).
   networking.firewall.allowedTCPPorts = [
-    19999
-    3000 # openspeedtest HTTP
-    3001 # openspeedtest HTTPS
+    80
+    443
   ];
 
   services.netdata = {
