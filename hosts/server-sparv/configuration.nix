@@ -242,9 +242,12 @@
       proxyPass = "http://127.0.0.1:19999/";
       extraConfig = "proxy_set_header Host $host;";
     };
-    "speed.failar.nu".locations."/" = {
-      proxyPass = "http://127.0.0.1:3000/";
-      extraConfig = "proxy_set_header Host $host;";
+    "speed.failar.nu" = {
+      extraConfig = "client_max_body_size 35m;";
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:3000/";
+        extraConfig = "proxy_set_header Host $host;";
+      };
     };
     "_" = {
       default = true;
