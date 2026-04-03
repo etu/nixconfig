@@ -162,6 +162,23 @@ update-mosquitto:
     fi
     sed -i -r "s#(eclipse-mosquitto):[0-9]+\.[0-9]+\.?[0-9]*#\1:$latest#" hosts/server-main-elis/services/hass.nix
 
+# Update jivetalking binary
+[group('updaters')]
+update-jivetalking:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    latest=$(curl -s -f "https://api.github.com/repos/linuxmatters/jivetalking/releases/latest" | jq -r '.tag_name') || { echo "Failed to fetch latest release from GitHub"; exit 1; }
+    if [ -z "$latest" ]; then
+      echo "Failed to find latest version"
+      exit 1
+    fi
+    version="${latest#v}"
+    url="https://github.com/linuxmatters/jivetalking/releases/download/${latest}/jivetalking-linux-amd64"
+    hash=$(nix-prefetch-url "$url") || { echo "Failed to prefetch $url"; exit 1; }
+    sed -i "s|version = \".*\"|version = \"$version\"|" packages/jivetalking/default.nix
+    sed -i "s|url = \".*\";|url = \"$url\";|" packages/jivetalking/default.nix
+    sed -i "s|hash = \"sha256:.*\"|hash = \"sha256:$hash\"|" packages/jivetalking/default.nix
+
 # Update vscode extensions
 [group('updaters')]
 update-vscode-extensions:
@@ -176,4 +193,4 @@ update-vscode-extensions:
 
 # Update all
 [group('updaters')]
-update-all: update-flake update-hass update-zwavejs2mqtt update-mosquitto update-vscode-extensions
+update-all: update-flake update-hass update-zwavejs2mqtt update-mosquitto update-vscode-extensions update-jivetalking
