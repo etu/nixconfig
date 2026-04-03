@@ -17,11 +17,13 @@
     # Install claude-code for my user.
     etu.user.extraUserPackages = [
       pkgs.claude-code
+      pkgs.claude-monitor
     ];
 
     # Enable persistence for claude-code state files.
     etu.base.zfs.user.directories = [
       ".claude"
+      ".claude-monitor"
     ];
   };
 }
