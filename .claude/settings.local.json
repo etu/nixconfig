@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(nix-prefetch-url:*)",
+      "Bash(nom build:*)"
+    ]
+  }
+}

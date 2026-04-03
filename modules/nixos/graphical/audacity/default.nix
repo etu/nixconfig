@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  perSystem,
   pkgs,
   ...
 }:
@@ -11,6 +12,7 @@
     # Install audacity using home-manager.
     etu.user.extraUserPackages = [
       pkgs.audacity
+      perSystem.self.jivetalking
     ];
 
     # Enable persistence for audacity related files.
