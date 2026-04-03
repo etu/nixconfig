@@ -238,6 +238,11 @@
 
   # HTTP (port 80) — host-based routing
   services.nginx.virtualHosts = {
+    # Tailscale hostname for this server, proxied to netdata.
+    "server-sparv".locations."/" = {
+      proxyPass = "http://127.0.0.1:19999/";
+      extraConfig = "proxy_set_header Host $host;";
+    };
     "netdata.failar.nu".locations."/" = {
       proxyPass = "http://127.0.0.1:19999/";
       extraConfig = "proxy_set_header Host $host;";
