@@ -25,5 +25,9 @@
       ".claude"
       ".claude-monitor"
     ];
+
+    etu.base.zfs.user.files = [
+      ".claude.json"
+    ];
   };
 }
