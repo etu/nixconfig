@@ -4,5 +4,18 @@
       "Bash(nix-prefetch-url:*)",
       "Bash(nom build:*)"
     ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "FILE=$(jq -r '.tool_input.file_path'); if [[ \"$FILE\" == *.nix ]]; then cd \"$CLAUDE_PROJECT_DIR\" && nix fmt \"$FILE\" 2>&1; fi"
+          }
+        ]
+      }
+    ]
   }
 }
