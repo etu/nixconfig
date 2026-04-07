@@ -12,6 +12,7 @@
     # Install audacity using home-manager.
     etu.user.extraUserPackages = [
       pkgs.audacity
+      pkgs.openai-whisper
       perSystem.self.jivetalking
     ];
 
