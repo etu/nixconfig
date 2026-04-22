@@ -79,24 +79,44 @@
       ];
       authorizedKeys = config.users.users.etu.openssh.authorizedKeys.keys;
     };
-    # Prompt me for password to decrypt zfs
-    #
-    # This was fun, the reason it looks like this is because of the
-    # initramfs that first imports a pool, then it stalls on running
-    # "zfs load-key -a" on the terminal, but we never input data there
-    # since it's on SSH. So I have to run that command when I log in,
-    # then it has to kill the other zfs command to continue the init
-    # script, that script will then import the second pool and the
-    # same dance starts over.
-    network.postCommands = ''
+  };
+
+  # Prompt me for password to decrypt zfs via SSH
+  #
+  # This was fun, the reason it looks like this is because of the
+  # initramfs that first imports a pool, then it stalls on running
+  # "zfs load-key -a" on the terminal, but we never input data there
+  # since it's on SSH. So I have to run that command when I log in,
+  # then it has to kill the other zfs command to continue the init
+  # script, that script will then import the second pool and the
+  # same dance starts over.
+  boot.initrd.systemd.services.zfs-setup-root-profile = {
+    description = "Prepare root .profile for ZFS unlocking via SSH";
+    wantedBy = [ "initrd.target" ];
+    before = [ "initrd-root-fs.target" ];
+    unitConfig.DefaultDependencies = false;
+    script = ''
       echo "zfs load-key -a; killall zfs; sleep 5; zfs load-key -a; killall zfs;" >> /root/.profile
     '';
+    serviceConfig.Type = "oneshot";
   };
 
   # Roll back certain filesystems to empty state on boot
-  boot.initrd.postDeviceCommands = lib.mkAfter ''
-    zfs rollback -r zroot/local/var-lib-nzbget-dst@empty
-  '';
+  boot.initrd.systemd.services.rollback-nzbget-dst = {
+    description = "Rollback nzbget-dst ZFS snapshot to empty state";
+    wantedBy = [ "initrd.target" ];
+    after = [ "zfs-import-zroot.service" ];
+    before = [ "sysroot.mount" ];
+    unitConfig.DefaultDependencies = false;
+    path = [ pkgs.zfs ];
+    script = ''
+      zfs rollback -r zroot/local/var-lib-nzbget-dst@empty
+    '';
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+    };
+  };
 
   # Enable ZFS.
   boot.supportedFilesystems = [ "zfs" ];
