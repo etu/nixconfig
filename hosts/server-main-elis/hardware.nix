@@ -90,6 +90,11 @@
   # then it has to kill the other zfs command to continue the init
   # script, that script will then import the second pool and the
   # same dance starts over.
+  boot.initrd.systemd.extraBin = {
+    killall = "${pkgs.psmisc}/bin/killall";
+    ps = "${pkgs.procps}/bin/ps";
+  };
+
   boot.initrd.systemd.services.zfs-setup-root-profile = {
     description = "Prepare root .profile for ZFS unlocking via SSH";
     wantedBy = [ "initrd.target" ];
