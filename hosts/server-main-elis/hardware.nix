@@ -83,25 +83,17 @@
 
   # Prompt me for password to decrypt zfs via SSH
   #
-  # This was fun, the reason it looks like this is because of the
-  # initramfs that first imports a pool, then it stalls on running
-  # "zfs load-key -a" on the terminal, but we never input data there
-  # since it's on SSH. So I have to run that command when I log in,
-  # then it has to kill the other zfs command to continue the init
-  # script, that script will then import the second pool and the
-  # same dance starts over.
-  boot.initrd.systemd.extraBin = {
-    killall = "${pkgs.psmisc}/bin/killall";
-    ps = "${pkgs.procps}/bin/ps";
-  };
-
+  # SSH in on port 2222, shell sources .profile which runs:
+  #   zfs load-key -a && systemctl default
+  # This unlocks all datasets and tells systemd to proceed to the
+  # default target, mounting ZFS and continuing boot.
   boot.initrd.systemd.services.zfs-setup-root-profile = {
     description = "Prepare root .profile for ZFS unlocking via SSH";
     wantedBy = [ "initrd.target" ];
     before = [ "initrd-root-fs.target" ];
     unitConfig.DefaultDependencies = false;
     script = ''
-      echo "zfs load-key -a; killall zfs; sleep 5; zfs load-key -a; killall zfs;" >> /root/.profile
+      echo "zfs load-key -a && systemctl default" >> /root/.profile
     '';
     serviceConfig.Type = "oneshot";
   };
