@@ -92,6 +92,7 @@
     users.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
       description = "${config.etu.user.realname},,,,";
       extraGroups = [ "wheel" ] ++ config.etu.user.extraGroups;
+      hashedPassword = lib.mkIf config.etu.user.setEmptyPassword "";
       hashedPasswordFile = lib.mkIf (
         !config.etu.user.setEmptyPassword
       ) config.age.secrets.hashed-user-password.path;
@@ -103,6 +104,7 @@
 
     # Define password, authorized keys and shell for root user.
     users.users.root = {
+      hashedPassword = lib.mkIf config.etu.user.setEmptyRootPassword "";
       hashedPasswordFile = lib.mkIf (
         !config.etu.user.setEmptyRootPassword
       ) config.age.secrets.hashed-root-password.path;

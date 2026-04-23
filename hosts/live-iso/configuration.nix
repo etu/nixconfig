@@ -44,6 +44,9 @@
     # Fore disable some graphical components unused on the live iso.
     graphical.gnupg.enable = false;
 
+    # Disable suspend on idle for the live iso.
+    graphical.sway.enableSuspendOnTimeout = false;
+
     # Force disable persistence modules since this system doesn't
     # use ZFS.
     base.zfs.enable = false;
