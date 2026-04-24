@@ -83,17 +83,20 @@
 
   # Prompt me for password to decrypt zfs via SSH
   #
-  # SSH in on port 2222, shell sources .profile which runs:
-  #   zfs load-key -a && systemctl default
-  # This unlocks all datasets and tells systemd to proceed to the
-  # default target, mounting ZFS and continuing boot.
+  # SSH in on port 2222, shell sources /var/empty/.profile which runs:
+  #   systemd-tty-ask-password-agent --watch
+  # This intercepts pending systemd password requests (from
+  # zfs-load-key@pool.service units) and routes them to the SSH
+  # terminal. --watch stays running to catch each pool as it becomes
+  # pending. systemd continues naturally once all keys are provided.
   boot.initrd.systemd.services.zfs-setup-root-profile = {
     description = "Prepare root .profile for ZFS unlocking via SSH";
     wantedBy = [ "initrd.target" ];
     before = [ "initrd-root-fs.target" ];
     unitConfig.DefaultDependencies = false;
     script = ''
-      echo "zfs load-key -a && systemctl default" >> /root/.profile
+      mkdir -p /var/empty
+      echo "systemd-tty-ask-password-agent --watch" > /var/empty/.profile
     '';
     serviceConfig.Type = "oneshot";
   };
