@@ -44,12 +44,10 @@
   # Import the zstorage pool on boot.
   boot.zfs.extraPools = [ "zstorage" ];
 
-  # Tune some ZFS parameters to use more RAM.
+  # Tune ZFS ARC to fit within available RAM (7.6 GiB).
   boot.kernelParams = [
-    # Enable a bigger ARC max size, reserve 30GiB.
-    "zfs.zfs_arc_max=${builtins.toString (30 * 1024 * 1024 * 1024)}"
-    # Enable a bigger ARC target size, reserve 28GiB.
-    "zfs.zfs_arc_min=${builtins.toString (28 * 1024 * 1024 * 1024)}"
+    "zfs.zfs_arc_max=${builtins.toString (4 * 1024 * 1024 * 1024)}"
+    "zfs.zfs_arc_min=${builtins.toString (1 * 1024 * 1024 * 1024)}"
   ];
 
   # Enable ZFS scrubbing.
