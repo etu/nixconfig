@@ -174,6 +174,9 @@ in
           # Run Launcher
           "${modifier}+e" = "exec ${config.programs.rofi.finalPackage}/bin/rofi -show combi";
 
+          # Run rofi emoji picker
+          "${modifier}+i" = "exec ${config.programs.rofi.finalPackage}/bin/rofi -show emoji";
+
           # Printscreen
           Print = "exec ${pkgs.gradia}/bin/gradia --screenshot=INTERACTIVE";
 
