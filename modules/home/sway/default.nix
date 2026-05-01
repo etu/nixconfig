@@ -18,15 +18,30 @@ let
       swaylock
     '';
   };
+  powerMenu = pkgs.writeShellApplication {
+    name = "power-menu";
+    runtimeInputs = [
+      pkgs.systemd
+      lockCommand
+    ];
+    text = ''
+      if [ -z "''${1:-}" ]; then
+        printf 'Lock\nSuspend\nReboot\nShutdown'
+      else
+        case "$1" in
+          Lock) lock ;;
+          Suspend) systemctl suspend ;;
+          Reboot) systemctl reboot ;;
+          Shutdown) systemctl poweroff ;;
+        esac
+      fi
+    '';
+  };
 in
 {
   # Enable rofi home manager module.
   programs.rofi.enable = true;
   programs.rofi.font = "${osConfig.etu.graphical.theme.fonts.monospace} ${toString osConfig.etu.graphical.theme.fonts.size}";
-
-  # Enable vicinae home manager module.
-  programs.vicinae.enable = true;
-  programs.vicinae.systemd.enable = true;
 
   # Set up a wallpaper manager.
   services.wpaperd.enable = true;
@@ -143,10 +158,7 @@ in
 
           # Run Launcher
           "${modifier}+e" =
-            "exec ${rofi}/bin/rofi -show combi -modi combi -combi-modes 'window,drun' | xargs swaymsg exec --";
-
-          # Test launcher
-          "${modifier}+Shift+i" = "exec ${pkgs.vicinae}/bin/vicinae open";
+            "exec ${rofi}/bin/rofi -show combi -modi combi,power-menu:${powerMenu}/bin/power-menu -combi-modes window,drun | xargs -r swaymsg exec --";
 
           # Run rofi emoji picker
           "${modifier}+i" = "exec ${rofi}/bin/rofi -show emoji";
