@@ -61,5 +61,8 @@ in
     etu.base.zfs.user.directories = [
       ".mozilla/firefox/default"
     ];
+    etu.base.zfs.user.files = [
+      ".mozilla/firefox/profiles.ini"
+    ];
   };
 }
