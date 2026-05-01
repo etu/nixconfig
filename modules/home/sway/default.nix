@@ -42,6 +42,10 @@ in
   # Enable rofi home manager module.
   programs.rofi.enable = true;
   programs.rofi.font = "${osConfig.etu.graphical.theme.fonts.monospace} ${toString osConfig.etu.graphical.theme.fonts.size}";
+  programs.rofi.extraConfig = {
+    modes = "combi,emoji,power-menu:${powerMenu}/bin/power-menu";
+    combi-modes = "window,drun";
+  };
 
   # Set up a wallpaper manager.
   services.wpaperd.enable = true;
@@ -157,8 +161,7 @@ in
           "${modifier}+Return" = "exec ${osConfig.etu.graphical.terminal.terminalPath}";
 
           # Run Launcher
-          "${modifier}+e" =
-            "exec ${rofi}/bin/rofi -show combi -modi combi,emoji,power-menu:${powerMenu}/bin/power-menu -combi-modes window,drun | xargs -r swaymsg exec --";
+          "${modifier}+e" = "exec ${rofi}/bin/rofi -show combi";
 
           # Printscreen
           Print = "exec ${pkgs.gradia}/bin/gradia --screenshot=INTERACTIVE";

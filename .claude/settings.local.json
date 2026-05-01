@@ -3,7 +3,8 @@
     "allow": [
       "Bash(nix-prefetch-url:*)",
       "Bash(nom build:*)",
-      "Bash(git commit *)"
+      "Bash(git commit *)",
+      "Bash(git add *)"
     ]
   },
   "hooks": {
