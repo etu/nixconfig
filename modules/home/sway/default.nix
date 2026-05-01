@@ -44,7 +44,7 @@ in
   programs.rofi.font = "${osConfig.etu.graphical.theme.fonts.monospace} ${toString osConfig.etu.graphical.theme.fonts.size}";
   programs.rofi.extraConfig = {
     modes = "combi,emoji,power-menu:${powerMenu}/bin/power-menu";
-    combi-modes = "window,drun";
+    combi-modes = "window,drun,power-menu";
   };
 
   # Set up a wallpaper manager.
