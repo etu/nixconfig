@@ -158,10 +158,7 @@ in
 
           # Run Launcher
           "${modifier}+e" =
-            "exec ${rofi}/bin/rofi -show combi -modi combi,power-menu:${powerMenu}/bin/power-menu -combi-modes window,drun | xargs -r swaymsg exec --";
-
-          # Run rofi emoji picker
-          "${modifier}+i" = "exec ${rofi}/bin/rofi -show emoji";
+            "exec ${rofi}/bin/rofi -show combi -modi combi,emoji,power-menu:${powerMenu}/bin/power-menu -combi-modes window,drun | xargs -r swaymsg exec --";
 
           # Printscreen
           Print = "exec ${pkgs.gradia}/bin/gradia --screenshot=INTERACTIVE";
