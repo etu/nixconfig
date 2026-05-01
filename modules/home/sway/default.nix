@@ -19,25 +19,6 @@ let
       swaylock
     '';
   };
-  powerMenu = pkgs.writeShellApplication {
-    name = "power-menu";
-    runtimeInputs = [
-      pkgs.systemd
-      lockCommand
-    ];
-    text = ''
-      if [ -z "''${1:-}" ]; then
-        printf 'Lock\nSuspend\nReboot\nShutdown'
-      else
-        case "$1" in
-          Lock) lock ;;
-          Suspend) systemctl suspend ;;
-          Reboot) systemctl reboot ;;
-          Shutdown) systemctl poweroff ;;
-        esac
-      fi
-    '';
-  };
 in
 {
   # Enable rofi home manager module.
@@ -51,7 +32,27 @@ in
     "emoji"
     {
       name = "power-menu";
-      path = lib.getExe powerMenu;
+      path = lib.getExe (
+        pkgs.writeShellApplication {
+          name = "power-menu";
+          runtimeInputs = [
+            pkgs.systemd
+            lockCommand
+          ];
+          text = ''
+            if test -z "''${1:-}"; then
+              printf 'Lock\nSuspend\nReboot\nShutdown'
+            else
+              case "$1" in
+                Lock) lock ;;
+                Suspend) systemctl suspend ;;
+                Reboot) systemctl reboot ;;
+                Shutdown) systemctl poweroff ;;
+              esac
+            fi
+          '';
+        }
+      );
     }
   ];
   programs.rofi.font = "${osConfig.etu.graphical.theme.fonts.monospace} ${toString osConfig.etu.graphical.theme.fonts.size}";
