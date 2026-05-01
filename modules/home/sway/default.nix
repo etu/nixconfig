@@ -1,4 +1,5 @@
 {
+  config,
   osConfig,
   lib,
   pkgs,
@@ -41,11 +42,19 @@ in
 {
   # Enable rofi home manager module.
   programs.rofi.enable = true;
+  programs.rofi.plugins = [
+    pkgs.rofi-emoji
+  ];
+  programs.rofi.extraConfig.combi-modes = "window,drun,power-menu";
+  programs.rofi.modes = [
+    "combi"
+    "emoji"
+    {
+      name = "power-menu";
+      path = lib.getExe powerMenu;
+    }
+  ];
   programs.rofi.font = "${osConfig.etu.graphical.theme.fonts.monospace} ${toString osConfig.etu.graphical.theme.fonts.size}";
-  programs.rofi.extraConfig = {
-    modes = "combi,emoji,power-menu:${powerMenu}/bin/power-menu";
-    combi-modes = "window,drun,power-menu";
-  };
 
   # Set up a wallpaper manager.
   services.wpaperd.enable = true;
@@ -134,7 +143,6 @@ in
 
     config =
       let
-        rofi = pkgs.rofi.override { plugins = [ pkgs.rofi-emoji ]; };
         pactl = "${osConfig.services.pulseaudio.package}/bin/pactl";
 
         # Set default modifier
@@ -161,7 +169,7 @@ in
           "${modifier}+Return" = "exec ${osConfig.etu.graphical.terminal.terminalPath}";
 
           # Run Launcher
-          "${modifier}+e" = "exec ${rofi}/bin/rofi -show combi";
+          "${modifier}+e" = "exec ${config.programs.rofi.finalPackage}/bin/rofi -show combi";
 
           # Printscreen
           Print = "exec ${pkgs.gradia}/bin/gradia --screenshot=INTERACTIVE";
