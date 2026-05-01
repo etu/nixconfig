@@ -19,5 +19,10 @@
 
     # Set up waybar, a bar for wayland
     etu.graphical.window-managers.waybar.enable = true;
+
+    # Disable the NixOS-managed blueman applet so home-manager can own it;
+    # withApplet = true (default) generates a drop-in that conflicts with the
+    # package-provided unit, producing two ExecStart= directives.
+    services.blueman.withApplet = lib.mkIf config.services.blueman.enable false;
   };
 }

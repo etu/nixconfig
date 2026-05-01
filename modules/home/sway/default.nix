@@ -41,8 +41,8 @@ in
   # Enable and import network-manager-applet
   services.network-manager-applet.enable = true;
 
-  # Enable the blueman applet service.
-  services.blueman-applet.enable = true;
+  # Enable blueman-applet if blueman is enabled at the system level.
+  services.blueman-applet.enable = lib.mkIf osConfig.services.blueman.enable true;
 
   # Enable the playerctld to be able to control music players and mpris-proxy to proxy bluetooth devices.
   services.playerctld.enable = true;
