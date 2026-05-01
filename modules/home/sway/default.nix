@@ -25,11 +25,13 @@ in
   programs.rofi.enable = true;
   programs.rofi.plugins = [
     pkgs.rofi-emoji
+    pkgs.rofi-calc
   ];
   programs.rofi.extraConfig.combi-modes = "window,drun,power-menu";
   programs.rofi.modes = [
     "combi"
     "emoji"
+    "calc"
     {
       name = "power-menu";
       path = lib.getExe (
