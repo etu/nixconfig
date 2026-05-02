@@ -54,7 +54,6 @@
     graphical.sway.enable = true;
     graphical.sway.enableSuspendOnTimeout = false;
     graphical.audacity.enable = true;
-    graphical.gnucash.enable = true;
     graphical.fdm-printing.enable = true;
     graphical.hamradio.enable = true;
     graphical.flatpak.enablePersistence = true;

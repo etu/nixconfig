@@ -10,7 +10,6 @@
     ./fdm-printing
     ./firefox
     ./flatpak
-    ./gnucash
     ./gnupg
     ./hamradio
     ./packages
