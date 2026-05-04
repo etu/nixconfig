@@ -28,6 +28,7 @@
 
   # Enable ZFS.
   boot.supportedFilesystems = [ "zfs" ];
+  boot.zfs.forceImportRoot = false;
 
   # Roll back certain filesystems to empty state on boot
   boot.initrd.systemd.services.rollback-nginx-cache = {
