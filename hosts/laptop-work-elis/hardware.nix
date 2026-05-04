@@ -42,6 +42,7 @@
 
   # Enable ZFS.
   boot.supportedFilesystems = [ "zfs" ];
+  boot.zfs.forceImportRoot = false;
 
   # Add hack to make wifi work at the office.
   boot.extraModprobeConfig = "options iwlwifi disable_11ax=Y";

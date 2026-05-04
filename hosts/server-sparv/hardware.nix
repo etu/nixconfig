@@ -40,6 +40,7 @@
 
   # Enable ZFS.
   boot.supportedFilesystems = [ "zfs" ];
+  boot.zfs.forceImportRoot = false;
 
   # Import the zstorage pool on boot.
   boot.zfs.extraPools = [ "zstorage" ];
