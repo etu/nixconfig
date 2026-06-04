@@ -144,6 +144,9 @@ in
     enable = true;
     systemd.enable = true;
 
+    # Seems like catpuccin colors can't be validated at the moment.
+    checkConfig = false;
+
     config =
       let
         pactl = "${osConfig.services.pulseaudio.package}/bin/pactl";
