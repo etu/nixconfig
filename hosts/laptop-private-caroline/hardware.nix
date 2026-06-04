@@ -37,7 +37,7 @@
 
   # Enable ZFS.
   boot.supportedFilesystems = [ "zfs" ];
-  boot.zfs.forceImportRoot = false;
+  boot.zfs.forceImportRoot = true;
 
   # Enable ZFS scrubbing.
   services.zfs.autoScrub.enable = true;
