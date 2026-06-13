@@ -12,8 +12,10 @@
   };
 
   config = lib.mkIf config.etu.theme.enable {
-    # Globally enable catppuccin themes on system level.
+    # Globally enable catppuccin themes on system level, and
+    # automatically enable for all services it supports.
     catppuccin.enable = true;
+    catppuccin.autoEnable = true;
     catppuccin.flavor = config.etu.theme.flavor;
 
     # Set up themes for home manager for the main user.
@@ -22,6 +24,11 @@
       imports = [
         inputs.catppuccin.homeModules.catppuccin
       ];
+
+      # Enable use of catppuccin, but don't automatically enable for
+      # all services it supports.
+      catppuccin.enable = true;
+      catppuccin.autoEnable = false;
 
       # Set Catppuccin flavor.
       catppuccin.flavor = config.etu.theme.flavor;
