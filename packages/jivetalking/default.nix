@@ -1,11 +1,11 @@
 { pkgs, ... }:
 pkgs.stdenv.mkDerivation {
   pname = "jivetalking";
-  version = "0.5.1";
+  version = "0.6.0";
 
   src = pkgs.fetchurl {
-    url = "https://github.com/linuxmatters/jivetalking/releases/download/0.5.1/jivetalking-linux-amd64";
-    hash = "sha256:1wv8bcl5h4wpv5fj2v3pirn62nlihlz0w4zr17jaa6yv23z7gsh8";
+    url = "https://github.com/linuxmatters/jivetalking/releases/download/0.6.0/jivetalking-linux-amd64";
+    hash = "sha256:1ijg89qmp88grishnyx2yp1mfgncnhklh5qczr6zpxdpngfm1yl4";
   };
 
   nativeBuildInputs = [ pkgs.autoPatchelfHook ];
