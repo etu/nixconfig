@@ -59,18 +59,26 @@ pkgs.writeShellApplication {
 
     list_entries() {
       shopt -s nullglob
-      for f in "$ENTRIES_DIR"/nixos-generation-*.conf; do
+      for f in "$ENTRIES_DIR"/nixos-*.conf; do
         b=$(basename "$f")
 
+        # Legacy format: generation encoded in filename
         if [[ "$b" =~ nixos-generation-([0-9]+)-specialisation-([^.]+)\.conf$ ]]; then
           gen="''${BASH_REMATCH[1]}"; spec="''${BASH_REMATCH[2]}"
         elif [[ "$b" =~ nixos-generation-([0-9]+)\.conf$ ]]; then
           gen="''${BASH_REMATCH[1]}"; spec="-"
         else
-          continue
+          # Modern format: generation in version field, hash-based filename
+          version=$(awk '/^version /{sub(/^version /,""); print; exit}' "$f" 2>/dev/null || true)
+          if [[ "$version" =~ ^Generation\ ([0-9]+) ]]; then
+            gen="''${BASH_REMATCH[1]}"
+          else
+            continue
+          fi
+          spec="-"
         fi
 
-        title=$(awk -F'= *' '/^title/ {print substr($0,index($0,"=")+1); exit}' "$f" 2>/dev/null || true)
+        title=$(awk '/^title /{sub(/^title /,""); print; exit}' "$f" 2>/dev/null || true)
 
         [[ -z "''${title:-}" ]] && title="generation $gen''${spec:+ (spec: $spec)}"
 
