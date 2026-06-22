@@ -154,6 +154,11 @@ in
     hostKeys = etu ++ h.server-sparv;
   };
 
+  windrose-server-env = {
+    file = ./secrets/server-sparv/windrose-server-env.age;
+    hostKeys = etu ++ h.server-sparv;
+  };
+
   # ---------------------------------------------------------------------------
   # Workstation secrets
   # ---------------------------------------------------------------------------

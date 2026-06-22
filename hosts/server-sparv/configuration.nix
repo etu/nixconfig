@@ -56,6 +56,7 @@
       "zroot/local/project-zomboid".use_template = [ "data" ]; # Project Zomboid server
       "zroot/local/vrising".use_template = [ "data" ]; # V Rising server
       "zroot/local/enshrouded".use_template = [ "data" ]; # Enshrouded server
+      "zroot/local/windrose".use_template = [ "data" ]; # Windrose server
     };
 
     user.extraRootAuthorizedKeys =
@@ -197,6 +198,27 @@
     #  ];
     #};
 
+    # Set up a windrose server
+    windrose-server = {
+      image = "docker.io/indifferentbroccoli/windrose-server-docker:latest";
+      ports = [
+        "7777:7777/tcp"
+        "7777:7777/udp"
+      ];
+      environment = {
+        PUID = "1000";
+        PGID = "1000";
+        USE_DIRECT_CONNECTION = "true";
+        USER_SELECTED_REGION = "EU";
+        SERVER_NAME = "Sparv Windrose";
+        UPDATE_ON_START = "true";
+      };
+      environmentFiles = [ config.age.secrets.windrose-server-env.path ];
+      volumes = [
+        "/var/lib/windrose/server-files:/home/steam/server-files"
+      ];
+    };
+
     #enshrouded-server = {
     #  image = "docker.io/sknnr/enshrouded-dedicated-server:latest";
     #  ports = [
@@ -215,6 +237,7 @@
   age.secrets.valheim-server-env = config.etu.data.ageModules.valheim-server-env;
   age.secrets.project-zomboid-env = config.etu.data.ageModules.project-zomboid-env;
   age.secrets.enshrouded-server-env = config.etu.data.ageModules.enshrouded-server-env;
+  age.secrets.windrose-server-env = config.etu.data.ageModules.windrose-server-env;
 
   # Restart valheim service every day
   systemd.services.restart-valheim-service = {
