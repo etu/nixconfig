@@ -139,6 +139,8 @@ Reusable NixOS and home-manager modules with custom options.
 **`modules/nixos/`** — system-level modules:
 `base`, `data`, `development`, `games`, `graphical`, `services`, `theme`,
 `user`, `work`.
+The `theme` module keeps `catppuccin.enable = true` and controls automatic port
+enrollment through `catppuccin.autoEnable` so evaluations stay warning-free.
 
 **`modules/home/`** — user-level home-manager modules:
 `alacritty`, `emacs`, `firefox`, `fish`, `flatpak-overrides`, `foot`,

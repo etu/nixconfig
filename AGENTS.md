@@ -321,6 +321,9 @@ versions.
   conventions for hosts, modules, and packages.
 - **`just` for tasks**: prefer `just <recipe>` over raw `nix`/`deploy` commands
   to stay consistent with how the repo is managed.
+- **Catppuccin toggle semantics**: keep `catppuccin.enable = true` and drive
+  default port enrollment via `catppuccin.autoEnable` to avoid transition
+  warnings from catppuccin/nix.
 - **Keep docs updated**: whenever you add, remove, or significantly change a
   host, module, workflow, or tool, update both `README.md` (human-facing
   overview) and `AGENTS.md` (agent-facing guide) to reflect the change.
