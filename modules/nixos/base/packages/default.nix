@@ -1,4 +1,10 @@
-{ pkgs, perSystem, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  perSystem,
+  ...
+}:
 {
   # Install some command line tools I commonly want available
   environment.systemPackages = [
@@ -40,6 +46,8 @@
       install -Dm755 xterm-${pkgs.xterm.version}/vttests/88colors2.pl $out/bin/88colors2.pl
     '')
 
+  ]
+  ++ lib.optionals config.boot.loader.systemd-boot.enable [
     # Package to do kexec to other systemd-boot nixos generations
     perSystem.self.nixosSystemdKexec
   ];
