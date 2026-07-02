@@ -50,10 +50,6 @@
     fonts.packages = [
       pkgs.jetbrains-mono
 
-      # Cantarell fonts seems to be used by GTK applications (was mostly
-      # noticeable in Firefox UI elements).
-      pkgs.cantarell-fonts
-
       # Install microsoft fonts
       pkgs.corefonts
 
