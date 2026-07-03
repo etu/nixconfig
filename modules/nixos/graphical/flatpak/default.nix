@@ -45,6 +45,17 @@
       }
     ];
 
+    # Patch flatpak to fix the glycin-svg / prlimit spawn issue (flatpak PR #6721).
+    # The fix passes run-environ as execvp envp instead of injecting it into the
+    # sandbox via --env, so NixOS store paths don't pollute the sub-sandbox PATH.
+    nixpkgs.overlays = [
+      (_final: prev: {
+        flatpak = prev.flatpak.overrideAttrs (old: {
+          patches = (old.patches or [ ]) ++ [ ./patches/fix-pr-6721-spawn-path.patch ];
+        });
+      })
+    ];
+
     # Enable flatpak
     services.flatpak.enable = true;
 
