@@ -95,6 +95,7 @@ in
 
   cloudflared-elis-nu-cert-pem = {
     file = ./secrets/server-main-elis/cloudflared-elis-nu-cert-pem.age;
+    path = "/etc/cloudflared/cert.pem";
     hostKeys = etu ++ h.server-main-elis;
   };
 
