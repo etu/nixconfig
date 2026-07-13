@@ -19,6 +19,9 @@
         "nextcloud.elis.nu" = {
           service = "http://localhost:80";
         };
+        "freshrss.elis.nu" = {
+          service = "http://localhost:80";
+        };
       };
       default = "http_status:404";
     };

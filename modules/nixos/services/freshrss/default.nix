@@ -24,7 +24,7 @@
     # Set up freshrss.
     services.freshrss = {
       enable = true;
-      baseUrl = "http://${config.etu.services.freshrss.hostname}";
+      baseUrl = "https://${config.etu.services.freshrss.hostname}";
       virtualHost = config.etu.services.freshrss.hostname;
 
       # Set up my user

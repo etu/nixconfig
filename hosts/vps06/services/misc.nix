@@ -22,12 +22,6 @@
       locations."/".proxyPass = "http://127.0.0.1:8123/";
       locations."/".extraConfig = "proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;";
     };
-    "freshrss.elis.nu" = {
-      forceSSL = true;
-      enableACME = true;
-      locations."/".proxyPass = "http://server-main-elis/";
-      locations."/".extraConfig = "proxy_set_header Host $host;";
-    };
     "jellyfin.elis.nu" = {
       forceSSL = true;
       enableACME = true;
