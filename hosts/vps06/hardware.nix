@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   modulesPath,
   ...
 }:
@@ -28,23 +27,6 @@
 
   # Enable ZFS.
   boot.supportedFilesystems = [ "zfs" ];
-
-  # Roll back certain filesystems to empty state on boot
-  boot.initrd.systemd.services.rollback-nginx-cache = {
-    description = "Rollback nginx-cache ZFS snapshot to empty state";
-    wantedBy = [ "initrd.target" ];
-    after = [ "zfs-import-zroot.service" ];
-    before = [ "sysroot.mount" ];
-    unitConfig.DefaultDependencies = false;
-    path = [ pkgs.zfs ];
-    script = ''
-      zfs rollback -r zroot/local/nginx-cache@empty
-    '';
-    serviceConfig = {
-      Type = "oneshot";
-      RemainAfterExit = true;
-    };
-  };
 
   # Enable ZFS scrubbing.
   services.zfs.autoScrub.enable = true;
@@ -78,16 +60,6 @@
 
   fileSystems.${config.etu.localPrefix} = {
     device = "zroot/local/data";
-    fsType = "zfs";
-    neededForBoot = true;
-    options = [
-      "defaults"
-      "noexec"
-    ];
-  };
-
-  fileSystems."/var/cache/nginx" = {
-    device = "zroot/local/nginx-cache";
     fsType = "zfs";
     neededForBoot = true;
     options = [
