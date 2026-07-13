@@ -1,5 +1,4 @@
 {
-  pkgs,
   flake,
   ...
 }:
@@ -42,16 +41,6 @@
         proxyPass = "http://server-main-elis:8096";
         proxyWebsockets = true;
       };
-    };
-    "misc.elis.nu" = {
-      forceSSL = true;
-      enableACME = true;
-      locations."/".proxyPass = "http://server-main-elis:80";
-      locations."/".extraConfig = "proxy_set_header Host $host;";
-      locations."/robots.txt".root = pkgs.writeTextDir "robots.txt" ''
-        User-agent: *
-        Disallow: /
-      '';
     };
   };
 

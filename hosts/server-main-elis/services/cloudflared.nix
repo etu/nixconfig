@@ -13,6 +13,9 @@
         "hass.elis.nu" = {
           service = "http://localhost:8123";
         };
+        "misc.elis.nu" = {
+          service = "http://localhost:80";
+        };
       };
       default = "http_status:404";
     };
