@@ -16,6 +16,9 @@
         "misc.elis.nu" = {
           service = "http://localhost:80";
         };
+        "nextcloud.elis.nu" = {
+          service = "http://localhost:80";
+        };
       };
       default = "http_status:404";
     };

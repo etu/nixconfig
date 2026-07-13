@@ -28,12 +28,6 @@
       locations."/".proxyPass = "http://server-main-elis/";
       locations."/".extraConfig = "proxy_set_header Host $host;";
     };
-    "nextcloud.elis.nu" = {
-      forceSSL = true;
-      enableACME = true;
-      locations."/".proxyPass = "http://server-main-elis/";
-      locations."/".extraConfig = "proxy_set_header Host $host;";
-    };
     "jellyfin.elis.nu" = {
       forceSSL = true;
       enableACME = true;
