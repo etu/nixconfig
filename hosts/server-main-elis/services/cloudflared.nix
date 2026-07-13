@@ -22,6 +22,9 @@
         "freshrss.elis.nu" = {
           service = "http://localhost:80";
         };
+        "jellyfin.elis.nu" = {
+          service = "http://localhost:8096";
+        };
       };
       default = "http_status:404";
     };

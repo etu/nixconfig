@@ -11,10 +11,6 @@
   # Enable the ip-failar-nu service
   services.ip-failar-nu.enable = true;
 
-  # This is to avoid nginx validation errors when upgrading tailscale
-  # and restarting nginx at the same time.
-  networking.hosts."100.100.6.114" = [ "server-main-elis" ];
-
   services.nginx.virtualHosts = {
     "ip.failar.nu" = {
       addSSL = true;
@@ -22,17 +18,7 @@
       locations."/".proxyPass = "http://127.0.0.1:8123/";
       locations."/".extraConfig = "proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;";
     };
-    "jellyfin.elis.nu" = {
-      forceSSL = true;
-      enableACME = true;
-      locations."/" = {
-        proxyPass = "http://server-main-elis:8096";
-        proxyWebsockets = true;
-      };
-    };
   };
-
-  services.nginx.clientMaxBodySize = "20m"; # Increase body size since we handle jellyfin.
 
   # Configure temp paths
   services.nginx.appendHttpConfig = ''
