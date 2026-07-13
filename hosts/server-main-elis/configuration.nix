@@ -17,6 +17,7 @@
     ./network-wait-hook.nix
 
     # Import local services that are host specific
+    ./services/cloudflared.nix
     ./services/empty-dirs-cleaner.nix
     ./services/hass.nix
     ./services/home-nginx.nix

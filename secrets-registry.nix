@@ -93,6 +93,16 @@ in
     hostKeys = etu ++ h.server-main-elis;
   };
 
+  cloudflared-elis-nu-cert-pem = {
+    file = ./secrets/server-main-elis/cloudflared-elis-nu-cert-pem.age;
+    hostKeys = etu ++ h.server-main-elis;
+  };
+
+  cloudflared-elis-nu-tunnel = {
+    file = ./secrets/server-main-elis/cloudflared-elis-nu-tunnel.age;
+    hostKeys = etu ++ h.server-main-elis;
+  };
+
   freshrss-password-etu = {
     file = ./secrets/server-main-elis/etu-freshrss-password.age;
     owner = "freshrss";
