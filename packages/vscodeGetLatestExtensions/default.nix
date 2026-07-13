@@ -32,21 +32,22 @@ pkgs.writeShellApplication {
     echo "Using VSCode version: $VSCODE_VERSION" >&2
     echo "Checking extension: $EXT_ORG.$EXT_NAME" >&2
 
-    # Extract versioned API proposal support from VS Code's compiled source.
-    # VS Code defines proposals like: chatDebug:{proposal:"...",version:2}
-    # Extensions in extensionsEnabledWithApiProposalVersion can require specific
-    # versions (e.g. chatDebug@3) that must match what VS Code supports.
+    # Extract API proposal support from VS Code's compiled source.
+    # Old format (pre-1.127): chatDebug:{proposal:"...",version:2} in out/main.js → "chatDebug@2"
+    # New format (1.127+):    chatDebug:{proposal:"..."}          in workbench.desktop.main.js → "chatDebug"
     VSCODE_APP_DIR="${vscodeRef}/lib/vscode/resources/app"
     VSCODE_PROPOSALS=$(grep -oP '[a-zA-Z0-9]+:\{proposal:"https://[^"]*",version:[0-9]+\}' \
-      "$VSCODE_APP_DIR/out/main.js" | \
-      sed -E 's/^([a-zA-Z0-9]+):\{proposal:"[^"]*",version:([0-9]+)\}/\1@\2/')
+      "$VSCODE_APP_DIR/out/main.js" 2>/dev/null | \
+      sed -E 's/^([a-zA-Z0-9]+):\{proposal:"[^"]*",version:([0-9]+)\}/\1@\2/' || \
+      grep -oP '[a-zA-Z0-9]+(?=:\{proposal:"https://)' \
+      "$VSCODE_APP_DIR/out/vs/workbench/workbench.desktop.main.js" 2>/dev/null || true)
 
     NEEDS_PROPOSAL_CHECK="false"
     if jq -e --arg id "$EXT_ORG.$EXT_NAME" \
         '.extensionsEnabledWithApiProposalVersion // [] | map(ascii_downcase) | index($id | ascii_downcase)' \
         "$VSCODE_APP_DIR/product.json" > /dev/null 2>&1; then
       NEEDS_PROPOSAL_CHECK="true"
-      echo "Extension uses versioned API proposals — checking compatibility" >&2
+      echo "Extension uses API proposals — checking compatibility" >&2
     fi
 
     CANDIDATES=$(vsce show "$EXT_ORG.$EXT_NAME" --json | \
@@ -98,7 +99,10 @@ pkgs.writeShellApplication {
         IFS=',' read -ra PROPS <<< "$proposals"
         for prop in "''${PROPS[@]}"; do
           if [[ "$prop" == *@* ]]; then
-            if ! echo "$VSCODE_PROPOSALS" | grep -qxF "$prop"; then
+            prop_name="''${prop%%@*}"
+            # Accept exact match (old versioned format) or name-only match (new format)
+            if ! echo "$VSCODE_PROPOSALS" | grep -qxF "$prop" && \
+               ! echo "$VSCODE_PROPOSALS" | grep -qxF "$prop_name"; then
               echo "  ⚠️ Skipping $ver: requires $prop (not supported by VSCode $VSCODE_VERSION)" >&2
               compatible=false
               break
