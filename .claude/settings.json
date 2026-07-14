@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "just all-fmt-check",
+            "timeout": 120,
+            "statusMessage": "Running fmt/lint checks..."
+          }
+        ]
+      }
+    ]
+  }
+}

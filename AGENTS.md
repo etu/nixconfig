@@ -75,6 +75,7 @@ Reusable NixOS modules covering:
 | `development/` | Development tooling options |
 | `games/` | Gaming-related configuration |
 | `graphical/` | Graphical desktop (Sway/Wayland) stack |
+| `hacks/` | **Temporary overlay hacks** — patches and package overrides waiting on upstream fixes. Check here during upgrades to see if anything can be removed. |
 | `services/` | Various service configurations (e.g. Nextcloud, Gitea, Home Assistant) |
 | `theme/` | System-wide theming (Catppuccin) |
 | `user/` | User account definitions |
@@ -375,6 +376,10 @@ These patterns have caused evaluation or build failures in past upgrades:
   transient (e.g. a new upstream service failing on first start). Always check
   `journalctl -u <failing-unit>` on the host to understand the failure before
   retrying.
+
+- **Hacks module**: after upgrading, review `modules/nixos/hacks/default.nix`.
+  Each entry has a `# Track:` URL pointing to the upstream PR or issue. If the
+  fix has landed in nixpkgs, remove the overlay and its patch file.
 
 - **VSCode extension updates**: `just update-vscode-extensions` (part of
   `just update-all`) updates all extension version pins. If you want to hold

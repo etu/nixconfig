@@ -7,18 +7,6 @@ let
   domain = "failar.nu";
 in
 {
-  # matrix-appservice-irc 4.0.0 uses nedb which calls util.isDate, removed in
-  # Node.js 24. Override to use Node.js 22 until the package is updated.
-  nixpkgs.overlays = [
-    (_: prev: {
-      matrix-appservice-irc = prev.matrix-appservice-irc.overrideAttrs (old: {
-        nativeBuildInputs = builtins.map (
-          dep: if dep == prev.nodejs-slim then prev.nodejs-slim_22 else dep
-        ) old.nativeBuildInputs;
-      });
-    })
-  ];
-
   etu.base.zfs.system.directories = [
     # Persistence of synapse data between boots.
     "/var/lib/matrix-synapse"

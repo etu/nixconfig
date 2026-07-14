@@ -7,6 +7,7 @@
     ./development
     ./games
     ./graphical
+    ./hacks
     ./services
     ./theme
     ./user

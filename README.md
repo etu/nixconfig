@@ -12,15 +12,6 @@ Personal NixOS configuration for multiple machines, managed with
 [agenix](https://github.com/ryantm/agenix) for secret management. The flake
 layout uses [blueprint](https://github.com/numtide/blueprint).
 
-## Maintenance hacks
-
-I do have some hacks in place to make things work that sometimes may
-be buggy from upstream and such. So here's a list to make it easier to
-remember to check on them and remove them.
-
-- [matrix-appservice-irc node version](https://github.com/etu/nixconfig/commit/e68e19e4a5af9e74a80e8dab6563444a61efbfc9), [PR in nixpkgs](https://github.com/NixOS/nixpkgs/pull/541566).
-- [flatpak environment leak](https://github.com/etu/nixconfig/commit/391e09a1ca09ed3c821a22a575c49dbb987a824d), [works by applying this patch](https://github.com/flatpak/flatpak/pull/6721) so will probably be fixed in a future flatpak release.
-
 ## Development
 
 Enter the dev shell (defined in `devshell.nix`) for all tooling:
