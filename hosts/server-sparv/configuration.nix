@@ -255,6 +255,22 @@
     };
   };
 
+  # Restart windrose service every day
+  systemd.services.restart-windrose-service = {
+    description = "Restart windrose service";
+    after = [ "docker.service" ];
+    serviceConfig.Type = "simple";
+    script = "${pkgs.systemd}/bin/systemctl restart docker-windrose-server.service";
+  };
+  systemd.timers.restart-windrose-service = {
+    wantedBy = [ "timers.target" ];
+    after = [ "docker.service" ];
+    timerConfig = {
+      OnCalendar = "05:00";
+      Persistent = "yes";
+    };
+  };
+
   # Nginx reverse proxy: routes netdata.failar.nu, speed.failar.nu, and the
   # lancache catchall on both HTTP (virtualHosts) and HTTPS (stream/SNI).
   services.nginx.enable = true;
