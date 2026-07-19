@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, lib, ... }:
 {
   # Make sure to have nginx enabled
   services.nginx.enable = true;
@@ -50,6 +50,7 @@
     "/var/lib/lidarr"
     "/var/lib/nzbget"
     "/var/lib/radarr"
+    "/var/lib/seerr"
     "/var/lib/sonarr"
   ];
 
@@ -75,6 +76,7 @@
     user = "downloads";
     group = "downloads";
   };
+  services.seerr.enable = true;
   services.sonarr = {
     enable = true;
     user = "downloads";
@@ -132,6 +134,15 @@
           "/var/lib/nzbget"
           "/var/lib/nzbget-dst"
         ];
+      };
+      seerr.serviceConfig = perms // {
+        ReadWritePaths = [
+          "/var/lib/seerr"
+        ];
+        StateDirectory = lib.mkForce "";
+        DynamicUser = lib.mkForce false;
+        User = lib.mkForce "seerr";
+        Group = lib.mkForce "seerr";
       };
       sonarr.serviceConfig = perms // {
         ReadWritePaths = [

@@ -246,6 +246,13 @@
   };
   users.groups.downloads.gid = 947;
 
+  users.users.seerr = {
+    group = "seerr";
+    uid = 948;
+    isSystemUser = true;
+  };
+  users.groups.seerr.gid = 948;
+
   # Install some additonal tools on this system.
   environment.systemPackages = [
     pkgs.mkvtoolnix-cli # mkvinfo and mkvmerge

@@ -25,6 +25,9 @@
         "jellyfin.elis.nu" = {
           service = "http://localhost:8096";
         };
+        "seerr.elis.nu" = {
+          service = "http://localhost:5055";
+        };
       };
       default = "http_status:404";
     };
