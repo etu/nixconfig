@@ -138,16 +138,16 @@ update-hass:
 
 # Update zwavejs2mqtt container
 [group('updaters')]
-update-zwavejs2mqtt:
+update-zwave-js-ui:
     #!/usr/bin/env bash
     set -euo pipefail
-    response=$(curl -s -f "https://registry.hub.docker.com/v2/repositories/zwavejs/zwavejs2mqtt/tags?page_size=100") || { echo "Failed to fetch tags from Docker Hub"; exit 1; }
+    response=$(curl -s -f "https://registry.hub.docker.com/v2/repositories/zwavejs/zwave-js-ui/tags?page_size=100") || { echo "Failed to fetch tags from Docker Hub"; exit 1; }
     latest=$(echo "$response" | jq -r '.results[].name' | grep -E '^[0-9]+\.[0-9]+\.[0-9]+$' | sort -V | tail -n 1) || { echo "Failed to parse JSON response"; exit 1; }
     if [ -z "$latest" ]; then
       echo "Failed to find latest version"
       exit 1
     fi
-    sed -i -r "s#(zwavejs/zwavejs2mqtt):[0-9]+\.[0-9]+\.[0-9]+#\1:$latest#" hosts/server-main-elis/services/hass.nix
+    sed -i -r "s#(zwavejs/zwave-js-ui):[0-9]+\.[0-9]+\.[0-9]+#\1:$latest#" hosts/server-main-elis/services/hass.nix
 
 # Update mosquitto container
 [group('updaters')]
@@ -193,4 +193,4 @@ update-vscode-extensions:
 
 # Update all
 [group('updaters')]
-update-all: update-flake update-hass update-zwavejs2mqtt update-mosquitto update-vscode-extensions update-jivetalking
+update-all: update-flake update-hass update-zwave-js-ui update-mosquitto update-vscode-extensions update-jivetalking
