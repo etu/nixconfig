@@ -198,26 +198,25 @@
     #  ];
     #};
 
-    # Set up a windrose server
-    windrose-server = {
-      image = "docker.io/indifferentbroccoli/windrose-server-docker:latest";
-      ports = [
-        "7777:7777/tcp"
-        "7777:7777/udp"
-      ];
-      environment = {
-        PUID = "1000";
-        PGID = "1000";
-        USE_DIRECT_CONNECTION = "true";
-        USER_SELECTED_REGION = "EU";
-        SERVER_NAME = "Sparv Windrose";
-        UPDATE_ON_START = "true";
-      };
-      environmentFiles = [ config.age.secrets.windrose-server-env.path ];
-      volumes = [
-        "/var/lib/windrose/server-files:/home/steam/server-files"
-      ];
-    };
+    #windrose-server = {
+    #  image = "docker.io/indifferentbroccoli/windrose-server-docker:latest";
+    #  ports = [
+    #    "7777:7777/tcp"
+    #    "7777:7777/udp"
+    #  ];
+    #  environment = {
+    #    PUID = "1000";
+    #    PGID = "1000";
+    #    USE_DIRECT_CONNECTION = "true";
+    #    USER_SELECTED_REGION = "EU";
+    #    SERVER_NAME = "Sparv Windrose";
+    #    UPDATE_ON_START = "true";
+    #  };
+    #  environmentFiles = [ config.age.secrets.windrose-server-env.path ];
+    #  volumes = [
+    #    "/var/lib/windrose/server-files:/home/steam/server-files"
+    #  ];
+    #};
 
     #enshrouded-server = {
     #  image = "docker.io/sknnr/enshrouded-dedicated-server:latest";
@@ -256,20 +255,20 @@
   };
 
   # Restart windrose service every day
-  systemd.services.restart-windrose-service = {
-    description = "Restart windrose service";
-    after = [ "docker.service" ];
-    serviceConfig.Type = "simple";
-    script = "${pkgs.systemd}/bin/systemctl restart docker-windrose-server.service";
-  };
-  systemd.timers.restart-windrose-service = {
-    wantedBy = [ "timers.target" ];
-    after = [ "docker.service" ];
-    timerConfig = {
-      OnCalendar = "05:00";
-      Persistent = "yes";
-    };
-  };
+  #systemd.services.restart-windrose-service = {
+  #  description = "Restart windrose service";
+  #  after = [ "docker.service" ];
+  #  serviceConfig.Type = "simple";
+  #  script = "${pkgs.systemd}/bin/systemctl restart docker-windrose-server.service";
+  #};
+  #systemd.timers.restart-windrose-service = {
+  #  wantedBy = [ "timers.target" ];
+  #  after = [ "docker.service" ];
+  #  timerConfig = {
+  #    OnCalendar = "05:00";
+  #    Persistent = "yes";
+  #  };
+  #};
 
   # Nginx reverse proxy: routes netdata.failar.nu, speed.failar.nu, and the
   # lancache catchall on both HTTP (virtualHosts) and HTTPS (stream/SNI).
