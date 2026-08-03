@@ -57,6 +57,7 @@
       "zroot/local/vrising".use_template = [ "data" ]; # V Rising server
       "zroot/local/enshrouded".use_template = [ "data" ]; # Enshrouded server
       "zroot/local/windrose".use_template = [ "data" ]; # Windrose server
+      "zroot/local/conan-exiles".use_template = [ "data" ]; # Conan Exiles server
     };
 
     user.extraRootAuthorizedKeys =
@@ -174,6 +175,21 @@
       ];
     };
 
+    # Set up a conan exiles server
+    conan-exiles = {
+      image = "ghcr.io/balnaimi/conan-exiles-server:latest";
+      ports = [
+        "7777:7777/udp"
+        "7778:7778/udp"
+        "27015:27015/udp"
+      ];
+      environmentFiles = [ config.age.secrets.conan-exiles-server-env.path ];
+      volumes = [
+        "/var/lib/conan-exiles/data:/conanexiles"
+        "/var/lib/conan-exiles/saved:/conanexiles/ConanSandbox/Saved"
+      ];
+    };
+
     # Set up openspeedtest
     openspeedtest = {
       image = "docker.io/openspeedtest/latest:latest";
@@ -237,6 +253,7 @@
   age.secrets.project-zomboid-env = config.etu.data.ageModules.project-zomboid-env;
   age.secrets.enshrouded-server-env = config.etu.data.ageModules.enshrouded-server-env;
   age.secrets.windrose-server-env = config.etu.data.ageModules.windrose-server-env;
+  age.secrets.conan-exiles-server-env = config.etu.data.ageModules.conan-exiles-server-env;
 
   # Restart valheim service every day
   systemd.services.restart-valheim-service = {
@@ -269,6 +286,22 @@
   #    Persistent = "yes";
   #  };
   #};
+
+  # Restart conan exiles service every day
+  systemd.services.restart-conan-exiles-service = {
+    description = "Restart conan exiles service";
+    after = [ "docker.service" ];
+    serviceConfig.Type = "simple";
+    script = "${pkgs.systemd}/bin/systemctl restart docker-conan-exiles.service";
+  };
+  systemd.timers.restart-conan-exiles-service = {
+    wantedBy = [ "timers.target" ];
+    after = [ "docker.service" ];
+    timerConfig = {
+      OnCalendar = "05:00";
+      Persistent = "yes";
+    };
+  };
 
   # Nginx reverse proxy: routes netdata.failar.nu, speed.failar.nu, and the
   # lancache catchall on both HTTP (virtualHosts) and HTTPS (stream/SNI).

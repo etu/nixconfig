@@ -170,6 +170,11 @@ in
     hostKeys = etu ++ h.server-sparv;
   };
 
+  conan-exiles-server-env = {
+    file = ./secrets/server-sparv/conan-exiles-server-env.age;
+    hostKeys = etu ++ h.server-sparv;
+  };
+
   # ---------------------------------------------------------------------------
   # Workstation secrets
   # ---------------------------------------------------------------------------
