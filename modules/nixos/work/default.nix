@@ -81,7 +81,7 @@
       pkgs.kubent
       pkgs.kubernetes-helm
       pkgs.k9s
-      pkgs.minikube
+      # pkgs.minikube
       # pkgs.octant
 
       # Misc
