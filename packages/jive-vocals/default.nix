@@ -1,11 +1,11 @@
 { pkgs, ... }:
 pkgs.stdenv.mkDerivation {
-  pname = "jivetalking";
-  version = "0.6.1";
+  pname = "jive-vocals";
+  version = "0.7.0";
 
   src = pkgs.fetchurl {
-    url = "https://github.com/linuxmatters/jivetalking/releases/download/0.6.1/jivetalking-linux-amd64";
-    hash = "sha256:16p7prymy5idg1h5cllvw5yssra6lrgy6hyl5m88h825365y8y8i";
+    url = "https://github.com/linuxmatters/jive-vocals/releases/download/0.7.0/jive-vocals-linux-amd64";
+    hash = "sha256:144ymgxddnvyna7cwj0pp5b8hfbwb33l82miqgvc94i6hhcb9996";
   };
 
   nativeBuildInputs = [ pkgs.autoPatchelfHook ];
@@ -15,7 +15,7 @@ pkgs.stdenv.mkDerivation {
   dontBuild = true;
 
   installPhase = ''
-    install -Dm755 $src $out/bin/jivetalking
+    install -Dm755 $src $out/bin/jive-vocals
   '';
 
   meta = {

@@ -13,7 +13,7 @@
     etu.user.extraUserPackages = [
       pkgs.audacity
       pkgs.openai-whisper
-      perSystem.self.jivetalking
+      perSystem.self.jive-vocals
     ];
 
     # Enable persistence for audacity related files.
