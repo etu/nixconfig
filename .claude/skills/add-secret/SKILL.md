@@ -24,18 +24,7 @@ If arguments are missing or ambiguous, ask the user before proceeding.
 
 The `etu` user keys (desktop-elis, laptop-private-elis, laptop-work-elis) are **always** prepended to every secret's `hostKeys` — they're defined as `etu` in the registry's `let` block.
 
-## Step 1 — Create the encrypted secret file
-
-Tell the user to run this command interactively (it opens an editor):
-```
-agenix -e secrets/<dir>/<secret-name>.age
-```
-
-Instruct them to type `! agenix -e secrets/<dir>/<secret-name>.age` in the Claude Code prompt to run it in the session, then enter the secret value in the editor that opens.
-
-Wait for the user to confirm the file was created before proceeding.
-
-## Step 2 — Read secrets-registry.nix
+## Step 1 — Read secrets-registry.nix
 
 Read `secrets-registry.nix` to understand the current structure and find the right section to insert the new entry.
 
@@ -43,7 +32,7 @@ Choose the insertion point:
 - Find the section comment that matches the `<dir>` (e.g., `# server-main-elis secrets`)
 - If no matching section exists, add a new section at the end before the closing `}`
 
-## Step 3 — Add the registry entry
+## Step 2 — Add the registry entry
 
 The standard entry shape is:
 ```nix
@@ -63,6 +52,19 @@ Optional fields (only add if the user specified them):
 - `symlink = false;` — required when `path` points into a ZFS persist dataset
 
 Use the Edit tool to insert the new block at the chosen location in `secrets-registry.nix`. Keep the existing section's style (blank line between entries, correct indentation of 2 spaces).
+
+This step must happen before Step 3: `secrets.nix` (which the `agenix` CLI reads to look up decryption keys) is derived from `secrets-registry.nix`, so `agenix -e` fails with an `attribute ... missing` error if the registry entry doesn't exist yet.
+
+## Step 3 — Create the encrypted secret file
+
+Tell the user to run this command interactively (it opens an editor):
+```
+agenix -e secrets/<dir>/<secret-name>.age
+```
+
+Instruct them to type `! agenix -e secrets/<dir>/<secret-name>.age` in the Claude Code prompt to run it in the session, then enter the secret value in the editor that opens.
+
+Wait for the user to confirm the file was created before proceeding.
 
 ## Step 4 — Stage the .age file
 
