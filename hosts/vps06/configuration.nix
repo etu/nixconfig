@@ -18,6 +18,7 @@
     # Import matrix settings
     ./services/forgejo.nix
     ./services/grafana.nix
+    ./services/hermes-agent.nix
     ./services/matomo.nix
     ./services/matrix.nix
     ./services/misc.nix
