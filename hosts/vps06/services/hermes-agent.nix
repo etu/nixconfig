@@ -24,7 +24,17 @@
     # Config is declarative in managed mode (HERMES_MANAGED=true) -- the
     # `hermes setup`/`hermes config set` wizards refuse to run and point
     # back here instead.
-    settings.model.default = "anthropic/claude-sonnet-5";
+    #
+    # Points at ollama on server-main-elis's Arc B580 (reachable over
+    # tailscale) instead of the Anthropic API, to avoid further API spend.
+    settings.model = {
+      default = "llama3.1:8b";
+      provider = "custom";
+      base_url = "http://server-main-elis:11434/v1";
+      # Matches OLLAMA_CONTEXT_LENGTH on server-main-elis -- Hermes requires
+      # a served window of at least 64K.
+      context_length = 65536;
+    };
     settings.platforms.telegram.enabled = true;
 
     # Not secret, just gates who the bot will talk to -- TELEGRAM_BOT_TOKEN

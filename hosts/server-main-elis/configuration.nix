@@ -23,6 +23,7 @@
     ./services/home-nginx.nix
     ./services/homepage.nix
     ./services/nextcloud.nix
+    ./services/ollama.nix
     ./services/svtplay.nix
     ./services/usenet.nix
 
