@@ -75,14 +75,6 @@
       "zroot/safe/home".use_template = [ "home" ];
 
       # Enable cleanup for synced backups
-      "zstorage/backups/current/desktop-caroline/data" = {
-        use_template = [ "data" ];
-        autosnap = false;
-      };
-      "zstorage/backups/current/desktop-caroline/home" = {
-        use_template = [ "home" ];
-        autosnap = false;
-      };
       "zstorage/backups/current/desktop-elis/data" = {
         use_template = [ "data" ];
         autosnap = false;
@@ -92,14 +84,6 @@
         autosnap = false;
       };
       "zstorage/backups/current/desktop-elis/work-home" = {
-        use_template = [ "home" ];
-        autosnap = false;
-      };
-      "zstorage/backups/current/laptop-private-caroline/data" = {
-        use_template = [ "data" ];
-        autosnap = false;
-      };
-      "zstorage/backups/current/laptop-private-caroline/home" = {
         use_template = [ "home" ];
         autosnap = false;
       };
@@ -146,19 +130,9 @@
     base.syncoid.enable = true;
     # Enable syncing of some filesystems
     base.syncoid.commands = {
-      "root@desktop-caroline:zroot/safe/data".target = "zstorage/backups/current/desktop-caroline/data";
-      "root@desktop-caroline:zroot/safe/home".target = "zstorage/backups/current/desktop-caroline/home";
-
       "root@desktop-elis:zroot/safe/data".target = "zstorage/backups/current/desktop-elis/data";
       "root@desktop-elis:zroot/safe/home".target = "zstorage/backups/current/desktop-elis/home";
       "root@desktop-elis:zroot/safe/work-home".target = "zstorage/backups/current/desktop-elis/work-home";
-
-      "root@laptop-private-caroline:zroot/safe/data".target =
-        "zstorage/backups/current/laptop-private-caroline/data";
-      "root@laptop-private-caroline:zroot/safe/home".target =
-        "zstorage/backups/current/laptop-private-caroline/home";
-      "root@laptop-private-caroline:zroot/zvol/win10".target =
-        "zstorage/backups/current/laptop-private-caroline/win10";
 
       "root@laptop-private-elis:zroot/safe/data".target =
         "zstorage/backups/current/laptop-private-elis/data";
