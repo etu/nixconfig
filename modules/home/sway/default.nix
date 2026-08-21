@@ -297,6 +297,11 @@ in
             "exec ${pkgs.glib}/bin/gdbus call -e -d net.sourceforge.mumble.mumble -o / -m net.sourceforge.mumble.Mumble.startTalking";
           "--no-repeat --release Alt_R" =
             "exec ${pkgs.glib}/bin/gdbus call -e -d net.sourceforge.mumble.mumble -o / -m net.sourceforge.mumble.Mumble.stopTalking";
+        }
+        // lib.optionalAttrs osConfig.etu.graphical.window-managers.voxtype.enable {
+          # Push-to-talk: hold $mod+k to record, release to transcribe
+          "--no-repeat ${modifier}+k" = "exec ${pkgs.voxtype-vulkan}/bin/voxtype record start";
+          "--no-repeat --release ${modifier}+k" = "exec ${pkgs.voxtype-vulkan}/bin/voxtype record stop";
         };
 
         modes.resize = {

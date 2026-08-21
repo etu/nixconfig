@@ -7,6 +7,7 @@
   imports = [
     ./kanshi
     ./mako
+    ./voxtype
     ./waybar
   ];
 
