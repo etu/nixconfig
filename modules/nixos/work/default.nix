@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  perSystem,
   pkgs,
   ...
 }:
@@ -33,11 +32,9 @@
     etu.base.zfs.user.directories = [
       ".aws"
       ".chalet"
-      ".chef"
       ".config/helm"
       ".config/tvnu"
       ".config/gh"
-      ".vagrant.d"
     ];
 
     etu.base.zfs.user.files = [
@@ -49,7 +46,6 @@
     # Allow certain unfree packages.
     etu.base.nix.allowUnfree = [
       "appgate-sdp"
-      "vagrant"
       "terraform"
     ];
 
@@ -68,10 +64,6 @@
       pkgs.git-crypt
       pkgs.git-lfs
       pkgs.github-cli
-
-      # Install chef and vagrant for some legacy systems reasons
-      perSystem.nixpkgs-22-11.chefdk
-      perSystem.nixpkgs-22-11.vagrant
 
       # Kubernetes and Docker utils
       pkgs.docker-compose

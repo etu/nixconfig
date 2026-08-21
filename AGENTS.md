@@ -288,7 +288,6 @@ use `nix-installer-action`. Remove it again once the upstream issue is resolved.
 | Input | Purpose |
 |-------|---------|
 | `nixpkgs` | Main nixpkgs (nixos-unstable) |
-| `nixpkgs-22-11` | Legacy nixpkgs pinned to 22.11 |
 | `nixos-hardware` | Hardware-specific NixOS modules |
 | `agenix` | Encrypted secret management |
 | `blueprint` | Flake layout / convention helper |

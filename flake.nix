@@ -5,7 +5,6 @@
   inputs = {
     # Packages
     nixpkgs.url = "github:NixOS/nixpkgs?ref=nixos-unstable";
-    nixpkgs-22-11.url = "github:NixOS/nixpkgs/nixos-22.11";
 
     # Hardware
     nixos-hardware.url = "github:nixos/nixos-hardware";
