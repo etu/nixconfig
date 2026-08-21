@@ -60,6 +60,7 @@ button:hover {
 #clock,
 #cpu,
 #custom-mxergo,
+#custom-voxtype,
 #idle_inhibitor,
 #memory,
 #mode,
@@ -134,6 +135,30 @@ button:hover {
 #custom-mxergo.critical {
     color: @red;
     box-shadow: inset 0 -3px @red;
+}
+
+/* Voxtype push-to-talk status */
+#custom-voxtype.idle {
+    color: @green;
+}
+
+#custom-voxtype.recording {
+    color: @red;
+    box-shadow: inset 0 -3px @red;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: steps(12);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#custom-voxtype.transcribing {
+    color: @yellow;
+    box-shadow: inset 0 -3px @yellow;
+}
+
+#custom-voxtype.stopped {
+    color: @overlay0;
 }
 
 /* Idle inhibitor */
