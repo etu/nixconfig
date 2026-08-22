@@ -46,6 +46,11 @@
       type = lib.types.listOf lib.types.str;
       default = [ ];
     };
+    allowOwnerAccess = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "Whether to grant my own device keys (etu.computers) SSH access to this host's user and root accounts.";
+    };
     extraAuthorizedKeys = lib.mkOption {
       type = lib.types.listOf lib.types.str;
       default = [ ];
@@ -98,7 +103,8 @@
       ) config.age.secrets.hashed-user-password.path;
       isNormalUser = true;
       openssh.authorizedKeys.keys =
-        config.etu.data.pubkeys.etu.computers ++ config.etu.user.extraAuthorizedKeys;
+        lib.optionals config.etu.user.allowOwnerAccess config.etu.data.pubkeys.etu.computers
+        ++ config.etu.user.extraAuthorizedKeys;
       inherit (config.etu.user) uid;
     };
 
@@ -109,7 +115,8 @@
         !config.etu.user.setEmptyRootPassword
       ) config.age.secrets.hashed-root-password.path;
       openssh.authorizedKeys.keys =
-        config.etu.data.pubkeys.etu.computers ++ config.etu.user.extraRootAuthorizedKeys;
+        lib.optionals config.etu.user.allowOwnerAccess config.etu.data.pubkeys.etu.computers
+        ++ config.etu.user.extraRootAuthorizedKeys;
     };
 
     # Configure some miscellaneous dotfiles for my user.

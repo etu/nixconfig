@@ -49,6 +49,9 @@
     user.email = "caroline@hirwing.se";
     user.extraGroups = [ "video" ];
 
+    # Don't allow Elis's own device keys to SSH into this machine.
+    user.allowOwnerAccess = false;
+
     # Don't set a password for root / user depending on agenix.
     user.userPasswordAgeModule = config.etu.data.ageModules.hashed-caroline-laptop-concate-password;
     user.rootPasswordAgeModule = config.etu.data.ageModules.hashed-caroline-laptop-root-password;
@@ -83,9 +86,6 @@
       pkgs.libreoffice
       pkgs.blender
     ];
-
-    # Allow home fileserver to connect to fetch snapshots.
-    user.extraRootAuthorizedKeys = config.etu.data.pubkeys.syncoid.server-main-elis;
 
     # Allow to install some unfree packages.
     base.nix.allowUnfree = [
