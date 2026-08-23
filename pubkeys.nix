@@ -1,11 +1,6 @@
 let
   etu =
     let
-      # New fileserver
-      server-main-elis = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDvsU9DbT9Buk0FcEA6cuq8UdE1wG+bD0UpyGoxJc93x etu@fenchurch-2019-12-22"
-      ];
-
       # Desktop computer
       desktop-elis = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKm0NHTsWdN+R+Ksvvva6FTZ9kVPexQpIGm7+6HGmX7q etu@desktop-elis-2024-11-15"
@@ -25,13 +20,12 @@ let
       # Include all separate units
       inherit
         desktop-elis
-        server-main-elis
         laptop-private-elis
         laptop-work-elis
         ;
 
       # Include a meta name of all computers
-      computers = desktop-elis ++ server-main-elis ++ laptop-private-elis ++ laptop-work-elis;
+      computers = desktop-elis ++ laptop-private-elis ++ laptop-work-elis;
     };
 
   # Public keys used for syncoid.

@@ -77,7 +77,7 @@
       hostKeys = [
         config.etu.data.ageModules.server-main-elis-initrd-sshd.path
       ];
-      authorizedKeys = config.users.users.etu.openssh.authorizedKeys.keys;
+      authorizedKeys = config.users.users.root.openssh.authorizedKeys.keys;
     };
   };
 
@@ -154,12 +154,6 @@
       "defaults"
       "noexec"
     ];
-  };
-
-  fileSystems."${config.etu.dataPrefix}/home" = {
-    device = "zroot/safe/home";
-    fsType = "zfs";
-    neededForBoot = true;
   };
 
   fileSystems."/var/log" = {
@@ -278,7 +272,7 @@
   };
 
   # Persistence of certain hosts paths and home directory paths.
-  etu.base.zfs.user.directories = [
+  etu.base.zfs.root.directories = [
     "backups"
   ];
 

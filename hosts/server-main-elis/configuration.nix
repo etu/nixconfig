@@ -53,8 +53,6 @@
 
     base.emacs.enable = false; # Disable emacs that is enabled by default.
     development.git.enable = true;
-    user.enable = true;
-    user.extraGroups = [ "libvirtd" ];
 
     user.extraRootAuthorizedKeys =
       # Allow workstations to push snapshots
