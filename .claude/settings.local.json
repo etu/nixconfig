@@ -4,7 +4,9 @@
       "Bash(nix-prefetch-url:*)",
       "Bash(nom build:*)",
       "Bash(git commit *)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(nix flake *)",
+      "Bash(nix eval *)"
     ]
   },
   "hooks": {
