@@ -31,6 +31,7 @@
     development.vscode.enableWork = true;
     graphical.enable = true;
     graphical.sway.enable = true;
+    graphical.window-managers.voxtype.enable = true;
     graphical.flatpak.enablePersistence = true;
     services.nfs.enable = true;
     services.nfs.exports = ''
