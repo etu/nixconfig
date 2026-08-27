@@ -35,6 +35,7 @@
       ".config/helm"
       ".config/tvnu"
       ".config/gh"
+      ".codex"
     ];
 
     etu.base.zfs.user.files = [
@@ -82,6 +83,8 @@
       pkgs.ssm-session-manager-plugin # Session manager plugin for aws
       pkgs.terraform
       pkgs.terragrunt
+
+      pkgs.codex
     ];
 
     # Enable appgate
