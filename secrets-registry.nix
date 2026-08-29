@@ -146,11 +146,6 @@ in
     hostKeys = etu ++ h.vps06;
   };
 
-  hermes-agent-env = {
-    file = ./secrets/vps06/hermes-agent-env.age;
-    hostKeys = etu ++ h.vps06;
-  };
-
   # ---------------------------------------------------------------------------
   # server-sparv secrets
   # ---------------------------------------------------------------------------
