@@ -7,6 +7,7 @@
   imports = [
     ./kanshi
     ./mako
+    ./quickshell
     ./voxtype
     ./waybar
   ];
@@ -17,6 +18,9 @@
 
     # Set up mako, a notification deamon for wayland
     etu.graphical.window-managers.mako.enable = true;
+
+    # Set up quickshell, runs alongside waybar for extra widgets
+    etu.graphical.window-managers.quickshell.enable = true;
 
     # Set up waybar, a bar for wayland
     etu.graphical.window-managers.waybar.enable = true;
