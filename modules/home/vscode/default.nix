@@ -57,8 +57,11 @@
     "phpSniffer.standard" = "PSR12";
     "telemetry.telemetryLevel" = "off";
     "workbench.editor.showTabs" = "none"; # I find tabs to be distracting
+    "qt-qml.doNotAskForQmllsDownload" = true;
     "qt-qml.qmlls.customExePath" = "${pkgs.qt6.qtdeclarative}/bin/qmlls"; # QML language server
     "qt-qml.qmlls.useQmlImportPathEnvVar" = true;
+    "qt-core.showWelcomePageOnActivation" = false;
+    "workbench.editorAssociations"."*.qrc" = "qt-core.qrcEditor";
   }
   // (lib.optionalAttrs osConfig.etu.development.vscode.enableWork {
     "[vue]"."editor.formatOnSave" = false;
