@@ -5,6 +5,7 @@
 }:
 {
   imports = [
+    ./dms-shell
     ./kanshi
     ./mako
     ./quickshell
