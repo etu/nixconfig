@@ -43,22 +43,12 @@ in
   services.playerctld.enable = true;
   services.mpris-proxy.enable = true;
 
-  # Configure swayidle for automatic screen locking
+  # Configure swayidle to lock the screen on suspend and on explicit
+  # loginctl lock-session calls (idle-timeout lock/suspend is handled by
+  # dms-shell's own idle manager instead, see modules/home/dms-shell).
   services.swayidle.enable = true;
   services.swayidle.events.before-sleep = "${lockCommand}/bin/lock";
   services.swayidle.events.lock = "${lockCommand}/bin/lock";
-  services.swayidle.timeouts = [
-    {
-      timeout = 300;
-      command = "${lockCommand}/bin/lock";
-    }
-  ]
-  ++ lib.optionals osConfig.etu.graphical.sway.enableSuspendOnTimeout [
-    {
-      timeout = 600;
-      command = "${pkgs.systemd}/bin/systemctl suspend";
-    }
-  ];
 
   # Set up the cursor theme
   home.pointerCursor = {

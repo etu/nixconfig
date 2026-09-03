@@ -1,4 +1,5 @@
-_: {
+{ osConfig, ... }:
+{
   # Configure DankMaterialShell, a Quickshell-based Material 3 desktop
   # shell (bar, launcher, notifications, etc).
   programs.dank-material-shell = {
@@ -21,6 +22,14 @@ _: {
       lockDateFormat = "yyyy-MM-dd"; # Lock date format
       useAutoLocation = true; # Location detection for weather
       screenPreferences.wallpaper = [ ]; # Disable wallpaper
+
+      # Idle management, replaces swayidle's timeout-based lock/suspend.
+      acLockTimeout = 300; # Lock after 5 minutes idle
+      batteryLockTimeout = 300;
+      acPostLockMonitorTimeout = 60; # Turn the screen off 1 minute after locking
+      batteryPostLockMonitorTimeout = 60;
+      acSuspendTimeout = if osConfig.etu.graphical.sway.enableSuspendOnTimeout then 600 else 0;
+      batterySuspendTimeout = if osConfig.etu.graphical.sway.enableSuspendOnTimeout then 600 else 0;
 
       barConfigs = [
         {
