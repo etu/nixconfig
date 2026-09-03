@@ -20,11 +20,6 @@
       default = builtins.toString perSystem.self.spaceWallpapers;
       description = "Wallpaper to use for sway";
     };
-    lockWallpaper = lib.mkOption {
-      type = lib.types.str;
-      default = "screenshot";
-      description = "Wallpaper to use for lockscreen";
-    };
     enableSuspendOnTimeout = lib.mkEnableOption "Lock the screen before suspending" // {
       default = true;
     };
@@ -74,6 +69,10 @@
 
     # Set up upower to be able to get battery levels of connected devices.
     services.upower.enable = true;
+
+    # Set up accounts-daemon so dms-shell can read/write the user's profile
+    # picture via org.freedesktop.Accounts.
+    services.accounts-daemon.enable = true;
 
     # Set up XDG Portals
     xdg.portal.enable = true;

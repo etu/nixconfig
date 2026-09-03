@@ -11,52 +11,22 @@ let
     runtimeInputs = [
       pkgs.dbus
       pkgs.openssh
-      pkgs.swaylock-effects
+      config.programs.dank-material-shell.package
     ];
     text = ''
       ssh-add -D
       dbus-send --dest=org.gnome.keyring --print-reply /org/freedesktop/secrets org.freedesktop.Secret.Service.LockService || true
-      swaylock
+      dms ipc lock lock
     '';
   };
 in
 {
-  # Enable rofi home manager module.
+  # Enable rofi home manager module, used for the emoji picker.
   programs.rofi.enable = true;
   programs.rofi.plugins = [
     pkgs.rofi-emoji
-    pkgs.rofi-calc
   ];
-  programs.rofi.extraConfig.combi-modes = "window,drun,power-menu";
-  programs.rofi.modes = [
-    "combi"
-    "emoji"
-    "calc"
-    {
-      name = "power-menu";
-      path = lib.getExe (
-        pkgs.writeShellApplication {
-          name = "power-menu";
-          runtimeInputs = [
-            pkgs.systemd
-            lockCommand
-          ];
-          text = ''
-            if test -z "''${1:-}"; then
-              printf 'Lock\nSuspend\nReboot\nShutdown'
-            else
-              case "$1" in
-                Lock) lock ;;
-                Suspend) systemctl suspend ;;
-                Reboot) systemctl reboot ;;
-                Shutdown) systemctl poweroff ;;
-              esac
-            fi
-          '';
-        }
-      );
-    }
-  ];
+  programs.rofi.modes = [ "emoji" ];
   programs.rofi.font = "${osConfig.etu.graphical.theme.fonts.monospace} ${toString osConfig.etu.graphical.theme.fonts.size}";
 
   # Set up a wallpaper manager.
@@ -69,32 +39,16 @@ in
     any.path = osConfig.etu.graphical.sway.wallpaper;
   };
 
-  # Enable and import network-manager-applet
-  services.network-manager-applet.enable = true;
-
-  # Enable blueman-applet if blueman is enabled at the system level.
-  services.blueman-applet.enable = lib.mkIf osConfig.services.blueman.enable true;
-
-  # Enable the playerctld to be able to control music players and mpris-proxy to proxy bluetooth devices.
-  services.playerctld.enable = true;
+  # Enable mpris-proxy to proxy bluetooth media devices onto MPRIS (dms-shell
+  # controls MPRIS players directly, so playerctld is no longer needed).
   services.mpris-proxy.enable = true;
 
-  # Configure swayidle for automatic screen locking
+  # Configure swayidle to lock the screen on suspend and on explicit
+  # loginctl lock-session calls (idle-timeout lock/suspend is handled by
+  # dms-shell's own idle manager instead, see modules/home/dms-shell).
   services.swayidle.enable = true;
   services.swayidle.events.before-sleep = "${lockCommand}/bin/lock";
   services.swayidle.events.lock = "${lockCommand}/bin/lock";
-  services.swayidle.timeouts = [
-    {
-      timeout = 300;
-      command = "${lockCommand}/bin/lock";
-    }
-  ]
-  ++ lib.optionals osConfig.etu.graphical.sway.enableSuspendOnTimeout [
-    {
-      timeout = 600;
-      command = "${pkgs.systemd}/bin/systemctl suspend";
-    }
-  ];
 
   # Set up the cursor theme
   home.pointerCursor = {
@@ -118,25 +72,6 @@ in
     TERMINAL = osConfig.etu.graphical.terminal.terminalName;
   };
 
-  # Configure swaylock
-  programs.swaylock.enable = true;
-  programs.swaylock.package = pkgs.swaylock-effects;
-  programs.swaylock.settings = {
-    daemonize = true;
-    clock = true;
-    timestr = "%k:%M";
-    datestr = "%Y-%m-%d";
-    show-failed-attempts = true;
-  }
-  // (lib.optionalAttrs (osConfig.etu.graphical.sway.lockWallpaper == "screenshot") {
-    indicator = true;
-    screenshots = true;
-    effect-blur = "5x5";
-  })
-  // (lib.optionalAttrs (osConfig.etu.graphical.sway.lockWallpaper != "screenshot") {
-    image = osConfig.etu.graphical.sway.lockWallpaper;
-  });
-
   wayland.systemd.target = "sway-session.target";
 
   # Sway user configs
@@ -146,8 +81,6 @@ in
 
     config =
       let
-        pactl = "${osConfig.services.pulseaudio.package}/bin/pactl";
-
         # Set default modifier
         modifier = "Mod4";
 
@@ -172,32 +105,35 @@ in
           "${modifier}+Return" = "exec ${osConfig.etu.graphical.terminal.terminalPath}";
 
           # Run Launcher
-          "${modifier}+e" = "exec ${config.programs.rofi.finalPackage}/bin/rofi -show combi";
+          "${modifier}+e" = "exec dms ipc launcher open";
 
           # Run rofi emoji picker
           "${modifier}+i" = "exec ${config.programs.rofi.finalPackage}/bin/rofi -show emoji";
 
+          # Open the dms power menu (lock/suspend/reboot/shutdown)
+          "${modifier}+Escape" = "exec dms ipc powermenu open";
+
           # Printscreen
-          Print = "exec ${pkgs.gradia}/bin/gradia --screenshot=INTERACTIVE";
+          Print = "exec dms screenshot region";
 
           # Backlight:
-          XF86MonBrightnessUp = "exec ${pkgs.acpilight}/bin/xbacklight -inc 10";
-          XF86MonBrightnessDown = "exec ${pkgs.acpilight}/bin/xbacklight -dec 10";
+          XF86MonBrightnessUp = "exec dms ipc call brightness increment 10 ''";
+          XF86MonBrightnessDown = "exec dms ipc call brightness decrement 10 ''";
 
           # Audio:
-          XF86AudioMute = "exec ${pactl} set-sink-mute @DEFAULT_SINK@ toggle";
-          XF86AudioLowerVolume = "exec ${pactl} set-sink-volume @DEFAULT_SINK@ -10%";
-          XF86AudioRaiseVolume = "exec ${pactl} set-sink-volume @DEFAULT_SINK@ +10%";
-          XF86AudioMicMute = "exec ${pactl} set-source-mute @DEFAULT_SOURCE@ toggle";
-          XF86AudioPrev = "exec ${pkgs.playerctl}/bin/playerctl previous";
-          XF86AudioPlay = "exec ${pkgs.playerctl}/bin/playerctl play-pause";
-          XF86AudioNext = "exec ${pkgs.playerctl}/bin/playerctl next";
+          XF86AudioMute = "exec dms ipc call audio mute";
+          XF86AudioLowerVolume = "exec dms ipc call audio decrement 10";
+          XF86AudioRaiseVolume = "exec dms ipc call audio increment 10";
+          XF86AudioMicMute = "exec dms ipc call mic mute";
+          XF86AudioPrev = "exec dms ipc call mpris previous";
+          XF86AudioPlay = "exec dms ipc call mpris playPause";
+          XF86AudioNext = "exec dms ipc call mpris next";
 
           # Misc buttons:
           XF86Tools = "exec ${osConfig.services.emacs.package}/bin/emacs";
           XF86Favorites = "exec ${osConfig.services.emacs.package}/bin/emacs";
 
-          # Launch screen locker by triggering swaylock.
+          # Lock the screen (caught by swayidle's events.lock, which runs lockCommand)
           "${modifier}+l" = "exec loginctl lock-session";
 
           # Kill focused window
@@ -290,13 +226,6 @@ in
           # Exit Sway
           "${modifier}+Shift+e" =
             "exec ${osConfig.etu.graphical.sway.package}/bin/swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' '${osConfig.etu.graphical.sway.package}/bin/swaymsg exit'";
-        }
-        // lib.optionalAttrs osConfig.etu.games.mumble.enable {
-          # Add PTT button for mumble in the gaming module:
-          "--no-repeat Alt_R" =
-            "exec ${pkgs.glib}/bin/gdbus call -e -d net.sourceforge.mumble.mumble -o / -m net.sourceforge.mumble.Mumble.startTalking";
-          "--no-repeat --release Alt_R" =
-            "exec ${pkgs.glib}/bin/gdbus call -e -d net.sourceforge.mumble.mumble -o / -m net.sourceforge.mumble.Mumble.stopTalking";
         }
         // lib.optionalAttrs osConfig.etu.graphical.window-managers.voxtype.enable {
           # Push-to-talk: hold $mod+k to record, release to transcribe
@@ -401,10 +330,6 @@ in
             app_id = "firefox";
             title = "Picture-in-Picture";
           }
-          {
-            app_id = ".blueman-manager-wrapped";
-            title = "Bluetooth Devices";
-          }
           { title = "Welcome to Google Chrome"; }
           {
             class = "Google-chrome";
@@ -413,9 +338,6 @@ in
           {
             app_id = "nm-connection-editor";
             title = "Network Connections";
-          }
-          {
-            app_id = "be.alexandervanhee.gradia";
           }
         ];
 
@@ -430,8 +352,6 @@ in
         floating.titlebar = true;
 
         startup = [
-          { command = "${pkgs.mako}/bin/mako"; }
-
           # Import variables needed for screen sharing and gnome3 pinentry to work.
           { command = "${pkgs.dbus}/bin/dbus-update-activation-environment WAYLAND_DISPLAY"; }
 

@@ -83,7 +83,4 @@
   # Enable ClamAV.
   services.clamav.daemon.enable = true;
   services.clamav.updater.enable = true;
-
-  # Enable blueman.
-  services.blueman.enable = true;
 }

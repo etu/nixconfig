@@ -89,6 +89,7 @@ Home-manager modules for user-level configuration:
 | Directory | Purpose |
 |-----------|---------|
 | `alacritty/` | Alacritty terminal emulator config |
+| `dms-shell/` | DankMaterialShell (Quickshell-based Material 3 desktop shell) config |
 | `emacs/` | Emacs configuration |
 | `firefox/` | Firefox browser settings |
 | `fish/` | Fish shell configuration |
@@ -97,11 +98,10 @@ Home-manager modules for user-level configuration:
 | `graphical-dotfiles/` | Miscellaneous graphical dotfiles |
 | `htop/` | htop config |
 | `kanshi/` | kanshi (display management) config |
-| `mako/` | mako notification daemon config |
 | `sway/` | Sway compositor config |
 | `tmux/` | tmux config |
 | `vscode/` | VS Code settings and extensions |
-| `waybar/` | Waybar (status bar) config |
+| `voxtype/` | voxtype (voice dictation) config |
 
 ---
 
@@ -294,6 +294,7 @@ use `nix-installer-action`. Remove it again once the upstream issue is resolved.
 | `catppuccin` | Catppuccin theme for NixOS/home-manager |
 | `deploy-rs` | Remote NixOS deployment |
 | `disko` | Declarative disk partitioning |
+| `dms` | DankMaterialShell — Quickshell-based Material 3 desktop shell |
 | `emacs-overlay` | Up-to-date Emacs packages |
 | `home-manager` | User environment management |
 | `impermanence` | Opt-in persistence on ephemeral root |
