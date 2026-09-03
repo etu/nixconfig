@@ -75,6 +75,10 @@
     # Set up upower to be able to get battery levels of connected devices.
     services.upower.enable = true;
 
+    # Set up accounts-daemon so dms-shell can read/write the user's profile
+    # picture via org.freedesktop.Accounts.
+    services.accounts-daemon.enable = true;
+
     # Set up XDG Portals
     xdg.portal.enable = true;
     xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-wlr ];
