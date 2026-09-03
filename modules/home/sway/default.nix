@@ -39,8 +39,8 @@ in
     any.path = osConfig.etu.graphical.sway.wallpaper;
   };
 
-  # Enable the playerctld to be able to control music players and mpris-proxy to proxy bluetooth devices.
-  services.playerctld.enable = true;
+  # Enable mpris-proxy to proxy bluetooth media devices onto MPRIS (dms-shell
+  # controls MPRIS players directly, so playerctld is no longer needed).
   services.mpris-proxy.enable = true;
 
   # Configure swayidle to lock the screen on suspend and on explicit
@@ -81,8 +81,6 @@ in
 
     config =
       let
-        pactl = "${osConfig.services.pulseaudio.package}/bin/pactl";
-
         # Set default modifier
         modifier = "Mod4";
 
@@ -116,20 +114,20 @@ in
           "${modifier}+Escape" = "exec dms ipc powermenu open";
 
           # Printscreen
-          Print = "exec ${pkgs.gradia}/bin/gradia --screenshot=INTERACTIVE";
+          Print = "exec dms screenshot region";
 
           # Backlight:
-          XF86MonBrightnessUp = "exec ${pkgs.acpilight}/bin/xbacklight -inc 10";
-          XF86MonBrightnessDown = "exec ${pkgs.acpilight}/bin/xbacklight -dec 10";
+          XF86MonBrightnessUp = "exec dms ipc call brightness increment 10 ''";
+          XF86MonBrightnessDown = "exec dms ipc call brightness decrement 10 ''";
 
           # Audio:
-          XF86AudioMute = "exec ${pactl} set-sink-mute @DEFAULT_SINK@ toggle";
-          XF86AudioLowerVolume = "exec ${pactl} set-sink-volume @DEFAULT_SINK@ -10%";
-          XF86AudioRaiseVolume = "exec ${pactl} set-sink-volume @DEFAULT_SINK@ +10%";
-          XF86AudioMicMute = "exec ${pactl} set-source-mute @DEFAULT_SOURCE@ toggle";
-          XF86AudioPrev = "exec ${pkgs.playerctl}/bin/playerctl previous";
-          XF86AudioPlay = "exec ${pkgs.playerctl}/bin/playerctl play-pause";
-          XF86AudioNext = "exec ${pkgs.playerctl}/bin/playerctl next";
+          XF86AudioMute = "exec dms ipc call audio mute";
+          XF86AudioLowerVolume = "exec dms ipc call audio decrement 10";
+          XF86AudioRaiseVolume = "exec dms ipc call audio increment 10";
+          XF86AudioMicMute = "exec dms ipc call mic mute";
+          XF86AudioPrev = "exec dms ipc call mpris previous";
+          XF86AudioPlay = "exec dms ipc call mpris playPause";
+          XF86AudioNext = "exec dms ipc call mpris next";
 
           # Misc buttons:
           XF86Tools = "exec ${osConfig.services.emacs.package}/bin/emacs";
@@ -339,10 +337,6 @@ in
             app_id = "firefox";
             title = "Picture-in-Picture";
           }
-          {
-            app_id = ".blueman-manager-wrapped";
-            title = "Bluetooth Devices";
-          }
           { title = "Welcome to Google Chrome"; }
           {
             class = "Google-chrome";
@@ -351,9 +345,6 @@ in
           {
             app_id = "nm-connection-editor";
             title = "Network Connections";
-          }
-          {
-            app_id = "be.alexandervanhee.gradia";
           }
         ];
 

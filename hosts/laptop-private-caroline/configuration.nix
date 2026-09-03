@@ -101,7 +101,4 @@
       "zroot/safe/home".use_template = [ "home" ];
     };
   };
-
-  # Enable blueman.
-  services.blueman.enable = true;
 }

@@ -82,9 +82,6 @@
   environment.systemPackages = with pkgs; [ virt-manager ];
   virtualisation.spiceUSBRedirection.enable = true;
 
-  # Enable blueman.
-  services.blueman.enable = true;
-
   age.secrets = {
     inherit (config.etu.data.ageModules) syncoid-workstations-ssh-ec;
   };
