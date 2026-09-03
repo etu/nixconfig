@@ -31,6 +31,7 @@ _: {
           screenPreferences = [ "all" ];
           showOnLastDisplay = true;
           leftWidgets = [
+            "launcherButton"
             "idleInhibitor"
             "cpuUsage"
             "memUsage"

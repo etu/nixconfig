@@ -11,52 +11,22 @@ let
     runtimeInputs = [
       pkgs.dbus
       pkgs.openssh
-      pkgs.swaylock-effects
+      config.programs.dank-material-shell.package
     ];
     text = ''
       ssh-add -D
       dbus-send --dest=org.gnome.keyring --print-reply /org/freedesktop/secrets org.freedesktop.Secret.Service.LockService || true
-      swaylock
+      dms ipc lock lock
     '';
   };
 in
 {
-  # Enable rofi home manager module.
+  # Enable rofi home manager module, used for the emoji picker.
   programs.rofi.enable = true;
   programs.rofi.plugins = [
     pkgs.rofi-emoji
-    pkgs.rofi-calc
   ];
-  programs.rofi.extraConfig.combi-modes = "window,drun,power-menu";
-  programs.rofi.modes = [
-    "combi"
-    "emoji"
-    "calc"
-    {
-      name = "power-menu";
-      path = lib.getExe (
-        pkgs.writeShellApplication {
-          name = "power-menu";
-          runtimeInputs = [
-            pkgs.systemd
-            lockCommand
-          ];
-          text = ''
-            if test -z "''${1:-}"; then
-              printf 'Lock\nSuspend\nReboot\nShutdown'
-            else
-              case "$1" in
-                Lock) lock ;;
-                Suspend) systemctl suspend ;;
-                Reboot) systemctl reboot ;;
-                Shutdown) systemctl poweroff ;;
-              esac
-            fi
-          '';
-        }
-      );
-    }
-  ];
+  programs.rofi.modes = [ "emoji" ];
   programs.rofi.font = "${osConfig.etu.graphical.theme.fonts.monospace} ${toString osConfig.etu.graphical.theme.fonts.size}";
 
   # Set up a wallpaper manager.
@@ -68,12 +38,6 @@ in
     };
     any.path = osConfig.etu.graphical.sway.wallpaper;
   };
-
-  # Enable and import network-manager-applet
-  services.network-manager-applet.enable = true;
-
-  # Enable blueman-applet if blueman is enabled at the system level.
-  services.blueman-applet.enable = lib.mkIf osConfig.services.blueman.enable true;
 
   # Enable the playerctld to be able to control music players and mpris-proxy to proxy bluetooth devices.
   services.playerctld.enable = true;
@@ -118,25 +82,6 @@ in
     TERMINAL = osConfig.etu.graphical.terminal.terminalName;
   };
 
-  # Configure swaylock
-  programs.swaylock.enable = true;
-  programs.swaylock.package = pkgs.swaylock-effects;
-  programs.swaylock.settings = {
-    daemonize = true;
-    clock = true;
-    timestr = "%k:%M";
-    datestr = "%Y-%m-%d";
-    show-failed-attempts = true;
-  }
-  // (lib.optionalAttrs (osConfig.etu.graphical.sway.lockWallpaper == "screenshot") {
-    indicator = true;
-    screenshots = true;
-    effect-blur = "5x5";
-  })
-  // (lib.optionalAttrs (osConfig.etu.graphical.sway.lockWallpaper != "screenshot") {
-    image = osConfig.etu.graphical.sway.lockWallpaper;
-  });
-
   wayland.systemd.target = "sway-session.target";
 
   # Sway user configs
@@ -172,10 +117,13 @@ in
           "${modifier}+Return" = "exec ${osConfig.etu.graphical.terminal.terminalPath}";
 
           # Run Launcher
-          "${modifier}+e" = "exec ${config.programs.rofi.finalPackage}/bin/rofi -show combi";
+          "${modifier}+e" = "exec dms ipc launcher open";
 
           # Run rofi emoji picker
           "${modifier}+i" = "exec ${config.programs.rofi.finalPackage}/bin/rofi -show emoji";
+
+          # Open the dms power menu (lock/suspend/reboot/shutdown)
+          "${modifier}+Escape" = "exec dms ipc powermenu open";
 
           # Printscreen
           Print = "exec ${pkgs.gradia}/bin/gradia --screenshot=INTERACTIVE";
