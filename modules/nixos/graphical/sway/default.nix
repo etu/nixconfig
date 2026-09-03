@@ -20,11 +20,6 @@
       default = builtins.toString perSystem.self.spaceWallpapers;
       description = "Wallpaper to use for sway";
     };
-    lockWallpaper = lib.mkOption {
-      type = lib.types.str;
-      default = "screenshot";
-      description = "Wallpaper to use for lockscreen";
-    };
     enableSuspendOnTimeout = lib.mkEnableOption "Lock the screen before suspending" // {
       default = true;
     };
