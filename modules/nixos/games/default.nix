@@ -8,7 +8,6 @@
     ./minecraft
     ./steam
     ./steam-controller
-    ./wowup
   ];
 
   options.etu.games.enable = lib.mkEnableOption "Enable games settings";
