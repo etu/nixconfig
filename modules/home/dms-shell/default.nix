@@ -40,7 +40,6 @@
           screenPreferences = [ "all" ];
           showOnLastDisplay = true;
           leftWidgets = [
-            "launcherButton"
             "idleInhibitor"
             "cpuUsage"
             "memUsage"
@@ -53,6 +52,7 @@
           ];
           rightWidgets = [
             "privacyIndicator"
+            "music"
             "weather"
             "clock"
             "clipboard"
