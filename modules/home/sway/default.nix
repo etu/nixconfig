@@ -359,8 +359,6 @@ in
         floating.titlebar = true;
 
         startup = [
-          { command = "${pkgs.mako}/bin/mako"; }
-
           # Import variables needed for screen sharing and gnome3 pinentry to work.
           { command = "${pkgs.dbus}/bin/dbus-update-activation-environment WAYLAND_DISPLAY"; }
 
