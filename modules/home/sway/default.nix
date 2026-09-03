@@ -227,13 +227,6 @@ in
           "${modifier}+Shift+e" =
             "exec ${osConfig.etu.graphical.sway.package}/bin/swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' '${osConfig.etu.graphical.sway.package}/bin/swaymsg exit'";
         }
-        // lib.optionalAttrs osConfig.etu.games.mumble.enable {
-          # Add PTT button for mumble in the gaming module:
-          "--no-repeat Alt_R" =
-            "exec ${pkgs.glib}/bin/gdbus call -e -d net.sourceforge.mumble.mumble -o / -m net.sourceforge.mumble.Mumble.startTalking";
-          "--no-repeat --release Alt_R" =
-            "exec ${pkgs.glib}/bin/gdbus call -e -d net.sourceforge.mumble.mumble -o / -m net.sourceforge.mumble.Mumble.stopTalking";
-        }
         // lib.optionalAttrs osConfig.etu.graphical.window-managers.voxtype.enable {
           # Push-to-talk: hold $mod+k to record, release to transcribe
           "--no-repeat ${modifier}+k" = "exec ${pkgs.voxtype-vulkan}/bin/voxtype record start";
