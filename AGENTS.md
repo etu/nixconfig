@@ -98,13 +98,10 @@ Home-manager modules for user-level configuration:
 | `graphical-dotfiles/` | Miscellaneous graphical dotfiles |
 | `htop/` | htop config |
 | `kanshi/` | kanshi (display management) config |
-| `mako/` | mako notification daemon config |
-| `quickshell/` | Quickshell config, runs alongside Waybar for extra widgets (OSD, notification popups, sidebar) |
 | `sway/` | Sway compositor config |
 | `tmux/` | tmux config |
 | `vscode/` | VS Code settings and extensions |
 | `voxtype/` | voxtype (voice dictation) config |
-| `waybar/` | Waybar (status bar) config |
 
 ---
 

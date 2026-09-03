@@ -26,8 +26,6 @@
     perSystem.self.vscode-extension-vscode-ido # Decent file navigation
     perSystem.self.vscode-extension-php-sniffer # Php code style sniffing
     perSystem.self.vscode-extension-github-copilot-chat # Copilot chat
-    perSystem.self.vscode-extension-qt-qml # Qt/QML support
-    perSystem.self.vscode-extension-qt-core # Qt/C++ support
   ]
   ++ (lib.optionals osConfig.etu.graphical.fdm-printing.enable [
     perSystem.self.vscode-extension-openscad # Openscad support
@@ -57,11 +55,6 @@
     "phpSniffer.standard" = "PSR12";
     "telemetry.telemetryLevel" = "off";
     "workbench.editor.showTabs" = "none"; # I find tabs to be distracting
-    "qt-qml.doNotAskForQmllsDownload" = true;
-    "qt-qml.qmlls.customExePath" = "${pkgs.qt6.qtdeclarative}/bin/qmlls"; # QML language server
-    "qt-qml.qmlls.useQmlImportPathEnvVar" = true;
-    "qt-core.showWelcomePageOnActivation" = false;
-    "workbench.editorAssociations"."*.qrc" = "qt-core.qrcEditor";
   }
   // (lib.optionalAttrs osConfig.etu.development.vscode.enableWork {
     "[vue]"."editor.formatOnSave" = false;

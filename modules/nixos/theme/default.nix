@@ -38,8 +38,6 @@
       catppuccin.foot.enable = true;
       catppuccin.fish.enable = true;
       catppuccin.rofi.enable = true;
-      catppuccin.mako.enable = true;
-      catppuccin.swaylock.enable = true;
 
       # Bat module and theme
       programs.bat.enable = true;
@@ -92,10 +90,6 @@
             "placeholder"
             ;
         };
-
-      # Set up theme for waybar.
-      catppuccin.waybar.enable = true;
-      catppuccin.waybar.mode = "createLink";
     };
   };
 }

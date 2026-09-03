@@ -133,7 +133,7 @@ in
           XF86Tools = "exec ${osConfig.services.emacs.package}/bin/emacs";
           XF86Favorites = "exec ${osConfig.services.emacs.package}/bin/emacs";
 
-          # Launch screen locker by triggering swaylock.
+          # Lock the screen (caught by swayidle's events.lock, which runs lockCommand)
           "${modifier}+l" = "exec loginctl lock-session";
 
           # Kill focused window
