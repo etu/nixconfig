@@ -162,6 +162,25 @@ update-mosquitto:
     fi
     sed -i -r "s#(eclipse-mosquitto):[0-9]+\.[0-9]+\.?[0-9]*#\1:$latest#" hosts/server-main-elis/services/hass.nix
 
+# Update dms-emoji-launcher plugin
+[group('updaters')]
+update-dms-emoji-launcher:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    latest=$(curl -s -f "https://api.github.com/repos/devnullvoid/dms-emoji-launcher/commits/main") || { echo "Failed to fetch latest commit from GitHub"; exit 1; }
+    rev=$(echo "$latest" | jq -r '.sha') || { echo "Failed to parse JSON response"; exit 1; }
+    date=$(echo "$latest" | jq -r '.commit.author.date[:10]') || { echo "Failed to parse JSON response"; exit 1; }
+    if [ -z "$rev" ] || [ "$rev" = "null" ]; then
+      echo "Failed to find latest commit"
+      exit 1
+    fi
+    url="https://github.com/devnullvoid/dms-emoji-launcher/archive/${rev}.tar.gz"
+    base32=$(nix-prefetch-url --unpack "$url") || { echo "Failed to prefetch $url"; exit 1; }
+    hash=$(nix hash convert --hash-algo sha256 --to sri "$base32") || { echo "Failed to convert hash"; exit 1; }
+    sed -i "s|version = \".*\"|version = \"0-unstable-$date\"|" packages/dms-emoji-launcher/default.nix
+    sed -i "s|rev = \".*\";|rev = \"$rev\";|" packages/dms-emoji-launcher/default.nix
+    sed -i "s|hash = \"sha256-.*\"|hash = \"$hash\"|" packages/dms-emoji-launcher/default.nix
+
 # Update vscode extensions
 [group('updaters')]
 update-vscode-extensions:
@@ -178,4 +197,4 @@ update-vscode-extensions:
 
 # Update all
 [group('updaters')]
-update-all: update-flake update-hass update-zwave-js-ui update-mosquitto update-vscode-extensions
+update-all: update-flake update-hass update-zwave-js-ui update-mosquitto update-vscode-extensions update-dms-emoji-launcher

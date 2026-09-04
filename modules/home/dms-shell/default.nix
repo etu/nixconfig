@@ -2,6 +2,7 @@
   config,
   lib,
   osConfig,
+  perSystem,
   pkgs,
   ...
 }:
@@ -61,6 +62,16 @@ in
     # System monitoring widgets are powered by dgop, which is built into
     # the dms daemon itself and needs no extra package.
     enableSystemMonitoring = true;
+
+    # Plugins without a `settings` block aren't auto-detected as needing
+    # plugin_settings.json managed, so their "enabled" state (separate
+    # from just being installed) would otherwise depend on manually
+    # toggling them on in Settings -> Plugins, and not be declarative.
+    managePluginSettings = true;
+
+    # Launcher plugin for searching/copying emoji and unicode characters,
+    # triggered from the app launcher with ":e <query>".
+    plugins.emojiLauncher.src = perSystem.self.dms-emoji-launcher;
 
     settings = {
       firstDayOfWeek = 1; # Week starts on Mondays
