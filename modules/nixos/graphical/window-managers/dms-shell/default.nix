@@ -3,6 +3,7 @@
   lib,
   inputs,
   flake,
+  pkgs,
   ...
 }:
 {
@@ -17,6 +18,18 @@
         flake.homeModules.dms-shell
       ];
     };
+
+    # Optional tools used by the quickCapture plugin (see
+    # modules/home/dms-shell) for screen recording, OCR, QR scanning,
+    # and PDF/image export. Not required for basic screenshot+annotate.
+    etu.user.extraUserPackages = [
+      pkgs.gpu-screen-recorder
+      pkgs.ffmpeg
+      pkgs.imagemagick
+      pkgs.img2pdf
+      pkgs.tesseract
+      pkgs.zbar
+    ];
 
     # Persist the first-launch and changelog markers so dms-shell doesn't
     # show its welcome greeter/changelog dialog again after every reboot.

@@ -106,8 +106,9 @@ in
           # Open the dms power menu (lock/suspend/reboot/shutdown)
           "${modifier}+Escape" = "exec dms ipc powermenu open";
 
-          # Printscreen
-          Print = "exec dms screenshot region";
+          # Printscreen, opens the quickCapture plugin's region screenshot
+          # editor (see modules/home/dms-shell).
+          Print = "exec dms ipc call quickCapture screenshot region edit";
 
           # Backlight:
           XF86MonBrightnessUp = "exec dms ipc call brightness increment 10 ''";

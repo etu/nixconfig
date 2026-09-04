@@ -200,6 +200,24 @@ update-nix-package-runner:
     sed -i "s|rev = \".*\";|rev = \"$rev\";|" packages/nix-package-runner/default.nix
     sed -i "s|hash = \"sha256-.*\"|hash = \"$hash\"|" packages/nix-package-runner/default.nix
 
+# Update dms-quick-capture plugin
+[group('updaters')]
+update-dms-quick-capture:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    latest=$(git ls-remote --tags 'https://github.com/hthienloc/dms-quick-capture.git' | grep -v '\^{}' | awk -F/ '{print $NF}' | sort -V | tail -n 1) || { echo "Failed to fetch tags from GitHub"; exit 1; }
+    if [ -z "$latest" ]; then
+      echo "Failed to find latest version"
+      exit 1
+    fi
+    version="${latest#v}"
+    url="https://github.com/hthienloc/dms-quick-capture/archive/refs/tags/${latest}.tar.gz"
+    base32=$(nix-prefetch-url --unpack "$url") || { echo "Failed to prefetch $url"; exit 1; }
+    hash=$(nix hash convert --hash-algo sha256 --to sri "$base32") || { echo "Failed to convert hash"; exit 1; }
+    sed -i "s|version = \".*\"|version = \"$version\"|" packages/dms-quick-capture/default.nix
+    sed -i "s|rev = \".*\";|rev = \"$latest\";|" packages/dms-quick-capture/default.nix
+    sed -i "s|hash = \"sha256-.*\"|hash = \"$hash\"|" packages/dms-quick-capture/default.nix
+
 # Update vscode extensions
 [group('updaters')]
 update-vscode-extensions:
@@ -216,4 +234,4 @@ update-vscode-extensions:
 
 # Update all
 [group('updaters')]
-update-all: update-flake update-hass update-zwave-js-ui update-mosquitto update-vscode-extensions update-dms-emoji-launcher update-nix-package-runner
+update-all: update-flake update-hass update-zwave-js-ui update-mosquitto update-vscode-extensions update-dms-emoji-launcher update-nix-package-runner update-dms-quick-capture

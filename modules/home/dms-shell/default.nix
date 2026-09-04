@@ -77,6 +77,9 @@ in
     # `nix run`/`nix shell`, triggered from the app launcher with "nix <query>".
     plugins.nixPackageRunner.src = perSystem.self.nix-package-runner;
 
+    # Screenshot annotation and screen recording plugin.
+    plugins.quickCapture.src = perSystem.self.dms-quick-capture;
+
     settings = {
       firstDayOfWeek = 1; # Week starts on Mondays
       showWeekNumber = true; # Show week numbers
