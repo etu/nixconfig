@@ -73,6 +73,10 @@ in
     # triggered from the app launcher with ":e <query>".
     plugins.emojiLauncher.src = perSystem.self.dms-emoji-launcher;
 
+    # Launcher plugin for searching and running nixpkgs packages ad-hoc via
+    # `nix run`/`nix shell`, triggered from the app launcher with "nix <query>".
+    plugins.nixPackageRunner.src = perSystem.self.nix-package-runner;
+
     settings = {
       firstDayOfWeek = 1; # Week starts on Mondays
       showWeekNumber = true; # Show week numbers
