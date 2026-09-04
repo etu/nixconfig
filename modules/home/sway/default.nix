@@ -21,14 +21,6 @@ let
   };
 in
 {
-  # Enable rofi home manager module, used for the emoji picker.
-  programs.rofi.enable = true;
-  programs.rofi.plugins = [
-    pkgs.rofi-emoji
-  ];
-  programs.rofi.modes = [ "emoji" ];
-  programs.rofi.font = "${osConfig.etu.graphical.theme.fonts.monospace} ${toString osConfig.etu.graphical.theme.fonts.size}";
-
   # Set up a wallpaper manager.
   services.wpaperd.enable = true;
   services.wpaperd.settings = {
@@ -68,7 +60,7 @@ in
     # Run QT programs in wayland
     QT_QPA_PLATFORM = "wayland";
 
-    # Set the TERMINAL environment variable for rofi-sensible-terminal
+    # Set the TERMINAL environment variable for apps that spawn one
     TERMINAL = osConfig.etu.graphical.terminal.terminalName;
   };
 
@@ -107,8 +99,9 @@ in
           # Run Launcher
           "${modifier}+e" = "exec dms ipc launcher open";
 
-          # Run rofi emoji picker
-          "${modifier}+i" = "exec ${config.programs.rofi.finalPackage}/bin/rofi -show emoji";
+          # Open the launcher pre-filled with the emoji/unicode launcher
+          # plugin's trigger (see modules/home/dms-shell).
+          "${modifier}+i" = "exec dms ipc call launcher openQuery ':e '";
 
           # Open the dms power menu (lock/suspend/reboot/shutdown)
           "${modifier}+Escape" = "exec dms ipc powermenu open";
