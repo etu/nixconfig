@@ -6,7 +6,6 @@
 }:
 {
   imports = [
-    ./audacity
     ./fdm-printing
     ./firefox
     ./flatpak

@@ -53,7 +53,6 @@
     graphical.sway.enable = true;
     graphical.sway.enableSuspendOnTimeout = false;
     graphical.window-managers.voxtype.enable = true;
-    graphical.audacity.enable = true;
     graphical.fdm-printing.enable = true;
     graphical.hamradio.enable = true;
     graphical.flatpak.enablePersistence = true;

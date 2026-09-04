@@ -162,23 +162,6 @@ update-mosquitto:
     fi
     sed -i -r "s#(eclipse-mosquitto):[0-9]+\.[0-9]+\.?[0-9]*#\1:$latest#" hosts/server-main-elis/services/hass.nix
 
-# Update jive-vocals binary
-[group('updaters')]
-update-jive-vocals:
-    #!/usr/bin/env bash
-    set -euo pipefail
-    latest=$(curl -s -f "https://api.github.com/repos/linuxmatters/jive-vocals/releases/latest" | jq -r '.tag_name') || { echo "Failed to fetch latest release from GitHub"; exit 1; }
-    if [ -z "$latest" ]; then
-      echo "Failed to find latest version"
-      exit 1
-    fi
-    version="${latest#v}"
-    url="https://github.com/linuxmatters/jive-vocals/releases/download/${latest}/jive-vocals-linux-amd64"
-    hash=$(nix-prefetch-url "$url") || { echo "Failed to prefetch $url"; exit 1; }
-    sed -i "s|version = \".*\"|version = \"$version\"|" packages/jive-vocals/default.nix
-    sed -i "s|url = \".*\";|url = \"$url\";|" packages/jive-vocals/default.nix
-    sed -i "s|hash = \"sha256:.*\"|hash = \"sha256:$hash\"|" packages/jive-vocals/default.nix
-
 # Update vscode extensions
 [group('updaters')]
 update-vscode-extensions:
@@ -195,4 +178,4 @@ update-vscode-extensions:
 
 # Update all
 [group('updaters')]
-update-all: update-flake update-hass update-zwave-js-ui update-mosquitto update-vscode-extensions update-jive-vocals
+update-all: update-flake update-hass update-zwave-js-ui update-mosquitto update-vscode-extensions
