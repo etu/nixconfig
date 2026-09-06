@@ -161,6 +161,15 @@
         "/var/lib/valheim/saves:/home/steam/.config/unity3d/IronGate/Valheim"
         "/var/lib/valheim/server:/home/steam/valheim"
       ];
+      extraOptions = [
+        # This host has no routable IPv6 (only Tailscale's ULA address), which
+        # makes the game's crossplay public-IPv6 lookup fail and then spin in
+        # a tight retry loop due to an HttpClient reuse bug in the game
+        # itself. Disabling IPv6 inside the container makes it see no IPv6
+        # capability at all, so it skips that lookup entirely.
+        "--sysctl"
+        "net.ipv6.conf.all.disable_ipv6=1"
+      ];
     };
 
     # Set up a project zomboid server
