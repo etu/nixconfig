@@ -142,9 +142,9 @@
         PUBLIC = "0";
         ENABLE_CROSSPLAY = "1";
 
-        # Disable updates
-        AUTO_UPDATE = "0";
-        UPDATE_ON_STARTUP = "0";
+        # Enable updates temporarily
+        AUTO_UPDATE = "1";
+        UPDATE_ON_STARTUP = "1";
 
         # Enable mods
         TYPE = "BepInEx";
