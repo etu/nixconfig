@@ -142,8 +142,10 @@
         PUBLIC = "0";
         ENABLE_CROSSPLAY = "1";
 
-        # Disable updates
-        AUTO_UPDATE = "0";
+        # Enable periodic auto-updates (cron), but not update-on-startup:
+        # a failed cron update just retries next night, but a failed
+        # update-on-startup crash-loops the running server.
+        AUTO_UPDATE = "1";
         UPDATE_ON_STARTUP = "0";
 
         # Enable mods
