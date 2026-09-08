@@ -333,6 +333,12 @@ in
             app_id = "nm-connection-editor";
             title = "Network Connections";
           }
+          {
+            # dms-shell's quickCapture plugin window. app_id alone would
+            # match every dms-shell window, so title is needed too.
+            app_id = "com.danklinux.dms";
+            title = "Quick Capture";
+          }
         ];
 
         # Set a custom keymap
