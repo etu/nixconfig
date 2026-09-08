@@ -308,6 +308,15 @@ in
             criteria.app_id = "emacs";
             command = "opacity set 0.99";
           }
+
+          # Set a fixed size for the dms-shell Quick Capture window
+          {
+            criteria = {
+              app_id = "com.danklinux.dms";
+              title = "Quick Capture";
+            };
+            command = "resize set width 1500 px height 850 px";
+          }
         ];
 
         # Make some programs floating
