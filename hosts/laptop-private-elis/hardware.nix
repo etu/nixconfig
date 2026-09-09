@@ -61,10 +61,25 @@
   # Enable fwupd for firmware updates etc.
   services.fwupd.enable = true;
 
-  # Enable TLP.
-  services.tlp.enable = true;
-  services.tlp.settings.START_CHARGE_THRESH_BAT0 = 40;
-  services.tlp.settings.STOP_CHARGE_THRESH_BAT0 = 70;
+  # TLP disabled in favor of power-profiles-daemon (enabled in dms-shell module)
+  # services.tlp.enable = true;
+  # services.tlp.settings.START_CHARGE_THRESH_BAT0 = 40;
+  # services.tlp.settings.STOP_CHARGE_THRESH_BAT0 = 70;
+
+  # Manually set battery charge thresholds (previously handled by TLP)
+  systemd.services.battery-charge-threshold = {
+    description = "Set battery charge thresholds";
+    wantedBy = [ "multi-user.target" ];
+    after = [ "multi-user.target" ];
+    startLimitBurst = 0;
+    script = ''
+      echo 40 > /sys/class/power_supply/BAT0/charge_control_start_threshold
+      echo 70 > /sys/class/power_supply/BAT0/charge_control_end_threshold
+    '';
+    serviceConfig = {
+      Type = "oneshot";
+    };
+  };
 
   # Mark filesystems as needed for boot
   fileSystems.${config.etu.dataPrefix}.neededForBoot = true;
