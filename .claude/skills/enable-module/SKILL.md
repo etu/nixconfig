@@ -18,7 +18,7 @@ Parse the arguments:
 
 Each host config lives at `hosts/<hostname>/configuration.nix`. The `etu = { ... }` block is where all module enables are set.
 
-**Available hosts:** desktop-elis, laptop-private-elis, laptop-work-elis, desktop-caroline, laptop-private-caroline, server-main-elis, server-sparv, vps06, live-iso
+**Available hosts:** desktop-elis, laptop-private-elis, laptop-work-elis, server-main-elis, server-sparv, vps06, live-iso
 
 ## Steps
 

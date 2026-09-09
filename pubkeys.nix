@@ -45,15 +45,11 @@ let
 
   # Public keys of different hosts
   systems = {
-    # Desktop computer for Caroline
-    desktop-caroline = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPGp2BbNa2Jum5qaIfuxsBgiqBi6wOiclGBziq9B/2lD";
-
     # Desktop system
     desktop-elis = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIT37fYpCIdvXtvAVhsbx3fVMp+2ve50BXy5svsC4du3";
 
     # Private laptop
     laptop-private-elis = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOr9fpRag0ZQq3eMOPHygrt60GZl0NW32rzvvvgsm5HC";
-    laptop-private-caroline = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGCHcHcxKgufBHM2vrpScbyUCLKbo8qh9RUc7rqdf92u";
 
     # home.elis.nu
     server-main-elis = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJRZYWjxAqloB5MZtxBHkckZhKi+3M1OObzBdyi7La98";

@@ -22,9 +22,7 @@ let
   # Host system key shorthands (each is a single string so we wrap in a list).
   sys = keys.systems;
   h = {
-    desktop-caroline = [ sys.desktop-caroline ];
     desktop-elis = [ sys.desktop-elis ];
-    laptop-private-caroline = [ sys.laptop-private-caroline ];
     laptop-private-elis = [ sys.laptop-private-elis ];
     laptop-work-elis = [ sys.laptop-work-elis ];
     server-main-elis = [ sys.server-main-elis ];
@@ -61,20 +59,6 @@ in
   hashed-root-password = {
     file = ./secrets/any/hashed-root-password-file.age;
     hostKeys = etu ++ h.all;
-  };
-
-  # ---------------------------------------------------------------------------
-  # Caroline's laptop secrets
-  # ---------------------------------------------------------------------------
-
-  hashed-caroline-laptop-concate-password = {
-    file = ./secrets/laptop-private-caroline/hashed-concate-password-file.age;
-    hostKeys = etu ++ h.laptop-private-caroline ++ h.desktop-caroline;
-  };
-
-  hashed-caroline-laptop-root-password = {
-    file = ./secrets/laptop-private-caroline/hashed-root-password-file.age;
-    hostKeys = etu ++ h.laptop-private-caroline ++ h.desktop-caroline;
   };
 
   # ---------------------------------------------------------------------------

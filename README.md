@@ -61,22 +61,10 @@ tools, gaming (Steam, Minecraft, WoW), ham radio software, Flipper Zero
 support, FDM 3D printing, and libvirtd virtualisation. ZFS with sanoid
 snapshots. Deployed locally with `nixos-rebuild`.
 
-#### `hosts/desktop-caroline/`
-
-Desktop for Caroline. Sway/Wayland with creative tools (Blender, Inkscape,
-LibreOffice), VSCodium, gaming (Steam, Minecraft, WoW), and FDM 3D printing.
-ZFS with sanoid snapshots. Deployed locally with `nixos-rebuild`.
-
 #### `hosts/laptop-private-elis/`
 
 Private laptop (Lenovo T495). Deployed with `nixos-rebuild`. ZFS snapshots are
 pushed from this system to `server-main-elis` via syncoid whenever online.
-
-#### `hosts/laptop-private-caroline/`
-
-Private laptop for Caroline. Similar to her desktop but without Steam. Creative
-tools (Blender, Inkscape, LibreOffice) and VSCodium. Deployed locally with
-`nixos-rebuild`.
 
 #### `hosts/laptop-work-elis/`
 

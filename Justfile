@@ -21,20 +21,10 @@ flake-check :
 build:
     nom build '.#nixosConfigurations.{{ hostname }}.config.system.build.toplevel'
 
-# Build the desktop-caroline host
-[group('build')]
-build-desktop-caroline:
-    nom build '.#nixosConfigurations.desktop-caroline.config.system.build.toplevel'
-
 # Build the desktop-elis host
 [group('build')]
 build-desktop-elis:
     nom build '.#nixosConfigurations.desktop-elis.config.system.build.toplevel'
-
-# Build the laptop-private-caroline host
-[group('build')]
-build-laptop-private-caroline:
-    nom build '.#nixosConfigurations.laptop-private-caroline.config.system.build.toplevel'
 
 # Build the laptop-private-elis host
 [group('build')]
@@ -68,7 +58,7 @@ build-vps06:
 
 # Build all hosts
 [group('build')]
-build-all: build-desktop-caroline build-desktop-elis build-laptop-private-caroline build-laptop-private-elis build-laptop-work-elis build-server-main-elis build-server-sparv build-vps06 build-live-iso
+build-all: build-desktop-elis build-laptop-private-elis build-laptop-work-elis build-server-main-elis build-server-sparv build-vps06 build-live-iso
 
 # Deploy the server-main-elis host
 [group('deploy')]

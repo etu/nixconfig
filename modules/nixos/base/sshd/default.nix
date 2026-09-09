@@ -38,9 +38,7 @@
     # Add known hosts for all of my systems that I access remotely so
     # they are always trusted.
     programs.ssh.knownHosts = {
-      desktop-caroline.publicKey = config.etu.data.pubkeys.systems.desktop-caroline;
       desktop-elis.publicKey = config.etu.data.pubkeys.systems.desktop-elis;
-      laptop-private-caroline.publicKey = config.etu.data.pubkeys.systems.laptop-private-caroline;
       laptop-private-elis.publicKey = config.etu.data.pubkeys.systems.laptop-private-elis;
       laptop-work-elis.publicKey = config.etu.data.pubkeys.systems.laptop-work-elis;
       server-main-elis = {
