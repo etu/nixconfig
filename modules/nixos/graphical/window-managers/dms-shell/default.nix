@@ -11,6 +11,9 @@
     lib.mkEnableOption "Enable DankMaterialShell, a Quickshell-based Material 3 desktop shell";
 
   config = lib.mkIf config.etu.graphical.window-managers.dms-shell.enable {
+    # Enable power-profiles-daemon for battery management
+    services.power-profiles-daemon.enable = true;
+
     # If my user exists, enable home-manager configurations
     home-manager.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
       imports = [
