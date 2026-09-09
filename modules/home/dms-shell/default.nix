@@ -95,6 +95,11 @@ in
       cp -r ${perSystem.tlp-power-profile.tlp-power-profile-plugin}/share/DankMaterialShell/plugins/tlp-power-profile/. $out/
     '';
 
+    session = {
+      weatherLocation = "Arvika, 671 32";
+      weatherCoordinates = "59.6543555,12.5916225";
+    };
+
     settings = {
       firstDayOfWeek = 1; # Week starts on Mondays
       showWeekNumber = true; # Show week numbers
@@ -103,7 +108,7 @@ in
       showWorkspaceIndex = true; # Workspace numbers in workspace switcher
       clockDateFormat = "yyyy-MM-dd"; # Date format in clock widget
       lockDateFormat = "yyyy-MM-dd"; # Lock date format
-      useAutoLocation = true; # Location detection for weather
+      useAutoLocation = false; # Location detection for weather
       screenPreferences.wallpaper = [ ]; # Disable wallpaper
 
       # Idle management, replaces swayidle's timeout-based lock/suspend.
