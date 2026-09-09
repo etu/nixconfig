@@ -7,13 +7,12 @@
   ...
 }:
 {
+  imports = [ inputs.tlp-power-profile.nixosModules.default ];
+
   options.etu.graphical.window-managers.dms-shell.enable =
     lib.mkEnableOption "Enable DankMaterialShell, a Quickshell-based Material 3 desktop shell";
 
   config = lib.mkIf config.etu.graphical.window-managers.dms-shell.enable {
-    # Enable power-profiles-daemon for battery management
-    services.power-profiles-daemon.enable = true;
-
     # If my user exists, enable home-manager configurations
     home-manager.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
       imports = [
@@ -21,6 +20,19 @@
         flake.homeModules.dms-shell
       ];
     };
+
+    # Helper + polkit rule for the tlpPowerProfile battery widget (see
+    # modules/home/dms-shell), letting members of the "power" group run
+    # `tlp` and the helper via pkexec without a password prompt. Hosts
+    # enable `services.tlp` themselves; this only adds the mkDefault it
+    # sets by default without overriding that.
+    services.tlpPowerProfile.enable = true;
+    etu.user.extraGroups = [ "power" ];
+
+    # pkexec is only a setuid binary (rather than failing with "pkexec
+    # must be setuid root") when this is explicitly opted into -- needed
+    # for the tlpPowerProfile widget's privileged tlp/helper calls above.
+    security.polkit.enablePkexecWrapper = true;
 
     # Optional tools used by the quickCapture plugin (see
     # modules/home/dms-shell) for screen recording, OCR, QR scanning,

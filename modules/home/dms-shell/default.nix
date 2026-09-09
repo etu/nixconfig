@@ -80,6 +80,21 @@ in
     # Screenshot annotation and screen recording plugin.
     plugins.quickCapture.src = perSystem.self.dms-quick-capture;
 
+    # Battery widget backed by TLP instead of power-profiles-daemon,
+    # exposing TLP's power modes and charge thresholds. Privileged calls
+    # (tlp ac/bat, the helper) go through pkexec, allowed passwordless by
+    # the polkit rule for the "power" group (see
+    # modules/nixos/graphical/window-managers/dms-shell).
+    #
+    # The upstream package installs the QML files under
+    # share/DankMaterialShell/plugins/tlp-power-profile/, but dms-shell
+    # expects plugin.json etc. directly at the plugin src root (like the
+    # other plugins above) -- flatten it out here.
+    plugins.tlpPowerProfile.src = pkgs.runCommand "tlp-power-profile-plugin" { } ''
+      mkdir -p $out
+      cp -r ${perSystem.tlp-power-profile.tlp-power-profile-plugin}/share/DankMaterialShell/plugins/tlp-power-profile/. $out/
+    '';
+
     settings = {
       firstDayOfWeek = 1; # Week starts on Mondays
       showWeekNumber = true; # Show week numbers
@@ -112,7 +127,7 @@ in
             "cpuUsage"
             "memUsage"
             "cpuTemp"
-            "battery"
+            "tlpPowerProfile"
             "network_speed_monitor"
           ];
           centerWidgets = [

@@ -422,7 +422,8 @@
         "ip-failar-nu": "ip-failar-nu",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_2",
-        "nur": "nur"
+        "nur": "nur",
+        "tlp-power-profile": "tlp-power-profile"
       }
     },
     "systems": {
@@ -482,6 +483,26 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "tlp-power-profile": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1779442437,
+        "narHash": "sha256-LV/Vo/PFjw48ayIofghqs8I/IcpO2v2jQQorzNLA9qI=",
+        "owner": "peturh",
+        "repo": "tlp-power-profile",
+        "rev": "2cba5384bd5f7609715ad206c2bcdaf8145cfdf0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "peturh",
+        "repo": "tlp-power-profile",
         "type": "github"
       }
     },
