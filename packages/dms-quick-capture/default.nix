@@ -1,13 +1,13 @@
 { pkgs, ... }:
 pkgs.stdenvNoCC.mkDerivation {
   pname = "dms-quick-capture";
-  version = "5.4.0";
+  version = "5.4.2";
 
   src = pkgs.fetchFromGitHub {
     owner = "hthienloc";
     repo = "dms-quick-capture";
-    rev = "v5.4.0";
-    hash = "sha256-uV5jCVwYkoOKdQwX/NXt62fZZd6OMcvD+94ySbkLArQ=";
+    rev = "v5.4.2";
+    hash = "sha256-R94wRRWqbO/i43Hsc69ZMYyb3nFirVvbvO/vENdCttQ=";
   };
 
   dontBuild = true;
