@@ -75,11 +75,6 @@
   virtualisation.docker.enable = true;
   virtualisation.docker.storageDriver = "zfs";
 
-  # Include agenix encripted secret for secret password file
-  age.secrets = {
-    inherit (config.etu.data.ageModules) syncoid-workstations-ssh-ec;
-  };
-
   # Enable ClamAV.
   services.clamav.daemon.enable = true;
   services.clamav.updater.enable = true;

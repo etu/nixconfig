@@ -38,11 +38,6 @@ let
       sys.server-sparv
       sys.vps06
     ];
-    workstations = [
-      sys.desktop-elis
-      sys.laptop-private-elis
-      sys.laptop-work-elis
-    ];
   };
 in
 {
@@ -157,17 +152,5 @@ in
   conan-exiles-server-env = {
     file = ./secrets/server-sparv/conan-exiles-server-env.age;
     hostKeys = etu ++ h.server-sparv;
-  };
-
-  # ---------------------------------------------------------------------------
-  # Workstation secrets
-  # ---------------------------------------------------------------------------
-
-  syncoid-workstations-ssh-ec = {
-    file = ./secrets/workstations/syncoid-ssh-ec.age;
-    path = "/var/lib/syncoid/.ssh/id_ed25519";
-    owner = "syncoid";
-    symlink = false;
-    hostKeys = etu ++ h.workstations;
   };
 }

@@ -90,8 +90,4 @@
   programs.dconf.enable = true;
   environment.systemPackages = with pkgs; [ virt-manager ];
   virtualisation.spiceUSBRedirection.enable = true;
-
-  age.secrets = {
-    inherit (config.etu.data.ageModules) syncoid-workstations-ssh-ec;
-  };
 }
