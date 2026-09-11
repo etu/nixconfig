@@ -52,6 +52,7 @@
       ++
         # Allow github to deploy system
         config.etu.data.pubkeys.github-actions;
+    base.syncoid.source.enable = true;
 
     base.sanoid.datasets = {
       # Enable snapshotting for some filesystems

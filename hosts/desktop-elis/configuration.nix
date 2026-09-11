@@ -65,6 +65,7 @@
 
     # Allow home fileserver to connect to fetch snapshots.
     user.extraRootAuthorizedKeys = config.etu.data.pubkeys.syncoid.server-main-elis;
+    base.syncoid.source.enable = true;
 
     user.extraUserPackages = [
       pkgs.nvtopPackages.amd

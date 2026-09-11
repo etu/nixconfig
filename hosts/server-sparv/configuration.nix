@@ -66,6 +66,7 @@
       ++
         # Allow github to deploy system
         config.etu.data.pubkeys.github-actions;
+    base.syncoid.source.enable = true;
 
     # Allow beszel to monitor this system
     services.beszel-agent.enable = true;

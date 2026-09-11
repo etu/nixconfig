@@ -62,6 +62,7 @@
 
     # Allow home fileserver to connect to fetch snapshots.
     user.extraRootAuthorizedKeys = config.etu.data.pubkeys.syncoid.server-main-elis;
+    base.syncoid.source.enable = true;
 
     base.sanoid.datasets = {
       # Enable snapshotting for some filesystems
