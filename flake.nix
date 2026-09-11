@@ -97,7 +97,7 @@
           };
 
           # This is highly advised, and will prevent many possible mistakes
-          checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks deploy) inputs.deploy-rs.lib;
+          checks = builtins.mapAttrs (_system: deployLib: deployLib.deployChecks deploy) inputs.deploy-rs.lib;
         in
         {
           inherit deploy checks;
