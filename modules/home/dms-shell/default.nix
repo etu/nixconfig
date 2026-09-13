@@ -70,15 +70,19 @@ in
     managePluginSettings = true;
 
     # Launcher plugin for searching/copying emoji and unicode characters,
-    # triggered from the app launcher with ":e <query>".
-    plugins.emojiLauncher.src = perSystem.self.dms-emoji-launcher;
+    # triggered from the app launcher with ":e <query>". Packaged in
+    # https://github.com/etu/nur-packages as dmsShellPlugins.emojiLauncher.
+    plugins.emojiLauncher.src = pkgs.nur.repos.etu.dmsShellPlugins.emojiLauncher;
 
     # Launcher plugin for searching and running nixpkgs packages ad-hoc via
     # `nix run`/`nix shell`, triggered from the app launcher with "nix <query>".
-    plugins.nixPackageRunner.src = perSystem.self.nix-package-runner;
+    # Packaged in https://github.com/etu/nur-packages as
+    # dmsShellPlugins.nixPackageRunner.
+    plugins.nixPackageRunner.src = pkgs.nur.repos.etu.dmsShellPlugins.nixPackageRunner;
 
-    # Screenshot annotation and screen recording plugin.
-    plugins.quickCapture.src = perSystem.self.dms-quick-capture;
+    # Screenshot annotation and screen recording plugin. Packaged in
+    # https://github.com/etu/nur-packages as dmsShellPlugins.quickCapture.
+    plugins.quickCapture.src = pkgs.nur.repos.etu.dmsShellPlugins.quickCapture;
 
     # Battery widget backed by TLP instead of power-profiles-daemon,
     # exposing TLP's power modes and charge thresholds. Privileged calls
