@@ -39,6 +39,10 @@
   # Set backup file extensions for conflicts on home manager activation.
   home-manager.backupFileExtension = "backup";
 
+  # Reuse the system's pkgs (with its overlays, e.g. NUR) instead of having
+  # home-manager instantiate its own separate copy.
+  home-manager.useGlobalPkgs = true;
+
   # Pass perSystem to home-manager modules.
   home-manager.extraSpecialArgs = { inherit perSystem; };
 

@@ -10,8 +10,8 @@
     lib.mkEnableOption "Enable development vscode for work settings";
 
   config = lib.mkIf config.etu.development.vscode.enable {
-    # Enable unfree packages on home level.
-    etu.base.nix.allowUnfreeHome = [
+    # Enable unfree packages.
+    etu.base.nix.allowUnfree = [
       "vscode"
       "vscode-extension-bmewburn-vscode-intelephense-client"
       "vscode-extension-github-copilot"

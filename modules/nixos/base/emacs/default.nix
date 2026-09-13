@@ -29,12 +29,6 @@
       "copilot-language-server"
     ];
 
-    # Allow unfree packages in home-manager as well
-    etu.base.nix.allowUnfreeHome = [
-      "intelephense"
-      "copilot-language-server"
-    ];
-
     # Install emacs icons symbols
     fonts.packages = [
       pkgs.emacs-all-the-icons-fonts
@@ -45,9 +39,6 @@
       imports = [
         flake.homeModules.emacs
       ];
-
-      # Pass just the emacs overlay to home module
-      _module.args.emacsOverlay = inputs.emacs-overlay.overlay;
     };
 
     # Enable persistence for Emacs.

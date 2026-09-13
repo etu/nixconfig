@@ -2,9 +2,6 @@
   lib,
   osConfig,
   pkgs,
-  # Emacs overlay from nix-community/emacs-overlay, passed via _module.args
-  # to provide emacsWithPackagesFromUsePackage function
-  emacsOverlay,
   ...
 }:
 let
@@ -114,9 +111,6 @@ let
   };
 in
 {
-  # Apply emacs overlay to home-manager's pkgs
-  nixpkgs.overlays = [ emacsOverlay ];
-
   home.file.".emacs".text = ''
     ;; Don't show the welcome splash screen
     (setq-default inhibit-startup-screen t)
