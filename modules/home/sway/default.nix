@@ -21,16 +21,6 @@ let
   };
 in
 {
-  # Set up a wallpaper manager.
-  services.wpaperd.enable = true;
-  services.wpaperd.settings = {
-    default = {
-      duration = "30m";
-      mode = "center";
-    };
-    any.path = osConfig.etu.graphical.sway.wallpaper;
-  };
-
   # Enable mpris-proxy to proxy bluetooth media devices onto MPRIS (dms-shell
   # controls MPRIS players directly, so playerctld is no longer needed).
   services.mpris-proxy.enable = true;

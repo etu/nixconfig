@@ -37,9 +37,15 @@ let
 
   # Concat these for use in the shell script.
   symlinkCommands = builtins.concatStringsSep "\n" symlinkCommandList;
-in
-pkgs.runCommand "spaceWallpapers" { } ''
-  mkdir -p $out
 
-  ${symlinkCommands}
-''
+  wallpapers = pkgs.runCommand "spaceWallpapers" { } ''
+    mkdir -p $out
+
+    ${symlinkCommands}
+  '';
+in
+# A specific image inside the output directory, for consumers (like
+# dms-shell's wallpaper cycling) that need a single starting image rather
+# than a directory -- they discover sibling images to cycle through from
+# the directory the given image lives in.
+wallpapers // { defaultImage = "${wallpapers}/${(builtins.head images).name}"; }

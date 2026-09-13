@@ -98,6 +98,12 @@ in
     session = {
       weatherLocation = "Arvika, 671 32";
       weatherCoordinates = "59.6543555,12.5916225";
+
+      # Replaces wpaperd: cycle through the wallpaper folder every 30
+      # minutes across all monitors.
+      wallpaperPath = osConfig.etu.graphical.sway.wallpaper;
+      wallpaperCyclingEnabled = true;
+      wallpaperCyclingInterval = 1800; # 30 minutes, in seconds
     };
 
     settings = {
@@ -109,7 +115,8 @@ in
       clockDateFormat = "yyyy-MM-dd"; # Date format in clock widget
       lockDateFormat = "yyyy-MM-dd"; # Lock date format
       useAutoLocation = false; # Location detection for weather
-      screenPreferences.wallpaper = [ ]; # Disable wallpaper
+      screenPreferences.wallpaper = [ "all" ];
+      wallpaperFillMode = "Fill"; # Scale and crop to fill the screen
 
       # Idle management, replaces swayidle's timeout-based lock/suspend.
       acLockTimeout = 300; # Lock after 5 minutes idle

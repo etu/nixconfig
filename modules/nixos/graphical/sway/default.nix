@@ -17,8 +17,11 @@
     };
     wallpaper = lib.mkOption {
       type = lib.types.str;
-      default = builtins.toString perSystem.self.spaceWallpapers;
-      description = "Wallpaper to use for sway";
+      default = perSystem.self.spaceWallpapers.defaultImage;
+      description = ''
+        Path to the default wallpaper image. dms-shell cycles through the
+        other images found in the same directory as this one.
+      '';
     };
     enableSuspendOnTimeout = lib.mkEnableOption "Lock the screen before suspending" // {
       default = true;
