@@ -104,6 +104,7 @@ in
       wallpaperPath = osConfig.etu.graphical.sway.wallpaper;
       wallpaperCyclingEnabled = true;
       wallpaperCyclingInterval = 1800; # 30 minutes, in seconds
+      wallpaperCyclingRandom = true;
     };
 
     settings = {
