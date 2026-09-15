@@ -109,6 +109,12 @@ in
       wallpaperCyclingEnabled = true;
       wallpaperCyclingInterval = 1800; # 30 minutes, in seconds
       wallpaperCyclingRandom = true;
+
+      # Hide useless microphone inputs
+      hiddenInputDeviceNames = [
+        # laptop-work-elis
+        "alsa_input.pci-0000_c3_00.6.HiFi__Mic1__source"
+      ];
     };
 
     settings = {
