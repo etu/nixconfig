@@ -44,6 +44,7 @@
       pkgs.img2pdf
       pkgs.tesseract
       pkgs.zbar
+      pkgs.libnotify # for notify-send for pomodoroTimer
     ];
 
     # Persist the first-launch and changelog markers so dms-shell doesn't
