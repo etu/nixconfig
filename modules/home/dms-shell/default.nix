@@ -84,6 +84,9 @@ in
     # https://github.com/etu/nur-packages as dmsShellPlugins.quickCapture.
     plugins.quickCapture.src = pkgs.nur.repos.etu.dmsShellPlugins.quickCapture;
 
+    # Pomodorotimer, let's try it!
+    plugins.pomodoroTimer.src = pkgs.nur.repos.etu.dmsShellPlugins.dankPomodoroTimer;
+
     # Battery widget backed by TLP instead of power-profiles-daemon,
     # exposing TLP's power modes and charge thresholds. Privileged calls
     # (tlp ac/bat, the helper) go through pkexec, allowed passwordless by
@@ -161,6 +164,7 @@ in
             "music"
             "weather"
             "clock"
+            "dankPomodoroTimer"
             "clipboard"
             "notificationButton"
             "systemTray"
