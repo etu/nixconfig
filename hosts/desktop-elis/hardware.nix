@@ -61,6 +61,8 @@
   # Enable openrazer to control razer devices.
   hardware.openrazer.enable = true;
   hardware.openrazer.users = [ config.etu.user.username ];
+  hardware.openrazer.batteryNotifier.frequency = 15 * 60; # Every 15 minutes minutes rather than the default 10 minutes.
+  hardware.openrazer.batteryNotifier.percentage = 5; # Start notifying at 5% rather than the default 33%.
   etu.user.extraUserPackages = [ pkgs.polychromatic ];
 
   # Use a newer version of OpenRGB to get support for my motherboard.
