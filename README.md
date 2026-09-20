@@ -130,8 +130,8 @@ Reusable NixOS and home-manager modules with custom options.
 
 **`modules/home/`** — user-level home-manager modules:
 `alacritty`, `dms-shell`, `emacs`, `firefox`, `fish`, `flatpak-overrides`,
-`foot`, `graphical-dotfiles`, `htop`, `kanshi`, `sway`, `tmux`, `vscode`,
-`voxtype`.
+`foot`, `ghostty`, `graphical-dotfiles`, `htop`, `kanshi`, `sway`, `tmux`,
+`vscode`, `voxtype`.
 
 ### `secrets-registry.nix`, `secrets.nix` and `secrets/`
 

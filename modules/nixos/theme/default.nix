@@ -36,6 +36,7 @@
       # Enable catppuchin for on home manager level for different applications.
       catppuccin.alacritty.enable = true;
       catppuccin.foot.enable = true;
+      catppuccin.ghostty.enable = true;
       catppuccin.fish.enable = true;
 
       # Bat module and theme

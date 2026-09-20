@@ -9,6 +9,7 @@
     ./fdm-printing
     ./firefox
     ./flatpak
+    ./ghostty
     ./gnupg
     ./hamradio
     ./packages

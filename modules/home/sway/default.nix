@@ -49,9 +49,6 @@ in
 
     # Run QT programs in wayland
     QT_QPA_PLATFORM = "wayland";
-
-    # Set the TERMINAL environment variable for apps that spawn one
-    TERMINAL = osConfig.etu.graphical.terminal.terminalName;
   };
 
   wayland.systemd.target = "sway-session.target";
@@ -261,6 +258,10 @@ in
             command = "border pixel 3";
           }
           {
+            criteria.app_id = "com.mitchellh.ghostty";
+            command = "border pixel 3";
+          }
+          {
             criteria.app_id = "firefox";
             command = "border pixel 3";
           }
@@ -292,6 +293,10 @@ in
           }
           {
             criteria.app_id = "foot";
+            command = "opacity set 0.9";
+          }
+          {
+            criteria.app_id = "com.mitchellh.ghostty";
             command = "opacity set 0.9";
           }
           {
