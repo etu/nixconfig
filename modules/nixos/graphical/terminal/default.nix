@@ -1,8 +1,8 @@
 {
   config,
   lib,
-  pkgs,
   flake,
+  perSystem,
   ...
 }:
 {
@@ -10,7 +10,7 @@
     enable = lib.mkEnableOption "Enable graphical terminal settings";
     terminalPackage = lib.mkOption {
       type = lib.types.package;
-      default = pkgs.alacritty;
+      default = perSystem.self.ghostty;
       description = "Terminal package to use.";
     };
     terminalPath = lib.mkOption {

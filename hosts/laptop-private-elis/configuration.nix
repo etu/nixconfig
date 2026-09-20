@@ -52,7 +52,6 @@
     graphical.fdm-printing.enable = true;
     graphical.hamradio.enable = true;
     graphical.flatpak.enablePersistence = true;
-    graphical.ghostty.enable = true;
     theme.enable = true;
     user.enable = true;
     user.extraGroups = [

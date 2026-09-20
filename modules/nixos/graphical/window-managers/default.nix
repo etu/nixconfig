@@ -16,5 +16,8 @@
 
     # Set up dms-shell.
     etu.graphical.window-managers.dms-shell.enable = true;
+
+    # Use ghostty as the terminal emulator (can be disabled per host).
+    etu.graphical.ghostty.enable = lib.mkDefault true;
   };
 }
