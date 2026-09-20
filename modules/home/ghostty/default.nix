@@ -14,6 +14,10 @@
       font-family = osConfig.etu.graphical.theme.fonts.monospace;
       font-size = osConfig.etu.graphical.theme.fonts.size;
 
+      # Don't start new windows in the directory of the previous terminal, they
+      # should start in the home directory (tabs and splits still inherit).
+      window-inherit-working-directory = false;
+
       # Always use a solid block cursor. Shell integration would otherwise
       # switch the cursor to a bar at the prompt.
       cursor-style = "block";
