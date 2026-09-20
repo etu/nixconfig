@@ -32,7 +32,6 @@
     home-manager.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
       imports = [
         flake.homeModules.alacritty
-        flake.homeModules.foot
       ];
     };
   };
