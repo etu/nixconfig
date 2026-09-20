@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  perSystem,
   ...
 }:
 {
@@ -35,7 +36,13 @@
       ".config/helm"
       ".config/tvnu"
       ".config/gh"
+      ".config/slk" # slk config and themes
+      ".local/share/slk" # slk tokens and SQLite cache
       ".codex"
+    ];
+
+    etu.base.zfs.localUser.directories = [
+      ".cache/slk" # slk avatars and image cache
     ];
 
     etu.base.zfs.user.files = [
@@ -76,6 +83,9 @@
       pkgs.k9s
       # pkgs.minikube
       # pkgs.octant
+
+      # Slack TUI client
+      perSystem.slk.slk
 
       # Misc
       pkgs.mariadb

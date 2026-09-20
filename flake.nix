@@ -55,6 +55,10 @@
     nur.url = "github:nix-community/NUR";
     nur.inputs.nixpkgs.follows = "nixpkgs";
 
+    # slk, a Slack TUI
+    slk.url = "github:gammons/slk";
+    slk.inputs.nixpkgs.follows = "nixpkgs";
+
     # TLP-backed power-profile widget for DankMaterialShell
     tlp-power-profile.url = "github:peturh/tlp-power-profile";
     tlp-power-profile.inputs.nixpkgs.follows = "nixpkgs";
