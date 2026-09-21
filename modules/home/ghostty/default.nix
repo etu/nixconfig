@@ -24,8 +24,10 @@
       cursor-style-blink = false;
       shell-integration-features = "no-cursor";
 
-      # Selecting text should copy it and middle-click paste should work.
+      # Selecting text should copy it and middle-click paste should use the
+      # regular clipboard.
       copy-on-select = true;
+      middle-click-action = "clipboard-paste";
 
       # Don't let Ctrl+Enter toggle fullscreen by default.
       keybind = [ "ctrl+enter=unbind" ];
