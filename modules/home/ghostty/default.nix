@@ -1,5 +1,9 @@
 { osConfig, perSystem, ... }:
 {
+  # Since Ghostty 1.3 the GTK setting for primary paste is honored, and it
+  # defaults to false outside of GNOME, which disables middle-click paste.
+  dconf.settings."org/gnome/desktop/interface".gtk-enable-primary-paste = true;
+
   programs.ghostty = {
     enable = true;
     package = perSystem.self.ghostty;
@@ -24,7 +28,7 @@
       cursor-style-blink = false;
       shell-integration-features = "no-cursor";
 
-      # Selecting text should copy it and middle-click paste should work.
+      # Selecting text should copy it (middle-click paste is enabled via dconf above).
       copy-on-select = true;
 
       # Don't let Ctrl+Enter toggle fullscreen by default.
