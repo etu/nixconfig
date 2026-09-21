@@ -3,27 +3,27 @@
   # Assorted images from: https://wallhaven.cc/search?q=space&atleast=2560x2880
   images ? [
     (pkgs.fetchurl {
-      url = "https://w.wallhaven.cc/full/0w/wallhaven-0wryzq.jpg";
+      url = "https://misc.elis.nu/.wallhaven/wallhaven-0wryzq.jpg"; # "https://w.wallhaven.cc/full/0w/wallhaven-0wryzq.jpg";
       hash = "sha256-61DKr+YemXEraAfzxwddMzFCUZAXFn11LUqW2TdGi8w=";
     })
     (pkgs.fetchurl {
-      url = "https://w.wallhaven.cc/full/6o/wallhaven-6ol5z7.jpg";
+      url = "https://misc.elis.nu/.wallhaven/wallhaven-6ol5z7.jpg"; # "https://w.wallhaven.cc/full/6o/wallhaven-6ol5z7.jpg";
       hash = "sha256-5cpf4DoaMcN96ZnQVmrNNxd5AZ6kxLDEqyrNRFoYxB4=";
     })
     (pkgs.fetchurl {
-      url = "https://w.wallhaven.cc/full/e7/wallhaven-e78y9r.jpg";
+      url = "https://misc.elis.nu/.wallhaven/wallhaven-e78y9r.jpg"; # "https://w.wallhaven.cc/full/e7/wallhaven-e78y9r.jpg";
       hash = "sha256-kR9gmxcQavDlqD7jZYjOa7cWsfqK/sN6e7Q+aJ0jjJg=";
     })
     (pkgs.fetchurl {
-      url = "https://w.wallhaven.cc/full/4d/wallhaven-4ddjr3.jpg";
+      url = "https://misc.elis.nu/.wallhaven/wallhaven-4ddjr3.jpg"; # "https://w.wallhaven.cc/full/4d/wallhaven-4ddjr3.jpg";
       hash = "sha256-k/d9fu5ZfjBibpdBE2ghna5JRTQ64fn8nlslr72cIfg=";
     })
     (pkgs.fetchurl {
-      url = "https://w.wallhaven.cc/full/dp/wallhaven-dpl57g.png";
+      url = "https://misc.elis.nu/.wallhaven/wallhaven-dpl57g.png"; # "https://w.wallhaven.cc/full/dp/wallhaven-dpl57g.png";
       hash = "sha256-fUkbZwvm440MKVdro8X3+qx4jgYpjYWu9WkulL8C5Mo=";
     })
     (pkgs.fetchurl {
-      url = "https://w.wallhaven.cc/full/5d/wallhaven-5dkx61.jpg";
+      url = "https://misc.elis.nu/.wallhaven/wallhaven-5dkx61.jpg"; # "https://w.wallhaven.cc/full/5d/wallhaven-5dkx61.jpg";
       hash = "sha256-6KmeGzSx9Odljflpxy9BTjIg0wdm84sv4nfVvi5zMTU=";
     })
   ]
