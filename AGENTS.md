@@ -92,7 +92,7 @@ Home-manager modules for user-level configuration:
 | `firefox/` | Firefox browser settings |
 | `fish/` | Fish shell configuration |
 | `flatpak-overrides/` | Flatpak permission overrides |
-| `ghostty/` | Ghostty terminal emulator config (wrapped with `GTK_IM_MODULE=simple` so the compose key works on GTK 4.20+/Wayland) |
+| `ghostty/` | Ghostty terminal emulator config (wrapped with `GTK_IM_MODULE=simple` so the compose key works on GTK 4.20+/Wayland, unbinds `Ctrl+Enter` fullscreen toggle, and enables copy-on-select) |
 | `graphical-dotfiles/` | Miscellaneous graphical dotfiles |
 | `htop/` | htop config |
 | `kanshi/` | kanshi (display management) config |
