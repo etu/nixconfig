@@ -132,6 +132,8 @@ Reusable NixOS and home-manager modules with custom options.
 `alacritty`, `dms-shell`, `emacs`, `firefox`, `fish`, `flatpak-overrides`,
 `ghostty`, `graphical-dotfiles`, `htop`, `kanshi`, `sway`, `tmux`, `vscode`,
 `voxtype`.
+The Ghostty module disables the default `Ctrl+Enter` fullscreen toggle and
+enables copy-on-select.
 
 ### `secrets-registry.nix`, `secrets.nix` and `secrets/`
 

@@ -23,6 +23,12 @@
       cursor-style = "block";
       cursor-style-blink = false;
       shell-integration-features = "no-cursor";
+
+      # Selecting text should copy it and middle-click paste should work.
+      copy-on-select = true;
+
+      # Don't let Ctrl+Enter toggle fullscreen by default.
+      keybind = [ "ctrl+enter=unbind" ];
     };
   };
 }
