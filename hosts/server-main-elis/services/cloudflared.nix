@@ -25,6 +25,9 @@
         "jellyfin.elis.nu" = {
           service = "http://localhost:8096";
         };
+        "manyfold.elis.nu" = {
+          service = "http://localhost:80";
+        };
         "seerr.elis.nu" = {
           service = "http://localhost:5055";
         };

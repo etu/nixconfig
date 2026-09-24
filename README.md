@@ -82,7 +82,8 @@ Runs a large collection of services:
 - **Home automation**: Home Assistant, Mosquitto MQTT, zwavejs2mqtt (all via
   Podman containers)
 - **Media stack**: Jellyfin, NZBGet, Sonarr, Radarr, Lidarr, Bazarr
-- **Web services**: Nextcloud, FreshRSS, Homepage dashboard, Nginx reverse proxy
+- **Web services**: Nextcloud, FreshRSS, Manyfold (3D model hosting/backup),
+  Homepage dashboard, Nginx reverse proxy
 - **Monitoring**: Beszel hub (collects from all three servers) + Beszel agent
 - **Infrastructure**: Sanoid (ZFS snapshots), Syncoid (pulls backups from 7
   machines), Cloudflare DynDNS, smartd, libvirtd, ACME/Let's Encrypt
