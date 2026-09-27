@@ -17,12 +17,11 @@ let
   keys = import ./pubkeys.nix;
 
   # etu's personal computer user keys – always allowed to decrypt every secret.
-  etu = keys.etu.desktop-elis ++ keys.etu.laptop-private-elis ++ keys.etu.laptop-work-elis;
+  etu = keys.etu.laptop-private-elis ++ keys.etu.laptop-work-elis;
 
   # Host system key shorthands (each is a single string so we wrap in a list).
   sys = keys.systems;
   h = {
-    desktop-elis = [ sys.desktop-elis ];
     laptop-private-elis = [ sys.laptop-private-elis ];
     laptop-work-elis = [ sys.laptop-work-elis ];
     server-main-elis = [ sys.server-main-elis ];
@@ -31,7 +30,6 @@ let
 
     # Convenience groups
     all = [
-      sys.desktop-elis
       sys.laptop-private-elis
       sys.laptop-work-elis
       sys.server-main-elis
@@ -47,8 +45,7 @@ in
 
   hashed-etu-password = {
     file = ./secrets/any/hashed-etu-password-file.age;
-    hostKeys =
-      etu ++ h.desktop-elis ++ h.laptop-private-elis ++ h.laptop-work-elis ++ h.server-main-elis;
+    hostKeys = etu ++ h.laptop-private-elis ++ h.laptop-work-elis ++ h.server-main-elis;
   };
 
   hashed-root-password = {

@@ -1,11 +1,6 @@
 let
   etu =
     let
-      # Desktop computer
-      desktop-elis = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKm0NHTsWdN+R+Ksvvva6FTZ9kVPexQpIGm7+6HGmX7q etu@desktop-elis-2024-11-15"
-      ];
-
       # New private laptop T495
       laptop-private-elis = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKALrQoSasNAaAvERCMsztZkezg0gRSFXWbc1vXpA1+C etu@laptop-private-elis-2023-01-27"
@@ -19,13 +14,12 @@ let
     {
       # Include all separate units
       inherit
-        desktop-elis
         laptop-private-elis
         laptop-work-elis
         ;
 
       # Include a meta name of all computers
-      computers = desktop-elis ++ laptop-private-elis ++ laptop-work-elis;
+      computers = laptop-private-elis ++ laptop-work-elis;
     };
 
   # Public keys used for syncoid.
@@ -42,9 +36,6 @@ let
 
   # Public keys of different hosts
   systems = {
-    # Desktop system
-    desktop-elis = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIT37fYpCIdvXtvAVhsbx3fVMp+2ve50BXy5svsC4du3";
-
     # Private laptop
     laptop-private-elis = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOr9fpRag0ZQq3eMOPHygrt60GZl0NW32rzvvvgsm5HC";
 

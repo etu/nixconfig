@@ -13,7 +13,7 @@ Parse the arguments:
 - First argument: the attribute name for the secret (e.g., `my-service-token`, `wireguard-private-key`)
 - Second argument: the subdirectory under `secrets/` (e.g., `server-main-elis`, `workstations`, `any`)
 - Remaining arguments: which hosts or groups can decrypt this secret. Each is either:
-  - A host name: `desktop-elis`, `laptop-private-elis`, `laptop-work-elis`, `server-main-elis`, `server-sparv`, `vps06`
+  - A host name: `laptop-private-elis`, `laptop-work-elis`, `server-main-elis`, `server-sparv`, `vps06`
   - A convenience group: `all`, `workstations`
 
 If arguments are missing or ambiguous, ask the user before proceeding.
@@ -22,7 +22,7 @@ If arguments are missing or ambiguous, ask the user before proceeding.
 
 `secrets-registry.nix` is the single source of truth. It defines all secrets with their file path and `hostKeys` (the SSH public keys allowed to decrypt them). From it, `secrets.nix` and `config.etu.data.ageModules` are derived automatically.
 
-The `etu` user keys (desktop-elis, laptop-private-elis, laptop-work-elis) are **always** prepended to every secret's `hostKeys` — they're defined as `etu` in the registry's `let` block.
+The `etu` user keys (laptop-private-elis, laptop-work-elis) are **always** prepended to every secret's `hostKeys` — they're defined as `etu` in the registry's `let` block.
 
 ## Step 1 — Read secrets-registry.nix
 

@@ -54,13 +54,6 @@ Task runner wrapping common `nix`, `deploy`, format, and update commands. Run
 
 ### `hosts/`
 
-#### `hosts/desktop-elis/`
-
-Primary desktop for etu. Sway/Wayland graphical environment with development
-tools, gaming (Steam, Minecraft, WoW), ham radio software, Flipper Zero
-support, FDM 3D printing, and libvirtd virtualisation. ZFS with sanoid
-snapshots. Deployed locally with `nixos-rebuild`.
-
 #### `hosts/laptop-private-elis/`
 
 Private laptop (Lenovo T495). Deployed with `nixos-rebuild`. ZFS snapshots are

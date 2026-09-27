@@ -69,18 +69,6 @@
       "zroot/safe/home".use_template = [ "home" ];
 
       # Enable cleanup for synced backups
-      "zstorage/backups/current/desktop-elis/data" = {
-        use_template = [ "data" ];
-        autosnap = false;
-      };
-      "zstorage/backups/current/desktop-elis/home" = {
-        use_template = [ "home" ];
-        autosnap = false;
-      };
-      "zstorage/backups/current/desktop-elis/work-home" = {
-        use_template = [ "home" ];
-        autosnap = false;
-      };
       "zstorage/backups/current/laptop-private-elis/data" = {
         use_template = [ "data" ];
         autosnap = false;
@@ -124,10 +112,6 @@
     base.syncoid.enable = true;
     # Enable syncing of some filesystems
     base.syncoid.commands = {
-      "root@desktop-elis:zroot/safe/data".target = "zstorage/backups/current/desktop-elis/data";
-      "root@desktop-elis:zroot/safe/home".target = "zstorage/backups/current/desktop-elis/home";
-      "root@desktop-elis:zroot/safe/work-home".target = "zstorage/backups/current/desktop-elis/work-home";
-
       "root@laptop-private-elis:zroot/safe/data".target =
         "zstorage/backups/current/laptop-private-elis/data";
       "root@laptop-private-elis:zroot/safe/home".target =
