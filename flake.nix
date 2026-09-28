@@ -12,7 +12,6 @@
     # Secrets
     agenix.url = "github:ryantm/agenix";
     agenix.inputs.nixpkgs.follows = "nixpkgs";
-    agenix.inputs.home-manager.follows = "home-manager";
 
     # Flake layout
     blueprint.url = "github:numtide/blueprint";
