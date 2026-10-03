@@ -34,6 +34,11 @@ let
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBsVq+lSP7EuU0KUurWYjlLWm1PJWKtYUXVayi1jD6lU github-actions-deployment-2023-08-30"
   ];
 
+  # Mittens
+  mittens = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF0+Vj2l+oYL4BtKG/92rySkcjx2WHgGBn8L5nfYv1mD"
+  ];
+
   # Public keys of different hosts
   systems = {
     # Private laptop
@@ -57,6 +62,7 @@ in
   inherit
     etu
     github-actions
+    mittens
     syncoid
     systems
     ;

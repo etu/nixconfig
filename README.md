@@ -32,7 +32,8 @@ Key groups: `build`, `deploy`, `format`, `format-check`, `updaters`, `nix`.
 All SSH public keys for users and host systems — no secrets, just public keys.
 Imported by `secrets-registry.nix` (to declare which hosts may decrypt each
 secret) and by `modules/nixos/data/` (which exposes the keys as
-`config.etu.data.pubkeys`).
+`config.etu.data.pubkeys`). Mittens' key is authorized for root SSH access on
+`server-sparv`.
 
 ### `flake.nix` and `flake.lock`
 
