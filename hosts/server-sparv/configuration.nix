@@ -65,7 +65,10 @@
       config.etu.data.pubkeys.syncoid.server-main-elis
       ++
         # Allow github to deploy system
-        config.etu.data.pubkeys.github-actions;
+        config.etu.data.pubkeys.github-actions
+      ++
+        # Allow Mittens root access
+        config.etu.data.pubkeys.mittens;
     base.syncoid.source.enable = true;
 
     # Allow beszel to monitor this system

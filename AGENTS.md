@@ -315,6 +315,8 @@ versions.
   files go into `secrets/`.
 - **Public keys in `pubkeys.nix`**: all SSH public keys (user and host) live in
   `pubkeys.nix`. Update it when adding hosts or rotating keys.
+- **Mittens root access**: the `mittens` key in `pubkeys.nix` is authorized for
+  root SSH access on `server-sparv`.
 - **blueprint conventions**: the flake uses blueprint, so follow its directory
   conventions for hosts, modules, and packages.
 - **`just` for tasks**: prefer `just <recipe>` over raw `nix`/`deploy` commands
