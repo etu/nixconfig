@@ -62,6 +62,7 @@ in
   inherit
     etu
     github-actions
+    mittens
     syncoid
     systems
     ;
