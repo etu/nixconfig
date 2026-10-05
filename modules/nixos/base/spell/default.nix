@@ -12,7 +12,6 @@
       # Aspell Dictionaries
       (pkgs.aspellWithDicts (dicts: [
         dicts.en
-        dicts.en-computers
         dicts.en-science
         dicts.sv
       ]))
