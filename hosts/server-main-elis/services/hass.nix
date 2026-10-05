@@ -39,7 +39,7 @@
       ];
     };
     zwavejs2mqtt = {
-      image = "docker.io/zwavejs/zwave-js-ui:11.24.1";
+      image = "docker.io/zwavejs/zwave-js-ui:11.24.2";
       ports = [
         "3000:3000"
         # "8091:8091" # Admin interface port
