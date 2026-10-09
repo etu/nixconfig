@@ -26,11 +26,6 @@ build:
 build-laptop-private-elis:
     nom build '.#nixosConfigurations.laptop-private-elis.config.system.build.toplevel'
 
-# Build the laptop-work-elis host
-[group('build')]
-build-laptop-work-elis:
-    nom build '.#nixosConfigurations.laptop-work-elis.config.system.build.toplevel'
-
 # Build the live-iso
 [group('build')]
 build-live-iso:
@@ -53,7 +48,7 @@ build-vps06:
 
 # Build all hosts
 [group('build')]
-build-all: build-laptop-private-elis build-laptop-work-elis build-server-main-elis build-server-sparv build-vps06 build-live-iso
+build-all: build-laptop-private-elis build-server-main-elis build-server-sparv build-vps06 build-live-iso
 
 # Deploy the server-main-elis host
 [group('deploy')]

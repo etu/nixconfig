@@ -132,7 +132,6 @@ config = lib.mkIf ... {
 
 The main hosts for Elis are:
 - `hosts/laptop-private-elis/configuration.nix`
-- `hosts/laptop-work-elis/configuration.nix`
 
 Enable options are set directly in the `etu = { ... }` block of each host's configuration.nix.
 
@@ -142,5 +141,4 @@ Enable options are set directly in the `etu = { ... }` block of each host's conf
 modules/nixos/graphical/audacity/default.nix  ← new module
 modules/nixos/graphical/default.nix           ← added ./audacity to imports
 hosts/laptop-private-elis/configuration.nix   ← added graphical.audacity.enable = true
-hosts/laptop-work-elis/configuration.nix      ← added graphical.audacity.enable = true
 ```

@@ -39,7 +39,6 @@
     # they are always trusted.
     programs.ssh.knownHosts = {
       laptop-private-elis.publicKey = config.etu.data.pubkeys.systems.laptop-private-elis;
-      laptop-work-elis.publicKey = config.etu.data.pubkeys.systems.laptop-work-elis;
       server-main-elis = {
         extraHostNames = [
           "home.elis.nu"

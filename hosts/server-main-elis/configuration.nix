@@ -77,14 +77,6 @@
         use_template = [ "home" ];
         autosnap = false;
       };
-      "zstorage/backups/current/laptop-work-elis/data" = {
-        use_template = [ "data" ];
-        autosnap = false;
-      };
-      "zstorage/backups/current/laptop-work-elis/home" = {
-        use_template = [ "home" ];
-        autosnap = false;
-      };
       "zstorage/backups/current/vps06/data" = {
         use_template = [ "data" ];
         autosnap = false;
@@ -116,9 +108,6 @@
         "zstorage/backups/current/laptop-private-elis/data";
       "root@laptop-private-elis:zroot/safe/home".target =
         "zstorage/backups/current/laptop-private-elis/home";
-
-      "root@laptop-work-elis:zroot/safe/data".target = "zstorage/backups/current/laptop-work-elis/data";
-      "root@laptop-work-elis:zroot/safe/home".target = "zstorage/backups/current/laptop-work-elis/home";
 
       "root@server-sparv:zroot/safe/valheim-saves".target =
         "zstorage/backups/current/server-sparv/valheim-saves";

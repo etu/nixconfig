@@ -51,7 +51,6 @@ Each host lives in `hosts/<hostname>/` and is automatically picked up by bluepri
 | Host | Type | Deployment method | Notes |
 |------|------|-------------------|-------|
 | `laptop-private-elis` | Laptop | `nixos-rebuild` locally | Private laptop (T495); pushes ZFS snapshots to `server-main-elis` |
-| `laptop-work-elis` | Laptop | `nixos-rebuild` locally | Work laptop; pushes ZFS snapshots to `server-main-elis` |
 | `server-main-elis` | Server | `deploy .#server-main-elis` | Home file server; also a Nix build machine, ZFS snapshot target, runs Home Assistant |
 | `server-sparv` | Server | `deploy .#server-sparv` | On-location server for speliarvika.se, LAN cache, game servers (Valheim, Project Zomboid, Minecraft) |
 | `vps06` | VPS | `deploy .#vps06` | Runs Gitea, ip.failar.nu, Matrix homeserver |
@@ -315,6 +314,8 @@ versions.
   files go into `secrets/`.
 - **Public keys in `pubkeys.nix`**: all SSH public keys (user and host) live in
   `pubkeys.nix`. Update it when adding hosts or rotating keys.
+- The `laptop-work-elis` SSH key is retained for a separately managed device;
+  this repository no longer configures that host.
 - **Mittens root access**: the `mittens` key in `pubkeys.nix` is authorized for
   root SSH access on `server-sparv`.
 - **blueprint conventions**: the flake uses blueprint, so follow its directory
