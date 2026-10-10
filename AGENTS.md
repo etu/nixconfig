@@ -30,7 +30,7 @@ flake outputs.
 | `flake.lock` | Locked versions of all flake inputs |
 | `pubkeys.nix` | All SSH public keys for users and host systems — standalone, no imports |
 | `secrets-registry.nix` | **Single source of truth** for all agenix secrets: file path, owner/path/symlink options, and the list of host keys allowed to decrypt each secret |
-| `secrets.nix` | Auto-derived from `secrets-registry.nix` — do not edit directly; consumed by the agenix CLI |
+| `agenix-rules.nix` | Auto-derived from `secrets-registry.nix` — do not edit directly; consumed by the agenix CLI |
 | `secrets/` | Directory of agenix-encrypted secret files (`.age`) |
 | `hosts/` | Per-machine NixOS configurations |
 | `modules/` | Reusable NixOS (`modules/nixos/`) and home-manager (`modules/home/`) modules |
@@ -203,7 +203,7 @@ Secrets are managed with [agenix](https://github.com/ryantm/agenix).
 |------|---------|-------|
 | `pubkeys.nix` | All SSH public keys (users + host systems) | Yes — when adding hosts or rotating keys |
 | `secrets-registry.nix` | **Single source of truth**: one entry per secret with `file`, optional agenix module fields (`owner`, `path`, `symlink`), and `hostKeys` | Yes — when adding/changing secrets |
-| `secrets.nix` | Derived from registry; maps `.age` file paths → `publicKeys` for the agenix CLI | **No** — auto-generated |
+| `agenix-rules.nix` | Derived from registry; maps `.age` file paths → `publicKeys` for the agenix CLI | **No** — auto-generated |
 | `secrets/` | Encrypted `.age` files. Never commit plaintext here | Encrypted only |
 
 ### How it works
@@ -222,10 +222,10 @@ my-secret = {
 - `modules/nixos/data/default.nix` calls `builtins.removeAttrs secret ["hostKeys"]` on each
   registry entry to produce the `ageModules` attrset consumed by host/module configs via
   `config.etu.data.ageModules.<name>`.
-- `secrets.nix` maps each entry's `file` path to `{ publicKeys = hostKeys; }`
+- `agenix-rules.nix` maps each entry's `file` path to `{ publicKeys = hostKeys; }`
   for the agenix CLI.
 
-`secrets.nix` is the only derived file — do not edit it by hand.
+`agenix-rules.nix` is the only derived file — do not edit it by hand.
 
 ### Re-encrypting after adding a key
 
@@ -418,7 +418,7 @@ These patterns have caused evaluation or build failures in past upgrades:
    `config.age.secrets.<name>.path`.
 5. Run `agenix -r` if you changed which keys have access.
 
-`secrets.nix` is derived automatically — do not edit it.
+`agenix-rules.nix` is derived automatically — do not edit it.
 
 ---
 

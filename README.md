@@ -125,7 +125,7 @@ Reusable NixOS and home-manager modules with custom options.
 The Ghostty module disables the default `Ctrl+Enter` fullscreen toggle and
 enables copy-on-select.
 
-### `secrets-registry.nix`, `secrets.nix` and `secrets/`
+### `secrets-registry.nix`, `agenix-rules.nix` and `secrets/`
 
 Secrets managed with [agenix](https://github.com/ryantm/agenix), which
 [age](https://github.com/FiloSottile/age)-encrypts files using the SSH public
@@ -134,9 +134,9 @@ keys of authorised users and hosts. Encrypted `.age` files are safe to commit.
 `secrets-registry.nix` is the **single source of truth**: each secret is
 defined once with its file path, optional agenix options (`owner`, `path`,
 `symlink`), and the list of host keys allowed to decrypt it. Both
-`secrets.nix` (used by the agenix CLI) and `config.etu.data.ageModules`
+`agenix-rules.nix` (used by the agenix CLI) and `config.etu.data.ageModules`
 (via `modules/nixos/data/`) are derived automatically from this registry.
-Do not edit `secrets.nix` by hand.
+Do not edit `agenix-rules.nix` by hand.
 
 ### CI/CD (`.github/workflows/`)
 

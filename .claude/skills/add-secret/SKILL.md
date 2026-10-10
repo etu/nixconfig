@@ -20,7 +20,7 @@ If arguments are missing or ambiguous, ask the user before proceeding.
 
 ## How Secrets Work in This Repo
 
-`secrets-registry.nix` is the single source of truth. It defines all secrets with their file path and `hostKeys` (the SSH public keys allowed to decrypt them). From it, `secrets.nix` and `config.etu.data.ageModules` are derived automatically.
+`secrets-registry.nix` is the single source of truth. It defines all secrets with their file path and `hostKeys` (the SSH public keys allowed to decrypt them). From it, `agenix-rules.nix` and `config.etu.data.ageModules` are derived automatically.
 
 The `etu` user keys (laptop-private-elis, laptop-work-elis) are **always** prepended to every secret's `hostKeys` — they're defined as `etu` in the registry's `let` block.
 
@@ -53,7 +53,7 @@ Optional fields (only add if the user specified them):
 
 Use the Edit tool to insert the new block at the chosen location in `secrets-registry.nix`. Keep the existing section's style (blank line between entries, correct indentation of 2 spaces).
 
-This step must happen before Step 3: `secrets.nix` (which the `agenix` CLI reads to look up decryption keys) is derived from `secrets-registry.nix`, so `agenix -e` fails with an `attribute ... missing` error if the registry entry doesn't exist yet.
+This step must happen before Step 3: `agenix-rules.nix` (which the `agenix` CLI reads to look up decryption keys) is derived from `secrets-registry.nix`, so `agenix -e` fails with an `attribute ... missing` error if the registry entry doesn't exist yet.
 
 ## Step 3 — Create the encrypted secret file
 

@@ -6,13 +6,13 @@
 #
 #   hostKeys – list of SSH public-key strings (beyond the etu user keys)
 #              that are allowed to decrypt this secret.  Used to generate
-#              secrets.nix for the agenix CLI tool.
+#              agenix-rules.nix for the agenix CLI tool.
 #
 # To add a new secret:
 #   1. agenix -e secrets/<dir>/name.age
 #   2. Add an entry here with the correct file path and hostKeys.
 #   3. git add the .age file.
-#   Done – secrets.nix and data.nix ageModules are derived automatically.
+#   Done – agenix-rules.nix and data.nix ageModules are derived automatically.
 let
   keys = import ./pubkeys.nix;
 
