@@ -7,7 +7,7 @@ cd @dataPrefix@$HOME/.dotfiles
 git pull
 
 case $(hostname) in
-    laptop-private-elis|laptop-work-elis)
+    laptop-private-elis)
         stow --dotfiles skeleton
         ;;
 

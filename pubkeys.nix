@@ -6,7 +6,7 @@ let
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKALrQoSasNAaAvERCMsztZkezg0gRSFXWbc1vXpA1+C etu@laptop-private-elis-2023-01-27"
       ];
 
-      # Work laptop
+      # User key on the new work laptop
       laptop-work-elis = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINPQrlHiejXvToMVQxO/HOhqYjl5yqC8rTLeT7maCLeb elis-work-laptop-2026-10-08"
       ];
@@ -53,9 +53,6 @@ let
 
     # vps06.elis.nu
     vps06 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINB1+Am7Ai9DfKjDv7JDmPA711FW9wrOXRGZZf0rmjTP";
-
-    # Work laptop
-    laptop-work-elis = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMQFSZBEijplTEV9Vag79O0rrYhkpmy6++w2yb2RG4qP";
   };
 in
 {

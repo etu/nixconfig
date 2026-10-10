@@ -115,7 +115,7 @@ in
 
       # Hide useless microphone inputs
       hiddenInputDeviceNames = [
-        # laptop-work-elis
+        # laptop-private-elis maybe have this
         "alsa_input.pci-0000_c3_00.6.HiFi__Mic1__source"
       ];
     };

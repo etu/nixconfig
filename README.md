@@ -33,7 +33,8 @@ All SSH public keys for users and host systems — no secrets, just public keys.
 Imported by `secrets-registry.nix` (to declare which hosts may decrypt each
 secret) and by `modules/nixos/data/` (which exposes the keys as
 `config.etu.data.pubkeys`). Mittens' key is authorized for root SSH access on
-`server-sparv`.
+`server-sparv`. The `laptop-work-elis` SSH key is retained for a separately
+managed device; this repository no longer configures that host.
 
 ### `flake.nix` and `flake.lock`
 
@@ -60,16 +61,11 @@ Task runner wrapping common `nix`, `deploy`, format, and update commands. Run
 Private laptop (Lenovo T495). Deployed with `nixos-rebuild`. ZFS snapshots are
 pushed from this system to `server-main-elis` via syncoid whenever online.
 
-#### `hosts/laptop-work-elis/`
-
-Work laptop. Deployed with `nixos-rebuild`. ZFS snapshots are pushed from this
-system to `server-main-elis` via syncoid whenever online.
-
 #### `hosts/server-main-elis/`
 
 Home file server, deployed using `deploy .#server-main-elis`. Also used as a
 Nix build machine for the laptops. Primary ZFS backup target — pulls snapshots
-from all desktops, laptops, server-sparv, and vps06 via syncoid.
+from configured backup sources via syncoid.
 
 Runs a large collection of services:
 
@@ -78,8 +74,8 @@ Runs a large collection of services:
 - **Media stack**: Jellyfin, NZBGet, Sonarr, Radarr, Lidarr, Bazarr
 - **Web services**: Nextcloud, FreshRSS, Homepage dashboard, Nginx reverse proxy
 - **Monitoring**: Beszel hub (collects from all three servers) + Beszel agent
-- **Infrastructure**: Sanoid (ZFS snapshots), Syncoid (pulls backups from 7
-  machines), Cloudflare DynDNS, smartd, libvirtd, ACME/Let's Encrypt
+- **Infrastructure**: Sanoid (ZFS snapshots), Syncoid (pulls backups from
+  configured systems), Cloudflare DynDNS, smartd, libvirtd, ACME/Let's Encrypt
 - **Scheduled tasks**: SVTPlay playlist downloader (daily), empty-dirs cleaner
   (hourly)
 

@@ -11,14 +11,14 @@ The user wants to enable an existing module option on one or more hosts. Argumen
 
 Parse the arguments:
 - First argument: the module option path (e.g., `graphical.audacity`, `development.flipper-zero`, `games.steam`)
-- Remaining arguments: host names to enable it on (e.g., `laptop-private-elis`, `laptop-work-elis`)
+- Remaining arguments: host names to enable it on (e.g., `laptop-private-elis`)
   - If no hosts are specified, default to `laptop-private-elis`
 
 ## Host Configuration Files
 
 Each host config lives at `hosts/<hostname>/configuration.nix`. The `etu = { ... }` block is where all module enables are set.
 
-**Available hosts:** laptop-private-elis, laptop-work-elis, server-main-elis, server-sparv, vps06, live-iso
+**Available hosts:** laptop-private-elis, server-main-elis, server-sparv, vps06, live-iso
 
 ## Steps
 
