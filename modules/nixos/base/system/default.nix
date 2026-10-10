@@ -7,7 +7,7 @@
 }:
 {
   # Set the nixpkgs inputs path as channel in the NIX_PATH variable.
-  nix.nixPath = [ "nixpkgs=${pkgs.path}" ];
+  nix.settings.nix-path = [ "nixpkgs=${pkgs.path}" ];
 
   # Enable experimental features in the nix command to make nix search work.
   nix.settings.experimental-features = [
