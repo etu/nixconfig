@@ -1,7 +1,7 @@
 let
   etu =
     let
-      # New private laptop T495
+      # Private laptop (ThinkPad P14s Gen 4)
       laptop-private-elis = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKALrQoSasNAaAvERCMsztZkezg0gRSFXWbc1vXpA1+C etu@laptop-private-elis-2023-01-27"
       ];

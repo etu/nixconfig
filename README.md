@@ -58,7 +58,7 @@ Task runner wrapping common `nix`, `deploy`, format, and update commands. Run
 
 #### `hosts/laptop-private-elis/`
 
-Private laptop (Lenovo T495). Deployed with `nixos-rebuild`. ZFS snapshots are
+Private laptop (Lenovo ThinkPad P14s Gen 4). Deployed with `nixos-rebuild`. ZFS snapshots are
 pushed from this system to `server-main-elis` via syncoid whenever online.
 
 #### `hosts/server-main-elis/`

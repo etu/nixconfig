@@ -50,7 +50,7 @@ Each host lives in `hosts/<hostname>/` and is automatically picked up by bluepri
 
 | Host | Type | Deployment method | Notes |
 |------|------|-------------------|-------|
-| `laptop-private-elis` | Laptop | `nixos-rebuild` locally | Private laptop (T495); pushes ZFS snapshots to `server-main-elis` |
+| `laptop-private-elis` | Laptop | `nixos-rebuild` locally | Private laptop (ThinkPad P14s Gen 4); pushes ZFS snapshots to `server-main-elis` |
 | `server-main-elis` | Server | `deploy .#server-main-elis` | Home file server; also a Nix build machine, ZFS snapshot target, runs Home Assistant |
 | `server-sparv` | Server | `deploy .#server-sparv` | On-location server for speliarvika.se, LAN cache, game servers (Valheim, Project Zomboid, Minecraft) |
 | `vps06` | VPS | `deploy .#vps06` | Runs Gitea, ip.failar.nu, Matrix homeserver |
