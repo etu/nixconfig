@@ -11,7 +11,6 @@
     ./services
     ./theme
     ./user
-    ./work
 
     # Include modules imported from flakes
     inputs.agenix.nixosModules.age
