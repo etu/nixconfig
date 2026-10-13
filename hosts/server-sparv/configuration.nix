@@ -110,6 +110,7 @@
   virtualisation.oci-containers.containers = {
     lancache = {
       image = "docker.io/lancachenet/monolithic:latest";
+      pull = "always";
       ports = [
         "127.0.0.1:8080:80/tcp"
         "127.0.0.1:8443:443/tcp"
@@ -125,6 +126,7 @@
     };
     lancache-dns = {
       image = "docker.io/lancachenet/lancache-dns:latest";
+      pull = "always";
       ports = [
         "53:53/udp"
       ];
@@ -138,6 +140,7 @@
     # Set up a valheim server
     valheim-server = {
       image = "ghcr.io/mbround18/valheim:latest";
+      pull = "always";
       ports = [
         "2456-2458:2456-2458/udp"
       ];
@@ -181,6 +184,7 @@
     # Set up a project zomboid server
     project-zomboid = {
       image = "docker.io/danixu86/project-zomboid-dedicated-server:latest";
+      pull = "always";
       ports = [
         "8766-8767:8766-8767/udp"
         "16261:16261/udp"
@@ -195,6 +199,7 @@
     # Set up a conan exiles server
     conan-exiles = {
       image = "ghcr.io/balnaimi/conan-exiles-server:latest";
+      pull = "always";
       ports = [
         "7777:7777/udp"
         "7778:7778/udp"
@@ -210,6 +215,7 @@
     # Set up openspeedtest
     openspeedtest = {
       image = "docker.io/openspeedtest/latest:latest";
+      pull = "always";
       ports = [
         "3000:3000/tcp"
         "3001:3001/tcp"
