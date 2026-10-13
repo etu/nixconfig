@@ -145,6 +145,7 @@
         PORT = "2456";
         PUBLIC = "0";
         ENABLE_CROSSPLAY = "1";
+        TZ = "Europe/Stockholm";
 
         # Enable periodic auto-updates (cron), but not update-on-startup:
         # a failed cron update just retries next night, but a failed
