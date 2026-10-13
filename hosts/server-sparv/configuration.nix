@@ -154,11 +154,7 @@
 
         # Enable mods
         TYPE = "BepInEx";
-        MODS = ''
-          CW_Jesse-BetterNetworking_Valheim-2.3.2
-          mvp-Serverside_Simulations-1.1.9
-          XineladaLendaria-ValheimPerformanceAnalyzer-1.0.1
-        '';
+        MODS = "CW_Jesse-BetterNetworking_Valheim-2.3.2 mvp-Serverside_Simulations-1.1.9 XineladaLendaria-ValheimPerformanceAnalyzer-1.0.1";
       };
       environmentFiles = [ config.age.secrets.valheim-server-env.path ];
       volumes = [
