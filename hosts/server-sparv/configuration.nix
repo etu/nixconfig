@@ -137,7 +137,7 @@
 
     # Set up a valheim server
     valheim-server = {
-      image = "ghcr.io/mbround18/valheim:latest";
+      image = "ghcr.io/mbround18/valheim:3";
       ports = [
         "2456-2458:2456-2458/udp"
       ];
