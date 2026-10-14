@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  flake,
   perSystem,
   ...
 }:
@@ -24,15 +23,6 @@
       default = config.etu.graphical.terminal.terminalPackage.meta.mainProgram;
       description = "Binary name of the terminal.";
       readOnly = true;
-    };
-  };
-
-  config = lib.mkIf config.etu.graphical.terminal.enable {
-    # If my user exists, enable home-manager configurations
-    home-manager.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
-      imports = [
-        flake.homeModules.alacritty
-      ];
     };
   };
 }

@@ -34,7 +34,6 @@
       catppuccin.flavor = config.etu.theme.flavor;
 
       # Enable catppuchin for on home manager level for different applications.
-      catppuccin.alacritty.enable = true;
       catppuccin.ghostty.enable = true;
       catppuccin.fish.enable = true;
 

@@ -40,7 +40,7 @@
     ];
 
     # Configure fontconfig to actually use more of Noto Color Emoji in
-    # alacritty.
+    # the terminal.
     fonts.fontconfig.defaultFonts.monospace = [
       config.etu.graphical.theme.fonts.monospace
       "Noto Color Emoji"

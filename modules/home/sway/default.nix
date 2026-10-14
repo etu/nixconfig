@@ -250,10 +250,6 @@ in
         window.commands = [
           # Set borders instead of title bars for some programs
           {
-            criteria.app_id = "Alacritty";
-            command = "border pixel 3";
-          }
-          {
             criteria.app_id = "com.mitchellh.ghostty";
             command = "border pixel 3";
           }
@@ -283,10 +279,6 @@ in
           }
 
           # Set opacity for some programs
-          {
-            criteria.app_id = "Alacritty";
-            command = "opacity set 0.9";
-          }
           {
             criteria.app_id = "com.mitchellh.ghostty";
             command = "opacity set 0.9";
