@@ -5,7 +5,6 @@
     ./base
     ./data
     ./development
-    ./games
     ./graphical
     ./hacks
     ./services
