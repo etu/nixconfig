@@ -35,8 +35,8 @@ secret) and by `modules/nixos/data/` (which exposes the keys as
 `config.etu.data.pubkeys`). Mittens' key is authorized for root SSH access on
 `server-sparv`. The `laptop-work-elis` SSH key is retained for a separately
 managed device; this repository no longer configures that host. The
-`macbook-air-elis` key belongs to a MacBook Air M5 (not managed by this repo)
-and is part of `etu.computers` and the agenix `etu` key set.
+`macbook-air-elis` key is the user key on the nix-darwin MacBook Air M5 and is
+part of `etu.computers` and the agenix `etu` key set.
 
 ### `flake.nix` and `flake.lock`
 
@@ -44,7 +44,7 @@ Main flake definition: inputs, blueprint wiring, deploy-rs nodes for the three
 remotely-managed servers, and the live-iso package alias. All inputs follow
 `nixpkgs` via `.follows` where possible. Key inputs: `agenix`, `blueprint`,
 `catppuccin`, `deploy-rs`, `disko`, `emacs-overlay`, `home-manager`,
-`impermanence`, `ip-failar-nu`, `nixos-hardware`, `nur`.
+`impermanence`, `ip-failar-nu`, `nix-darwin`, `nixos-hardware`, `nur`.
 
 ### `Justfile`
 
@@ -53,6 +53,7 @@ Task runner wrapping common `nix`, `deploy`, format, and update commands. Run
 
 - `just build` / `just build-<hostname>` / `just build-all` — build hosts with `nom`
 - `just deploy-server-main-elis` / `just deploy-server-sparv` / `just deploy-vps06`
+- `just switch-macbook-air-elis` — activate the nix-darwin config locally on the MacBook
 - `just nix-fmt` / `just all-fmt-check` — format and lint checks
 - `just update-all` — update flake inputs and all container image tags
 
@@ -62,6 +63,16 @@ Task runner wrapping common `nix`, `deploy`, format, and update commands. Run
 
 Private laptop (Lenovo ThinkPad P14s Gen 4). Deployed with `nixos-rebuild`. ZFS snapshots are
 pushed from this system to `server-main-elis` via syncoid whenever online.
+
+#### `hosts/macbook-air-elis/`
+
+MacBook Air M5 (`aarch64-darwin`) managed with
+[nix-darwin](https://github.com/nix-darwin/nix-darwin) via
+`darwin-configuration.nix`, which blueprint exposes as
+`darwinConfigurations.macbook-air-elis`. Currently a minimal bootstrap: Nix
+settings and caches, hostname, and Touch ID for `sudo`. Bootstrap steps are in
+the header of the configuration file; later changes are applied with
+`just switch-macbook-air-elis`. Not built in CI (Linux runners only).
 
 #### `hosts/server-main-elis/`
 

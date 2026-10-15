@@ -50,6 +50,10 @@
     ip-failar-nu.url = "github:etu/ip.failar.nu";
     ip-failar-nu.inputs.nixpkgs.follows = "nixpkgs";
 
+    # nix-darwin
+    nix-darwin.url = "github:nix-darwin/nix-darwin";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+
     # NUR
     nur.url = "github:nix-community/NUR";
     nur.inputs.nixpkgs.follows = "nixpkgs";

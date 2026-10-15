@@ -51,6 +51,7 @@ Each host lives in `hosts/<hostname>/` and is automatically picked up by bluepri
 | Host | Type | Deployment method | Notes |
 |------|------|-------------------|-------|
 | `laptop-private-elis` | Laptop | `nixos-rebuild` locally | Private laptop (ThinkPad P14s Gen 4); pushes ZFS snapshots to `server-main-elis` |
+| `macbook-air-elis` | Laptop (macOS) | `just switch-macbook-air-elis` locally | MacBook Air M5, `aarch64-darwin`, managed with nix-darwin via `darwin-configuration.nix`; not built in CI |
 | `server-main-elis` | Server | `deploy .#server-main-elis` | Home file server; also a Nix build machine, ZFS snapshot target, runs Home Assistant |
 | `server-sparv` | Server | `deploy .#server-sparv` | On-location server for speliarvika.se, LAN cache, game servers (Valheim, Project Zomboid, Minecraft) |
 | `vps06` | VPS | `deploy .#vps06` | Runs Gitea, ip.failar.nu, Matrix homeserver |
@@ -134,7 +135,8 @@ Run `just` to list all available recipes. Key groups:
 ```sh
 just build                        # Build current host (auto-detected via `hostname`)
 just build-<hostname>             # Build a specific host
-just build-all                    # Build all hosts (plus the live ISO)
+just build-all                    # Build all NixOS hosts (plus the live ISO)
+just build-macbook-air-elis       # Build the nix-darwin MacBook config (macOS only)
 just build-live-iso               # Build the live ISO image
 ```
 
@@ -147,6 +149,9 @@ just deploy-vps06
 ```
 
 These call `deploy --skip-checks --targets '.#<hostname>'` using deploy-rs.
+
+On the MacBook, apply the nix-darwin config locally with
+`just switch-macbook-air-elis` (runs `sudo darwin-rebuild switch`).
 
 ### Format / Lint
 
@@ -295,6 +300,7 @@ use `nix-installer-action`. Remove it again once the upstream issue is resolved.
 | `home-manager` | User environment management |
 | `impermanence` | Opt-in persistence on ephemeral root |
 | `ip-failar-nu` | Custom service: ip.failar.nu |
+| `nix-darwin` | macOS system configuration for `macbook-air-elis` |
 | `nur` | Nix User Repository |
 
 All inputs follow `nixpkgs` via `.follows` where possible to avoid duplicate
@@ -316,8 +322,13 @@ versions.
   `pubkeys.nix`. Update it when adding hosts or rotating keys.
 - The `laptop-work-elis` SSH key is retained for a separately managed device;
   this repository no longer configures that host.
-- The `macbook-air-elis` key (MacBook Air M5, not managed by this repo) is part
-  of `etu.computers` and the `etu` key set in `secrets-registry.nix`.
+- The `macbook-air-elis` key (user key on the nix-darwin MacBook) is part of
+  `etu.computers` and the `etu` key set in `secrets-registry.nix`.
+- **nix-darwin hosts**: blueprint loads `hosts/<name>/darwin-configuration.nix`
+  into `darwinConfigurations.<name>`. These do not import `modules/nixos/`
+  (NixOS-only). The NixOS hosts can't be evaluated on macOS without an
+  `x86_64-linux` builder (catppuccin uses import-from-derivation), so run
+  `just flake-check` for them in CI or on a Linux machine.
 - **Mittens root access**: the `mittens` key in `pubkeys.nix` is authorized for
   root SSH access on `server-sparv`.
 - **blueprint conventions**: the flake uses blueprint, so follow its directory
