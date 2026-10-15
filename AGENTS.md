@@ -51,7 +51,7 @@ Each host lives in `hosts/<hostname>/` and is automatically picked up by bluepri
 | Host | Type | Deployment method | Notes |
 |------|------|-------------------|-------|
 | `laptop-private-elis` | Laptop | `nixos-rebuild` locally | Private laptop (ThinkPad P14s Gen 4); pushes ZFS snapshots to `server-main-elis` |
-| `macbook-air-elis` | Laptop (macOS) | `just activate` locally | MacBook Air M5, `aarch64-darwin`, managed with nix-darwin via `darwin-configuration.nix`; not built in CI |
+| `macbook-air-elis` | Laptop (macOS) | `just activate` locally | MacBook Air M5, `aarch64-darwin`, managed with nix-darwin via `darwin-configuration.nix`; built in CI on a `macos-latest` runner |
 | `server-main-elis` | Server | `deploy .#server-main-elis` | Home file server; also a Nix build machine, ZFS snapshot target, runs Home Assistant |
 | `server-sparv` | Server | `deploy .#server-sparv` | On-location server for speliarvika.se, LAN cache, game servers (Valheim, Project Zomboid, Minecraft) |
 | `vps06` | VPS | `deploy .#vps06` | Runs Gitea, ip.failar.nu, Matrix homeserver |
@@ -256,6 +256,14 @@ Located in `.github/workflows/`:
 Helper workflow files (`helper_*.yaml`) are reusable workflows called by the
 above.
 
+`helper_host_matrix.yaml` builds the host matrix from `nixosConfigurations`
+and `darwinConfigurations`. Each entry carries the `runner`, nix `system` and
+flake `attr` to build: NixOS hosts run on `ubuntu-24.04` (`x86_64-linux`),
+nix-darwin hosts on `macos-latest` (`aarch64-darwin`).
+`helper_cache_hosts.yaml` uses those, so the pull request, cache and update
+workflows all build the MacBook too. Steps that only work on Linux (such as
+`wimpysworld/nothing-but-nix`) are guarded with `if: runner.os == 'Linux'`.
+
 ### Pinning the Nix version in CI
 
 If a Determinate Nix release breaks CI (e.g. `nix flake check` fails on GitHub
@@ -271,7 +279,8 @@ to a specific release from `releases.nixos.org`. Example:
 
 Run `nix eval nixpkgs#nix.version --raw` locally to find the version your
 nixpkgs provides. Apply the `with:` block to all seven workflow files that
-use `nix-installer-action`. Remove it again once the upstream issue is resolved.
+use `nix-installer-action`. In `helper_cache_hosts.yaml` the tarball name uses
+`${{ matrix.system }}` instead of `x86_64-linux`, since it also runs on macOS. Remove it again once the upstream issue is resolved.
 
 ### Required GitHub Secrets
 

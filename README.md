@@ -93,7 +93,8 @@ The emacs module uses the native macOS `emacs` build on darwin instead of
 from Spotlight finds git and other tools instead of the Xcode stubs in
 `/usr/bin`. Bootstrap steps are in
 the header of the configuration file; later changes are applied with
-`just activate`. Not built in CI (Linux runners only).
+`just activate`. Built and cached in CI on a `macos-latest` (Apple Silicon)
+runner alongside the NixOS hosts.
 
 #### `hosts/server-main-elis/`
 
@@ -178,6 +179,7 @@ Five workflows keep the repo healthy:
 
 - **`format.yml`** — Nix fmt, yamllint, deadnix, statix checks on every push/PR
 - **`pull_request.yaml`** — builds dev shell, runs flake check, builds all hosts
-- **`cache.yml`** — builds and caches all hosts to Cachix on pushes to `main`
+  (NixOS hosts on Linux runners, the MacBook on a macOS runner)
+- **`cache.yml`** — builds and caches all hosts (including the MacBook) to Cachix on pushes to `main`
 - **`deploy.yml`** — deploys the three remote servers via deploy-rs after a push to `main`
 - **`update.yml`** — scheduled PRs to update flake inputs and container image tags
