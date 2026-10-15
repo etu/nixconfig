@@ -71,6 +71,12 @@
     };
   };
 
+  # Claude Code, like modules/nixos/development/claude-code on the NixOS hosts.
+  home.packages = [
+    pkgs.claude-code
+    pkgs.claude-monitor
+  ];
+
   # Used for backwards compatibility, read the release notes before changing.
   home.stateVersion = "26.11";
 }

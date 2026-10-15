@@ -8,7 +8,12 @@
 #
 # Later deployments:
 # $ just switch-macbook-air-elis
-{ inputs, pkgs, ... }:
+{
+  inputs,
+  lib,
+  pkgs,
+  ...
+}:
 {
   imports = [
     ./etu-options.nix
@@ -16,6 +21,14 @@
   ];
 
   nixpkgs.hostPlatform = "aarch64-darwin";
+
+  # Unfree packages allowed on this host, like etu.base.nix.allowUnfree on
+  # the NixOS hosts. Also applies to home-manager (useGlobalPkgs).
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
+    builtins.elem (lib.getName pkg) [
+      "claude-code"
+    ];
 
   # Set the hostname so darwin-rebuild picks this configuration by default.
   networking.hostName = "macbook-air-elis";

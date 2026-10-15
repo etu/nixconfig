@@ -333,7 +333,11 @@ versions.
   as-is (currently `htop` and `tmux`). Modules that only read a few such
   options can still be used by declaring those options on the darwin host:
   `hosts/macbook-air-elis/etu-options.nix` does this for `etu.user.username`
-  and `etu.base.fish.*` so `flake.homeModules.fish` works unchanged. The NixOS hosts can't be evaluated on macOS without an
+  and `etu.base.fish.*` so `flake.homeModules.fish` works unchanged.
+  `etu.base.nix.allowUnfree` doesn't exist there; unfree packages for the
+  MacBook are listed in `nixpkgs.config.allowUnfreePredicate` in its
+  `darwin-configuration.nix` (which also covers home-manager via
+  `useGlobalPkgs`). The NixOS hosts can't be evaluated on macOS without an
   `x86_64-linux` builder (catppuccin uses import-from-derivation), so run
   `just flake-check` for them in CI or on a Linux machine.
 - **Mittens root access**: the `mittens` key in `pubkeys.nix` is authorized for
