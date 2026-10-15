@@ -2,7 +2,7 @@
 #
 # Picked up by blueprint and applied through nix-darwin's home-manager
 # module, so it's activated with `just switch-macbook-air-elis`.
-{ flake, ... }:
+{ flake, pkgs, ... }:
 {
   # Shared home-manager modules from modules/home/ that don't depend on
   # NixOS-only osConfig.etu.* options.
@@ -33,6 +33,28 @@
       # REuse REcorded REsolution to remember and resolve merge conflicts
       # better when you hit the several conflict several times.
       rerere.enabled = true;
+    };
+  };
+
+  # Ghostty, with the macOS build of the package and the platform-neutral
+  # settings from modules/home/ghostty (which is Linux-specific).
+  programs.ghostty = {
+    enable = true;
+    package = pkgs.ghostty-bin;
+
+    settings = {
+      # Don't start new windows in the directory of the previous terminal, they
+      # should start in the home directory (tabs and splits still inherit).
+      window-inherit-working-directory = false;
+
+      # Always use a solid block cursor. Shell integration would otherwise
+      # switch the cursor to a bar at the prompt.
+      cursor-style = "block";
+      cursor-style-blink = false;
+      shell-integration-features = "no-cursor";
+
+      # Selecting text should copy it.
+      copy-on-select = true;
     };
   };
 
