@@ -71,7 +71,10 @@ MacBook Air M5 (`aarch64-darwin`) managed with
 `darwin-configuration.nix`, which blueprint exposes as
 `darwinConfigurations.macbook-air-elis`. Currently a minimal bootstrap: Nix
 settings and caches, hostname, Caps Lock remapped to Control, and Touch ID for
-`sudo`. Bootstrap steps are in
+`sudo`. home-manager for `elishirwing` lives in
+`users/elishirwing/home-configuration.nix` (git, direnv with nix-direnv, zsh,
+plus the shared `htop` module from `modules/home/`) and is applied together
+with the system. Bootstrap steps are in
 the header of the configuration file; later changes are applied with
 `just switch-macbook-air-elis`. Not built in CI (Linux runners only).
 

@@ -326,7 +326,11 @@ versions.
   `etu.computers` and the `etu` key set in `secrets-registry.nix`.
 - **nix-darwin hosts**: blueprint loads `hosts/<name>/darwin-configuration.nix`
   into `darwinConfigurations.<name>`. These do not import `modules/nixos/`
-  (NixOS-only). The NixOS hosts can't be evaluated on macOS without an
+  (NixOS-only). home-manager on darwin hosts uses blueprint's
+  `hosts/<name>/users/<user>/home-configuration.nix` convention. Shared
+  modules from `modules/home/` are imported there as `flake.homeModules.<name>`,
+  but only those that don't read NixOS-only `osConfig.etu.*` options work
+  as-is (currently `htop` and `tmux`). The NixOS hosts can't be evaluated on macOS without an
   `x86_64-linux` builder (catppuccin uses import-from-derivation), so run
   `just flake-check` for them in CI or on a Linux machine.
 - **Mittens root access**: the `mittens` key in `pubkeys.nix` is authorized for
