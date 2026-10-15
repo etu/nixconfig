@@ -126,6 +126,8 @@ let
 in
 {
   home.file.".emacs".text = ''
+    ;;; .emacs  -*- lexical-binding: t -*-
+
     ;; Don't show the welcome splash screen
     (setq-default inhibit-startup-screen t)
   '';
