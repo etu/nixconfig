@@ -73,14 +73,19 @@ MacBook Air M5 (`aarch64-darwin`) managed with
 settings and caches, hostname, Caps Lock remapped to Control, the command line
 tools from `modules/nixos/base/packages` (including NUR tools), Tailscale
 (`tailscaled` as a launchd daemon; log in once with `sudo tailscale up`), fish (in
-`/etc/shells`; set as login shell once with `chsh`), and Touch ID for `sudo`.
+`/etc/shells`; set as login shell once with `chsh`), the emacs-overlay and
+fonts for Emacs, and Touch ID for `sudo`.
 home-manager for `elishirwing` lives in
 `users/elishirwing/home-configuration.nix` (git, direnv with nix-direnv, zsh,
 Ghostty via the macOS `ghostty-bin` package (always starting fish), Claude
-Code and claude-monitor, plus the shared `fish` and `htop`
-modules from `modules/home/`) and is applied together with the system.
-`etu-options.nix` declares the few `etu.*` options the shared fish module
-reads, so it can be used unchanged. Bootstrap steps are in
+Code and claude-monitor, plus the shared `emacs`, `fish` and `htop` modules
+from `modules/home/`) and is applied together with the system.
+`etu-options.nix` declares the few `etu.*` options the shared emacs and fish
+modules read, so they can be used unchanged (with a macOS font name and size).
+The emacs module uses the native macOS `emacs` build on darwin instead of
+`emacs-pgtk`, and adds the Nix profiles to its PATH so `Emacs.app` launched
+from Spotlight finds git and other tools instead of the Xcode stubs in
+`/usr/bin`. Bootstrap steps are in
 the header of the configuration file; later changes are applied with
 `just switch-macbook-air-elis`. Not built in CI (Linux runners only).
 

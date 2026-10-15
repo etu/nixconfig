@@ -87,7 +87,7 @@ Home-manager modules for user-level configuration:
 |-----------|---------|
 | `alacritty/` | Alacritty terminal emulator config |
 | `dms-shell/` | DankMaterialShell (Quickshell-based Material 3 desktop shell) config |
-| `emacs/` | Emacs configuration |
+| `emacs/` | Emacs configuration (`emacs-pgtk` on Linux, native `emacs` on macOS; on macOS `Emacs.app` is wrapped too and the Nix profiles are added to PATH, since apps started from Spotlight/launchd only get `/usr/bin:/bin:/usr/sbin:/sbin`) |
 | `firefox/` | Firefox browser settings |
 | `fish/` | Fish shell configuration |
 | `flatpak-overrides/` | Flatpak permission overrides |
@@ -332,8 +332,13 @@ versions.
   but only those that don't read NixOS-only `osConfig.etu.*` options work
   as-is (currently `htop` and `tmux`). Modules that only read a few such
   options can still be used by declaring those options on the darwin host:
-  `hosts/macbook-air-elis/etu-options.nix` does this for `etu.user.username`
-  and `etu.base.fish.*` so `flake.homeModules.fish` works unchanged.
+  `hosts/macbook-air-elis/etu-options.nix` does this for `etu.user.username`,
+  `etu.dataPrefix`, `etu.base.fish.*`, `etu.base.emacs.extraConfig` and
+  `etu.graphical.theme.fonts.{monospace,size}` so `flake.homeModules.fish`
+  and `flake.homeModules.emacs` work there. The emacs home module picks
+  `pkgs.emacs` on darwin and `pkgs.emacs-pgtk` on Linux; the darwin host must
+  also apply `inputs.emacs-overlay.overlay` and allow its unfree language
+  servers.
   `etu.base.nix.allowUnfree` doesn't exist there; unfree packages for the
   MacBook are listed in `nixpkgs.config.allowUnfreePredicate` in its
   `darwin-configuration.nix` (which also covers home-manager via

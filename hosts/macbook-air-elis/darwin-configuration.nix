@@ -28,7 +28,21 @@
     pkg:
     builtins.elem (lib.getName pkg) [
       "claude-code"
+      "copilot-language-server" # emacs
+      "intelephense" # emacs
     ];
+
+  # Emacs overlay from nix community, used by the shared emacs home module
+  # (modules/home/emacs) for emacsWithPackagesFromUsePackage.
+  nixpkgs.overlays = [
+    inputs.emacs-overlay.overlay
+  ];
+
+  # Fonts used by Emacs (and Ghostty can use them too).
+  fonts.packages = [
+    pkgs.emacs-all-the-icons-fonts
+    pkgs.jetbrains-mono
+  ];
 
   # Set the hostname so darwin-rebuild picks this configuration by default.
   networking.hostName = "macbook-air-elis";

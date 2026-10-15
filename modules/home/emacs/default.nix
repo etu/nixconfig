@@ -1,12 +1,26 @@
 {
+  config,
   lib,
   osConfig,
   pkgs,
   ...
 }:
 let
-  # Get the emacs package with treesitter support
-  emacsPackage = pkgs.emacs-pgtk;
+  inherit (pkgs.stdenv.hostPlatform) isDarwin;
+
+  # On macOS, Emacs.app started from Spotlight/Finder and the launchd daemon
+  # only get PATH=/usr/bin:/bin:/usr/sbin:/sbin, where git etc. are Xcode
+  # stubs. Add the Nix user and system profiles so they see the same tools as
+  # a terminal.
+  darwinProfilePaths = lib.concatMapStringsSep ":" (p: "${p}/bin") [
+    config.home.profileDirectory
+    "/run/current-system/sw"
+    "/nix/var/nix/profiles/default"
+  ];
+
+  # Get the emacs package with treesitter support (pgtk is Wayland/GTK only,
+  # so use the native macOS build on darwin)
+  emacsPackage = if isDarwin then pkgs.emacs else pkgs.emacs-pgtk;
 
   # List custom treesitter grammars
   treesitGrammars = emacsPackage.pkgs.treesit-grammars.with-grammars (
@@ -100,9 +114,9 @@ let
 
     postBuild = ''
       # Wrap all emacs binaries with language servers in PATH
-      for bin in $out/bin/*; do
+      for bin in $out/bin/*${lib.optionalString isDarwin " $out/Applications/Emacs.app/Contents/MacOS/Emacs"}; do
         wrapProgram "$bin" \
-          --prefix PATH : ${lib.makeBinPath extraPackages}
+          --prefix PATH : ${lib.makeBinPath extraPackages}${lib.optionalString isDarwin ":${darwinProfilePaths}"}
       done
     '';
 

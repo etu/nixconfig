@@ -10,9 +10,11 @@
   ...
 }:
 {
-  # Shared home-manager modules from modules/home/. The fish module reads a few
-  # osConfig.etu.* options, which ../../etu-options.nix declares for this host.
+  # Shared home-manager modules from modules/home/. The emacs and fish modules
+  # read a few osConfig.etu.* options, which ../../etu-options.nix declares
+  # for this host.
   imports = [
+    flake.homeModules.emacs
     flake.homeModules.fish
     flake.homeModules.htop
   ];
