@@ -71,7 +71,8 @@ MacBook Air M5 (`aarch64-darwin`) managed with
 `darwin-configuration.nix`, which blueprint exposes as
 `darwinConfigurations.macbook-air-elis`. Currently a minimal bootstrap: Nix
 settings and caches, hostname, Caps Lock remapped to Control, the command line
-tools from `modules/nixos/base/packages` (including NUR tools), fish (in
+tools from `modules/nixos/base/packages` (including NUR tools), Tailscale
+(`tailscaled` as a launchd daemon; log in once with `sudo tailscale up`), fish (in
 `/etc/shells`; set as login shell once with `chsh`), and Touch ID for `sudo`.
 home-manager for `elishirwing` lives in
 `users/elishirwing/home-configuration.nix` (git, direnv with nix-direnv, zsh,

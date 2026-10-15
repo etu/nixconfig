@@ -71,6 +71,11 @@
   # Use zoxide for cd in fish, like on laptop-private-elis.
   etu.base.fish.enableUserZoxideCd = true;
 
+  # Tailscale, running the open source tailscaled as a launchd daemon (no menu
+  # bar app). Log in once after activation with:
+  # $ sudo tailscale up
+  services.tailscale.enable = true;
+
   # Use Touch ID for sudo.
   security.pam.services.sudo_local.touchIdAuth = true;
 
