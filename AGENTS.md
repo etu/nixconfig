@@ -133,7 +133,7 @@ Run `just` to list all available recipes. Key groups:
 ### Build
 
 ```sh
-just build                        # Build current host (auto-detected via `hostname`)
+just build                        # Build current host (auto-detected via `hostname`; darwinConfigurations on macOS, nixosConfigurations elsewhere)
 just build-<hostname>             # Build a specific host
 just build-all                    # Build all NixOS hosts (plus the live ISO)
 just build-macbook-air-elis       # Build the nix-darwin MacBook config (macOS only)

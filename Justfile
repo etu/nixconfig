@@ -2,6 +2,10 @@
 
 hostname := shell('hostname')
 
+# The system output for the current host: nix-darwin on macOS, NixOS elsewhere.
+
+build-target := if os() == "macos" { "darwinConfigurations." + hostname + ".system" } else { "nixosConfigurations." + hostname + ".config.system.build.toplevel" }
+
 # Make a private default recipe to list recipes.
 _default:
     @just --list
@@ -19,7 +23,7 @@ flake-check :
 # Build the current host
 [group('build')]
 build:
-    nom build '.#nixosConfigurations.{{ hostname }}.config.system.build.toplevel'
+    nom build '.#{{ build-target }}'
 
 # Build the laptop-private-elis host
 [group('build')]

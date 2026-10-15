@@ -54,6 +54,7 @@ Task runner wrapping common `nix`, `deploy`, format, and update commands. Run
 `just` to list everything. Notable recipes:
 
 - `just build` / `just build-<hostname>` / `just build-all` — build hosts with `nom`
+  (`just build` builds the current host, using its nix-darwin config on macOS)
 - `just deploy-server-main-elis` / `just deploy-server-sparv` / `just deploy-vps06`
 - `just switch-macbook-air-elis` — activate the nix-darwin config locally on the MacBook
 - `just nix-fmt` / `just all-fmt-check` — format and lint checks
