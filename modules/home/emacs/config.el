@@ -583,7 +583,7 @@
 ;;;
 ;;; Tree sitter
 ;;;
-(add-to-list 'treesit-extra-load-path "@treesitGrammars@/lib")
+(add-to-list 'treesit-extra-load-path "@treesitGrammars@")
 
 (setq major-mode-remap-alist
       '((sh-mode . bash-ts-mode)
