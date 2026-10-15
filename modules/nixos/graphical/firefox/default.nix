@@ -8,16 +8,12 @@
 let
   # Define Firefox extensions with NUR packages
   defaultExtensions = [
-    pkgs.nur.repos.rycee.firefox-addons.elasticvue
     pkgs.nur.repos.rycee.firefox-addons.facebook-container
-    pkgs.nur.repos.rycee.firefox-addons.firefox-color
     pkgs.nur.repos.rycee.firefox-addons.multi-account-containers
     pkgs.nur.repos.rycee.firefox-addons.privacy-badger
     pkgs.nur.repos.rycee.firefox-addons.proton-pass
     pkgs.nur.repos.rycee.firefox-addons.sponsorblock
-    pkgs.nur.repos.rycee.firefox-addons.streetpass-for-mastodon
     pkgs.nur.repos.rycee.firefox-addons.swedish-dictionary
-    pkgs.nur.repos.rycee.firefox-addons.terms-of-service-didnt-read
     pkgs.nur.repos.rycee.firefox-addons.ublock-origin
   ];
 in
