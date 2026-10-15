@@ -2,6 +2,9 @@ _: {
   # Use dark mode.
   system.defaults.NSGlobalDomain.AppleInterfaceStyle = "Dark";
 
+  # Hide the Dock until the pointer reaches the screen edge.
+  system.defaults.dock.autohide = true;
+
   # Show the Bluetooth control in the menu bar.
   system.defaults.controlcenter.Bluetooth = true;
 

@@ -94,7 +94,7 @@ that read `osConfig.etu.*` work unchanged on macOS.
 | `base/htop/` | `etu.base.htop.enable`: imports `homeModules.htop` |
 | `base/nix/` | `etu.base.nix.*`: flakes, trusted users, binary caches, `allowUnfree` list |
 | `base/packages/` | Command line tools (mirrors `modules/nixos/base/packages`, minus Linux-only ones) |
-| `base/system/` | macOS defaults: dark mode, Bluetooth in the menu bar, Caps Lock → Control, Touch ID for `sudo` |
+| `base/system/` | macOS defaults: dark mode, auto-hiding Dock, Bluetooth in the menu bar, Caps Lock → Control, Touch ID for `sudo` |
 | `base/tailscale/` | `etu.base.tailscale.enable`: `tailscaled` as a launchd daemon |
 | `development/claude-code/` | `etu.development.claude-code.enable`: Claude Code and claude-monitor for the user |
 | `graphical/theme/` | `etu.graphical.theme.*`: font options (macOS defaults: `JetBrains Mono`, 12) and the font package |
