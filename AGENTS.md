@@ -316,6 +316,8 @@ versions.
   `pubkeys.nix`. Update it when adding hosts or rotating keys.
 - The `laptop-work-elis` SSH key is retained for a separately managed device;
   this repository no longer configures that host.
+- The `macbook-air-elis` key (MacBook Air M5, not managed by this repo) is part
+  of `etu.computers` and the `etu` key set in `secrets-registry.nix`.
 - **Mittens root access**: the `mittens` key in `pubkeys.nix` is authorized for
   root SSH access on `server-sparv`.
 - **blueprint conventions**: the flake uses blueprint, so follow its directory

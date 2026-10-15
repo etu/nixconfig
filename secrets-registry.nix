@@ -17,7 +17,7 @@ let
   keys = import ./pubkeys.nix;
 
   # etu's personal computer user keys – always allowed to decrypt every secret.
-  etu = keys.etu.laptop-private-elis ++ keys.etu.laptop-work-elis;
+  etu = keys.etu.laptop-private-elis ++ keys.etu.laptop-work-elis ++ keys.etu.macbook-air-elis;
 
   # Host system key shorthands (each is a single string so we wrap in a list).
   sys = keys.systems;

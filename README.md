@@ -34,7 +34,9 @@ Imported by `secrets-registry.nix` (to declare which hosts may decrypt each
 secret) and by `modules/nixos/data/` (which exposes the keys as
 `config.etu.data.pubkeys`). Mittens' key is authorized for root SSH access on
 `server-sparv`. The `laptop-work-elis` SSH key is retained for a separately
-managed device; this repository no longer configures that host.
+managed device; this repository no longer configures that host. The
+`macbook-air-elis` key belongs to a MacBook Air M5 (not managed by this repo)
+and is part of `etu.computers` and the agenix `etu` key set.
 
 ### `flake.nix` and `flake.lock`
 

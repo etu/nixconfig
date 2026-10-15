@@ -10,16 +10,22 @@ let
       laptop-work-elis = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINPQrlHiejXvToMVQxO/HOhqYjl5yqC8rTLeT7maCLeb elis-work-laptop-2026-10-08"
       ];
+
+      # User key on the MacBook Air M5
+      macbook-air-elis = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB5n3Xof23tmxnr9LRIpAPN16zdYvAuFftvv05XzXQX9 elis-macbook-air-m5-2026-10-15"
+      ];
     in
     {
       # Include all separate units
       inherit
         laptop-private-elis
         laptop-work-elis
+        macbook-air-elis
         ;
 
       # Include a meta name of all computers
-      computers = laptop-private-elis ++ laptop-work-elis;
+      computers = laptop-private-elis ++ laptop-work-elis ++ macbook-air-elis;
     };
 
   # Public keys used for syncoid.
