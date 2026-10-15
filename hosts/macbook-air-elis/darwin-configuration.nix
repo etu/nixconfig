@@ -39,6 +39,10 @@
     "etu.cachix.org-1:CeyfbMJZHZ95TScp8+I8+EeyzbncqPSj1xfCK9vOAFE="
   ];
 
+  # Remap Caps Lock to Control.
+  system.keyboard.enableKeyMapping = true;
+  system.keyboard.remapCapsLockToControl = true;
+
   # Use Touch ID for sudo.
   security.pam.services.sudo_local.touchIdAuth = true;
 
