@@ -41,7 +41,9 @@ part of `etu.computers` and the agenix `etu` key set.
 ### `flake.nix` and `flake.lock`
 
 Main flake definition: inputs, blueprint wiring, deploy-rs nodes for the three
-remotely-managed servers, and the live-iso package alias. All inputs follow
+remotely-managed servers, and the live-iso package alias. Per-system outputs
+are generated for `aarch64-darwin`, `aarch64-linux` and `x86_64-linux` only
+(nixpkgs 26.11 dropped `x86_64-darwin`). All inputs follow
 `nixpkgs` via `.follows` where possible. Key inputs: `agenix`, `blueprint`,
 `catppuccin`, `deploy-rs`, `disko`, `emacs-overlay`, `home-manager`,
 `impermanence`, `ip-failar-nu`, `nix-darwin`, `nixos-hardware`, `nur`.

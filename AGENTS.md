@@ -26,7 +26,7 @@ flake outputs.
 
 | Path | Description |
 |------|-------------|
-| `flake.nix` | Main flake definition: inputs, blueprint wiring, deploy-rs nodes, and the live-iso package alias |
+| `flake.nix` | Main flake definition: inputs, blueprint wiring (with an explicit `systems` list, since nixpkgs 26.11 dropped `x86_64-darwin` from blueprint's defaults), deploy-rs nodes, and the live-iso package alias |
 | `flake.lock` | Locked versions of all flake inputs |
 | `pubkeys.nix` | All SSH public keys for users and host systems — standalone, no imports |
 | `secrets-registry.nix` | **Single source of truth** for all agenix secrets: file path, owner/path/symlink options, and the list of host keys allowed to decrypt each secret |

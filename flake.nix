@@ -69,13 +69,22 @@
 
   outputs =
     inputs:
+    let
+      # Systems to generate per-system outputs for. Blueprint's default list
+      # also includes x86_64-darwin, which nixpkgs 26.11 no longer supports.
+      systems = [
+        "aarch64-darwin"
+        "aarch64-linux"
+        "x86_64-linux"
+      ];
+    in
 
     # Call a library function to do a recursive merge to blueprint
     # with my own attributes.
     inputs.nixpkgs.lib.attrsets.recursiveUpdate
 
       # Load blueprint.
-      (inputs.blueprint { inherit inputs; })
+      (inputs.blueprint { inherit inputs systems; })
 
       # And declare my own things that gets recursively merged with
       # blueprint so they don't overwrite each other.
@@ -104,7 +113,9 @@
           };
 
           # This is highly advised, and will prevent many possible mistakes
-          checks = builtins.mapAttrs (_system: deployLib: deployLib.deployChecks deploy) inputs.deploy-rs.lib;
+          checks = inputs.nixpkgs.lib.genAttrs systems (
+            system: inputs.deploy-rs.lib.${system}.deployChecks deploy
+          );
         in
         {
           inherit deploy checks;
