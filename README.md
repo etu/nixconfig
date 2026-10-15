@@ -74,7 +74,7 @@ MacBook Air M5 (`aarch64-darwin`) managed with
 [nix-darwin](https://github.com/nix-darwin/nix-darwin) via
 `darwin-configuration.nix`, which blueprint exposes as
 `darwinConfigurations.macbook-air-elis`. Currently a minimal bootstrap: Nix
-settings and caches, hostname, dark mode, Caps Lock remapped to Control, the command line
+settings and caches, hostname, dark mode, Bluetooth in the menu bar, Caps Lock remapped to Control, the command line
 tools from `modules/nixos/base/packages` (including NUR tools), Tailscale
 (`tailscaled` as a launchd daemon; log in once with `sudo tailscale up`), fish (in
 `/etc/shells`; set as login shell once with `chsh`), the emacs-overlay and
