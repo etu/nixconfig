@@ -74,7 +74,7 @@ settings and caches, hostname, Caps Lock remapped to Control, fish (in
 `/etc/shells`; set as login shell once with `chsh`), and Touch ID for `sudo`.
 home-manager for `elishirwing` lives in
 `users/elishirwing/home-configuration.nix` (git, direnv with nix-direnv, zsh,
-Ghostty via the macOS `ghostty-bin` package, plus the shared `fish` and `htop`
+Ghostty via the macOS `ghostty-bin` package (always starting fish), plus the shared `fish` and `htop`
 modules from `modules/home/`) and is applied together with the system.
 `etu-options.nix` declares the few `etu.*` options the shared fish module
 reads, so it can be used unchanged. Bootstrap steps are in

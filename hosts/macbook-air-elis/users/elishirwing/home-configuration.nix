@@ -2,7 +2,13 @@
 #
 # Picked up by blueprint and applied through nix-darwin's home-manager
 # module, so it's activated with `just switch-macbook-air-elis`.
-{ flake, pkgs, ... }:
+{
+  config,
+  flake,
+  lib,
+  pkgs,
+  ...
+}:
 {
   # Shared home-manager modules from modules/home/. The fish module reads a few
   # osConfig.etu.* options, which ../../etu-options.nix declares for this host.
@@ -47,6 +53,9 @@
     package = pkgs.ghostty-bin;
 
     settings = {
+      # Always start fish, regardless of the account's login shell.
+      command = lib.getExe config.programs.fish.package;
+
       # Don't start new windows in the directory of the previous terminal, they
       # should start in the home directory (tabs and splits still inherit).
       window-inherit-working-directory = false;
