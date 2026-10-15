@@ -51,7 +51,7 @@ Each host lives in `hosts/<hostname>/` and is automatically picked up by bluepri
 | Host | Type | Deployment method | Notes |
 |------|------|-------------------|-------|
 | `laptop-private-elis` | Laptop | `nixos-rebuild` locally | Private laptop (ThinkPad P14s Gen 4); pushes ZFS snapshots to `server-main-elis` |
-| `macbook-air-elis` | Laptop (macOS) | `just switch-macbook-air-elis` locally | MacBook Air M5, `aarch64-darwin`, managed with nix-darwin via `darwin-configuration.nix`; not built in CI |
+| `macbook-air-elis` | Laptop (macOS) | `just activate` locally | MacBook Air M5, `aarch64-darwin`, managed with nix-darwin via `darwin-configuration.nix`; not built in CI |
 | `server-main-elis` | Server | `deploy .#server-main-elis` | Home file server; also a Nix build machine, ZFS snapshot target, runs Home Assistant |
 | `server-sparv` | Server | `deploy .#server-sparv` | On-location server for speliarvika.se, LAN cache, game servers (Valheim, Project Zomboid, Minecraft) |
 | `vps06` | VPS | `deploy .#vps06` | Runs Gitea, ip.failar.nu, Matrix homeserver |
@@ -149,9 +149,6 @@ just deploy-vps06
 ```
 
 These call `deploy --skip-checks --targets '.#<hostname>'` using deploy-rs.
-
-On the MacBook, apply the nix-darwin config locally with
-`just switch-macbook-air-elis` (runs `sudo darwin-rebuild switch`).
 
 `just activate` builds and activates the current host locally, picked by
 `hostname`: `sudo darwin-rebuild switch` on macOS and

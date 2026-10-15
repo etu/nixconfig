@@ -56,7 +56,6 @@ Task runner wrapping common `nix`, `deploy`, format, and update commands. Run
 - `just build` / `just build-<hostname>` / `just build-all` — build hosts with `nom`
   (`just build` builds the current host, using its nix-darwin config on macOS)
 - `just deploy-server-main-elis` / `just deploy-server-sparv` / `just deploy-vps06`
-- `just switch-macbook-air-elis` — activate the nix-darwin config locally on the MacBook
 - `just activate` — build and activate the current host locally (`darwin-rebuild`
   on macOS, `nixos-rebuild` on Linux, e.g. `laptop-private-elis`)
 - `just nix-fmt` / `just all-fmt-check` — format and lint checks
@@ -94,7 +93,7 @@ The emacs module uses the native macOS `emacs` build on darwin instead of
 from Spotlight finds git and other tools instead of the Xcode stubs in
 `/usr/bin`. Bootstrap steps are in
 the header of the configuration file; later changes are applied with
-`just switch-macbook-air-elis`. Not built in CI (Linux runners only).
+`just activate`. Not built in CI (Linux runners only).
 
 #### `hosts/server-main-elis/`
 

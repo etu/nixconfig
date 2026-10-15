@@ -1,7 +1,7 @@
 # home-manager configuration for elishirwing on macbook-air-elis.
 #
 # Picked up by blueprint and applied through nix-darwin's home-manager
-# module, so it's activated with `just switch-macbook-air-elis`.
+# module, so it's activated with `just activate`.
 {
   config,
   flake,

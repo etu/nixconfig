@@ -7,7 +7,7 @@
 #    $ sudo nix --extra-experimental-features 'nix-command flakes' run nix-darwin -- switch --flake .#macbook-air-elis
 #
 # Later deployments:
-# $ just switch-macbook-air-elis
+# $ just activate
 {
   inputs,
   lib,

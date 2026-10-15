@@ -68,11 +68,6 @@ build-all: build-laptop-private-elis build-server-main-elis build-server-sparv b
 activate:
     sudo {{ rebuild }} switch --flake '.#{{ hostname }}'
 
-# Switch the macbook-air-elis host (nix-darwin, run locally)
-[group('deploy')]
-switch-macbook-air-elis:
-    sudo darwin-rebuild switch --flake '.#macbook-air-elis'
-
 # Deploy the server-main-elis host
 [group('deploy')]
 deploy-server-main-elis:
