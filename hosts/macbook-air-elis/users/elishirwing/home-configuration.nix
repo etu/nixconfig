@@ -4,9 +4,10 @@
 # module, so it's activated with `just switch-macbook-air-elis`.
 { flake, pkgs, ... }:
 {
-  # Shared home-manager modules from modules/home/ that don't depend on
-  # NixOS-only osConfig.etu.* options.
+  # Shared home-manager modules from modules/home/. The fish module reads a few
+  # osConfig.etu.* options, which ../../etu-options.nix declares for this host.
   imports = [
+    flake.homeModules.fish
     flake.homeModules.htop
   ];
 
@@ -17,6 +18,9 @@
   # direnv with nix-direnv for cached `use flake` environments.
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
+
+  # The shared fish module already sets up the direnv hook itself.
+  programs.direnv.enableFishIntegration = false;
 
   # Git settings, mirroring modules/nixos/development/git on the NixOS hosts.
   programs.git = {

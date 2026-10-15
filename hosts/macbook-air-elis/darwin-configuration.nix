@@ -10,6 +10,10 @@
 # $ just switch-macbook-air-elis
 { pkgs, ... }:
 {
+  imports = [
+    ./etu-options.nix
+  ];
+
   nixpkgs.hostPlatform = "aarch64-darwin";
 
   # Set the hostname so darwin-rebuild picks this configuration by default.
@@ -42,6 +46,16 @@
   # Remap Caps Lock to Control.
   system.keyboard.enableKeyMapping = true;
   system.keyboard.remapCapsLockToControl = true;
+
+  # Install fish system wide, load the Nix environment in it and add it to
+  # /etc/shells. nix-darwin only changes login shells of users listed in
+  # users.knownUsers, so switch to it once with:
+  # $ chsh -s /run/current-system/sw/bin/fish
+  programs.fish.enable = true;
+  environment.shells = [ pkgs.fish ];
+
+  # Use zoxide for cd in fish, like on laptop-private-elis.
+  etu.base.fish.enableUserZoxideCd = true;
 
   # Use Touch ID for sudo.
   security.pam.services.sudo_local.touchIdAuth = true;
