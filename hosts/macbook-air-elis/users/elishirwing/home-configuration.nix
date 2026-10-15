@@ -6,6 +6,7 @@
   config,
   flake,
   lib,
+  osConfig,
   pkgs,
   ...
 }:
@@ -101,6 +102,10 @@
     settings = {
       # Always start fish, regardless of the account's login shell.
       command = lib.getExe config.programs.fish.package;
+
+      # Same font as Emacs, from ../../etu-options.nix.
+      font-family = osConfig.etu.graphical.theme.fonts.monospace;
+      font-size = osConfig.etu.graphical.theme.fonts.size;
 
       # Don't start new windows in the directory of the previous terminal, they
       # should start in the home directory (tabs and splits still inherit).
