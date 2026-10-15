@@ -29,15 +29,29 @@ jobs:
         run: |
           set -Eeuo pipefail
 
-          # Get the hosts
+          # Get the hosts (deploy-rs nodes are all NixOS hosts)
           if [[ "${{ inputs.deployOnly }}" == "true" ]]; then
-            hosts=$(nix eval .#deploy.nodes --apply 'builtins.attrNames' --json)
+            nixos=$(nix eval .#deploy.nodes --apply 'builtins.attrNames' --json)
+            darwin='[]'
           else
-            hosts=$(nix eval .#nixosConfigurations --apply 'builtins.attrNames' --json)
+            nixos=$(nix eval .#nixosConfigurations --apply 'builtins.attrNames' --json)
+            darwin=$(nix eval .#darwinConfigurations --apply 'builtins.attrNames' --json)
           fi
 
-          # Create the matrix object
-          matrix=$(jq -c '[.[] | {hostname: .}]' <<< "$hosts")
+          # Create the matrix object, with the runner, nix system and flake
+          # attribute to build for each host
+          matrix=$(jq -nc --argjson nixos "$nixos" --argjson darwin "$darwin" '
+            [$nixos[] | {
+              hostname: .,
+              runner: "ubuntu-24.04",
+              system: "x86_64-linux",
+              attr: "nixosConfigurations.\(.).config.system.build.toplevel"
+            }] + [$darwin[] | {
+              hostname: .,
+              runner: "macos-latest",
+              system: "aarch64-darwin",
+              attr: "darwinConfigurations.\(.).system"
+            }]')
 
           # Output
           echo "matrix={\"include\": $matrix}" >> "$GITHUB_OUTPUT"

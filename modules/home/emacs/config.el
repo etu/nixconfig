@@ -1,4 +1,4 @@
-;;; base.el -- Global emacs config starts here
+;;; base.el -- Global emacs config starts here  -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
 
@@ -319,7 +319,14 @@
 ;; Statistics based ranking in company
 (use-package company-statistics
   :ensure t
-  :init (setq company-statistics-file (concat user-emacs-data-directory "/company-statistics.dat"))
+  :init
+  (setq company-statistics-file (concat user-emacs-data-directory "/company-statistics.dat"))
+  ;; The package saves its data file without a lexical-binding cookie, so
+  ;; Emacs 31+ warns every time it's loaded. Silence that for this file only.
+  (require 'warnings)
+  (add-to-list 'warning-suppress-log-types
+               `(files missing-lexbind-cookie
+                       ,(abbreviate-file-name (expand-file-name company-statistics-file))))
   :hook (company-mode . company-statistics-mode))
 
 
@@ -583,7 +590,7 @@
 ;;;
 ;;; Tree sitter
 ;;;
-(add-to-list 'treesit-extra-load-path "@treesitGrammars@/lib")
+(add-to-list 'treesit-extra-load-path "@treesitGrammars@")
 
 (setq major-mode-remap-alist
       '((sh-mode . bash-ts-mode)

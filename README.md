@@ -35,16 +35,18 @@ secret) and by `modules/nixos/data/` (which exposes the keys as
 `config.etu.data.pubkeys`). Mittens' key is authorized for root SSH access on
 `server-sparv`. The `laptop-work-elis` SSH key is retained for a separately
 managed device; this repository no longer configures that host. The
-`macbook-air-elis` key belongs to a MacBook Air M5 (not managed by this repo)
-and is part of `etu.computers` and the agenix `etu` key set.
+`macbook-air-elis` key is the user key on the nix-darwin MacBook Air M5 and is
+part of `etu.computers` and the agenix `etu` key set.
 
 ### `flake.nix` and `flake.lock`
 
 Main flake definition: inputs, blueprint wiring, deploy-rs nodes for the three
-remotely-managed servers, and the live-iso package alias. All inputs follow
+remotely-managed servers, and the live-iso package alias. Per-system outputs
+are generated for `aarch64-darwin`, `aarch64-linux` and `x86_64-linux` only
+(nixpkgs 26.11 dropped `x86_64-darwin`). All inputs follow
 `nixpkgs` via `.follows` where possible. Key inputs: `agenix`, `blueprint`,
 `catppuccin`, `deploy-rs`, `disko`, `emacs-overlay`, `home-manager`,
-`impermanence`, `ip-failar-nu`, `nixos-hardware`, `nur`.
+`impermanence`, `ip-failar-nu`, `nix-darwin`, `nixos-hardware`, `nur`.
 
 ### `Justfile`
 
@@ -52,7 +54,10 @@ Task runner wrapping common `nix`, `deploy`, format, and update commands. Run
 `just` to list everything. Notable recipes:
 
 - `just build` / `just build-<hostname>` / `just build-all` — build hosts with `nom`
+  (`just build` builds the current host, using its nix-darwin config on macOS)
 - `just deploy-server-main-elis` / `just deploy-server-sparv` / `just deploy-vps06`
+- `just activate` — build and activate the current host locally (`darwin-rebuild`
+  on macOS, `nixos-rebuild` on Linux, e.g. `laptop-private-elis`)
 - `just nix-fmt` / `just all-fmt-check` — format and lint checks
 - `just update-all` — update flake inputs and all container image tags
 
@@ -62,6 +67,34 @@ Task runner wrapping common `nix`, `deploy`, format, and update commands. Run
 
 Private laptop (Lenovo ThinkPad P14s Gen 4). Deployed with `nixos-rebuild`. ZFS snapshots are
 pushed from this system to `server-main-elis` via syncoid whenever online.
+
+#### `hosts/macbook-air-elis/`
+
+MacBook Air M5 (`aarch64-darwin`) managed with
+[nix-darwin](https://github.com/nix-darwin/nix-darwin) via
+`darwin-configuration.nix`, which blueprint exposes as
+`darwinConfigurations.macbook-air-elis`. Currently a minimal bootstrap: Nix
+settings and caches, hostname, dark mode, Bluetooth in the menu bar, Caps Lock remapped to Control, the command line
+tools from `modules/nixos/base/packages` (including NUR tools), Tailscale
+(`tailscaled` as a launchd daemon; log in once with `sudo tailscale up`), fish (in
+`/etc/shells`; set as login shell once with `chsh`), the emacs-overlay and
+fonts for Emacs, and Touch ID for `sudo`.
+home-manager for `elishirwing` lives in
+`users/elishirwing/home-configuration.nix` (git, direnv with nix-direnv, zsh,
+ssh using the macOS ssh-agent with key passphrases in the Keychain (loaded
+into the agent at login), SSH-signed git commits,
+Ghostty via the macOS `ghostty-bin` package (always starting fish), Claude
+Code and claude-monitor, plus the shared `emacs`, `fish` and `htop` modules
+from `modules/home/`) and is applied together with the system.
+`etu-options.nix` declares the few `etu.*` options the shared emacs and fish
+modules read, so they can be used unchanged (with a macOS font name and size).
+The emacs module uses the native macOS `emacs` build on darwin instead of
+`emacs-pgtk`, and adds the Nix profiles to its PATH so `Emacs.app` launched
+from Spotlight finds git and other tools instead of the Xcode stubs in
+`/usr/bin`. Bootstrap steps are in
+the header of the configuration file; later changes are applied with
+`just activate`. Built and cached in CI on a `macos-latest` (Apple Silicon)
+runner alongside the NixOS hosts.
 
 #### `hosts/server-main-elis/`
 
@@ -146,6 +179,7 @@ Five workflows keep the repo healthy:
 
 - **`format.yml`** — Nix fmt, yamllint, deadnix, statix checks on every push/PR
 - **`pull_request.yaml`** — builds dev shell, runs flake check, builds all hosts
-- **`cache.yml`** — builds and caches all hosts to Cachix on pushes to `main`
+  (NixOS hosts on Linux runners, the MacBook on a macOS runner)
+- **`cache.yml`** — builds and caches all hosts (including the MacBook) to Cachix on pushes to `main`
 - **`deploy.yml`** — deploys the three remote servers via deploy-rs after a push to `main`
 - **`update.yml`** — scheduled PRs to update flake inputs and container image tags

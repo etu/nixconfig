@@ -22,7 +22,7 @@ jobs:
 
   cache:
     needs: matrix
-    runs-on: ubuntu-24.04
+    runs-on: ${{ matrix.runner }}
     strategy:
       matrix: ${{ fromJSON(needs.matrix.outputs.matrix) }}
     name: 'Cache ${{ matrix.hostname }} 🖥️'
@@ -30,10 +30,12 @@ jobs:
       - uses: actions/checkout@v7
         with:
           ref: ${{ inputs.branch }}
+      # Frees up disk space, only supported on Linux runners
       - uses: wimpysworld/nothing-but-nix@v10
+        if: runner.os == 'Linux'
       - uses: DeterminateSystems/nix-installer-action@v23
         with:
-          nix-package-url: https://releases.nixos.org/nix/nix-2.31.3/nix-2.31.3-x86_64-linux.tar.xz
+          nix-package-url: https://releases.nixos.org/nix/nix-2.31.3/nix-2.31.3-${{ matrix.system }}.tar.xz
       - uses: cachix/cachix-action@v17
         with:
           name: etu
@@ -42,4 +44,4 @@ jobs:
           skipPush: ${{ inputs.skipPush }}
 
       - name: 'Build system 🔨🖥️'
-        run: nix build -L ".#nixosConfigurations.${{ matrix.hostname }}.config.system.build.toplevel"
+        run: nix build -L ".#${{ matrix.attr }}"

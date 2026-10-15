@@ -26,7 +26,7 @@ flake outputs.
 
 | Path | Description |
 |------|-------------|
-| `flake.nix` | Main flake definition: inputs, blueprint wiring, deploy-rs nodes, and the live-iso package alias |
+| `flake.nix` | Main flake definition: inputs, blueprint wiring (with an explicit `systems` list, since nixpkgs 26.11 dropped `x86_64-darwin` from blueprint's defaults), deploy-rs nodes, and the live-iso package alias |
 | `flake.lock` | Locked versions of all flake inputs |
 | `pubkeys.nix` | All SSH public keys for users and host systems — standalone, no imports |
 | `secrets-registry.nix` | **Single source of truth** for all agenix secrets: file path, owner/path/symlink options, and the list of host keys allowed to decrypt each secret |
@@ -51,6 +51,7 @@ Each host lives in `hosts/<hostname>/` and is automatically picked up by bluepri
 | Host | Type | Deployment method | Notes |
 |------|------|-------------------|-------|
 | `laptop-private-elis` | Laptop | `nixos-rebuild` locally | Private laptop (ThinkPad P14s Gen 4); pushes ZFS snapshots to `server-main-elis` |
+| `macbook-air-elis` | Laptop (macOS) | `just activate` locally | MacBook Air M5, `aarch64-darwin`, managed with nix-darwin via `darwin-configuration.nix`; built in CI on a `macos-latest` runner |
 | `server-main-elis` | Server | `deploy .#server-main-elis` | Home file server; also a Nix build machine, ZFS snapshot target, runs Home Assistant |
 | `server-sparv` | Server | `deploy .#server-sparv` | On-location server for speliarvika.se, LAN cache, game servers (Valheim, Project Zomboid, Minecraft) |
 | `vps06` | VPS | `deploy .#vps06` | Runs Gitea, ip.failar.nu, Matrix homeserver |
@@ -86,7 +87,7 @@ Home-manager modules for user-level configuration:
 |-----------|---------|
 | `alacritty/` | Alacritty terminal emulator config |
 | `dms-shell/` | DankMaterialShell (Quickshell-based Material 3 desktop shell) config |
-| `emacs/` | Emacs configuration |
+| `emacs/` | Emacs configuration (`emacs-pgtk` on Linux, native `emacs` on macOS; on macOS `Emacs.app` is wrapped too and the Nix profiles are added to PATH, since apps started from Spotlight/launchd only get `/usr/bin:/bin:/usr/sbin:/sbin`) |
 | `firefox/` | Firefox browser settings |
 | `fish/` | Fish shell configuration |
 | `flatpak-overrides/` | Flatpak permission overrides |
@@ -132,9 +133,10 @@ Run `just` to list all available recipes. Key groups:
 ### Build
 
 ```sh
-just build                        # Build current host (auto-detected via `hostname`)
+just build                        # Build current host (auto-detected via `hostname`; darwinConfigurations on macOS, nixosConfigurations elsewhere)
 just build-<hostname>             # Build a specific host
-just build-all                    # Build all hosts (plus the live ISO)
+just build-all                    # Build all NixOS hosts (plus the live ISO)
+just build-macbook-air-elis       # Build the nix-darwin MacBook config (macOS only)
 just build-live-iso               # Build the live ISO image
 ```
 
@@ -147,6 +149,10 @@ just deploy-vps06
 ```
 
 These call `deploy --skip-checks --targets '.#<hostname>'` using deploy-rs.
+
+`just activate` builds and activates the current host locally, picked by
+`hostname`: `sudo darwin-rebuild switch` on macOS and
+`sudo nixos-rebuild switch` elsewhere (e.g. `laptop-private-elis`).
 
 ### Format / Lint
 
@@ -250,6 +256,14 @@ Located in `.github/workflows/`:
 Helper workflow files (`helper_*.yaml`) are reusable workflows called by the
 above.
 
+`helper_host_matrix.yaml` builds the host matrix from `nixosConfigurations`
+and `darwinConfigurations`. Each entry carries the `runner`, nix `system` and
+flake `attr` to build: NixOS hosts run on `ubuntu-24.04` (`x86_64-linux`),
+nix-darwin hosts on `macos-latest` (`aarch64-darwin`).
+`helper_cache_hosts.yaml` uses those, so the pull request, cache and update
+workflows all build the MacBook too. Steps that only work on Linux (such as
+`wimpysworld/nothing-but-nix`) are guarded with `if: runner.os == 'Linux'`.
+
 ### Pinning the Nix version in CI
 
 If a Determinate Nix release breaks CI (e.g. `nix flake check` fails on GitHub
@@ -265,7 +279,8 @@ to a specific release from `releases.nixos.org`. Example:
 
 Run `nix eval nixpkgs#nix.version --raw` locally to find the version your
 nixpkgs provides. Apply the `with:` block to all seven workflow files that
-use `nix-installer-action`. Remove it again once the upstream issue is resolved.
+use `nix-installer-action`. In `helper_cache_hosts.yaml` the tarball name uses
+`${{ matrix.system }}` instead of `x86_64-linux`, since it also runs on macOS. Remove it again once the upstream issue is resolved.
 
 ### Required GitHub Secrets
 
@@ -295,6 +310,7 @@ use `nix-installer-action`. Remove it again once the upstream issue is resolved.
 | `home-manager` | User environment management |
 | `impermanence` | Opt-in persistence on ephemeral root |
 | `ip-failar-nu` | Custom service: ip.failar.nu |
+| `nix-darwin` | macOS system configuration for `macbook-air-elis` |
 | `nur` | Nix User Repository |
 
 All inputs follow `nixpkgs` via `.follows` where possible to avoid duplicate
@@ -316,8 +332,29 @@ versions.
   `pubkeys.nix`. Update it when adding hosts or rotating keys.
 - The `laptop-work-elis` SSH key is retained for a separately managed device;
   this repository no longer configures that host.
-- The `macbook-air-elis` key (MacBook Air M5, not managed by this repo) is part
-  of `etu.computers` and the `etu` key set in `secrets-registry.nix`.
+- The `macbook-air-elis` key (user key on the nix-darwin MacBook) is part of
+  `etu.computers` and the `etu` key set in `secrets-registry.nix`.
+- **nix-darwin hosts**: blueprint loads `hosts/<name>/darwin-configuration.nix`
+  into `darwinConfigurations.<name>`. These do not import `modules/nixos/`
+  (NixOS-only). home-manager on darwin hosts uses blueprint's
+  `hosts/<name>/users/<user>/home-configuration.nix` convention. Shared
+  modules from `modules/home/` are imported there as `flake.homeModules.<name>`,
+  but only those that don't read NixOS-only `osConfig.etu.*` options work
+  as-is (currently `htop` and `tmux`). Modules that only read a few such
+  options can still be used by declaring those options on the darwin host:
+  `hosts/macbook-air-elis/etu-options.nix` does this for `etu.user.username`,
+  `etu.dataPrefix`, `etu.base.fish.*`, `etu.base.emacs.extraConfig` and
+  `etu.graphical.theme.fonts.{monospace,size}` so `flake.homeModules.fish`
+  and `flake.homeModules.emacs` work there. The emacs home module picks
+  `pkgs.emacs` on darwin and `pkgs.emacs-pgtk` on Linux; the darwin host must
+  also apply `inputs.emacs-overlay.overlay` and allow its unfree language
+  servers.
+  `etu.base.nix.allowUnfree` doesn't exist there; unfree packages for the
+  MacBook are listed in `nixpkgs.config.allowUnfreePredicate` in its
+  `darwin-configuration.nix` (which also covers home-manager via
+  `useGlobalPkgs`). The NixOS hosts can't be evaluated on macOS without an
+  `x86_64-linux` builder (catppuccin uses import-from-derivation), so run
+  `just flake-check` for them in CI or on a Linux machine.
 - **Mittens root access**: the `mittens` key in `pubkeys.nix` is authorized for
   root SSH access on `server-sparv`.
 - **blueprint conventions**: the flake uses blueprint, so follow its directory
