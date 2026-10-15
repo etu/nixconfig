@@ -33,7 +33,7 @@ flake outputs.
 | `agenix-rules.nix` | Auto-derived from `secrets-registry.nix` — do not edit directly; consumed by the agenix CLI |
 | `secrets/` | Directory of agenix-encrypted secret files (`.age`) |
 | `hosts/` | Per-machine NixOS configurations |
-| `modules/` | Reusable NixOS (`modules/nixos/`) and home-manager (`modules/home/`) modules |
+| `modules/` | Reusable NixOS (`modules/nixos/`), nix-darwin (`modules/darwin/`) and home-manager (`modules/home/`) modules |
 | `packages/` | Custom Nix packages defined in this repo |
 | `devshell.nix` | `nix develop` shell with all tools needed for day-to-day work |
 | `Justfile` | Task runner (via [just](https://just.systems/)) wrapping common nix, build, deploy, format, and update commands |
@@ -78,6 +78,28 @@ Reusable NixOS modules covering:
 | `user/` | User account definitions |
 | `work/` | Work-specific settings |
 | `default.nix` | Module entry point, imports all sub-modules |
+
+### `modules/darwin/`
+
+nix-darwin modules, exposed by blueprint as `darwinModules.<name>` and
+imported by darwin hosts through `flake.darwinModules.default`. They mirror
+`modules/nixos/` and reuse its `etu.*` option names, so shared home modules
+that read `osConfig.etu.*` work unchanged on macOS.
+
+| Directory | Purpose |
+|-----------|---------|
+| `base/` | Base settings; enables the base modules below by default and defines `etu.dataPrefix` |
+| `base/emacs/` | `etu.base.emacs.*`: emacs-overlay, icon font, unfree language servers, imports `homeModules.emacs` |
+| `base/fish/` | `etu.base.fish.*`: fish system wide and in `/etc/shells`, imports `homeModules.fish` |
+| `base/htop/` | `etu.base.htop.enable`: imports `homeModules.htop` |
+| `base/nix/` | `etu.base.nix.*`: flakes, trusted users, binary caches, `allowUnfree` list |
+| `base/packages/` | Command line tools (mirrors `modules/nixos/base/packages`, minus Linux-only ones) |
+| `base/system/` | macOS defaults: dark mode, Bluetooth in the menu bar, Caps Lock → Control, Touch ID for `sudo` |
+| `base/tailscale/` | `etu.base.tailscale.enable`: `tailscaled` as a launchd daemon |
+| `development/claude-code/` | `etu.development.claude-code.enable`: Claude Code and claude-monitor for the user |
+| `graphical/theme/` | `etu.graphical.theme.*`: font options (macOS defaults: `JetBrains Mono`, 12) and the font package |
+| `user/` | `etu.user.username`: `system.primaryUser` and the user's home directory |
+| `default.nix` | Module entry point, imports all sub-modules and NUR's darwin module |
 
 ### `modules/home/`
 
@@ -335,24 +357,18 @@ versions.
 - The `macbook-air-elis` key (user key on the nix-darwin MacBook) is part of
   `etu.computers` and the `etu` key set in `secrets-registry.nix`.
 - **nix-darwin hosts**: blueprint loads `hosts/<name>/darwin-configuration.nix`
-  into `darwinConfigurations.<name>`. These do not import `modules/nixos/`
-  (NixOS-only). home-manager on darwin hosts uses blueprint's
-  `hosts/<name>/users/<user>/home-configuration.nix` convention. Shared
-  modules from `modules/home/` are imported there as `flake.homeModules.<name>`,
-  but only those that don't read NixOS-only `osConfig.etu.*` options work
-  as-is (currently `htop` and `tmux`). Modules that only read a few such
-  options can still be used by declaring those options on the darwin host:
-  `hosts/macbook-air-elis/etu-options.nix` does this for `etu.user.username`,
-  `etu.dataPrefix`, `etu.base.fish.*`, `etu.base.emacs.extraConfig` and
-  `etu.graphical.theme.fonts.{monospace,size}` so `flake.homeModules.fish`
-  and `flake.homeModules.emacs` work there. The emacs home module picks
-  `pkgs.emacs` on darwin and `pkgs.emacs-pgtk` on Linux; the darwin host must
-  also apply `inputs.emacs-overlay.overlay` and allow its unfree language
-  servers.
-  `etu.base.nix.allowUnfree` doesn't exist there; unfree packages for the
-  MacBook are listed in `nixpkgs.config.allowUnfreePredicate` in its
-  `darwin-configuration.nix` (which also covers home-manager via
-  `useGlobalPkgs`). The NixOS hosts can't be evaluated on macOS without an
+  into `darwinConfigurations.<name>`. They import `flake.darwinModules.default`
+  (`modules/darwin/`) instead of the NixOS-only `modules/nixos/`, and set
+  `etu.*` options just like NixOS hosts do. To bring a NixOS feature to
+  macOS, add a matching module under `modules/darwin/` using the same `etu.*`
+  option names, and have it import shared home modules into
+  `home-manager.users.${config.etu.user.username}`. Shared home modules that
+  read `osConfig.etu.*` then work unchanged, as long as the darwin modules
+  declare every option they read. User-specific home-manager settings stay in
+  blueprint's `hosts/<name>/users/<user>/home-configuration.nix`. The emacs
+  home module picks `pkgs.emacs` on darwin and `pkgs.emacs-pgtk` on Linux.
+  Unfree packages go in `etu.base.nix.allowUnfree`, as on NixOS (it also
+  covers home-manager via `useGlobalPkgs`). The NixOS hosts can't be evaluated on macOS without an
   `x86_64-linux` builder (catppuccin uses import-from-derivation), so run
   `just flake-check` for them in CI or on a Linux machine.
 - **Mittens root access**: the `mittens` key in `pubkeys.nix` is authorized for
@@ -469,7 +485,7 @@ file or `README.md`. Update them if you did any of the following:
 - [ ] Added, removed, or renamed a **host**
 - [ ] Added or changed a **Justfile recipe**
 - [ ] Added or changed a **secret** (new `.age` file, `secrets-registry.nix`, `pubkeys.nix`)
-- [ ] Added or changed a **module** (`modules/nixos/` or `modules/home/`)
+- [ ] Added or changed a **module** (`modules/nixos/`, `modules/darwin/` or `modules/home/`)
 - [ ] Changed a **CI workflow** (`.github/workflows/`)
 - [ ] Changed **tooling or conventions** (formatters, linters, deploy method)
 - [ ] Discovered a new **upgrade breakage pattern** worth documenting

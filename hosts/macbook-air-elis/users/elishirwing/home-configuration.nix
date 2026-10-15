@@ -2,24 +2,17 @@
 #
 # Picked up by blueprint and applied through nix-darwin's home-manager
 # module, so it's activated with `just activate`.
+#
+# The shared home-manager modules (emacs, fish, htop) and Claude Code are
+# imported for this user by the darwin modules in modules/darwin/.
 {
   config,
-  flake,
   lib,
   osConfig,
   pkgs,
   ...
 }:
 {
-  # Shared home-manager modules from modules/home/. The emacs and fish modules
-  # read a few osConfig.etu.* options, which ../../etu-options.nix declares
-  # for this host.
-  imports = [
-    flake.homeModules.emacs
-    flake.homeModules.fish
-    flake.homeModules.htop
-  ];
-
   # Let zsh (the macOS login shell) load the home-manager environment and
   # shell integrations below.
   programs.zsh.enable = true;
@@ -109,7 +102,7 @@
       # Always start fish, regardless of the account's login shell.
       command = lib.getExe config.programs.fish.package;
 
-      # Same font as Emacs, from ../../etu-options.nix.
+      # Same font as Emacs, from etu.graphical.theme.fonts (modules/darwin).
       font-family = osConfig.etu.graphical.theme.fonts.monospace;
       font-size = osConfig.etu.graphical.theme.fonts.size;
 
@@ -127,12 +120,6 @@
       copy-on-select = true;
     };
   };
-
-  # Claude Code, like modules/nixos/development/claude-code on the NixOS hosts.
-  home.packages = [
-    pkgs.claude-code
-    pkgs.claude-monitor
-  ];
 
   # Used for backwards compatibility, read the release notes before changing.
   home.stateVersion = "26.11";

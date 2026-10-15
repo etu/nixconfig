@@ -73,21 +73,21 @@ pushed from this system to `server-main-elis` via syncoid whenever online.
 MacBook Air M5 (`aarch64-darwin`) managed with
 [nix-darwin](https://github.com/nix-darwin/nix-darwin) via
 `darwin-configuration.nix`, which blueprint exposes as
-`darwinConfigurations.macbook-air-elis`. Currently a minimal bootstrap: Nix
-settings and caches, hostname, dark mode, Bluetooth in the menu bar, Caps Lock remapped to Control, the command line
-tools from `modules/nixos/base/packages` (including NUR tools), Tailscale
-(`tailscaled` as a launchd daemon; log in once with `sudo tailscale up`), fish (in
-`/etc/shells`; set as login shell once with `chsh`), the emacs-overlay and
-fonts for Emacs, and Touch ID for `sudo`.
-home-manager for `elishirwing` lives in
+`darwinConfigurations.macbook-air-elis`. The host file only sets the
+hostname, platform, state version and a few `etu.*` options; everything else
+comes from `flake.darwinModules.default` (see `modules/darwin/` below): Nix
+settings and caches, dark mode, Bluetooth in the menu bar, Caps Lock remapped
+to Control, Touch ID for `sudo`, the command line tools (including NUR tools),
+Tailscale (`tailscaled` as a launchd daemon; log in once with
+`sudo tailscale up`), fish (in `/etc/shells`; set as login shell once with
+`chsh`), Emacs with its overlay and fonts, Claude Code, and the shared
+`emacs`, `fish` and `htop` home-manager modules.
+User-specific home-manager settings live in
 `users/elishirwing/home-configuration.nix` (git, direnv with nix-direnv, zsh,
 ssh using the macOS ssh-agent with key passphrases in the Keychain (loaded
-into the agent at login), SSH-signed git commits,
-Ghostty via the macOS `ghostty-bin` package (always starting fish), Claude
-Code and claude-monitor, plus the shared `emacs`, `fish` and `htop` modules
-from `modules/home/`) and is applied together with the system.
-`etu-options.nix` declares the few `etu.*` options the shared emacs and fish
-modules read, so they can be used unchanged (with a macOS font name and size).
+into the agent at login), SSH-signed git commits, Ghostty via the macOS
+`ghostty-bin` package (always starting fish), extra fish abbreviations) and
+are applied together with the system.
 The emacs module uses the native macOS `emacs` build on darwin instead of
 `emacs-pgtk`, and adds the Nix profiles to its PATH so `Emacs.app` launched
 from Spotlight finds git and other tools instead of the Xcode stubs in
@@ -152,6 +152,11 @@ Reusable NixOS and home-manager modules with custom options.
 **`modules/nixos/`** — system-level modules:
 `base`, `data`, `development`, `games`, `graphical`, `services`, `theme`,
 `user`, `work`.
+
+**`modules/darwin/`** — nix-darwin modules, mirroring `modules/nixos/` and
+its `etu.*` option names (so shared home modules reading `osConfig.etu.*`
+work on macOS too): `base` (emacs, fish, htop, nix, packages, system defaults,
+tailscale), `development` (claude-code), `graphical` (theme fonts), `user`.
 
 **`modules/home/`** — user-level home-manager modules:
 `alacritty`, `dms-shell`, `emacs`, `firefox`, `fish`, `flatpak-overrides`,
