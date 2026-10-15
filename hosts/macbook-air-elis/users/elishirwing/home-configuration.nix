@@ -48,6 +48,25 @@
     };
   };
 
+  # Use the ssh-agent macOS already runs per login session (SSH_AUTH_SOCK is
+  # set by launchd), with key passphrases stored in the Keychain. Store the
+  # passphrase once with:
+  # $ ssh-add --apple-use-keychain ~/.ssh/id_ed25519
+  programs.ssh = {
+    enable = true;
+    enableDefaultConfig = false;
+
+    settings."*" = {
+      # Load keys into the agent on first use.
+      AddKeysToAgent = "yes";
+
+      # UseKeychain only exists in Apple's ssh (/usr/bin/ssh); don't let
+      # other ssh builds fail on it.
+      IgnoreUnknown = "UseKeychain";
+      UseKeychain = "yes";
+    };
+  };
+
   # Ghostty, with the macOS build of the package and the platform-neutral
   # settings from modules/home/ghostty (which is Linux-specific).
   programs.ghostty = {
