@@ -153,6 +153,10 @@ These call `deploy --skip-checks --targets '.#<hostname>'` using deploy-rs.
 On the MacBook, apply the nix-darwin config locally with
 `just switch-macbook-air-elis` (runs `sudo darwin-rebuild switch`).
 
+`just activate` builds and activates the current host locally, picked by
+`hostname`: `sudo darwin-rebuild switch` on macOS and
+`sudo nixos-rebuild switch` elsewhere (e.g. `laptop-private-elis`).
+
 ### Format / Lint
 
 ```sh

@@ -6,6 +6,10 @@ hostname := shell('hostname')
 
 build-target := if os() == "macos" { "darwinConfigurations." + hostname + ".system" } else { "nixosConfigurations." + hostname + ".config.system.build.toplevel" }
 
+# The rebuild tool for the current host: nix-darwin on macOS, NixOS elsewhere.
+
+rebuild := if os() == "macos" { "darwin-rebuild" } else { "nixos-rebuild" }
+
 # Make a private default recipe to list recipes.
 _default:
     @just --list
@@ -58,6 +62,11 @@ build-vps06:
 # Build all hosts
 [group('build')]
 build-all: build-laptop-private-elis build-server-main-elis build-server-sparv build-vps06 build-live-iso
+
+# Build and activate the current host locally (nix-darwin on macOS, NixOS elsewhere)
+[group('deploy')]
+activate:
+    sudo {{ rebuild }} switch --flake '.#{{ hostname }}'
 
 # Switch the macbook-air-elis host (nix-darwin, run locally)
 [group('deploy')]
