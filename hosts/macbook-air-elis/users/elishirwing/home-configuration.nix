@@ -31,6 +31,12 @@
   # The shared fish module already sets up the direnv hook itself.
   programs.direnv.enableFishIntegration = false;
 
+  # Extra fish abbreviations for this host, merged with the ones from the
+  # shared fish module.
+  programs.fish.shellAbbrs = {
+    l = "ls -lh";
+  };
+
   # Git settings, mirroring modules/nixos/development/git on the NixOS hosts.
   programs.git = {
     enable = true;
