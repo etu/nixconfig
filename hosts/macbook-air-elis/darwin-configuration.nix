@@ -71,6 +71,9 @@
     "etu.cachix.org-1:CeyfbMJZHZ95TScp8+I8+EeyzbncqPSj1xfCK9vOAFE="
   ];
 
+  # Use dark mode.
+  system.defaults.NSGlobalDomain.AppleInterfaceStyle = "Dark";
+
   # Remap Caps Lock to Control.
   system.keyboard.enableKeyMapping = true;
   system.keyboard.remapCapsLockToControl = true;
