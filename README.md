@@ -79,7 +79,8 @@ tools from `modules/nixos/base/packages` (including NUR tools), Tailscale
 fonts for Emacs, and Touch ID for `sudo`.
 home-manager for `elishirwing` lives in
 `users/elishirwing/home-configuration.nix` (git, direnv with nix-direnv, zsh,
-ssh using the macOS ssh-agent with key passphrases in the Keychain,
+ssh using the macOS ssh-agent with key passphrases in the Keychain (loaded
+into the agent at login), SSH-signed git commits,
 Ghostty via the macOS `ghostty-bin` package (always starting fish), Claude
 Code and claude-monitor, plus the shared `emacs`, `fish` and `htop` modules
 from `modules/home/`) and is applied together with the system.

@@ -37,6 +37,12 @@
     settings = {
       user.name = "Elis Hirwing";
       user.email = "elis@hirwing.se";
+      user.signingKey = "~/.ssh/id_ed25519.pub";
+
+      # Sign commits with the SSH key (through the ssh-agent) instead of GPG.
+      commit.gpgSign = true;
+      gpg.format = "ssh";
+      gpg.ssh.allowedSignersFile = "~/.ssh/allowed_signers";
 
       # Set default "git pull" behaviour so it doesn't try to default to
       # either "git fetch; git merge" (default) or "git fetch; git rebase".
@@ -45,6 +51,25 @@
       # REuse REcorded REsolution to remember and resolve merge conflicts
       # better when you hit the several conflict several times.
       rerere.enabled = true;
+    };
+  };
+
+  # Allowed signers file for verifying SSH-signed git commits.
+  home.file.".ssh/allowed_signers".text = lib.concatMapStrings (
+    key: "elis@hirwing.se ${key}\n"
+  ) (import ../../../../pubkeys.nix).etu.computers;
+
+  # The agent starts empty at login and only ssh itself adds keys on first
+  # use, so commit signing would prompt for the passphrase after a reboot.
+  # Load the keys from the Keychain into the agent at login instead.
+  launchd.agents.ssh-add-keychain = {
+    enable = true;
+    config = {
+      ProgramArguments = [
+        "/usr/bin/ssh-add"
+        "--apple-load-keychain"
+      ];
+      RunAtLoad = true;
     };
   };
 
