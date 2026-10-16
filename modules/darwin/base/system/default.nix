@@ -24,6 +24,8 @@ _: {
   system.keyboard.enableKeyMapping = true;
   system.keyboard.remapCapsLockToControl = true;
 
-  # Use Touch ID for sudo.
+  # Use Touch ID for sudo, also inside tmux (reattach connects processes
+  # started by the tmux server back to the user's login session).
   security.pam.services.sudo_local.touchIdAuth = true;
+  security.pam.services.sudo_local.reattach = true;
 }

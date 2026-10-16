@@ -95,7 +95,7 @@ that read `osConfig.etu.*` work unchanged on macOS.
 | `base/nix/` | `etu.base.nix.*`: flakes, trusted users, binary caches, `allowUnfree` list |
 | `base/packages/` | Command line tools (mirrors `modules/nixos/base/packages`, minus Linux-only ones, plus `watch`, which macOS lacks) |
 | `base/ssh/` | `etu.base.ssh.enable`: ssh client using the macOS ssh-agent with key passphrases in the Keychain (`UseKeychain`, `AddKeysToAgent`), and a login agent loading the keys into the ssh-agent |
-| `base/system/` | macOS defaults: dark mode, auto-hiding Dock without recent apps, battery percentage and Bluetooth in the menu bar, Caps Lock → Control, faster key repeat, Touch ID for `sudo` |
+| `base/system/` | macOS defaults: dark mode, auto-hiding Dock without recent apps, battery percentage and Bluetooth in the menu bar, Caps Lock → Control, faster key repeat, Touch ID for `sudo` (with `pam_reattach`, so it also works inside tmux) |
 | `base/tailscale/` | `etu.base.tailscale.enable`: `tailscaled` as a launchd daemon |
 | `base/tmux/` | `etu.base.tmux.enable`: imports `homeModules.tmux`, always starts fish (tmux otherwise uses `$SHELL`, which is zsh on macOS), and overrides the status bar's load average (the shared module reads Linux-only `/proc/loadavg`) with `sysctl -n vm.loadavg` |
 | `development/claude-code/` | `etu.development.claude-code.enable`: Claude Code and claude-monitor for the user |
