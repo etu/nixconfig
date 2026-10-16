@@ -82,14 +82,14 @@ Tailscale (`tailscaled` as a launchd daemon; log in once with
 `sudo tailscale up`), fish (in `/etc/shells`; set as login shell once with
 `chsh`), Emacs with its overlay and fonts, Claude Code, the AeroSpace tiling
 window manager (sway-like bindings on Alt, see `modules/darwin/graphical/aerospace`),
-and the shared `emacs`, `fish` and `htop` home-manager modules.
+and the shared `emacs`, `fish`, `ghostty` and `htop` home-manager modules
+(Ghostty uses the macOS `ghostty-bin` package there, always starts fish and
+quits after its last window closes).
 User-specific home-manager settings live in
 `users/elishirwing/home-configuration.nix` (git, direnv with nix-direnv, zsh,
 ssh using the macOS ssh-agent with key passphrases in the Keychain (loaded
-into the agent at login), SSH-signed git commits, Ghostty via the macOS
-`ghostty-bin` package (always starting fish, quitting after its last window
-closes), extra fish abbreviations) and
-are applied together with the system.
+into the agent at login), SSH-signed git commits, extra fish abbreviations)
+and are applied together with the system.
 The emacs module uses the native macOS `emacs` build on darwin instead of
 `emacs-pgtk`, and adds the Nix profiles to its PATH so `Emacs.app` launched
 from Spotlight finds git and other tools instead of the Xcode stubs in
@@ -159,7 +159,7 @@ Reusable NixOS and home-manager modules with custom options.
 **`modules/darwin/`** — nix-darwin modules, mirroring `modules/nixos/` and
 its `etu.*` option names (so shared home modules reading `osConfig.etu.*`
 work on macOS too): `base` (emacs, fish, htop, nix, packages, system defaults,
-tailscale), `development` (claude-code), `graphical` (AeroSpace, theme fonts), `user`.
+tailscale), `development` (claude-code), `graphical` (AeroSpace, Ghostty, theme fonts), `user`.
 
 **`modules/home/`** — user-level home-manager modules:
 `alacritty`, `dms-shell`, `emacs`, `firefox`, `fish`, `flatpak-overrides`,

@@ -3,15 +3,9 @@
 # Picked up by blueprint and applied through nix-darwin's home-manager
 # module, so it's activated with `just activate`.
 #
-# The shared home-manager modules (emacs, fish, htop) and Claude Code are
-# imported for this user by the darwin modules in modules/darwin/.
-{
-  config,
-  lib,
-  osConfig,
-  pkgs,
-  ...
-}:
+# The shared home-manager modules (emacs, fish, ghostty, htop) and Claude Code
+# are imported for this user by the darwin modules in modules/darwin/.
+{ lib, ... }:
 {
   # Let zsh (the macOS login shell) load the home-manager environment and
   # shell integrations below.
@@ -89,42 +83,6 @@
       # other ssh builds fail on it.
       IgnoreUnknown = "UseKeychain";
       UseKeychain = "yes";
-    };
-  };
-
-  # Ghostty, with the macOS build of the package and the platform-neutral
-  # settings from modules/home/ghostty (which is Linux-specific).
-  programs.ghostty = {
-    enable = true;
-    package = pkgs.ghostty-bin;
-
-    settings = {
-      # Always start fish, regardless of the account's login shell.
-      command = lib.getExe config.programs.fish.package;
-
-      # Same font as Emacs, from etu.graphical.theme.fonts (modules/darwin).
-      font-family = osConfig.etu.graphical.theme.fonts.monospace;
-      font-size = osConfig.etu.graphical.theme.fonts.size;
-
-      # Don't start new windows in the directory of the previous terminal, they
-      # should start in the home directory (tabs and splits still inherit).
-      window-inherit-working-directory = false;
-
-      # Always use a solid block cursor. Shell integration would otherwise
-      # switch the cursor to a bar at the prompt (no-cursor). Over ssh, install
-      # the xterm-ghostty terminfo on remote hosts (ssh-terminfo), and fall back
-      # to TERM=xterm-256color when that isn't possible (ssh-env).
-      cursor-style = "block";
-      cursor-style-blink = false;
-      shell-integration-features = "no-cursor,ssh-terminfo,ssh-env";
-
-      # Selecting text should copy it.
-      copy-on-select = true;
-
-      # Quit when the last window is closed, like on Linux. Otherwise every
-      # instance started by AeroSpace's Alt+Return (open -na Ghostty) stays
-      # running in the Dock after its window is closed.
-      quit-after-last-window-closed = true;
     };
   };
 

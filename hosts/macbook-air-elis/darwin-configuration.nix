@@ -30,6 +30,7 @@
     base.fish.enableUserZoxideCd = true;
     development.claude-code.enable = true;
     graphical.aerospace.enable = true;
+    graphical.ghostty.enable = true;
     graphical.theme.enable = true;
   };
 

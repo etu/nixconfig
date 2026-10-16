@@ -1,20 +1,12 @@
-{ osConfig, perSystem, ... }:
+# Ghostty settings shared by NixOS and nix-darwin. The platform specific parts
+# (package, Linux desktop integration, macOS app behaviour) are set by
+# modules/nixos/graphical/ghostty and modules/darwin/graphical/ghostty.
+{ osConfig, ... }:
 {
-  # Since Ghostty 1.3 the GTK setting for primary paste is honored, and it
-  # defaults to false outside of GNOME, which disables middle-click paste.
-  dconf.settings."org/gnome/desktop/interface".gtk-enable-primary-paste = true;
-
   programs.ghostty = {
     enable = true;
-    package = perSystem.self.ghostty;
-
-    # The unit shipped in the (wrapped) package is already picked up through the
-    # profile, so don't let home-manager install another copy of it.
-    systemd.enable = false;
 
     settings = {
-      term = "xterm-256color";
-      env = [ "TERMINAL=ghostty" ];
       font-family = osConfig.etu.graphical.theme.fonts.monospace;
       font-size = osConfig.etu.graphical.theme.fonts.size;
 
@@ -30,11 +22,8 @@
       cursor-style-blink = false;
       shell-integration-features = "no-cursor,ssh-terminfo,ssh-env";
 
-      # Selecting text should copy it (middle-click paste is enabled via dconf above).
+      # Selecting text should copy it.
       copy-on-select = true;
-
-      # Don't let Ctrl+Enter toggle fullscreen by default.
-      keybind = [ "ctrl+enter=unbind" ];
     };
   };
 }
