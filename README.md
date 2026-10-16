@@ -87,7 +87,8 @@ User-specific home-manager settings live in
 `users/elishirwing/home-configuration.nix` (git, direnv with nix-direnv, zsh,
 ssh using the macOS ssh-agent with key passphrases in the Keychain (loaded
 into the agent at login), SSH-signed git commits, Ghostty via the macOS
-`ghostty-bin` package (always starting fish), extra fish abbreviations) and
+`ghostty-bin` package (always starting fish, quitting after its last window
+closes), extra fish abbreviations) and
 are applied together with the system.
 The emacs module uses the native macOS `emacs` build on darwin instead of
 `emacs-pgtk`, and adds the Nix profiles to its PATH so `Emacs.app` launched

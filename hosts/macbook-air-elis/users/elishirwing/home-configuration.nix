@@ -118,6 +118,11 @@
 
       # Selecting text should copy it.
       copy-on-select = true;
+
+      # Quit when the last window is closed, like on Linux. Otherwise every
+      # instance started by AeroSpace's Alt+Return (open -na Ghostty) stays
+      # running in the Dock after its window is closed.
+      quit-after-last-window-closed = true;
     };
   };
 
