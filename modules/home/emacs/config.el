@@ -531,9 +531,11 @@
   (progn
     (setq org-src-fontify-natively t)
 
-    ;; Set path for org agenda files
-    (if (file-directory-p "@dataPrefix@/home/etu/.dotfiles/skeleton/org")
-        (setq org-agenda-files '("@dataPrefix@/home/etu/.dotfiles/skeleton/org")))
+    ;; Set path for org agenda files (the dotfiles live below the persistent
+    ;; data prefix on NixOS, and directly in the home directory on macOS)
+    (let ((org-dir (concat "@dataPrefix@" (getenv "HOME") "/.dotfiles/skeleton/org")))
+      (if (file-directory-p org-dir)
+          (setq org-agenda-files (list org-dir))))
 
     ;; Disable indentation of text and content to be based on the headlines
     ;; amount of stars.

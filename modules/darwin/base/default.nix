@@ -18,7 +18,8 @@
   options.etu = {
     dataPrefix = lib.mkOption {
       type = lib.types.str;
-      default = "/data";
+      # macOS has no ephemeral root, so everything persists in place.
+      default = "";
       description = "The path to where persistent storage happens";
     };
   };
