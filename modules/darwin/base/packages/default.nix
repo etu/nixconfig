@@ -21,6 +21,7 @@
     pkgs.ripgrep # quick file searcher
     pkgs.testssl # print TLS certificate info
     pkgs.speedtest-cli # Speedtest command line util
+    pkgs.watch # run a command periodically (part of procps on Linux, missing on macOS)
 
     # Own tools:
     pkgs.nur.repos.etu.llr # llr, tool to cut long lines

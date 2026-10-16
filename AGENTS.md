@@ -93,7 +93,7 @@ that read `osConfig.etu.*` work unchanged on macOS.
 | `base/fish/` | `etu.base.fish.*`: fish system wide and in `/etc/shells`, imports `homeModules.fish` |
 | `base/htop/` | `etu.base.htop.enable`: imports `homeModules.htop` |
 | `base/nix/` | `etu.base.nix.*`: flakes, trusted users, binary caches, `allowUnfree` list |
-| `base/packages/` | Command line tools (mirrors `modules/nixos/base/packages`, minus Linux-only ones) |
+| `base/packages/` | Command line tools (mirrors `modules/nixos/base/packages`, minus Linux-only ones, plus `watch`, which macOS lacks) |
 | `base/system/` | macOS defaults: dark mode, auto-hiding Dock without recent apps, battery percentage and Bluetooth in the menu bar, Caps Lock → Control, Touch ID for `sudo` |
 | `base/tailscale/` | `etu.base.tailscale.enable`: `tailscaled` as a launchd daemon |
 | `development/claude-code/` | `etu.development.claude-code.enable`: Claude Code and claude-monitor for the user |
