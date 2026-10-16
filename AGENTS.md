@@ -98,6 +98,8 @@ that read `osConfig.etu.*` work unchanged on macOS.
 | `base/tailscale/` | `etu.base.tailscale.enable`: `tailscaled` as a launchd daemon |
 | `base/tmux/` | `etu.base.tmux.enable`: imports `homeModules.tmux`, always starts fish (tmux otherwise uses `$SHELL`, which is zsh on macOS), and overrides the status bar's load average (the shared module reads Linux-only `/proc/loadavg`) with `sysctl -n vm.loadavg` |
 | `development/claude-code/` | `etu.development.claude-code.enable`: Claude Code and claude-monitor for the user |
+| `development/vscode/` | `etu.development.vscode.enable` / `enableWork`: imports `homeModules.vscode` and allows its unfree packages, like the NixOS module |
+| `graphical/fdm-printing/` | `etu.graphical.fdm-printing.enable`: OpenSCAD for the user (FreeCAD isn't available for macOS); also read by `homeModules.vscode` for the OpenSCAD extension |
 | `graphical/aerospace/` | `etu.graphical.aerospace.enable`: AeroSpace tiling window manager via `services.aerospace`, with bindings mirroring `modules/home/sway` (Alt instead of Super, configurable with `etu.graphical.aerospace.modifier`, Emacs-style `b`/`f`/`p`/`n` directions, Dvorak key mapping, workspaces I–X on keys 1–0, resize mode) |
 | `graphical/ghostty/` | `etu.graphical.ghostty.enable`: imports `homeModules.ghostty` for the user, like the NixOS module, and adds the macOS specifics (`ghostty-bin`, always start fish, quit after the last window closes) |
 | `graphical/theme/` | `etu.graphical.theme.*`: font options (macOS defaults: `JetBrains Mono`, 12) and the font package |

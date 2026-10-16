@@ -159,7 +159,8 @@ Reusable NixOS and home-manager modules with custom options.
 **`modules/darwin/`** — nix-darwin modules, mirroring `modules/nixos/` and
 its `etu.*` option names (so shared home modules reading `osConfig.etu.*`
 work on macOS too): `base` (emacs, fish, htop, nix, packages, system defaults,
-tailscale, tmux), `development` (claude-code), `graphical` (AeroSpace, Ghostty, theme fonts), `user`.
+tailscale, tmux), `development` (claude-code, vscode), `graphical` (AeroSpace, fdm-printing,
+Ghostty, theme fonts), `user`.
 
 **`modules/home/`** — user-level home-manager modules:
 `alacritty`, `dms-shell`, `emacs`, `firefox`, `fish`, `flatpak-overrides`,
