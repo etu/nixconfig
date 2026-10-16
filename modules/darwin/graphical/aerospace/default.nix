@@ -4,9 +4,7 @@
   ...
 }:
 let
-  # Mirror modules/home/sway: Alt instead of Super (Cmd collides with most
-  # macOS shortcuts), and Emacs-style direction keys (b/f/p/n).
-  modifier = "alt";
+  inherit (config.etu.graphical.aerospace) modifier;
 
   # Start a new Ghostty instance, like sway's exec of the terminal. AppleScript
   # ("tell application Ghostty to new window") doesn't work here: AeroSpace
@@ -18,6 +16,14 @@ in
 {
   options.etu.graphical.aerospace.enable =
     lib.mkEnableOption "Enable the AeroSpace tiling window manager";
+  options.etu.graphical.aerospace.modifier = lib.mkOption {
+    type = lib.types.str;
+    # Mirror modules/home/sway with Alt instead of Super, since Cmd collides
+    # with most macOS shortcuts. The Emacs-style direction keys are b/f/p/n.
+    default = "alt";
+    example = "cmd";
+    description = "AeroSpace modifier key(s) for all bindings, e.g. `alt`, `cmd` or `cmd-alt`.";
+  };
 
   config = lib.mkIf config.etu.graphical.aerospace.enable {
     services.aerospace.enable = true;
