@@ -80,7 +80,7 @@ settings and caches, dark mode, an auto-hiding Dock without recent apps, battery
 to Control, faster key repeat, Touch ID for `sudo`, the command line tools (including NUR tools),
 Tailscale (`tailscaled` as a launchd daemon; log in once with
 `sudo tailscale up`), fish (in `/etc/shells`; set as login shell once with
-`chsh`), Emacs with its overlay and fonts, Claude Code, the AeroSpace tiling
+`chsh`), Emacs with its overlay and fonts, Claude Code, VS Code, OpenSCAD, the AeroSpace tiling
 window manager (sway-like bindings on Alt, see `modules/darwin/graphical/aerospace`),
 and the shared `emacs`, `fish`, `ghostty`, `htop` and `tmux` home-manager modules
 (Ghostty uses the macOS `ghostty-bin` package there, always starts fish and
