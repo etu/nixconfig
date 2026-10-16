@@ -1,5 +1,6 @@
 {
   config,
+  flake,
   lib,
   pkgs,
   ...
@@ -15,48 +16,12 @@
 
     # Configure git for my users home-manager (if it's enabled).
     home-manager.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
-      home.file = {
-        "bin/git-branchclean".source = ./bin/git-branchclean;
-        "bin/git-git".source = ./bin/git-git;
-        "bin/git-lol".source = ./bin/git-lol;
-        "bin/git-refetch-tags".source = ./bin/git-refetch-tags;
+      imports = [
+        flake.homeModules.git
+      ];
 
-        # Allowed signers file for verifying SSH-signed git commits.
-        ".ssh/allowed_signers".text = lib.concatMapStrings (
-          key: "${config.etu.user.email} ${key}\n"
-        ) config.etu.data.pubkeys.etu.computers;
-      };
-
-      programs.git = {
-        enable = true;
-
-        # Default configs
-        settings = {
-          commit.gpgSign = config.etu.graphical.gnupg.enable;
-
-          user.name = config.etu.user.realname;
-          user.email = config.etu.user.email;
-          user.signingKey = config.etu.user.signingKey;
-
-          # Use SSH keys for commit signing instead of GPG.
-          gpg.format = "ssh";
-          gpg.ssh.allowedSignersFile = "~/.ssh/allowed_signers";
-
-          # Set default "git pull" behaviour so it doesn't try to default to
-          # either "git fetch; git merge" (default) or "git fetch; git rebase".
-          pull.ff = "only";
-
-          # REuse REcorded REsolution to remember and resolve merge conflicts
-          # better when you hit the several conflict several times.
-          rerere.enabled = true;
-        };
-
-        # Global ignores
-        ignores = [
-          ".ac-php-conf.json"
-          ".projectile-cache.eld"
-        ];
-      };
+      # Sign commits by default when the signing setup (gnupg) is enabled.
+      programs.git.settings.commit.gpgSign = config.etu.graphical.gnupg.enable;
     };
   };
 }

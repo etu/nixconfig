@@ -98,12 +98,13 @@ that read `osConfig.etu.*` work unchanged on macOS.
 | `base/tailscale/` | `etu.base.tailscale.enable`: `tailscaled` as a launchd daemon |
 | `base/tmux/` | `etu.base.tmux.enable`: imports `homeModules.tmux`, always starts fish (tmux otherwise uses `$SHELL`, which is zsh on macOS), and overrides the status bar's load average (the shared module reads Linux-only `/proc/loadavg`) with `sysctl -n vm.loadavg` |
 | `development/claude-code/` | `etu.development.claude-code.enable`: Claude Code and claude-monitor for the user |
+| `development/git/` | `etu.development.git.enable`: git system wide, imports `homeModules.git` and always signs commits (SSH key through the ssh-agent) |
 | `development/vscode/` | `etu.development.vscode.enable` / `enableWork`: imports `homeModules.vscode` and allows its unfree packages, like the NixOS module |
 | `graphical/fdm-printing/` | `etu.graphical.fdm-printing.enable`: OpenSCAD for the user (FreeCAD isn't available for macOS); also read by `homeModules.vscode` for the OpenSCAD extension |
 | `graphical/aerospace/` | `etu.graphical.aerospace.enable`: AeroSpace tiling window manager via `services.aerospace`, with bindings mirroring `modules/home/sway` (Alt instead of Super, configurable with `etu.graphical.aerospace.modifier`, Emacs-style `b`/`f`/`p`/`n` directions, Dvorak key mapping, workspaces I–X on keys 1–0, resize mode) |
 | `graphical/ghostty/` | `etu.graphical.ghostty.enable`: imports `homeModules.ghostty` for the user, like the NixOS module, and adds the macOS specifics (`ghostty-bin`, always start fish, quit after the last window closes) |
 | `graphical/theme/` | `etu.graphical.theme.*`: font options (macOS defaults: `JetBrains Mono`, 12) and the font package |
-| `user/` | `etu.user.username`: `system.primaryUser` and the user's home directory |
+| `user/` | `etu.user.username`: `system.primaryUser` and the user's home directory; also `etu.user.{realname,email,signingKey}` (same defaults as NixOS) for `homeModules.git` |
 | `default.nix` | Module entry point, imports all sub-modules and NUR's darwin module |
 
 ### `modules/home/`
@@ -120,6 +121,7 @@ Home-manager modules for user-level configuration:
 | `flatpak-overrides/` | Flatpak permission overrides |
 | `ghostty/` | Ghostty settings shared by NixOS and nix-darwin: font from `etu.graphical.theme.fonts`, block cursor, copy-on-select, and ssh shell integration (`ssh-terminfo`, `ssh-env`). Platform specifics live in the OS modules: `modules/nixos/graphical/ghostty` sets the wrapped package (`GTK_IM_MODULE=simple` so the compose key works on GTK 4.20+/Wayland), middle-click paste via dconf and unbinds the `Ctrl+Enter` fullscreen toggle; `modules/darwin/graphical/ghostty` sets `ghostty-bin`, always starts fish and quits after the last window closes |
 | `graphical-dotfiles/` | Miscellaneous graphical dotfiles |
+| `git/` | Git settings shared by NixOS and nix-darwin: identity and signing key from `etu.user.*`, SSH commit signing setup with an allowed signers file from `pubkeys.nix`, `bin/git-*` helper scripts and global ignores. Hosts that need another identity (like the work MacBook) set `etu.user.email`. Whether to sign by default is set by the OS modules (`etu.graphical.gnupg.enable` on NixOS, always on darwin) |
 | `htop/` | htop config |
 | `kanshi/` | kanshi (display management) config |
 | `sway/` | Sway compositor config |

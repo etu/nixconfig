@@ -4,10 +4,27 @@
   ...
 }:
 {
-  options.etu.user.username = lib.mkOption {
-    type = lib.types.str;
-    default = "etu";
-    description = "My username for this system.";
+  options.etu.user = {
+    username = lib.mkOption {
+      type = lib.types.str;
+      default = "etu";
+      description = "My username for this system.";
+    };
+    realname = lib.mkOption {
+      type = lib.types.str;
+      default = "Elis Hirwing";
+      description = "My realname for this system.";
+    };
+    email = lib.mkOption {
+      type = lib.types.str;
+      default = "elis@hirwing.se";
+      description = "My email for this system.";
+    };
+    signingKey = lib.mkOption {
+      type = lib.types.str;
+      default = "~/.ssh/id_ed25519.pub";
+      description = "My public signing key for this system.";
+    };
   };
 
   config = {

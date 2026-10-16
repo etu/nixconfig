@@ -3,10 +3,10 @@
 # Picked up by blueprint and applied through nix-darwin's home-manager
 # module, so it's activated with `just activate`.
 #
-# The shared home-manager modules (emacs, fish, ghostty, htop) and Claude Code
-# are imported for this user by the darwin modules in modules/darwin/.
-{ lib, ... }:
-{
+# The shared home-manager modules (emacs, fish, ghostty, git, htop, tmux,
+# vscode) and Claude Code are imported for this user by the darwin modules in
+# modules/darwin/.
+_: {
   # Let zsh (the macOS login shell) load the home-manager environment and
   # shell integrations below.
   programs.zsh.enable = true;
@@ -24,37 +24,9 @@
     l = "ls -lh";
   };
 
-  # Git settings, mirroring modules/nixos/development/git on the NixOS hosts.
-  programs.git = {
-    enable = true;
-
-    settings = {
-      user.name = "Elis Hirwing";
-      user.email = "elis@hirwing.se";
-      user.signingKey = "~/.ssh/id_ed25519.pub";
-
-      # Sign commits with the SSH key (through the ssh-agent) instead of GPG.
-      commit.gpgSign = true;
-      gpg.format = "ssh";
-      gpg.ssh.allowedSignersFile = "~/.ssh/allowed_signers";
-
-      # Set default "git pull" behaviour so it doesn't try to default to
-      # either "git fetch; git merge" (default) or "git fetch; git rebase".
-      pull.ff = "only";
-
-      # REuse REcorded REsolution to remember and resolve merge conflicts
-      # better when you hit the several conflict several times.
-      rerere.enabled = true;
-    };
-  };
-
-  # Allowed signers file for verifying SSH-signed git commits.
-  home.file.".ssh/allowed_signers".text = lib.concatMapStrings (
-    key: "elis@hirwing.se ${key}\n"
-  ) (import ../../../../pubkeys.nix).etu.computers;
-
   # The agent starts empty at login and only ssh itself adds keys on first
-  # use, so commit signing would prompt for the passphrase after a reboot.
+  # use, so git commit signing (modules/darwin/development/git) would prompt
+  # for the passphrase after a reboot.
   # Load the keys from the Keychain into the agent at login instead.
   launchd.agents.ssh-add-keychain = {
     enable = true;
