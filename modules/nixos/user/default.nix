@@ -27,16 +27,6 @@
       default = "elis@hirwing.se";
       description = "My email for this system.";
     };
-    companyEmail = lib.mkOption {
-      type = lib.types.str;
-      default = "elis@taserud.net";
-      description = "My email for this system.";
-    };
-    workEmail = lib.mkOption {
-      type = lib.types.str;
-      default = "elis.hirwing@schibsted.com";
-      description = "My email for this system.";
-    };
     signingKey = lib.mkOption {
       type = lib.types.str;
       default = "~/.ssh/id_ed25519.pub";

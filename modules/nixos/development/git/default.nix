@@ -56,31 +56,6 @@
           ".ac-php-conf.json"
           ".projectile-cache.eld"
         ];
-
-        # Conditonally included configs
-        includes = [
-          {
-            condition = "gitdir:/home/${config.etu.user.username}/tvnu/";
-            contents = {
-              commit.gpgSign = false;
-              user.email = config.etu.user.workEmail;
-              user.signingKey = "";
-              core.excludesFile = pkgs.writeTextFile {
-                name = "tvnu-ignore";
-                text = ''
-                  .ac-php-conf.json
-                  .vscode/
-                '';
-              };
-            };
-          }
-          {
-            condition = "gitdir:/home/${config.etu.user.username}/code/TaserudConsulting/";
-            contents = {
-              user.email = config.etu.user.companyEmail;
-            };
-          }
-        ];
       };
     };
   };
