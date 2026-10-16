@@ -80,8 +80,9 @@ settings and caches, dark mode, an auto-hiding Dock, battery percentage and Blue
 to Control, Touch ID for `sudo`, the command line tools (including NUR tools),
 Tailscale (`tailscaled` as a launchd daemon; log in once with
 `sudo tailscale up`), fish (in `/etc/shells`; set as login shell once with
-`chsh`), Emacs with its overlay and fonts, Claude Code, and the shared
-`emacs`, `fish` and `htop` home-manager modules.
+`chsh`), Emacs with its overlay and fonts, Claude Code, the AeroSpace tiling
+window manager (sway-like bindings on Alt, see `modules/darwin/graphical/aerospace`),
+and the shared `emacs`, `fish` and `htop` home-manager modules.
 User-specific home-manager settings live in
 `users/elishirwing/home-configuration.nix` (git, direnv with nix-direnv, zsh,
 ssh using the macOS ssh-agent with key passphrases in the Keychain (loaded
@@ -157,7 +158,7 @@ Reusable NixOS and home-manager modules with custom options.
 **`modules/darwin/`** — nix-darwin modules, mirroring `modules/nixos/` and
 its `etu.*` option names (so shared home modules reading `osConfig.etu.*`
 work on macOS too): `base` (emacs, fish, htop, nix, packages, system defaults,
-tailscale), `development` (claude-code), `graphical` (theme fonts), `user`.
+tailscale), `development` (claude-code), `graphical` (AeroSpace, theme fonts), `user`.
 
 **`modules/home/`** — user-level home-manager modules:
 `alacritty`, `dms-shell`, `emacs`, `firefox`, `fish`, `flatpak-overrides`,
