@@ -5,6 +5,9 @@ _: {
   # Hide the Dock until the pointer reaches the screen edge.
   system.defaults.dock.autohide = true;
 
+  # Don't show recently used apps in the Dock.
+  system.defaults.dock.show-recents = false;
+
   # Show the battery percentage in the menu bar.
   system.defaults.controlcenter.BatteryShowPercentage = true;
 

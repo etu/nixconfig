@@ -94,7 +94,7 @@ that read `osConfig.etu.*` work unchanged on macOS.
 | `base/htop/` | `etu.base.htop.enable`: imports `homeModules.htop` |
 | `base/nix/` | `etu.base.nix.*`: flakes, trusted users, binary caches, `allowUnfree` list |
 | `base/packages/` | Command line tools (mirrors `modules/nixos/base/packages`, minus Linux-only ones) |
-| `base/system/` | macOS defaults: dark mode, auto-hiding Dock, battery percentage and Bluetooth in the menu bar, Caps Lock → Control, Touch ID for `sudo` |
+| `base/system/` | macOS defaults: dark mode, auto-hiding Dock without recent apps, battery percentage and Bluetooth in the menu bar, Caps Lock → Control, Touch ID for `sudo` |
 | `base/tailscale/` | `etu.base.tailscale.enable`: `tailscaled` as a launchd daemon |
 | `development/claude-code/` | `etu.development.claude-code.enable`: Claude Code and claude-monitor for the user |
 | `graphical/aerospace/` | `etu.graphical.aerospace.enable`: AeroSpace tiling window manager via `services.aerospace`, with bindings mirroring `modules/home/sway` (Alt instead of Super, Emacs-style `b`/`f`/`p`/`n` directions, Dvorak key mapping, workspaces I–X on keys 1–0, resize mode) |
