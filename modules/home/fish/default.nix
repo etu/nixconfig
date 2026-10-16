@@ -124,13 +124,20 @@
           set PROMPT $PROMPT(set_color -b 585858)(set_color bbbbbb)' 👤 '$USER' '
       end
 
-      # Set a variable to remember "who am i" output length to reduce the amount of subshells during usage.
-      if not set -q __fish_prompt_who_am_i_count
-        set -g __fish_prompt_who_am_i_count (who am i | wc -l)
+      # Remember if this is a remote connection to reduce the amount of subshells
+      # during usage. Remote logins show the client host in parentheses in
+      # "who am i". Just checking for any output isn't enough: on macOS local
+      # terminals are listed too (without a host), unlike on Linux.
+      if not set -q __fish_prompt_is_remote
+        if who am i | string match -q -r '\(.+\)'
+          set -g __fish_prompt_is_remote 1
+        else
+          set -g __fish_prompt_is_remote 0
+        end
       end
 
       # Add hostname if it's a remote connection
-      if test $__fish_prompt_who_am_i_count = 0
+      if test $__fish_prompt_is_remote = 0
         set PROMPT $PROMPT(set_color -b 444444)(set_color bbbbbb)' 💻 '
       else
         set PROMPT $PROMPT(set_color -b 444444)(set_color bbbbbb)' 🔗 '$hostname' '
