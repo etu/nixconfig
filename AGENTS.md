@@ -89,7 +89,7 @@ that read `osConfig.etu.*` work unchanged on macOS.
 | Directory | Purpose |
 |-----------|---------|
 | `base/` | Base settings; enables the base modules below by default and defines `etu.dataPrefix` (empty by default: macOS has no ephemeral root or `/data`, so paths like the Emacs org agenda's `<dataPrefix>$HOME/.dotfiles` resolve to the home directory) |
-| `base/emacs/` | `etu.base.emacs.*`: emacs-overlay, icon font, unfree language servers, imports `homeModules.emacs` |
+| `base/emacs/` | `etu.base.emacs.*`: emacs-overlay, icon font, unfree language servers, imports `homeModules.emacs`. Host-specific Emacs Lisp (like the work MacBook's `~/tvnu/.lisp` loader) goes in `etu.base.emacs.extraConfig`, which is inserted into the shared config |
 | `base/fish/` | `etu.base.fish.*`: fish system wide and in `/etc/shells`, imports `homeModules.fish` and adds macOS-only abbreviations (`l` for `ls -lh`) |
 | `base/htop/` | `etu.base.htop.enable`: imports `homeModules.htop` |
 | `base/nix/` | `etu.base.nix.*`: flakes, trusted users, binary caches, `allowUnfree` list, weekly garbage collection (older than 7 days) and daily store optimisation |

@@ -627,17 +627,4 @@
     (message "Split to three-column-layout")))
 
 
-;;;
-;;; Include work utilities
-;;;
-
-(let ((work-lisp-dir (expand-file-name "tvnu/.lisp" (getenv "HOME"))))
-  (if (file-directory-p work-lisp-dir)
-      (progn
-        ;; Add work lisp dir to load path
-        (add-to-list 'load-path work-lisp-dir)
-
-        (require 'work-init))))
-
-
 ;;; base.el ends here
