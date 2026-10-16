@@ -111,10 +111,12 @@
       window-inherit-working-directory = false;
 
       # Always use a solid block cursor. Shell integration would otherwise
-      # switch the cursor to a bar at the prompt.
+      # switch the cursor to a bar at the prompt (no-cursor). Over ssh, install
+      # the xterm-ghostty terminfo on remote hosts (ssh-terminfo), and fall back
+      # to TERM=xterm-256color when that isn't possible (ssh-env).
       cursor-style = "block";
       cursor-style-blink = false;
-      shell-integration-features = "no-cursor";
+      shell-integration-features = "no-cursor,ssh-terminfo,ssh-env";
 
       # Selecting text should copy it.
       copy-on-select = true;
