@@ -90,7 +90,7 @@ that read `osConfig.etu.*` work unchanged on macOS.
 |-----------|---------|
 | `base/` | Base settings; enables the base modules below by default and defines `etu.dataPrefix` |
 | `base/emacs/` | `etu.base.emacs.*`: emacs-overlay, icon font, unfree language servers, imports `homeModules.emacs` |
-| `base/fish/` | `etu.base.fish.*`: fish system wide and in `/etc/shells`, imports `homeModules.fish` |
+| `base/fish/` | `etu.base.fish.*`: fish system wide and in `/etc/shells`, imports `homeModules.fish` and adds macOS-only abbreviations (`l` for `ls -lh`) |
 | `base/htop/` | `etu.base.htop.enable`: imports `homeModules.htop` |
 | `base/nix/` | `etu.base.nix.*`: flakes, trusted users, binary caches, `allowUnfree` list, weekly garbage collection (older than 7 days) and daily store optimisation |
 | `base/packages/` | Command line tools (mirrors `modules/nixos/base/packages`, minus Linux-only ones, plus `watch`, which macOS lacks) |
@@ -106,8 +106,8 @@ that read `osConfig.etu.*` work unchanged on macOS.
 | `graphical/aerospace/` | `etu.graphical.aerospace.enable`: AeroSpace tiling window manager via `services.aerospace`, with bindings mirroring `modules/home/sway` (Alt instead of Super, configurable with `etu.graphical.aerospace.modifier`, Emacs-style `b`/`f`/`p`/`n` directions, Dvorak key mapping, workspaces I–X on keys 1–0, resize mode) |
 | `graphical/ghostty/` | `etu.graphical.ghostty.enable`: imports `homeModules.ghostty` for the user, like the NixOS module, and adds the macOS specifics (`ghostty-bin`, always start fish, quit after the last window closes) |
 | `graphical/theme/` | `etu.graphical.theme.*`: font options (macOS defaults: `JetBrains Mono`, 12) and the font package |
-| `user/` | `etu.user.username`: `system.primaryUser` and the user's home directory; also `etu.user.{realname,email,signingKey}` (same defaults as NixOS) for `homeModules.git` |
-| `default.nix` | Module entry point, imports all sub-modules and NUR's darwin module |
+| `user/` | `etu.user.username`: `system.primaryUser` and the user's home directory; also `etu.user.{realname,email,signingKey}` (same defaults as NixOS) for `homeModules.git`. Sets up home-manager for the user (`useGlobalPkgs`, `useUserPackages`, `perSystem`, zsh) with `home.stateVersion` from `etu.stateVersion` |
+| `default.nix` | Module entry point, imports all sub-modules, home-manager's darwin module and NUR's darwin module |
 
 ### `modules/home/`
 
@@ -373,8 +373,11 @@ versions.
   option names, and have it import shared home modules into
   `home-manager.users.${config.etu.user.username}`. Shared home modules that
   read `osConfig.etu.*` then work unchanged, as long as the darwin modules
-  declare every option they read. User-specific home-manager settings stay in
-  blueprint's `hosts/<name>/users/<user>/home-configuration.nix`. The emacs
+  declare every option they read. Darwin hosts have no `users/` directory:
+  `modules/darwin` imports home-manager itself (like `modules/nixos`) and
+  sets it up for `etu.user.username`, so host-specific settings go in
+  `darwin-configuration.nix` as `etu.*` options (or
+  `home-manager.users.<user>` there if no option fits). The emacs
   home module picks `pkgs.emacs` on darwin and `pkgs.emacs-pgtk` on Linux.
   Unfree packages go in `etu.base.nix.allowUnfree`, as on NixOS (it also
   covers home-manager via `useGlobalPkgs`). The NixOS hosts can't be evaluated on macOS without an

@@ -88,10 +88,10 @@ home-manager modules (Ghostty uses the macOS `ghostty-bin` package there,
 always starts fish and quits after its last window closes; git always signs
 commits with the SSH key), ssh using the macOS ssh-agent with key
 passphrases in the Keychain (loaded into the agent at login), and direnv with
-nix-direnv.
-User-specific home-manager settings live in
-`users/elishirwing/home-configuration.nix` (zsh, extra fish abbreviations) and
-are applied together with the system.
+nix-direnv. The host has no separate home-manager file: the darwin modules set
+up home-manager for `etu.user.username` (including zsh and
+`home.stateVersion` from `etu.stateVersion`), and host-specific settings are
+`etu.*` options in `darwin-configuration.nix`.
 The emacs module uses the native macOS `emacs` build on darwin instead of
 `emacs-pgtk`, and adds the Nix profiles to its PATH so `Emacs.app` launched
 from Spotlight finds git and other tools instead of the Xcode stubs in

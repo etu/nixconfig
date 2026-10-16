@@ -30,8 +30,16 @@
     environment.shells = [ pkgs.fish ];
 
     # Configure fish for my users home-manager.
-    home-manager.users.${config.etu.user.username}.imports = [
-      flake.homeModules.fish
-    ];
+    home-manager.users.${config.etu.user.username} = {
+      imports = [
+        flake.homeModules.fish
+      ];
+
+      # Extra abbreviations on macOS, merged with the ones from the shared
+      # fish module.
+      programs.fish.shellAbbrs = {
+        l = "ls -lh";
+      };
+    };
   };
 }

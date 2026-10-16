@@ -24,6 +24,10 @@
 
   # My module settings
   etu = {
+    # Used for backwards compatibility of my user's home-manager config, read
+    # the release notes before changing.
+    stateVersion = "26.11";
+
     user.username = "elishirwing";
 
     # Use zoxide for cd in fish, like on laptop-private-elis.
