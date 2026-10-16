@@ -14,6 +14,12 @@ _: {
   # Show the Bluetooth control in the menu bar.
   system.defaults.controlcenter.Bluetooth = true;
 
+  # Faster key repeat (in units of 15 ms): start repeating after 375 ms (one
+  # step below the shortest delay in System Settings), then repeat every 30 ms
+  # (the fastest rate in System Settings).
+  system.defaults.NSGlobalDomain.InitialKeyRepeat = 25;
+  system.defaults.NSGlobalDomain.KeyRepeat = 2;
+
   # Remap Caps Lock to Control.
   system.keyboard.enableKeyMapping = true;
   system.keyboard.remapCapsLockToControl = true;
