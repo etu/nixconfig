@@ -29,6 +29,7 @@
     # Use zoxide for cd in fish, like on laptop-private-elis.
     base.fish.enableUserZoxideCd = true;
     development.claude-code.enable = true;
+    development.direnv.enable = true;
     development.git.enable = true;
     development.vscode.enable = true;
     graphical.aerospace.enable = true;

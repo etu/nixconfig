@@ -99,6 +99,7 @@ that read `osConfig.etu.*` work unchanged on macOS.
 | `base/tailscale/` | `etu.base.tailscale.enable`: `tailscaled` as a launchd daemon |
 | `base/tmux/` | `etu.base.tmux.enable`: imports `homeModules.tmux`, always starts fish (tmux otherwise uses `$SHELL`, which is zsh on macOS), and overrides the status bar's load average (the shared module reads Linux-only `/proc/loadavg`) with `sysctl -n vm.loadavg` |
 | `development/claude-code/` | `etu.development.claude-code.enable`: Claude Code and claude-monitor for the user |
+| `development/direnv/` | `etu.development.direnv.enable`: direnv with nix-direnv for the user (the NixOS module uses lorri instead); the fish hook comes from `homeModules.fish` |
 | `development/git/` | `etu.development.git.enable`: git system wide, imports `homeModules.git` and always signs commits (SSH key through the ssh-agent) |
 | `development/vscode/` | `etu.development.vscode.enable` / `enableWork`: imports `homeModules.vscode` and allows its unfree packages, like the NixOS module |
 | `graphical/fdm-printing/` | `etu.graphical.fdm-printing.enable`: OpenSCAD for the user (FreeCAD isn't available for macOS); also read by `homeModules.vscode` for the OpenSCAD extension |

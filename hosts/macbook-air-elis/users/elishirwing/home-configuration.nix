@@ -8,15 +8,8 @@
 # modules/darwin/.
 _: {
   # Let zsh (the macOS login shell) load the home-manager environment and
-  # shell integrations below.
+  # shell integrations (such as direnv's hook).
   programs.zsh.enable = true;
-
-  # direnv with nix-direnv for cached `use flake` environments.
-  programs.direnv.enable = true;
-  programs.direnv.nix-direnv.enable = true;
-
-  # The shared fish module already sets up the direnv hook itself.
-  programs.direnv.enableFishIntegration = false;
 
   # Extra fish abbreviations for this host, merged with the ones from the
   # shared fish module.
