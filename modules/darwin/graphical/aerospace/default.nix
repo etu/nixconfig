@@ -53,9 +53,11 @@ in
         # Kill focused window
         "${modifier}-shift-quote" = "close";
 
-        # Split in horizontal/vertical orientation (sway's split h/v).
-        "${modifier}-h" = "layout horizontal";
-        "${modifier}-v" = "layout vertical";
+        # Closest thing to sway's split h/v: group the focused window with the
+        # window to the right (side by side) or below (stacked) into a nested
+        # container, which can then get its own layout (e.g. accordion).
+        "${modifier}-h" = "join-with right";
+        "${modifier}-v" = "join-with down";
 
         # Change layout of focused container (stacking, tabbed, toggle split).
         "${modifier}-o" = "layout v_accordion";
