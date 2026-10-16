@@ -92,7 +92,7 @@ that read `osConfig.etu.*` work unchanged on macOS.
 | `base/emacs/` | `etu.base.emacs.*`: emacs-overlay, icon font, unfree language servers, imports `homeModules.emacs` |
 | `base/fish/` | `etu.base.fish.*`: fish system wide and in `/etc/shells`, imports `homeModules.fish` |
 | `base/htop/` | `etu.base.htop.enable`: imports `homeModules.htop` |
-| `base/nix/` | `etu.base.nix.*`: flakes, trusted users, binary caches, `allowUnfree` list |
+| `base/nix/` | `etu.base.nix.*`: flakes, trusted users, binary caches, `allowUnfree` list, weekly garbage collection (older than 7 days) and daily store optimisation |
 | `base/packages/` | Command line tools (mirrors `modules/nixos/base/packages`, minus Linux-only ones, plus `watch`, which macOS lacks) |
 | `base/ssh/` | `etu.base.ssh.enable`: ssh client using the macOS ssh-agent with key passphrases in the Keychain (`UseKeychain`, `AddKeysToAgent`), and a login agent loading the keys into the ssh-agent |
 | `base/system/` | macOS defaults: dark mode, auto-hiding Dock without recent apps, battery percentage and Bluetooth in the menu bar, Caps Lock → Control, faster key repeat, Touch ID for `sudo` (with `pam_reattach`, so it also works inside tmux) |

@@ -25,6 +25,19 @@
       config.etu.user.username
     ];
 
+    # Clean up the Nix store like on the NixOS servers: collect garbage older
+    # than a week once a week (nix-darwin's default interval, Sundays 03:15)
+    # and deduplicate the store daily. Missed runs while asleep run on wake.
+    nix.gc.automatic = true;
+    nix.gc.options = "--delete-older-than 7d";
+    nix.optimise.automatic = true;
+    nix.optimise.interval = [
+      {
+        Hour = 4;
+        Minute = 15;
+      }
+    ];
+
     # Extra binary caches
     nix.settings.substituters = [
       "https://nix-community.cachix.org"

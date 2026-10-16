@@ -76,7 +76,8 @@ MacBook Air M5 (`aarch64-darwin`) managed with
 `darwinConfigurations.macbook-air-elis`. The host file only sets the
 hostname, platform, state version and a few `etu.*` options; everything else
 comes from `flake.darwinModules.default` (see `modules/darwin/` below): Nix
-settings and caches, dark mode, an auto-hiding Dock without recent apps, battery percentage and Bluetooth in the menu bar, Caps Lock remapped
+settings and caches (with weekly garbage collection and daily store
+optimisation), dark mode, an auto-hiding Dock without recent apps, battery percentage and Bluetooth in the menu bar, Caps Lock remapped
 to Control, faster key repeat, Touch ID for `sudo` (also inside tmux), the command line tools (including NUR tools),
 Tailscale (`tailscaled` as a launchd daemon; log in once with
 `sudo tailscale up`), fish (in `/etc/shells`; set as login shell once with
