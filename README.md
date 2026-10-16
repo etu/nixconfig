@@ -91,7 +91,8 @@ are applied together with the system.
 The emacs module uses the native macOS `emacs` build on darwin instead of
 `emacs-pgtk`, and adds the Nix profiles to its PATH so `Emacs.app` launched
 from Spotlight finds git and other tools instead of the Xcode stubs in
-`/usr/bin`. Bootstrap steps are in
+`/usr/bin`. Its `Emacs.app` starts Emacs as a separate process, like a
+terminal would, so AeroSpace manages its windows. Bootstrap steps are in
 the header of the configuration file; later changes are applied with
 `just activate`. Built and cached in CI on a `macos-latest` (Apple Silicon)
 runner alongside the NixOS hosts.

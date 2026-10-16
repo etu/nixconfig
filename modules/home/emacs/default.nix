@@ -114,10 +114,25 @@ let
 
     postBuild = ''
       # Wrap all emacs binaries with language servers in PATH
-      for bin in $out/bin/*${lib.optionalString isDarwin " $out/Applications/Emacs.app/Contents/MacOS/Emacs"}; do
+      for bin in $out/bin/*; do
         wrapProgram "$bin" \
           --prefix PATH : ${lib.makeBinPath extraPackages}${lib.optionalString isDarwin ":${darwinProfilePaths}"}
       done
+    ''
+    # On macOS, Emacs.app (started from Spotlight/Finder) normally execs the
+    # emacsWithPackages wrapper, which execs the real Emacs binary from another
+    # app bundle. A process launched as one bundle but running from another
+    # isn't picked up by window managers such as AeroSpace, so its windows end
+    # up unmanaged. Make Emacs.app start the wrapped bin/emacs as a separate
+    # process instead, exactly like starting it from a terminal, and exit.
+    + lib.optionalString isDarwin ''
+      app=$out/Applications/Emacs.app/Contents/MacOS
+      rm "$app/Emacs" "$app/.Emacs-wrapped"
+      cat > "$app/Emacs" <<EOF
+      #!${pkgs.runtimeShell}
+      "$out/bin/emacs" "\$@" >/dev/null 2>&1 &
+      EOF
+      chmod +x "$app/Emacs"
     '';
 
     # Preserve meta attributes from the original package

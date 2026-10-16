@@ -109,7 +109,7 @@ Home-manager modules for user-level configuration:
 |-----------|---------|
 | `alacritty/` | Alacritty terminal emulator config |
 | `dms-shell/` | DankMaterialShell (Quickshell-based Material 3 desktop shell) config |
-| `emacs/` | Emacs configuration (`emacs-pgtk` on Linux, native `emacs` on macOS; on macOS `Emacs.app` is wrapped too and the Nix profiles are added to PATH, since apps started from Spotlight/launchd only get `/usr/bin:/bin:/usr/sbin:/sbin`) |
+| `emacs/` | Emacs configuration (`emacs-pgtk` on Linux, native `emacs` on macOS; on macOS the Nix profiles are added to the wrapper's PATH, since apps started from Spotlight/launchd only get `/usr/bin:/bin:/usr/sbin:/sbin`, and `Emacs.app` is replaced by a launcher that starts the wrapped `bin/emacs` as a separate process, because a bundle that execs into another bundle's binary isn't managed by window managers like AeroSpace) |
 | `firefox/` | Firefox browser settings |
 | `fish/` | Fish shell configuration |
 | `flatpak-overrides/` | Flatpak permission overrides |
