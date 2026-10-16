@@ -11,6 +11,7 @@
     ./packages
     ./system
     ./tailscale
+    ./tmux
   ];
 
   options.etu = {
@@ -29,6 +30,7 @@
       htop.enable = lib.mkDefault true;
       nix.enable = lib.mkDefault true;
       tailscale.enable = lib.mkDefault true;
+      tmux.enable = lib.mkDefault true;
     };
   };
 }

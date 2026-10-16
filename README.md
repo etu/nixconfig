@@ -82,7 +82,7 @@ Tailscale (`tailscaled` as a launchd daemon; log in once with
 `sudo tailscale up`), fish (in `/etc/shells`; set as login shell once with
 `chsh`), Emacs with its overlay and fonts, Claude Code, the AeroSpace tiling
 window manager (sway-like bindings on Alt, see `modules/darwin/graphical/aerospace`),
-and the shared `emacs`, `fish`, `ghostty` and `htop` home-manager modules
+and the shared `emacs`, `fish`, `ghostty`, `htop` and `tmux` home-manager modules
 (Ghostty uses the macOS `ghostty-bin` package there, always starts fish and
 quits after its last window closes).
 User-specific home-manager settings live in
@@ -159,7 +159,7 @@ Reusable NixOS and home-manager modules with custom options.
 **`modules/darwin/`** — nix-darwin modules, mirroring `modules/nixos/` and
 its `etu.*` option names (so shared home modules reading `osConfig.etu.*`
 work on macOS too): `base` (emacs, fish, htop, nix, packages, system defaults,
-tailscale), `development` (claude-code), `graphical` (AeroSpace, Ghostty, theme fonts), `user`.
+tailscale, tmux), `development` (claude-code), `graphical` (AeroSpace, Ghostty, theme fonts), `user`.
 
 **`modules/home/`** — user-level home-manager modules:
 `alacritty`, `dms-shell`, `emacs`, `firefox`, `fish`, `flatpak-overrides`,

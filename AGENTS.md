@@ -96,6 +96,7 @@ that read `osConfig.etu.*` work unchanged on macOS.
 | `base/packages/` | Command line tools (mirrors `modules/nixos/base/packages`, minus Linux-only ones, plus `watch`, which macOS lacks) |
 | `base/system/` | macOS defaults: dark mode, auto-hiding Dock without recent apps, battery percentage and Bluetooth in the menu bar, Caps Lock → Control, faster key repeat, Touch ID for `sudo` |
 | `base/tailscale/` | `etu.base.tailscale.enable`: `tailscaled` as a launchd daemon |
+| `base/tmux/` | `etu.base.tmux.enable`: imports `homeModules.tmux`, always starts fish (tmux otherwise uses `$SHELL`, which is zsh on macOS), and overrides the status bar's load average (the shared module reads Linux-only `/proc/loadavg`) with `sysctl -n vm.loadavg` |
 | `development/claude-code/` | `etu.development.claude-code.enable`: Claude Code and claude-monitor for the user |
 | `graphical/aerospace/` | `etu.graphical.aerospace.enable`: AeroSpace tiling window manager via `services.aerospace`, with bindings mirroring `modules/home/sway` (Alt instead of Super, configurable with `etu.graphical.aerospace.modifier`, Emacs-style `b`/`f`/`p`/`n` directions, Dvorak key mapping, workspaces I–X on keys 1–0, resize mode) |
 | `graphical/ghostty/` | `etu.graphical.ghostty.enable`: imports `homeModules.ghostty` for the user, like the NixOS module, and adds the macOS specifics (`ghostty-bin`, always start fish, quit after the last window closes) |
