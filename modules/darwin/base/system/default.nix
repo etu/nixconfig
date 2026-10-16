@@ -5,6 +5,9 @@ _: {
   # Hide the Dock until the pointer reaches the screen edge.
   system.defaults.dock.autohide = true;
 
+  # Show the battery percentage in the menu bar.
+  system.defaults.controlcenter.BatteryShowPercentage = true;
+
   # Show the Bluetooth control in the menu bar.
   system.defaults.controlcenter.Bluetooth = true;
 
