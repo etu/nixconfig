@@ -1,4 +1,11 @@
-_: {
+{ flake, lib, ... }:
+{
+  # Record the git commit of this flake in the system, shown by
+  # `darwin-version --configuration-revision` (dirtyRev when built with
+  # uncommitted changes). mkDefault so flakes that import these modules, like
+  # the work MacBook's, can record their own revision instead.
+  system.configurationRevision = lib.mkDefault (flake.rev or flake.dirtyRev or null);
+
   # Use dark mode.
   system.defaults.NSGlobalDomain.AppleInterfaceStyle = "Dark";
 
