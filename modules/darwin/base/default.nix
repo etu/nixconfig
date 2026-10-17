@@ -9,6 +9,7 @@
     ./htop
     ./nix
     ./packages
+    ./spell
     ./ssh
     ./system
     ./tailscale
@@ -31,6 +32,7 @@
       fish.enable = lib.mkDefault true;
       htop.enable = lib.mkDefault true;
       nix.enable = lib.mkDefault true;
+      spell.enable = lib.mkDefault true;
       ssh.enable = lib.mkDefault true;
       tailscale.enable = lib.mkDefault true;
       tmux.enable = lib.mkDefault true;

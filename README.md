@@ -78,7 +78,7 @@ hostname, platform, state version and a few `etu.*` options; everything else
 comes from `flake.darwinModules.default` (see `modules/darwin/` below): Nix
 settings and caches (with weekly garbage collection and daily store
 optimisation), dark mode, an auto-hiding Dock without recent apps, battery percentage and Bluetooth in the menu bar, Caps Lock remapped
-to Control, faster key repeat, Touch ID for `sudo` (also inside tmux), the command line tools (including NUR tools),
+to Control, faster key repeat, Touch ID for `sudo` (also inside tmux), the command line tools (including NUR tools), aspell and hunspell with English and Swedish dictionaries (for Emacs' flyspell),
 Tailscale (`tailscaled` as a launchd daemon; log in once with
 `sudo tailscale up`), fish (in `/etc/shells`; set as login shell once with
 `chsh`), Emacs with its overlay and fonts, Claude Code, VS Code, OpenSCAD, the AeroSpace tiling
@@ -160,7 +160,7 @@ Reusable NixOS and home-manager modules with custom options.
 
 **`modules/darwin/`** — nix-darwin modules, mirroring `modules/nixos/` and
 its `etu.*` option names (so shared home modules reading `osConfig.etu.*`
-work on macOS too): `base` (emacs, fish, htop, nix, packages, ssh, system defaults,
+work on macOS too): `base` (emacs, fish, htop, nix, packages, spell, ssh, system defaults,
 tailscale, tmux), `development` (claude-code, direnv, git, vscode), `graphical` (AeroSpace, fdm-printing,
 Ghostty, theme fonts), `user`.
 

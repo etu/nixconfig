@@ -94,6 +94,7 @@ that read `osConfig.etu.*` work unchanged on macOS.
 | `base/htop/` | `etu.base.htop.enable`: imports `homeModules.htop` |
 | `base/nix/` | `etu.base.nix.*`: flakes, trusted users, binary caches, `allowUnfree` list, weekly garbage collection (older than 7 days) and daily store optimisation |
 | `base/packages/` | Command line tools (mirrors `modules/nixos/base/packages`, minus Linux-only ones, plus `watch`, which macOS lacks) |
+| `base/spell/` | `etu.base.spell.enable`: aspell and hunspell with English and Swedish dictionaries for the user (Emacs enables flyspell in text buffers), like the NixOS module |
 | `base/ssh/` | `etu.base.ssh.enable`: ssh client using the macOS ssh-agent with key passphrases in the Keychain (`UseKeychain`, `AddKeysToAgent`), and a login agent loading the keys into the ssh-agent |
 | `base/system/` | macOS defaults: dark mode, auto-hiding Dock without recent apps, battery percentage and Bluetooth in the menu bar, Caps Lock → Control, faster key repeat, Touch ID for `sudo` (with `pam_reattach`, so it also works inside tmux) |
 | `base/tailscale/` | `etu.base.tailscale.enable`: `tailscaled` as a launchd daemon |
