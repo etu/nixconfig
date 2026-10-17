@@ -1,3 +1,5 @@
-#!/bin/sh
+#!/usr/bin/env bash
+
+set -euo pipefail
 
 exec git log --graph --decorate --pretty=format:'%C(yellow)%h %Cgreen%cd%C(bold red)%d%Creset %s' --abbrev-commit --date=short
