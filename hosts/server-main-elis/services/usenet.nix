@@ -96,7 +96,12 @@
   # Enable service protections
   systemd.services =
     let
-      perms = {
+      # Fallback hardening for settings the upstream modules don't set
+      # themselves (some, like nzbget and lidarr, set none at all). They're
+      # mkDefault so upstream values win and new upstream hardening doesn't
+      # conflict; override a service with mkForce below where upstream is
+      # weaker than this.
+      perms = lib.mapAttrs (_: lib.mkDefault) {
         CapabilityBoundingSet = "";
         NoNewPrivileges = true;
         PrivateDevices = true;
@@ -120,6 +125,9 @@
     in
     {
       bazarr.serviceConfig = perms // {
+        # The upstream module sets ProtectSystem = "full", keep the stricter
+        # "strict" (with the ReadWritePaths below).
+        ProtectSystem = lib.mkForce "strict";
         ReadWritePaths = [
           "/var/lib/bazarr"
           "/media/zstorage/files/video/series"

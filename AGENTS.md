@@ -430,6 +430,19 @@ These patterns have caused evaluation or build failures in past upgrades:
     the running host if upgrading), add an entry to `secrets-registry.nix`, then
     set the option via `"$__file{${config.age.secrets.<name>.path}}"`.
 
+- **Upstream service hardening**: nixpkgs keeps adding systemd hardening to
+  service modules, which can conflict with the shared `perms` hardening set in
+  `hosts/server-main-elis/services/usenet.nix` ("has conflicting definition
+  values"). `perms` is therefore all `lib.mkDefault` (via
+  `lib.mapAttrs (_: lib.mkDefault)`): upstream values win where a module sets
+  them, and `perms` fills the gaps (nzbget and lidarr set no hardening at
+  all). Where upstream's value is weaker than ours, override it with
+  `lib.mkForce` in that service's block.
+  - Example (26.11): bazarr gained `PrivateTmp = "disconnected"` (stricter than
+    our `true`, so upstream's applies) and `ProtectSystem = "full"` (weaker
+    than our `"strict"`, so the bazarr block sets `lib.mkForce "strict"` to
+    keep its `ReadWritePaths` meaningful).
+
 - **New agenix secrets**: when adding a new `.age` file, always `git add` it
   before running `nix flake check` — the file must be tracked for Nix to find
   it through the flake's git source.
