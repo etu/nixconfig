@@ -38,7 +38,7 @@
       # Extra abbreviations on macOS, merged with the ones from the shared
       # fish module.
       programs.fish.shellAbbrs = {
-        l = "ls -lh";
+        l = "ls -alh";
       };
     };
   };
