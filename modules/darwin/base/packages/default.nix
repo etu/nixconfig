@@ -14,6 +14,7 @@
     pkgs.fd # find util
     pkgs.file # file duh
     pkgs.fzf # fuzzy finder
+    pkgs.gh # GitHub CLI
     pkgs.jc # parse different formats and command outputs to json
     pkgs.jq # parse, format and query json documents
     pkgs.ncdu # disk usage navigator
