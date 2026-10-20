@@ -57,14 +57,6 @@
   # nzbget needs unrar
   etu.base.nix.allowUnfree = [ "unrar" ];
 
-  # dotnet for sonarr seems to be very old
-  nixpkgs.config.permittedInsecurePackages = [
-    "aspnetcore-runtime-6.0.36"
-    "aspnetcore-runtime-wrapped-6.0.36"
-    "dotnet-sdk-6.0.428"
-    "dotnet-sdk-wrapped-6.0.428"
-  ];
-
   # Enable services
   services.bazarr = {
     enable = true;
