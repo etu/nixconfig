@@ -65,6 +65,10 @@ in
         "${modifier}-h" = "join-with right";
         "${modifier}-v" = "join-with down";
 
+        # Undo all nesting on the workspace: put every window back into a
+        # single top-level container.
+        "${modifier}-shift-h" = "flatten-workspace-tree";
+
         # Change layout of focused container (stacking, tabbed, toggle split).
         "${modifier}-o" = "layout v_accordion";
         "${modifier}-comma" = "layout h_accordion";
