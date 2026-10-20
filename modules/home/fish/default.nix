@@ -23,7 +23,7 @@
 
     # Enable the direnv hook
     if command -v direnv > /dev/null
-      eval (direnv hook fish)
+      direnv hook fish | source
     end
   '';
   programs.fish.loginShellInit = "set --erase fish_greeting";
