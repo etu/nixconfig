@@ -48,6 +48,25 @@
     ignores = [
       ".ac-php-conf.json"
       ".projectile-cache.eld"
+    ]
+    ++ lib.optionals pkgs.stdenv.isDarwin [
+      ".AppleDB"
+      ".AppleDesktop"
+      ".AppleDouble"
+      ".DocumentRevisions-V100"
+      ".DS_Store"
+      ".LSOverride"
+      ".Spotlight-V100"
+      ".TemporaryItems"
+      ".Trashes"
+      ".VolumeIcon.icns"
+      "._*"
+      ".apdisk"
+      ".com.apple.timemachine.donotpresent"
+      ".fseventsd"
+      "Icon"
+      "Network Trash Folder"
+      "Temporary Items"
     ];
   };
 }
