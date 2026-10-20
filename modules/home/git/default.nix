@@ -48,7 +48,8 @@
     ignores = [
       ".ac-php-conf.json"
       ".projectile-cache.eld"
-    ] ++ lib.optionals pkgs.stdenv.isDarwin [
+    ]
+    ++ lib.optionals pkgs.stdenv.isDarwin [
       ".AppleDB"
       ".AppleDesktop"
       ".AppleDouble"
