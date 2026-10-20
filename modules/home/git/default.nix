@@ -49,7 +49,7 @@
       ".ac-php-conf.json"
       ".projectile-cache.eld"
     ]
-    ++ lib.optionals pkgs.stdenv.isDarwin [
+    ++ lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
       ".AppleDB"
       ".AppleDesktop"
       ".AppleDouble"
