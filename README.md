@@ -156,7 +156,8 @@ Reusable NixOS and home-manager modules with custom options.
 
 **`modules/nixos/`** — system-level modules:
 `base`, `data`, `development`, `games`, `graphical`, `services`, `theme`,
-`user`, `work`.
+`user`, `work`. The shared NixOS and nix-darwin base modules blacklist the
+compromised `Comodo AAA Services root` and `emSign ECC Root CA - G3` certificates.
 
 **`modules/darwin/`** — nix-darwin modules, mirroring `modules/nixos/` and
 its `etu.*` option names (so shared home modules reading `osConfig.etu.*`

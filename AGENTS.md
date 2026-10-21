@@ -67,7 +67,7 @@ Reusable NixOS modules covering:
 
 | Directory | Purpose |
 |-----------|---------|
-| `base/` | Base system settings shared across hosts |
+| `base/` | Base system settings shared across hosts, including the blacklist for compromised Comodo AAA Services and emSign ECC Root CA certificates |
 | `data/` | Defines `config.etu.data` option: derives `ageModules` from `secrets-registry.nix` and imports `pubkeys.nix` |
 | `development/` | Development tooling options |
 | `games/` | Gaming-related configuration |
@@ -88,7 +88,7 @@ that read `osConfig.etu.*` work unchanged on macOS.
 
 | Directory | Purpose |
 |-----------|---------|
-| `base/` | Base settings; enables the base modules below by default and defines `etu.dataPrefix` (empty by default: macOS has no ephemeral root or `/data`, so paths like the Emacs org agenda's `<dataPrefix>$HOME/.dotfiles` resolve to the home directory) |
+| `base/` | Base settings; enables the base modules below by default, blacklists the compromised Comodo AAA Services and emSign ECC Root CA certificates, and defines `etu.dataPrefix` (empty by default: macOS has no ephemeral root or `/data`, so paths like the Emacs org agenda's `<dataPrefix>$HOME/.dotfiles` resolve to the home directory) |
 | `base/emacs/` | `etu.base.emacs.*`: emacs-overlay, icon font, unfree language servers, imports `homeModules.emacs`. Host-specific Emacs Lisp (like the work MacBook's `~/tvnu/.lisp` loader) goes in `etu.base.emacs.extraConfig`, which is inserted into the shared config |
 | `base/fish/` | `etu.base.fish.*`: fish system wide and in `/etc/shells`, imports `homeModules.fish` and adds macOS-only abbreviations (`l` for `ls -alh`) |
 | `base/htop/` | `etu.base.htop.enable`: imports `homeModules.htop` |
