@@ -55,7 +55,9 @@
 
     user.extraRootAuthorizedKeys =
       # Allow github to deploy system
-      config.etu.data.pubkeys.github-actions;
+      config.etu.data.pubkeys.github-actions
+      # Allow the MacBook Air to use this machine as a Nix remote builder
+      ++ config.etu.data.pubkeys.builders.macbook-air-elis;
 
     services.freshrss.enable = true;
     services.jellyfin.enable = true;

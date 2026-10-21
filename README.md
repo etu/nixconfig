@@ -36,7 +36,10 @@ secret) and by `modules/nixos/data/` (which exposes the keys as
 `server-sparv`. The `laptop-work-elis` SSH key is retained for a separately
 managed device; this repository no longer configures that host. The
 `macbook-air-elis` key is the user key on the nix-darwin MacBook Air M5 and is
-part of `etu.computers` and the agenix `etu` key set.
+part of `etu.computers` and the agenix `etu` key set. The file also holds the
+Nix remote builder keys: `builders` (the MacBook's dedicated passphrase-less
+builder key, used by `modules/darwin/base/nix/`) and `builderHostKeys` (the
+base64-encoded host keys that Nix's `builders` setting requires).
 
 ### `flake.nix` and `flake.lock`
 
@@ -98,14 +101,22 @@ from Spotlight finds git and other tools instead of the Xcode stubs in
 `/usr/bin`. Its `Emacs.app` starts Emacs as a separate process, like a
 terminal would, so AeroSpace manages its windows. Bootstrap steps are in
 the header of the configuration file; later changes are applied with
-`just activate`. Built and cached in CI on a `macos-latest` (Apple Silicon)
+`just activate`. Since macOS cannot build `x86_64-linux` derivations locally,
+Nix builds the NixOS hosts on `server-main-elis` from this machine (enabled
+with `base.nix.remoteBuilds` in `darwin-configuration.nix`, backed by
+`nix.buildMachines` in `modules/darwin/base/nix/` and a dedicated
+passphrase-less key in `~/.ssh/nix-builder`, see `pubkeys.nix`), so
+`just build-<server>` and `just deploy-<server>` work from the Mac too.
+Built and cached in CI on a `macos-latest` (Apple Silicon)
 runner alongside the NixOS hosts.
 
 #### `hosts/server-main-elis/`
 
-Home file server, deployed using `deploy .#server-main-elis`. Also used as a
-Nix build machine for the laptops. Primary ZFS backup target — pulls snapshots
-from configured backup sources via syncoid.
+Home file server, deployed using `deploy .#server-main-elis`. Also the Nix
+remote builder for the MacBook: it builds the `x86_64-linux` hosts (8 jobs,
+`ssh-ng` with a dedicated key) so they can be built and deployed from macOS.
+Primary ZFS backup target — pulls snapshots from configured backup sources via
+syncoid.
 
 Runs a large collection of services:
 
@@ -161,7 +172,8 @@ compromised `Comodo AAA Services root` and `emSign ECC Root CA - G3` certificate
 
 **`modules/darwin/`** — nix-darwin modules, mirroring `modules/nixos/` and
 its `etu.*` option names (so shared home modules reading `osConfig.etu.*`
-work on macOS too): `base` (emacs, fish, htop, nix, packages, spell, ssh, system defaults,
+work on macOS too): `base` (emacs, fish, htop, nix with remote builds on
+`server-main-elis`, packages, spell, ssh, system defaults,
 tailscale, tmux), `development` (claude-code, direnv, git, vscode), `graphical` (AeroSpace, fdm-printing,
 Ghostty, theme fonts), `user`.
 

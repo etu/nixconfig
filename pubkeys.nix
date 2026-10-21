@@ -35,6 +35,25 @@ let
     ];
   };
 
+  # Public keys for Nix remote builds: the nix-daemon on macbook-air-elis uses
+  # this passphrase-less key to SSH into the builders and build x86_64-linux
+  # derivations (Nix can neither prompt for a passphrase nor use an ssh-agent).
+  builders = {
+    # Dedicated builder key on the MacBook Air M5, lives in ~/.ssh/nix-builder
+    macbook-air-elis = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJwr/Cxy22nPT9XBPk3yo0qUz68aZaBrGVLApGNsVSMu nix-builder@macbook-air-elis"
+    ];
+  };
+
+  # Host keys of the machines in `builders`, base64-encoded the way Nix's
+  # `builders` setting expects them: `base64 -w0` of the whole
+  # `ssh_host_*_key.pub` file (trailing newline included). Regenerate with:
+  #   ssh <host> "base64 -w0 /etc/ssh/ssh_host_ed25519_key.pub"
+  builderHostKeys = {
+    # server-main-elis, see `systems.server-main-elis`
+    server-main-elis = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSUpSWllXanhBcWxvQjVNWnR4QkhrY2taaEtpKzNNMU9PYnpCZHlpN0xhOTgK";
+  };
+
   # Github Actions deployment key.
   github-actions = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBsVq+lSP7EuU0KUurWYjlLWm1PJWKtYUXVayi1jD6lU github-actions-deployment-2023-08-30"
@@ -63,6 +82,8 @@ let
 in
 {
   inherit
+    builderHostKeys
+    builders
     etu
     github-actions
     mittens

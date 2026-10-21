@@ -32,6 +32,10 @@
 
     # Use zoxide for cd in fish, like on laptop-private-elis.
     base.fish.enableUserZoxideCd = true;
+
+    # Build the x86_64-linux hosts on server-main-elis, see
+    # modules/darwin/base/nix. Needs ~/.ssh/nix-builder to exist.
+    base.nix.remoteBuilds = true;
     development.claude-code.enable = true;
     development.direnv.enable = true;
     development.git.enable = true;

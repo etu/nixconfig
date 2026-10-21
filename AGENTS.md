@@ -28,7 +28,7 @@ flake outputs.
 |------|-------------|
 | `flake.nix` | Main flake definition: inputs, blueprint wiring (with an explicit `systems` list, since nixpkgs 26.11 dropped `x86_64-darwin` from blueprint's defaults), deploy-rs nodes, and the live-iso package alias |
 | `flake.lock` | Locked versions of all flake inputs |
-| `pubkeys.nix` | All SSH public keys for users and host systems — standalone, no imports |
+| `pubkeys.nix` | All SSH public keys for users and host systems — standalone, no imports; also the Nix remote builder keys (`builders` for the Mac's builder client key and `builderHostKeys` for the base64 host keys) |
 | `secrets-registry.nix` | **Single source of truth** for all agenix secrets: file path, owner/path/symlink options, and the list of host keys allowed to decrypt each secret |
 | `agenix-rules.nix` | Auto-derived from `secrets-registry.nix` — do not edit directly; consumed by the agenix CLI |
 | `secrets/` | Directory of agenix-encrypted secret files (`.age`) |
@@ -51,8 +51,8 @@ Each host lives in `hosts/<hostname>/` and is automatically picked up by bluepri
 | Host | Type | Deployment method | Notes |
 |------|------|-------------------|-------|
 | `laptop-private-elis` | Laptop | `nixos-rebuild` locally | Private laptop (ThinkPad P14s Gen 4); pushes ZFS snapshots to `server-main-elis` |
-| `macbook-air-elis` | Laptop (macOS) | `just activate` locally | MacBook Air M5, `aarch64-darwin`, managed with nix-darwin via `darwin-configuration.nix`; built in CI on a `macos-latest` runner |
-| `server-main-elis` | Server | `deploy .#server-main-elis` | Home file server; also a Nix build machine, ZFS snapshot target, runs Home Assistant |
+| `macbook-air-elis` | Laptop (macOS) | `just activate` locally | MacBook Air M5, `aarch64-darwin`, managed with nix-darwin via `darwin-configuration.nix`; built in CI on a `macos-latest` runner; builds the x86_64-linux hosts on `server-main-elis` (see *Building and deploying from macOS*) |
+| `server-main-elis` | Server | `deploy .#server-main-elis` | Home file server; also the Nix remote builder for the MacBook (builds the x86_64-linux hosts from macOS), ZFS snapshot target, runs Home Assistant |
 | `server-sparv` | Server | `deploy .#server-sparv` | On-location server for speliarvika.se, LAN cache, game servers (Valheim, Project Zomboid, Minecraft) |
 | `vps06` | VPS | `deploy .#vps06` | Runs Gitea, ip.failar.nu, Matrix homeserver |
 | `live-iso` | ISO | `nix build .#iso` | Live ISO of this config; not deployed remotely |
@@ -92,7 +92,7 @@ that read `osConfig.etu.*` work unchanged on macOS.
 | `base/emacs/` | `etu.base.emacs.*`: emacs-overlay, icon font, unfree language servers, imports `homeModules.emacs`. Host-specific Emacs Lisp (like the work MacBook's `~/tvnu/.lisp` loader) goes in `etu.base.emacs.extraConfig`, which is inserted into the shared config |
 | `base/fish/` | `etu.base.fish.*`: fish system wide and in `/etc/shells`, imports `homeModules.fish` and adds macOS-only abbreviations (`l` for `ls -alh`) |
 | `base/htop/` | `etu.base.htop.enable`: imports `homeModules.htop` |
-| `base/nix/` | `etu.base.nix.*`: flakes, trusted users, binary caches, `allowUnfree` list, weekly garbage collection (older than 7 days) and daily store optimisation |
+| `base/nix/` | `etu.base.nix.*`: flakes, trusted users, binary caches, `allowUnfree` list, `remoteBuilds` (remote build on `server-main-elis` via `nix.distributedBuilds` + `nix.buildMachines`; off by default, enabled on `macbook-air-elis`, see *Building and deploying from macOS*), weekly garbage collection (older than 7 days) and daily store optimisation |
 | `base/packages/` | Command line tools (mirrors `modules/nixos/base/packages`, minus Linux-only ones, plus `watch`, which macOS lacks, and the GitHub CLI `gh`) |
 | `base/spell/` | `etu.base.spell.enable`: aspell and hunspell with English and Swedish dictionaries for the user (Emacs enables flyspell in text buffers), like the NixOS module |
 | `base/ssh/` | `etu.base.ssh.enable`: ssh client using the macOS ssh-agent with key passphrases in the Keychain (`UseKeychain`, `AddKeysToAgent`), and a login agent loading the keys into the ssh-agent |
@@ -181,6 +181,8 @@ just deploy-vps06
 ```
 
 These call `deploy --skip-checks --targets '.#<hostname>'` using deploy-rs.
+From macOS, deploy-rs builds the x86_64-linux closure through the remote
+builder (see *Building and deploying from macOS*) and copies it to the target.
 
 `just activate` builds and activates the current host locally, picked by
 `hostname`: `sudo darwin-rebuild switch` on macOS and
@@ -215,6 +217,44 @@ just update-all                   # Run all updaters
 just flake-show                   # nix flake show
 just flake-check                  # nix flake check
 ```
+
+---
+
+## Building and deploying from macOS
+
+The MacBook has no local x86_64-linux builder, so Nix builds the NixOS hosts
+on `server-main-elis` (ssh-ng, as root, 8 jobs). The wiring lives in
+`modules/darwin/base/nix/` behind `etu.base.nix.remoteBuilds`, which is **off
+by default** (a builder needs the dedicated key on disk) and is enabled per
+host — currently only in `hosts/macbook-air-elis/darwin-configuration.nix`:
+
+- `nix.distributedBuilds = true` plus `nix.buildMachines = [ … ]`. Nix has to
+  keep its default `builders = @/etc/nix/machines`: nix-darwin writes that
+  file from `nix.buildMachines` only while distributed builds are on, and
+  *clears* `builders` when they are off, which would silently disable remote
+  builds.
+- `nix.settings.builders-use-substitutes = true`, so the builder fetches
+  substitutes instead of only receiving inputs copied from the Mac.
+- Do **not** set `extra-platforms = x86_64-linux`: remote builders are picked
+  up without it, while that setting makes Nix attempt foreign builds locally,
+  which fail with "Undefined error: 0".
+
+A builder needs:
+
+- A dedicated **passphrase-less** key on the Mac (`~/.ssh/nix-builder`) —
+  Nix's SSH can neither prompt for a passphrase nor use the ssh-agent. Its
+  public key lives in `pubkeys.nix` under `builders` and is authorized for
+  root on the builder through `etu.user.extraRootAuthorizedKeys` in the
+  builder's host config (for `server-main-elis`).
+- Its host key, base64-encoded, in `pubkeys.nix` under `builderHostKeys`
+  (`ssh <host> "base64 -w0 /etc/ssh/ssh_host_ed25519_key.pub"`). It is passed
+  as the last field of `/etc/nix/machines`; without it Nix falls back to
+  SSH's known_hosts files, which are not managed here.
+
+Verify with `just build-vps06` (or any other x86_64-linux host): the builds
+must run on `server-main-elis` instead of failing locally. Builder changes
+reach the Mac with `just activate` and the authorized_keys side with a deploy
+of `server-main-elis`.
 
 ---
 
@@ -381,9 +421,14 @@ versions.
   `home-manager.users.<user>` there if no option fits). The emacs
   home module picks `pkgs.emacs` on darwin and `pkgs.emacs-pgtk` on Linux.
   Unfree packages go in `etu.base.nix.allowUnfree`, as on NixOS (it also
-  covers home-manager via `useGlobalPkgs`). The NixOS hosts can't be evaluated on macOS without an
-  `x86_64-linux` builder (catppuccin uses import-from-derivation), so run
-  `just flake-check` for them in CI or on a Linux machine.
+  covers home-manager via `useGlobalPkgs`). The NixOS hosts can't be built on macOS without an
+  `x86_64-linux` builder (catppuccin uses import-from-derivation) — the
+  remote builder on `server-main-elis` covers that (see *Building and
+  deploying from macOS*); otherwise run `just flake-check` in CI or on a
+  Linux machine.
+- **Building from macOS**: the x86_64-linux hosts are built on
+  `server-main-elis` from the MacBook via `nix.buildMachines` — read
+  *Building and deploying from macOS* before changing `nix.*` settings there.
 - **Mittens root access**: the `mittens` key in `pubkeys.nix` is authorized for
   root SSH access on `server-sparv`.
 - **blueprint conventions**: the flake uses blueprint, so follow its directory
