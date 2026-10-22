@@ -89,12 +89,6 @@ in
     hostKeys = etu ++ h.server-main-elis;
   };
 
-  nextcloud-admin-password = {
-    file = ./secrets/server-main-elis/nextcloud-admin-password.age;
-    owner = "nextcloud";
-    hostKeys = etu ++ h.server-main-elis;
-  };
-
   beszel-ssh-ec = {
     file = ./secrets/server-main-elis/beszel-ssh-ec.age;
     path = "/data/var/lib/beszel-hub/beszel_data/id_ed25519";
