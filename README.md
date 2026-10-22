@@ -196,7 +196,8 @@ defined once with its file path, optional agenix options (`owner`, `path`,
 `symlink`), and the list of host keys allowed to decrypt it. Both
 `agenix-rules.nix` (used by the agenix CLI) and `config.etu.data.ageModules`
 (via `modules/nixos/data/`) are derived automatically from this registry.
-Do not edit `agenix-rules.nix` by hand.
+Do not edit `agenix-rules.nix` by hand. This repository does not manage
+Nextcloud administrator credentials.
 
 ### CI/CD (`.github/workflows/`)
 

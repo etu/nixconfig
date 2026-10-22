@@ -304,6 +304,7 @@ my-secret = {
   for the agenix CLI.
 
 `agenix-rules.nix` is the only derived file — do not edit it by hand.
+Nextcloud administrator credentials are not managed by this repository.
 
 ### Re-encrypting after adding a key
 
