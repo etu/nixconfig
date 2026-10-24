@@ -44,6 +44,33 @@ _: {
         else
           prev.khal;
 
+      # aggregateModules now merges a .ko.cer certificate for every external
+      # kernel module, but acpi_call copies its module by hand instead of
+      # going through Kbuild's modules_install, so no certificate is made and
+      # the kernel modules fail to build. Install it like upstream's fix.
+      # Only applies while acpi_call still has its own installPhase.
+      #
+      # Track: https://github.com/NixOS/nixpkgs/pull/575394
+      kernelPackagesExtensions = prev.kernelPackagesExtensions ++ [
+        (_: kprev: {
+          acpi_call =
+            if kprev.acpi_call ? installPhase then
+              kprev.acpi_call.overrideAttrs (oa: {
+                makeFlags = oa.makeFlags ++ [
+                  "INSTALL_MOD_PATH=${placeholder "out"}"
+                  "INSTALL_MOD_DIR=misc"
+                  "DEPMOD=true"
+                ];
+                installPhase = null;
+                postInstall = ''
+                  install -D -m755 examples/turn_off_gpu.sh $out/bin/test_discrete_video_off.sh
+                '';
+              })
+            else
+              kprev.acpi_call;
+        })
+      ];
+
       ## matrix-appservice-irc 4.0.0 uses nedb which calls util.isDate,
       ## removed in Node.js 24. Override to use Node.js 22 until the
       ## package is updated.
