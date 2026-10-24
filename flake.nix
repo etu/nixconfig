@@ -3,11 +3,18 @@
 
   # Add all your dependencies here
   inputs = {
-    # Packages
-    nixpkgs.url = "github:NixOS/nixpkgs?ref=nixos-unstable";
+    # Packages for the NixOS hosts. The -small channel advances as soon as a
+    # smaller set of NixOS tests and builds pass, so fixes land sooner.
+    nixpkgs.url = "github:NixOS/nixpkgs?ref=nixos-unstable-small";
+
+    # Packages for the nix-darwin hosts. nixos-unstable(-small) doesn't wait
+    # for the darwin builds, nixpkgs-unstable does (and is what nix-darwin
+    # recommends with its master branch).
+    nixpkgs-darwin.url = "github:NixOS/nixpkgs?ref=nixpkgs-unstable";
 
     # Hardware
     nixos-hardware.url = "github:nixos/nixos-hardware";
+    nixos-hardware.inputs.nixpkgs.follows = "nixpkgs";
 
     # Secrets
     agenix.url = "github:ryantm/agenix";
@@ -28,10 +35,15 @@
     # Emacs packages
     emacs-overlay.url = "github:nix-community/emacs-overlay";
     emacs-overlay.inputs.nixpkgs.follows = "nixpkgs";
+    emacs-overlay.inputs.nixpkgs-stable.follows = "nixpkgs";
 
     # Home-manager
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Home-manager for the nix-darwin hosts, following nixpkgs-darwin
+    home-manager-darwin.url = "github:nix-community/home-manager";
+    home-manager-darwin.inputs.nixpkgs.follows = "nixpkgs-darwin";
 
     # Impermanence
     impermanence.url = "github:nix-community/impermanence";
@@ -44,7 +56,7 @@
 
     # nix-darwin
     nix-darwin.url = "github:nix-darwin/nix-darwin";
-    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs-darwin";
 
     # NUR
     nur.url = "github:nix-community/NUR";

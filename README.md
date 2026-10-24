@@ -46,10 +46,14 @@ base64-encoded host keys that Nix's `builders` setting requires).
 Main flake definition: inputs, blueprint wiring, deploy-rs nodes for the three
 remotely-managed servers, and the live-iso package alias. Per-system outputs
 are generated for `aarch64-darwin`, `aarch64-linux` and `x86_64-linux` only
-(nixpkgs 26.11 dropped `x86_64-darwin`). All inputs follow
+(nixpkgs 26.11 dropped `x86_64-darwin`). nixpkgs is split by platform:
+`nixpkgs` (`nixos-unstable-small`) for the NixOS hosts and `nixpkgs-darwin`
+(`nixpkgs-unstable`, which waits for the darwin builds) for the MacBook, with
+`nix-darwin` and `home-manager-darwin` following it. All other inputs follow
 `nixpkgs` via `.follows` where possible. Key inputs: `agenix`, `blueprint`,
 `deploy-rs`, `disko`, `emacs-overlay`, `home-manager`,
-`impermanence`, `ip-failar-nu`, `nix-darwin`, `nixos-hardware`, `nur`.
+`home-manager-darwin`, `impermanence`, `ip-failar-nu`, `nix-darwin`,
+`nixos-hardware`, `nixpkgs-darwin`, `nur`.
 
 ### `Justfile`
 
@@ -165,7 +169,8 @@ Reusable NixOS and home-manager modules with custom options.
 ISO: `base`, `data`, `development` (git), `graphical` (only the font options
 read by the Emacs module), `hacks`, `services`, `user`. There is no NixOS
 desktop any more; the desktop is the nix-darwin MacBook. The shared NixOS and nix-darwin base modules blacklist the
-compromised `Comodo AAA Services root` and `emSign ECC Root CA - G3` certificates.
+compromised `Comodo AAA Services root` certificate (nss 3.131.1 removed the
+also compromised `emSign ECC Root CA - G3` itself).
 
 **`modules/darwin/`** — nix-darwin modules, mirroring `modules/nixos/` and
 its `etu.*` option names (so shared home modules reading `osConfig.etu.*`

@@ -39,9 +39,12 @@
   };
 
   config = {
+    # Blacklist compromised CA certificates. The CA bundle build fails on
+    # entries that aren't in the store any more, so drop an entry once nss
+    # removes the certificate itself (as 3.131.1 did with "emSign ECC Root
+    # CA - G3").
     security.pki.caCertificateBlacklist = [
       "Comodo AAA Services root"
-      "emSign ECC Root CA - G3"
     ];
 
     # Enable base services.

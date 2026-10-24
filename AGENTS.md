@@ -66,7 +66,7 @@ Reusable NixOS modules covering:
 
 | Directory | Purpose |
 |-----------|---------|
-| `base/` | Base system settings shared across hosts, including the blacklist for compromised Comodo AAA Services and emSign ECC Root CA certificates |
+| `base/` | Base system settings shared across hosts, including the blacklist for the compromised Comodo AAA Services certificate |
 | `data/` | Defines `config.etu.data` option: derives `ageModules` from `secrets-registry.nix` and imports `pubkeys.nix` |
 | `development/` | Development tooling; only `git/` is left (`etu.development.git.enable`, used by `server-main-elis` and `live-iso`), which doesn't sign commits by default |
 | `graphical/` | Only `theme/`, declaring the `etu.graphical.theme.fonts` options read by `homeModules.emacs` (mirrored by the darwin module). The NixOS desktop (sway, dms-shell, catppuccin theme, desktop development modules) was removed; the desktop is the nix-darwin MacBook |
@@ -84,7 +84,7 @@ that read `osConfig.etu.*` work unchanged on macOS.
 
 | Directory | Purpose |
 |-----------|---------|
-| `base/` | Base settings; enables the base modules below by default, blacklists the compromised Comodo AAA Services and emSign ECC Root CA certificates, and defines `etu.dataPrefix` (empty by default: macOS has no ephemeral root or `/data`, so paths like the Emacs org agenda's `<dataPrefix>$HOME/.dotfiles` resolve to the home directory) |
+| `base/` | Base settings; enables the base modules below by default, blacklists the compromised Comodo AAA Services certificate, and defines `etu.dataPrefix` (empty by default: macOS has no ephemeral root or `/data`, so paths like the Emacs org agenda's `<dataPrefix>$HOME/.dotfiles` resolve to the home directory) |
 | `base/emacs/` | `etu.base.emacs.*`: emacs-overlay, icon font, unfree language servers, imports `homeModules.emacs`. Host-specific Emacs Lisp (like the work MacBook's `~/tvnu/.lisp` loader) goes in `etu.base.emacs.extraConfig`, which is inserted into the shared config |
 | `base/fish/` | `etu.base.fish.*`: fish system wide and in `/etc/shells`, imports `homeModules.fish` and adds macOS-only abbreviations (`l` for `ls -alh`) |
 | `base/htop/` | `etu.base.htop.enable`: imports `homeModules.htop` |
@@ -104,7 +104,7 @@ that read `osConfig.etu.*` work unchanged on macOS.
 | `graphical/ghostty/` | `etu.graphical.ghostty.enable`: imports `homeModules.ghostty` for the user and adds the macOS specifics (`ghostty-bin`, always start fish, quit after the last window closes) |
 | `graphical/theme/` | `etu.graphical.theme.*`: font options (macOS defaults: `JetBrains Mono`, 12) and the font package |
 | `user/` | `etu.user.username`: `system.primaryUser` and the user's home directory; also `etu.user.{realname,email,signingKey}` (same defaults as NixOS) for `homeModules.git`. `etu.user.restow.enable` imports `homeModules.restow`. Sets up home-manager for the user (`useGlobalPkgs`, `useUserPackages`, `perSystem`, zsh) with `home.stateVersion` from `etu.stateVersion` |
-| `default.nix` | Module entry point, imports all sub-modules, home-manager's darwin module and NUR's darwin module |
+| `default.nix` | Module entry point, imports all sub-modules, home-manager's darwin module (from the `home-manager-darwin` input) and NUR's darwin module |
 
 ### `modules/home/`
 
@@ -360,21 +360,31 @@ use `nix-installer-action`. In `helper_cache_hosts.yaml` the tarball name uses
 
 | Input | Purpose |
 |-------|---------|
-| `nixpkgs` | Main nixpkgs (nixos-unstable) |
+| `nixpkgs` | nixpkgs for the NixOS hosts (`nixos-unstable-small`) |
+| `nixpkgs-darwin` | nixpkgs for the nix-darwin hosts (`nixpkgs-unstable`, which waits for the darwin builds) |
 | `nixos-hardware` | Hardware-specific NixOS modules |
 | `agenix` | Encrypted secret management |
 | `blueprint` | Flake layout / convention helper |
 | `deploy-rs` | Remote NixOS deployment |
 | `disko` | Declarative disk partitioning |
 | `emacs-overlay` | Up-to-date Emacs packages |
-| `home-manager` | User environment management |
+| `home-manager` | User environment management (NixOS hosts) |
+| `home-manager-darwin` | home-manager for the nix-darwin hosts, following `nixpkgs-darwin` |
 | `impermanence` | Opt-in persistence on ephemeral root |
 | `ip-failar-nu` | Custom service: ip.failar.nu |
-| `nix-darwin` | macOS system configuration for `macbook-air-elis` |
+| `nix-darwin` | macOS system configuration for `macbook-air-elis`, following `nixpkgs-darwin` |
 | `nur` | Nix User Repository |
 
-All inputs follow `nixpkgs` via `.follows` where possible to avoid duplicate
-versions.
+nixpkgs is split by platform. Blueprint builds the NixOS hosts with
+`inputs.nixpkgs.lib.nixosSystem`, so they always use `nixpkgs`. The darwin
+hosts get their packages from nix-darwin's own `nixpkgs` input, which follows
+`nixpkgs-darwin`, and `modules/darwin` imports home-manager from
+`home-manager-darwin`. Blueprint's per-system outputs (`packages/`,
+`perSystem.*`) are built from `nixpkgs` on every platform, including darwin;
+that only affects the small VS Code extension packages the MacBook uses.
+
+All other inputs follow `nixpkgs` via `.follows` where possible to avoid
+duplicate versions.
 
 ---
 
@@ -455,6 +465,23 @@ These patterns have caused evaluation or build failures in past upgrades:
   "option does not exist", search nixpkgs for the new option name.
   - Example (26.05): `services.homepage-dashboard.environmentFile` (scalar)
     was renamed to `environmentFiles` (list).
+
+- **Removed NixOS options read by flake input modules**: when nixpkgs
+  removes an option, a module from another input that still *reads* it
+  breaks evaluation too, even if this repo never sets it. Update that input
+  (`nix flake update <input>`) once upstream has adapted.
+  - Example (26.11): the scripted initrd was removed, taking
+    `boot.initrd.systemd.enable` with it. impermanence still read it
+    ("can no longer be used since it's been removed") until its
+    2026-10-23 release. All hosts already used systemd in stage 1, so
+    boot behaviour didn't change.
+
+- **Blacklisted CA certificates removed upstream**: the CA bundle build
+  fails with "Certs in blocklist but not in cert store" when an entry in
+  `security.pki.caCertificateBlacklist` (set in both `base` modules) is no
+  longer shipped by nss. Remove that entry from both modules. Since every
+  system depends on the bundle, all hosts fail to build at once.
+  - Example (26.11): nss 3.131.1 dropped `emSign ECC Root CA - G3`.
 
 - **Removed option defaults**: modules sometimes drop their default values,
   making previously-optional config mandatory.
