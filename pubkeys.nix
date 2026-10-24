@@ -1,11 +1,6 @@
 let
   etu =
     let
-      # Private laptop (ThinkPad P14s Gen 4)
-      laptop-private-elis = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKALrQoSasNAaAvERCMsztZkezg0gRSFXWbc1vXpA1+C etu@laptop-private-elis-2023-01-27"
-      ];
-
       # User key on the new work laptop
       laptop-work-elis = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINPQrlHiejXvToMVQxO/HOhqYjl5yqC8rTLeT7maCLeb elis-work-laptop-2026-10-08"
@@ -19,13 +14,12 @@ let
     {
       # Include all separate units
       inherit
-        laptop-private-elis
         laptop-work-elis
         macbook-air-elis
         ;
 
       # Include a meta name of all computers
-      computers = laptop-private-elis ++ laptop-work-elis ++ macbook-air-elis;
+      computers = laptop-work-elis ++ macbook-air-elis;
     };
 
   # Public keys used for syncoid.
@@ -66,9 +60,6 @@ let
 
   # Public keys of different hosts
   systems = {
-    # Private laptop
-    laptop-private-elis = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOr9fpRag0ZQq3eMOPHygrt60GZl0NW32rzvvvgsm5HC";
-
     # home.elis.nu
     server-main-elis = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJRZYWjxAqloB5MZtxBHkckZhKi+3M1OObzBdyi7La98";
     server-main-elis-initrd = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGii+3fHNc3to81E0kY+W1yvPCnjFoMZxUr+SbH2nx1e";

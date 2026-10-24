@@ -71,14 +71,6 @@
       "zroot/safe/home".use_template = [ "home" ];
 
       # Enable cleanup for synced backups
-      "zstorage/backups/current/laptop-private-elis/data" = {
-        use_template = [ "data" ];
-        autosnap = false;
-      };
-      "zstorage/backups/current/laptop-private-elis/home" = {
-        use_template = [ "home" ];
-        autosnap = false;
-      };
       "zstorage/backups/current/vps06/data" = {
         use_template = [ "data" ];
         autosnap = false;
@@ -106,11 +98,6 @@
     base.syncoid.enable = true;
     # Enable syncing of some filesystems
     base.syncoid.commands = {
-      "root@laptop-private-elis:zroot/safe/data".target =
-        "zstorage/backups/current/laptop-private-elis/data";
-      "root@laptop-private-elis:zroot/safe/home".target =
-        "zstorage/backups/current/laptop-private-elis/home";
-
       "root@server-sparv:zroot/safe/valheim-saves".target =
         "zstorage/backups/current/server-sparv/valheim-saves";
       "root@server-sparv:zroot/safe/minecraft".target = "zstorage/backups/current/server-sparv/minecraft";

@@ -50,7 +50,6 @@ Each host lives in `hosts/<hostname>/` and is automatically picked up by bluepri
 
 | Host | Type | Deployment method | Notes |
 |------|------|-------------------|-------|
-| `laptop-private-elis` | Laptop | `nixos-rebuild` locally | Private laptop (ThinkPad P14s Gen 4); pushes ZFS snapshots to `server-main-elis` |
 | `macbook-air-elis` | Laptop (macOS) | `just activate` locally | MacBook Air M5, `aarch64-darwin`, managed with nix-darwin via `darwin-configuration.nix`; built in CI on a `macos-latest` runner; builds the x86_64-linux hosts on `server-main-elis` (see *Building and deploying from macOS*) |
 | `server-main-elis` | Server | `deploy .#server-main-elis` | Home file server; also the Nix remote builder for the MacBook (builds the x86_64-linux hosts from macOS), ZFS snapshot target, runs Home Assistant |
 | `server-sparv` | Server | `deploy .#server-sparv` | On-location server for speliarvika.se, LAN cache, game servers (Valheim, Project Zomboid, Minecraft) |
@@ -186,7 +185,7 @@ builder (see *Building and deploying from macOS*) and copies it to the target.
 
 `just activate` builds and activates the current host locally, picked by
 `hostname`: `sudo darwin-rebuild switch` on macOS and
-`sudo nixos-rebuild switch` elsewhere (e.g. `laptop-private-elis`).
+`sudo nixos-rebuild switch` elsewhere.
 
 ### Format / Lint
 

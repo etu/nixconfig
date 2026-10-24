@@ -60,16 +60,11 @@ Task runner wrapping common `nix`, `deploy`, format, and update commands. Run
   (`just build` builds the current host, using its nix-darwin config on macOS)
 - `just deploy-server-main-elis` / `just deploy-server-sparv` / `just deploy-vps06`
 - `just activate` — build and activate the current host locally (`darwin-rebuild`
-  on macOS, `nixos-rebuild` on Linux, e.g. `laptop-private-elis`)
+  on macOS, `nixos-rebuild` on Linux)
 - `just nix-fmt` / `just all-fmt-check` — format and lint checks
 - `just update-all` — update flake inputs and all container image tags
 
 ### `hosts/`
-
-#### `hosts/laptop-private-elis/`
-
-Private laptop (Lenovo ThinkPad P14s Gen 4). Deployed with `nixos-rebuild`. ZFS snapshots are
-pushed from this system to `server-main-elis` via syncoid whenever online.
 
 #### `hosts/macbook-air-elis/`
 

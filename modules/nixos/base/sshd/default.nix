@@ -38,7 +38,6 @@
     # Add known hosts for all of my systems that I access remotely so
     # they are always trusted.
     programs.ssh.knownHosts = {
-      laptop-private-elis.publicKey = config.etu.data.pubkeys.systems.laptop-private-elis;
       server-main-elis = {
         extraHostNames = [
           "home.elis.nu"

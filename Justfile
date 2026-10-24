@@ -29,11 +29,6 @@ flake-check :
 build:
     nom build '.#{{ build-target }}'
 
-# Build the laptop-private-elis host
-[group('build')]
-build-laptop-private-elis:
-    nom build '.#nixosConfigurations.laptop-private-elis.config.system.build.toplevel'
-
 # Build the live-iso
 [group('build')]
 build-live-iso:
@@ -61,7 +56,7 @@ build-vps06:
 
 # Build all hosts
 [group('build')]
-build-all: build-laptop-private-elis build-server-main-elis build-server-sparv build-vps06 build-live-iso
+build-all: build-server-main-elis build-server-sparv build-vps06 build-live-iso
 
 # Build and activate the current host locally (nix-darwin on macOS, NixOS elsewhere)
 [group('deploy')]

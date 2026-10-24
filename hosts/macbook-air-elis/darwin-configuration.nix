@@ -30,7 +30,7 @@
 
     user.username = "elishirwing";
 
-    # Use zoxide for cd in fish, like on laptop-private-elis.
+    # Use zoxide for cd in fish.
     base.fish.enableUserZoxideCd = true;
 
     # Build the x86_64-linux hosts on server-main-elis, see
