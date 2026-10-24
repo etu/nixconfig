@@ -150,7 +150,8 @@ VPS running public-facing services, deployed using `deploy .#vps06`:
 #### `hosts/live-iso/`
 
 If you're adventurous and want to run a clone of this configuration from a
-live ISO, it can be built locally:
+live ISO (console only, without a graphical environment), it can be built
+locally:
 
 ```sh
 nix build github:etu/nixconfig#iso

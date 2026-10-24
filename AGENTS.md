@@ -54,7 +54,7 @@ Each host lives in `hosts/<hostname>/` and is automatically picked up by bluepri
 | `server-main-elis` | Server | `deploy .#server-main-elis` | Home file server; also the Nix remote builder for the MacBook (builds the x86_64-linux hosts from macOS), ZFS snapshot target, runs Home Assistant |
 | `server-sparv` | Server | `deploy .#server-sparv` | On-location server for speliarvika.se, LAN cache, game servers (Valheim, Project Zomboid, Minecraft) |
 | `vps06` | VPS | `deploy .#vps06` | Runs Gitea, ip.failar.nu, Matrix homeserver |
-| `live-iso` | ISO | `nix build .#iso` | Live ISO of this config; not deployed remotely |
+| `live-iso` | ISO | `nix build .#iso` | Console-only live ISO of this config (no graphical environment); not deployed remotely |
 
 ---
 

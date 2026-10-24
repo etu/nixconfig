@@ -1,5 +1,5 @@
 #
-# This definition is used to build a live-iso using my graphical environment.
+# This definition is used to build a live-iso with my base setup.
 #
 # Build by running the following command:
 # $ nix build .#nixosConfigurations.live-iso.config.system.build.isoImage
@@ -37,16 +37,6 @@
     user.setEmptyPassword = true;
     user.setEmptyRootPassword = true;
 
-    # Enable a graphical system.
-    graphical.enable = true;
-    graphical.sway.enable = true;
-
-    # Fore disable some graphical components unused on the live iso.
-    graphical.gnupg.enable = false;
-
-    # Disable suspend on idle for the live iso.
-    graphical.sway.enableSuspendOnTimeout = false;
-
     # Force disable persistence modules since this system doesn't
     # use ZFS.
     base.zfs.enable = false;
@@ -58,7 +48,6 @@
     base.tailscale.enable = false;
   };
 
-  networking.wireless.enable = false;
   services.openssh.settings.PermitRootLogin = lib.mkForce "prohibit-password";
 
   # Use the host platform for building by default to avoid cross compiling.
