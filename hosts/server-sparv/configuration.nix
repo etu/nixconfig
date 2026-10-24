@@ -145,6 +145,8 @@
         "2456-2458:2456-2458/udp"
       ];
       environment = {
+        NAME = "Sparv Server";
+        WORLD = "SparvWorld";
         PORT = "2456";
         PUBLIC = "0";
         ENABLE_CROSSPLAY = "1";
@@ -189,6 +191,7 @@
         "16261:16261/udp"
         "16262-16272:16262-16272/tcp"
       ];
+      environment.SERVERNAME = "Sparv";
       environmentFiles = [ config.age.secrets.project-zomboid-env.path ];
       volumes = [
         "/var/lib/project-zomboid:/home/steam/Zomboid"
@@ -204,6 +207,22 @@
         "7778:7778/udp"
         "27015:27015/udp"
       ];
+      environment = {
+        # Server name shown in the server browser
+        SERVER_NAME = "Sparv Conan Server";
+
+        # Game mode: pve, pvp, or pve-c
+        SERVER_TYPE = "pve";
+
+        # Max players allowed at the same time
+        MAX_PLAYERS = "10";
+
+        # Region: 0=EU, 1=NA, 2=Asia, 3=Oceania, 4=SA, 5=Japan
+        SERVER_REGION = "0";
+
+        # Timezone examples: UTC, Europe/London, Asia/Qatar, America/New_York
+        TZ = "Europe/Stockholm";
+      };
       environmentFiles = [ config.age.secrets.conan-exiles-server-env.path ];
       volumes = [
         "/var/lib/conan-exiles/data:/conanexiles"
@@ -262,6 +281,7 @@
     #    "15636-15637:15636-15637/udp"
     #    "27015:27015/udp"
     #  ];
+    #  environment.SERVER_NAME = "Sparv Enshrouded";
     #  environmentFiles = [ config.age.secrets.enshrouded-server-env.path ];
     #  volumes = [
     #    "/var/lib/enshrouded/state:/home/steam/enshrouded"
