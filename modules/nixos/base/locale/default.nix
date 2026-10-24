@@ -1,4 +1,4 @@
-{ config, ... }:
+{ lib, ... }:
 {
   # Set your time zone.
   time.timeZone = "Europe/Stockholm";
@@ -16,8 +16,16 @@
   console.useXkbConfig = true;
 
   # Keyboard layout used by the console, X11 and other parts.
-  services.xserver.xkb.model = config.etu.graphical.xkb-keymap.model;
-  services.xserver.xkb.layout = config.etu.graphical.xkb-keymap.layout;
-  services.xserver.xkb.options = config.etu.graphical.xkb-keymap.options;
-  services.xserver.xkb.variant = config.etu.graphical.xkb-keymap.variant;
+  services.xserver.xkb.model = "pc105";
+  services.xserver.xkb.layout = "us";
+  services.xserver.xkb.variant = "dvorak";
+  services.xserver.xkb.options = lib.concatStringsSep "," [
+    "compose:102" # Make the LSGT/"<>"/"&lt; &gt;" key a Compose key
+    "compose:sclk" # Make the Scroll Lock key a Compose key
+    "ctrl:nocaps" # Make the Caps Lock a Ctrl key
+    "eurosign:e" # Make a Euro on E, third level
+    "kpdl:dot" # Make the keypad comma key a dot
+    "numpad:mac" # Numeric keypad always enters digits (as in macOS)
+    "terminate:ctrl_alt_bksp" # Remove the Ctrl+Alt+Backspace behavior
+  ];
 }

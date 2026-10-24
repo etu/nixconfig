@@ -20,8 +20,8 @@
         flake.homeModules.git
       ];
 
-      # Sign commits by default when the signing setup (gnupg) is enabled.
-      programs.git.settings.commit.gpgSign = config.etu.graphical.gnupg.enable;
+      # Don't sign commits by default, the NixOS hosts have no signing setup.
+      programs.git.settings.commit.gpgSign = false;
     };
   };
 }

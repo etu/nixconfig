@@ -1,11 +1,7 @@
+{ lib, ... }:
 {
-  config,
-  lib,
-  pkgs,
-  ...
-}:
-{
-  options.etu.graphical.theme.enable = lib.mkEnableOption "Enable graphical theme settings";
+  # Font settings, read by homeModules.emacs (and mirrored by the darwin
+  # module of the same name).
   options.etu.graphical.theme.fonts = {
     size = lib.mkOption {
       type = lib.types.int;
@@ -26,53 +22,6 @@
       type = lib.types.str;
       default = "DejaVu Sans";
       description = "Default font to use";
-    };
-  };
-
-  config = lib.mkIf config.etu.graphical.enable {
-    # Set up default fonts
-    fonts.enableDefaultPackages = true;
-    fonts.enableGhostscriptFonts = true;
-
-    # Allow to install microsoft fonts
-    etu.base.nix.allowUnfree = [
-      "corefonts"
-    ];
-
-    # Configure fontconfig to actually use more of Noto Color Emoji in
-    # the terminal.
-    fonts.fontconfig.defaultFonts.monospace = [
-      config.etu.graphical.theme.fonts.monospace
-      "Noto Color Emoji"
-    ];
-
-    # Install some extra fonts.
-    fonts.packages = [
-      pkgs.jetbrains-mono
-
-      # Install microsoft fonts
-      pkgs.corefonts
-
-      pkgs.nur.repos.etu.font-etuvetica # My own font
-      pkgs.nur.repos.etu.font-talyznewroman # Install talyz's font
-    ];
-
-    # If my user exists, enable home-manager configurations
-    home-manager.users.${config.etu.user.username} = lib.mkIf config.etu.user.enable {
-      # GTK theme configs
-      gtk = {
-        enable = true;
-        font.name = config.etu.graphical.theme.fonts.normal;
-        font.size = config.etu.graphical.theme.fonts.size;
-        gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
-        gtk4.extraConfig.gtk-application-prefer-dark-theme = 1;
-      }; # END gtk
-
-      # QT theme configs
-      qt = {
-        enable = true;
-        platformTheme.name = "gtk3";
-      }; # END qt
     };
   };
 }

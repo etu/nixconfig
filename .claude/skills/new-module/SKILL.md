@@ -13,12 +13,15 @@ The user wants to add a new module to this NixOS config. Arguments: $ARGUMENTS
 
 Modules live under `modules/nixos/<category>/`. Each module is a directory with a `default.nix`. The root module at `modules/nixos/default.nix` imports all category directories, and each category's `default.nix` imports its sub-modules.
 
-**Categories and their top-level enable option:**
-- `graphical/` — gated on `config.etu.graphical.enable`
-- `development/` — gated on `config.etu.development.enable`
-- `games/` — gated on `config.etu.games.enable`
-- `base/` — always active
-- `services/` — always active
+**Categories:**
+- `base/` — always imported; most modules are enabled by default
+- `development/` — development tooling, each module has its own enable option
+- `graphical/` — only the font options read by `homeModules.emacs`; there is no NixOS desktop any more
+- `services/` — service configurations
+
+The NixOS hosts are servers and a console-only live ISO. A desktop
+application for the MacBook belongs in a nix-darwin module under
+`modules/darwin/` instead (see *nix-darwin hosts* in AGENTS.md).
 
 ## Standard Module Template
 
@@ -81,7 +84,7 @@ Run `nix search nixpkgs <keyword>` in the terminal to find the exact package att
 
 ## Common Patterns
 
-### Simple graphical app (most common case)
+### Simple app (most common case)
 ```nix
 {
   config,
@@ -90,9 +93,9 @@ Run `nix search nixpkgs <keyword>` in the terminal to find the exact package att
   ...
 }:
 {
-  options.etu.graphical.<name>.enable = lib.mkEnableOption "Enable <name>";
+  options.etu.<category>.<name>.enable = lib.mkEnableOption "Enable <name>";
 
-  config = lib.mkIf config.etu.graphical.<name>.enable {
+  config = lib.mkIf config.etu.<category>.<name>.enable {
     etu.user.extraUserPackages = [ pkgs.<name> ];
 
     etu.base.zfs.user.directories = [
@@ -104,7 +107,7 @@ Run `nix search nixpkgs <keyword>` in the terminal to find the exact package att
 
 ### App needing extra user groups
 ```nix
-config = lib.mkIf config.etu.graphical.<name>.enable {
+config = lib.mkIf config.etu.<category>.<name>.enable {
   etu.user.extraUserPackages = [ pkgs.<name> ];
   etu.user.extraGroups = [ "dialout" ];  # e.g., for serial/USB devices
   etu.base.zfs.user.directories = [ ".config/<name>" ];
@@ -138,10 +141,10 @@ The NixOS hosts are:
 
 Enable options are set directly in the `etu = { ... }` block of each host's configuration.nix.
 
-## Example: What Was Done for Audacity
+## Example: Adding a Development Tool
 
 ```
-modules/nixos/graphical/audacity/default.nix  ← new module
-modules/nixos/graphical/default.nix           ← added ./audacity to imports
-hosts/<host>/configuration.nix                ← added graphical.audacity.enable = true
+modules/nixos/development/<name>/default.nix  ← new module
+modules/nixos/development/default.nix         ← added ./<name> to imports
+hosts/<host>/configuration.nix                ← added development.<name>.enable = true
 ```

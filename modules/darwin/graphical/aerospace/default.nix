@@ -18,8 +18,8 @@ in
     lib.mkEnableOption "Enable the AeroSpace tiling window manager";
   options.etu.graphical.aerospace.modifier = lib.mkOption {
     type = lib.types.str;
-    # Mirror modules/home/sway with Alt instead of Super, since Cmd collides
-    # with most macOS shortcuts. The Emacs-style direction keys are b/f/p/n.
+    # Mirror the former NixOS sway bindings with Alt instead of Super, since
+    # Cmd collides with most macOS shortcuts. The Emacs-style direction keys are b/f/p/n.
     default = "alt";
     example = "cmd";
     description = "AeroSpace modifier key(s) for all bindings, e.g. `alt`, `cmd` or `cmd-alt`.";

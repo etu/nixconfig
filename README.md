@@ -48,7 +48,7 @@ remotely-managed servers, and the live-iso package alias. Per-system outputs
 are generated for `aarch64-darwin`, `aarch64-linux` and `x86_64-linux` only
 (nixpkgs 26.11 dropped `x86_64-darwin`). All inputs follow
 `nixpkgs` via `.follows` where possible. Key inputs: `agenix`, `blueprint`,
-`catppuccin`, `deploy-rs`, `disko`, `emacs-overlay`, `home-manager`,
+`deploy-rs`, `disko`, `emacs-overlay`, `home-manager`,
 `impermanence`, `ip-failar-nu`, `nix-darwin`, `nixos-hardware`, `nur`.
 
 ### `Justfile`
@@ -161,9 +161,10 @@ nix build github:etu/nixconfig#iso
 
 Reusable NixOS and home-manager modules with custom options.
 
-**`modules/nixos/`** — system-level modules:
-`base`, `data`, `development`, `games`, `graphical`, `services`, `theme`,
-`user`, `work`. The shared NixOS and nix-darwin base modules blacklist the
+**`modules/nixos/`** — system-level modules for the servers and the live
+ISO: `base`, `data`, `development` (git), `graphical` (only the font options
+read by the Emacs module), `hacks`, `services`, `user`. There is no NixOS
+desktop any more; the desktop is the nix-darwin MacBook. The shared NixOS and nix-darwin base modules blacklist the
 compromised `Comodo AAA Services root` and `emSign ECC Root CA - G3` certificates.
 
 **`modules/darwin/`** — nix-darwin modules, mirroring `modules/nixos/` and
@@ -174,12 +175,9 @@ tailscale, tmux), `development` (claude-code, direnv, git, vscode), `graphical` 
 Ghostty, theme fonts), `user`.
 
 **`modules/home/`** — user-level home-manager modules:
-`alacritty`, `dms-shell`, `emacs`, `firefox`, `fish`, `flatpak-overrides`,
-`ghostty`, `git`, `graphical-dotfiles`, `htop`, `kanshi`, `sway`, `tmux`,
-`vscode`, `voxtype`. The shared Git module globally ignores common macOS
-filesystem artifacts (such as `.DS_Store`) on Darwin.
-The Ghostty module disables the default `Ctrl+Enter` fullscreen toggle and
-enables copy-on-select.
+`emacs`, `fish`, `ghostty`, `git`, `htop`, `tmux`, `vscode`. The shared Git
+module globally ignores common macOS filesystem artifacts (such as
+`.DS_Store`) on Darwin. The Ghostty module enables copy-on-select.
 
 ### `secrets-registry.nix`, `agenix-rules.nix` and `secrets/`
 

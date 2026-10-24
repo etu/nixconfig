@@ -10,7 +10,7 @@ allowed-tools: [Read, Write, Edit, Glob, Grep, Bash]
 The user wants to enable an existing module option on one or more hosts. Arguments: $ARGUMENTS
 
 Parse the arguments:
-- First argument: the module option path (e.g., `graphical.audacity`, `development.flipper-zero`, `games.steam`)
+- First argument: the module option path (e.g., `development.git`, `base.syncoid.source`)
 - Remaining arguments: host names to enable it on (e.g., `server-main-elis`)
   - If no hosts are specified, ask the user which hosts to enable it on
 
@@ -43,9 +43,9 @@ If the option is already present in the host's `etu = { }` block (even if set to
 ### 4. Insert the enable line
 
 Find the right location within the `etu = { ... }` block. Module options are grouped by category prefix. Insert the new line:
-- After the last existing line that shares the same category prefix (e.g., after all `graphical.*` lines if adding `graphical.foo`)
-- If no lines with that category exist yet, insert after the category's parent enable line (e.g., after `graphical.enable = true;`)
-- If none of those exist, insert in alphabetical order by category, before `theme`, `user` lines
+- After the last existing line that shares the same category prefix (e.g., after all `base.*` lines if adding `base.foo`)
+- If no lines with that category exist yet, insert after the category's parent enable line, if there is one
+- If none of those exist, insert in alphabetical order by category, before `user` lines
 
 The line to insert is:
 ```nix
@@ -60,24 +60,22 @@ Re-read each modified file to confirm the line was inserted correctly and the `e
 
 ## Example
 
-Enabling `graphical.audacity` on `live-iso`:
+Enabling `development.git` on `vps06`:
 
 Before (relevant excerpt):
 ```nix
-    graphical.enable = true;
-    graphical.sway.enable = true;
-    graphical.fdm-printing.enable = true;
+    base.emacs.enable = lib.mkForce false;
+    base.syncoid.source.enable = true;
 ```
 
 After:
 ```nix
-    graphical.enable = true;
-    graphical.sway.enable = true;
-    graphical.audacity.enable = true;
-    graphical.fdm-printing.enable = true;
+    base.emacs.enable = lib.mkForce false;
+    base.syncoid.source.enable = true;
+    development.git.enable = true;
 ```
 
-(Insert alphabetically among the `graphical.*` lines.)
+(Insert in alphabetical order by category, after the `base.*` lines.)
 
 ## Notes
 

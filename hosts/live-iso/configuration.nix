@@ -37,6 +37,9 @@
     user.setEmptyPassword = true;
     user.setEmptyRootPassword = true;
 
+    # Install git with my git settings.
+    development.git.enable = true;
+
     # Force disable persistence modules since this system doesn't
     # use ZFS.
     base.zfs.enable = false;

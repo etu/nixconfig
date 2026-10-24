@@ -8,12 +8,10 @@
     ./graphical
     ./hacks
     ./services
-    ./theme
     ./user
 
     # Include modules imported from flakes
     inputs.agenix.nixosModules.age
-    inputs.catppuccin.nixosModules.catppuccin
     inputs.disko.nixosModules.disko
     inputs.home-manager.nixosModules.home-manager
     inputs.impermanence.nixosModules.impermanence

@@ -68,14 +68,11 @@ Reusable NixOS modules covering:
 |-----------|---------|
 | `base/` | Base system settings shared across hosts, including the blacklist for compromised Comodo AAA Services and emSign ECC Root CA certificates |
 | `data/` | Defines `config.etu.data` option: derives `ageModules` from `secrets-registry.nix` and imports `pubkeys.nix` |
-| `development/` | Development tooling options |
-| `games/` | Gaming-related configuration |
-| `graphical/` | Graphical desktop (Sway/Wayland) stack |
+| `development/` | Development tooling; only `git/` is left (`etu.development.git.enable`, used by `server-main-elis` and `live-iso`), which doesn't sign commits by default |
+| `graphical/` | Only `theme/`, declaring the `etu.graphical.theme.fonts` options read by `homeModules.emacs` (mirrored by the darwin module). The NixOS desktop (sway, dms-shell, catppuccin theme, desktop development modules) was removed; the desktop is the nix-darwin MacBook |
 | `hacks/` | **Temporary overlay hacks** — patches and package overrides waiting on upstream fixes. Check here during upgrades to see if anything can be removed. |
 | `services/` | Various service configurations (e.g. Nextcloud, Gitea, Home Assistant) |
-| `theme/` | System-wide theming (Catppuccin) |
 | `user/` | User account definitions |
-| `work/` | Work-specific settings |
 | `default.nix` | Module entry point, imports all sub-modules |
 
 ### `modules/darwin/`
@@ -99,12 +96,12 @@ that read `osConfig.etu.*` work unchanged on macOS.
 | `base/tailscale/` | `etu.base.tailscale.enable`: `tailscaled` as a launchd daemon |
 | `base/tmux/` | `etu.base.tmux.enable`: imports `homeModules.tmux`, always starts fish (tmux otherwise uses `$SHELL`, which is zsh on macOS), and overrides the status bar's load average (the shared module reads Linux-only `/proc/loadavg`) with `sysctl -n vm.loadavg` |
 | `development/claude-code/` | `etu.development.claude-code.enable`: Claude Code and claude-monitor for the user |
-| `development/direnv/` | `etu.development.direnv.enable`: direnv with nix-direnv for the user (the NixOS module uses lorri instead); the fish hook comes from `homeModules.fish` |
+| `development/direnv/` | `etu.development.direnv.enable`: direnv with nix-direnv for the user; the fish hook comes from `homeModules.fish` |
 | `development/git/` | `etu.development.git.enable`: git system wide, imports `homeModules.git` and always signs commits (SSH key through the ssh-agent) |
-| `development/vscode/` | `etu.development.vscode.enable` / `enableWork`: imports `homeModules.vscode` and allows its unfree packages, like the NixOS module |
+| `development/vscode/` | `etu.development.vscode.enable` / `enableWork`: imports `homeModules.vscode` and allows its unfree packages. `enableWork` adds the work extensions and settings; nothing here sets it, but it is kept for use by an external work flake |
 | `graphical/fdm-printing/` | `etu.graphical.fdm-printing.enable`: OpenSCAD for the user (FreeCAD isn't available for macOS); also read by `homeModules.vscode` for the OpenSCAD extension |
-| `graphical/aerospace/` | `etu.graphical.aerospace.enable`: AeroSpace tiling window manager via `services.aerospace`, with bindings mirroring `modules/home/sway` (Alt instead of Super, configurable with `etu.graphical.aerospace.modifier`, Emacs-style `b`/`f`/`p`/`n` directions, Dvorak key mapping, workspaces I–X on keys 1–0, resize mode) |
-| `graphical/ghostty/` | `etu.graphical.ghostty.enable`: imports `homeModules.ghostty` for the user, like the NixOS module, and adds the macOS specifics (`ghostty-bin`, always start fish, quit after the last window closes) |
+| `graphical/aerospace/` | `etu.graphical.aerospace.enable`: AeroSpace tiling window manager via `services.aerospace`, with bindings mirroring the former NixOS sway setup (Alt instead of Super, configurable with `etu.graphical.aerospace.modifier`, Emacs-style `b`/`f`/`p`/`n` directions, Dvorak key mapping, workspaces I–X on keys 1–0, resize mode) |
+| `graphical/ghostty/` | `etu.graphical.ghostty.enable`: imports `homeModules.ghostty` for the user and adds the macOS specifics (`ghostty-bin`, always start fish, quit after the last window closes) |
 | `graphical/theme/` | `etu.graphical.theme.*`: font options (macOS defaults: `JetBrains Mono`, 12) and the font package |
 | `user/` | `etu.user.username`: `system.primaryUser` and the user's home directory; also `etu.user.{realname,email,signingKey}` (same defaults as NixOS) for `homeModules.git`. Sets up home-manager for the user (`useGlobalPkgs`, `useUserPackages`, `perSystem`, zsh) with `home.stateVersion` from `etu.stateVersion` |
 | `default.nix` | Module entry point, imports all sub-modules, home-manager's darwin module and NUR's darwin module |
@@ -115,21 +112,13 @@ Home-manager modules for user-level configuration:
 
 | Directory | Purpose |
 |-----------|---------|
-| `alacritty/` | Alacritty terminal emulator config |
-| `dms-shell/` | DankMaterialShell (Quickshell-based Material 3 desktop shell) config |
 | `emacs/` | Emacs configuration (`emacs-pgtk` on Linux, native `emacs` on macOS; on macOS the Nix profiles are added to the wrapper's PATH, since apps started from Spotlight/launchd only get `/usr/bin:/bin:/usr/sbin:/sbin`, and `Emacs.app` is replaced by a launcher that starts the wrapped `bin/emacs` as a separate process, because a bundle that execs into another bundle's binary isn't managed by window managers like AeroSpace) |
-| `firefox/` | Firefox browser settings |
 | `fish/` | Fish shell configuration |
-| `flatpak-overrides/` | Flatpak permission overrides |
-| `ghostty/` | Ghostty settings shared by NixOS and nix-darwin: font from `etu.graphical.theme.fonts`, block cursor, copy-on-select, and ssh shell integration (`ssh-terminfo`, `ssh-env`). Platform specifics live in the OS modules: `modules/nixos/graphical/ghostty` sets the wrapped package (`GTK_IM_MODULE=simple` so the compose key works on GTK 4.20+/Wayland), middle-click paste via dconf and unbinds the `Ctrl+Enter` fullscreen toggle; `modules/darwin/graphical/ghostty` sets `ghostty-bin`, always starts fish and quits after the last window closes |
-| `graphical-dotfiles/` | Miscellaneous graphical dotfiles |
+| `ghostty/` | Ghostty settings shared by NixOS and nix-darwin: font from `etu.graphical.theme.fonts`, block cursor, copy-on-select, and ssh shell integration (`ssh-terminfo`, `ssh-env`). Only the MacBook uses it now; `modules/darwin/graphical/ghostty` sets `ghostty-bin`, always starts fish and quits after the last window closes |
 | `git/` | Git settings shared by NixOS and nix-darwin: identity and signing key from `etu.user.*`, SSH commit signing setup with an allowed signers file from `pubkeys.nix`, `git-*` helper scripts (from `bin/`, installed into the profile so they're in PATH on NixOS and macOS) and global ignores (including macOS filesystem artifacts on Darwin only). Hosts that need another identity (like the work MacBook) set `etu.user.email`. Whether to sign by default is set by the OS modules (`etu.graphical.gnupg.enable` on NixOS, always on darwin) |
 | `htop/` | htop config |
-| `kanshi/` | kanshi (display management) config |
-| `sway/` | Sway compositor config |
 | `tmux/` | tmux config |
 | `vscode/` | VS Code settings and extensions |
-| `voxtype/` | voxtype (voice dictation) config |
 
 ---
 
@@ -374,10 +363,8 @@ use `nix-installer-action`. In `helper_cache_hosts.yaml` the tarball name uses
 | `nixos-hardware` | Hardware-specific NixOS modules |
 | `agenix` | Encrypted secret management |
 | `blueprint` | Flake layout / convention helper |
-| `catppuccin` | Catppuccin theme for NixOS/home-manager |
 | `deploy-rs` | Remote NixOS deployment |
 | `disko` | Declarative disk partitioning |
-| `dms` | DankMaterialShell — Quickshell-based Material 3 desktop shell |
 | `emacs-overlay` | Up-to-date Emacs packages |
 | `home-manager` | User environment management |
 | `impermanence` | Opt-in persistence on ephemeral root |
@@ -421,11 +408,11 @@ versions.
   `home-manager.users.<user>` there if no option fits). The emacs
   home module picks `pkgs.emacs` on darwin and `pkgs.emacs-pgtk` on Linux.
   Unfree packages go in `etu.base.nix.allowUnfree`, as on NixOS (it also
-  covers home-manager via `useGlobalPkgs`). The NixOS hosts can't be built on macOS without an
-  `x86_64-linux` builder (catppuccin uses import-from-derivation) — the
-  remote builder on `server-main-elis` covers that (see *Building and
-  deploying from macOS*); otherwise run `just flake-check` in CI or on a
-  Linux machine.
+  covers home-manager via `useGlobalPkgs`). The NixOS hosts evaluate on macOS without
+  import-from-derivation (keep it that way: catppuccin's IFD used to make
+  even evaluation need a Linux builder), but building them needs an
+  `x86_64-linux` builder — the remote builder on `server-main-elis`
+  covers that (see *Building and deploying from macOS*).
 - **Building from macOS**: the x86_64-linux hosts are built on
   `server-main-elis` from the MacBook via `nix.buildMachines` — read
   *Building and deploying from macOS* before changing `nix.*` settings there.

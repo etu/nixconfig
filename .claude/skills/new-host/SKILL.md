@@ -17,6 +17,12 @@ Parse the arguments:
 
 If anything is unclear, ask the user before writing files.
 
+Note: the NixOS graphical stack (sway, dms-shell, catppuccin theme and
+the desktop development modules) has been removed; the desktop is the
+nix-darwin MacBook. A NixOS workstation/laptop gets a console-only base
+setup from the scaffold below. Bringing a desktop back means restoring
+those modules from git history first, so ask the user before doing that.
+
 ---
 
 ## How Blueprint Discovers Hosts
@@ -50,10 +56,7 @@ Blueprint auto-discovers hosts from `hosts/*/configuration.nix`. No manual entry
     stateVersion = "26.05";
 
     base.fish.enableUserZoxideCd = true;
-    development.enable = true;
-    graphical.enable = true;
-    graphical.sway.enable = true;
-    theme.enable = true;
+    development.git.enable = true;
     user.enable = true;
 
     base.sanoid.datasets = {

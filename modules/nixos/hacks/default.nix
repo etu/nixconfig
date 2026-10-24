@@ -23,27 +23,6 @@ _: {
         else
           prev.svtplay-dl;
 
-      # Python packages now default to __structuredAttrs, which makes
-      # sphinxHook read only the first entry of sphinxBuilders, so khal's man
-      # page is never built and the build fails on the missing `man` output.
-      # Pass both builders as one string, like upstream's workaround. Only
-      # applies while khal still lists them separately, so it's a no-op once
-      # the upstream fix reaches nixos-unstable.
-      #
-      # Track: https://github.com/NixOS/nixpkgs/pull/576662
-      khal =
-        if
-          prev.khal.sphinxBuilders == [
-            "html"
-            "man"
-          ]
-        then
-          prev.khal.overrideAttrs (_: {
-            sphinxBuilders = [ "html man" ];
-          })
-        else
-          prev.khal;
-
       ## matrix-appservice-irc 4.0.0 uses nedb which calls util.isDate,
       ## removed in Node.js 24. Override to use Node.js 22 until the
       ## package is updated.
