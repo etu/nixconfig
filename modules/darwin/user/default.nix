@@ -1,5 +1,6 @@
 {
   config,
+  flake,
   lib,
   perSystem,
   ...
@@ -33,6 +34,7 @@
         default = "~/.ssh/id_ed25519.pub";
         description = "My public signing key for this system.";
       };
+      restow.enable = lib.mkEnableOption "the restow command for stowing my dotfiles";
     };
   };
 
@@ -51,6 +53,10 @@
     home-manager.extraSpecialArgs = { inherit perSystem; };
 
     home-manager.users.${config.etu.user.username} = {
+      imports = lib.optionals config.etu.user.restow.enable [
+        flake.homeModules.restow
+      ];
+
       # Let zsh (the macOS login shell) load the home-manager environment and
       # shell integrations (such as direnv's hook).
       programs.zsh.enable = true;

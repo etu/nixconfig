@@ -29,6 +29,7 @@
     stateVersion = "26.11";
 
     user.username = "elishirwing";
+    user.restow.enable = true;
 
     # Use zoxide for cd in fish.
     base.fish.enableUserZoxideCd = true;

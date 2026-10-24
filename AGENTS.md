@@ -103,7 +103,7 @@ that read `osConfig.etu.*` work unchanged on macOS.
 | `graphical/aerospace/` | `etu.graphical.aerospace.enable`: AeroSpace tiling window manager via `services.aerospace`, with bindings mirroring the former NixOS sway setup (Alt instead of Super, configurable with `etu.graphical.aerospace.modifier`, Emacs-style `b`/`f`/`p`/`n` directions, Dvorak key mapping, workspaces I–X on keys 1–0, resize mode) |
 | `graphical/ghostty/` | `etu.graphical.ghostty.enable`: imports `homeModules.ghostty` for the user and adds the macOS specifics (`ghostty-bin`, always start fish, quit after the last window closes) |
 | `graphical/theme/` | `etu.graphical.theme.*`: font options (macOS defaults: `JetBrains Mono`, 12) and the font package |
-| `user/` | `etu.user.username`: `system.primaryUser` and the user's home directory; also `etu.user.{realname,email,signingKey}` (same defaults as NixOS) for `homeModules.git`. Sets up home-manager for the user (`useGlobalPkgs`, `useUserPackages`, `perSystem`, zsh) with `home.stateVersion` from `etu.stateVersion` |
+| `user/` | `etu.user.username`: `system.primaryUser` and the user's home directory; also `etu.user.{realname,email,signingKey}` (same defaults as NixOS) for `homeModules.git`. `etu.user.restow.enable` imports `homeModules.restow`. Sets up home-manager for the user (`useGlobalPkgs`, `useUserPackages`, `perSystem`, zsh) with `home.stateVersion` from `etu.stateVersion` |
 | `default.nix` | Module entry point, imports all sub-modules, home-manager's darwin module and NUR's darwin module |
 
 ### `modules/home/`
@@ -117,6 +117,7 @@ Home-manager modules for user-level configuration:
 | `ghostty/` | Ghostty settings shared by NixOS and nix-darwin: font from `etu.graphical.theme.fonts`, block cursor, copy-on-select, and ssh shell integration (`ssh-terminfo`, `ssh-env`). Only the MacBook uses it now; `modules/darwin/graphical/ghostty` sets `ghostty-bin`, always starts fish and quits after the last window closes |
 | `git/` | Git settings shared by NixOS and nix-darwin: identity and signing key from `etu.user.*`, SSH commit signing setup with an allowed signers file from `pubkeys.nix`, `git-*` helper scripts (from `bin/`, installed into the profile so they're in PATH on NixOS and macOS) and global ignores (including macOS filesystem artifacts on Darwin only). Hosts that need another identity (like the work MacBook) set `etu.user.email`. Whether to sign by default is set by the OS modules (`etu.graphical.gnupg.enable` on NixOS, always on darwin) |
 | `htop/` | htop config |
+| `restow/` | The `restow` command (installed into the profile): `git pull` in `~/.dotfiles` and `stow --dotfiles skeleton`. macOS only, imported by the darwin user module on hosts that set `etu.user.restow.enable` (the MacBook) |
 | `tmux/` | tmux config |
 | `vscode/` | VS Code settings and extensions |
 

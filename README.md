@@ -175,7 +175,9 @@ tailscale, tmux), `development` (claude-code, direnv, git, vscode), `graphical` 
 Ghostty, theme fonts), `user`.
 
 **`modules/home/`** — user-level home-manager modules:
-`emacs`, `fish`, `ghostty`, `git`, `htop`, `tmux`, `vscode`. The shared Git
+`emacs`, `fish`, `ghostty`, `git`, `htop`, `restow`, `tmux`, `vscode`.
+`restow` updates `~/.dotfiles` and stows it into the home directory, on
+nix-darwin hosts that set `etu.user.restow.enable`. The shared Git
 module globally ignores common macOS filesystem artifacts (such as
 `.DS_Store`) on Darwin. The Ghostty module enables copy-on-select.
 

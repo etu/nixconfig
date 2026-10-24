@@ -118,15 +118,6 @@
         # Nano config
         ".nanorc".text = "set constantshow # Show linenumbers -c as default";
 
-        "bin/restow".source =
-          pkgs.runCommand "restow"
-            {
-              inherit (config.etu) dataPrefix;
-            }
-            ''
-              substituteAll ${./bin/restow} $out
-              chmod +x $out
-            '';
         "bin/spacecolors".source = ./bin/spacecolors;
 
         "bin/keep".source = pkgs.runCommand "keep" { } ''
