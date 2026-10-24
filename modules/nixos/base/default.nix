@@ -47,6 +47,12 @@
       "Comodo AAA Services root"
     ];
 
+    # Don't force-import the root pool in the initrd, the default from 26.11
+    # on. Every host's pools are imported with its own networking.hostId, so
+    # this only matters after importing a pool from another system (such as
+    # a rescue ISO): then `zpool import -f` it by hand once.
+    boot.zfs.forceImportRoot = lib.mkDefault false;
+
     # Enable base services.
     etu.base = {
       emacs.enable = lib.mkDefault true;
