@@ -23,6 +23,25 @@ _: {
         else
           prev.svtplay-dl;
 
+      # Update cloudflared 2026.10.1 -> 2026.10.3 ahead of nixpkgs. The
+      # vendorHash is unchanged. Only applies to 2026.10.1, so it's a no-op
+      # once nixpkgs moves on.
+      #
+      # Track: https://github.com/NixOS/nixpkgs/pull/576762
+      cloudflared =
+        if prev.cloudflared.version == "2026.10.1" then
+          prev.cloudflared.overrideAttrs (_: rec {
+            version = "2026.10.3";
+            src = prev.fetchFromGitHub {
+              owner = "cloudflare";
+              repo = "cloudflared";
+              tag = version;
+              hash = "sha256-k1OMkHHItOT5VHhQqgC8ODm/RCJEtwtZi0Lxyf/esLg=";
+            };
+          })
+        else
+          prev.cloudflared;
+
       ## matrix-appservice-irc 4.0.0 uses nedb which calls util.isDate,
       ## removed in Node.js 24. Override to use Node.js 22 until the
       ## package is updated.
