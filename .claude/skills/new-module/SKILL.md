@@ -135,7 +135,6 @@ config = lib.mkIf ... {
 
 The NixOS hosts are:
 - `hosts/server-main-elis/configuration.nix`
-- `hosts/server-sparv/configuration.nix`
 - `hosts/vps06/configuration.nix`
 - `hosts/live-iso/configuration.nix`
 

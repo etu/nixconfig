@@ -54,10 +54,6 @@
         ];
         publicKey = config.etu.data.pubkeys.systems.server-main-elis-initrd;
       };
-      "sparv.failar.nu" = {
-        extraHostNames = [ "server-sparv" ];
-        publicKey = config.etu.data.pubkeys.systems.server-sparv;
-      };
       "vps06.elis.nu" = {
         extraHostNames = [
           "vps06"

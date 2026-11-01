@@ -13,7 +13,7 @@ Parse the arguments:
 - First argument: the attribute name for the secret (e.g., `my-service-token`, `wireguard-private-key`)
 - Second argument: the subdirectory under `secrets/` (e.g., `server-main-elis`, `workstations`, `any`)
 - Remaining arguments: which hosts or groups can decrypt this secret. Each is either:
-  - A host name: `server-main-elis`, `server-sparv`, `vps06`
+  - A host name: `server-main-elis`, `vps06`
   - A convenience group: `all`, `workstations`
 
 If arguments are missing or ambiguous, ask the user before proceeding.

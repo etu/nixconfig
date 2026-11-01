@@ -32,8 +32,7 @@ Key groups: `build`, `deploy`, `format`, `format-check`, `updaters`, `nix`.
 All SSH public keys for users and host systems — no secrets, just public keys.
 Imported by `secrets-registry.nix` (to declare which hosts may decrypt each
 secret) and by `modules/nixos/data/` (which exposes the keys as
-`config.etu.data.pubkeys`). Mittens' key is authorized for root SSH access on
-`server-sparv`. The `laptop-work-elis` SSH key is retained for a separately
+`config.etu.data.pubkeys`). The `laptop-work-elis` SSH key is retained for a separately
 managed device; this repository no longer configures that host. The
 `macbook-air-elis` key is the user key on the nix-darwin MacBook Air M5 and is
 part of `etu.computers` and the agenix `etu` key set. The file also holds the
@@ -43,7 +42,7 @@ base64-encoded host keys that Nix's `builders` setting requires).
 
 ### `flake.nix` and `flake.lock`
 
-Main flake definition: inputs, blueprint wiring, deploy-rs nodes for the three
+Main flake definition: inputs, blueprint wiring, deploy-rs nodes for the two
 remotely-managed servers, and the live-iso package alias. Per-system outputs
 are generated for `aarch64-darwin`, `aarch64-linux` and `x86_64-linux` only
 (nixpkgs 26.11 dropped `x86_64-darwin`). nixpkgs is split by platform:
@@ -62,7 +61,7 @@ Task runner wrapping common `nix`, `deploy`, format, and update commands. Run
 
 - `just build` / `just build-<hostname>` / `just build-all` — build hosts with `nom`
   (`just build` builds the current host, using its nix-darwin config on macOS)
-- `just deploy-server-main-elis` / `just deploy-server-sparv` / `just deploy-vps06`
+- `just deploy-server-main-elis` / `just deploy-vps06`
 - `just activate` — build and activate the current host locally (`darwin-rebuild`
   on macOS, `nixos-rebuild` on Linux)
 - `just nix-fmt` / `just all-fmt-check` — format and lint checks
@@ -123,20 +122,11 @@ Runs a large collection of services:
   Podman containers)
 - **Media stack**: Jellyfin, NZBGet, Sonarr, Radarr, Lidarr, Bazarr
 - **Web services**: Nextcloud, FreshRSS, Homepage dashboard, Nginx reverse proxy
-- **Monitoring**: Beszel hub (collects from all three servers) + Beszel agent
+- **Monitoring**: Beszel hub (collects from both servers) + Beszel agent
 - **Infrastructure**: Sanoid (ZFS snapshots), Syncoid (pulls backups from
   configured systems), Cloudflare DynDNS, smartd, libvirtd, ACME/Let's Encrypt
 - **Scheduled tasks**: SVTPlay playlist downloader (daily), empty-dirs cleaner
   (hourly)
-
-#### `hosts/server-sparv/`
-
-On-location server for [speliarvika.se](http://speliarvika.se). Primarily a
-game server host and LAN cache. Runs Valheim and Project Zomboid via Docker,
-plus a whitelisted Minecraft server (NixOS service). Includes lancache
-(monolithic + DNS) for LAN game cache. ZFS snapshots via sanoid. Monitoring
-with Netdata (local dashboard) and Beszel agent. Deployed using
-`deploy .#server-sparv`.
 
 #### `hosts/vps06/`
 
@@ -208,5 +198,5 @@ Five workflows keep the repo healthy:
 - **`pull_request.yaml`** — builds dev shell, runs flake check, builds all hosts
   (NixOS hosts on Linux runners, the MacBook on a macOS runner)
 - **`cache.yml`** — builds and caches all hosts (including the MacBook) to Cachix on pushes to `main`
-- **`deploy.yml`** — deploys the three remote servers via deploy-rs after a push to `main`
+- **`deploy.yml`** — deploys the two remote servers via deploy-rs after a push to `main`
 - **`update.yml`** — scheduled PRs to update flake inputs and container image tags

@@ -53,19 +53,11 @@ let
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBsVq+lSP7EuU0KUurWYjlLWm1PJWKtYUXVayi1jD6lU github-actions-deployment-2023-08-30"
   ];
 
-  # Mittens
-  mittens = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF0+Vj2l+oYL4BtKG/92rySkcjx2WHgGBn8L5nfYv1mD"
-  ];
-
   # Public keys of different hosts
   systems = {
     # home.elis.nu
     server-main-elis = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJRZYWjxAqloB5MZtxBHkckZhKi+3M1OObzBdyi7La98";
     server-main-elis-initrd = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGii+3fHNc3to81E0kY+W1yvPCnjFoMZxUr+SbH2nx1e";
-
-    # Sparv server
-    server-sparv = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICHgZaEnCWXVULHjWqgsvf3mQDX20WmWzAagAtHsBEMZ";
 
     # vps06.elis.nu
     vps06 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINB1+Am7Ai9DfKjDv7JDmPA711FW9wrOXRGZZf0rmjTP";
@@ -77,7 +69,6 @@ in
     builders
     etu
     github-actions
-    mittens
     syncoid
     systems
     ;

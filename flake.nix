@@ -104,7 +104,6 @@
           # Declare deployable nodes
           deploy.nodes = {
             server-main-elis = mkDeploy { name = "server-main-elis"; };
-            server-sparv = mkDeploy { name = "server-sparv"; };
             vps06 = mkDeploy { name = "vps06"; };
           };
 

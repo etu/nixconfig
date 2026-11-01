@@ -44,11 +44,6 @@ build-macbook-air-elis:
 build-server-main-elis:
     nom build '.#nixosConfigurations.server-main-elis.config.system.build.toplevel'
 
-# Build the server-sparv host
-[group('build')]
-build-server-sparv:
-    nom build '.#nixosConfigurations.server-sparv.config.system.build.toplevel'
-
 # Build the vps06 host
 [group('build')]
 build-vps06:
@@ -56,7 +51,7 @@ build-vps06:
 
 # Build all hosts
 [group('build')]
-build-all: build-server-main-elis build-server-sparv build-vps06 build-live-iso
+build-all: build-server-main-elis build-vps06 build-live-iso
 
 # Build and activate the current host locally (nix-darwin on macOS, NixOS elsewhere)
 [group('deploy')]
@@ -67,11 +62,6 @@ activate:
 [group('deploy')]
 deploy-server-main-elis:
     deploy --skip-checks --targets '.#server-main-elis'
-
-# Deploy the server-sparv host
-[group('deploy')]
-deploy-server-sparv:
-    deploy --skip-checks --targets '.#server-sparv'
 
 # Deploy the vps06 host
 [group('deploy')]

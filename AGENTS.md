@@ -52,7 +52,6 @@ Each host lives in `hosts/<hostname>/` and is automatically picked up by bluepri
 |------|------|-------------------|-------|
 | `macbook-air-elis` | Laptop (macOS) | `just activate` locally | MacBook Air M5, `aarch64-darwin`, managed with nix-darwin via `darwin-configuration.nix`; built in CI on a `macos-latest` runner; builds the x86_64-linux hosts on `server-main-elis` (see *Building and deploying from macOS*) |
 | `server-main-elis` | Server | `deploy .#server-main-elis` | Home file server; also the Nix remote builder for the MacBook (builds the x86_64-linux hosts from macOS), ZFS snapshot target, runs Home Assistant |
-| `server-sparv` | Server | `deploy .#server-sparv` | On-location server for speliarvika.se, LAN cache, game servers (Valheim, Project Zomboid, Minecraft) |
 | `vps06` | VPS | `deploy .#vps06` | Runs Gitea, ip.failar.nu, Matrix homeserver |
 | `live-iso` | ISO | `nix build .#iso` | Console-only live ISO of this config (no graphical environment); not deployed remotely |
 
@@ -165,7 +164,6 @@ just build-live-iso               # Build the live ISO image
 
 ```sh
 just deploy-server-main-elis
-just deploy-server-sparv
 just deploy-vps06
 ```
 
@@ -427,8 +425,6 @@ duplicate versions.
 - **Building from macOS**: the x86_64-linux hosts are built on
   `server-main-elis` from the MacBook via `nix.buildMachines` — read
   *Building and deploying from macOS* before changing `nix.*` settings there.
-- **Mittens root access**: the `mittens` key in `pubkeys.nix` is authorized for
-  root SSH access on `server-sparv`.
 - **blueprint conventions**: the flake uses blueprint, so follow its directory
   conventions for hosts, modules, and packages.
 - **`just` for tasks**: prefer `just <recipe>` over raw `nix`/`deploy` commands
@@ -453,7 +449,7 @@ When doing a manual upgrade, follow these steps in order:
 5. **Build all hosts**: `just build-<hostname>` for each host, or let CI do it.
 6. **Commit**, then **deploy** each remotely-managed server and confirm it is
    healthy before pushing. Deployment order: `server-main-elis` →
-   `server-sparv` → `vps06`.
+   `vps06`.
 7. **Push** once all deployments are confirmed.
 
 ### Common nixpkgs upgrade breakages to watch for

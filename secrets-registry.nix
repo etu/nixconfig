@@ -23,13 +23,11 @@ let
   sys = keys.systems;
   h = {
     server-main-elis = [ sys.server-main-elis ];
-    server-sparv = [ sys.server-sparv ];
     vps06 = [ sys.vps06 ];
 
     # Convenience groups
     all = [
       sys.server-main-elis
-      sys.server-sparv
       sys.vps06
     ];
   };
@@ -112,32 +110,4 @@ in
     hostKeys = etu ++ h.vps06;
   };
 
-  # ---------------------------------------------------------------------------
-  # server-sparv secrets
-  # ---------------------------------------------------------------------------
-
-  valheim-server-env = {
-    file = ./secrets/server-sparv/valheim-server-env.age;
-    hostKeys = etu ++ h.server-sparv;
-  };
-
-  project-zomboid-env = {
-    file = ./secrets/server-sparv/project-zomboid-env.age;
-    hostKeys = etu ++ h.server-sparv;
-  };
-
-  enshrouded-server-env = {
-    file = ./secrets/server-sparv/enshrouded-server-env.age;
-    hostKeys = etu ++ h.server-sparv;
-  };
-
-  windrose-server-env = {
-    file = ./secrets/server-sparv/windrose-server-env.age;
-    hostKeys = etu ++ h.server-sparv;
-  };
-
-  conan-exiles-server-env = {
-    file = ./secrets/server-sparv/conan-exiles-server-env.age;
-    hostKeys = etu ++ h.server-sparv;
-  };
 }

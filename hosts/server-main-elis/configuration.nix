@@ -75,14 +75,6 @@
         use_template = [ "data" ];
         autosnap = false;
       };
-      "zstorage/backups/current/server-sparv/minecraft" = {
-        use_template = [ "data" ];
-        autosnap = false;
-      };
-      "zstorage/backups/current/server-sparv/valheim-saves" = {
-        use_template = [ "data" ];
-        autosnap = false;
-      };
 
       # Enable snapshotting for bulk storage
       "zstorage/files".use_template = [ "storage" ];
@@ -98,10 +90,6 @@
     base.syncoid.enable = true;
     # Enable syncing of some filesystems
     base.syncoid.commands = {
-      "root@server-sparv:zroot/safe/valheim-saves".target =
-        "zstorage/backups/current/server-sparv/valheim-saves";
-      "root@server-sparv:zroot/safe/minecraft".target = "zstorage/backups/current/server-sparv/minecraft";
-
       "root@vps06:zroot/safe/data".target = "zstorage/backups/current/vps06/data";
     };
 
@@ -128,11 +116,6 @@
       {
         name = "vps06";
         host = "vps06";
-        port = 45876;
-      }
-      {
-        name = "server-sparv";
-        host = "server-sparv";
         port = 45876;
       }
     ];
