@@ -22,6 +22,26 @@ _: {
           })
         else
           prev.svtplay-dl;
+
+      # Update cloudflared 2026.10.3 -> 2026.10.7 ahead of nixpkgs. The Go
+      # dependencies changed, so the vendorHash is new too. Only applies to
+      # 2026.10.3, so it's a no-op once nixpkgs moves on.
+      #
+      # Track: https://github.com/NixOS/nixpkgs/pull/581699
+      cloudflared =
+        if prev.cloudflared.version == "2026.10.3" then
+          prev.cloudflared.overrideAttrs (_: rec {
+            version = "2026.10.7";
+            src = prev.fetchFromGitHub {
+              owner = "cloudflare";
+              repo = "cloudflared";
+              tag = version;
+              hash = "sha256-qyGcPCYaa4UT8ws5sUW+SXCp8QWbVniB4QFR8gGE0ds=";
+            };
+            vendorHash = "sha256-ah+kI+bWIZqsi9U+AJtWME9rfjTr6QpiLQy0RXNlDzc=";
+          })
+        else
+          prev.cloudflared;
     })
   ];
 }
