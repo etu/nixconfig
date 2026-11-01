@@ -427,6 +427,13 @@ duplicate versions.
   *Building and deploying from macOS* before changing `nix.*` settings there.
 - **blueprint conventions**: the flake uses blueprint, so follow its directory
   conventions for hosts, modules, and packages.
+- **Linux-only packages**: blueprint builds every package in `packages/` for
+  all systems and adds a `pkgs-<name>` check for each, so `nix flake check`
+  on the MacBook fails ("Refusing to evaluate package … not available on the
+  requested hostPlatform") for packages using Linux-only tools such as
+  `kexec-tools` or `zfs`. Set `meta.platforms = pkgs.lib.platforms.linux;`
+  on those (as `nixosSystemdKexec` and `syncoid-recv-check` do); blueprint
+  then leaves them out of the darwin packages and checks.
 - **`just` for tasks**: prefer `just <recipe>` over raw `nix`/`deploy` commands
   to stay consistent with how the repo is managed.
 - **Keep docs updated**: whenever you add, remove, or significantly change a

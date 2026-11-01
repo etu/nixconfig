@@ -29,4 +29,7 @@ pkgs.writeShellApplication {
       echo "$found interrupted receive(s) found."
     fi
   '';
+
+  # zfs is Linux-only; keeps blueprint from generating checks for darwin.
+  meta.platforms = pkgs.lib.platforms.linux;
 }

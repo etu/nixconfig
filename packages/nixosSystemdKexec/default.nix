@@ -156,4 +156,6 @@ pkgs.writeShellApplication {
   '';
 
   meta.description = "Package to do kexec to other systemd-boot nixos generations";
+  # kexec-tools is Linux-only; keeps blueprint from generating checks for darwin.
+  meta.platforms = pkgs.lib.platforms.linux;
 }
