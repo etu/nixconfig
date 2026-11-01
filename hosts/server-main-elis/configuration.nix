@@ -68,7 +68,6 @@
     base.sanoid.datasets = {
       # Enable snapshotting for some filesystems
       "zroot/safe/data".use_template = [ "data" ];
-      "zroot/safe/home".use_template = [ "home" ];
 
       # Enable cleanup for synced backups
       "zstorage/backups/current/vps06/data" = {
@@ -99,7 +98,6 @@
       "/boot"
       "/boot-fallback"
       "/data"
-      "/data/home"
       "/data/local"
       "/media/zstorage"
       "/nix"
