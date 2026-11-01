@@ -561,6 +561,11 @@ These patterns have caused evaluation or build failures in past upgrades:
    `age.secrets.<name> = config.etu.data.ageModules.<name>;` and
    `config.age.secrets.<name>.path`.
 5. Run `agenix -r` if you changed which keys have access.
+6. If a service only reads the secret at startup (e.g. an `EnvironmentFile`),
+   agenix won't restart it when the secret changes. Add
+   `systemd.services.<name>.restartTriggers = [ (builtins.hashFile "sha256" config.age.secrets.<name>.file) ];`
+   (hash the file: its store path changes with every commit). See
+   `hosts/server-main-elis/services/homepage.nix`.
 
 `agenix-rules.nix` is derived automatically — do not edit it.
 

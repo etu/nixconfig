@@ -4,6 +4,13 @@
     inherit (config.etu.data.ageModules) homepage-dashboard-environment;
   };
 
+  # agenix doesn't restart services when a secret changes, and homepage only
+  # reads its environment at startup. Restart it when the encrypted file's
+  # contents change (its path changes with every commit, so hash it instead).
+  systemd.services.homepage-dashboard.restartTriggers = [
+    (builtins.hashFile "sha256" config.age.secrets.homepage-dashboard-environment.file)
+  ];
+
   services.homepage-dashboard = {
     enable = true;
     environmentFiles = [ config.age.secrets.homepage-dashboard-environment.path ];
@@ -61,6 +68,15 @@
                 icon = "nzbget.svg";
                 href = "/nzbget";
                 description = "NZBGet";
+              }
+            ];
+          }
+          {
+            Seerr = [
+              {
+                icon = "seerr.svg";
+                href = "https://seerr.elis.nu/";
+                description = "Seerr";
               }
             ];
           }
@@ -155,6 +171,17 @@
       }
       {
         Media = [
+          {
+            Seerr = {
+              icon = "seerr.svg";
+              description = "Seerr";
+              widget = {
+                type = "seerr";
+                url = "http://localhost:5055/";
+                key = "{{HOMEPAGE_VAR_SEERR_API_KEY}}";
+              };
+            };
+          }
           {
             Sonarr = {
               icon = "sonarr.svg";
