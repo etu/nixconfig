@@ -93,15 +93,4 @@ in
     symlink = false;
     hostKeys = etu ++ h.server-main-elis;
   };
-
-  # ---------------------------------------------------------------------------
-  # vps06 secrets
-  # ---------------------------------------------------------------------------
-
-  grafana-secret-key = {
-    file = ./secrets/vps06/grafana-secret-key.age;
-    owner = "grafana";
-    hostKeys = etu ++ h.vps06;
-  };
-
 }

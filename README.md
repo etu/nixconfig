@@ -135,7 +135,6 @@ VPS running public-facing services, deployed using `deploy .#vps06`:
 - **Forgejo** — git forge at `git.elis.nu`
 - **Matrix Synapse** — homeserver on `failar.nu`, with Element Web at
   `element.failar.nu` and an IRC bridge
-- **Grafana** — dashboards at `grafana.elis.nu`
 - **Matomo** — web analytics at `matomo.elis.nu`
 - **ip.failar.nu** — custom service from the `ip-failar-nu` flake input
 - **Nginx reverse proxy** — also forwards traffic to services hosted on
