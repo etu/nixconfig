@@ -22,46 +22,6 @@ _: {
           })
         else
           prev.svtplay-dl;
-
-      # Update cloudflared 2026.10.1 -> 2026.10.3 ahead of nixpkgs. The
-      # vendorHash is unchanged. Only applies to 2026.10.1, so it's a no-op
-      # once nixpkgs moves on.
-      #
-      # Track: https://github.com/NixOS/nixpkgs/pull/576762
-      cloudflared =
-        if prev.cloudflared.version == "2026.10.1" then
-          prev.cloudflared.overrideAttrs (_: rec {
-            version = "2026.10.3";
-            src = prev.fetchFromGitHub {
-              owner = "cloudflare";
-              repo = "cloudflared";
-              tag = version;
-              hash = "sha256-k1OMkHHItOT5VHhQqgC8ODm/RCJEtwtZi0Lxyf/esLg=";
-            };
-          })
-        else
-          prev.cloudflared;
-
-      ## matrix-appservice-irc 4.0.0 uses nedb which calls util.isDate,
-      ## removed in Node.js 24. Override to use Node.js 22 until the
-      ## package is updated.
-      ##
-      ## Track: https://github.com/NixOS/nixpkgs/pull/541566
-      #matrix-appservice-irc = prev.matrix-appservice-irc.overrideAttrs (oa: {
-      #  nativeBuildInputs = builtins.map (
-      #    dep: if dep == prev.nodejs-slim then prev.nodejs-slim_22 else dep
-      #  ) oa.nativeBuildInputs;
-      #});
-
-      ## Patch flatpak to fix the glycin-svg / prlimit spawn issue
-      ## (flatpak PR #6721). The fix passes run-environ as execvp envp
-      ## instead of injecting it into the sandbox via --env, so NixOS
-      ## store paths don't pollute the sub-sandbox PATH.
-      ##
-      ## Track: https://github.com/flatpak/flatpak/pull/6721
-      #flatpak = prev.flatpak.overrideAttrs (oa: {
-      #  patches = (oa.patches or [ ]) ++ [ ./patches/fix-pr-6721-spawn-path.patch ];
-      #});
     })
   ];
 }
