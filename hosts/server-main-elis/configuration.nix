@@ -59,7 +59,6 @@
       # Allow the MacBook Air to use this machine as a Nix remote builder
       ++ config.etu.data.pubkeys.builders.macbook-air-elis;
 
-    services.freshrss.enable = true;
     services.jellyfin.enable = true;
     services.cloudflare-dyndns = {
       enable = true;

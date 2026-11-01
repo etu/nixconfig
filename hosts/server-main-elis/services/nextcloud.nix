@@ -13,7 +13,7 @@
   services.nginx.enable = true;
 
   etu.base.zfs.system.directories = [
-    # Bind mount for persistent data for freshrss
+    # Bind mount for persistent data for nextcloud
     "/var/lib/nextcloud"
   ];
 }

@@ -121,7 +121,7 @@ Runs a large collection of services:
 - **Home automation**: Home Assistant, Mosquitto MQTT, zwavejs2mqtt (all via
   Podman containers)
 - **Media stack**: Jellyfin, NZBGet, Sonarr, Radarr, Lidarr, Bazarr
-- **Web services**: Nextcloud, FreshRSS, Homepage dashboard, Nginx reverse proxy
+- **Web services**: Nextcloud, Homepage dashboard, Nginx reverse proxy
 - **Monitoring**: Beszel hub (collects from both servers) + Beszel agent
 - **Infrastructure**: Sanoid (ZFS snapshots), Syncoid (pulls backups from
   configured systems), Cloudflare DynDNS, smartd, libvirtd, ACME/Let's Encrypt
@@ -139,7 +139,7 @@ VPS running public-facing services, deployed using `deploy .#vps06`:
 - **Matomo** — web analytics at `matomo.elis.nu`
 - **ip.failar.nu** — custom service from the `ip-failar-nu` flake input
 - **Nginx reverse proxy** — also forwards traffic to services hosted on
-  `server-main-elis` (Nextcloud, FreshRSS, Home Assistant, Jellyfin, etc.)
+  `server-main-elis` (Nextcloud, Home Assistant, Jellyfin, etc.)
 
 #### `hosts/live-iso/`
 

@@ -19,9 +19,6 @@
         "nextcloud.elis.nu" = {
           service = "http://localhost:80";
         };
-        "freshrss.elis.nu" = {
-          service = "http://localhost:80";
-        };
         "jellyfin.elis.nu" = {
           service = "http://localhost:8096";
         };

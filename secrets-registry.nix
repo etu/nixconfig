@@ -74,12 +74,6 @@ in
     hostKeys = etu ++ h.server-main-elis;
   };
 
-  freshrss-password-etu = {
-    file = ./secrets/server-main-elis/etu-freshrss-password.age;
-    owner = "freshrss";
-    hostKeys = etu ++ h.server-main-elis;
-  };
-
   homepage-dashboard-environment = {
     file = ./secrets/server-main-elis/homepage-dashboard-environment.age;
     hostKeys = etu ++ h.server-main-elis;
