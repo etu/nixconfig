@@ -74,19 +74,8 @@
   documentation.info.enable = false;
   documentation.man.enable = false;
 
-  # Set up Letsencrypt
-  security.acme.defaults.email = config.etu.user.email;
-  security.acme.acceptTerms = true;
-
-  etu.base.zfs.system.directories = [
-    # Persistence of certificates for nginx
-    "/var/lib/acme"
-  ];
-
-  networking.firewall.allowedTCPPorts = [
-    80
-    443
-  ];
-
+  # All sites are served through the Cloudflare tunnel (see
+  # ./services/cloudflared.nix), so nginx only listens on loopback: no open
+  # HTTP(S) ports and no ACME certificates.
   services.nginx.enable = true;
 }

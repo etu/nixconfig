@@ -31,9 +31,8 @@ in
   };
 
   # Cloudflare terminates TLS, so these virtual hosts are plain HTTP and only
-  # listen on loopback, where cloudflared connects to them. They can't be
-  # reached directly through the public ports 80/443, which the failar.nu
-  # sites still use.
+  # listen on loopback, where cloudflared connects to them. The firewall has
+  # no HTTP(S) ports open either.
   services.nginx.virtualHosts = lib.genAttrs hostnames (_: {
     listen = [
       {

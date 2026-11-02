@@ -138,10 +138,10 @@ VPS running public-facing services, deployed using `deploy .#vps06`:
   Element Web at `element.elis.nu` and an IRC bridge. The `.well-known/matrix`
   files delegating `elis.nu` live in the blog repository (GitHub Pages)
 - **Matomo** — web analytics at `matomo.elis.nu`
-- **ip.failar.nu** — custom service from the `ip-failar-nu` flake input, also
-  at `ip.elis.nu`
-- **Cloudflare Tunnel** — all the `elis.nu` sites above are served through
-  the host's own tunnel instead of directly (SSH for Forgejo goes to
+- **ip.elis.nu** — "what's my IP" service from the `ip-failar-nu` flake
+  input (`ip.failar.nu` is a Cloudflare redirect rule to it)
+- **Cloudflare Tunnel** — all the sites above are served through the host's
+  own tunnel, so it has no HTTP(S) ports open (SSH for Forgejo goes to
   `vps06.elis.nu`)
 
 #### `hosts/live-iso/`

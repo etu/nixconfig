@@ -52,7 +52,7 @@ Each host lives in `hosts/<hostname>/` and is automatically picked up by bluepri
 |------|------|-------------------|-------|
 | `macbook-air-elis` | Laptop (macOS) | `just activate` locally | MacBook Air M5, `aarch64-darwin`, managed with nix-darwin via `darwin-configuration.nix`; built in CI on a `macos-latest` runner; builds the x86_64-linux hosts on `server-main-elis` (see *Building and deploying from macOS*) |
 | `server-main-elis` | Server | `deploy .#server-main-elis` | Home file server; serves its public sites (`*.elis.nu`) through a Cloudflare Tunnel (`services/cloudflared.nix`); also the Nix remote builder for the MacBook (builds the x86_64-linux hosts from macOS), ZFS snapshot target, runs Home Assistant, has the NixOS manual and options reference enabled |
-| `vps06` | VPS | `deploy .#vps06` | Runs Forgejo, Matomo, ip.failar.nu, and the Matrix homeserver for `elis.nu` (Synapse at `matrix.elis.nu`, Element at `element.elis.nu`, IRC bridge; the `.well-known/matrix/*` delegation files are served by the GitHub Pages blog at `elis.nu`, in the `etu.github.io` repo's `static/`; the registration shared secret is the `matrix-synapse-registration` agenix secret, for `matrix-synapse-register_new_matrix_user`). The `elis.nu` sites (`element.elis.nu`, `git.elis.nu`, `ip.elis.nu`, `matomo.elis.nu`, `matrix.elis.nu`) go through its own Cloudflare Tunnel (`services/cloudflared.nix`, sharing the `cloudflared-elis-nu-cert-pem` account certificate at `/etc/cloudflared/cert.pem` with `server-main-elis`): their nginx vhosts are plain HTTP on loopback only, with the visitor IP restored from `CF-Connecting-IP`; Forgejo's SSH clone URLs use `vps06.elis.nu`. Only `ip.failar.nu` is still served directly with ACME |
+| `vps06` | VPS | `deploy .#vps06` | Runs Forgejo, Matomo, ip.elis.nu (the `ip-failar-nu` service; `ip.failar.nu` is a Cloudflare redirect rule to it), and the Matrix homeserver for `elis.nu` (Synapse at `matrix.elis.nu`, Element at `element.elis.nu`, IRC bridge; the `.well-known/matrix/*` delegation files are served by the GitHub Pages blog at `elis.nu`, in the `etu.github.io` repo's `static/`; the registration shared secret is the `matrix-synapse-registration` agenix secret, for `matrix-synapse-register_new_matrix_user`). The `elis.nu` sites (`element.elis.nu`, `git.elis.nu`, `ip.elis.nu`, `matomo.elis.nu`, `matrix.elis.nu`) go through its own Cloudflare Tunnel (`services/cloudflared.nix`, sharing the `cloudflared-elis-nu-cert-pem` account certificate at `/etc/cloudflared/cert.pem` with `server-main-elis`): their nginx vhosts are plain HTTP on loopback only, with the visitor IP restored from `CF-Connecting-IP`; Forgejo's SSH clone URLs use `vps06.elis.nu`. Nothing is served directly: the firewall only opens SSH, and there is no ACME |
 | `live-iso` | ISO | `nix build .#iso` | Console-only live ISO of this config (no graphical environment); not deployed remotely |
 
 ---
@@ -369,7 +369,7 @@ use `nix-installer-action`. In `helper_cache_hosts.yaml` the tarball name uses
 | `home-manager` | User environment management (NixOS hosts) |
 | `home-manager-darwin` | home-manager for the nix-darwin hosts, following `nixpkgs-darwin` |
 | `impermanence` | Opt-in persistence on ephemeral root |
-| `ip-failar-nu` | Custom service: ip.failar.nu |
+| `ip-failar-nu` | Custom service: "what's my IP", served at ip.elis.nu |
 | `nix-darwin` | macOS system configuration for `macbook-air-elis`, following `nixpkgs-darwin` |
 | `nur` | Nix User Repository |
 
