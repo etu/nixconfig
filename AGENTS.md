@@ -506,6 +506,16 @@ These patterns have caused evaluation or build failures in past upgrades:
     than our `"strict"`, so the bazarr block sets `lib.mkForce "strict"` to
     keep its `ReadWritePaths` meaningful).
 
+- **PostgreSQL collation version mismatch after a glibc bump**: `psql`
+  warns "database … has a collation version mismatch" for databases with a
+  libc locale (`forgejo`, `postgres`, `template1` on `vps06`; Synapse's uses
+  `C` and isn't affected). Their text indexes may sort differently under the
+  new glibc, so rebuild them and record the new version, connected to each
+  database in turn: `REINDEX DATABASE CONCURRENTLY <db>` (plain `REINDEX`
+  for `postgres`/`template1`), then
+  `ALTER DATABASE <db> REFRESH COLLATION VERSION`.
+  - Example (26.11): glibc 2.40 → 2.44.
+
 - **Cloudflare Tunnel hostnames**: a tunneled nginx vhost must not use
   `forceSSL` (redirect loop, since the tunnel delivers plain HTTP). Some
   modules default it to on (Matomo's `services.matomo.nginx`), so set
