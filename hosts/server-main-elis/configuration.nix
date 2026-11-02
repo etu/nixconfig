@@ -123,7 +123,7 @@
   documentation.nixos.enable = true;
   documentation.doc.enable = true;
   documentation.info.enable = false;
-  documentation.man.enable = false;
+  documentation.man.enable = true;
 
   # Hardware settings
   hardware.cpu.intel.updateMicrocode = true;
