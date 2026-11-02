@@ -15,7 +15,8 @@
     # Include static network settings.
     ./networking.nix
 
-    # Import matrix settings
+    # Import service settings
+    ./services/cloudflared.nix
     ./services/forgejo.nix
     ./services/matomo.nix
     ./services/matrix.nix

@@ -124,7 +124,8 @@ Runs a large collection of services:
 - **Web services**: Nextcloud, Homepage dashboard, Nginx reverse proxy
 - **Monitoring**: Beszel hub (collects from both servers) + Beszel agent
 - **Infrastructure**: Sanoid (ZFS snapshots), Syncoid (pulls backups from
-  configured systems), Cloudflare DynDNS, smartd, libvirtd, ACME/Let's Encrypt
+  configured systems), Cloudflare Tunnel for the public `*.elis.nu` sites,
+  Cloudflare DynDNS, smartd, libvirtd, ACME/Let's Encrypt
 - **Scheduled tasks**: SVTPlay playlist downloader (daily), empty-dirs cleaner
   (hourly)
 
@@ -137,8 +138,9 @@ VPS running public-facing services, deployed using `deploy .#vps06`:
   `element.failar.nu` and an IRC bridge
 - **Matomo** — web analytics at `matomo.elis.nu`
 - **ip.failar.nu** — custom service from the `ip-failar-nu` flake input
-- **Nginx reverse proxy** — also forwards traffic to services hosted on
-  `server-main-elis` (Nextcloud, Home Assistant, Jellyfin, etc.)
+- **Cloudflare Tunnel** — `git.elis.nu` and `matomo.elis.nu` are served
+  through the host's own tunnel instead of directly (SSH for Forgejo goes to
+  `vps06.elis.nu`)
 
 #### `hosts/live-iso/`
 

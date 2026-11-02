@@ -51,8 +51,8 @@ Each host lives in `hosts/<hostname>/` and is automatically picked up by bluepri
 | Host | Type | Deployment method | Notes |
 |------|------|-------------------|-------|
 | `macbook-air-elis` | Laptop (macOS) | `just activate` locally | MacBook Air M5, `aarch64-darwin`, managed with nix-darwin via `darwin-configuration.nix`; built in CI on a `macos-latest` runner; builds the x86_64-linux hosts on `server-main-elis` (see *Building and deploying from macOS*) |
-| `server-main-elis` | Server | `deploy .#server-main-elis` | Home file server; also the Nix remote builder for the MacBook (builds the x86_64-linux hosts from macOS), ZFS snapshot target, runs Home Assistant, has the NixOS manual and options reference enabled |
-| `vps06` | VPS | `deploy .#vps06` | Runs Gitea, ip.failar.nu, Matrix homeserver |
+| `server-main-elis` | Server | `deploy .#server-main-elis` | Home file server; serves its public sites (`*.elis.nu`) through a Cloudflare Tunnel (`services/cloudflared.nix`); also the Nix remote builder for the MacBook (builds the x86_64-linux hosts from macOS), ZFS snapshot target, runs Home Assistant, has the NixOS manual and options reference enabled |
+| `vps06` | VPS | `deploy .#vps06` | Runs Forgejo, Matomo, ip.failar.nu, Matrix homeserver. The `elis.nu` sites (`git.elis.nu`, `matomo.elis.nu`) go through its own Cloudflare Tunnel (`services/cloudflared.nix`, sharing the `cloudflared-elis-nu-cert-pem` account certificate at `/etc/cloudflared/cert.pem` with `server-main-elis`): their nginx vhosts are plain HTTP on loopback only, with the visitor IP restored from `CF-Connecting-IP`; Forgejo's SSH clone URLs use `vps06.elis.nu`. The `failar.nu` sites are still served directly with ACME |
 | `live-iso` | ISO | `nix build .#iso` | Console-only live ISO of this config (no graphical environment); not deployed remotely |
 
 ---
@@ -505,6 +505,11 @@ These patterns have caused evaluation or build failures in past upgrades:
     our `true`, so upstream's applies) and `ProtectSystem = "full"` (weaker
     than our `"strict"`, so the bazarr block sets `lib.mkForce "strict"` to
     keep its `ReadWritePaths` meaningful).
+
+- **Cloudflare Tunnel hostnames**: a tunneled nginx vhost must not use
+  `forceSSL` (redirect loop, since the tunnel delivers plain HTTP). Some
+  modules default it to on (Matomo's `services.matomo.nginx`), so set
+  `forceSSL = false; enableACME = false;` there.
 
 - **New agenix secrets**: when adding a new `.age` file, always `git add` it
   before running `nix flake check` — the file must be tracked for Nix to find

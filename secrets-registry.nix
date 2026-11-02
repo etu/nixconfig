@@ -47,6 +47,14 @@ in
     hostKeys = etu ++ h.all;
   };
 
+  # Account certificate for the elis.nu zone, used to manage tunnels
+  # (`cloudflared tunnel …`). Shared by every host that runs a tunnel.
+  cloudflared-elis-nu-cert-pem = {
+    file = ./secrets/any/cloudflared-elis-nu-cert-pem.age;
+    path = "/etc/cloudflared/cert.pem";
+    hostKeys = etu ++ h.server-main-elis ++ h.vps06;
+  };
+
   # ---------------------------------------------------------------------------
   # server-main-elis secrets
   # ---------------------------------------------------------------------------
@@ -60,12 +68,6 @@ in
 
   cloudflare-api-env = {
     file = ./secrets/server-main-elis/cloudflare-api-env.age;
-    hostKeys = etu ++ h.server-main-elis;
-  };
-
-  cloudflared-elis-nu-cert-pem = {
-    file = ./secrets/server-main-elis/cloudflared-elis-nu-cert-pem.age;
-    path = "/etc/cloudflared/cert.pem";
     hostKeys = etu ++ h.server-main-elis;
   };
 
@@ -92,5 +94,14 @@ in
     owner = "syncoid";
     symlink = false;
     hostKeys = etu ++ h.server-main-elis;
+  };
+
+  # ---------------------------------------------------------------------------
+  # vps06 secrets
+  # ---------------------------------------------------------------------------
+
+  cloudflared-vps06-tunnel = {
+    file = ./secrets/vps06/cloudflared-tunnel.age;
+    hostKeys = etu ++ h.vps06;
   };
 }

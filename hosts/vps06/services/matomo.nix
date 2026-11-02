@@ -12,7 +12,12 @@
   # Enable matomo
   services.matomo.enable = true;
   services.matomo.hostname = "matomo.elis.nu";
-  services.matomo.nginx = { };
+  # Served through the Cloudflare tunnel (see ./cloudflared.nix), which
+  # terminates TLS, so no certificate or HTTPS redirect here.
+  services.matomo.nginx = {
+    forceSSL = false;
+    enableACME = false;
+  };
 
   # Enable mariadb
   services.mysql.enable = true;
