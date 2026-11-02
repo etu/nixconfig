@@ -1,10 +1,15 @@
 {
+  config,
   pkgs,
   lib,
   ...
 }:
 let
-  domain = "failar.nu";
+  # The server name is permanent: it's part of every user and room ID, so
+  # changing it means starting over with a new database. The server itself
+  # runs at matrix.${domain}, delegated from https://${domain}/.well-known/matrix/*
+  # (served by the GitHub Pages blog at ${domain}).
+  domain = "elis.nu";
 in
 {
   etu.base.zfs.system.directories = [
@@ -13,6 +18,10 @@ in
     "/var/lib/matrix-appservice-irc"
   ];
 
+  # Synapse needs a database with C collation, while ensureDatabases would
+  # create it with the system locale. On a new host, create it by hand first:
+  #   CREATE DATABASE "matrix-synapse" TEMPLATE template0
+  #     LC_COLLATE 'C' LC_CTYPE 'C' ENCODING 'UTF8';
   services.postgresql = {
     ensureDatabases = [ "matrix-synapse" ];
     ensureUsers = [
@@ -23,34 +32,9 @@ in
     ];
   };
 
+  # Served through the Cloudflare tunnel, see ./cloudflared.nix.
   services.nginx.virtualHosts = {
-    ${domain} = {
-      enableACME = true;
-      forceSSL = true;
-      locations = {
-        "/.well-known/matrix/server".extraConfig =
-          let
-            server."m.server" = "matrix.${domain}:443";
-          in
-          ''
-            add_header Content-Type application/json;
-            return 200 '${builtins.toJSON server}';
-          '';
-        "/.well-known/matrix/client".extraConfig =
-          let
-            client."m.homeserver".base_url = "https://matrix.${domain}";
-          in
-          ''
-            add_header Content-Type application/json;
-            add_header Access-Control-Allow-Origin *;
-            return 200 '${builtins.toJSON client}';
-          '';
-        "/_matrix/".return = "307 http://matrix.${domain}$request_uri";
-      };
-    };
     "element.${domain}" = {
-      enableACME = true;
-      forceSSL = true;
       locations."/" = {
         root = pkgs.element-web.override (_: {
           conf = {
@@ -79,15 +63,16 @@ in
       };
     };
     "matrix.${domain}" = {
-      enableACME = true;
-      forceSSL = true;
       locations = {
         "~* ^(\\/_matrix|\\/_synapse\\/client)" = {
           proxyPass = "http://[::1]:8448";
+          # $remote_addr is the visitor's address (restored from
+          # CF-Connecting-IP), and TLS ends at Cloudflare, so the scheme
+          # nginx sees is always http.
           extraConfig = ''
             proxy_set_header Host $host;
             proxy_set_header X-Forwarded-For $remote_addr;
-            proxy_set_header X-Forwarded-Proto $scheme;
+            proxy_set_header X-Forwarded-Proto https;
             proxy_read_timeout 900s;
           '';
         };
@@ -95,22 +80,16 @@ in
     };
   };
 
+  # `registration_shared_secret: …`, lets `matrix-synapse-register_new_matrix_user`
+  # (run as root on this host) create accounts while registration is closed.
+  age.secrets.matrix-synapse-registration = config.etu.data.ageModules.matrix-synapse-registration;
+
   services.matrix-synapse = {
     enable = true;
+    extraConfigFiles = [ config.age.secrets.matrix-synapse-registration.path ];
     settings = {
-      # registration_shared_secret = ""; # Set this value to be able
-      # to use ${pkgs.matrix-synapse}/bin/register_new_matrix_user
-      # like this:
-      # $register_new_matrix_user -u [username] -p [password] -a -k [registration_shared_secret] http://localhost:8448.
       server_name = domain;
       public_baseurl = "https://matrix.${domain}";
-      database_type = "psycopg2";
-      database_args = {
-        user = "matrix-synapse";
-        database = "matrix-synapse";
-        cp_min = 5;
-        cp_max = 10;
-      };
       report_stats = true;
       enable_metrics = true;
       listeners = [
@@ -156,94 +135,6 @@ in
       dynamic_thumbnails = true; # might be a nicer user experience?
       allow_guest_access = false;
       enable_registration = false; # for admin purposes
-      logConfig = ''
-        version: 1
-        formatters:
-          journal_fmt:
-            format: '%(name)s: [%(request)s] %(message)s'
-        filters:
-          context:
-            (): synapse.util.logcontext.LoggingContextFilter
-            request: ""
-        handlers:
-          journal:
-            class: systemd.journal.JournalHandler
-            formatter: journal_fmt
-            filters: [context]
-            SYSLOG_IDENTIFIER: synapse
-        disable_existing_loggers: True
-        loggers:
-          synapse:
-            level: WARN
-          synapse.storage.SQL:
-            level: WARN
-        root:
-          level: WARN
-          handlers: [journal]
-      '';
-      extraConfigFiles = [
-        (pkgs.writeText "misc.yml" (
-          builtins.toJSON {
-            #session_lifetime = "24h"; # disabled to allow guest accounts
-            experimental_features = {
-              spaces_enabled = true;
-            };
-          }
-        ))
-        (pkgs.writeText "retention.yml" (
-          builtins.toJSON {
-            retention = {
-              enabled = true;
-              default_policy = {
-                min_lifetime = "1d";
-                max_lifetime = "36500d";
-              };
-              #allowed_lifetime_min = "1d";
-              #allowed_lifetime_max = "365d";
-              #purge_jobs = [
-              #  {
-              #    shorted_max_lifetime = "1d";
-              #    longest_max_lifetime = "7d";
-              #    interval = "5m";
-              #  }
-              #  {
-              #    shorted_max_lifetime = "7d";
-              #    longest_max_lifetime = "90d";
-              #    interval = "24h";
-              #  }
-              #];
-            };
-          }
-        ))
-        (pkgs.writeText "url-preview.yml" (
-          builtins.toJSON {
-            url_preview_enabled = true;
-            url_preview_ip_range_blacklist = [
-              "127.0.0.0/8"
-              "10.0.0.0/8"
-              "172.16.0.0/12"
-              "192.168.0.0/16"
-              "100.64.0.0/10"
-              "169.254.0.0/16"
-              "::1/128"
-              "fe80::/64"
-              "fc00::/7"
-            ];
-            url_preview_url_blacklist = [
-              { username = "*"; }
-              { netloc = "google.com"; }
-              { netloc = "*.google.com"; }
-              { netloc = "^[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$"; }
-            ];
-            max_spider_size = "10M";
-          }
-        ))
-        (pkgs.writeText "push.yml" (
-          builtins.toJSON {
-            push.include_content = false;
-          }
-        ))
-      ];
       app_service_config_files = [
         "/var/lib/matrix-appservice-irc/registration.yml"
       ];
@@ -259,7 +150,8 @@ in
     registrationUrl = "http://localhost:8009";
 
     settings = {
-      homeserver.url = "https://matrix.${domain}";
+      # Talk to Synapse directly rather than through Cloudflare.
+      homeserver.url = "http://[::1]:8448";
       homeserver.domain = domain;
 
       # Not sure where this value is used.

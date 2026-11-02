@@ -6,9 +6,11 @@ let
   # Hostnames served through the tunnel. Each one is an nginx virtual host
   # on this machine and gets a proxied CNAME to <tunnelId>.cfargotunnel.com.
   hostnames = [
+    "element.elis.nu"
     "git.elis.nu"
     "ip.elis.nu"
     "matomo.elis.nu"
+    "matrix.elis.nu"
   ];
 in
 {

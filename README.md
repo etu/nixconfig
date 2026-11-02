@@ -134,14 +134,15 @@ Runs a large collection of services:
 VPS running public-facing services, deployed using `deploy .#vps06`:
 
 - **Forgejo** — git forge at `git.elis.nu`
-- **Matrix Synapse** — homeserver on `failar.nu`, with Element Web at
-  `element.failar.nu` and an IRC bridge
+- **Matrix Synapse** — homeserver for `elis.nu` at `matrix.elis.nu`, with
+  Element Web at `element.elis.nu` and an IRC bridge. The `.well-known/matrix`
+  files delegating `elis.nu` live in the blog repository (GitHub Pages)
 - **Matomo** — web analytics at `matomo.elis.nu`
 - **ip.failar.nu** — custom service from the `ip-failar-nu` flake input, also
   at `ip.elis.nu`
-- **Cloudflare Tunnel** — `git.elis.nu`, `ip.elis.nu` and `matomo.elis.nu`
-  are served through the host's own tunnel instead of directly (SSH for
-  Forgejo goes to `vps06.elis.nu`)
+- **Cloudflare Tunnel** — all the `elis.nu` sites above are served through
+  the host's own tunnel instead of directly (SSH for Forgejo goes to
+  `vps06.elis.nu`)
 
 #### `hosts/live-iso/`
 

@@ -104,4 +104,11 @@ in
     file = ./secrets/vps06/cloudflared-tunnel.age;
     hostKeys = etu ++ h.vps06;
   };
+
+  # Synapse config snippet: `registration_shared_secret: <random>`.
+  matrix-synapse-registration = {
+    file = ./secrets/vps06/matrix-synapse-registration.age;
+    owner = "matrix-synapse";
+    hostKeys = etu ++ h.vps06;
+  };
 }
