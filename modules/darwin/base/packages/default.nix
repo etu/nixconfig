@@ -15,6 +15,7 @@
     pkgs.file # file duh
     pkgs.fzf # fuzzy finder
     pkgs.gh # GitHub CLI
+    pkgs.gnused # GNU sed as `sed`, like on Linux (macOS has BSD sed at /usr/bin/sed)
     pkgs.jc # parse different formats and command outputs to json
     pkgs.jq # parse, format and query json documents
     pkgs.ncdu # disk usage navigator
