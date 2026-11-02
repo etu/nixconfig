@@ -118,11 +118,12 @@
     ];
   };
 
-  # Disable documentation to make the system smaller.
-  documentation.enable = false;
-  documentation.doc.enable = false;
+  # Enable the NixOS manual and options reference.
+  documentation.enable = true;
+  documentation.nixos.enable = true;
+  documentation.doc.enable = true;
   documentation.info.enable = false;
-  documentation.man.enable = false;
+  documentation.man.enable = true;
 
   # Hardware settings
   hardware.cpu.intel.updateMicrocode = true;
