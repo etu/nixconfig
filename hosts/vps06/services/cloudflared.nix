@@ -7,6 +7,7 @@ let
   # on this machine and gets a proxied CNAME to <tunnelId>.cfargotunnel.com.
   hostnames = [
     "git.elis.nu"
+    "ip.elis.nu"
     "matomo.elis.nu"
   ];
 in

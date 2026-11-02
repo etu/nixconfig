@@ -137,10 +137,11 @@ VPS running public-facing services, deployed using `deploy .#vps06`:
 - **Matrix Synapse** — homeserver on `failar.nu`, with Element Web at
   `element.failar.nu` and an IRC bridge
 - **Matomo** — web analytics at `matomo.elis.nu`
-- **ip.failar.nu** — custom service from the `ip-failar-nu` flake input
-- **Cloudflare Tunnel** — `git.elis.nu` and `matomo.elis.nu` are served
-  through the host's own tunnel instead of directly (SSH for Forgejo goes to
-  `vps06.elis.nu`)
+- **ip.failar.nu** — custom service from the `ip-failar-nu` flake input, also
+  at `ip.elis.nu`
+- **Cloudflare Tunnel** — `git.elis.nu`, `ip.elis.nu` and `matomo.elis.nu`
+  are served through the host's own tunnel instead of directly (SSH for
+  Forgejo goes to `vps06.elis.nu`)
 
 #### `hosts/live-iso/`
 
