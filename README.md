@@ -114,7 +114,7 @@ Home file server, deployed using `deploy .#server-main-elis`. Also the Nix
 remote builder for the MacBook: it builds the `x86_64-linux` hosts (8 jobs,
 `ssh-ng` with a dedicated key) so they can be built and deployed from macOS.
 Primary ZFS backup target — pulls snapshots from configured backup sources via
-syncoid.
+syncoid. The NixOS manual and options reference are enabled on this host.
 
 Runs a large collection of services:
 
