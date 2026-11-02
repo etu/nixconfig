@@ -39,7 +39,7 @@ in
 
     ipCheckUrl = mkOption {
       type = types.str;
-      default = "https://ip.failar.nu";
+      default = "https://ip.elis.nu";
       description = "URL to use for obtaining the current public IP address";
     };
   };
