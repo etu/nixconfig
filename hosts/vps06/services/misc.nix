@@ -4,12 +4,12 @@
 }:
 {
   imports = [
-    # Import the ip-failar-nu module
-    flake.inputs.ip-failar-nu.nixosModules.x86_64-linux.default
+    # Import the ip-elis-nu module
+    flake.inputs.ip-elis-nu.nixosModules.x86_64-linux.default
   ];
 
-  # Enable the ip-failar-nu service
-  services.ip-failar-nu.enable = true;
+  # Enable the ip-elis-nu service
+  services.ip-elis-nu.enable = true;
 
   # Served through the Cloudflare tunnel, see ./cloudflared.nix. The
   # service answers with the first X-Forwarded-For address, so set it to the

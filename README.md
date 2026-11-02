@@ -51,7 +51,7 @@ are generated for `aarch64-darwin`, `aarch64-linux` and `x86_64-linux` only
 `nix-darwin` and `home-manager-darwin` following it. All other inputs follow
 `nixpkgs` via `.follows` where possible. Key inputs: `agenix`, `blueprint`,
 `deploy-rs`, `disko`, `emacs-overlay`, `home-manager`,
-`home-manager-darwin`, `impermanence`, `ip-failar-nu`, `nix-darwin`,
+`home-manager-darwin`, `impermanence`, `ip-elis-nu`, `nix-darwin`,
 `nixos-hardware`, `nixpkgs-darwin`, `nur`.
 
 ### `Justfile`
@@ -138,7 +138,7 @@ VPS running public-facing services, deployed using `deploy .#vps06`:
   Element Web at `element.elis.nu` and an IRC bridge. The `.well-known/matrix`
   files delegating `elis.nu` live in the blog repository (GitHub Pages)
 - **Matomo** — web analytics at `matomo.elis.nu`
-- **ip.elis.nu** — "what's my IP" service from the `ip-failar-nu` flake
+- **ip.elis.nu** — "what's my IP" service from the `ip-elis-nu` flake
   input (`ip.failar.nu` is a Cloudflare redirect rule to it)
 - **Cloudflare Tunnel** — all the sites above are served through the host's
   own tunnel, so it has no HTTP(S) ports open (SSH for Forgejo goes to

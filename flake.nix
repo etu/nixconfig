@@ -50,9 +50,9 @@
     impermanence.inputs.nixpkgs.follows = "nixpkgs";
     impermanence.inputs.home-manager.follows = "home-manager";
 
-    # ip-failar-nu
-    ip-failar-nu.url = "github:etu/ip.failar.nu";
-    ip-failar-nu.inputs.nixpkgs.follows = "nixpkgs";
+    # ip-elis-nu
+    ip-elis-nu.url = "github:etu/ip.elis.nu";
+    ip-elis-nu.inputs.nixpkgs.follows = "nixpkgs";
 
     # nix-darwin
     nix-darwin.url = "github:nix-darwin/nix-darwin";

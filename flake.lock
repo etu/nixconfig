@@ -224,7 +224,7 @@
         "type": "github"
       }
     },
-    "ip-failar-nu": {
+    "ip-elis-nu": {
       "inputs": {
         "flake-utils": "flake-utils",
         "nixpkgs": [
@@ -232,16 +232,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1789367779,
-        "narHash": "sha256-BMY+MCdJLGQD5H7XJH1mku/GuKrLA/+4Fe8KaluAd6I=",
+        "lastModified": 1793656523,
+        "narHash": "sha256-8gLyXrtaySW6/PzNUaeocTy5ACrkIAu4P7+XR5W+d0s=",
         "owner": "etu",
-        "repo": "ip.failar.nu",
-        "rev": "1c83ec2692b8fb5ce1666e8ce32e683459449f85",
+        "repo": "ip.elis.nu",
+        "rev": "ea9a23225eb195a1879b4c89b87c2ecb7472a100",
         "type": "github"
       },
       "original": {
         "owner": "etu",
-        "repo": "ip.failar.nu",
+        "repo": "ip.elis.nu",
         "type": "github"
       }
     },
@@ -348,7 +348,7 @@
         "home-manager": "home-manager",
         "home-manager-darwin": "home-manager-darwin",
         "impermanence": "impermanence",
-        "ip-failar-nu": "ip-failar-nu",
+        "ip-elis-nu": "ip-elis-nu",
         "nix-darwin": "nix-darwin",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
