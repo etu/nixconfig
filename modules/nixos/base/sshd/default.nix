@@ -40,17 +40,13 @@
     programs.ssh.knownHosts = {
       server-main-elis = {
         extraHostNames = [
-          "home.elis.nu"
-          "local.elis.nu"
-          "192.168.1.101"
+          "192.168.1.10"
         ];
         publicKey = config.etu.data.pubkeys.systems.server-main-elis;
       };
       server-main-elis-initrd = {
         extraHostNames = [
-          "home.elis.nu"
-          "local.elis.nu"
-          "192.168.1.101"
+          "192.168.1.10"
         ];
         publicKey = config.etu.data.pubkeys.systems.server-main-elis-initrd;
       };
