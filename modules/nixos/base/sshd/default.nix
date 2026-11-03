@@ -47,8 +47,6 @@
       server-main-elis-initrd = {
         extraHostNames = [
           "192.168.1.10"
-          # The initrd's own tailnet node, sshd listens on 2222
-          "[server-main-elis-initrd]:2222"
         ];
         publicKey = config.etu.data.pubkeys.systems.server-main-elis-initrd;
       };

@@ -115,7 +115,7 @@ remote builder for the MacBook: it builds the `x86_64-linux` hosts (8 jobs,
 `ssh-ng` with a dedicated key) so they can be built and deployed from macOS.
 Primary ZFS backup target — pulls snapshots from configured backup sources via
 syncoid. The NixOS manual and options reference are enabled on this host.
-Its encrypted ZFS root is unlocked over SSH (port 2222) from the initrd,
+Its encrypted ZFS root is unlocked over SSH from the initrd,
 which joins the tailnet as its own node, `server-main-elis-initrd`, so the
 unlock also works from outside the LAN.
 

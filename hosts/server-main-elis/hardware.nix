@@ -74,7 +74,7 @@
     # Listen to ssh to let me decrypt zfs
     network.ssh = {
       enable = true;
-      port = 2222;
+      port = 22;
       hostKeys = [
         config.etu.data.ageModules.server-main-elis-initrd-sshd.path
       ];
@@ -83,7 +83,7 @@
   };
 
   # Join the tailnet from the initrd as its own node,
-  # server-main-elis-initrd, so the ZFS unlock over SSH (port 2222)
+  # server-main-elis-initrd, so the ZFS unlock over SSH (port 22)
   # also works from outside the LAN.
   #
   # The node was registered once with a separate tailscaled (tagged
@@ -136,7 +136,7 @@
 
   # Prompt me for password to decrypt zfs via SSH
   #
-  # SSH in on port 2222, shell sources /var/empty/.profile which runs:
+  # SSH in on port 22, shell sources /var/empty/.profile which runs:
   #   systemd-tty-ask-password-agent --watch
   # This intercepts pending systemd password requests (from
   # zfs-load-key@pool.service units) and routes them to the SSH
