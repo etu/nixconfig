@@ -20,16 +20,16 @@
   boot.loader.grub.enable = true;
   boot.loader.grub.efiSupport = true;
   boot.loader.grub.device = "nodev";
-  boot.loader.grub.extraInstallCommands = ''
-    mkdir -p /boot/EFI/Microsoft/Boot/ /boot-fallback/EFI/Microsoft/Boot/
-    cp /boot/EFI/nixos/grubx64.efi /boot/EFI/Microsoft/Boot/bootmgfw.efi
-    cp /boot-fallback/EFI/nixos/grubx64.efi /boot-fallback/EFI/Microsoft/Boot/bootmgfw.efi
-  '';
 
   boot.loader.grub.mirroredBoots = [
     {
       devices = [ "/dev/disk/by-uuid/6258-01A0" ];
       path = "/boot-fallback";
+      # Use the same EFI path as /boot (\EFI\NixOS-boot\grubx64.efi).
+      # The SSDs are clones with identical GPT GUIDs, so the firmware
+      # boot entry for that path matches the ESP on either disk, and
+      # the fallback disk boots with the same entry if /boot's dies.
+      efiBootloaderId = "NixOS-boot";
     }
   ];
 
