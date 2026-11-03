@@ -51,6 +51,7 @@
 
   age.secrets = {
     inherit (config.etu.data.ageModules) server-main-elis-initrd-sshd;
+    inherit (config.etu.data.ageModules) server-main-elis-initrd-tailscaled-state;
     inherit (config.etu.data.ageModules) syncoid-server-main-elis-ssh-ec;
   };
 
@@ -78,6 +79,58 @@
         config.etu.data.ageModules.server-main-elis-initrd-sshd.path
       ];
       authorizedKeys = config.users.users.root.openssh.authorizedKeys.keys;
+    };
+  };
+
+  # Join the tailnet from the initrd as its own node,
+  # server-main-elis-initrd, so the ZFS unlock over SSH (port 2222)
+  # also works from outside the LAN.
+  #
+  # The node was registered once with a separate tailscaled (tagged
+  # tag:initrd, so key expiry is off) and its tailscaled.state is the
+  # server-main-elis-initrd-tailscaled-state agenix secret. Like the
+  # initrd SSH host key it is copied into the initrd when the bootloader
+  # is installed, so it is readable from the boot partition: keep the
+  # tag's ACLs limited to incoming SSH.
+  #
+  # Userspace networking needs no tun device or firewall rules and
+  # forwards incoming tailnet connections to the initrd sshd. Only the
+  # Go binary is copied, the package's wrapper would pull iptables,
+  # iproute2 and friends into the initrd.
+  boot.initrd.secrets."/var/lib/tailscale/tailscaled.state" =
+    config.etu.data.ageModules.server-main-elis-initrd-tailscaled-state.path;
+
+  # Store paths only referenced from a unit aren't copied into the
+  # initrd, so the binary goes in through extraBin. It's a multicall
+  # binary: called as tailscale it is the CLI, for debugging from the
+  # initrd shell.
+  boot.initrd.systemd.extraBin =
+    let
+      tailscaled = pkgs.runCommand "tailscaled-initrd" { } ''
+        install -Dm755 ${pkgs.tailscale}/bin/.tailscaled-wrapped $out/bin/tailscaled
+      '';
+    in
+    {
+      tailscaled = "${tailscaled}/bin/tailscaled";
+      tailscale = "${tailscaled}/bin/tailscaled";
+    };
+
+  boot.initrd.systemd.services.tailscaled = {
+    description = "Tailscale node agent in the initrd";
+    wantedBy = [ "initrd.target" ];
+    after = [ "network.target" ];
+    # Stop before switching root, so the real tailscaled starts cleanly.
+    conflicts = [ "initrd-switch-root.target" ];
+    before = [ "initrd-switch-root.target" ];
+    unitConfig.DefaultDependencies = false;
+    serviceConfig = {
+      ExecStart = lib.concatStringsSep " " [
+        "/bin/tailscaled"
+        "--tun=userspace-networking"
+        "--statedir=/var/lib/tailscale"
+        "--state=/var/lib/tailscale/tailscaled.state"
+      ];
+      Restart = "on-failure";
     };
   };
 

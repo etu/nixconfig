@@ -66,6 +66,13 @@ in
     hostKeys = etu ++ h.server-main-elis;
   };
 
+  server-main-elis-initrd-tailscaled-state = {
+    file = ./secrets/server-main-elis/tailscaled-state.age;
+    path = "/data/etc/initrd-ssh/tailscaled.state";
+    symlink = false;
+    hostKeys = etu ++ h.server-main-elis;
+  };
+
   cloudflared-elis-nu-tunnel = {
     file = ./secrets/server-main-elis/cloudflared-elis-nu-tunnel.age;
     hostKeys = etu ++ h.server-main-elis;
