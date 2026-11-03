@@ -66,11 +66,6 @@ in
     hostKeys = etu ++ h.server-main-elis;
   };
 
-  cloudflare-api-env = {
-    file = ./secrets/server-main-elis/cloudflare-api-env.age;
-    hostKeys = etu ++ h.server-main-elis;
-  };
-
   cloudflared-elis-nu-tunnel = {
     file = ./secrets/server-main-elis/cloudflared-elis-nu-tunnel.age;
     hostKeys = etu ++ h.server-main-elis;

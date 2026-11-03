@@ -60,10 +60,6 @@
       ++ config.etu.data.pubkeys.builders.macbook-air-elis;
 
     services.jellyfin.enable = true;
-    services.cloudflare-dyndns = {
-      enable = true;
-      secretName = "cloudflare-api-env";
-    };
     base.sanoid.datasets = {
       # Enable snapshotting for some filesystems
       "zroot/safe/data".use_template = [ "data" ];

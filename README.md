@@ -125,7 +125,7 @@ Runs a large collection of services:
 - **Monitoring**: Beszel hub (collects from both servers) + Beszel agent
 - **Infrastructure**: Sanoid (ZFS snapshots), Syncoid (pulls backups from
   configured systems), Cloudflare Tunnel for the public `*.elis.nu` sites,
-  Cloudflare DynDNS, smartd, libvirtd, ACME/Let's Encrypt
+  smartd, libvirtd, ACME/Let's Encrypt
 - **Scheduled tasks**: SVTPlay playlist downloader (daily), empty-dirs cleaner
   (hourly)
 
