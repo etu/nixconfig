@@ -402,6 +402,11 @@ duplicate versions.
   this repository no longer configures that host.
 - The `macbook-air-elis` key (user key on the nix-darwin MacBook) is part of
   `etu.computers` and the `etu` key set in `secrets-registry.nix`.
+- The `iphone-elis` key is in `etu.phones`, not `etu.computers`:
+  `modules/nixos/user` adds `etu.phones` to root's authorized keys only
+  (behind `etu.user.allowOwnerAccess`), so it gets root on every NixOS host
+  (and the `server-main-elis` initrd, which reuses root's keys), but no user
+  access, no git allowed-signers entry and no agenix access.
 - **nix-darwin hosts**: blueprint loads `hosts/<name>/darwin-configuration.nix`
   into `darwinConfigurations.<name>`. They import `flake.darwinModules.default`
   (`modules/darwin/`) instead of the NixOS-only `modules/nixos/`, and set

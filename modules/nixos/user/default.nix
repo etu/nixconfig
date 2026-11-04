@@ -39,7 +39,7 @@
     allowOwnerAccess = lib.mkOption {
       type = lib.types.bool;
       default = true;
-      description = "Whether to grant my own device keys (etu.computers) SSH access to this host's user and root accounts.";
+      description = "Whether to grant my own device keys (etu.computers) SSH access to this host's user and root accounts, and my phone keys (etu.phones) access to root.";
     };
     extraAuthorizedKeys = lib.mkOption {
       type = lib.types.listOf lib.types.str;
@@ -105,7 +105,9 @@
         !config.etu.user.setEmptyRootPassword
       ) config.age.secrets.hashed-root-password.path;
       openssh.authorizedKeys.keys =
-        lib.optionals config.etu.user.allowOwnerAccess config.etu.data.pubkeys.etu.computers
+        lib.optionals config.etu.user.allowOwnerAccess (
+          config.etu.data.pubkeys.etu.computers ++ config.etu.data.pubkeys.etu.phones
+        )
         ++ config.etu.user.extraRootAuthorizedKeys;
     };
 

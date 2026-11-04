@@ -10,16 +10,26 @@ let
       macbook-air-elis = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB5n3Xof23tmxnr9LRIpAPN16zdYvAuFftvv05XzXQX9 elis-macbook-air-m5-2026-10-15"
       ];
+
+      # Key on the iPhone, only granted root access on the NixOS hosts (it is
+      # not in `computers`, so it gets no user access and isn't a git signer)
+      iphone-elis = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO5XZF2Q7Ye91w0LgxeUms5Sj3QreGuj9i/aaiBG0yBc elis-iphone-2026-11-04"
+      ];
     in
     {
       # Include all separate units
       inherit
+        iphone-elis
         laptop-work-elis
         macbook-air-elis
         ;
 
       # Include a meta name of all computers
       computers = laptop-work-elis ++ macbook-air-elis;
+
+      # Include a meta name of all phones (root access only)
+      phones = iphone-elis;
     };
 
   # Public keys used for syncoid.

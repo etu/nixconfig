@@ -35,7 +35,10 @@ secret) and by `modules/nixos/data/` (which exposes the keys as
 `config.etu.data.pubkeys`). The `laptop-work-elis` SSH key is retained for a separately
 managed device; this repository no longer configures that host. The
 `macbook-air-elis` key is the user key on the nix-darwin MacBook Air M5 and is
-part of `etu.computers` and the agenix `etu` key set. The file also holds the
+part of `etu.computers` and the agenix `etu` key set. The `iphone-elis` key
+(in `etu.phones`) only gets root access on the NixOS hosts, including the
+`server-main-elis` initrd unlock; it has no user access, isn't a git allowed
+signer and can't decrypt secrets. The file also holds the
 Nix remote builder keys: `builders` (the MacBook's dedicated passphrase-less
 builder key, used by `modules/darwin/base/nix/`) and `builderHostKeys` (the
 base64-encoded host keys that Nix's `builders` setting requires).
