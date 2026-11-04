@@ -180,10 +180,12 @@ builder (see *Building and deploying from macOS*) and copies it to the target.
 ```sh
 just nix-fmt                      # Format Nix files (nix fmt)
 just yaml-fmt                     # Lint YAML files (yamllint)
+just just-fmt                     # Format the Justfile (just --fmt)
 just nix-fmt-check                # CI-style Nix format check (nix fmt -- --ci)
 just yaml-fmt-check               # CI-style YAML check
 just deadnix-fmt-check            # Check for unused Nix bindings
 just statix-fmt-check             # Statix lint check
+just just-fmt-check               # Justfile format check (just --fmt --check)
 just all-fmt-check                # Run all format checks
 ```
 
@@ -254,6 +256,9 @@ All Nix code must pass:
 3. **`statix`** — no anti-patterns (except `repeated_keys`, which is explicitly disabled in `.statix.toml`)
 4. **`yamllint`** — all YAML files must pass strict lint
 
+The `Justfile` must also match `just --fmt` (checked by `just just-fmt-check`
+and in CI).
+
 Run `just all-fmt-check` to verify all checks locally before pushing.
 
 ---
@@ -307,7 +312,7 @@ Located in `.github/workflows/`:
 
 | Workflow | Trigger | Purpose |
 |----------|---------|---------|
-| `format.yml` | push / PR | Checks Nix fmt, YAML lint, deadnix, statix, and flake integrity |
+| `format.yml` | push / PR | Checks Nix fmt, YAML lint, deadnix, statix, Justfile formatting (`just --fmt --check`), and flake integrity |
 | `pull_request.yaml` | PR → main | Builds dev shell, runs flake check, builds all hosts (no push to cache) |
 | `cache.yml` | push to `main`/`cache` (`.nix`, `.age`, `flake.lock`) | Runs flake check and caches all host builds to Cachix |
 | `deploy.yml` | push to `main` (`.nix`, `.age`, `flake.lock`) | Runs flake check then deploys remotely via deploy-rs |

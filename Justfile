@@ -21,7 +21,7 @@ flake-show:
 
 # nix flake check
 [group('nix')]
-flake-check :
+flake-check:
     nix flake check
 
 # Build the current host
@@ -78,6 +78,11 @@ nix-fmt:
 yaml-fmt:
     yamllint --strict --format github .
 
+# Justfile format
+[group('format')]
+just-fmt:
+    just --fmt
+
 # Nix fmt check
 [group('format-check')]
 nix-fmt-check:
@@ -98,9 +103,14 @@ deadnix-fmt-check:
 statix-fmt-check:
     statix check --config .statix.toml
 
+# Justfile fmt check
+[group('format-check')]
+just-fmt-check:
+    just --fmt --check
+
 # All fmt check
 [group('format-check')]
-all-fmt-check: nix-fmt-check yaml-fmt-check deadnix-fmt-check statix-fmt-check
+all-fmt-check: nix-fmt-check yaml-fmt-check deadnix-fmt-check statix-fmt-check just-fmt-check
 
 # Update flake inputs
 [group('updaters')]

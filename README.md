@@ -211,7 +211,7 @@ Nextcloud administrator credentials.
 
 Five workflows keep the repo healthy:
 
-- **`format.yml`** — Nix fmt, yamllint, deadnix, statix checks on every push/PR
+- **`format.yml`** — Nix fmt, yamllint, deadnix, statix and Justfile format (`just --fmt --check`) checks on every push/PR
 - **`pull_request.yaml`** — builds dev shell, runs flake check, builds all hosts
   (NixOS hosts on Linux runners, the MacBook on a macOS runner)
 - **`cache.yml`** — builds and caches all hosts (including the MacBook) to Cachix on pushes to `main`
