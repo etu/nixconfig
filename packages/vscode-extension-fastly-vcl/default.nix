@@ -6,6 +6,6 @@
 pkgs.vscode-utils.extensionFromVscodeMarketplace {
   publisher = "fastly";
   name = "vscode-fastly-vcl";
-  version = "3.0.0";
-  sha256 = "sha256-ybI+Tu4XTc5xObFKfcmZ5ihRp3y2OWY2C/lGbUY9oBk=";
+  version = "4.0.1";
+  sha256 = "sha256-4xAXk3tiw5qJ5IfhJlD8lCrLRtWlNyTbju3lixVBhOI=";
 }
