@@ -154,11 +154,19 @@ VPS running public-facing services, deployed using `deploy .#vps06`:
 
 If you're adventurous and want to run a clone of this configuration from a
 live ISO (console only, without a graphical environment), it can be built
-locally:
+straight from GitHub, without cloning the repository:
 
 ```sh
-nix build github:etu/nixconfig#iso
+nix build github:etu/nixconfig#packages.x86_64-linux.iso
 ```
+
+The image ends up in `result/iso/`. Use `github:etu/nixconfig/<branch-or-rev>#…`
+to build something other than the default branch. The ISO is only defined for
+`x86_64-linux` (`flake.nix`), so the attribute names the system explicitly:
+the shorter `#iso` is looked up for the machine you're on and isn't found on
+other systems, such as macOS. Building it there needs an x86_64-linux remote
+builder, which the MacBook already has (see `hosts/macbook-air-elis/`
+above). From a clone, `just build-live-iso` builds the same attribute.
 
 ### `modules/`
 

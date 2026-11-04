@@ -32,7 +32,7 @@ build:
 # Build the live-iso
 [group('build')]
 build-live-iso:
-    nom build '.#iso'
+    nom build '.#packages.x86_64-linux.iso'
 
 # Build the macbook-air-elis host (nix-darwin)
 [group('build')]
