@@ -24,6 +24,11 @@
     pkgs.testssl # print TLS certificate info
     pkgs.speedtest-cli # Speedtest command line util
 
+    # Terminfo for TERM=xterm-ghostty, so ssh sessions from Ghostty work. Ghostty's
+    # ssh-terminfo upload goes to ~/.terminfo, which doesn't survive a reboot on
+    # hosts with an ephemeral root (like /root on server-main-elis).
+    pkgs.ghostty.terminfo
+
     # Own tools:
     pkgs.nur.repos.etu.llr # llr, tool to cut long lines
     pkgs.nur.repos.etu.mkvcleaner # mkvcleaner, clean video files from unwanted tracks

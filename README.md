@@ -177,7 +177,9 @@ ISO: `base`, `data`, `development` (git), `graphical` (only the font options
 read by the Emacs module), `hacks`, `services`, `user`. There is no NixOS
 desktop any more; the desktop is the nix-darwin MacBook. The shared NixOS and nix-darwin base modules blacklist the
 compromised `Comodo AAA Services root` certificate (nss 3.131.1 removed the
-also compromised `emSign ECC Root CA - G3` itself).
+also compromised `emSign ECC Root CA - G3` itself). The NixOS base packages
+include Ghostty's `xterm-ghostty` terminfo, so ssh sessions from Ghostty work
+even where `~/.terminfo` doesn't survive a reboot.
 
 **`modules/darwin/`** — nix-darwin modules, mirroring `modules/nixos/` and
 its `etu.*` option names (so shared home modules reading `osConfig.etu.*`

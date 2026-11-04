@@ -65,7 +65,7 @@ Reusable NixOS modules covering:
 
 | Directory | Purpose |
 |-----------|---------|
-| `base/` | Base system settings shared across hosts, including the blacklist for the compromised Comodo AAA Services certificate, and `boot.zfs.forceImportRoot = false` (the 26.11 default; after importing a host's pool from another system, such as a rescue ISO, `zpool import -f` it by hand once) |
+| `base/` | Base system settings shared across hosts, including the blacklist for the compromised Comodo AAA Services certificate, and `boot.zfs.forceImportRoot = false` (the 26.11 default; after importing a host's pool from another system, such as a rescue ISO, `zpool import -f` it by hand once). `base/packages` installs `pkgs.ghostty.terminfo` system wide: Ghostty's `ssh-terminfo` uploads to `~/.terminfo`, which is wiped on reboot where the home is on the tmpfs root (`/root` on `server-main-elis`), while Ghostty's `+ssh-cache` still considers the host done |
 | `data/` | Defines `config.etu.data` option: derives `ageModules` from `secrets-registry.nix` and imports `pubkeys.nix` |
 | `development/` | Development tooling; only `git/` is left (`etu.development.git.enable`, used by `server-main-elis` and `live-iso`), which doesn't sign commits by default |
 | `graphical/` | Only `theme/`, declaring the `etu.graphical.theme.fonts` options read by `homeModules.emacs` (mirrored by the darwin module). The NixOS desktop (sway, dms-shell, catppuccin theme, desktop development modules) was removed; the desktop is the nix-darwin MacBook |
