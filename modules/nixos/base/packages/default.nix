@@ -24,6 +24,11 @@
     pkgs.testssl # print TLS certificate info
     pkgs.speedtest-cli # Speedtest command line util
 
+    # uutils (Rust rewrite) of coreutils for the shell. hiPrio makes it win
+    # over GNU coreutils in /run/current-system/sw/bin; system services and
+    # nixpkgs scripts keep using GNU by store path.
+    (lib.hiPrio pkgs.uutils-coreutils-noprefix)
+
     # Terminfo for TERM=xterm-ghostty, so ssh sessions from Ghostty work. Ghostty's
     # ssh-terminfo upload goes to ~/.terminfo, which doesn't survive a reboot on
     # hosts with an ephemeral root (like /root on server-main-elis).

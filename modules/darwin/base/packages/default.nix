@@ -15,6 +15,7 @@
     pkgs.file # file duh
     pkgs.fzf # fuzzy finder
     pkgs.gh # GitHub CLI
+    pkgs.uutils-coreutils-noprefix # GNU-compatible coreutils in Rust, shadowing the BSD ones in /bin and /usr/bin
     pkgs.gnused # GNU sed as `sed`, like on Linux (macOS has BSD sed at /usr/bin/sed)
     pkgs.jc # parse different formats and command outputs to json
     pkgs.jq # parse, format and query json documents

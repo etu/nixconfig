@@ -179,7 +179,11 @@ desktop any more; the desktop is the nix-darwin MacBook. The shared NixOS and ni
 compromised `Comodo AAA Services root` certificate (nss 3.131.1 removed the
 also compromised `emSign ECC Root CA - G3` itself). The NixOS base packages
 include Ghostty's `xterm-ghostty` terminfo, so ssh sessions from Ghostty work
-even where `~/.terminfo` doesn't survive a reboot.
+even where `~/.terminfo` doesn't survive a reboot. Both base package
+modules install the [uutils](https://uutils.org/) Rust rewrite of coreutils
+for the shell: on NixOS with `lib.hiPrio` over GNU coreutils (system services
+keep using GNU by store path), on macOS in place of the BSD tools. The other
+uutils projects (sed and so on) aren't used yet.
 
 **`modules/darwin/`** — nix-darwin modules, mirroring `modules/nixos/` and
 its `etu.*` option names (so shared home modules reading `osConfig.etu.*`
