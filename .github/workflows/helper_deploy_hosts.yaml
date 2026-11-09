@@ -40,7 +40,7 @@ jobs:
           ref: main
       - run: |
           git pull
-      - uses: wimpysworld/nothing-but-nix@v10
+      - uses: wimpysworld/nothing-but-nix@v12
       - uses: DeterminateSystems/nix-installer-action@v23
         with:
           nix-package-url: https://releases.nixos.org/nix/nix-2.31.3/nix-2.31.3-x86_64-linux.tar.xz
