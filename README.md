@@ -96,8 +96,8 @@ nix-direnv. The host has no separate home-manager file: the darwin modules set
 up home-manager for `etu.user.username` (including zsh and
 `home.stateVersion` from `etu.stateVersion`), and host-specific settings are
 `etu.*` options in `darwin-configuration.nix`.
-The emacs module uses the native macOS `emacs` build on darwin instead of
-`emacs-pgtk`, and adds the Nix profiles to its PATH so `Emacs.app` launched
+The emacs module uses the native macOS `emacs` build on darwin (and the
+terminal-only `emacs-nox` on Linux), and adds the Nix profiles to its PATH so `Emacs.app` launched
 from Spotlight finds git and other tools instead of the Xcode stubs in
 `/usr/bin`. Its `Emacs.app` starts Emacs as a separate process, like a
 terminal would, so AeroSpace manages its windows. Bootstrap steps are in

@@ -18,9 +18,9 @@ let
     "/nix/var/nix/profiles/default"
   ];
 
-  # Get the emacs package with treesitter support (pgtk is Wayland/GTK only,
-  # so use the native macOS build on darwin)
-  emacsPackage = if isDarwin then pkgs.emacs else pkgs.emacs-pgtk;
+  # Get the emacs package with treesitter support: the native macOS build on
+  # darwin, and the terminal-only build on Linux, where there is no desktop
+  emacsPackage = if isDarwin then pkgs.emacs else pkgs.emacs-nox;
 
   # List custom treesitter grammars
   treesitGrammars = emacsPackage.pkgs.treesit-grammars.with-grammars (

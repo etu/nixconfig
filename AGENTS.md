@@ -111,7 +111,7 @@ Home-manager modules for user-level configuration:
 
 | Directory | Purpose |
 |-----------|---------|
-| `emacs/` | Emacs configuration (`emacs-pgtk` on Linux, native `emacs` on macOS; on macOS the Nix profiles are added to the wrapper's PATH, since apps started from Spotlight/launchd only get `/usr/bin:/bin:/usr/sbin:/sbin`, and `Emacs.app` is replaced by a launcher that starts the wrapped `bin/emacs` as a separate process, because a bundle that execs into another bundle's binary isn't managed by window managers like AeroSpace) |
+| `emacs/` | Emacs configuration (terminal-only `emacs-nox` on Linux, where there is no desktop, native `emacs` on macOS; on macOS the Nix profiles are added to the wrapper's PATH, since apps started from Spotlight/launchd only get `/usr/bin:/bin:/usr/sbin:/sbin`, and `Emacs.app` is replaced by a launcher that starts the wrapped `bin/emacs` as a separate process, because a bundle that execs into another bundle's binary isn't managed by window managers like AeroSpace) |
 | `fish/` | Fish shell configuration |
 | `ghostty/` | Ghostty settings shared by NixOS and nix-darwin: font from `etu.graphical.theme.fonts`, block cursor, copy-on-select, and ssh shell integration (`ssh-terminfo`, `ssh-env`). Only the MacBook uses it now; `modules/darwin/graphical/ghostty` sets `ghostty-bin`, always starts fish and quits after the last window closes |
 | `git/` | Git settings shared by NixOS and nix-darwin: identity and signing key from `etu.user.*`, SSH commit signing setup with an allowed signers file from `pubkeys.nix`, `git-*` helper scripts (from `bin/`, installed into the profile so they're in PATH on NixOS and macOS) and global ignores (including macOS filesystem artifacts on Darwin only). Hosts that need another identity (like the work MacBook) set `etu.user.email`. Whether to sign by default is set by the OS modules (`etu.graphical.gnupg.enable` on NixOS, always on darwin) |
@@ -425,7 +425,7 @@ duplicate versions.
   sets it up for `etu.user.username`, so host-specific settings go in
   `darwin-configuration.nix` as `etu.*` options (or
   `home-manager.users.<user>` there if no option fits). The emacs
-  home module picks `pkgs.emacs` on darwin and `pkgs.emacs-pgtk` on Linux.
+  home module picks `pkgs.emacs` on darwin and `pkgs.emacs-nox` on Linux.
   Unfree packages go in `etu.base.nix.allowUnfree`, as on NixOS (it also
   covers home-manager via `useGlobalPkgs`). The NixOS hosts evaluate on macOS without
   import-from-derivation (keep it that way: catppuccin's IFD used to make

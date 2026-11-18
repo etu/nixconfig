@@ -3,7 +3,6 @@
   flake,
   inputs,
   lib,
-  pkgs,
   ...
 }:
 {
@@ -27,11 +26,6 @@
     etu.base.nix.allowUnfree = [
       "intelephense"
       "copilot-language-server"
-    ];
-
-    # Install emacs icons symbols
-    fonts.packages = [
-      pkgs.emacs-all-the-icons-fonts
     ];
 
     # Configure emacs for my users home-manager (if it's enabled).
